@@ -44,7 +44,29 @@
         .cart-item { display: flex; justify-content: space-between; align-items: center; background: #1e1e1e; padding: 8px 10px; margin-bottom: 8px; border-radius: 4px; font-size: 0.8rem; }
         .checkout-btn { background: #d4af37; color: #000; border: none; padding: 10px; width: 100%; font-weight: 800; cursor: pointer; border-radius: 4px; text-transform: uppercase; }
 
-        /* Banner Slider Section with Minimal Clean Arrows (No Background Highlight) */
+        /* Product Details Modal (Quick View) */
+        #product-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 15px; }
+        .modal-body { background: #141414; border: 1px solid #333; border-radius: 8px; width: 100%; max-width: 650px; display: flex; flex-direction: column; md-direction: row; overflow: hidden; position: relative; }
+        @media(min-width: 768px) { .modal-body { flex-direction: row; } }
+        .modal-img { width: 100%; height: 280px; object-fit: cover; }
+        @media(min-width: 768px) { .modal-img { width: 50%; height: auto; } }
+        .modal-info { padding: 20px; width: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+        .close-modal { position: absolute; top: 10px; right: 15px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+        
+        .size-selector, .color-selector { display: flex; gap: 8px; margin: 10px 0; }
+        .size-btn, .color-btn { background: #1e1e1e; border: 1px solid #444; color: #fff; padding: 6px 12px; font-size: 0.75rem; cursor: pointer; border-radius: 4px; }
+        .size-btn.selected, .color-btn.selected { border-color: #d4af37; color: #d4af37; background: #262211; }
+
+        /* Checkout Address Modal Form */
+        #checkout-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center; }
+        .modal-content { background: #141414; padding: 25px; border-radius: 8px; width: 90%; max-width: 450px; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+        .modal-content h3 { color: #d4af37; margin-bottom: 15px; font-size: 1.1rem; border-bottom: 1px solid #222; padding-bottom: 8px; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.75rem; font-weight: bold; margin-bottom: 4px; color: #aaa; }
+        .form-group input, .form-group textarea { width: 100%; padding: 9px; background: #1e1e1e; border: 1px solid #333; border-radius: 4px; color: #fff; font-size: 0.85rem; }
+        .form-group textarea { height: 60px; resize: none; }
+
+        /* Banner Slider Section */
         .slider-container { position: relative; width: 100%; height: 300px; overflow: hidden; border-bottom: 2px solid #d4af37; }
         .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; background-size: cover; background-position: center; padding: 0 15px; }
         .slide.active { opacity: 1; }
@@ -52,7 +74,7 @@
         .slide p { font-size: 0.9rem; margin-bottom: 15px; color: #ddd; font-weight: 400; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
         .btn { background: #d4af37; color: #000; padding: 10px 22px; text-decoration: none; font-weight: 800; font-size: 0.85rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Clean Minimalist Arrows (No background, just symbols) */
+        /* Minimalist Arrows */
         .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; cursor: pointer; z-index: 10; font-size: 2.5rem; font-weight: 300; text-shadow: 0 2px 5px rgba(0,0,0,0.8); padding: 0 15px; transition: color 0.2s; }
         .slider-arrow:hover { color: #d4af37; }
         .prev-arrow { left: 5px; }
@@ -77,7 +99,7 @@
         @media(min-width: 768px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
 
         /* Product Card */
-        .product-card { background: #141414; border-radius: 6px; overflow: hidden; border: 1px solid #222; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, border-color 0.2s; }
+        .product-card { background: #141414; border-radius: 6px; overflow: hidden; border: 1px solid #222; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, border-color 0.2s; cursor: pointer; }
         .product-card:hover { transform: translateY(-4px); border-color: #d4af37; }
         .product-card img { width: 100%; height: 200px; object-fit: cover; }
         @media(min-width: 768px) { .product-card img { height: 250px; } }
@@ -109,33 +131,25 @@
         </div>
     </header>
 
-    <!-- Detailed Mega Menu Navigation Bar -->
+    <!-- Mega Menu Navigation Bar -->
     <div class="top-nav-bar">
         <nav>
             <div class="dropdown">
                 <button class="drop-btn">Men ▾</button>
                 <div class="dropdown-content">
-                    <a href="#men">T-Shirts</a>
-                    <a href="#men">Shirts</a>
-                    <a href="#men">Jeans</a>
-                    <a href="#men">Blazers</a>
+                    <a href="#men">T-Shirts</a><a href="#men">Shirts</a><a href="#men">Jeans</a><a href="#men">Blazers</a>
                 </div>
             </div>
             <div class="dropdown">
                 <button class="drop-btn">Women ▾</button>
                 <div class="dropdown-content">
-                    <a href="#women">Dresses</a>
-                    <a href="#women">Kurtas</a>
-                    <a href="#women">Sarees</a>
-                    <a href="#women">Tops</a>
+                    <a href="#women">Dresses</a><a href="#women">Kurtas</a><a href="#women">Sarees</a><a href="#women">Tops</a>
                 </div>
             </div>
             <div class="dropdown">
                 <button class="drop-btn">Kids ▾</button>
                 <div class="dropdown-content">
-                    <a href="#kids">Boys Wear</a>
-                    <a href="#kids">Girls Frocks</a>
-                    <a href="#kids">Infants</a>
+                    <a href="#kids">Boys Wear</a><a href="#kids">Girls Frocks</a><a href="#kids">Infants</a>
                 </div>
             </div>
             <a href="#footwear" class="nav-link">Footwear</a>
@@ -162,14 +176,73 @@
                 <span>Total:</span>
                 <span id="cart-total" style="color: #d4af37;">₹0</span>
             </div>
-            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            <button class="checkout-btn" onclick="openCheckoutModal()">Proceed to Checkout</button>
         </div>
     </div>
 
-    <!-- Sliding Banners Section with Clean Minimalist Arrows -->
+    <!-- Product Details Modal (Quick View with Size & Color Selection) -->
+    <div id="product-modal">
+        <div class="modal-body">
+            <button class="close-modal" onclick="closeProductModal()">✕</button>
+            <img id="modal-img" class="modal-img" src="" alt="Product">
+            <div class="modal-info">
+                <div>
+                    <span id="modal-brand" class="brand-name"></span>
+                    <h2 id="modal-title" style="font-size: 1.1rem; color: #fff; margin: 5px 0;"></h2>
+                    <div class="price-box" style="margin: 10px 0;">
+                        <p id="modal-price" style="font-size: 1.1rem;"></p>
+                        <span id="modal-mrp" class="original-price"></span>
+                    </div>
+                    
+                    <p style="font-size: 0.75rem; color: #aaa; margin-bottom: 5px;">SELECT SIZE:</p>
+                    <div class="size-selector" id="size-options">
+                        <button class="size-btn selected" onclick="selectSize(this)">S</button>
+                        <button class="size-btn" onclick="selectSize(this)">M</button>
+                        <button class="size-btn" onclick="selectSize(this)">L</button>
+                        <button class="size-btn" onclick="selectSize(this)">XL</button>
+                    </div>
+
+                    <p style="font-size: 0.75rem; color: #aaa; margin-top: 10px; margin-bottom: 5px;">SELECT COLOR:</p>
+                    <div class="color-selector" id="color-options">
+                        <button class="color-btn selected" onclick="selectColor(this)">Black</button>
+                        <button class="color-btn" onclick="selectColor(this)">Blue</button>
+                        <button class="color-btn" onclick="selectColor(this)">Gold</button>
+                    </div>
+
+                    <p id="modal-desc" style="font-size: 0.8rem; color: #888; margin-top: 12px; line-height: 1.4;"></p>
+                </div>
+
+                <button class="cart-btn" onclick="addModalToCart()" style="margin-top: 15px; padding: 10px;">Add to Bag</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Address Modal Form -->
+    <div id="checkout-modal">
+        <div class="modal-content">
+            <h3>Shipping & Delivery Address</h3>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="cName" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" id="cPhone" placeholder="10-digit mobile number">
+            </div>
+            <div class="form-group">
+                <label>Delivery Address</label>
+                <textarea id="cAddress" placeholder="House No, Street, Area, City..."></textarea>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button class="checkout-btn" onclick="submitOrder()" style="background: #2ecc71; color: #fff;">Confirm & Place Order</button>
+                <button class="checkout-btn" onclick="closeCheckoutModal()" style="background: #333; color: #fff;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sliding Banners Section -->
     <div class="slider-container">
         <button class="slider-arrow prev-arrow" onclick="manualSlide(-1)">‹</button>
-        
         <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200')">
             <h2>✨ NEW ARRIVALS</h2>
             <p>Be the first to wear the latest global fashion trends</p>
@@ -180,27 +253,6 @@
             <p>Most-loved styles chosen by fashion experts</p>
             <a href="#sale" class="btn">EXPLORE TRENDS</a>
         </div>
-        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200')">
-            <h2>⭐ BESTSELLERS</h2>
-            <p>Top rated outfits loved by thousands of customers</p>
-            <a href="#sale" class="btn">SHOP BESTSELLERS</a>
-        </div>
-        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1555529771-835f59fc5efe?w=1200')">
-            <h2>🏷️ UNDER ₹499 STORE</h2>
-            <p>Super stylish fashion at unbelievable pocket prices</p>
-            <a href="#sale" class="btn">SHOP BUDGET</a>
-        </div>
-        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200')">
-            <h2>💎 LUXE EDITION</h2>
-            <p>Premium fabrics and elite designer wear collection</p>
-            <a href="#sale" class="btn">DISCOVER LUXE</a>
-        </div>
-        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=1200')">
-            <h2>🚨 CLEARANCE SALE</h2>
-            <p>Massive discounts on top styles. Grab before they're gone!</p>
-            <a href="#sale" class="btn" style="background: #ff3e6c; color: #fff;">SHOP CLEARANCE</a>
-        </div>
-
         <button class="slider-arrow next-arrow" onclick="manualSlide(1)">›</button>
     </div>
 
@@ -216,127 +268,41 @@
 
     <div class="container">
         
-        <!-- NEW LAUNCH PREVIEWS -->
-        <h2 class="section-title">New Launch Previews 🔥</h2>
-        <div class="video-grid">
-            <div class="video-card">
-                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500" alt="Preview 1">
-                <div style="padding: 8px; text-align: center;"><p style="font-size: 0.75rem; font-weight: bold; color: #fff;">Summer Kurta Edit</p></div>
-            </div>
-            <div class="video-card">
-                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500" alt="Preview 2">
-                <div style="padding: 8px; text-align: center;"><p style="font-size: 0.75rem; font-weight: bold; color: #fff;">Denim Series</p></div>
-            </div>
-            <div class="video-card">
-                <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500" alt="Preview 3">
-                <div style="padding: 8px; text-align: center;"><p style="font-size: 0.75rem; font-weight: bold; color: #fff;">Party Gowns</p></div>
-            </div>
-        </div>
-
         <!-- MEN SECTION -->
         <h2 id="men" class="section-title">Men's Store</h2>
         <div class="products-grid">
-            <div class="product-card">
+            <div class="product-card" onclick="openProductModal('Roadster', 'Casual Slim Shirt', 799, 1999, 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500', 'Premium cotton slim fit casual shirt. Perfect for daily wear and formal occasions.')">
                 <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500" alt="Shirt">
                 <div class="product-info">
                     <span class="brand-name">Roadster</span>
                     <h3>Casual Slim Shirt</h3>
                     <div class="price-box"><p>₹799</p><span class="original-price">₹1,999</span><span class="discount">60% OFF</span></div>
                 </div>
-                <button class="cart-btn" onclick="addToCart('Casual Slim Shirt', 799)">Add to Bag</button>
+                <button class="cart-btn" onclick="event.stopPropagation(); openProductModal('Roadster', 'Casual Slim Shirt', 799, 1999, 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500', 'Premium cotton slim fit casual shirt.')">Select Options</button>
             </div>
-            <div class="product-card">
+            
+            <div class="product-card" onclick="openProductModal('Levis', 'Denim Blue Jeans', 1499, 2999, 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500', 'Classic stretchable denim jeans with comfortable fit and durable stitching.')">
                 <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=500" alt="Jeans">
                 <div class="product-info">
                     <span class="brand-name">Levis</span>
                     <h3>Denim Blue Jeans</h3>
                     <div class="price-box"><p>₹1,499</p><span class="original-price">₹2,999</span><span class="discount">50% OFF</span></div>
                 </div>
-                <button class="cart-btn" onclick="addToCart('Denim Blue Jeans', 1499)">Add to Bag</button>
+                <button class="cart-btn" onclick="event.stopPropagation(); openProductModal('Levis', 'Denim Blue Jeans', 1499, 2999, 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500', 'Classic stretchable denim jeans.')">Select Options</button>
             </div>
         </div>
 
         <!-- WOMEN SECTION -->
         <h2 id="women" class="section-title">Women's Boutique</h2>
         <div class="products-grid">
-            <div class="product-card">
+            <div class="product-card" onclick="openProductModal('H&M', 'Floral Maxi Dress', 1299, 2499, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500', 'Elegant floral printed maxi dress crafted with lightweight breathable fabric.')">
                 <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500" alt="Dress">
                 <div class="product-info">
                     <span class="brand-name">H&M</span>
                     <h3>Floral Maxi Dress</h3>
                     <div class="price-box"><p>₹1,299</p><span class="original-price">₹2,499</span><span class="discount">48% OFF</span></div>
                 </div>
-                <button class="cart-btn" onclick="addToCart('Floral Maxi Dress', 1299)">Add to Bag</button>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500" alt="Kurta">
-                <div class="product-info">
-                    <span class="brand-name">Anouk</span>
-                    <h3>Ethnic Kurta Set</h3>
-                    <div class="price-box"><p>₹999</p><span class="original-price">₹1,999</span><span class="discount">50% OFF</span></div>
-                </div>
-                <button class="cart-btn" onclick="addToCart('Ethnic Kurta Set', 999)">Add to Bag</button>
-            </div>
-        </div>
-
-        <!-- KIDS SECTION -->
-        <h2 id="kids" class="section-title">Kids Fashion</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=500" alt="Frock">
-                <div class="product-info">
-                    <span class="brand-name">GAP Kids</span>
-                    <h3>Party Wear Frock</h3>
-                    <div class="price-box"><p>₹899</p><span class="original-price">₹1,599</span><span class="discount">43% OFF</span></div>
-                </div>
-                <button class="cart-btn" onclick="addToCart('Party Wear Frock', 899)">Add to Bag</button>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1503944583220-7eeec4934c7b?w=500" alt="Boys wear">
-                <div class="product-info">
-                    <span class="brand-name">UCB Kids</span>
-                    <h3>Boys Casual Set</h3>
-                    <div class="price-box"><p>₹799</p><span class="original-price">₹1,299</span><span class="discount">38% OFF</span></div>
-                </div>
-                <button class="cart-btn" onclick="addToCart('Boys Casual Set', 799)">Add to Bag</button>
-            </div>
-        </div>
-
-        <!-- FOOTWEAR & ACCESSORIES -->
-        <h2 id="footwear" class="section-title">Footwear & Accessories</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
-                <div class="product-info">
-                    <span class="brand-name">Nike</span>
-                    <h3>Air Runner Sneakers</h3>
-                    <div class="price-box"><p>₹2,999</p><span class="original-price">₹4,999</span><span class="discount">40% OFF</span></div>
-                </div>
-                <button class="cart-btn" onclick="addToCart('Air Runner Sneakers', 2999)">Add to Bag</button>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500" alt="Bag">
-                <div class="product-info">
-                    <span class="brand-name">Accessorize</span>
-                    <h3>Designer Handbag</h3>
-                    <div class="price-box"><p>₹1,199</p><span class="original-price">₹2,299</span><span class="discount">47% OFF</span></div>
-                </div>
-                <button class="cart-btn" onclick="addToCart('Designer Handbag', 1199)">Add to Bag</button>
-            </div>
-        </div>
-
-        <!-- BRANDS SECTION -->
-        <h2 id="brands" class="section-title">Featured Brands</h2>
-        <div class="products-grid">
-            <div class="product-card" style="text-align: center; padding: 20px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                <h3 style="color:#d4af37; font-size:1.3rem; font-weight:800; margin-bottom:5px;">NIKE</h3>
-                <p style="font-size:0.75rem; color:#aaa; margin-bottom: 10px;">Official sportswear & sneakers</p>
-                <button class="cart-btn" style="width:auto; padding:6px 15px;">Explore</button>
-            </div>
-            <div class="product-card" style="text-align: center; padding: 20px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                <h3 style="color:#d4af37; font-size:1.3rem; font-weight:800; margin-bottom:5px;">H & M</h3>
-                <p style="font-size:0.75rem; color:#aaa; margin-bottom: 10px;">Latest global fashion trends</p>
-                <button class="cart-btn" style="width:auto; padding:6px 15px;">Explore</button>
+                <button class="cart-btn" onclick="event.stopPropagation(); openProductModal('H&M', 'Floral Maxi Dress', 1299, 2499, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500', 'Elegant floral printed maxi dress.')">Select Options</button>
             </div>
         </div>
 
@@ -346,7 +312,7 @@
         <p>&copy; 2026 AS Fashions. All Rights Reserved. <br>Crafted for Luxury Online Shopping.</p>
     </footer>
 
-    <!-- JavaScript for Auto & Manual Slider + Cart Drawer -->
+    <!-- JavaScript for Product Quick View, Sizes, Colors & Cart -->
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
@@ -358,14 +324,44 @@
             slides[currentSlide].classList.add('active');
         }
 
-        function nextSlide() {
-            showSlide(currentSlide + 1);
-        }
-
+        function nextSlide() { showSlide(currentSlide + 1); }
         function manualSlide(direction) {
             clearInterval(slideInterval);
             showSlide(currentSlide + direction);
             slideInterval = setInterval(nextSlide, 3500);
+        }
+
+        // Product Modal Data Management
+        let selectedProduct = {};
+        let selectedSize = 'S';
+        let selectedColor = 'Black';
+
+        function openProductModal(brand, title, price, mrp, img, desc) {
+            selectedProduct = {brand, title, price, img};
+            document.getElementById('modal-brand').innerText = brand;
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-price').innerText = '₹' + price;
+            document.getElementById('modal-mrp').innerText = '₹' + mrp;
+            document.getElementById('modal-img').src = img;
+            document.getElementById('modal-desc').innerText = desc;
+            
+            document.getElementById('product-modal').style.display = 'flex';
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').style.display = 'none';
+        }
+
+        function selectSize(btn) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedSize = btn.innerText;
+        }
+
+        function selectColor(btn) {
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedColor = btn.innerText;
         }
 
         // Cart Drawer & Management Logic
@@ -375,9 +371,13 @@
             document.getElementById('cart-sidebar').classList.toggle('open');
         }
 
-        function addToCart(name, price) {
-            cart.push({name, price});
+        function addModalToCart() {
+            cart.push({
+                name: `${selectedProduct.title} (${selectedSize}, ${selectedColor})`,
+                price: selectedProduct.price
+            });
             updateCartUI();
+            closeProductModal();
             toggleCart();
         }
 
@@ -396,7 +396,7 @@
 
             let html = '';
             let total = 0;
-            cart.forEach((item, index) => {
+            cart.forEach((item) => {
                 total += item.price;
                 html += `<div class="cart-item">
                     <span>${item.name}</span>
@@ -408,15 +408,33 @@
             cartTotal.innerText = '₹' + total;
         }
 
-        function checkout() {
+        function openCheckoutModal() {
             if(cart.length === 0) {
                 alert('Your bag is empty!');
                 return;
             }
-            alert('Order placed successfully! Thank you for shopping with AS Fashions.');
+            toggleCart();
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').style.display = 'none';
+        }
+
+        function submitOrder() {
+            const name = document.getElementById('cName').value;
+            const phone = document.getElementById('cPhone').value;
+            const address = document.getElementById('cAddress').value;
+
+            if(!name || !phone || !address) {
+                alert('Please fill in all delivery details.');
+                return;
+            }
+
+            alert('Order Placed Successfully! Thank you ' + name + '. Your items will be shipped to your address.');
             cart = [];
             updateCartUI();
-            toggleCart();
+            closeCheckoutModal();
         }
     </script>
 

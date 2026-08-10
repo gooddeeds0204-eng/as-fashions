@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS Fashions - Men, Women, Kids & All Varieties</title>
+    <title>AS Fashions - Men, Women, Kids & More</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #333; }
@@ -11,143 +11,203 @@
         /* Fixed Header */
         header { background: #111; color: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
         header h1 { font-size: 1.1rem; letter-spacing: 1px; font-weight: bold; }
-        nav { display: flex; gap: 8px; }
-        nav a { color: #fff; text-decoration: none; font-size: 0.7rem; }
+        
+        /* Horizontal Scrollable Nav */
+        nav { display: flex; gap: 12px; overflow-x: auto; padding: 5px 0; white-space: nowrap; scrollbar-width: none; }
+        nav::-webkit-scrollbar { display: none; }
+        nav a { color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 500; }
+        nav a:hover { color: #ff3e6c; }
+
+        .top-nav-bar { background: #1a1a1a; padding: 8px 15px; border-top: 1px solid #333; }
 
         /* Hero Section */
-        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800') no-repeat center center/cover; height: 260px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 15px; }
-        .hero h2 { font-size: 1.5rem; margin-bottom: 8px; }
-        .hero p { font-size: 0.8rem; margin-bottom: 12px; }
-        .btn { background: #fff; color: #111; padding: 8px 16px; text-decoration: none; font-weight: bold; font-size: 0.8rem; border-radius: 4px; }
+        .hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1000') no-repeat center center/cover; height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 15px; }
+        .hero h2 { font-size: 1.6rem; margin-bottom: 8px; }
+        .hero p { font-size: 0.85rem; margin-bottom: 15px; }
+        .btn { background: #ff3e6c; color: #fff; padding: 8px 18px; text-decoration: none; font-weight: bold; font-size: 0.85rem; border-radius: 4px; }
+
+        /* Special Highlights Bar */
+        .highlights { display: flex; justify-content: space-around; background: #fff; padding: 12px 5px; font-size: 0.75rem; font-weight: bold; text-align: center; border-bottom: 1px solid #ddd; overflow-x: auto; gap: 10px; }
+        .highlights span { background: #f0f0f0; padding: 6px 12px; border-radius: 20px; white-space: nowrap; color: #111; }
 
         /* Container & Grid */
         .container { max-width: 1200px; margin: 20px auto; padding: 0 10px; }
-        .section-title { margin: 25px 0 10px; font-size: 1.1rem; color: #222; border-bottom: 2px solid #111; padding-bottom: 5px; }
+        .section-title { margin: 25px 0 12px; font-size: 1.2rem; color: #111; border-left: 4px solid #ff3e6c; padding-left: 8px; text-transform: uppercase; }
         
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media(min-width: 768px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 15px; } }
 
         /* Product Card */
         .product-card { background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between; padding-bottom: 10px; }
-        .product-card img { width: 100%; height: 160px; object-fit: cover; }
-        @media(min-width: 768px) { .product-card img { height: 220px; } }
+        .product-card img { width: 100%; height: 180px; object-fit: cover; }
+        @media(min-width: 768px) { .product-card img { height: 230px; } }
         
-        .product-info { padding: 8px; text-align: center; }
-        .product-card h3 { font-size: 0.8rem; margin-bottom: 4px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .product-card p { color: #b12704; font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; }
+        .product-info { padding: 10px; text-align: left; }
+        .brand-name { font-size: 0.7rem; color: #777; font-weight: bold; text-transform: uppercase; }
+        .product-card h3 { font-size: 0.85rem; margin: 3px 0; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .price-box { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+        .product-card p { color: #111; font-weight: bold; font-size: 0.9rem; }
+        .original-price { color: #777; text-decoration: line-through; font-size: 0.75rem; }
+        .discount { color: #ff905a; font-size: 0.75rem; font-weight: bold; }
         
-        .cart-btn { background: #111; color: white; border: none; padding: 6px; width: 90%; margin: 0 auto; cursor: pointer; border-radius: 4px; font-size: 0.7rem; font-weight: bold; display: block; }
+        .cart-btn { background: #111; color: white; border: none; padding: 7px; width: 92%; margin: 0 auto; cursor: pointer; border-radius: 4px; font-size: 0.75rem; font-weight: bold; display: block; transition: background 0.2s; }
+        .cart-btn:hover { background: #ff3e6c; }
         
         /* Footer */
-        footer { background: #111; color: #fff; text-align: center; padding: 15px; margin-top: 30px; font-size: 0.8rem; }
+        footer { background: #111; color: #fff; text-align: center; padding: 20px; margin-top: 30px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>AS FASHIONS</h1>
-        <nav>
-            <a href="#women">Women</a>
-            <a href="#men">Men</a>
-            <a href="#kids">Kids</a>
-            <a href="#all">All Varieties</a>
-        </nav>
+        <div style="font-size: 0.8rem; cursor: pointer;">🔍 Search</div>
     </header>
 
+    <!-- Main Navigation Bar -->
+    <div class="top-nav-bar">
+        <nav>
+            <a href="#men">MEN</a>
+            <a href="#women">WOMEN</a>
+            <a href="#kids">KIDS</a>
+            <a href="#footwear">FOOTWEAR</a>
+            <a href="#accessories">ACCESSORIES</a>
+            <a href="#beauty">BEAUTY</a>
+            <a href="#sports">SPORTS</a>
+            <a href="#home">HOME</a>
+            <a href="#brands">BRANDS</a>
+            <a href="#sale" style="color: #ff3e6c;">SALE 🔥</a>
+        </nav>
+    </div>
+
     <div class="hero">
-        <h2>AS FASHIONS - All Varieties</h2>
-        <p>Exclusive Fashion Hub for Men, Women & Kids</p>
-        <a href="#all" class="btn">EXPLORE ALL</a>
+        <h2>AS FASHIONS MEGA STORE</h2>
+        <p>Explore Men, Women, Kids & All Brand Collections</p>
+        <a href="#sale" class="btn">SHOP EXPLOSIVE DEALS</a>
+    </div>
+
+    <!-- Highlights Bar -->
+    <div class="highlights">
+        <span>✨ New Arrivals</span>
+        <span>🔥 Trending Now</span>
+        <span>⭐ Bestsellers</span>
+        <span>🏷️ Under ₹499</span>
+        <span>💎 Luxe Edition</span>
     </div>
 
     <div class="container">
-        <!-- Women Collection -->
-        <h2 id="women" class="section-title">Women's Special</h2>
+        
+        <!-- MEN SECTION -->
+        <h2 id="men" class="section-title">Men's Store</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500" alt="Shirt">
+                <div class="product-info">
+                    <span class="brand-name">Roadster</span>
+                    <h3>Casual Slim Shirt</h3>
+                    <div class="price-box"><p>₹799</p><span class="original-price">₹1,999</span><span class="discount">(60% OFF)</span></div>
+                </div>
+                <button class="cart-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=500" alt="Jeans">
+                <div class="product-info">
+                    <span class="brand-name">Levis</span>
+                    <h3>Denim Blue Jeans</h3>
+                    <div class="price-box"><p>₹1,499</p><span class="original-price">₹2,999</span><span class="discount">(50% OFF)</span></div>
+                </div>
+                <button class="cart-btn">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- WOMEN SECTION -->
+        <h2 id="women" class="section-title">Women's Boutique</h2>
         <div class="products-grid">
             <div class="product-card">
                 <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500" alt="Dress">
                 <div class="product-info">
+                    <span class="brand-name">H&M</span>
                     <h3>Floral Maxi Dress</h3>
-                    <p>₹1,999</p>
+                    <div class="price-box"><p>₹1,299</p><span class="original-price">₹2,499</span><span class="discount">(48% OFF)</span></div>
                 </div>
                 <button class="cart-btn">Add to Cart</button>
             </div>
             <div class="product-card">
                 <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500" alt="Kurta">
                 <div class="product-info">
+                    <span class="brand-name">Anouk</span>
                     <h3>Ethnic Kurta Set</h3>
-                    <p>₹1,499</p>
+                    <div class="price-box"><p>₹999</p><span class="original-price">₹1,999</span><span class="discount">(50% OFF)</span></div>
                 </div>
                 <button class="cart-btn">Add to Cart</button>
             </div>
         </div>
 
-        <!-- Men Collection -->
-        <h2 id="men" class="section-title">Men's Wear</h2>
+        <!-- KIDS SECTION -->
+        <h2 id="kids" class="section-title">Kids Fashion</h2>
         <div class="products-grid">
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500" alt="Shirt">
+                <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=500" alt="Frock">
                 <div class="product-info">
-                    <h3>Casual Slim Shirt</h3>
-                    <p>₹1,299</p>
-                </div>
-                <button class="cart-btn">Add to Cart</button>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef?w=500" alt="Jacket">
-                <div class="product-info">
-                    <h3>Denim Jacket</h3>
-                    <p>₹2,199</p>
-                </div>
-                <button class="cart-btn">Add to Cart</button>
-            </div>
-        </div>
-
-        <!-- Kids Collection -->
-        <h2 id="kids" class="section-title">Kids' Fashion</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=500" alt="Kids Frock">
-                <div class="product-info">
+                    <span class="brand-name">GAP Kids</span>
                     <h3>Party Wear Frock</h3>
-                    <p>₹999</p>
+                    <div class="price-box"><p>₹899</p><span class="original-price">₹1,599</span><span class="discount">(43% OFF)</span></div>
                 </div>
                 <button class="cart-btn">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1503944583220-7eeec4934c7b?w=500" alt="Boys Wear">
+                <img src="https://images.unsplash.com/photo-1503944583220-7eeec4934c7b?w=500" alt="Boys wear">
                 <div class="product-info">
+                    <span class="brand-name">UCB Kids</span>
                     <h3>Boys Casual Set</h3>
-                    <p>₹899</p>
+                    <div class="price-box"><p>₹799</p><span class="original-price">₹1,299</span><span class="discount">(38% OFF)</span></div>
                 </div>
                 <button class="cart-btn">Add to Cart</button>
             </div>
         </div>
 
-        <!-- All Varieties / Accessories Section -->
-        <h2 id="all" class="section-title">All Varieties & Accessories</h2>
+        <!-- FOOTWEAR & ACCESSORIES -->
+        <h2 id="footwear" class="section-title">Footwear & Accessories</h2>
         <div class="products-grid">
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500" alt="Handbag">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
                 <div class="product-info">
-                    <h3>Designer Handbag</h3>
-                    <p>₹1,199</p>
+                    <span class="brand-name">Nike</span>
+                    <h3>Air Runner Sneakers</h3>
+                    <div class="price-box"><p>₹2,999</p><span class="original-price">₹4,999</span><span class="discount">(40% OFF)</span></div>
                 </div>
                 <button class="cart-btn">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500" alt="Sunglasses">
+                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500" alt="Bag">
                 <div class="product-info">
-                    <h3>Classic Sunglasses</h3>
-                    <p>₹699</p>
+                    <span class="brand-name">Accessorize</span>
+                    <h3>Designer Handbag</h3>
+                    <div class="price-box"><p>₹1,199</p><span class="original-price">₹2,299</span><span class="discount">(47% OFF)</span></div>
                 </div>
                 <button class="cart-btn">Add to Cart</button>
             </div>
         </div>
+
+        <!-- BRANDS SECTION -->
+        <h2 id="brands" class="section-title">Featured Brands</h2>
+        <div class="products-grid">
+            <div class="product-card" style="text-align: center; padding: 20px;">
+                <h3 style="color:#ff3e6c; font-size:1.2rem;">NIKE</h3>
+                <p style="font-size:0.8rem; color:#666; margin: 10px 0;">Explore official sportswear & sneakers</p>
+                <button class="cart-btn">View Brand</button>
+            </div>
+            <div class="product-card" style="text-align: center; padding: 20px;">
+                <h3 style="color:#ff3e6c; font-size:1.2rem;">H & M</h3>
+                <p style="font-size:0.8rem; color:#666; margin: 10px 0;">Latest global fashion trends</p>
+                <button class="cart-btn">View Brand</button>
+            </div>
+        </div>
+
     </div>
 
     <footer>
-        <p>&copy; 2026 AS Fashions. All Rights Reserved.</p>
+        <p>&copy; 2026 AS Fashions. All Rights Reserved. Powered by GitHub Pages.</p>
     </footer>
 
 </body>

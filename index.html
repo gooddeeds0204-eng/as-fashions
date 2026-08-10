@@ -12,16 +12,37 @@
         header { background: #141414; color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #222; }
         header h1 { font-size: 1.3rem; letter-spacing: 2.5px; font-weight: 900; color: #d4af37; }
         
-        .header-right { display: flex; gap: 12px; font-size: 0.8rem; font-weight: 600; align-items: center; }
+        .header-right { display: flex; gap: 15px; font-size: 0.8rem; font-weight: 600; align-items: center; }
         .header-right a { color: #ccc; text-decoration: none; }
         .admin-link { background: #d4af37; color: #000 !important; padding: 6px 12px; border-radius: 4px; font-weight: 700; }
+        .cart-icon { cursor: pointer; color: #d4af37; font-weight: 700; }
 
-        /* Navigation Bar */
+        /* Mega Menu Navigation Bar */
         .top-nav-bar { background: #181818; padding: 10px 15px; border-bottom: 1px solid #282828; position: sticky; top: 55px; z-index: 999; }
         nav { display: flex; gap: 20px; overflow-x: auto; padding: 4px 0; white-space: nowrap; scrollbar-width: none; }
         nav::-webkit-scrollbar { display: none; }
-        nav a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
-        nav a:hover { color: #d4af37; }
+        
+        .dropdown { position: relative; display: inline-block; }
+        .drop-btn { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; background: none; border: none; cursor: pointer; font-family: inherit; }
+        .drop-btn:hover { color: #d4af37; }
+        
+        .dropdown-content { display: none; position: absolute; background: #1a1a1a; min-width: 140px; box-shadow: 0px 8px 16px rgba(0,0,0,0.5); border: 1px solid #333; z-index: 1000; top: 100%; left: 0; }
+        .dropdown-content a { color: #ccc; padding: 8px 12px; text-decoration: none; display: block; font-size: 0.75rem; text-transform: none; }
+        .dropdown-content a:hover { background: #d4af37; color: #000; }
+        .dropdown:hover .dropdown-content { display: block; }
+        
+        .nav-link { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+        .nav-link:hover { color: #d4af37; }
+
+        /* Cart Sidebar Drawer */
+        #cart-sidebar { position: fixed; right: -320px; top: 0; width: 320px; height: 100%; background: #141414; z-index: 2000; padding: 20px; transition: 0.3s ease-in-out; border-left: 2px solid #d4af37; box-shadow: -5px 0 15px rgba(0,0,0,0.8); display: flex; flex-direction: column; }
+        #cart-sidebar.open { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
+        .cart-header h3 { color: #d4af37; font-size: 1.1rem; }
+        .close-cart { background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; }
+        .cart-items-container { flex-grow: 1; overflow-y: auto; margin-bottom: 15px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; background: #1e1e1e; padding: 8px 10px; margin-bottom: 8px; border-radius: 4px; font-size: 0.8rem; }
+        .checkout-btn { background: #d4af37; color: #000; border: none; padding: 10px; width: 100%; font-weight: 800; cursor: pointer; border-radius: 4px; text-transform: uppercase; }
 
         /* Banner Slider Section */
         .slider-container { position: relative; width: 100%; height: 300px; overflow: hidden; border-bottom: 2px solid #d4af37; }
@@ -31,7 +52,7 @@
         .slide p { font-size: 0.9rem; margin-bottom: 15px; color: #ddd; font-weight: 400; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
         .btn { background: #d4af37; color: #000; padding: 10px 22px; text-decoration: none; font-weight: 800; font-size: 0.85rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Interactive Category Buttons Bar */
+        /* Highlights Bar */
         .highlights { display: flex; justify-content: flex-start; background: #141414; padding: 12px 15px; font-size: 0.75rem; font-weight: 600; text-align: center; border-bottom: 1px solid #222; overflow-x: auto; gap: 10px; }
         .highlights span { background: #1e1e1e; border: 1px solid #333; padding: 6px 14px; border-radius: 20px; white-space: nowrap; color: #d4af37; cursor: pointer; }
 
@@ -44,7 +65,7 @@
         .video-grid { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
         .video-grid::-webkit-scrollbar { display: none; }
         .video-card { min-width: 150px; background: #141414; border-radius: 8px; overflow: hidden; border: 1px solid #222; }
-        .video-card img { width: 100%; height: 220px; object-fit: cover; } /* Using high quality fashion GIFs/Images to avoid black video loading error */
+        .video-card img { width: 100%; height: 220px; object-fit: cover; }
 
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media(min-width: 768px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
@@ -77,24 +98,66 @@
         <h1>AS FASHIONS</h1>
         <div class="header-right">
             <span>🔍 Search</span>
+            <span class="cart-icon" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</span>
             <a href="admin.html" class="admin-link">Admin ⚙️</a>
         </div>
     </header>
 
-    <!-- Main Navigation Bar -->
+    <!-- Detailed Mega Menu Navigation Bar -->
     <div class="top-nav-bar">
         <nav>
-            <a href="#men">Men</a>
-            <a href="#women">Women</a>
-            <a href="#kids">Kids</a>
-            <a href="#footwear">Footwear</a>
-            <a href="#accessories">Accessories</a>
-            <a href="#beauty">Beauty</a>
-            <a href="#sports">Sports</a>
-            <a href="#home">Home</a>
-            <a href="#brands">Brands</a>
-            <a href="#sale" style="color: #d4af37;">Sale 🔥</a>
+            <div class="dropdown">
+                <button class="drop-btn">Men ▾</button>
+                <div class="dropdown-content">
+                    <a href="#men">T-Shirts</a>
+                    <a href="#men">Shirts</a>
+                    <a href="#men">Jeans</a>
+                    <a href="#men">Blazers</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="drop-btn">Women ▾</button>
+                <div class="dropdown-content">
+                    <a href="#women">Dresses</a>
+                    <a href="#women">Kurtas</a>
+                    <a href="#women">Sarees</a>
+                    <a href="#women">Tops</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="drop-btn">Kids ▾</button>
+                <div class="dropdown-content">
+                    <a href="#kids">Boys Wear</a>
+                    <a href="#kids">Girls Frocks</a>
+                    <a href="#kids">Infants</a>
+                </div>
+            </div>
+            <a href="#footwear" class="nav-link">Footwear</a>
+            <a href="#accessories" class="nav-link">Accessories</a>
+            <a href="#beauty" class="nav-link">Beauty</a>
+            <a href="#sports" class="nav-link">Sports</a>
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#brands" class="nav-link">Brands</a>
+            <a href="#sale" class="nav-link" style="color: #d4af37;">Sale 🔥</a>
         </nav>
+    </div>
+
+    <!-- Cart Sidebar Drawer -->
+    <div id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Shopping Bag</h3>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items-container" id="cart-items-list">
+            <p style="color: #777; font-size: 0.85rem; text-align: center; margin-top: 40px;">Your bag is empty</p>
+        </div>
+        <div style="border-top: 1px solid #333; padding-top: 15px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-weight: bold; font-size: 0.9rem;">
+                <span>Total:</span>
+                <span id="cart-total" style="color: #d4af37;">₹0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
     </div>
 
     <!-- Sliding Banners Section -->
@@ -137,7 +200,7 @@
 
     <div class="container">
         
-        <!-- NEW LAUNCH PREVIEWS (Fixed Black Screen Issue with High Quality Visuals) -->
+        <!-- NEW LAUNCH PREVIEWS -->
         <h2 class="section-title">New Launch Previews 🔥</h2>
         <div class="video-grid">
             <div class="video-card">
@@ -164,7 +227,7 @@
                     <h3>Casual Slim Shirt</h3>
                     <div class="price-box"><p>₹799</p><span class="original-price">₹1,999</span><span class="discount">60% OFF</span></div>
                 </div>
-                <button class="cart-btn">Add to Bag</button>
+                <button class="cart-btn" onclick="addToCart('Casual Slim Shirt', 799)">Add to Bag</button>
             </div>
             <div class="product-card">
                 <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=500" alt="Jeans">
@@ -173,7 +236,7 @@
                     <h3>Denim Blue Jeans</h3>
                     <div class="price-box"><p>₹1,499</p><span class="original-price">₹2,999</span><span class="discount">50% OFF</span></div>
                 </div>
-                <button class="cart-btn">Add to Bag</button>
+                <button class="cart-btn" onclick="addToCart('Denim Blue Jeans', 1499)">Add to Bag</button>
             </div>
         </div>
 
@@ -187,7 +250,7 @@
                     <h3>Floral Maxi Dress</h3>
                     <div class="price-box"><p>₹1,299</p><span class="original-price">₹2,499</span><span class="discount">48% OFF</span></div>
                 </div>
-                <button class="cart-btn">Add to Bag</button>
+                <button class="cart-btn" onclick="addToCart('Floral Maxi Dress', 1299)">Add to Bag</button>
             </div>
             <div class="product-card">
                 <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500" alt="Kurta">
@@ -196,7 +259,7 @@
                     <h3>Ethnic Kurta Set</h3>
                     <div class="price-box"><p>₹999</p><span class="original-price">₹1,999</span><span class="discount">50% OFF</span></div>
                 </div>
-                <button class="cart-btn">Add to Bag</button>
+                <button class="cart-btn" onclick="addToCart('Ethnic Kurta Set', 999)">Add to Bag</button>
             </div>
         </div>
 
@@ -210,16 +273,16 @@
                     <h3>Party Wear Frock</h3>
                     <div class="price-box"><p>₹899</p><span class="original-price">₹1,599</span><span class="discount">43% OFF</span></div>
                 </div>
-                <button class="cart-btn">Add to Bag</button>
+                <button class="cart-btn" onclick="addToCart('Party Wear Frock', 899)">Add to Bag</button>
             </div>
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1503944583220-7eeec4934c7b?w=500" alt="Boys wear">
+                <img src="https://images.unsplash.com/photo-1503944583220-7eeec4934c7 &w=500" alt="Boys wear">
                 <div class="product-info">
                     <span class="brand-name">UCB Kids</span>
                     <h3>Boys Casual Set</h3>
                     <div class="price-box"><p>₹799</p><span class="original-price">₹1,299</span><span class="discount">38% OFF</span></div>
                 </div>
-                <button class="cart-btn">Add to Bag</button>
+                <button class="cart-btn" onclick="addToCart('Boys Casual Set', 799)">Add to Bag</button>
             </div>
         </div>
 
@@ -233,7 +296,7 @@
                     <h3>Air Runner Sneakers</h3>
                     <div class="price-box"><p>₹2,999</p><span class="original-price">₹4,999</span><span class="discount">40% OFF</span></div>
                 </div>
-                <button class="cart-btn">Add to Bag</button>
+                <button class="cart-btn" onclick="addToCart('Air Runner Sneakers', 2999)">Add to Bag</button>
             </div>
             <div class="product-card">
                 <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500" alt="Bag">
@@ -242,7 +305,7 @@
                     <h3>Designer Handbag</h3>
                     <div class="price-box"><p>₹1,199</p><span class="original-price">₹2,299</span><span class="discount">47% OFF</span></div>
                 </div>
-                <button class="cart-btn">Add to Bag</button>
+                <button class="cart-btn" onclick="addToCart('Designer Handbag', 1199)">Add to Bag</button>
             </div>
         </div>
 
@@ -267,8 +330,9 @@
         <p>&copy; 2026 AS Fashions. All Rights Reserved. <br>Crafted for Luxury Online Shopping.</p>
     </footer>
 
-    <!-- JavaScript for Automatic Banner Slider -->
+    <!-- JavaScript for Slider and Cart Drawer Functionality -->
     <script>
+        // Banner Slider Logic
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         
@@ -277,9 +341,58 @@
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
         }
-
-        // Change slide every 3.5 seconds automatically
         setInterval(nextSlide, 3500);
+
+        // Cart Drawer & Management Logic
+        let cart = [];
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+        }
+
+        function addToCart(name, price) {
+            cart.push({name, price});
+            updateCartUI();
+            toggleCart();
+        }
+
+        function updateCartUI() {
+            const cartList = document.getElementById('cart-items-list');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+            
+            cartCount.innerText = cart.length;
+            
+            if(cart.length === 0) {
+                cartList.innerHTML = '<p style="color: #777; font-size: 0.85rem; text-align: center; margin-top: 40px;">Your bag is empty</p>';
+                cartTotal.innerText = '₹0';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `<div class="cart-item">
+                    <span>${item.name}</span>
+                    <span style="color: #d4af37; font-weight: bold;">₹${item.price}</span>
+                </div>`;
+            });
+            
+            cartList.innerHTML = html;
+            cartTotal.innerText = '₹' + total;
+        }
+
+        function checkout() {
+            if(cart.length === 0) {
+                alert('Your bag is empty!');
+                return;
+            }
+            alert('Order placed successfully! Thank you for shopping with AS Fashions.');
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
     </script>
 
 </body>

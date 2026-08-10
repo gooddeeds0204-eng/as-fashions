@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AS Fashions - Admin Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; }
+        
+        header { background: #111; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        header h1 { font-size: 1.1rem; }
+        
+        .container { max-width: 1000px; margin: 20px auto; padding: 0 10px; }
+        
+        .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .card h2 { font-size: 1rem; margin-bottom: 15px; color: #111; border-bottom: 2px solid #ff3e6c; padding-bottom: 5px; display: inline-block; }
+        
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; }
+        .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.9rem; }
+        
+        .btn { background: #ff3e6c; color: white; border: none; padding: 10px; width: 100%; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+        .btn:hover { background: #e0325c; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 8px; text-align: left; }
+        th { background: #111; color: white; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AS FASHIONS ADMIN</h1>
+        <a href="index.html" style="color: white; text-decoration: none; font-size: 0.8rem;">View Website ↗</a>
+    </header>
+
+    <div class="container">
+        <!-- Add Product Section -->
+        <div class="card">
+            <h2>Add New Product</h2>
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" id="pName" placeholder="e.g. Slim Fit Shirt">
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="pCategory">
+                    <option value="Men">Men</option>
+                    <option value="Women">Women</option>
+                    <option value="Kids">Kids</option>
+                    <option value="Footwear">Footwear</option>
+                    <option value="Accessories">Accessories</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Price (₹)</label>
+                <input type="number" id="pPrice" placeholder="999">
+            </div>
+            <div class="form-group">
+                <label>Image URL</label>
+                <input type="text" id="pImage" placeholder="Paste image link">
+            </div>
+            <button class="btn" onclick="alert('Product added successfully!')">Publish Product</button>
+        </div>
+
+        <!-- Orders Management -->
+        <div class="card">
+            <h2>Customer Orders</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Item</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#101</td>
+                        <td>Rahul (Guntur)</td>
+                        <td>Floral Maxi Dress</td>
+                        <td><span style="color: green; font-weight: bold;">Processing</span></td>
+                    </tr>
+                    <tr>
+                        <td>#102</td>
+                        <td>Priya</td>
+                        <td>Casual Slim Shirt</td>
+                        <td><span style="color: orange; font-weight: bold;">Shipped</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

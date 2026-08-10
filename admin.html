@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AS Fashions - Ultimate Admin Panel</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f7f6; color: #333; padding-bottom: 40px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: #0b0b0b; color: #f3f3f3; padding-bottom: 40px; }
         
-        header { background: #111; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-        header h1 { font-size: 1.1rem; }
+        header { background: #141414; color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #222; }
+        header h1 { font-size: 1.1rem; color: #d4af37; letter-spacing: 1px; }
         
         .container { max-width: 900px; margin: 20px auto; padding: 0 10px; }
         
-        .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px; }
-        .card h2 { font-size: 1.1rem; margin-bottom: 15px; color: #111; border-bottom: 2px solid #ff3e6c; padding-bottom: 6px; }
+        .card { background: #141414; padding: 20px; border-radius: 8px; border: 1px solid #222; box-shadow: 0 4px 12px rgba(0,0,0,0.5); margin-bottom: 20px; }
+        .card h2 { font-size: 1.1rem; margin-bottom: 15px; color: #fff; border-bottom: 2px solid #d4af37; padding-bottom: 6px; }
         
         .form-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
         @media(min-width: 600px) { .form-grid { grid-template-columns: 1fr 1fr; } }
@@ -22,53 +22,83 @@
         .form-group { margin-bottom: 10px; }
         .form-group.full { grid-column: span 2; }
         
-        .form-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #444; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.9rem; background: #fafafa; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #ccc; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #333; border-radius: 4px; font-size: 0.9rem; background: #1e1e1e; color: #fff; }
         .form-group textarea { resize: vertical; height: 80px; }
 
-        .btn { background: #ff3e6c; color: white; border: none; padding: 12px; width: 100%; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 1rem; margin-top: 10px; }
-        .btn:hover { background: #e0325c; }
+        .btn { background: #d4af37; color: #000; border: none; padding: 12px; width: 100%; font-weight: 800; border-radius: 4px; cursor: pointer; font-size: 1rem; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn:hover { background: #f39c12; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; }
-        table, th, td { border: 1px solid #ddd; }
+        table, th, td { border: 1px solid #333; }
         th, td { padding: 10px; text-align: left; }
-        th { background: #111; color: white; }
+        th { background: #1c1c1c; color: #d4af37; }
+        td { color: #ccc; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>AS FASHIONS ADMIN</h1>
-        <a href="index.html" style="color: white; text-decoration: none; font-size: 0.8rem;">View Website ↗</a>
+        <a href="index.html" style="color: #d4af37; text-decoration: none; font-size: 0.8rem; font-weight: 700;">View Website ↗</a>
     </header>
 
     <div class="container">
-        <!-- Add Product Section with Stock & Colors -->
+        <!-- Upload Preview Video / Reel Section -->
         <div class="card">
-            <h2>📦 Add New Product (Complete Inventory)</h2>
+            <h2>🎥 Upload New Launch Preview Video / Reel</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Video Title</label>
+                    <input type="text" id="vTitle" placeholder="e.g. Summer Kurta Launch">
+                </div>
+                <div class="form-group">
+                    <label>Video Direct URL (.mp4)</label>
+                    <input type="text" id="vUrl" placeholder="Paste direct video link">
+                </div>
+            </div>
+            <button class="btn" onclick="alert('Preview Video successfully published to website header!')">Publish Video Reel</button>
+        </div>
+
+        <!-- Add Product Section -->
+        <div class="card">
+            <h2>📦 Add New Product to Store</h2>
             
             <div class="form-grid">
                 <div class="form-group">
                     <label>Product Title / Name</label>
-                    <input type="text" id="pName" placeholder="e.g. Floral Maxi Dress">
+                    <input type="text" id="pName" placeholder="e.g. Designer Kurta Set">
                 </div>
 
                 <div class="form-group">
                     <label>Brand Name</label>
-                    <input type="text" id="pBrand" placeholder="e.g. H&M, Nike, Roadster">
+                    <input type="text" id="pBrand" placeholder="e.g. H&M, Nike, Levis, Roadster">
                 </div>
 
                 <div class="form-group">
-                    <label>Category</label>
+                    <label>Store Category</label>
                     <select id="pCategory">
-                        <option value="Men">Men</option>
-                        <option value="Women">Women</option>
-                        <option value="Kids">Kids</option>
+                        <option value="Men">Men's Store</option>
+                        <option value="Women">Women's Boutique</option>
+                        <option value="Kids">Kids Fashion</option>
                         <option value="Footwear">Footwear</option>
                         <option value="Accessories">Accessories</option>
                         <option value="Beauty">Beauty</option>
                         <option value="Sports">Sports & Fitness</option>
                         <option value="Home">Home & Lifestyle</option>
+                        <option value="Brands">Featured Brands</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Special Section Tag</label>
+                    <select id="pTag">
+                        <option value="Standard">Standard Collection</option>
+                        <option value="New Arrivals">✨ New Arrivals</option>
+                        <option value="Trending Now">🔥 Trending Now</option>
+                        <option value="Bestsellers">⭐ Bestsellers</option>
+                        <option value="Under 499">🏷️ Under ₹499</option>
+                        <option value="Luxe">💎 Luxe Edition</option>
                     </select>
                 </div>
 
@@ -78,28 +108,28 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Available Colors</label>
+                    <input type="text" id="pColors" placeholder="e.g. Black, Blue, Gold">
+                </div>
+
+                <div class="form-group">
                     <label>Selling Price (₹)</label>
                     <input type="number" id="pPrice" placeholder="999">
                 </div>
 
                 <div class="form-group">
-                    <label>Original MRP (₹) [For Discount]</label>
+                    <label>Original MRP (₹)</label>
                     <input type="number" id="pMrp" placeholder="1999">
                 </div>
 
                 <div class="form-group">
-                    <label>Stock Count (Quantity)</label>
-                    <input type="number" id="pStock" placeholder="e.g. 50">
-                </div>
-
-                <div class="form-group">
-                    <label>Available Colors</label>
-                    <input type="text" id="pColors" placeholder="e.g. Black, Blue, Red">
+                    <label>Stock Count</label>
+                    <input type="number" id="pStock" placeholder="50">
                 </div>
 
                 <div class="form-group full">
                     <label>Image Direct URL</label>
-                    <input type="text" id="pImage" placeholder="Paste image link from Unsplash or product photo URL">
+                    <input type="text" id="pImage" placeholder="Paste image link">
                 </div>
 
                 <div class="form-group full">
@@ -108,7 +138,7 @@
                 </div>
             </div>
 
-            <button class="btn" onclick="alert('Product along with stock and colors published successfully!')">Publish to Store</button>
+            <button class="btn" onclick="alert('Product successfully published to store database!')">Publish Product</button>
         </div>
 
         <!-- Orders Management -->
@@ -128,13 +158,13 @@
                         <td>#101</td>
                         <td>Rahul (Guntur)</td>
                         <td>Floral Maxi Dress</td>
-                        <td><span style="color: green; font-weight: bold;">Processing</span></td>
+                        <td><span style="color: #2ecc71; font-weight: bold;">Processing</span></td>
                     </tr>
                     <tr>
                         <td>#102</td>
                         <td>Priya</td>
                         <td>Casual Slim Shirt</td>
-                        <td><span style="color: orange; font-weight: bold;">Shipped</span></td>
+                        <td><span style="color: #f39c12; font-weight: bold;">Shipped</span></td>
                     </tr>
                 </tbody>
             </table>

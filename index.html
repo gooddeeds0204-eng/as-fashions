@@ -3,64 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS Fashions - Online Shopping for Men, Women, Kids & More</title>
+    <title>AS Fashions - Luxury & Trendy Store</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f5; color: #282c3f; }
+        body { font-family: 'Inter', sans-serif; background-color: #0b0b0b; color: #f3f3f3; }
         
-        /* Top Header */
-        header { background: #ffffff; color: #282c3f; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        header h1 { font-size: 1.3rem; letter-spacing: 1.5px; font-weight: 800; color: #ff3e6c; }
+        /* Luxury Header */
+        header { background: #141414; color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #222; }
+        header h1 { font-size: 1.3rem; letter-spacing: 2.5px; font-weight: 900; color: #d4af37; }
         
-        .header-right { display: flex; gap: 15px; font-size: 0.85rem; font-weight: 600; align-items: center; }
-        .header-right a { color: #282c3f; text-decoration: none; }
-        .admin-link { background: #ff3e6c; color: #fff !important; padding: 5px 10px; border-radius: 4px; }
+        .header-right { display: flex; gap: 12px; font-size: 0.8rem; font-weight: 600; align-items: center; }
+        .header-right a { color: #ccc; text-decoration: none; }
+        .admin-link { background: #d4af37; color: #000 !important; padding: 6px 12px; border-radius: 4px; font-weight: 700; }
 
-        /* Horizontal Scrollable Nav */
-        .top-nav-bar { background: #ffffff; padding: 8px 15px; border-bottom: 1px solid #eaeaec; position: sticky; top: 53px; z-index: 999; }
-        nav { display: flex; gap: 18px; overflow-x: auto; padding: 4px 0; white-space: nowrap; scrollbar-width: none; }
+        /* Navigation Bar */
+        .top-nav-bar { background: #181818; padding: 10px 15px; border-bottom: 1px solid #282828; position: sticky; top: 55px; z-index: 999; }
+        nav { display: flex; gap: 20px; overflow-x: auto; padding: 4px 0; white-space: nowrap; scrollbar-width: none; }
         nav::-webkit-scrollbar { display: none; }
-        nav a { color: #282c3f; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
-        nav a:hover { color: #ff3e6c; }
+        nav a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+        nav a:hover { color: #d4af37; }
 
         /* Hero Banner */
-        .hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200') no-repeat center center/cover; height: 260px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 15px; }
-        .hero h2 { font-size: 1.6rem; margin-bottom: 6px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-        .hero p { font-size: 0.85rem; margin-bottom: 12px; font-weight: 400; }
-        .btn { background: #ff3e6c; color: #fff; padding: 9px 20px; text-decoration: none; font-weight: bold; font-size: 0.85rem; border-radius: 4px; box-shadow: 0 2px 6px rgba(255,62,108,0.4); }
+        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200') no-repeat center center/cover; height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 15px; border-bottom: 2px solid #d4af37; }
+        .hero h2 { font-size: 1.8rem; margin-bottom: 8px; font-weight: 800; letter-spacing: 1px; color: #fff; }
+        .hero p { font-size: 0.85rem; margin-bottom: 15px; color: #ddd; font-weight: 300; }
+        .btn { background: #d4af37; color: #000; padding: 10px 22px; text-decoration: none; font-weight: 800; font-size: 0.85rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
         /* Highlights Bar */
-        .highlights { display: flex; justify-content: flex-start; background: #fff; padding: 10px 15px; font-size: 0.75rem; font-weight: 600; text-align: center; border-bottom: 1px solid #eaeaec; overflow-x: auto; gap: 10px; }
-        .highlights span { background: #fff1f3; border: 1px solid #ffccd5; padding: 5px 12px; border-radius: 20px; white-space: nowrap; color: #ff3e6c; }
+        .highlights { display: flex; justify-content: flex-start; background: #141414; padding: 12px 15px; font-size: 0.75rem; font-weight: 600; text-align: center; border-bottom: 1px solid #222; overflow-x: auto; gap: 10px; }
+        .highlights span { background: #1e1e1e; border: 1px solid #333; padding: 6px 14px; border-radius: 20px; white-space: nowrap; color: #d4af37; }
 
         /* Container & Grid */
-        .container { max-width: 1200px; margin: 15px auto; padding: 0 10px; }
-        .section-title { margin: 25px 0 12px; font-size: 1.15rem; color: #282c3f; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
-        .section-title::before { content: ''; width: 4px; height: 18px; background: #ff3e6c; display: inline-block; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 10px; }
+        .section-title { margin: 30px 0 15px; font-size: 1.2rem; color: #fff; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+        .section-title::before { content: ''; width: 4px; height: 18px; background: #d4af37; display: inline-block; }
         
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        @media(min-width: 768px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 15px; } }
+        /* Video Reels Preview Section */
+        .video-grid { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+        .video-grid::-webkit-scrollbar { display: none; }
+        .video-card { min-width: 150px; background: #141414; border-radius: 8px; overflow: hidden; border: 1px solid #222; }
+        .video-card video { width: 100%; height: 220px; object-fit: cover; }
+
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        @media(min-width: 768px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
 
         /* Product Card */
-        .product-card { background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
-        .product-card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
-        .product-card img { width: 100%; height: 190px; object-fit: cover; }
-        @media(min-width: 768px) { .product-card img { height: 240px; } }
+        .product-card { background: #141414; border-radius: 6px; overflow: hidden; border: 1px solid #222; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, border-color 0.2s; }
+        .product-card:hover { transform: translateY(-4px); border-color: #d4af37; }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; }
+        @media(min-width: 768px) { .product-card img { height: 250px; } }
         
-        .product-info { padding: 10px; text-align: left; }
-        .brand-name { font-size: 0.75rem; color: #535763; font-weight: 700; text-transform: uppercase; }
-        .product-card h3 { font-size: 0.8rem; margin: 2px 0 6px 0; color: #535763; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 400; }
+        .product-info { padding: 12px; text-align: left; }
+        .brand-name { font-size: 0.7rem; color: #d4af37; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .product-card h3 { font-size: 0.85rem; margin: 4px 0 8px 0; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
         
-        .price-box { display: flex; gap: 6px; align-items: center; margin-bottom: 8px; }
-        .product-card p { color: #282c3f; font-weight: 700; font-size: 0.9rem; }
-        .original-price { color: #7e818c; text-decoration: line-through; font-size: 0.75rem; font-weight: 400; }
-        .discount { color: #ff905a; font-size: 0.75rem; font-weight: 700; }
+        .price-box { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
+        .product-card p { color: #fff; font-weight: 800; font-size: 0.95rem; }
+        .original-price { color: #777; text-decoration: line-through; font-size: 0.75rem; font-weight: 400; }
+        .discount { color: #2ecc71; font-size: 0.75rem; font-weight: 700; }
         
-        .cart-btn { background: #ffffff; color: #ff3e6c; border: 1px solid #ff3e6c; padding: 7px; width: 100%; cursor: pointer; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; transition: all 0.2s; }
-        .cart-btn:hover { background: #ff3e6c; color: #fff; }
+        .cart-btn { background: #d4af37; color: #000; border: none; padding: 8px; width: 100%; cursor: pointer; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; transition: background 0.2s; }
+        .cart-btn:hover { background: #f39c12; }
         
         /* Footer */
-        footer { background: #fafbfc; color: #535763; text-align: center; padding: 25px 15px; margin-top: 40px; font-size: 0.8rem; border-top: 1px solid #eaeaec; }
+        footer { background: #111; color: #888; text-align: center; padding: 30px 15px; margin-top: 50px; font-size: 0.8rem; border-top: 1px solid #222; }
     </style>
 </head>
 <body>
@@ -85,14 +91,14 @@
             <a href="#sports">Sports</a>
             <a href="#home">Home</a>
             <a href="#brands">Brands</a>
-            <a href="#sale" style="color: #ff3e6c;">Sale 🔥</a>
+            <a href="#sale" style="color: #d4af37;">Sale 🔥</a>
         </nav>
     </div>
 
     <div class="hero">
-        <h2>AS FASHIONS MEGA STORE</h2>
-        <p>Explore Men, Women, Kids & All Brand Collections</p>
-        <a href="#sale" class="btn">SHOP EXPLOSIVE DEALS</a>
+        <h2>LUXE & TRENDY COLLECTION</h2>
+        <p>Discover Exclusive Global Fashion for Men, Women & Kids</p>
+        <a href="#sale" class="btn">EXPLORE DEALS</a>
     </div>
 
     <!-- Highlights Bar -->
@@ -106,6 +112,23 @@
 
     <div class="container">
         
+        <!-- NEW LAUNCH PREVIEW VIDEOS -->
+        <h2 class="section-title">New Launch Previews 🔥</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <video src="https://assets.mixkit.co/videos/preview/mixkit-stylish-woman-walking-in-urban-setting-42999-large.mp4" autoplay loop muted playsinline></video>
+                <div style="padding: 8px; text-align: center;"><p style="font-size: 0.75rem; font-weight: bold; color: #fff;">Summer Kurta Edit</p></div>
+            </div>
+            <div class="video-card">
+                <video src="https://assets.mixkit.co/videos/preview/mixkit-model-posing-for-a-photoshoot-in-a-studio-43004-large.mp4" autoplay loop muted playsinline></video>
+                <div style="padding: 8px; text-align: center;"><p style="font-size: 0.75rem; font-weight: bold; color: #fff;">Denim Series</p></div>
+            </div>
+            <div class="video-card">
+                <video src="https://assets.mixkit.co/videos/preview/mixkit-young-woman-looking-at-the-camera-in-a-photoshoot-42997-large.mp4" autoplay loop muted playsinline></video>
+                <div style="padding: 8px; text-align: center;"><p style="font-size: 0.75rem; font-weight: bold; color: #fff;">Party Gowns</p></div>
+            </div>
+        </div>
+
         <!-- MEN SECTION -->
         <h2 id="men" class="section-title">Men's Store</h2>
         <div class="products-grid">
@@ -114,7 +137,7 @@
                 <div class="product-info">
                     <span class="brand-name">Roadster</span>
                     <h3>Casual Slim Shirt</h3>
-                    <div class="price-box"><p>₹799</p><span class="original-price">₹1,999</span><span class="discount">(60% OFF)</span></div>
+                    <div class="price-box"><p>₹799</p><span class="original-price">₹1,999</span><span class="discount">60% OFF</span></div>
                 </div>
                 <button class="cart-btn">Add to Bag</button>
             </div>
@@ -123,7 +146,7 @@
                 <div class="product-info">
                     <span class="brand-name">Levis</span>
                     <h3>Denim Blue Jeans</h3>
-                    <div class="price-box"><p>₹1,499</p><span class="original-price">₹2,999</span><span class="discount">(50% OFF)</span></div>
+                    <div class="price-box"><p>₹1,499</p><span class="original-price">₹2,999</span><span class="discount">50% OFF</span></div>
                 </div>
                 <button class="cart-btn">Add to Bag</button>
             </div>
@@ -137,7 +160,7 @@
                 <div class="product-info">
                     <span class="brand-name">H&M</span>
                     <h3>Floral Maxi Dress</h3>
-                    <div class="price-box"><p>₹1,299</p><span class="original-price">₹2,499</span><span class="discount">(48% OFF)</span></div>
+                    <div class="price-box"><p>₹1,299</p><span class="original-price">₹2,499</span><span class="discount">48% OFF</span></div>
                 </div>
                 <button class="cart-btn">Add to Bag</button>
             </div>
@@ -146,7 +169,7 @@
                 <div class="product-info">
                     <span class="brand-name">Anouk</span>
                     <h3>Ethnic Kurta Set</h3>
-                    <div class="price-box"><p>₹999</p><span class="original-price">₹1,999</span><span class="discount">(50% OFF)</span></div>
+                    <div class="price-box"><p>₹999</p><span class="original-price">₹1,999</span><span class="discount">50% OFF</span></div>
                 </div>
                 <button class="cart-btn">Add to Bag</button>
             </div>
@@ -160,7 +183,7 @@
                 <div class="product-info">
                     <span class="brand-name">GAP Kids</span>
                     <h3>Party Wear Frock</h3>
-                    <div class="price-box"><p>₹899</p><span class="original-price">₹1,599</span><span class="discount">(43% OFF)</span></div>
+                    <div class="price-box"><p>₹899</p><span class="original-price">₹1,599</span><span class="discount">43% OFF</span></div>
                 </div>
                 <button class="cart-btn">Add to Bag</button>
             </div>
@@ -169,7 +192,7 @@
                 <div class="product-info">
                     <span class="brand-name">UCB Kids</span>
                     <h3>Boys Casual Set</h3>
-                    <div class="price-box"><p>₹799</p><span class="original-price">₹1,299</span><span class="discount">(38% OFF)</span></div>
+                    <div class="price-box"><p>₹799</p><span class="original-price">₹1,299</span><span class="discount">38% OFF</span></div>
                 </div>
                 <button class="cart-btn">Add to Bag</button>
             </div>
@@ -183,7 +206,7 @@
                 <div class="product-info">
                     <span class="brand-name">Nike</span>
                     <h3>Air Runner Sneakers</h3>
-                    <div class="price-box"><p>₹2,999</p><span class="original-price">₹4,999</span><span class="discount">(40% OFF)</span></div>
+                    <div class="price-box"><p>₹2,999</p><span class="original-price">₹4,999</span><span class="discount">40% OFF</span></div>
                 </div>
                 <button class="cart-btn">Add to Bag</button>
             </div>
@@ -192,7 +215,7 @@
                 <div class="product-info">
                     <span class="brand-name">Accessorize</span>
                     <h3>Designer Handbag</h3>
-                    <div class="price-box"><p>₹1,199</p><span class="original-price">₹2,299</span><span class="discount">(47% OFF)</span></div>
+                    <div class="price-box"><p>₹1,199</p><span class="original-price">₹2,299</span><span class="discount">47% OFF</span></div>
                 </div>
                 <button class="cart-btn">Add to Bag</button>
             </div>
@@ -202,13 +225,13 @@
         <h2 id="brands" class="section-title">Featured Brands</h2>
         <div class="products-grid">
             <div class="product-card" style="text-align: center; padding: 20px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                <h3 style="color:#ff3e6c; font-size:1.3rem; font-weight:800; margin-bottom:5px;">NIKE</h3>
-                <p style="font-size:0.75rem; color:#535763; margin-bottom: 10px;">Official sportswear & sneakers</p>
+                <h3 style="color:#d4af37; font-size:1.3rem; font-weight:800; margin-bottom:5px;">NIKE</h3>
+                <p style="font-size:0.75rem; color:#aaa; margin-bottom: 10px;">Official sportswear & sneakers</p>
                 <button class="cart-btn" style="width:auto; padding:6px 15px;">Explore</button>
             </div>
             <div class="product-card" style="text-align: center; padding: 20px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                <h3 style="color:#ff3e6c; font-size:1.3rem; font-weight:800; margin-bottom:5px;">H & M</h3>
-                <p style="font-size:0.75rem; color:#535763; margin-bottom: 10px;">Latest global fashion trends</p>
+                <h3 style="color:#d4af37; font-size:1.3rem; font-weight:800; margin-bottom:5px;">H & M</h3>
+                <p style="font-size:0.75rem; color:#aaa; margin-bottom: 10px;">Latest global fashion trends</p>
                 <button class="cart-btn" style="width:auto; padding:6px 15px;">Explore</button>
             </div>
         </div>
@@ -216,7 +239,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 AS Fashions. All Rights Reserved. <br>Designed for Online Shopping Excellence.</p>
+        <p>&copy; 2026 AS Fashions. All Rights Reserved. <br>Crafted for Luxury Online Shopping.</p>
     </footer>
 
 </body>

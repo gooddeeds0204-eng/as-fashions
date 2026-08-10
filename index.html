@@ -44,13 +44,19 @@
         .cart-item { display: flex; justify-content: space-between; align-items: center; background: #1e1e1e; padding: 8px 10px; margin-bottom: 8px; border-radius: 4px; font-size: 0.8rem; }
         .checkout-btn { background: #d4af37; color: #000; border: none; padding: 10px; width: 100%; font-weight: 800; cursor: pointer; border-radius: 4px; text-transform: uppercase; }
 
-        /* Banner Slider Section */
+        /* Banner Slider Section with Manual Navigation Arrows */
         .slider-container { position: relative; width: 100%; height: 300px; overflow: hidden; border-bottom: 2px solid #d4af37; }
         .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; background-size: cover; background-position: center; padding: 0 15px; }
         .slide.active { opacity: 1; }
         .slide h2 { font-size: 1.8rem; margin-bottom: 8px; font-weight: 800; letter-spacing: 1px; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
         .slide p { font-size: 0.9rem; margin-bottom: 15px; color: #ddd; font-weight: 400; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
         .btn { background: #d4af37; color: #000; padding: 10px 22px; text-decoration: none; font-weight: 800; font-size: 0.85rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Slider Arrows */
+        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #d4af37; border: 1px solid #d4af37; padding: 10px 14px; cursor: pointer; z-index: 10; font-size: 1.1rem; font-weight: bold; border-radius: 50%; transition: 0.2s; }
+        .slider-arrow:hover { background: #d4af37; color: #000; }
+        .prev-arrow { left: 15px; }
+        .next-arrow { right: 15px; }
 
         /* Highlights Bar */
         .highlights { display: flex; justify-content: flex-start; background: #141414; padding: 12px 15px; font-size: 0.75rem; font-weight: 600; text-align: center; border-bottom: 1px solid #222; overflow-x: auto; gap: 10px; }
@@ -160,8 +166,10 @@
         </div>
     </div>
 
-    <!-- Sliding Banners Section (Includes Clearance Sale) -->
+    <!-- Sliding Banners Section with Manual Left/Right Controls -->
     <div class="slider-container">
+        <button class="slider-arrow prev-arrow" onclick="manualSlide(-1)">❮</button>
+        
         <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200')">
             <h2>✨ NEW ARRIVALS</h2>
             <p>Be the first to wear the latest global fashion trends</p>
@@ -192,6 +200,8 @@
             <p>Massive discounts on top styles. Grab before they're gone!</p>
             <a href="#sale" class="btn" style="background: #ff3e6c; color: #fff;">SHOP CLEARANCE</a>
         </div>
+
+        <button class="slider-arrow next-arrow" onclick="manualSlide(1)">❯</button>
     </div>
 
     <!-- Highlights Bar -->
@@ -336,18 +346,27 @@
         <p>&copy; 2026 AS Fashions. All Rights Reserved. <br>Crafted for Luxury Online Shopping.</p>
     </footer>
 
-    <!-- JavaScript for Slider and Cart Drawer Functionality -->
+    <!-- JavaScript for Auto & Manual Slider + Cart Drawer -->
     <script>
-        // Banner Slider Logic
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        
-        function nextSlide() {
+        let slideInterval = setInterval(nextSlide, 3500);
+
+        function showSlide(index) {
             slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
+            currentSlide = (index + slides.length) % slides.length;
             slides[currentSlide].classList.add('active');
         }
-        setInterval(nextSlide, 3500);
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function manualSlide(direction) {
+            clearInterval(slideInterval); // Reset timer when user manually clicks
+            showSlide(currentSlide + direction);
+            slideInterval = setInterval(nextSlide, 3500); // Restart timer
+        }
 
         // Cart Drawer & Management Logic
         let cart = [];

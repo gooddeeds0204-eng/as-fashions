@@ -135,34 +135,142 @@
         <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="Search for products, brands, categories...">
     </div>
 
-    <!-- Mega Menu Navigation Bar -->
+    <!-- Mega Menu Navigation Bar (17-Level Architecture) -->
     <div class="top-nav-bar">
         <nav>
+            <!-- 1. MEN -->
             <div class="dropdown">
                 <button class="drop-btn">Men ▾</button>
                 <div class="dropdown-content">
-                    <a href="#men">T-Shirts</a><a href="#men">Shirts</a><a href="#men">Jeans</a><a href="#men">Blazers</a>
+                    <a href="#men">T-Shirts (Regular, Oversized, Polo)</a>
+                    <a href="#men">Shirts (Casual, Formal, Linen)</a>
+                    <a href="#men">Jeans (Skinny, Slim, Baggy)</a>
+                    <a href="#men">Trousers & Chinos</a>
+                    <a href="#men">Shorts & Joggers</a>
+                    <a href="#men">Jackets & Hoodies</a>
+                    <a href="#men">Suits & Blazers</a>
+                    <a href="#men">Indian Wear (Kurtas, Sherwanis)</a>
+                    <a href="#men">Innerwear & Loungewear</a>
+                    <a href="#men">Activewear</a>
                 </div>
             </div>
+
+            <!-- 2. WOMEN -->
             <div class="dropdown">
                 <button class="drop-btn">Women ▾</button>
                 <div class="dropdown-content">
-                    <a href="#women">Dresses</a><a href="#women">Kurtas</a><a href="#women">Sarees</a><a href="#women">Tops</a>
+                    <a href="#women">Western (Tops, T-Shirts, Shirts)</a>
+                    <a href="#women">Dresses & Jumpsuits</a>
+                    <a href="#women">Jeans & Trousers</a>
+                    <a href="#women">Skirts & Shorts</a>
+                    <a href="#women">Co-ord Sets & Shrugs</a>
+                    <a href="#women">Sweaters & Jackets</a>
+                    <a href="#women">Indian Wear (Kurtis, Sarees, Lehengas)</a>
+                    <a href="#women">Lingerie & Innerwear</a>
+                    <a href="#women">Activewear</a>
                 </div>
             </div>
+
+            <!-- 3. KIDS -->
             <div class="dropdown">
                 <button class="drop-btn">Kids ▾</button>
                 <div class="dropdown-content">
-                    <a href="#kids">Boys Wear</a><a href="#kids">Girls Frocks</a><a href="#kids">Infants</a>
+                    <a href="#kids">Boys Clothing</a>
+                    <a href="#kids">Girls Clothing</a>
+                    <a href="#kids">Baby Wear (Newborn to 4 Years)</a>
+                    <a href="#kids">Kids Accessories & Toys</a>
                 </div>
             </div>
-            <a href="#footwear" class="nav-link">Footwear</a>
-            <a href="#accessories" class="nav-link">Accessories</a>
-            <a href="#beauty" class="nav-link">Beauty</a>
-            <a href="#sports" class="nav-link">Sports</a>
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#brands" class="nav-link">Brands</a>
-            <a href="#sale" class="nav-link" style="color: #d4af37;">Sale 🔥</a>
+
+            <!-- 4. FOOTWEAR -->
+            <div class="dropdown">
+                <button class="drop-btn">Footwear ▾</button>
+                <div class="dropdown-content">
+                    <a href="#footwear">Men's Sneakers, Formal & Sports Shoes</a>
+                    <a href="#footwear">Women's Heels, Flats & Boots</a>
+                    <a href="#footwear">Kids Footwear & School Shoes</a>
+                </div>
+            </div>
+
+            <!-- 5. BAGS -->
+            <div class="dropdown">
+                <button class="drop-btn">Bags ▾</button>
+                <div class="dropdown-content">
+                    <a href="#bags">Women's Handbags, Totes & Slings</a>
+                    <a href="#bags">Men's Backpacks & Wallets</a>
+                    <a href="#bags">Travel Luggage & Suitcases</a>
+                </div>
+            </div>
+
+            <!-- 6. ACCESSORIES & JEWELLERY -->
+            <div class="dropdown">
+                <button class="drop-btn">Accessories ▾</button>
+                <div class="dropdown-content">
+                    <a href="#accessories">Jewellery (Earrings, Necklaces, Rings)</a>
+                    <a href="#accessories">Watches & Sunglasses</a>
+                    <a href="#accessories">Belts, Caps & Scarves</a>
+                </div>
+            </div>
+
+            <!-- 7. BEAUTY -->
+            <div class="dropdown">
+                <button class="drop-btn">Beauty ▾</button>
+                <div class="dropdown-content">
+                    <a href="#beauty">Makeup (Foundation, Lipstick)</a>
+                    <a href="#beauty">Skincare (Face Wash, Sunscreen)</a>
+                    <a href="#beauty">Haircare & Fragrances</a>
+                    <a href="#beauty">Grooming & Trimmers</a>
+                </div>
+            </div>
+
+            <!-- 8. SPORTS -->
+            <div class="dropdown">
+                <button class="drop-btn">Sports ▾</button>
+                <div class="dropdown-content">
+                    <a href="#sports">Running & Gym Wear</a>
+                    <a href="#sports">Sports Footwear & Jerseys</a>
+                    <a href="#sports">Fitness Equipment & Yoga Mats</a>
+                </div>
+            </div>
+
+            <!-- 9. HOME -->
+            <div class="dropdown">
+                <button class="drop-btn">Home ▾</button>
+                <div class="dropdown-content">
+                    <a href="#home">Home Decor & Cushions</a>
+                    <a href="#home">Bedsheets & Curtains</a>
+                    <a href="#home">Kitchen & Storage Containers</a>
+                </div>
+            </div>
+
+            <!-- 10. WINTER WEAR -->
+            <a href="#winter" class="nav-link">Winter Wear</a>
+
+            <!-- 11. BRANDS -->
+            <div class="dropdown">
+                <button class="drop-btn">Brands ▾</button>
+                <div class="dropdown-content">
+                    <a href="#brands">Nike, Adidas, Puma</a>
+                    <a href="#brands">Levi's, Pepe Jeans</a>
+                    <a href="#brands">H&M, Vero Moda</a>
+                    <a href="#brands">Roadster, WROGN</a>
+                </div>
+            </div>
+
+            <!-- 12. TRENDING -->
+            <a href="#trending" class="nav-link">Trending 🔥</a>
+
+            <!-- 13. NEW ARRIVALS -->
+            <a href="#new" class="nav-link">New Arrivals ✨</a>
+
+            <!-- 14. SALE -->
+            <a href="#sale" class="nav-link" style="color: #ff3e6c;">Sale 🏷️</a>
+
+            <!-- 15. GIFTING -->
+            <a href="#gifting" class="nav-link">Gifting 🎁</a>
+
+            <!-- 16. EDITS -->
+            <a href="#edits" class="nav-link">Edits 🌟</a>
         </nav>
     </div>
 
@@ -244,7 +352,7 @@
         </div>
     </div>
 
-    <!-- Sliding Banners Section (Fixed Alignment) -->
+    <!-- Sliding Banners Section -->
     <div class="slider-container">
         <button class="slider-arrow prev-arrow" onclick="manualSlide(-1)">‹</button>
         <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200')">
@@ -300,7 +408,7 @@
             </div>
         </div>
 
-        <!-- WOMEN SECTION (Fixed Grid Layout to Avoid Blank Spacing) -->
+        <!-- WOMEN SECTION -->
         <h2 id="women" class="section-title">Women's Boutique</h2>
         <div class="products-grid">
             <div class="product-card" onclick="openProductModal('H&M', 'Floral Maxi Dress', 1299, 2499, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500', 'Elegant floral printed maxi dress.')">
@@ -321,6 +429,44 @@
                     <div class="price-box"><p>₹999</p><span class="original-price">₹1,999</span><span class="discount">50% OFF</span></div>
                 </div>
                 <button class="cart-btn" onclick="event.stopPropagation(); openProductModal('Anouk', 'Ethnic Kurta Set', 999, 1999, 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500', 'Traditional ethnic kurta set.')">Select Options</button>
+            </div>
+        </div>
+
+        <!-- KIDS SECTION -->
+        <h2 id="kids" class="section-title">Kids Fashion</h2>
+        <div class="products-grid">
+            <div class="product-card" onclick="openProductModal('GAP Kids', 'Party Wear Frock', 899, 1599, 'https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=500', 'Cute party wear frock for young girls.')">
+                <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=500" alt="Frock">
+                <div class="product-info">
+                    <span class="brand-name">GAP Kids</span>
+                    <h3>Party Wear Frock</h3>
+                    <div class="price-box"><p>₹899</p><span class="original-price">₹1,599</span><span class="discount">43% OFF</span></div>
+                </div>
+                <button class="cart-btn" onclick="event.stopPropagation(); openProductModal('GAP Kids', 'Party Wear Frock', 899, 1599, 'https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=500', 'Cute party wear frock.')">Select Options</button>
+            </div>
+            
+            <div class="product-card" onclick="openProductModal('UCB Kids', 'Boys Casual Set', 799, 1299, 'https://images.unsplash.com/photo-1503944583220-7eeec4934c7b?w=500', 'Comfortable casual clothing set for boys.')">
+                <img src="https://images.unsplash.com/photo-1503944583220-7eeec4934c7b?w=500" alt="Boys set">
+                <div class="product-info">
+                    <span class="brand-name">UCB Kids</span>
+                    <h3>Boys Casual Set</h3>
+                    <div class="price-box"><p>₹799</p><span class="original-price">₹1,299</span><span class="discount">38% OFF</span></div>
+                </div>
+                <button class="cart-btn" onclick="event.stopPropagation(); openProductModal('UCB Kids', 'Boys Casual Set', 799, 1299, 'https://images.unsplash.com/photo-1503944583220-7eeec4934c7b?w=500', 'Comfortable boys casual set.')">Select Options</button>
+            </div>
+        </div>
+
+        <!-- FOOTWEAR SECTION -->
+        <h2 id="footwear" class="section-title">Footwear Store</h2>
+        <div class="products-grid">
+            <div class="product-card" onclick="openProductModal('Nike', 'Air Runner Sneakers', 2999, 4999, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500', 'High performance sports sneakers for running and training.')">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
+                <div class="product-info">
+                    <span class="brand-name">Nike</span>
+                    <h3>Air Runner Sneakers</h3>
+                    <div class="price-box"><p>₹2,999</p><span class="original-price">₹4,999</span><span class="discount">40% OFF</span></div>
+                </div>
+                <button class="cart-btn" onclick="event.stopPropagation(); openProductModal('Nike', 'Air Runner Sneakers', 2999, 4999, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500', 'Nike sports sneakers.')">Select Options</button>
             </div>
         </div>
 

@@ -23,15 +23,17 @@
         nav a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
         nav a:hover { color: #d4af37; }
 
-        /* Hero Banner */
-        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200') no-repeat center center/cover; height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 15px; border-bottom: 2px solid #d4af37; }
-        .hero h2 { font-size: 1.8rem; margin-bottom: 8px; font-weight: 800; letter-spacing: 1px; color: #fff; }
-        .hero p { font-size: 0.85rem; margin-bottom: 15px; color: #ddd; font-weight: 300; }
+        /* Banner Slider Section */
+        .slider-container { position: relative; width: 100%; height: 300px; overflow: hidden; border-bottom: 2px solid #d4af37; }
+        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; background-size: cover; background-position: center; padding: 0 15px; }
+        .slide.active { opacity: 1; }
+        .slide h2 { font-size: 1.8rem; margin-bottom: 8px; font-weight: 800; letter-spacing: 1px; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+        .slide p { font-size: 0.9rem; margin-bottom: 15px; color: #ddd; font-weight: 400; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
         .btn { background: #d4af37; color: #000; padding: 10px 22px; text-decoration: none; font-weight: 800; font-size: 0.85rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Highlights Bar */
+        /* Interactive Category Buttons Bar */
         .highlights { display: flex; justify-content: flex-start; background: #141414; padding: 12px 15px; font-size: 0.75rem; font-weight: 600; text-align: center; border-bottom: 1px solid #222; overflow-x: auto; gap: 10px; }
-        .highlights span { background: #1e1e1e; border: 1px solid #333; padding: 6px 14px; border-radius: 20px; white-space: nowrap; color: #d4af37; }
+        .highlights span { background: #1e1e1e; border: 1px solid #333; padding: 6px 14px; border-radius: 20px; white-space: nowrap; color: #d4af37; cursor: pointer; }
 
         /* Container & Grid */
         .container { max-width: 1200px; margin: 20px auto; padding: 0 10px; }
@@ -42,7 +44,7 @@
         .video-grid { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
         .video-grid::-webkit-scrollbar { display: none; }
         .video-card { min-width: 150px; background: #141414; border-radius: 8px; overflow: hidden; border: 1px solid #222; }
-        .video-card video { width: 100%; height: 220px; object-fit: cover; }
+        .video-card img { width: 100%; height: 220px; object-fit: cover; } /* Using high quality fashion GIFs/Images to avoid black video loading error */
 
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media(min-width: 768px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
@@ -95,10 +97,33 @@
         </nav>
     </div>
 
-    <div class="hero">
-        <h2>LUXE & TRENDY COLLECTION</h2>
-        <p>Discover Exclusive Global Fashion for Men, Women & Kids</p>
-        <a href="#sale" class="btn">EXPLORE DEALS</a>
+    <!-- Sliding Banners Section -->
+    <div class="slider-container">
+        <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200')">
+            <h2>✨ NEW ARRIVALS</h2>
+            <p>Be the first to wear the latest global fashion trends</p>
+            <a href="#sale" class="btn">SHOP NEW</a>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200')">
+            <h2>🔥 TRENDING NOW</h2>
+            <p>Most-loved styles chosen by fashion experts</p>
+            <a href="#sale" class="btn">EXPLORE TRENDS</a>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200')">
+            <h2>⭐ BESTSELLERS</h2>
+            <p>Top rated outfits loved by thousands of customers</p>
+            <a href="#sale" class="btn">SHOP BESTSELLERS</a>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1555529771-835f59fc5efe?w=1200')">
+            <h2>🏷️ UNDER ₹499 STORE</h2>
+            <p>Super stylish fashion at unbelievable pocket prices</p>
+            <a href="#sale" class="btn">SHOP BUDGET</a>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200')">
+            <h2>💎 LUXE EDITION</h2>
+            <p>Premium fabrics and elite designer wear collection</p>
+            <a href="#sale" class="btn">DISCOVER LUXE</a>
+        </div>
     </div>
 
     <!-- Highlights Bar -->
@@ -112,19 +137,19 @@
 
     <div class="container">
         
-        <!-- NEW LAUNCH PREVIEW VIDEOS -->
+        <!-- NEW LAUNCH PREVIEWS (Fixed Black Screen Issue with High Quality Visuals) -->
         <h2 class="section-title">New Launch Previews 🔥</h2>
         <div class="video-grid">
             <div class="video-card">
-                <video src="https://assets.mixkit.co/videos/preview/mixkit-stylish-woman-walking-in-urban-setting-42999-large.mp4" autoplay loop muted playsinline></video>
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500" alt="Preview 1">
                 <div style="padding: 8px; text-align: center;"><p style="font-size: 0.75rem; font-weight: bold; color: #fff;">Summer Kurta Edit</p></div>
             </div>
             <div class="video-card">
-                <video src="https://assets.mixkit.co/videos/preview/mixkit-model-posing-for-a-photoshoot-in-a-studio-43004-large.mp4" autoplay loop muted playsinline></video>
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500" alt="Preview 2">
                 <div style="padding: 8px; text-align: center;"><p style="font-size: 0.75rem; font-weight: bold; color: #fff;">Denim Series</p></div>
             </div>
             <div class="video-card">
-                <video src="https://assets.mixkit.co/videos/preview/mixkit-young-woman-looking-at-the-camera-in-a-photoshoot-42997-large.mp4" autoplay loop muted playsinline></video>
+                <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500" alt="Preview 3">
                 <div style="padding: 8px; text-align: center;"><p style="font-size: 0.75rem; font-weight: bold; color: #fff;">Party Gowns</p></div>
             </div>
         </div>
@@ -241,6 +266,21 @@
     <footer>
         <p>&copy; 2026 AS Fashions. All Rights Reserved. <br>Crafted for Luxury Online Shopping.</p>
     </footer>
+
+    <!-- JavaScript for Automatic Banner Slider -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Change slide every 3.5 seconds automatically
+        setInterval(nextSlide, 3500);
+    </script>
 
 </body>
 </html>

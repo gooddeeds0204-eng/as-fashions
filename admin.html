@@ -3,29 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS Fashions - Admin Dashboard</title>
+    <title>AS Fashions - Advanced Admin Panel</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f7f6; color: #333; }
+        body { background-color: #f4f7f6; color: #333; padding-bottom: 40px; }
         
-        header { background: #111; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        header { background: #111; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         header h1 { font-size: 1.1rem; }
         
-        .container { max-width: 1000px; margin: 20px auto; padding: 0 10px; }
+        .container { max-width: 900px; margin: 20px auto; padding: 0 10px; }
         
-        .card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        .card h2 { font-size: 1rem; margin-bottom: 15px; color: #111; border-bottom: 2px solid #ff3e6c; padding-bottom: 5px; display: inline-block; }
+        .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .card h2 { font-size: 1.1rem; margin-bottom: 15px; color: #111; border-bottom: 2px solid #ff3e6c; padding-bottom: 6px; }
         
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; }
-        .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.9rem; }
+        .form-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        @media(min-width: 600px) { .form-grid { grid-template-columns: 1fr 1fr; } }
+
+        .form-group { margin-bottom: 10px; }
+        .form-group.full { grid-column: span 2; }
         
-        .btn { background: #ff3e6c; color: white; border: none; padding: 10px; width: 100%; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #444; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.9rem; background: #fafafa; }
+        .form-group textarea { resize: vertical; height: 80px; }
+
+        .btn { background: #ff3e6c; color: white; border: none; padding: 12px; width: 100%; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 1rem; margin-top: 10px; }
         .btn:hover { background: #e0325c; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; }
         table, th, td { border: 1px solid #ddd; }
-        th, td { padding: 8px; text-align: left; }
+        th, td { padding: 10px; text-align: left; }
         th { background: #111; color: white; }
     </style>
 </head>
@@ -37,41 +43,71 @@
     </header>
 
     <div class="container">
-        <!-- Add Product Section -->
+        <!-- Detailed Add Product Section -->
         <div class="card">
-            <h2>Add New Product</h2>
-            <div class="form-group">
-                <label>Product Name</label>
-                <input type="text" id="pName" placeholder="e.g. Slim Fit Shirt">
+            <h2>📦 Add New Product (Detailed)</h2>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Product Title / Name</label>
+                    <input type="text" id="pName" placeholder="e.g. Floral Maxi Dress">
+                </div>
+
+                <div class="form-group">
+                    <label>Brand Name</label>
+                    <input type="text" id="pBrand" placeholder="e.g. H&M, Nike, Roadster">
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="pCategory">
+                        <option value="Men">Men</option>
+                        <option value="Women">Women</option>
+                        <option value="Kids">Kids</option>
+                        <option value="Footwear">Footwear</option>
+                        <option value="Accessories">Accessories</option>
+                        <option value="Beauty">Beauty</option>
+                        <option value="Sports">Sports & Fitness</option>
+                        <option value="Home">Home & Lifestyle</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Available Sizes</label>
+                    <input type="text" id="pSizes" placeholder="S, M, L, XL, Free Size">
+                </div>
+
+                <div class="form-group">
+                    <label>Selling Price (₹)</label>
+                    <input type="number" id="pPrice" placeholder="999">
+                </div>
+
+                <div class="form-group">
+                    <label>Original MRP (₹) [For Discount]</label>
+                    <input type="number" id="pMrp" placeholder="1999">
+                </div>
+
+                <div class="form-group full">
+                    <label>Image Direct URL</label>
+                    <input type="text" id="pImage" placeholder="Paste image link from Unsplash or product photo URL">
+                </div>
+
+                <div class="form-group full">
+                    <label>Product Description</label>
+                    <textarea id="pDesc" placeholder="Write fabric details, fit type, wash care, etc..."></textarea>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Category</label>
-                <select id="pCategory">
-                    <option value="Men">Men</option>
-                    <option value="Women">Women</option>
-                    <option value="Kids">Kids</option>
-                    <option value="Footwear">Footwear</option>
-                    <option value="Accessories">Accessories</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Price (₹)</label>
-                <input type="number" id="pPrice" placeholder="999">
-            </div>
-            <div class="form-group">
-                <label>Image URL</label>
-                <input type="text" id="pImage" placeholder="Paste image link">
-            </div>
-            <button class="btn" onclick="alert('Product added successfully!')">Publish Product</button>
+
+            <button class="btn" onclick="alert('Product details captured successfully!')">Publish to Store</button>
         </div>
 
         <!-- Orders Management -->
         <div class="card">
-            <h2>Customer Orders</h2>
+            <h2>🛒 Customer Orders Overview</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Order ID</th>
+                        <th>ID</th>
                         <th>Customer</th>
                         <th>Item</th>
                         <th>Status</th>

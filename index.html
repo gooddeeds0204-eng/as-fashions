@@ -22,7 +22,7 @@
         #search-input { width: 100%; max-width: 600px; padding: 10px 15px; background: #111; border: 1px solid #444; border-radius: 4px; color: #fff; font-size: 0.9rem; outline: none; }
         #search-input:focus { border-color: #d4af37; }
 
-        /* Mega Menu Navigation Bar */
+        /* Mega Menu Navigation Bar - 17 Level Deep Structure */
         .top-nav-bar { background: #181818; padding: 10px 15px; border-bottom: 1px solid #282828; position: sticky; top: 55px; z-index: 999; }
         nav { display: flex; gap: 18px; overflow-x: auto; padding: 4px 0; white-space: nowrap; scrollbar-width: none; }
         nav::-webkit-scrollbar { display: none; }
@@ -31,9 +31,10 @@
         .drop-btn { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; background: none; border: none; cursor: pointer; font-family: inherit; }
         .drop-btn:hover { color: #d4af37; }
         
-        .dropdown-content { display: none; position: absolute; background: #1a1a1a; min-width: 180px; max-height: 300px; overflow-y: auto; box-shadow: 0px 8px 16px rgba(0,0,0,0.8); border: 1px solid #333; z-index: 1000; top: 100%; left: 0; }
-        .dropdown-content a { color: #ccc; padding: 8px 12px; text-decoration: none; display: block; font-size: 0.75rem; text-transform: none; }
+        .dropdown-content { display: none; position: absolute; background: #1a1a1a; min-width: 220px; max-height: 350px; overflow-y: auto; box-shadow: 0px 8px 16px rgba(0,0,0,0.8); border: 1px solid #333; z-index: 1000; top: 100%; left: 0; padding: 5px 0; }
+        .dropdown-content a { color: #ccc; padding: 7px 15px; text-decoration: none; display: block; font-size: 0.75rem; text-transform: none; }
         .dropdown-content a:hover { background: #d4af37; color: #000; }
+        .dropdown-content .sub-title { color: #d4af37; font-weight: bold; padding: 5px 15px; font-size: 0.75rem; border-bottom: 1px solid #222; margin-top: 5px; }
         .dropdown:hover .dropdown-content { display: block; }
         
         .nav-link { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
@@ -71,7 +72,7 @@
         .form-group input, .form-group textarea { width: 100%; padding: 9px; background: #1e1e1e; border: 1px solid #333; border-radius: 4px; color: #fff; font-size: 0.85rem; }
         .form-group textarea { height: 60px; resize: none; }
 
-        /* Fixed Banner Slider Section */
+        /* Slider Section */
         .slider-container { position: relative; width: 100%; height: 280px; overflow: hidden; border-bottom: 2px solid #d4af37; background: #000; }
         .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; transition: opacity 0.6s ease-in-out; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; background-size: cover; background-position: center; padding: 0 15px; }
         .slide.active { opacity: 1; visibility: visible; position: relative; }
@@ -79,7 +80,6 @@
         .slide p { font-size: 0.85rem; margin-bottom: 12px; color: #ddd; font-weight: 400; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
         .btn { background: #d4af37; color: #000; padding: 9px 20px; text-decoration: none; font-weight: 800; font-size: 0.85rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Minimalist Clean Arrows */
         .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; cursor: pointer; z-index: 10; font-size: 2.5rem; font-weight: 300; text-shadow: 0 2px 5px rgba(0,0,0,0.8); padding: 0 15px; }
         .slider-arrow:hover { color: #d4af37; }
         .prev-arrow { left: 5px; }
@@ -115,7 +115,6 @@
         .cart-btn { background: #d4af37; color: #000; border: none; padding: 8px; width: 100%; cursor: pointer; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; transition: background 0.2s; }
         .cart-btn:hover { background: #f39c12; }
         
-        /* Footer */
         footer { background: #111; color: #888; text-align: center; padding: 30px 15px; margin-top: 50px; font-size: 0.8rem; border-top: 1px solid #222; }
     </style>
 </head>
@@ -142,13 +141,15 @@
             <div class="dropdown">
                 <button class="drop-btn">Men ▾</button>
                 <div class="dropdown-content">
+                    <div class="sub-title">Clothing</div>
                     <a href="#men">T-Shirts (Regular, Oversized, Polo)</a>
                     <a href="#men">Shirts (Casual, Formal, Linen)</a>
                     <a href="#men">Jeans (Skinny, Slim, Baggy)</a>
                     <a href="#men">Trousers & Chinos</a>
                     <a href="#men">Shorts & Joggers</a>
-                    <a href="#men">Jackets & Hoodies</a>
-                    <a href="#men">Suits & Blazers</a>
+                    <a href="#men">Sweatshirts & Hoodies</a>
+                    <a href="#men">Jackets & Blazers</a>
+                    <div class="sub-title">Ethnic & Inner</div>
                     <a href="#men">Indian Wear (Kurtas, Sherwanis)</a>
                     <a href="#men">Innerwear & Loungewear</a>
                     <a href="#men">Activewear</a>
@@ -159,13 +160,14 @@
             <div class="dropdown">
                 <button class="drop-btn">Women ▾</button>
                 <div class="dropdown-content">
-                    <a href="#women">Western (Tops, T-Shirts, Shirts)</a>
-                    <a href="#women">Dresses & Jumpsuits</a>
+                    <div class="sub-title">Western Wear</div>
+                    <a href="#women">Tops, T-Shirts & Shirts</a>
+                    <a href="#women">Dresses (Mini, Maxi, Bodycon)</a>
                     <a href="#women">Jeans & Trousers</a>
-                    <a href="#women">Skirts & Shorts</a>
-                    <a href="#women">Co-ord Sets & Shrugs</a>
-                    <a href="#women">Sweaters & Jackets</a>
-                    <a href="#women">Indian Wear (Kurtis, Sarees, Lehengas)</a>
+                    <a href="#women">Skirts, Shorts & Jumpsuits</a>
+                    <a href="#women">Co-ord Sets & Sweaters</a>
+                    <div class="sub-title">Ethnic & Lingerie</div>
+                    <a href="#women">Indian Wear (Sarees, Kurtis, Lehengas)</a>
                     <a href="#women">Lingerie & Innerwear</a>
                     <a href="#women">Activewear</a>
                 </div>
@@ -175,10 +177,10 @@
             <div class="dropdown">
                 <button class="drop-btn">Kids ▾</button>
                 <div class="dropdown-content">
-                    <a href="#kids">Boys Clothing</a>
-                    <a href="#kids">Girls Clothing</a>
+                    <a href="#kids">Boys Clothing (T-Shirts, Jeans)</a>
+                    <a href="#kids">Girls Clothing (Frocks, Skirts)</a>
                     <a href="#kids">Baby Wear (Newborn to 4 Years)</a>
-                    <a href="#kids">Kids Accessories & Toys</a>
+                    <a href="#kids">Kids Accessories & School Bags</a>
                 </div>
             </div>
 
@@ -186,9 +188,9 @@
             <div class="dropdown">
                 <button class="drop-btn">Footwear ▾</button>
                 <div class="dropdown-content">
-                    <a href="#footwear">Men's Sneakers, Formal & Sports Shoes</a>
-                    <a href="#footwear">Women's Heels, Flats & Boots</a>
-                    <a href="#footwear">Kids Footwear & School Shoes</a>
+                    <a href="#footwear">Men (Sneakers, Formal, Loafers)</a>
+                    <a href="#footwear">Women (Heels, Flats, Boots)</a>
+                    <a href="#footwear">Kids (Sneakers, School Shoes)</a>
                 </div>
             </div>
 
@@ -196,17 +198,17 @@
             <div class="dropdown">
                 <button class="drop-btn">Bags ▾</button>
                 <div class="dropdown-content">
-                    <a href="#bags">Women's Handbags, Totes & Slings</a>
-                    <a href="#bags">Men's Backpacks & Wallets</a>
-                    <a href="#bags">Travel Luggage & Suitcases</a>
+                    <a href="#bags">Women (Handbags, Totes, Slings)</a>
+                    <a href="#bags">Men (Backpacks, Wallets)</a>
+                    <a href="#bags">Travel (Suitcases, Duffles)</a>
                 </div>
             </div>
 
-            <!-- 6. ACCESSORIES & JEWELLERY -->
+            <!-- 6. ACCESSORIES -->
             <div class="dropdown">
                 <button class="drop-btn">Accessories ▾</button>
                 <div class="dropdown-content">
-                    <a href="#accessories">Jewellery (Earrings, Necklaces, Rings)</a>
+                    <a href="#accessories">Jewellery (Earrings, Necklaces)</a>
                     <a href="#accessories">Watches & Sunglasses</a>
                     <a href="#accessories">Belts, Caps & Scarves</a>
                 </div>
@@ -227,9 +229,9 @@
             <div class="dropdown">
                 <button class="drop-btn">Sports ▾</button>
                 <div class="dropdown-content">
-                    <a href="#sports">Running & Gym Wear</a>
-                    <a href="#sports">Sports Footwear & Jerseys</a>
-                    <a href="#sports">Fitness Equipment & Yoga Mats</a>
+                    <a href="#sports">Running & Gym Apparel</a>
+                    <a href="#sports">Sports Shoes & Jerseys</a>
+                    <a href="#sports">Fitness Equipment & Mats</a>
                 </div>
             </div>
 
@@ -239,7 +241,7 @@
                 <div class="dropdown-content">
                     <a href="#home">Home Decor & Cushions</a>
                     <a href="#home">Bedsheets & Curtains</a>
-                    <a href="#home">Kitchen & Storage Containers</a>
+                    <a href="#home">Kitchen & Bottles</a>
                 </div>
             </div>
 

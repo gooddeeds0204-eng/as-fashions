@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS Fashions - Advanced Admin Panel</title>
+    <title>AS Fashions - Ultimate Admin Panel</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f4f7f6; color: #333; padding-bottom: 40px; }
@@ -43,9 +43,9 @@
     </header>
 
     <div class="container">
-        <!-- Detailed Add Product Section -->
+        <!-- Add Product Section with Stock & Colors -->
         <div class="card">
-            <h2>📦 Add New Product (Detailed)</h2>
+            <h2>📦 Add New Product (Complete Inventory)</h2>
             
             <div class="form-grid">
                 <div class="form-group">
@@ -87,6 +87,16 @@
                     <input type="number" id="pMrp" placeholder="1999">
                 </div>
 
+                <div class="form-group">
+                    <label>Stock Count (Quantity)</label>
+                    <input type="number" id="pStock" placeholder="e.g. 50">
+                </div>
+
+                <div class="form-group">
+                    <label>Available Colors</label>
+                    <input type="text" id="pColors" placeholder="e.g. Black, Blue, Red">
+                </div>
+
                 <div class="form-group full">
                     <label>Image Direct URL</label>
                     <input type="text" id="pImage" placeholder="Paste image link from Unsplash or product photo URL">
@@ -98,7 +108,7 @@
                 </div>
             </div>
 
-            <button class="btn" onclick="alert('Product details captured successfully!')">Publish to Store</button>
+            <button class="btn" onclick="alert('Product along with stock and colors published successfully!')">Publish to Store</button>
         </div>
 
         <!-- Orders Management -->

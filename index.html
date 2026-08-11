@@ -1138,7 +1138,7 @@ header{
 <script>
 
 /* =====================================================
-   PRODUCT DATABASE (Default + Admin Custom Products Sync)
+   PRODUCT DATABASE
 ===================================================== */
 
 const defaultProducts = [
@@ -1160,8 +1160,13 @@ const defaultProducts = [
 { id:16, brand:"Fossil", name:"Classic Fashion Watch", category:"Accessories", type:"Watch", price:4999, mrp:7999, rating:4.8, discount:38, new:false, trending:true, image:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=700", description:"Classic watch." }
 ];
 
-// Load custom products from Admin panel storage
-let customProducts = JSON.parse(localStorage.getItem("as_custom_products") || "[]");
+// Merge Admin Custom Products safely
+let customProducts = [];
+try {
+    customProducts = JSON.parse(localStorage.getItem("as_custom_products") || "[]");
+} catch(e) {
+    customProducts = [];
+}
 const products = [...customProducts, ...defaultProducts];
 
 /* =====================================================
@@ -1186,6 +1191,7 @@ function saveState(){
 
 function toast(message){
     const t = document.getElementById("toast");
+    if(!t) return;
     t.innerText = message;
     t.classList.add("show");
     setTimeout(()=>{ t.classList.remove("show"); }, 2200);
@@ -1205,12 +1211,14 @@ function toggleDropdown(element, event) {
 
 function toggleAccount(event){
     event.stopPropagation();
-    document.getElementById('accountDropdown').classList.toggle('open');
+    const dropdown = document.getElementById('accountDropdown');
+    if(dropdown) dropdown.classList.toggle('open');
 }
 
 window.addEventListener('click', () => {
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('open'));
-    document.getElementById('accountDropdown').classList.remove('open');
+    const accDrop = document.getElementById('accountDropdown');
+    if(accDrop) accDrop.classList.remove('open');
 });
 
 /* =====================================================
@@ -1242,11 +1250,18 @@ function productCard(product){
 }
 
 function renderProducts(){
-    document.getElementById("allProductGrid").innerHTML = currentProducts.map(productCard).join("");
-    document.getElementById("trendingProducts").innerHTML = products.filter(p=>p.trending).slice(0,4).map(productCard).join("");
-    document.getElementById("newProducts").innerHTML = products.filter(p=>p.new).slice(0,4).map(productCard).join("");
-    document.getElementById("bestProducts").innerHTML = [...products].sort((a,b)=>b.rating-a.rating).slice(0,4).map(productCard).join("");
-    document.getElementById("recommendedProducts").innerHTML = [...products].sort(()=>Math.random()-.5).slice(0,4).map(productCard).join("");
+    const allGrid = document.getElementById("allProductGrid");
+    const trendGrid = document.getElementById("trendingProducts");
+    const newGrid = document.getElementById("newProducts");
+    const bestGrid = document.getElementById("bestProducts");
+    const recGrid = document.getElementById("recommendedProducts");
+
+    if(allGrid) allGrid.innerHTML = currentProducts.map(productCard).join("");
+    if(trendGrid) trendGrid.innerHTML = products.filter(p=>p.trending).slice(0,4).map(productCard).join("");
+    if(newGrid) newGrid.innerHTML = products.filter(p=>p.new).slice(0,4).map(productCard).join("");
+    if(bestGrid) bestGrid.innerHTML = [...products].sort((a,b)=>b.rating-a.rating).slice(0,4).map(productCard).join("");
+    if(recGrid) recGrid.innerHTML = [...products].sort(()=>Math.random()-.5).slice(0,4).map(productCard).join("");
+    
     renderRecentlyViewed();
 }
 
@@ -1279,7 +1294,8 @@ function sortProducts(type){
     if(type === "rating") arr.sort((a,b)=>b.rating-a.rating);
     if(type === "newest") arr.sort((a,b)=>Number(b.new)-Number(a.new));
     currentProducts = arr;
-    document.getElementById("allProductGrid").innerHTML = arr.map(productCard).join("");
+    const allGrid = document.getElementById("allProductGrid");
+    if(allGrid) allGrid.innerHTML = arr.map(productCard).join("");
 }
 
 /* =====================================================
@@ -1290,6 +1306,7 @@ function openProduct(id){
     const product = products.find(p=>p.id === id);
     if(!product) return;
     currentProduct = product;
+    
     document.getElementById("modalImage").src = product.image;
     document.getElementById("modalBrand").innerText = product.brand;
     document.getElementById("modalTitle").innerText = product.name;
@@ -1361,14 +1378,18 @@ function addModalToCart(){
 }
 
 function updateCart(){
-    const count = cart.reduce((sum,item)=>sum+item.qty,0);
-    document.getElementById("cartCount").innerText = count;
+    const countSpan = document.getElementById("cartCount");
+    if(countSpan) countSpan.innerText = cart.reduce((sum,item)=>sum+item.qty,0);
+    
     const container = document.getElementById("cartItems");
+    if(!container) return;
+
     if(cart.length === 0){
         container.innerHTML = `<div style="text-align:center;padding:50px 15px;color:#777"><div style="font-size:40px">🛍️</div><p style="margin-top:10px">Your shopping bag is empty</p></div>`;
     } else {
         container.innerHTML = cart.map((item,index)=>{
             const p = products.find(x=>x.id === item.id);
+            if(!p) return '';
             return `
             <div class="cart-item">
                 <img src="${p.image}">
@@ -1411,19 +1432,31 @@ function updateCartSummary(){
     let subtotal = 0;
     cart.forEach(item=>{
         const p = products.find(x=>x.id === item.id);
-        subtotal += p.price * item.qty;
+        if(p) subtotal += p.price * item.qty;
     });
     const delivery = subtotal === 0 ? 0 : (subtotal >= 999 ? 0 : 79);
     const total = subtotal + delivery - couponDiscount;
 
-    document.getElementById("subtotal").innerText = "₹" + subtotal.toLocaleString("en-IN");
-    document.getElementById("delivery").innerText = delivery === 0 ? "FREE" : "₹" + delivery;
-    document.getElementById("cartDiscount").innerText = "₹" + couponDiscount;
-    document.getElementById("cartTotal").innerText = "₹" + Math.max(0,total).toLocaleString("en-IN");
+    const subEl = document.getElementById("subtotal");
+    const delEl = document.getElementById("delivery");
+    const discEl = document.getElementById("cartDiscount");
+    const totEl = document.getElementById("cartTotal");
+
+    if(subEl) subEl.innerText = "₹" + subtotal.toLocaleString("en-IN");
+    if(delEl) delEl.innerText = delivery === 0 ? "FREE" : "₹" + delivery;
+    if(discEl) discEl.innerText = "₹" + couponDiscount;
+    if(totEl) totEl.innerText = "₹" + Math.max(0,total).toLocaleString("en-IN");
 }
 
-function openCart(){ document.getElementById("cartDrawer").classList.add("open"); updateCart(); }
-function closeCart(){ document.getElementById("cartDrawer").classList.remove("open"); }
+function openCart(){ 
+    const drawer = document.getElementById("cartDrawer");
+    if(drawer) drawer.classList.add("open"); 
+    updateCart(); 
+}
+function closeCart(){ 
+    const drawer = document.getElementById("cartDrawer");
+    if(drawer) drawer.classList.remove("open"); 
+}
 
 /* =====================================================
    WISHLIST & RECENTLY VIEWED
@@ -1444,27 +1477,43 @@ function toggleWishlist(id){
     renderWishlist();
 }
 
-function updateWishlistCount(){ document.getElementById("wishlistCount").innerText = wishlist.length; }
+function updateWishlistCount(){ 
+    const wCount = document.getElementById("wishlistCount");
+    if(wCount) wCount.innerText = wishlist.length; 
+}
+
 function addModalToWishlist(){ if(currentProduct) toggleWishlist(currentProduct.id); }
 
 function renderWishlist(){
     const container = document.getElementById("wishlistItems");
+    if(!container) return;
+
     if(wishlist.length === 0){
         container.innerHTML = `<div style="text-align:center;color:#777;padding:50px 15px"><div style="font-size:40px">♡</div><p>Your wishlist is empty</p></div>`;
         return;
     }
     container.innerHTML = wishlist.map(id=>{
         const p = products.find(x=>x.id === id);
+        if(!p) return '';
         return `<div class="cart-item"><img src="${p.image}"><div><h4>${p.name}</h4><p>${p.brand}</p><strong>₹${p.price.toLocaleString("en-IN")}</strong></div><button class="remove" onclick="toggleWishlist(${p.id})">Remove</button></div>`;
     }).join("");
 }
 
-function openWishlist(){ renderWishlist(); document.getElementById("wishlistDrawer").classList.add("open"); }
-function closeWishlist(){ document.getElementById("wishlistDrawer").classList.remove("open"); }
+function openWishlist(){ 
+    renderWishlist(); 
+    const wDrawer = document.getElementById("wishlistDrawer");
+    if(wDrawer) wDrawer.classList.add("open"); 
+}
+function closeWishlist(){ 
+    const wDrawer = document.getElementById("wishlistDrawer");
+    if(wDrawer) wDrawer.classList.remove("open"); 
+}
 
 function renderRecentlyViewed(){
     const section = document.getElementById("recentSection");
     const container = document.getElementById("recentProducts");
+    if(!section || !container) return;
+
     if(recentlyViewed.length === 0){ section.style.display = "none"; return; }
     section.style.display = "block";
     container.innerHTML = recentlyViewed.map(id=>products.find(p=>p.id === id)).filter(Boolean).map(productCard).join("");
@@ -1476,35 +1525,52 @@ function renderRecentlyViewed(){
 
 function toggleSearch(){
     const panel = document.getElementById("searchPanel");
+    if(!panel) return;
     panel.classList.toggle("open");
-    if(panel.classList.contains("open")) document.getElementById("searchInput").focus();
+    if(panel.classList.contains("open")){
+        const sInput = document.getElementById("searchInput");
+        if(sInput) sInput.focus();
+    }
 }
 
 function searchProducts(){
-    const query = document.getElementById("searchInput").value.toLowerCase().trim();
+    const sInput = document.getElementById("searchInput");
     const results = document.getElementById("searchResults");
+    if(!sInput || !results) return;
+
+    const query = sInput.value.toLowerCase().trim();
     if(!query){ results.classList.remove("open"); return; }
     const matches = products.filter(p=>`${p.name} ${p.brand} ${p.category} ${p.type}`.toLowerCase().includes(query));
     results.innerHTML = matches.length ? matches.slice(0,8).map(p=>`<div class="search-result" onclick="openProduct(${p.id});closeSearchResults()"><span>${p.brand} — ${p.name}</span><strong>₹${p.price}</strong></div>`).join("") : `<div class="search-result">No products found</div>`;
     results.classList.add("open");
 }
 
-function closeSearchResults(){ document.getElementById("searchResults").classList.remove("open"); }
+function closeSearchResults(){ 
+    const res = document.getElementById("searchResults");
+    if(res) res.classList.remove("open"); 
+}
 
 function openCheckout(){
     if(cart.length === 0){ toast("Your shopping bag is empty"); return; }
     closeCart();
     renderCheckout();
-    document.getElementById("checkoutModal").classList.add("open");
+    const chkModal = document.getElementById("checkoutModal");
+    if(chkModal) chkModal.classList.add("open");
 }
 
-function closeCheckout(){ document.getElementById("checkoutModal").classList.remove("open"); }
+function closeCheckout(){ 
+    const chkModal = document.getElementById("checkoutModal");
+    if(chkModal) chkModal.classList.remove("open"); 
+}
 
 function renderCheckout(){
     let subtotal = 0;
     const items = document.getElementById("checkoutItems");
+    if(!items) return;
+
     items.innerHTML = cart.map(item=>{
         const p = products.find(x=>x.id === item.id);
+        if(!p) return '';
         const amount = p.price * item.qty;
         subtotal += amount;
         return `<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #292929;font-size:11px;"><span>${p.name} × ${item.qty}</span><strong>₹${amount.toLocaleString("en-IN")}</strong></div>`;
@@ -1513,26 +1579,37 @@ function renderCheckout(){
     const delivery = subtotal >= 999 ? 0 : 79;
     const total = Math.max(0, subtotal + delivery - couponDiscount);
 
-    document.getElementById("checkoutSubtotal").innerText = "₹" + subtotal.toLocaleString("en-IN");
-    document.getElementById("checkoutDelivery").innerText = delivery === 0 ? "FREE" : "₹" + delivery;
-    document.getElementById("checkoutDiscount").innerText = "₹" + couponDiscount;
-    document.getElementById("checkoutTotal").innerText = "₹" + Math.max(0,total).toLocaleString("en-IN");
+    const cSub = document.getElementById("checkoutSubtotal");
+    const cDel = document.getElementById("checkoutDelivery");
+    const cDisc = document.getElementById("checkoutDiscount");
+    const cTot = document.getElementById("checkoutTotal");
+
+    if(cSub) cSub.innerText = "₹" + subtotal.toLocaleString("en-IN");
+    if(cDel) cDel.innerText = delivery === 0 ? "FREE" : "₹" + delivery;
+    if(cDisc) cDisc.innerText = "₹" + couponDiscount;
+    if(cTot) cTot.innerText = "₹" + Math.max(0,total).toLocaleString("en-IN");
 }
 
 function applyCoupon(){
-    const code = document.getElementById("couponInput").value.trim().toUpperCase();
-    let subtotal = cart.reduce((sum,item)=>sum + products.find(x=>x.id === item.id).price * item.qty, 0);
+    const cInput = document.getElementById("couponInput");
+    const cMsg = document.getElementById("couponMessage");
+    if(!cInput) return;
+
+    const code = cInput.value.trim().toUpperCase();
+    let subtotal = cart.reduce((sum,item)=>{
+        const p = products.find(x=>x.id === item.id);
+        return sum + (p ? p.price * item.qty : 0);
+    }, 0);
 
     if(code === "ASNEW10"){
         couponDiscount = Math.round(subtotal * .10);
-        document.getElementById("couponMessage").innerText = "Coupon applied! 10% discount 🎉";
+        if(cMsg){ cMsg.style.color = "var(--green)"; cMsg.innerText = "Coupon applied! 10% discount 🎉"; }
     } else if(code === "WELCOME500"){
         couponDiscount = Math.min(500, subtotal);
-        document.getElementById("couponMessage").innerText = "₹500 discount applied! 🎉";
+        if(cMsg){ cMsg.style.color = "var(--green)"; cMsg.innerText = "₹500 discount applied! 🎉"; }
     } else {
         couponDiscount = 0;
-        document.getElementById("couponMessage").style.color = "#ff416c";
-        document.getElementById("couponMessage").innerText = "Invalid coupon code";
+        if(cMsg){ cMsg.style.color = "#ff416c"; cMsg.innerText = "Invalid coupon code"; }
     }
     renderCheckout();
     updateCartSummary();
@@ -1549,14 +1626,14 @@ function placeOrder(){
 
     const orderId = "ASF" + Date.now().toString().slice(-7);
     
-    // Create WhatsApp order text
     let orderText = `*New Order Placed!* 🛍️%0A*Order ID:* ${orderId}%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Pincode:* ${pin}%0A*Address:* ${address}%0A%0A*Items:*%0A`;
     cart.forEach(item => {
         const p = products.find(x => x.id === item.id);
-        orderText += `- ${p.name} (Size: ${item.size}, Color: ${item.color}) x ${item.qty}%0A`;
+        if(p) orderText += `- ${p.name} (Size: ${item.size}, Color: ${item.color}) x ${item.qty}%0A`;
     });
     
-    const totalAmount = document.getElementById("checkoutTotal").innerText;
+    const totalAmountElem = document.getElementById("checkoutTotal");
+    const totalAmount = totalAmountElem ? totalAmountElem.innerText : "₹0";
     orderText += `%0A*Total Payable:* ${totalAmount}`;
 
     let confirmWhatsApp = confirm(`Order Placed Successfully! 🎉\nOrder ID: ${orderId}\n\nClick OK to send order details directly via WhatsApp to the store owner.`);
@@ -1579,33 +1656,40 @@ function placeOrder(){
 
 let heroIndex = 0;
 const heroSlides = document.querySelectorAll(".hero-slide");
-const dots = document.getElementById("heroDots");
+const dotsContainer = document.getElementById("heroDots");
 
-heroSlides.forEach((_,i)=>{
-    const dot = document.createElement("button");
-    dot.className = "hero-dot " + (i === 0 ? "active":"");
-    dot.onclick = ()=>showHero(i);
-    dots.appendChild(dot);
-});
+if(heroSlides.length > 0 && dotsContainer){
+    heroSlides.forEach((_,i)=>{
+        const dot = document.createElement("button");
+        dot.className = "hero-dot " + (i === 0 ? "active":"");
+        dot.onclick = ()=>showHero(i);
+        dotsContainer.appendChild(dot);
+    });
+}
 
 function showHero(index){
+    if(heroSlides.length === 0) return;
     heroSlides.forEach(slide=>slide.classList.remove("active"));
     document.querySelectorAll(".hero-dot").forEach(dot=>dot.classList.remove("active"));
     heroIndex = (index + heroSlides.length) % heroSlides.length;
     heroSlides[heroIndex].classList.add("active");
-    document.querySelectorAll(".hero-dot")[heroIndex].classList.add("active");
+    const dots = document.querySelectorAll(".hero-dot");
+    if(dots[heroIndex]) dots[heroIndex].classList.add("active");
 }
 
 function changeHero(direction){ showHero(heroIndex + direction); }
-setInterval(()=>{ changeHero(1); }, 5000);
+if(heroSlides.length > 0){
+    setInterval(()=>{ changeHero(1); }, 5000);
+}
 
 function scrollToSection(id){
-    document.getElementById(id)?.scrollIntoView({ behavior:"smooth" });
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({ behavior:"smooth" });
 }
 
 function toggleMobileNav(){
     const nav = document.getElementById("navbar");
-    nav.classList.toggle("open");
+    if(nav) nav.classList.toggle("open");
 }
 
 /* =====================================================

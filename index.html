@@ -477,6 +477,48 @@ header{
     font-weight:800;
 }
 
+/* ================= STORIES SECTION ================= */
+
+.stories-scroll{
+    display:flex;
+    gap:15px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    padding-bottom:5px;
+}
+
+.stories-scroll::-webkit-scrollbar{
+    display:none;
+}
+
+.story-card{
+    min-width:110px;
+    height:180px;
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+    cursor:pointer;
+    border:2px solid var(--gold);
+    flex-shrink:0;
+    background-size:cover;
+    background-position:center;
+}
+
+.story-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(transparent,rgba(0,0,0,.8));
+    display:flex;
+    align-items:end;
+    padding:10px;
+}
+
+.story-overlay span{
+    font-size:11px;
+    font-weight:700;
+    color:white;
+}
+
 /* ================= CATEGORY CARDS ================= */
 
 .category-grid{
@@ -1709,6 +1751,34 @@ footer{
 
 <main class="container">
 
+<!-- ================= STORIES / REELS SECTION ================= -->
+
+<section class="section">
+<div class="section-header">
+<div>
+<h2 class="section-title">New Launch Previews 🔥</h2>
+<p class="section-subtitle">Watch our latest collection reels</p>
+</div>
+</div>
+<div class="stories-scroll">
+<div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400')">
+<div class="story-overlay"><span>Summer Kurta</span></div>
+</div>
+<div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400')">
+<div class="story-overlay"><span>Denim Series</span></div>
+</div>
+<div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400')">
+<div class="story-overlay"><span>Party Gowns</span></div>
+</div>
+<div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1555529771-835f59fc5efe?w=400')">
+<div class="story-overlay"><span>Luxe Edit</span></div>
+</div>
+<div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=400')">
+<div class="story-overlay"><span>Streetwear</span></div>
+</div>
+</div>
+</section>
+
 <!-- ================= SHOP BY CATEGORY ================= -->
 
 <section class="section">
@@ -2226,7 +2296,7 @@ function sortProducts(type){
 }
 
 /* =====================================================
-   PRODUCT MODAL & DYNAMIC SIZES (FIXED FOR KIDS, MEN, WOMEN)
+   PRODUCT MODAL & DYNAMIC SIZES
 ===================================================== */
 
 function openProduct(id){
@@ -2242,7 +2312,6 @@ function openProduct(id){
     document.getElementById("modalDiscount").innerText = " " + product.discount + "% OFF";
     document.getElementById("modalDescription").innerText = product.description;
 
-    // Dynamic Sizing based on Category
     let sizes = ["S", "M", "L", "XL", "XXL"];
     let sizeLabelText = "SELECT SIZE";
 
@@ -2460,7 +2529,7 @@ function renderCheckout(){
     document.getElementById("checkoutSubtotal").innerText = "₹" + subtotal.toLocaleString("en-IN");
     document.getElementById("checkoutDelivery").innerText = delivery === 0 ? "FREE" : "₹" + delivery;
     document.getElementById("checkoutDiscount").innerText = "₹" + couponDiscount;
-    document.getElementById("checkoutTotal").innerText = "₹" + total.toLocaleString("en-IN");
+    document.getElementById("checkoutTotal").innerText = "₹" + Math.max(0,total).toLocaleString("en-IN");
 }
 
 function applyCoupon(){

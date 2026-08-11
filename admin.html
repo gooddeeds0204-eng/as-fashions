@@ -87,16 +87,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Available Sizes / Age Groups</label>
-                    <input type="text" id="pSizes" placeholder="S, M, L, XL, XXL OR 2-3Y, 5-6Y OR UK 6-10">
-                </div>
-
-                <div class="form-group">
-                    <label>Available Colors</label>
-                    <input type="text" id="pColors" placeholder="e.g. Black, White, Blue, Gold">
-                </div>
-
-                <div class="form-group">
                     <label>Selling Price (₹)</label>
                     <input type="number" id="pPrice" placeholder="999">
                 </div>
@@ -107,8 +97,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Stock Count</label>
-                    <input type="number" id="pStock" placeholder="50">
+                    <label>Discount (%)</label>
+                    <input type="number" id="pDiscount" placeholder="50">
+                </div>
+
+                <div class="form-group">
+                    <label>Rating (e.g. 4.5)</label>
+                    <input type="text" id="pRating" placeholder="4.5">
                 </div>
 
                 <div class="form-group full">
@@ -122,7 +117,7 @@
                 </div>
             </div>
 
-            <button class="btn" onclick="alert('Product successfully published to store database!')">Publish Product</button>
+            <button class="btn" onclick="publishProduct()">Publish Product to Live Website</button>
         </div>
 
         <!-- Add Stories / Reels Section with Video URL -->
@@ -137,11 +132,6 @@
                 <div class="form-group">
                     <label>Cover Thumbnail Image URL</label>
                     <input type="text" id="sImage" placeholder="Paste thumbnail image URL">
-                </div>
-
-                <div class="form-group full">
-                    <label>Video Reel Direct URL (MP4 / Instagram Link)</label>
-                    <input type="text" id="sVideoUrl" placeholder="Paste video direct link (.mp4)">
                 </div>
             </div>
 
@@ -179,5 +169,57 @@
 
     </div>
 
+    <script>
+        function publishProduct(){
+            const name = document.getElementById("pName").value.trim();
+            const brand = document.getElementById("pBrand").value.trim();
+            const category = document.getElementById("pCategory").value;
+            const tag = document.getElementById("pTag").value;
+            const price = Number(document.getElementById("pPrice").value);
+            const mrp = Number(document.getElementById("pMrp").value);
+            const discount = Number(document.getElementById("pDiscount").value);
+            const rating = Number(document.getElementById("pRating").value) || 4.5;
+            const image = document.getElementById("pImage").value.trim();
+            const description = document.getElementById("pDesc").value.trim();
+
+            if(!name || !price || !image){
+                alert("Dayisi! Name, Price, mariyu Image URL mandatory ga fill cheyandi.");
+                return;
+            }
+
+            let customProducts = JSON.parse(localStorage.getItem("as_custom_products") || "[]");
+            
+            const newProduct = {
+                id: Date.now(),
+                brand: brand || "AS Fashions",
+                name: name,
+                category: category,
+                type: "Fashion",
+                price: price,
+                mrp: mrp || price * 2,
+                rating: rating,
+                discount: discount || 50,
+                new: tag === "New Arrivals" || true,
+                trending: tag === "Trending Now" || true,
+                image: image,
+                description: description || "Premium quality fashion product."
+            };
+
+            customProducts.push(newProduct);
+            localStorage.setItem("as_custom_products", JSON.stringify(customProducts));
+
+            alert("Product successfully published to live website! 🎉");
+
+            // Clear form inputs
+            document.getElementById("pName").value = "";
+            document.getElementById("pBrand").value = "";
+            document.getElementById("pPrice").value = "";
+            document.getElementById("pMrp").value = "";
+            document.getElementById("pDiscount").value = "";
+            document.getElementById("pRating").value = "";
+            document.getElementById("pImage").value = "";
+            document.getElementById("pDesc").value = "";
+        }
+    </script>
 </body>
 </html>

@@ -2226,7 +2226,7 @@ function sortProducts(type){
 }
 
 /* =====================================================
-   PRODUCT MODAL & DYNAMIC SIZES
+   PRODUCT MODAL & DYNAMIC SIZES (FIXED FOR KIDS, MEN, WOMEN)
 ===================================================== */
 
 function openProduct(id){
@@ -2246,7 +2246,10 @@ function openProduct(id){
     let sizes = ["S", "M", "L", "XL", "XXL"];
     let sizeLabelText = "SELECT SIZE";
 
-    if(product.category === "Footwear"){
+    if(product.category === "Kids"){
+        sizes = ["2-3Y", "3-4Y", "5-6Y", "7-8Y", "9-10Y"];
+        sizeLabelText = "SELECT AGE GROUP";
+    } else if(product.category === "Footwear"){
         sizes = ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"];
         sizeLabelText = "SELECT SHOE SIZE (UK)";
     } else if(product.category === "Bags" || product.category === "Accessories" || product.category === "Beauty"){

@@ -566,26 +566,26 @@ footer{ margin-top:64px; background:#fff; border-top:1px solid var(--border); pa
         <div class="nav-item">
             <button class="nav-btn" onclick="toggleDropdown(this.parentElement, event)">Men</button>
             <div class="mega-menu">
-                <div class="mega-column"><h4>Topwear</h4><a onclick="filterCategory('Men')">Shirts</a><a onclick="filterCategory('Men')">T-Shirts</a></div>
-                <div class="mega-column"><h4>Bottomwear</h4><a onclick="filterCategory('Men')">Jeans</a><a onclick="filterCategory('Men')">Trousers</a></div>
-                <div class="mega-column"><h4>Footwear</h4><a onclick="filterCategory('Footwear')">Sneakers</a></div>
-                <div class="mega-column"><h4>Accessories</h4><a onclick="filterCategory('Accessories')">Watches</a><a onclick="filterCategory('Bags')">Bags</a></div>
+                <div class="mega-column"><h4>Topwear</h4><a onclick="filterCategory('Men'); toggleMobileNav();">Shirts</a><a onclick="filterCategory('Men'); toggleMobileNav();">T-Shirts</a></div>
+                <div class="mega-column"><h4>Bottomwear</h4><a onclick="filterCategory('Men'); toggleMobileNav();">Jeans</a><a onclick="filterCategory('Men'); toggleMobileNav();">Trousers</a></div>
+                <div class="mega-column"><h4>Footwear</h4><a onclick="filterCategory('Footwear'); toggleMobileNav();">Sneakers</a></div>
+                <div class="mega-column"><h4>Accessories</h4><a onclick="filterCategory('Accessories'); toggleMobileNav();">Watches</a><a onclick="filterCategory('Bags'); toggleMobileNav();">Bags</a></div>
             </div>
         </div>
         <div class="nav-item">
             <button class="nav-btn" onclick="toggleDropdown(this.parentElement, event)">Women</button>
             <div class="mega-menu">
-                <div class="mega-column"><h4>Ethnic</h4><a onclick="filterCategory('Women')">Kurta Sets</a></div>
-                <div class="mega-column"><h4>Western</h4><a onclick="filterCategory('Women')">Dresses</a><a onclick="filterCategory('Women')">Jeans</a></div>
-                <div class="mega-column"><h4>Footwear</h4><a onclick="filterCategory('Footwear')">Heels</a></div>
-                <div class="mega-column"><h4>Bags</h4><a onclick="filterCategory('Bags')">Handbags</a></div>
+                <div class="mega-column"><h4>Ethnic</h4><a onclick="filterCategory('Women'); toggleMobileNav();">Kurta Sets</a></div>
+                <div class="mega-column"><h4>Western</h4><a onclick="filterCategory('Women'); toggleMobileNav();">Dresses</a><a onclick="filterCategory('Women'); toggleMobileNav();">Jeans</a></div>
+                <div class="mega-column"><h4>Footwear</h4><a onclick="filterCategory('Footwear'); toggleMobileNav();">Heels</a></div>
+                <div class="mega-column"><h4>Bags</h4><a onclick="filterCategory('Bags'); toggleMobileNav();">Handbags</a></div>
             </div>
         </div>
-        <div class="nav-item"><button class="nav-btn" onclick="filterCategory('Kids')">Kids</button></div>
-        <div class="nav-item"><button class="nav-btn" onclick="filterCategory('Footwear')">Footwear</button></div>
-        <div class="nav-item"><button class="nav-btn" onclick="filterCategory('Beauty')">Beauty</button></div>
-        <div class="nav-item"><button class="nav-btn" onclick="filterCategory('Accessories')">Accessories</button></div>
-        <div class="nav-item"><button class="nav-btn sale" onclick="filterProducts('All', null); sortProducts('discount')">Sale</button></div>
+        <div class="nav-item"><button class="nav-btn" onclick="filterCategory('Kids'); toggleMobileNav();">Kids</button></div>
+        <div class="nav-item"><button class="nav-btn" onclick="filterCategory('Footwear'); toggleMobileNav();">Footwear</button></div>
+        <div class="nav-item"><button class="nav-btn" onclick="filterCategory('Beauty'); toggleMobileNav();">Beauty</button></div>
+        <div class="nav-item"><button class="nav-btn" onclick="filterCategory('Accessories'); toggleMobileNav();">Accessories</button></div>
+        <div class="nav-item"><button class="nav-btn sale" onclick="filterProducts('All', null); sortProducts('discount'); toggleMobileNav();">Sale</button></div>
     </div>
 </nav>
 
@@ -1010,6 +1010,7 @@ function filterCategory(category){
         btn.classList.remove("active");
         if(btn.innerText.trim() === category) btn.classList.add("active");
     });
+    toggleMobileNav(); // Close mobile nav on category selection
 }
 
 function sortProducts(type){
@@ -1328,7 +1329,10 @@ setInterval(()=>{ changeHero(1); }, 5000);
 
 function scrollToSection(id){ document.getElementById(id)?.scrollIntoView({ behavior:"smooth" }); }
 
-function toggleMobileNav(){ document.getElementById("navbar").classList.toggle("open"); }
+function toggleMobileNav(){ 
+    const navBar = document.getElementById("navbar");
+    navBar.classList.toggle("open");
+}
 
 /* =====================================================
    INIT

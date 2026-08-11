@@ -44,22 +44,6 @@
     </header>
 
     <div class="container">
-        <!-- Upload Preview Video / Reel Section -->
-        <div class="card">
-            <h2>🎥 Upload New Launch Preview Video / Reel</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Video Title</label>
-                    <input type="text" id="vTitle" placeholder="e.g. Summer Kurta Launch">
-                </div>
-                <div class="form-group">
-                    <label>Video Direct URL (.mp4)</label>
-                    <input type="text" id="vUrl" placeholder="Paste direct video link">
-                </div>
-            </div>
-            <button class="btn" onclick="alert('Preview Video successfully published to website header!')">Publish Video Reel</button>
-        </div>
-
         <!-- Add Product Section -->
         <div class="card">
             <h2>📦 Add New Product to Store</h2>
@@ -78,20 +62,20 @@
                 <div class="form-group">
                     <label>Store Category</label>
                     <select id="pCategory">
-                        <option value="Men">Men's Store</option>
-                        <option value="Women">Women's Boutique</option>
-                        <option value="Kids">Kids Fashion</option>
+                        <option value="Men">Men</option>
+                        <option value="Women">Women</option>
+                        <option value="Kids">Kids (Boys/Girls/Baby)</option>
                         <option value="Footwear">Footwear</option>
+                        <option value="Bags">Bags</option>
                         <option value="Accessories">Accessories</option>
                         <option value="Beauty">Beauty</option>
                         <option value="Sports">Sports & Fitness</option>
                         <option value="Home">Home & Lifestyle</option>
-                        <option value="Brands">Featured Brands</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label>Special Section Tag</label>
+                    <label>Collection Tag</label>
                     <select id="pTag">
                         <option value="Standard">Standard Collection</option>
                         <option value="New Arrivals">✨ New Arrivals</option>
@@ -103,13 +87,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Available Sizes</label>
-                    <input type="text" id="pSizes" placeholder="S, M, L, XL, Free Size">
+                    <label>Available Sizes / Age Groups</label>
+                    <input type="text" id="pSizes" placeholder="S, M, L, XL, XXL OR 2-3Y, 5-6Y OR UK 6-10">
                 </div>
 
                 <div class="form-group">
                     <label>Available Colors</label>
-                    <input type="text" id="pColors" placeholder="e.g. Black, Blue, Gold">
+                    <input type="text" id="pColors" placeholder="e.g. Black, White, Blue, Gold">
                 </div>
 
                 <div class="form-group">
@@ -129,7 +113,7 @@
 
                 <div class="form-group full">
                     <label>Image Direct URL</label>
-                    <input type="text" id="pImage" placeholder="Paste image link">
+                    <input type="text" id="pImage" placeholder="Paste image link (Unsplash URL)">
                 </div>
 
                 <div class="form-group full">

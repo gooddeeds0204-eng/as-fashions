@@ -477,7 +477,7 @@ header{
     font-weight:800;
 }
 
-/* ================= CATEGORY CARDS (2 Columns on Mobile Fixed) ================= */
+/* ================= CATEGORY CARDS ================= */
 
 .category-grid{
     display:grid;
@@ -516,34 +516,6 @@ header{
 
 .category-overlay strong{
     font-size:14px;
-}
-
-/* ================= CHIPS ================= */
-
-.chips{
-    display:flex;
-    gap:9px;
-    overflow:auto;
-    scrollbar-width:none;
-}
-
-.chips::-webkit-scrollbar{
-    display:none;
-}
-
-.chip{
-    white-space:nowrap;
-    padding:9px 15px;
-    background:#171717;
-    border:1px solid #333;
-    color:#ccc;
-    border-radius:30px;
-    font-size:12px;
-}
-
-.chip:hover{
-    border-color:var(--gold);
-    color:var(--gold);
 }
 
 /* ================= PRODUCT GRID ================= */
@@ -737,48 +709,6 @@ header{
     color:#bbb;
     font-size:12px;
     margin:5px 0 12px;
-}
-
-/* ================= DEAL (Centered Fix) ================= */
-
-.deal-box{
-    background:linear-gradient(100deg,#1d1605,#121212);
-    border:1px solid #5b4917;
-    padding:25px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-radius:8px;
-    width: 100%;
-}
-
-.deal-title{
-    color:var(--gold);
-    font-size:22px;
-    font-weight:900;
-}
-
-.countdown{
-    display:flex;
-    gap:8px;
-}
-
-.time-box{
-    background:#000;
-    border:1px solid #444;
-    min-width:55px;
-    padding:8px;
-    text-align:center;
-}
-
-.time-box strong{
-    display:block;
-    font-size:18px;
-}
-
-.time-box span{
-    color:#777;
-    font-size:8px;
 }
 
 /* ================= FILTER TOOLBAR ================= */
@@ -1233,13 +1163,20 @@ footer{
     .logo{ font-size:16px; }
     .header-actions{ gap:10px; }
     .mobile-menu-btn{ display:block; }
-    .navbar{ display:none; }
+    
+    /* Navbar styling for mobile drawer/dropdown */
+    .navbar{ display:none; position:absolute; top:58px; left:0; width:100%; background:#151515; border-bottom:1px solid #333; z-index:4500; }
+    .navbar.open{ display:block; }
+    .nav-scroll{ flex-direction:column; padding:10px; }
+    .nav-item{ width:100%; border-bottom:1px solid #222; }
+    .nav-btn{ width:100%; justify-content:space-between; }
+    .mega-menu{ position:relative; top:0; width:100%!important; box-shadow:none; border:0; padding:10px 15px; grid-template-columns:1fr!important; gap:10px; background:#111; }
+
     .hero{ height:390px; }
     .hero-content h2{ font-size:34px; }
     .benefits{ grid-template-columns:repeat(2,1fr); }
     .benefit{ border-bottom:1px solid #292929; }
     
-    /* Category Grid Fixed to 2 Columns cleanly on Mobile */
     .category-grid{
         display:grid;
         grid-template-columns:repeat(2,1fr);
@@ -1256,7 +1193,6 @@ footer{
     .product-info{ padding:9px; }
     .banner-grid{ grid-template-columns:1fr; }
     .banner:first-child{ grid-column:auto; }
-    .deal-box{ flex-direction:column; gap:15px; align-items:flex-start; }
     .product-modal-grid{ grid-template-columns:1fr; }
     .modal-image{ min-height:330px; height:330px; }
     .modal-details{ padding:20px; }
@@ -1321,7 +1257,7 @@ footer{
     </div>
 </div>
 
-<!-- ================= NAVIGATION (Clickable Subcategories for Mobile/Desktop) ================= -->
+<!-- ================= NAVIGATION ================= -->
 
 <div class="navbar" id="navbar">
 <div class="nav-scroll">
@@ -1808,45 +1744,6 @@ footer{
 <div class="category-card" onclick="filterCategory('Beauty')">
 <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600">
 <div class="category-overlay"><strong>Beauty</strong></div>
-</div>
-</div>
-</section>
-
-<!-- ================= SHOP BY STYLE ================= -->
-
-<section class="section" id="edits">
-<div class="section-header">
-<div>
-<h2 class="section-title">Shop By Style</h2>
-<p class="section-subtitle">Find the aesthetic that matches you</p>
-</div>
-</div>
-<div class="chips">
-<button class="chip">🔥 Streetwear</button>
-<button class="chip">✨ Minimal</button>
-<button class="chip">🕶️ Old Money</button>
-<button class="chip">💿 Y2K</button>
-<button class="chip">🤍 Quiet Luxury</button>
-<button class="chip">🏃 Athleisure</button>
-<button class="chip">🌸 Boho</button>
-<button class="chip">👔 Classic</button>
-<button class="chip">🎨 Vintage</button>
-<button class="chip">👕 Oversized</button>
-</div>
-</section>
-
-<!-- ================= FLASH SALE ================= -->
-
-<section class="section" id="sale">
-<div class="deal-box">
-<div>
-<div class="deal-title">🔥 FLASH SALE</div>
-<p style="color:#aaa;font-size:12px;margin-top:5px;">Limited time deals up to 70% OFF</p>
-</div>
-<div class="countdown">
-<div class="time-box"><strong id="hours">08</strong><span>HRS</span></div>
-<div class="time-box"><strong id="minutes">32</strong><span>MIN</span></div>
-<div class="time-box"><strong id="seconds">45</strong><span>SEC</span></div>
 </div>
 </div>
 </section>
@@ -2591,7 +2488,7 @@ function placeOrder(){
 function toggleAccount(){ document.getElementById("accountDropdown").classList.toggle("open"); }
 
 /* =====================================================
-   HERO SLIDER & TIMERS
+   HERO SLIDER
 ===================================================== */
 
 let heroIndex = 0;
@@ -2616,25 +2513,13 @@ function showHero(index){
 function changeHero(direction){ showHero(heroIndex + direction); }
 setInterval(()=>{ changeHero(1); }, 5000);
 
-let saleSeconds = 8*60*60 + 32*60 + 45;
-setInterval(()=>{
-    if(saleSeconds <= 0) return;
-    saleSeconds--;
-    const h = Math.floor(saleSeconds/3600);
-    const m = Math.floor((saleSeconds%3600)/60);
-    const s = saleSeconds%60;
-    document.getElementById("hours").innerText = String(h).padStart(2,"0");
-    document.getElementById("minutes").innerText = String(m).padStart(2,"0");
-    document.getElementById("seconds").innerText = String(s).padStart(2,"0");
-},1000);
-
 function scrollToSection(id){
     document.getElementById(id)?.scrollIntoView({ behavior:"smooth" });
 }
 
 function toggleMobileNav(){
     const nav = document.getElementById("navbar");
-    nav.style.display = (nav.style.display === "block") ? "none" : "block";
+    nav.classList.toggle("open");
 }
 
 /* =====================================================

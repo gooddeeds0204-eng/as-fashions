@@ -145,6 +145,20 @@ header{
     display:flex; align-items:center; justify-content:center;
 }
 
+.account-menu{ position:relative; }
+.account-dropdown{
+    display:none; position:absolute; right:0; top:40px; width:200px;
+    background:var(--card); border:1px solid var(--line); box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    padding:6px; z-index:7000; border-radius:4px;
+}
+.account-dropdown.open{ display:block; }
+.account-dropdown a,.account-dropdown button{
+    display:block; width:100%; padding:10px 12px; text-align:left;
+    color:var(--ink); background:none; border:0; text-decoration:none; font-size:12px; cursor:pointer; font-weight:500;
+    border-radius:2px;
+}
+.account-dropdown a:hover,.account-dropdown button:hover{ background:#f0f2f2; color:#007185; }
+
 /* SUBNAV / CATEGORY BAR */
 .navbar{ background:var(--primary-light); color:#fff; position:sticky; top:62px; z-index:4000; border-top:1px solid #3a4553; }
 .nav-scroll{ max-width:1500px; margin:auto; display:flex; overflow-x:auto; scrollbar-width:none; padding:0 15px; }
@@ -155,18 +169,21 @@ header{
 }
 .nav-btn:hover, .nav-link:hover{ border-color:#fff; border-radius:2px; }
 
-/* SUB-BAR TICKER */
-.sub-ticker{
-    background:#eaeded;
-    color:#0f1111;
-    font-size:12px;
-    padding:8px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid var(--line);
-    font-weight:500;
+/* SEARCH PANEL DROPDOWN */
+.search-panel{ display:none; background:#050505; padding:16px 20px; border-bottom:1px solid var(--line); }
+.search-panel.open{ display:block; }
+.search-wrapper{ max-width:780px; margin:auto; position:relative; }
+.search-input-mob{
+    width:100%; padding:13px 18px; background:var(--card); color:var(--ink);
+    border:1px solid var(--line); outline:none; font-size:13px; border-radius:4px;
 }
+.search-results{
+    position:absolute; left:0; right:0; top:52px; background:var(--card);
+    border:1px solid var(--line); z-index:6000; display:none; max-height:350px; overflow:auto; border-radius:4px;
+}
+.search-results.open{ display:block; }
+.search-result{ padding:12px 15px; display:flex; justify-content:space-between; border-bottom:1px solid var(--line); cursor:pointer; font-size:12.5px; }
+.search-result:hover{ background:#f0f2f2; }
 
 /* PROFESSIONAL AMAZON STYLE HERO */
 .hero{
@@ -174,13 +191,7 @@ header{
     padding: 40px 20px 120px;
     position: relative;
 }
-.hero-container{
-    max-width: 1400px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
+.hero-container{ max-width: 1400px; margin: auto; }
 .hero-banner-card{
     background: rgba(255, 255, 255, 0.95);
     padding: 40px;
@@ -257,8 +268,21 @@ header{
 .section{ margin-top:35px; }
 .section-header{ display:flex; justify-content:space-between; align-items:end; margin-bottom:15px; background: var(--card); padding: 12px 20px; border-radius: 6px; border: 1px solid var(--line); }
 .section-title{ font-size: 18px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 10px; }
-.view-all{ color: #007185; font-size: 13px; font-weight: 600; cursor: pointer; }
+.view-all{ color: #007185; font-size: 13px; font-weight: 600; cursor: pointer; background:none; border:0; }
 .view-all:hover{ color: #C45500; text-decoration: underline; }
+
+/* STORIES / REELS PREVIEW ROW */
+.stories-scroll{ display:flex; gap:14px; overflow-x:auto; scrollbar-width:none; padding-bottom:6px; }
+.stories-scroll::-webkit-scrollbar{ display:none; }
+.story-card{
+    min-width:110px; height:160px; position:relative; cursor:pointer; flex-shrink:0;
+    background-size:cover; background-position:center; border:2px solid var(--accent); border-radius:8px; overflow:hidden;
+}
+.story-overlay{
+    position:absolute; inset:0; background:linear-gradient(transparent 40%,rgba(0,0,0,.8));
+    display:flex; align-items:end; justify-content:center; padding:10px;
+}
+.story-overlay span{ font-size:10.5px; font-weight:700; color:#fff; text-transform:uppercase; letter-spacing:.5px; }
 
 /* PRODUCTS GRID (AMAZON STYLE) */
 .products-grid{ display:grid; grid-template-columns:repeat(5, 1fr); gap:16px; }
@@ -293,19 +317,16 @@ header{
 }
 .add-btn:hover{ background:#F7CA00; }
 
-/* HORIZONTAL SCROLL PRODUCT ROW (AMAZON STYLE) */
 .horizontal-scroll-section{ background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 20px; }
 .horizontal-products{ display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; padding-bottom: 10px; }
 .horizontal-products::-webkit-scrollbar{ display: none; }
 .horizontal-products .product-card{ min-width: 210px; flex-shrink: 0; }
 
-/* TOOLBAR & FILTERS */
 .toolbar{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:20px; flex-wrap:wrap; background: var(--card); padding: 15px; border-radius: 6px; border: 1px solid var(--line); }
 .filter-buttons{ display:flex; gap:8px; flex-wrap:wrap; }
 .filter-btn,.sort-select{ background:#f0f2f2; color:var(--ink); border:1px solid #d5d9d9; padding:8px 14px; font-size:12px; border-radius:4px; outline:none; font-weight:500; }
 .filter-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary); }
 
-/* DRAWERS & MODALS */
 .drawer{
     position:fixed; top:0; right:-450px; width:430px; max-width:100%; height:100vh; background:var(--card);
     z-index:8000; transition:.3s; border-left:1px solid var(--line); display:flex; flex-direction:column; box-shadow:-10px 0 30px rgba(0,0,0,0.2);
@@ -338,7 +359,8 @@ header{
 .modal-brand{ color:var(--ink-soft); font-size:11px; font-weight:700; text-transform:uppercase; }
 .modal-details h2{ font-size:22px; margin:6px 0; font-weight:700; }
 .modal-price{ font-size:22px; font-weight:700; color:#B12704; }
-.selector-title{ font-size:11px; color:var(--ink-soft); margin-top:16px; margin-bottom:6px; text-transform:uppercase; font-weight:700; }
+.selector-title{ font-size:11px; color:var(--ink-soft); margin-top:16px; margin-bottom:6px; text-transform:uppercase; font-weight:700; display:flex; justify-content:space-between; align-items:center; }
+.size-guide{ color:#007185; background:none; border:0; font-size:11px; font-weight:600; text-decoration:underline; cursor:pointer; }
 .selector{ display:flex; gap:8px; flex-wrap:wrap; }
 .selector button{ background:#f0f2f2; border:1px solid #d5d9d9; color:var(--ink); padding:6px 12px; font-size:12px; border-radius:4px; font-weight:600; }
 .selector button.selected{ background:#fff; border-color:#e77600; box-shadow:0 0 3px 2px rgba(228,121,17,.5); }
@@ -365,7 +387,6 @@ header{
 }
 .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
-/* AMAZON STYLE FOOTER */
 footer{ margin-top:60px; background:#232F3E; color:#fff; }
 .footer-back-to-top{ background:#37475A; text-align:center; padding:12px; font-size:12px; font-weight:600; cursor:pointer; }
 .footer-back-to-top:hover{ background:#485769; }
@@ -442,7 +463,7 @@ footer{ margin-top:60px; background:#232F3E; color:#fff; }
 
 <div class="search-panel" id="searchPanel">
     <div class="search-wrapper">
-        <input type="text" class="search-input" id="mobileSearchInput" placeholder="Search products, brands, categories..." oninput="searchProducts()">
+        <input type="text" class="search-input-mob" id="mobileSearchInput" placeholder="Search products, brands, categories..." oninput="searchProducts()">
         <div class="search-results" id="searchResults"></div>
     </div>
 </div>
@@ -468,7 +489,7 @@ footer{ margin-top:60px; background:#232F3E; color:#fff; }
         <div class="hero-banner-card">
             <span class="tag">Mega Shopping Event</span>
             <h1>Everything you need, <span>delivered to your door.</span></h1>
-            <p>Explore top brands, latest fashion trends, footwear, electronics essentials, and exclusive daily discounts at AS Shopping Mall.</p>
+            <p>Explore top brands, latest fashion trends, footwear, essentials, and exclusive daily discounts at AS Shopping Mall.</p>
             <button class="amazon-cta-btn" onclick="scrollToSection('trending')">Shop Trending Deals →</button>
         </div>
     </div>
@@ -493,10 +514,10 @@ footer{ margin-top:60px; background:#232F3E; color:#fff; }
         <span class="q-card-link" onclick="filterCategory('Men')">Shop all Men</span>
     </div>
     <div class="q-card">
-        <h3>Automotive essentials</h3>
+        <h3>Automotive & Accessories</h3>
         <div class="q-grid-images">
-            <div class="q-img-item" onclick="filterCategory('Accessories')"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=300"><span>Cleaning</span></div>
-            <div class="q-img-item" onclick="filterCategory('Accessories')"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=300"><span>Gadgets</span></div>
+            <div class="q-img-item" onclick="filterCategory('Accessories')"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=300"><span>Care</span></div>
+            <div class="q-img-item" onclick="filterCategory('Accessories')"><img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=300"><span>Watches</span></div>
         </div>
         <span class="q-card-link" onclick="filterCategory('Accessories')">See all</span>
     </div>
@@ -511,6 +532,20 @@ footer{ margin-top:60px; background:#232F3E; color:#fff; }
 </div>
 
 <div class="container">
+
+    <!-- STORIES / REELS PREVIEW ROW -->
+    <section class="section">
+        <div class="section-header" style="background:none; border:0; padding:0 0 10px 0;">
+            <div class="section-title">🔥 New Launch Previews & Reels</div>
+        </div>
+        <div class="stories-scroll">
+            <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400')" onclick="filterCategory('Women')"><div class="story-overlay"><span>Summer Kurta</span></div></div>
+            <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400')" onclick="filterCategory('Men')"><div class="story-overlay"><span>Denim Series</span></div></div>
+            <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400')" onclick="filterCategory('Women')"><div class="story-overlay"><span>Party Gowns</span></div></div>
+            <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1555529771-835f59fc5efe?w=400')" onclick="filterCategory('Accessories')"><div class="story-overlay"><span>Luxe Edit</span></div></div>
+            <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=400')" onclick="filterCategory('Men')"><div class="story-overlay"><span>Streetwear</span></div></div>
+        </div>
+    </section>
 
     <!-- HORIZONTAL SCROLLING TRENDING ROW -->
     <section class="section">
@@ -548,7 +583,7 @@ footer{ margin-top:60px; background:#232F3E; color:#fff; }
 
     <section class="section" id="recentSection" style="display:none">
         <div class="section-header">
-            <div class="section-title">history · Inspired by your browsing</div>
+            <div class="section-title">History · Inspired by your browsing</div>
         </div>
         <div class="products-grid" id="recentProducts"></div>
     </section>
@@ -614,14 +649,17 @@ footer{ margin-top:60px; background:#232F3E; color:#fff; }
                 </div>
                 <p class="modal-description" id="modalDescription"></p>
 
-                <div class="selector-title" id="colorLabel">Select Colour</div>
+                <div class="selector-title">Select Colour</div>
                 <div class="selector" id="colorSelector">
                     <button class="selected" onclick="selectColor(this)">Black</button>
                     <button onclick="selectColor(this)">White</button>
                     <button onclick="selectColor(this)">Blue</button>
                 </div>
 
-                <div class="selector-title" id="sizeLabel">Select Size</div>
+                <div class="selector-title">
+                    <span id="sizeLabel">Select Size</span>
+                    <button class="size-guide" onclick="alert('Size Guide: S (36), M (38), L (40), XL (42), XXL (44)')">Size Guide</button>
+                </div>
                 <div class="selector" id="sizeSelector"></div>
 
                 <div class="modal-actions">

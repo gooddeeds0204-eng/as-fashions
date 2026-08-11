@@ -1970,14 +1970,14 @@ footer{
 <span class="discount" id="modalDiscount"></span>
 </div>
 
-<div class="selector-title">SELECT SIZE <button class="size-guide">SIZE GUIDE</button></div>
-<div class="selector" id="sizeSelector">
-<button class="selected">S</button><button>M</button><button>L</button><button>XL</button><button>XXL</button>
-</div>
+<div class="selector-title" id="sizeLabel">SELECT SIZE <button class="size-guide">SIZE GUIDE</button></div>
+<div class="selector" id="sizeSelector"></div>
 
 <div class="selector-title">SELECT COLOR</div>
 <div class="selector" id="colorSelector">
-<button class="selected">Black</button><button>White</button><button>Blue</button>
+<button class="selected" onclick="selectColor(this)">Black</button>
+<button onclick="selectColor(this)">White</button>
+<button onclick="selectColor(this)">Blue</button>
 </div>
 
 <p class="modal-description" id="modalDescription"></p>
@@ -2152,7 +2152,6 @@ function toggleDropdown(element, event) {
     element.classList.toggle('open');
 }
 
-// Close dropdowns when clicking outside
 window.addEventListener('click', () => {
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('open'));
     document.getElementById('accountDropdown').classList.remove('open');
@@ -2228,7 +2227,7 @@ function sortProducts(type){
 }
 
 /* =====================================================
-   PRODUCT MODAL & CART
+   PRODUCT MODAL & DYNAMIC SIZES
 ===================================================== */
 
 function openProduct(id){
@@ -2243,6 +2242,25 @@ function openProduct(id){
     document.getElementById("modalMRP").innerText = " ₹" + product.mrp.toLocaleString("en-IN");
     document.getElementById("modalDiscount").innerText = " " + product.discount + "% OFF";
     document.getElementById("modalDescription").innerText = product.description;
+
+    // Dynamic Sizing based on Category
+    let sizes = ["S", "M", "L", "XL", "XXL"];
+    let sizeLabelText = "SELECT SIZE";
+
+    if(product.category === "Footwear"){
+        sizes = ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"];
+        sizeLabelText = "SELECT SHOE SIZE (UK)";
+    } else if(product.category === "Bags" || product.category === "Accessories" || product.category === "Beauty"){
+        sizes = ["Standard Size"];
+        sizeLabelText = "SIZE / CAPACITY";
+    }
+
+    document.getElementById("sizeLabel").innerHTML = `${sizeLabelText} <button class="size-guide">SIZE GUIDE</button>`;
+    
+    selectedSize = sizes[0];
+    const sizeContainer = document.getElementById("sizeSelector");
+    sizeContainer.innerHTML = sizes.map((sz, i)=>`<button class="${i===0?'selected':''}" onclick="selectSizeBtn(this)">${sz}</button>`).join("");
+
     document.getElementById("productModal").classList.add("open");
 
     if(!recentlyViewed.includes(id)){
@@ -2257,21 +2275,17 @@ function closeProductModal(){
     document.getElementById("productModal").classList.remove("open");
 }
 
-document.querySelectorAll("#sizeSelector button").forEach(button=>{
-    button.addEventListener("click",()=>{
-        document.querySelectorAll("#sizeSelector button").forEach(b=>b.classList.remove("selected"));
-        button.classList.add("selected");
-        selectedSize = button.innerText;
-    });
-});
+function selectSizeBtn(btn){
+    document.querySelectorAll("#sizeSelector button").forEach(b=>b.classList.remove("selected"));
+    btn.classList.add("selected");
+    selectedSize = btn.innerText;
+}
 
-document.querySelectorAll("#colorSelector button").forEach(button=>{
-    button.addEventListener("click",()=>{
-        document.querySelectorAll("#colorSelector button").forEach(b=>b.classList.remove("selected"));
-        button.classList.add("selected");
-        selectedColor = button.innerText;
-    });
-});
+function selectColor(btn){
+    document.querySelectorAll("#colorSelector button").forEach(b=>b.classList.remove("selected"));
+    btn.classList.add("selected");
+    selectedColor = btn.innerText;
+}
 
 function addModalToCart(){
     if(!currentProduct) return;

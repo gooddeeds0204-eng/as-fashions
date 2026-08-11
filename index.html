@@ -178,44 +178,100 @@ header{
 .mega-column a{ display:block; color:var(--ink-soft); text-decoration:none; font-size:13px; margin:8px 0; cursor:pointer; font-weight:500; }
 .mega-column a:hover{ color:var(--ink); }
 
-.hero{ background:var(--bg); border-bottom:1px solid var(--line); overflow:hidden; position:relative; padding-top:20px; }
-.masthead{
-    max-width:1400px; margin:auto; padding:0 32px 10px; display:flex; justify-content:space-between;
-    align-items:baseline; font-size:11px; letter-spacing:1px; color:var(--ink-soft); text-transform:uppercase; font-weight:600;
+/* --- NEW REDESIGNED HERO SECTION --- */
+.hero{
+    background: linear-gradient(135deg, #F4EFE6 0%, #EFE8DC 100%);
+    border-bottom: 1px solid var(--line);
+    padding: 60px 0 40px;
+    position: relative;
+    overflow: hidden;
 }
-.hero-slides{ position:relative; min-height:480px; }
-.hero-slide{
-    display:none; grid-template-columns:1.1fr .9fr; align-items:center;
-    max-width:1400px; margin:auto; padding:20px 32px 50px; gap:50px;
+.hero-container{
+    max-width: 1400px;
+    margin: auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
 }
-.hero-slide.active{ display:grid; animation:fadeIn .6s ease; }
-@keyframes fadeIn{ from{ opacity:0;} to{opacity:1;} }
-.hero-copy .eyebrow{
-    color:var(--accent-dark); font-size:12px; letter-spacing:2px;
-    text-transform:uppercase; display:inline-block; font-weight:700; margin-bottom:14px;
+.hero-content span.badge{
+    display: inline-block;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
 }
-.hero-copy h2{ font-family:var(--font-display); font-weight:700; font-size:clamp(40px,5vw,64px); line-height:1.1; margin:0 0 16px; color:var(--ink); }
-.hero-copy h2 em{ font-style:italic; color:var(--accent-dark); }
-.hero-copy p{ color:var(--ink-soft); max-width:440px; margin-bottom:28px; font-size:15px; }
-.ink-btn{
-    background:var(--ink); color:var(--bg); border:0; padding:15px 30px; font-weight:700;
-    text-transform:uppercase; letter-spacing:1px; font-size:12.5px; display:inline-flex; align-items:center; gap:10px; border-radius:30px; transition:.2s;
+.hero-content h1{
+    font-family: var(--font-display);
+    font-size: clamp(42px, 5.5vw, 72px);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 20px;
 }
-.ink-btn:hover{ background:var(--accent-dark); }
-.hero-frame{ position:relative; border:1px solid var(--line); aspect-ratio:4/5; overflow:hidden; background:var(--card); border-radius:16px; box-shadow:0 20px 40px rgba(0,0,0,0.04); }
-.hero-frame img{ width:100%; height:100%; object-fit:cover; }
-.hero-frame::after{
-    content:attr(data-tag); position:absolute; bottom:16px; left:16px; background:var(--card); color:var(--ink);
-    font-size:11px; font-weight:700; padding:8px 14px; letter-spacing:.5px;
-    text-transform:uppercase; border-radius:20px; box-shadow:0 4px 10px rgba(0,0,0,0.06);
+.hero-content h1 span{
+    font-style: italic;
+    color: var(--accent-dark);
 }
-.hero-nav{ max-width:1400px; margin:auto; padding:0 32px 30px; display:flex; align-items:center; justify-content:space-between; }
-.hero-dots{ display:flex; gap:8px; }
-.hero-dot{ width:30px; height:4px; background:var(--line); border:0; padding:0; cursor:pointer; border-radius:2px; transition:.2s; }
-.hero-dot.active{ background:var(--ink); }
-.hero-arrows{ display:flex; gap:10px; }
-.hero-arrow{ background:var(--card); border:1px solid var(--line); color:var(--ink); width:40px; height:40px; font-size:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:.2s; }
-.hero-arrow:hover{ background:var(--ink); color:var(--bg); }
+.hero-content p{
+    color: var(--ink-soft);
+    font-size: 16px;
+    max-width: 500px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+.hero-buttons{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.secondary-btn{
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 15px 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12.5px;
+    border-radius: 30px;
+    transition: .2s;
+}
+.secondary-btn:hover{
+    background: var(--ink);
+    color: #fff;
+}
+.hero-image-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    height: 440px;
+}
+.hero-img-box{
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+}
+.hero-img-box img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+}
+.hero-img-box:hover img{
+    transform: scale(1.05);
+}
+.hero-img-box:nth-child(2){
+    margin-top: 30px;
+}
+/* --- END HERO SECTION --- */
 
 .benefits{ display:grid; grid-template-columns:repeat(4,1fr); background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
 .benefit{ padding:22px 24px; border-right:1px solid var(--line); }
@@ -394,8 +450,7 @@ footer{ margin-top:80px; background:var(--card); color:var(--ink); padding:60px 
     .category-grid{ grid-template-columns:repeat(3,1fr); }
     .products-grid{ grid-template-columns:repeat(3,1fr); }
     .footer-grid{ grid-template-columns:1fr 1fr; }
-    .hero-slide{ grid-template-columns:1fr; }
-    .hero-frame{ aspect-ratio:16/9; order:-1; }
+    .hero-container{ grid-template-columns:1fr; gap:30px; }
 }
 
 @media (max-width:760px){
@@ -411,10 +466,10 @@ footer{ margin-top:80px; background:var(--card); color:var(--ink); padding:60px 
     .nav-btn,.nav-link{ height:44px; padding:0 20px; width:100%; }
     .mega-menu{ position:static; width:100%; grid-template-columns:1fr 1fr; box-shadow:none; padding:20px; gap:16px; border:0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
     .ticker{ display:none; }
-    .masthead{ padding:20px 20px 0; }
-    .hero-slide{ padding:16px 20px 35px; gap:24px; }
-    .hero-copy h2{ font-size:36px; }
-    .hero-nav{ padding:0 20px 24px; }
+    .hero{ padding:40px 0 20px; }
+    .hero-container{ padding:0 20px; gap:24px; }
+    .hero-content h1{ font-size:38px; }
+    .hero-image-grid{ height:320px; }
     .benefits{ grid-template-columns:repeat(2,1fr); }
     .benefit{ padding:16px 18px; }
     .container{ padding:0 20px; }
@@ -508,53 +563,25 @@ footer{ margin-top:80px; background:var(--card); color:var(--ink); padding:60px 
 
 <a id="topAnchor"></a>
 
+<!-- NEW MODERN REDESIGNED HERO SECTION -->
 <section class="hero">
-    <div class="masthead">
-        <span>The Warm Cream Edit — 2026</span>
-        <span id="masthead-date"></span>
-    </div>
-
-    <div class="hero-slides">
-        <div class="hero-slide active">
-            <div class="hero-copy">
-                <span class="eyebrow">New Collection</span>
-                <h2>Timeless elegance in<br><em>every thread.</em></h2>
-                <p>Curated garments designed for supreme comfort, refined silhouettes, and premium everyday styling.</p>
-                <button class="ink-btn" onclick="filterProducts('All', null)">Explore catalog →</button>
-            </div>
-            <div class="hero-frame" data-tag="New Season">
-                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=900" alt="New arrivals">
+    <div class="hero-container">
+        <div class="hero-content">
+            <span class="badge">New Season Drop</span>
+            <h1>Timeless elegance in <span>every thread.</span></h1>
+            <p>Curated garments designed for supreme comfort, refined silhouettes, and premium everyday styling. Discover the new collection today.</p>
+            <div class="hero-buttons">
+                <button class="ink-btn" onclick="filterProducts('All', null)">Explore Collection →</button>
+                <button class="secondary-btn" onclick="scrollToSection('trending')">Trending Now</button>
             </div>
         </div>
-        <div class="hero-slide">
-            <div class="hero-copy">
-                <span class="eyebrow">Limited Offer</span>
-                <h2>Seasonal clearance<br><em>reductions.</em></h2>
-                <p>Exceptional markdowns on top-rated wardrobe staples. Premium quality at an unmatched value.</p>
-                <button class="ink-btn" onclick="filterProducts('All', null); sortProducts('discount')">View clearance →</button>
+        <div class="hero-image-grid">
+            <div class="hero-img-box">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=700" alt="Boutique Style 1">
             </div>
-            <div class="hero-frame" data-tag="Special Price">
-                <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=900" alt="Sale">
+            <div class="hero-img-box">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700" alt="Boutique Style 2">
             </div>
-        </div>
-        <div class="hero-slide">
-            <div class="hero-copy">
-                <span class="eyebrow">Footwear Series</span>
-                <h2>Grounded in<br><em>comfort.</em></h2>
-                <p>Footwear engineered for durability and effortless everyday mobility. Step out in confidence.</p>
-                <button class="ink-btn" onclick="filterCategory('Footwear')">Shop footwear →</button>
-            </div>
-            <div class="hero-frame" data-tag="Premium Soles">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900" alt="Footwear">
-            </div>
-        </div>
-    </div>
-
-    <div class="hero-nav">
-        <div class="hero-dots" id="heroDots"></div>
-        <div class="hero-arrows">
-            <button class="hero-arrow" onclick="changeHero(-1)">‹</button>
-            <button class="hero-arrow" onclick="changeHero(1)">›</button>
         </div>
     </div>
 </section>
@@ -596,7 +623,7 @@ footer{ margin-top:80px; background:var(--card); color:var(--ink); padding:60px 
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="trending">
         <div class="section-header">
             <div><span class="section-tag">Featured</span><div class="section-title">Trending Now</div></div>
             <button class="view-all" onclick="filterProducts('All', null)">View all →</button>
@@ -618,7 +645,7 @@ footer{ margin-top:80px; background:var(--card); color:var(--ink); padding:60px 
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="new">
         <div class="section-header">
             <div><span class="section-tag">Latest Drop</span><div class="section-title">New Arrivals</div></div>
             <button class="view-all" onclick="filterProducts('All', null); sortProducts('newest')">View all →</button>
@@ -1013,7 +1040,7 @@ function updateCart(){
                     </div>
                 </div>
                 <div>
-                    <strong style="font-family:var(--font-mono)">₹${(p.price*item.qty).toLocaleString("en-IN")}</strong><br>
+                    <strong style="font-family:var(--font-body)">₹${(p.price*item.qty).toLocaleString("en-IN")}</strong><br>
                     <button class="remove" onclick="removeCart(${index})">Remove</button>
                 </div>
             </div>`;
@@ -1072,7 +1099,7 @@ function renderWishlist(){
     }
     container.innerHTML = wishlist.map(id=>{
         const p = products.find(x=>x.id === id);
-        return `<div class="cart-item"><img src="${p.image}"><div><h4>${p.name}</h4><p>${p.brand}</p><strong style="font-family:var(--font-mono)">₹${p.price.toLocaleString("en-IN")}</strong></div><button class="remove" onclick="toggleWishlist(${p.id})">Remove</button></div>`;
+        return `<div class="cart-item"><img src="${p.image}"><div><h4>${p.name}</h4><p>${p.brand}</p><strong>₹${p.price.toLocaleString("en-IN")}</strong></div><button class="remove" onclick="toggleWishlist(${p.id})">Remove</button></div>`;
     }).join("");
 }
 
@@ -1120,7 +1147,7 @@ function renderCheckout(){
         const p = products.find(x=>x.id === item.id);
         const amount = p.price * item.qty;
         subtotal += amount;
-        return `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:11px;font-family:var(--font-mono)"><span>${p.name} × ${item.qty}</span><strong>₹${amount.toLocaleString("en-IN")}</strong></div>`;
+        return `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:11px;"><span>${p.name} × ${item.qty}</span><strong>₹${amount.toLocaleString("en-IN")}</strong></div>`;
     }).join("");
 
     const delivery = subtotal >= 999 ? 0 : 79;
@@ -1184,33 +1211,9 @@ function placeOrder(){
     toast("Order placed successfully 🎉");
 }
 
-let heroIndex = 0;
-const heroSlides = document.querySelectorAll(".hero-slide");
-const dots = document.getElementById("heroDots");
-
-heroSlides.forEach((_,i)=>{
-    const dot = document.createElement("button");
-    dot.className = "hero-dot " + (i === 0 ? "active":"");
-    dot.onclick = ()=>showHero(i);
-    dots.appendChild(dot);
-});
-
-function showHero(index){
-    heroSlides.forEach(slide=>slide.classList.remove("active"));
-    document.querySelectorAll(".hero-dot").forEach(dot=>dot.classList.remove("active"));
-    heroIndex = (index + heroSlides.length) % heroSlides.length;
-    heroSlides[heroIndex].classList.add("active");
-    document.querySelectorAll(".hero-dot")[heroIndex].classList.add("active");
-}
-
-function changeHero(direction){ showHero(heroIndex + direction); }
-setInterval(()=>{ changeHero(1); }, 5500);
-
 function scrollToSection(id){ document.getElementById(id)?.scrollIntoView({ behavior:"smooth" }); }
 
 function toggleMobileNav(){ document.getElementById("navbar").classList.toggle("open"); }
-
-document.getElementById("masthead-date").innerText = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
 
 renderProducts();
 updateCart();

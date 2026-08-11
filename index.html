@@ -78,6 +78,7 @@ header{
     border:0;
     color:var(--pink);
     text-transform:uppercase;
+    cursor:pointer;
 }
 .logo span{ color:var(--text); }
 
@@ -111,7 +112,7 @@ header{
 .header-actions{
     display:flex;
     align-items:center;
-    gap:34px;
+    gap:28px;
 }
 
 .mobile-menu-btn{
@@ -289,6 +290,20 @@ header{
 .section-title{ font-family:'Poppins',sans-serif; font-size:22px; font-weight:700; }
 .section-subtitle{ color:var(--muted); font-size:12.5px; margin-top:4px; }
 .view-all{ color:var(--pink-dark); font-size:12.5px; font-weight:800; text-transform:uppercase; letter-spacing:.3px; background:none; border:0; cursor:pointer; }
+
+/* ================= STORIES SECTION ================= */
+
+.stories-scroll{ display:flex; gap:16px; overflow-x:auto; scrollbar-width:none; padding-bottom:6px; }
+.stories-scroll::-webkit-scrollbar{ display:none; }
+.story-card{
+    min-width:110px; height:160px; position:relative; cursor:pointer; flex-shrink:0;
+    background-size:cover; background-position:center; border:2px solid var(--pink); border-radius:8px; overflow:hidden;
+}
+.story-overlay{
+    position:absolute; inset:0; background:linear-gradient(transparent 40%,rgba(0,0,0,.75));
+    display:flex; align-items:end; justify-content:center; padding:10px;
+}
+.story-overlay span{ font-size:10.5px; font-weight:700; color:#fff; text-transform:uppercase; letter-spacing:.5px; }
 
 /* ================= CIRCLE CATEGORIES ================= */
 
@@ -470,7 +485,7 @@ footer{ margin-top:64px; background:#fff; border-top:1px solid var(--border); pa
     .container{ padding:0 20px; }
     .products-grid{ grid-template-columns:repeat(3,1fr); }
     .footer-grid{ grid-template-columns:1fr 1fr; }
-    .footer-grid, .footer-grid, footer{ padding-left:20px; padding-right:20px; }
+    .footer-grid, footer{ padding-left:20px; padding-right:20px; }
 }
 
 @media (max-width:760px){
@@ -521,6 +536,8 @@ footer{ margin-top:64px; background:#fff; border-top:1px solid var(--border); pa
     </div>
 
     <div class="header-actions">
+        <button class="header-action" onclick="openWishlist()"><span class="icon">♡</span>Wishlist<span class="wishlist-badge" id="wishlistCount">0</span></button>
+        <button class="header-action" onclick="openCart()"><span class="icon">🛍</span>Bag<span class="cart-badge" id="cartCount">0</span></button>
         <div class="account-menu">
             <button class="header-action" onclick="toggleAccount(event)"><span class="icon">👤</span>Profile</button>
             <div class="account-dropdown" id="accountDropdown">
@@ -532,8 +549,6 @@ footer{ margin-top:64px; background:#fff; border-top:1px solid var(--border); pa
                 <button>Logout</button>
             </div>
         </div>
-        <button class="header-action" onclick="openWishlist()"><span class="icon">♡</span>Wishlist<span class="wishlist-badge" id="wishlistCount">0</span></button>
-        <button class="header-action" onclick="openCart()"><span class="icon">🛍</span>Bag<span class="cart-badge" id="cartCount">0</span></button>
     </div>
 </header>
 
@@ -619,6 +634,20 @@ footer{ margin-top:64px; background:#fff; border-top:1px solid var(--border); pa
 </section>
 
 <div class="container">
+
+    <!-- ================= STORIES SECTION ================= -->
+    <section class="section">
+        <div class="section-header">
+            <div><div class="section-title">New Launch Previews 🔥</div><div class="section-subtitle">Watch our latest collection reels</div></div>
+        </div>
+        <div class="stories-scroll">
+            <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400')" onclick="filterCategory('Women')"><div class="story-overlay"><span>Summer Kurta</span></div></div>
+            <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400')" onclick="filterCategory('Men')"><div class="story-overlay"><span>Denim Series</span></div></div>
+            <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400')" onclick="filterCategory('Women')"><div class="story-overlay"><span>Party Gowns</span></div></div>
+            <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1555529771-835f59fc5efe?w=400')" onclick="filterCategory('Accessories')"><div class="story-overlay"><span>Luxe Edit</span></div></div>
+            <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=400')" onclick="filterCategory('Men')"><div class="story-overlay"><span>Streetwear</span></div></div>
+        </div>
+    </section>
 
     <!-- ================= CATEGORIES ================= -->
     <section class="section">

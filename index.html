@@ -96,13 +96,14 @@ header{
     display:none;
     position:absolute;
     right:0;
-    top:34px;
+    top:38px;
     width:220px;
     background:#171717;
     border:1px solid var(--border);
     box-shadow:0 10px 35px #000;
     border-radius:8px;
     padding:8px;
+    z-index:7000;
 }
 
 .account-dropdown.open{
@@ -1272,7 +1273,8 @@ footer{
             🛍️ <span class="cart-badge" id="cartCount">0</span>
         </button>
         <div class="account-menu">
-            <button class="header-action" onclick="toggleAccount()">
+            <!-- FIXED: Added explicit onclick handler for the profile button -->
+            <button class="header-action" onclick="toggleAccount(event)">
                 👤 <span class="label">Account</span>
             </button>
             <div class="account-dropdown" id="accountDropdown">
@@ -2221,6 +2223,11 @@ function toggleDropdown(element, event) {
     element.classList.toggle('open');
 }
 
+function toggleAccount(event){
+    event.stopPropagation();
+    document.getElementById('accountDropdown').classList.toggle('open');
+}
+
 window.addEventListener('click', () => {
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('open'));
     document.getElementById('accountDropdown').classList.remove('open');
@@ -2569,8 +2576,6 @@ function placeOrder(){
     closeCheckout();
     toast("Order placed successfully 🎉");
 }
-
-function toggleAccount(){ document.getElementById("accountDropdown").classList.toggle("open"); }
 
 /* =====================================================
    HERO SLIDER

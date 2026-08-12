@@ -92,7 +92,6 @@
       border:0;
       color:var(--black);
       text-align:left;
-      cursor:pointer;
     }
 
     .logo span {
@@ -121,7 +120,6 @@
       border:0;
       color:var(--black);
       padding:0;
-      cursor:pointer;
     }
 
     nav a:hover, .nav-drop-btn:hover { color: var(--sale); }
@@ -208,7 +206,6 @@
       background:none;
       border:0;
       color:var(--black);
-      cursor:pointer;
     }
     .action:hover{ color:var(--sale); }
 
@@ -250,7 +247,7 @@
     .account-dropdown.open{ display:block; }
     .account-dropdown a, .account-dropdown button{
       display:block; width:100%; padding:10px 12px; text-align:left;
-      color:var(--black); background:none; border:0; font-size:12.5px; border-radius:4px; cursor:pointer;
+      color:var(--black); background:none; border:0; font-size:12.5px; border-radius:4px;
     }
     .account-dropdown a:hover, .account-dropdown button:hover{ background:var(--light-gray); color:var(--sale); }
 
@@ -299,30 +296,13 @@
       padding: 20px 4% 60px;
     }
 
-    /* ================= STORIES SECTION ================= */
-
-    .stories-section { margin-bottom: 30px; }
-
-    .stories-scroll {
-      display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; padding-bottom: 6px;
-    }
-    .stories-scroll::-webkit-scrollbar { display: none; }
-
-    .story-card {
-      min-width: 90px; height: 130px; border-radius: 8px; overflow: hidden;
-      position: relative; cursor: pointer; border: 2px solid var(--sale); flex-shrink: 0;
-      background-size: cover; background-position: center;
-    }
-    .story-overlay {
-      position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8));
-      display: flex; align-items: end; padding: 8px;
-    }
-    .story-overlay span { font-size: 10px; font-weight: 700; color: white; text-transform: uppercase; }
-
     /* ================= HERO ================= */
 
     .hero {
-      height: 430px; border-radius: 10px; overflow: hidden; position: relative;
+      height: 430px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
     }
 
     .hero-slide{
@@ -332,18 +312,25 @@
     }
     .hero-slide.active{ opacity:1; }
     .hero-slide::before{
-      content:""; position:absolute; inset:0;
+      content:"";
+      position:absolute; inset:0;
       background:linear-gradient(90deg, rgba(245,232,220,.98) 0%, rgba(245,232,220,.85) 42%, rgba(245,232,220,.1) 72%);
     }
 
     .hero-content { max-width: 500px; position:relative; z-index:2; }
 
     .hero-small {
-      font-size: 19px; font-weight: 700; letter-spacing: 2px; margin-bottom: 12px;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
     }
 
     .hero h1 {
-      font-size: clamp(44px, 5vw, 76px); line-height: .95; margin-bottom: 15px; letter-spacing: -3px;
+      font-size: clamp(44px, 5vw, 76px);
+      line-height: .95;
+      margin-bottom: 15px;
+      letter-spacing: -3px;
     }
 
     .hero p { font-size: 19px; font-weight: 600; margin-bottom: 28px; }
@@ -351,16 +338,28 @@
     .hero-buttons { display: flex; gap: 12px; }
 
     .btn {
-      padding: 14px 28px; border-radius: 3px; border: 1px solid #111; font-weight: 700; font-size: 13px; transition: .2s;
+      padding: 14px 28px;
+      border-radius: 3px;
+      border: 1px solid #111;
+      font-weight: 700;
+      font-size: 13px;
+      transition: .2s;
     }
+
     .btn-black { background: #111; color: white; }
     .btn-white { background: white; color: #111; }
     .btn:hover { transform: translateY(-2px); }
 
     .slider-dots {
-      position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 7px; z-index:3;
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 7px;
+      z-index:3;
     }
+
     .dot { width: 8px; height: 8px; background: #999; border-radius: 50%; border:0; padding:0; cursor:pointer; }
     .dot.active { background: #111; }
 
@@ -369,8 +368,14 @@
     .section { margin-top: 48px; }
 
     .section-title {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; flex-wrap:wrap; gap:10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      flex-wrap:wrap;
+      gap:10px;
     }
+
     .section-title h2 { font-size: 21px; letter-spacing: .5px; }
     .view-all { font-size: 12px; font-weight: 700; background:none; border:0; color:var(--black); cursor:pointer; }
     .view-all:hover { color: var(--sale); }
@@ -757,7 +762,7 @@
     <!-- MOBILE HEADER -->
     <div class="mobile-header">
       <button class="mobile-menu-btn" style="display:block" onclick="openMobileNav()">☰</button>
-      <div class="mobile-logo" onclick="scrollToTop()">AS FASHIONS</div>
+      <div class="mobile-logo">AS FASHIONS</div>
 
       <div class="mobile-icons">
         <button class="mobile-search-toggle" onclick="toggleMobileSearch()">⌕</button>
@@ -782,12 +787,12 @@
       <strong>AS FASHIONS</strong>
       <button class="close-btn" onclick="closeMobileNav()">✕</button>
     </div>
-    <button class="mn-cat" onclick="filterCategory('Men'); closeMobileNav()">Men</button>
-    <button class="mn-cat" onclick="filterCategory('Women'); closeMobileNav()">Women</button>
-    <button class="mn-cat" onclick="filterCategory('Kids'); closeMobileNav()">Kids</button>
-    <button class="mn-cat" onclick="filterCategory('Footwear'); closeMobileNav()">Footwear</button>
-    <button class="mn-cat" onclick="filterCategory('Accessories'); closeMobileNav()">Accessories</button>
-    <button class="mn-cat" onclick="filterCategory('Beauty'); closeMobileNav()">Beauty</button>
+    <button class="mn-cat" onclick="filterCategory('Men')">Men</button>
+    <button class="mn-cat" onclick="filterCategory('Women')">Women</button>
+    <button class="mn-cat" onclick="filterCategory('Kids')">Kids</button>
+    <button class="mn-cat" onclick="filterCategory('Footwear')">Footwear</button>
+    <button class="mn-cat" onclick="filterCategory('Accessories')">Accessories</button>
+    <button class="mn-cat" onclick="filterCategory('Beauty')">Beauty</button>
     <button class="mn-cat sale" onclick="filterProducts('All', null); sortProducts('discount'); closeMobileNav(); scrollToSection('allProducts')">Sale</button>
     <a onclick="openWishlist(); closeMobileNav()">My Wishlist</a>
     <a onclick="openCart(); closeMobileNav()">My Bag</a>
@@ -796,27 +801,6 @@
   </div>
 
   <main>
-
-    <!-- STORIES / REELS SECTION -->
-    <section class="stories-section">
-      <div class="stories-scroll">
-        <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400')" onclick="filterCategory('Women')">
-          <div class="story-overlay"><span>Summer Kurta</span></div>
-        </div>
-        <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400')" onclick="filterCategory('Men')">
-          <div class="story-overlay"><span>Denim Series</span></div>
-        </div>
-        <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400')" onclick="filterCategory('Women')">
-          <div class="story-overlay"><span>Party Gowns</span></div>
-        </div>
-        <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1555529771-835f59fc5efe?w=400')" onclick="filterCategory('Accessories')">
-          <div class="story-overlay"><span>Luxe Edit</span></div>
-        </div>
-        <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=400')" onclick="filterCategory('Men')">
-          <div class="story-overlay"><span>Streetwear</span></div>
-        </div>
-      </div>
-    </section>
 
     <!-- HERO -->
     <section class="hero" id="topAnchor">
@@ -1085,7 +1069,7 @@
         <a href="#">Pinterest</a>
       </div>
     </div>
-    <div class="copyright">© 2026 AS FASHIONS. All Rights Reserved.</div>
+    <div class="copyright">© 2026 AS FASHIONS. All Rights Reserved. &nbsp;·&nbsp; <a href="admin.html" style="color:#aaa">Admin</a></div>
   </footer>
 
   <!-- CART DRAWER -->
@@ -1185,7 +1169,7 @@
   <script>
 
     /* =====================================================
-       PRODUCT DATABASE (Static + Admin Custom Products Sync)
+       PRODUCT DATABASE
     ===================================================== */
 
     const defaultProducts = [
@@ -1202,13 +1186,20 @@
       { id:11, brand:"Adidas", name:"Street Style Sneakers", category:"Footwear", type:"Sneakers", price:2499, mrp:3999, rating:4.7, ratingCount:"1.3K", discount:38, new:true, trending:true, image:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=700&q=85", description:"Street-style sneakers for everyday wear." },
       { id:12, brand:"Puma", name:"Performance Gym T-Shirt", category:"Sports", type:"Sportswear", price:899, mrp:1699, rating:4.5, ratingCount:"560", discount:47, new:false, trending:true, image:"https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=700&q=85", description:"Breathable gym T-shirt for training." },
       { id:13, brand:"ONLY", name:"Wide Leg Fashion Jeans", category:"Women", type:"Jeans", price:1399, mrp:2799, rating:4.4, ratingCount:"470", discount:50, new:true, trending:true, image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=85", description:"Wide-leg jeans with a relaxed fit." },
-      { id:14, brand:"U.S. Polo", name:"Premium Polo T-Shirt", category:"Men", type:"T-Shirt", price:1199, mrp:2199, rating:4.7, ratingCount:"830", discount:45, new:false, trending:true, image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85", description:"Cotton polo t-shirt, classic fit." },
+      { id:14, brand:"U.S. Polo", name:"Premium Polo T-Shirt", category:"Men", type:"T-Shirt", price:1199, mrp:2199, rating:4.7, ratingCount:"830", discount:45, new:false, trending:true, image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85", description:"Cotton polo T-shirt, classic fit." },
       { id:15, brand:"Mango", name:"Luxury Shoulder Bag", category:"Bags", type:"Handbag", price:1799, mrp:3499, rating:4.6, ratingCount:"290", discount:49, new:true, trending:true, image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=85", description:"Everyday shoulder bag in premium finish." },
       { id:16, brand:"Fossil", name:"Classic Fashion Watch", category:"Accessories", type:"Watch", price:4999, mrp:7999, rating:4.8, ratingCount:"512", discount:38, new:false, trending:true, image:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=85", description:"Classic analog watch." }
     ];
 
-    let customProducts = JSON.parse(localStorage.getItem("as_custom_products") || "[]");
-    const products = [...customProducts, ...defaultProducts];
+    // Products added from the Admin Panel are stored in localStorage and merged in here
+    function loadCustomProducts(){
+      try{
+        return JSON.parse(localStorage.getItem("as_custom_products") || "[]");
+      } catch(e){
+        return [];
+      }
+    }
+    let products = [...loadCustomProducts(), ...defaultProducts];
 
     /* =====================================================
        STATE & STORAGE
@@ -1624,7 +1615,7 @@
       orderText += `%0A*Total Payable:* ${totalAmount}`;
 
       let confirmWhatsApp = confirm(`Order Placed Successfully! 🎉\nOrder ID: ${orderId}\n\nClick OK to send order details directly via WhatsApp to the store owner.`);
-      if(confirmWhatsApp){ window.open(`https://wa.me/919966681276?text=${orderText}`, '_blank'); }
+      if(confirmWhatsApp){ window.open(`https://wa.me/919999999999?text=${orderText}`, '_blank'); }
 
       cart = [];
       couponDiscount = 0;

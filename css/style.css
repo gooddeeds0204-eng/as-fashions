@@ -2,82 +2,74 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Assistant, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
-    background-color: #f7f8fa;
-    color: #282c3f;
+    background-color: #f3f4f6;
+    color: #1f2937;
 }
 
-/* --- NAVBAR --- */
+/* --- MODERN HEADER --- */
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 30px;
-    height: 75px;
+    padding: 12px 20px;
     background: #ffffff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
     position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 1000;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: 900;
-    letter-spacing: 1.5px;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
     color: #ff3f6c;
     text-decoration: none;
 }
 
 .nav-links {
     display: flex;
-    gap: 24px;
-    height: 100%;
-    align-items: center;
+    gap: 20px;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: #282c3f;
-    font-weight: 700;
+    color: #4b5563;
+    font-weight: 600;
     font-size: 13px;
     text-transform: uppercase;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    border-bottom: 3px solid transparent;
+    transition: color 0.2s;
 }
 
 .nav-links a:hover {
     color: #ff3f6c;
-    border-bottom: 3px solid #ff3f6c;
 }
 
-/* Search bar */
+/* Search bar sleek design */
 .search-container {
-    background: #f5f5f6;
+    background: #f1f3f5;
     display: flex;
     align-items: center;
-    width: 350px;
+    width: 320px;
     height: 38px;
-    border-radius: 4px;
+    border-radius: 8px;
     padding: 0 12px;
-    border: 1px solid #d4d5d9;
 }
 
 .search-container i {
-    color: #696e79;
+    color: #9ca3af;
     font-size: 13px;
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 .search-container input {
@@ -86,14 +78,13 @@ body {
     outline: none;
     width: 100%;
     font-size: 13px;
-    color: #282c3f;
+    color: #1f2937;
 }
 
-/* User Actions */
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 20px;
 }
 
 .action-item {
@@ -101,14 +92,14 @@ body {
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    color: #282c3f;
+    color: #4b5563;
     position: relative;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .action-item i {
-    font-size: 17px;
+    font-size: 16px;
     margin-bottom: 2px;
 }
 
@@ -118,8 +109,8 @@ body {
 
 .badge {
     position: absolute;
-    top: -5px;
-    right: 0px;
+    top: -4px;
+    right: -2px;
     background: #ff3f6c;
     color: #fff;
     font-size: 9px;
@@ -128,68 +119,75 @@ body {
     border-radius: 50%;
 }
 
-/* --- HERO BANNER --- */
+/* --- MODERN HERO BANNER --- */
 .hero-banner {
     width: 100%;
-    height: 380px;
-    background: linear-gradient(135deg, #1a1a1a, #282c3f);
+    height: 320px;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    border-radius: 0 0 20px 20px;
 }
 
 .banner-content h1 {
-    font-size: 42px;
+    font-size: 34px;
     font-weight: 900;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
     color: #ff3f6c;
 }
 
 .banner-content p {
-    font-size: 16px;
-    margin-bottom: 20px;
-    color: #eaeaec;
+    font-size: 14px;
+    margin-bottom: 18px;
+    color: #cbd5e1;
 }
 
 .shop-btn {
     background: #ff3f6c;
     color: #fff;
     border: none;
-    padding: 12px 30px;
-    font-size: 14px;
+    padding: 10px 28px;
+    font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     text-transform: uppercase;
-    border-radius: 4px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(255, 63, 108, 0.3);
+    transition: transform 0.2s;
 }
 
-/* --- SECTIONS --- */
+.shop-btn:hover {
+    transform: scale(1.03);
+}
+
+/* --- SECTION HEADERS --- */
 .section-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #3e4152;
-    margin: 30px 20px 15px 20px;
+    letter-spacing: 0.5px;
+    color: #1f2937;
+    margin: 20px 15px 12px 15px;
 }
 
-/* --- CATEGORIES CIRCLES --- */
+/* --- CATEGORIES (SMART APP ICONS) --- */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 15px;
-    padding: 0 20px;
-    margin-bottom: 40px;
+    gap: 12px;
+    padding: 0 15px;
+    margin-bottom: 30px;
 }
 
 .category-circle-card {
     text-align: center;
     text-decoration: none;
-    color: #282c3f;
+    color: #1f2937;
 }
 
 .category-img-box {
@@ -198,49 +196,60 @@ body {
     border-radius: 50%;
     background-color: #ffffff;
     overflow: hidden;
-    margin-bottom: 8px;
-    border: 2px solid #eaeaec;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 6px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    color: #535766;
+    font-size: 18px;
+    color: #4b5563;
+    transition: border-color 0.2s;
+}
+
+.category-circle-card:hover .category-img-box {
+    border-color: #ff3f6c;
 }
 
 .category-circle-card span {
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 /* --- PRODUCTS GRID --- */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    padding: 0 20px;
-    margin-bottom: 40px;
+    gap: 15px;
+    padding: 0 15px;
+    margin-bottom: 35px;
 }
 
 .product-card {
     background: #fff;
-    border: 1px solid #eaeaec;
-    border-radius: 4px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
 }
 
 .product-img-container {
     width: 100%;
-    height: 260px;
-    background: #f5f5f6;
+    height: 240px;
+    background: #f8fafc;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #94969f;
-    font-size: 13px;
+    color: #94a3b8;
+    font-size: 12px;
 }
 
 .product-rating {
@@ -249,35 +258,36 @@ body {
     left: 8px;
     background: rgba(255, 255, 255, 0.95);
     padding: 2px 6px;
-    border-radius: 3px;
+    border-radius: 4px;
     font-size: 11px;
     font-weight: 700;
-    color: #282c3f;
+    color: #1f2937;
     display: flex;
     align-items: center;
     gap: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .product-rating i {
-    color: #03a685;
+    color: #10b981;
     font-size: 10px;
 }
 
 .product-details {
-    padding: 12px;
+    padding: 10px;
 }
 
 .product-brand {
-    font-size: 14px;
-    font-weight: 800;
-    color: #282c3f;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1f2937;
     margin-bottom: 2px;
 }
 
 .product-name {
-    font-size: 12px;
-    color: #535766;
-    margin-bottom: 8px;
+    font-size: 11px;
+    color: #6b7280;
+    margin-bottom: 6px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -287,31 +297,31 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .current-price {
     font-weight: 700;
-    color: #282c3f;
+    color: #1f2937;
 }
 
 .original-price {
     text-decoration: line-through;
-    color: #7e818c;
-    font-size: 11px;
+    color: #9ca3af;
+    font-size: 10px;
 }
 
 .discount {
-    color: #ff905a;
-    font-size: 11px;
+    color: #f97316;
+    font-size: 10px;
     font-weight: 700;
 }
 
 footer {
-    background: #fafbfc;
-    padding: 30px;
+    background: #ffffff;
+    padding: 25px;
     text-align: center;
-    color: #696e79;
+    color: #6b7280;
     font-size: 12px;
-    border-top: 1px solid #eaeaec;
+    border-top: 1px solid #e5e7eb;
 }

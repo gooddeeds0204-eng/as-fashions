@@ -1,104 +1,91 @@
 @media screen and (max-width: 768px) {
-    /* Mobile Header Layout */
+    /* Mobile Header Cleanup */
     .navbar {
-        padding: 0 12px;
-        height: auto;
+        padding: 10px 12px;
         flex-direction: column;
-        padding-bottom: 10px;
+        gap: 10px;
     }
 
     .logo-container {
         width: 100%;
         justify-content: space-between;
-        height: 55px;
-        gap: 10px;
-    }
-
-    .logo {
-        font-size: 20px;
     }
 
     .nav-links {
-        display: none; /* Hide heavy links on mobile header, can use menu later */
+        display: none; /* Mobile optimization: hide top desktop menu items */
     }
 
     .search-container {
         width: 100%;
-        margin-bottom: 8px;
         height: 36px;
     }
 
     .nav-actions {
         width: 100%;
         justify-content: space-around;
-        gap: 10px;
-        border-top: 1px solid #f0f0f0;
+        border-top: 1px solid #f3f4f6;
         padding-top: 8px;
     }
 
     .action-item {
         flex-direction: row;
-        gap: 5px;
-        font-size: 12px;
-        font-weight: 500;
+        gap: 4px;
+        font-size: 11px;
     }
 
     .action-item i {
-        font-size: 15px;
+        font-size: 14px;
         margin-bottom: 0;
-    }
-
-    .action-item span {
-        display: inline-block; /* Show text neatly on mobile action bar */
     }
 
     /* Hero Banner Mobile */
     .hero-banner {
-        height: 220px;
-        margin-bottom: 20px;
-    }
-
-    .banner-content h1 {
-        font-size: 24px;
-    }
-
-    .banner-content p {
-        font-size: 13px;
+        height: 180px;
+        border-radius: 0;
         margin-bottom: 15px;
     }
 
-    .shop-btn {
-        padding: 8px 20px;
-        font-size: 12px;
+    .banner-content h1 {
+        font-size: 22px;
     }
 
-    /* Categories Grid: 3 items per row on mobile */
+    .banner-content p {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .shop-btn {
+        padding: 6px 16px;
+        font-size: 11px;
+    }
+
+    /* Categories: 3 Columns Grid for Mobile */
     .section-title {
-        font-size: 16px;
-        margin: 20px 12px 10px 12px;
+        font-size: 15px;
+        margin: 15px 10px 8px 10px;
     }
 
     .categories-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
-        padding: 0 12px;
-        margin-bottom: 25px;
+        padding: 0 10px;
+        margin-bottom: 20px;
     }
 
     .category-circle-card span {
         font-size: 11px;
     }
 
-    /* Products Grid: 2 items per row (Like Myntra App) */
+    /* Products: Exactly 2 Columns Grid (Like Myntra App view) */
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        padding: 0 12px;
-        margin-bottom: 30px;
+        padding: 0 10px;
+        margin-bottom: 25px;
     }
 
     .product-img-container {
-        height: 190px;
+        height: 170px;
     }
 
     .product-details {
@@ -110,18 +97,18 @@
     }
 
     .product-name {
-        font-size: 11px;
+        font-size: 10px;
     }
 
     .current-price {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .original-price {
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .discount {
-        font-size: 10px;
+        font-size: 9px;
     }
 }

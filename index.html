@@ -84,6 +84,7 @@
       font-weight: 700;
       letter-spacing: 2px;
       line-height: 24px;
+      cursor: pointer;
     }
 
     .logo span {
@@ -150,6 +151,7 @@
       text-align: center;
       font-size: 11px;
       position: relative;
+      cursor: pointer;
     }
 
     .action-icon {
@@ -179,12 +181,129 @@
       display: none;
     }
 
+    /* ================= MOBILE NAV OVERLAY ================= */
+
+    .mobile-nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1500;
+      display: none;
+    }
+
+    .mobile-nav-overlay.open {
+      display: block;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100vh;
+      background: #fff;
+      z-index: 1600;
+      transition: .3s ease;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 5px 0 25px rgba(0,0,0,0.2);
+    }
+
+    .mobile-drawer.open {
+      left: 0;
+    }
+
+    .mobile-drawer-header {
+      padding: 20px;
+      background: #111;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .mobile-drawer-header button {
+      background: none;
+      border: 0;
+      color: #fff;
+      font-size: 20px;
+    }
+
+    .mobile-drawer-links {
+      padding: 10px 0;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .mobile-drawer-links a {
+      display: block;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border-bottom: 1px solid #f0f0f0;
+      color: #222;
+    }
+
+    .mobile-drawer-links a:hover {
+      background: #fff1f3;
+      color: var(--sale);
+    }
+
     /* ================= MAIN ================= */
 
     main {
       max-width: var(--max-width);
       margin: auto;
       padding: 20px 4% 60px;
+    }
+
+    /* ================= STORIES SECTION ================= */
+
+    .stories-section {
+      margin-bottom: 30px;
+    }
+
+    .stories-scroll {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 6px;
+    }
+
+    .stories-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .story-card {
+      min-width: 90px;
+      height: 130px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: 2px solid var(--sale);
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .story-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      display: flex;
+      align-items: end;
+      padding: 8px;
+    }
+
+    .story-overlay span {
+      font-size: 10px;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
     }
 
     /* ================= HERO ================= */
@@ -494,21 +613,10 @@
       object-fit: cover;
     }
 
-    .promo:nth-child(1) {
-      background: #f3e5d5;
-    }
-
-    .promo:nth-child(2) {
-      background: #f4d6df;
-    }
-
-    .promo:nth-child(3) {
-      background: #dce3d4;
-    }
-
-    .promo:nth-child(4) {
-      background: #dce6f1;
-    }
+    .promo:nth-child(1) { background: #f3e5d5; }
+    .promo:nth-child(2) { background: #f4d6df; }
+    .promo:nth-child(3) { background: #dce3d4; }
+    .promo:nth-child(4) { background: #dce6f1; }
 
     /* ================= BRANDS ================= */
 
@@ -688,41 +796,17 @@
     /* ================= RESPONSIVE ================= */
 
     @media (max-width: 1200px) {
-      nav {
-        gap: 16px;
-      }
-
-      .search {
-        width: 220px;
-      }
-
-      .products {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .categories {
-        grid-template-columns: repeat(4, 1fr);
-        row-gap: 25px;
-      }
-
-      .brands {
-        grid-template-columns: repeat(4, 1fr);
-      }
+      nav { gap: 16px; }
+      .search { width: 220px; }
+      .products { grid-template-columns: repeat(4, 1fr); }
+      .categories { grid-template-columns: repeat(4, 1fr); row-gap: 25px; }
+      .brands { grid-template-columns: repeat(4, 1fr); }
     }
 
     @media (max-width: 850px) {
-
-      .top-bar {
-        display: none;
-      }
-
-      header {
-        position: sticky;
-      }
-
-      .header-main {
-        display: none;
-      }
+      .top-bar { display: none; }
+      header { position: sticky; }
+      .header-main { display: none; }
 
       .mobile-header {
         display: flex;
@@ -737,6 +821,7 @@
         font-size: 23px;
         font-weight: 700;
         letter-spacing: 1px;
+        cursor: pointer;
       }
 
       .mobile-icons {
@@ -745,160 +830,75 @@
         font-size: 20px;
       }
 
-      main {
-        padding: 12px 14px 40px;
-      }
+      main { padding: 12px 14px 40px; }
 
       .hero {
         height: 390px;
         padding: 25px;
         align-items: flex-end;
         background:
-          linear-gradient(
-            0deg,
-            rgba(0,0,0,.7),
-            rgba(0,0,0,.05) 65%
-          ),
-          url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=85")
-          center/cover;
+          linear-gradient(0deg, rgba(0,0,0,.7), rgba(0,0,0,.05) 65%),
+          url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=85") center/cover;
         color: white;
       }
 
-      .hero h1 {
-        font-size: 48px;
-      }
+      .hero h1 { font-size: 48px; }
+      .hero p { font-size: 15px; }
 
-      .hero p {
-        font-size: 15px;
-      }
-
-      .categories {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px 10px;
-      }
-
-      .category-img {
-        width: 72px;
-        height: 72px;
-      }
-
-      .products {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-
-      .product-img {
-        height: 260px;
-      }
-
-      .promos {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .brands {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .features {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-      }
-
-      .feature:nth-child(2) {
-        border-right: 0;
-      }
-
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .footer-brand {
-        grid-column: 1 / -1;
-      }
+      .categories { grid-template-columns: repeat(4, 1fr); gap: 18px 10px; }
+      .category-img { width: 72px; height: 72px; }
+      .products { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .product-img { height: 260px; }
+      .promos { grid-template-columns: repeat(2, 1fr); }
+      .brands { grid-template-columns: repeat(4, 1fr); }
+      .features { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .feature:nth-child(2) { border-right: 0; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-brand { grid-column: 1 / -1; }
     }
 
     @media (max-width: 500px) {
-
-      .hero {
-        height: 400px;
-      }
-
-      .hero h1 {
-        font-size: 43px;
-      }
-
-      .hero-small {
-        font-size: 14px;
-      }
-
-      .hero-buttons {
-        flex-wrap: wrap;
-      }
-
-      .btn {
-        padding: 12px 20px;
-      }
-
-      .categories {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .category p {
-        font-size: 10px;
-      }
-
-      .product-img {
-        height: 230px;
-      }
-
-      .product-info {
-        padding: 9px;
-      }
-
-      .promos {
-        grid-template-columns: 1fr;
-      }
-
-      .promo {
-        height: 170px;
-      }
-
-      .brands {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .features {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .feature {
-        border-right: 0;
-      }
-
-      .newsletter h2 {
-        font-size: 22px;
-      }
-
-      .subscribe {
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .subscribe input,
-      .subscribe button {
-        width: 100%;
-        height: 45px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 25px;
-      }
+      .hero { height: 400px; }
+      .hero h1 { font-size: 43px; }
+      .hero-small { font-size: 14px; }
+      .hero-buttons { flex-wrap: wrap; }
+      .btn { padding: 12px 20px; }
+      .categories { grid-template-columns: repeat(4, 1fr); }
+      .category p { font-size: 10px; }
+      .product-img { height: 230px; }
+      .product-info { padding: 9px; }
+      .promos { grid-template-columns: 1fr; }
+      .promo { height: 170px; }
+      .brands { grid-template-columns: repeat(2, 1fr); }
+      .features { grid-template-columns: 1fr 1fr; }
+      .feature { border-right: 0; }
+      .newsletter h2 { font-size: 22px; }
+      .subscribe { flex-direction: column; gap: 8px; }
+      .subscribe input, .subscribe button { width: 100%; height: 45px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 25px; }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="toggleMobileNav()"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span>AS FASHIONS</span>
+      <button onclick="toggleMobileNav()">✕</button>
+    </div>
+    <div class="mobile-drawer-links">
+      <a href="#men" onclick="toggleMobileNav()">MEN</a>
+      <a href="#women" onclick="toggleMobileNav()">WOMEN</a>
+      <a href="#kids" onclick="toggleMobileNav()">KIDS</a>
+      <a href="#footwear" onclick="toggleMobileNav()">FOOTWEAR</a>
+      <a href="#accessories" onclick="toggleMobileNav()">ACCESSORIES</a>
+      <a href="#beauty" onclick="toggleMobileNav()">BEAUTY</a>
+      <a href="#sale" style="color:var(--sale);" onclick="toggleMobileNav()">SALE</a>
+    </div>
+  </div>
 
   <!-- TOP BAR -->
   <div class="top-bar">
@@ -957,7 +957,10 @@
 
     <!-- MOBILE HEADER -->
     <div class="mobile-header">
-      <div class="mobile-logo">AS FASHIONS</div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <button onclick="toggleMobileNav()" style="background:none; border:0; font-size:22px; cursor:pointer;">☰</button>
+        <div class="mobile-logo">AS FASHIONS</div>
+      </div>
 
       <div class="mobile-icons">
         <span>♡</span>
@@ -967,6 +970,27 @@
   </header>
 
   <main>
+
+    <!-- STORIES / REELS SECTION -->
+    <section class="stories-section">
+      <div class="stories-scroll">
+        <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400')">
+          <div class="story-overlay"><span>Summer Kurta</span></div>
+        </div>
+        <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400')">
+          <div class="story-overlay"><span>Denim Series</span></div>
+        </div>
+        <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400')">
+          <div class="story-overlay"><span>Party Gowns</span></div>
+        </div>
+        <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1555529771-835f59fc5efe?w=400')">
+          <div class="story-overlay"><span>Luxe Edit</span></div>
+        </div>
+        <div class="story-card" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=400')">
+          <div class="story-overlay"><span>Streetwear</span></div>
+        </div>
+      </div>
+    </section>
 
     <!-- HERO -->
     <section class="hero">
@@ -1424,6 +1448,14 @@
 
     let wishlist = 0;
     let cart = 0;
+
+    /* ================= MOBILE NAV TOGGLE ================= */
+    function toggleMobileNav() {
+      const drawer = document.getElementById("mobileDrawer");
+      const overlay = document.getElementById("mobileNavOverlay");
+      drawer.classList.toggle("open");
+      overlay.classList.toggle("open");
+    }
 
     /* ================= WISHLIST ================= */
 

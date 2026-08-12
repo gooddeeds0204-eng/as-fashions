@@ -92,6 +92,7 @@
       border:0;
       color:var(--black);
       text-align:left;
+      cursor:pointer;
     }
 
     .logo span {
@@ -120,6 +121,7 @@
       border:0;
       color:var(--black);
       padding:0;
+      cursor:pointer;
     }
 
     nav a:hover, .nav-drop-btn:hover { color: var(--sale); }
@@ -206,6 +208,7 @@
       background:none;
       border:0;
       color:var(--black);
+      cursor:pointer;
     }
     .action:hover{ color:var(--sale); }
 
@@ -247,7 +250,7 @@
     .account-dropdown.open{ display:block; }
     .account-dropdown a, .account-dropdown button{
       display:block; width:100%; padding:10px 12px; text-align:left;
-      color:var(--black); background:none; border:0; font-size:12.5px; border-radius:4px;
+      color:var(--black); background:none; border:0; font-size:12.5px; border-radius:4px; cursor:pointer;
     }
     .account-dropdown a:hover, .account-dropdown button:hover{ background:var(--light-gray); color:var(--sale); }
 
@@ -762,7 +765,7 @@
     <!-- MOBILE HEADER -->
     <div class="mobile-header">
       <button class="mobile-menu-btn" style="display:block" onclick="openMobileNav()">☰</button>
-      <div class="mobile-logo">AS FASHIONS</div>
+      <div class="mobile-logo" onclick="scrollToTop()">AS FASHIONS</div>
 
       <div class="mobile-icons">
         <button class="mobile-search-toggle" onclick="toggleMobileSearch()">⌕</button>
@@ -796,8 +799,8 @@
     <button class="mn-cat sale" onclick="filterProducts('All', null); sortProducts('discount'); closeMobileNav(); scrollToSection('allProducts')">Sale</button>
     <a onclick="openWishlist(); closeMobileNav()">My Wishlist</a>
     <a onclick="openCart(); closeMobileNav()">My Bag</a>
-    <a href="#">Track Order</a>
-    <a href="#">Help & Support</a>
+    <a onclick="showToast('Track Order feature coming soon!'); closeMobileNav()">Track Order</a>
+    <a onclick="showToast('Help & Support: Call/WhatsApp 9966681276'); closeMobileNav()">Help & Support</a>
   </div>
 
   <main>
@@ -1614,7 +1617,7 @@
       const totalAmount = document.getElementById("checkoutTotal").innerText;
       orderText += `%0A*Total Payable:* ${totalAmount}`;
 
-      let confirmWhatsApp = confirm(`Order Placed Successfully! 🎉\nOrder ID: ${orderId}\n\nClick OK to send order details directly via WhatsApp.`);
+      let confirmWhatsApp = confirm(`Order Placed Successfully! 🎉\nOrder ID: ${orderId}\n\nClick OK to send order details directly via WhatsApp to the store owner.`);
       if(confirmWhatsApp){ window.open(`https://wa.me/919966681276?text=${orderText}`, '_blank'); }
 
       cart = [];

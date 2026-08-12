@@ -1,2076 +1,2077 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AS FASHIONS — Fashion for Everyone</title>
+
+<meta name="description"
+      content="AS FASHIONS - Shop Men, Women, Kids, Footwear, Accessories, Beauty and more.">
+
+<style>
+/* =========================================================
+   AS FASHIONS
+   MAIN HOMEPAGE
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #ff3f6c;
+    --dark: #282c3f;
+    --text: #424553;
+    --muted: #696b79;
+    --light: #f5f5f6;
+    --border: #eaeaec;
+    --white: #ffffff;
+    --success: #03a685;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: #fff;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+header {
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    height: 76px;
+    max-width: 1400px;
+    margin: auto;
+    padding: 0 28px;
+
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+/* Logo */
+
+.logo {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+/* Navigation */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    height: 100%;
+}
+
+.nav-links a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+    color: var(--dark);
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .4px;
+
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    background: var(--primary);
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    transform: scaleX(0);
+    transition: .2s;
+}
 
-    <title>AS FASHIONS | Online Fashion Store</title>
+.nav-links a:hover::after {
+    transform: scaleX(1);
+}
 
-    <meta
-        name="description"
-        content="AS FASHIONS - Shop Men's, Women's, Kids Fashion, Footwear, Accessories and Beauty."
-    >
+/* Search */
 
-    <style>
-        /* =========================
-           RESET
-        ========================= */
+.search-box {
+    flex: 1;
+    max-width: 430px;
+    height: 42px;
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    display: flex;
+    align-items: center;
 
-        html {
-            scroll-behavior: smooth;
-        }
+    background: #f5f5f6;
+    border-radius: 4px;
+    overflow: hidden;
+}
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #ffffff;
-            color: #282c3f;
-        }
+.search-icon {
+    width: 45px;
+    text-align: center;
+    color: #696b79;
+}
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+.search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
 
-        button,
-        input {
-            font-family: inherit;
-        }
+    width: 100%;
+    height: 100%;
 
-        img {
-            display: block;
-            max-width: 100%;
-        }
+    font-size: 14px;
+}
 
+/* Header actions */
 
-        /* =========================
-           TOP OFFER BAR
-        ========================= */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
 
-        .top-bar {
-            height: 34px;
-            background: #111111;
-            color: #ffffff;
+.action {
+    text-decoration: none;
+    color: var(--dark);
+    text-align: center;
+    position: relative;
+    font-size: 12px;
+    font-weight: 700;
+}
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+.action-icon {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
 
-            font-size: 12px;
-            letter-spacing: .3px;
-        }
+.badge {
+    position: absolute;
 
+    top: -7px;
+    right: -10px;
 
-        /* =========================
-           HEADER
-        ========================= */
+    min-width: 17px;
+    height: 17px;
 
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+    padding: 0 4px;
 
-            background: #ffffff;
-            border-bottom: 1px solid #eeeeee;
+    background: var(--primary);
+    color: white;
 
-            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
-        }
+    border-radius: 50%;
 
-        .navbar {
-            height: 72px;
+    font-size: 10px;
+    line-height: 17px;
+}
 
-            max-width: 1400px;
-            margin: auto;
-            padding: 0 28px;
+/* =========================================================
+   CATEGORY DROPDOWN
+   ========================================================= */
 
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
+.category-bar {
+    background: #fff;
+}
 
+.category-menu {
+    max-width: 1400px;
+    margin: auto;
 
-        /* LOGO */
+    display: flex;
+    justify-content: center;
 
-        .logo {
-            min-width: 145px;
+    gap: 40px;
 
-            font-size: 27px;
-            font-weight: 900;
-            letter-spacing: -1px;
+    padding: 14px 20px;
 
-            color: #111111;
-        }
+    border-top: 1px solid #fafafa;
+}
 
-        .logo span {
-            color: #ff3f6c;
-        }
+.category-item {
+    position: relative;
+}
 
+.category-item > a {
+    text-decoration: none;
+    color: var(--dark);
 
-        /* NAVIGATION */
+    font-size: 13px;
+    font-weight: 700;
+}
 
-        .main-nav {
-            display: flex;
-            align-items: center;
-            gap: 26px;
+.category-item:hover > a {
+    color: var(--primary);
+}
 
-            height: 100%;
-        }
+.dropdown {
+    display: none;
 
-        .main-nav a {
-            height: 100%;
+    position: absolute;
 
-            display: flex;
-            align-items: center;
+    top: 25px;
+    left: -30px;
 
-            position: relative;
+    width: 260px;
 
-            font-size: 13px;
-            font-weight: 700;
+    background: white;
 
-            color: #282c3f;
-        }
+    border: 1px solid var(--border);
 
-        .main-nav a:hover {
-            color: #ff3f6c;
-        }
+    box-shadow: 0 8px 30px rgba(0,0,0,.12);
 
-        .main-nav a::after {
-            content: "";
+    padding: 20px;
 
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
+    z-index: 100;
+}
 
-            height: 3px;
+.category-item:hover .dropdown {
+    display: block;
+}
 
-            background: #ff3f6c;
+.dropdown h4 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 13px;
+}
 
-            transform: scaleX(0);
-            transition: .2s;
-        }
+.dropdown a {
+    display: block;
 
-        .main-nav a:hover::after {
-            transform: scaleX(1);
-        }
+    text-decoration: none;
+    color: var(--text);
 
+    padding: 6px 0;
 
-        /* SEARCH */
+    font-size: 13px;
+}
 
-        .search-box {
-            flex: 1;
+.dropdown a:hover {
+    color: var(--primary);
+}
 
-            max-width: 500px;
-            height: 42px;
+/* =========================================================
+   HERO
+   ========================================================= */
 
-            background: #f5f5f6;
-            border-radius: 4px;
+.hero {
+    max-width: 1400px;
+    margin: 25px auto 0;
+    padding: 0 22px;
+}
 
-            display: flex;
-            align-items: center;
-        }
+.hero-banner {
+    min-height: 430px;
 
-        .search-icon {
-            width: 48px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.68),
+            rgba(0,0,0,.15)
+        ),
+        url("https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1800&q=85");
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    background-size: cover;
+    background-position: center;
 
-            font-size: 18px;
-            color: #696e79;
-        }
+    display: flex;
+    align-items: center;
+
+    border-radius: 4px;
+    overflow: hidden;
+}
 
-        .search-box input {
-            flex: 1;
+.hero-content {
+    color: white;
+    padding: 50px;
+    max-width: 650px;
+}
 
-            border: none;
-            outline: none;
+.hero-content .small-title {
+    font-size: 16px;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
 
-            background: transparent;
+.hero-content h1 {
+    font-size: clamp(40px, 5vw, 70px);
+    line-height: 1;
+    margin-bottom: 20px;
+}
 
-            font-size: 13px;
-            color: #282c3f;
-        }
+.hero-content p {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
 
-        .search-box input::placeholder {
-            color: #94969f;
-        }
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
 
+.btn {
+    display: inline-block;
+    text-decoration: none;
 
-        /* HEADER ACTIONS */
+    padding: 14px 28px;
 
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 22px;
-        }
+    font-size: 13px;
+    font-weight: 700;
 
-        .action {
-            min-width: 42px;
+    border-radius: 2px;
 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
+    cursor: pointer;
+    border: none;
+}
 
-            cursor: pointer;
+.btn-primary {
+    background: white;
+    color: var(--dark);
+}
 
-            font-size: 11px;
-            font-weight: 700;
-        }
+.btn-primary:hover {
+    background: var(--primary);
+    color: white;
+}
 
-        .action-icon {
-            font-size: 21px;
-        }
+.btn-dark {
+    background: var(--dark);
+    color: white;
+}
 
-        .action:hover {
-            color: #ff3f6c;
-        }
+.btn-dark:hover {
+    background: var(--primary);
+}
 
+/* =========================================================
+   SECTION
+   ========================================================= */
 
-        /* =========================
-           MOBILE HEADER
-        ========================= */
+.section {
+    max-width: 1400px;
+    margin: 55px auto 0;
+    padding: 0 22px;
+}
 
-        .mobile-menu {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-        }
+.section-title {
+    text-align: center;
+    margin-bottom: 28px;
+}
 
+.section-title h2 {
+    color: var(--dark);
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-        /* =========================
-           HERO
-        ========================= */
+.section-title p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 8px;
+}
 
-        .hero {
-            max-width: 1400px;
-            margin: 24px auto 0;
-            padding: 0 24px;
-        }
+/* =========================================================
+   SHOP BY CATEGORY
+   ========================================================= */
 
-        .hero-banner {
-            min-height: 430px;
+.category-grid {
+    display: grid;
 
-            border-radius: 4px;
+    grid-template-columns:
+        repeat(6, 1fr);
 
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(0, 0, 0, .82),
-                    rgba(0, 0, 0, .35),
-                    rgba(0, 0, 0, .05)
-                ),
-                url("https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1800&q=85");
+    gap: 15px;
+}
 
-            background-size: cover;
-            background-position: center;
+.category-card {
+    position: relative;
+    overflow: hidden;
 
-            display: flex;
-            align-items: center;
+    height: 210px;
 
-            padding: 60px;
-        }
+    border-radius: 4px;
 
-        .hero-content {
-            color: white;
-            max-width: 550px;
-        }
+    text-decoration: none;
+    color: white;
+}
 
-        .hero-small {
-            font-size: 14px;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
+.category-card img {
+    width: 100%;
+    height: 100%;
 
-        .hero-title {
-            font-size: clamp(42px, 6vw, 76px);
-            line-height: .95;
-            font-weight: 900;
-            margin-bottom: 22px;
-        }
+    object-fit: cover;
 
-        .hero-title span {
-            color: #ff3f6c;
-        }
+    transition: transform .4s;
+}
 
-        .hero-text {
-            font-size: 17px;
-            line-height: 1.6;
-            margin-bottom: 28px;
-            max-width: 450px;
-        }
+.category-card:hover img {
+    transform: scale(1.08);
+}
 
-        .hero-buttons {
-            display: flex;
-            gap: 12px;
-        }
+.category-overlay {
+    position: absolute;
 
-        .btn {
-            border: none;
-            padding: 14px 27px;
+    inset: 0;
 
-            cursor: pointer;
+    background:
+        linear-gradient(
+            transparent 35%,
+            rgba(0,0,0,.72)
+        );
 
-            font-size: 13px;
-            font-weight: 700;
+    display: flex;
+    align-items: flex-end;
 
-            border-radius: 2px;
-        }
+    padding: 18px;
+}
 
-        .btn-primary {
-            background: #ffffff;
-            color: #111111;
-        }
+.category-overlay h3 {
+    font-size: 18px;
+}
 
-        .btn-primary:hover {
-            background: #ff3f6c;
-            color: #ffffff;
-        }
+/* =========================================================
+   SPECIAL COLLECTIONS
+   ========================================================= */
 
-        .btn-outline {
-            background: transparent;
-            color: #ffffff;
-            border: 1px solid #ffffff;
-        }
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+}
 
-        .btn-outline:hover {
-            background: #ffffff;
-            color: #111111;
-        }
+.collection {
+    min-height: 150px;
 
+    display: flex;
+    align-items: flex-end;
 
-        /* =========================
-           SECTION
-        ========================= */
+    padding: 20px;
 
-        .section {
-            max-width: 1400px;
-            margin: 60px auto;
-            padding: 0 24px;
-        }
+    text-decoration: none;
+    color: white;
 
-        .section-heading {
-            margin-bottom: 26px;
-        }
+    background:
+        linear-gradient(
+            rgba(0,0,0,.15),
+            rgba(0,0,0,.72)
+        ),
+        url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80");
 
-        .section-heading h2 {
-            font-size: 25px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
+    background-size: cover;
+    background-position: center;
 
-        .section-heading p {
-            margin-top: 7px;
-            color: #7e818c;
-            font-size: 13px;
-        }
+    border-radius: 4px;
+}
 
+.collection h3 {
+    font-size: 17px;
+}
 
-        /* =========================
-           CATEGORIES
-        ========================= */
+/* =========================================================
+   PRODUCT GRID
+   ========================================================= */
 
-        .category-grid {
-            display: grid;
+.product-grid {
+    display: grid;
 
-            grid-template-columns:
-                repeat(7, 1fr);
+    grid-template-columns:
+        repeat(5, 1fr);
 
-            gap: 14px;
-        }
+    gap: 18px;
+}
 
-        .category-card {
-            height: 150px;
+.product-card {
+    position: relative;
 
-            border-radius: 4px;
+    background: white;
 
-            overflow: hidden;
+    transition: .2s;
 
-            position: relative;
+    overflow: hidden;
+}
 
-            cursor: pointer;
+.product-card:hover {
+    box-shadow: 0 4px 18px rgba(0,0,0,.10);
+}
 
-            background: #eeeeee;
-        }
+.product-image {
+    position: relative;
+    aspect-ratio: 3 / 4;
 
-        .category-card img {
-            width: 100%;
-            height: 100%;
+    background: #f5f5f6;
 
-            object-fit: cover;
+    overflow: hidden;
+}
 
-            transition: transform .4s;
-        }
+.product-image img {
+    width: 100%;
+    height: 100%;
 
-        .category-card:hover img {
-            transform: scale(1.08);
-        }
+    object-fit: cover;
 
-        .category-overlay {
-            position: absolute;
+    transition: .3s;
+}
 
-            inset: 0;
+.product-card:hover .product-image img {
+    transform: scale(1.03);
+}
 
-            background: linear-gradient(
-                transparent 25%,
-                rgba(0, 0, 0, .8)
-            );
+.wishlist {
+    position: absolute;
 
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
+    right: 10px;
+    bottom: 10px;
 
-            padding: 16px 5px;
-        }
+    width: 34px;
+    height: 34px;
 
-        .category-overlay h3 {
-            color: #ffffff;
+    border-radius: 50%;
+    border: none;
 
-            font-size: 13px;
-            text-transform: uppercase;
+    background: white;
 
-            letter-spacing: .7px;
+    cursor: pointer;
 
-            text-align: center;
-        }
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
 
+    font-size: 17px;
+}
 
-        /* =========================
-           SPECIAL COLLECTIONS
-        ========================= */
+.product-info {
+    padding: 12px;
+}
 
-        .collection-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
+.brand {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+}
 
-        .collection-card {
-            height: 250px;
+.product-name {
+    font-size: 13px;
+    color: var(--muted);
 
-            position: relative;
-            overflow: hidden;
+    margin-top: 5px;
 
-            border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-            cursor: pointer;
-        }
+.price {
+    margin-top: 8px;
+}
 
-        .collection-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+.current-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+}
 
-            transition: .4s;
-        }
+.old-price {
+    margin-left: 6px;
 
-        .collection-card:hover img {
-            transform: scale(1.06);
-        }
+    color: #94969f;
+    text-decoration: line-through;
 
-        .collection-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+    font-size: 12px;
+}
 
-            padding: 25px 20px;
+.discount {
+    margin-left: 5px;
 
-            color: #ffffff;
+    color: #ff905a;
 
-            background:
-                linear-gradient(
-                    transparent,
-                    rgba(0, 0, 0, .85)
-                );
-        }
+    font-size: 11px;
+    font-weight: 700;
+}
 
-        .collection-info h3 {
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
+/* =========================================================
+   FEATURES
+   ========================================================= */
 
-        .collection-info p {
-            font-size: 12px;
-        }
+.features {
+    background: #f8f8f8;
 
+    margin-top: 60px;
 
-        /* =========================
-           PRODUCT GRID
-        ========================= */
+    padding: 38px 20px;
+}
 
-        .product-grid {
-            display: grid;
+.feature-grid {
+    max-width: 1200px;
+    margin: auto;
 
-            grid-template-columns:
-                repeat(5, 1fr);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 
-            gap: 18px;
-        }
+    gap: 25px;
+}
 
-        .product-card {
-            position: relative;
+.feature {
+    text-align: center;
+}
 
-            cursor: pointer;
+.feature-icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
 
-            background: #ffffff;
+.feature h3 {
+    color: var(--dark);
+    font-size: 14px;
+}
 
-            transition: .25s;
-        }
+.feature p {
+    margin-top: 5px;
 
-        .product-card:hover {
-            transform: translateY(-3px);
-        }
+    color: var(--muted);
+    font-size: 12px;
+}
 
-        .product-image {
-            height: 310px;
+/* =========================================================
+   NEWSLETTER
+   ========================================================= */
 
-            background: #f5f5f6;
+.newsletter {
+    max-width: 850px;
+    margin: 65px auto;
 
-            overflow: hidden;
+    padding: 45px 25px;
 
-            position: relative;
-        }
+    text-align: center;
+}
 
-        .product-image img {
-            width: 100%;
-            height: 100%;
+.newsletter h2 {
+    color: var(--dark);
+    font-size: 25px;
+}
 
-            object-fit: cover;
+.newsletter p {
+    margin: 10px 0 20px;
 
-            transition: .35s;
-        }
+    color: var(--muted);
+    font-size: 13px;
+}
 
-        .product-card:hover .product-image img {
-            transform: scale(1.04);
-        }
+.subscribe {
+    display: flex;
 
-        .wishlist {
-            position: absolute;
+    max-width: 500px;
+    margin: auto;
+}
 
-            right: 10px;
-            bottom: 10px;
+.subscribe input {
+    flex: 1;
 
-            width: 34px;
-            height: 34px;
+    height: 45px;
 
-            border-radius: 50%;
+    border: 1px solid var(--border);
 
-            border: none;
+    padding: 0 15px;
 
-            background: rgba(255, 255, 255, .95);
+    outline: none;
+}
 
-            cursor: pointer;
+.subscribe button {
+    width: 130px;
 
-            font-size: 17px;
-        }
+    border: none;
 
-        .wishlist:hover {
-            color: #ff3f6c;
-        }
+    background: var(--dark);
+    color: white;
 
-        .product-info {
-            padding: 12px 4px;
-        }
+    font-weight: 700;
 
-        .product-brand {
-            font-size: 14px;
-            font-weight: 700;
+    cursor: pointer;
+}
 
-            margin-bottom: 5px;
-        }
+.subscribe button:hover {
+    background: var(--primary);
+}
 
-        .product-name {
-            font-size: 13px;
-            color: #535766;
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+footer {
+    background: #282c3f;
+    color: white;
 
-            margin-bottom: 8px;
-        }
+    padding: 55px 25px 25px;
+}
 
-        .product-price {
-            display: flex;
-            align-items: center;
-            gap: 7px;
+.footer-grid {
+    max-width: 1250px;
+    margin: auto;
 
-            font-size: 13px;
-        }
+    display: grid;
 
-        .price {
-            font-weight: 700;
-        }
+    grid-template-columns:
+        2fr 1fr 1fr 1fr 1fr;
 
-        .old-price {
-            color: #94969f;
-            text-decoration: line-through;
-        }
+    gap: 40px;
+}
 
-        .discount {
-            color: #ff905a;
-            font-size: 12px;
-            font-weight: 700;
-        }
+.footer-column h3 {
+    font-size: 14px;
 
-        .badge {
-            position: absolute;
+    margin-bottom: 18px;
+}
 
-            top: 10px;
-            left: 10px;
+.footer-column p,
+.footer-column a {
+    display: block;
 
-            background: #ff3f6c;
-            color: #ffffff;
+    color: #bfc0c6;
 
-            padding: 5px 8px;
+    text-decoration: none;
 
-            font-size: 10px;
-            font-weight: 700;
-        }
+    font-size: 12px;
 
+    margin-bottom: 10px;
+}
 
-        /* =========================
-           DEAL BANNER
-        ========================= */
+.footer-column a:hover {
+    color: white;
+}
 
-        .deal-banner {
-            min-height: 250px;
+.footer-logo {
+    font-size: 25px;
+    font-weight: 900;
 
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(0, 0, 0, .88),
-                    rgba(0, 0, 0, .45)
-                ),
-                url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=85");
+    margin-bottom: 15px;
+}
 
-            background-position: center;
-            background-size: cover;
+.footer-logo span {
+    color: var(--primary);
+}
 
-            display: flex;
-            align-items: center;
+.footer-bottom {
+    max-width: 1250px;
+    margin: 40px auto 0;
 
-            padding: 45px;
+    padding-top: 20px;
 
-            color: white;
-        }
+    border-top: 1px solid #454858;
 
-        .deal-content h2 {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
+    display: flex;
+    justify-content: space-between;
 
-        .deal-content p {
-            margin-bottom: 20px;
-            color: #eeeeee;
-        }
+    color: #bfc0c6;
 
+    font-size: 11px;
+}
 
-        /* =========================
-           TRUST FEATURES
-        ========================= */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
-        .features {
-            max-width: 1400px;
+.mobile-menu {
+    display: none;
+}
 
-            margin: 70px auto;
+/* Tablet */
 
-            padding: 0 24px;
+@media (max-width: 1100px) {
 
-            display: grid;
+    .nav-links {
+        display: none;
+    }
 
-            grid-template-columns:
-                repeat(4, 1fr);
+    .category-menu {
+        overflow-x: auto;
+        justify-content: flex-start;
+        white-space: nowrap;
+    }
 
-            gap: 20px;
-        }
+    .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 
-        .feature {
-            display: flex;
-            align-items: center;
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 
-            gap: 14px;
+    .collection-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 
-            padding: 22px;
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
 
-            border: 1px solid #eeeeee;
-        }
+/* Mobile */
 
-        .feature-icon {
-            font-size: 30px;
-        }
+@media (max-width: 700px) {
 
-        .feature h3 {
-            font-size: 13px;
-            margin-bottom: 5px;
-        }
+    .navbar {
+        height: auto;
+        min-height: 65px;
 
-        .feature p {
-            font-size: 11px;
-            color: #7e818c;
-        }
+        padding: 12px 14px;
 
+        flex-wrap: wrap;
+        gap: 12px;
+    }
 
-        /* =========================
-           FOOTER
-        ========================= */
+    .logo {
+        font-size: 23px;
+    }
 
-        footer {
-            background: #fafbfc;
+    .header-actions {
+        margin-left: auto;
+        gap: 12px;
+    }
 
-            border-top: 1px solid #eeeeee;
+    .action {
+        font-size: 10px;
+    }
 
-            padding: 55px 24px 25px;
-        }
+    .action-icon {
+        font-size: 18px;
+    }
 
-        .footer-container {
-            max-width: 1400px;
-            margin: auto;
-        }
+    .search-box {
+        order: 5;
+        flex-basis: 100%;
+        max-width: none;
+    }
 
-        .footer-grid {
-            display: grid;
+    .category-menu {
+        padding: 12px 15px;
+        gap: 24px;
+    }
 
-            grid-template-columns:
-                2fr repeat(4, 1fr);
+    .category-menu a {
+        font-size: 11px;
+    }
 
-            gap: 40px;
-        }
+    .hero {
+        margin-top: 12px;
+        padding: 0 10px;
+    }
 
-        .footer-brand h2 {
-            font-size: 25px;
-            margin-bottom: 15px;
-        }
+    .hero-banner {
+        min-height: 430px;
+    }
 
-        .footer-brand h2 span {
-            color: #ff3f6c;
-        }
+    .hero-content {
+        padding: 30px 25px;
+    }
 
-        .footer-brand p {
-            max-width: 300px;
+    .hero-content h1 {
+        font-size: 42px;
+    }
 
-            font-size: 12px;
-            line-height: 1.7;
+    .hero-content p {
+        font-size: 14px;
+    }
 
-            color: #696e79;
-        }
+    .section {
+        margin-top: 40px;
+        padding: 0 12px;
+    }
 
-        .footer-column h3 {
-            font-size: 12px;
+    .section-title h2 {
+        font-size: 20px;
+    }
 
-            text-transform: uppercase;
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
 
-            margin-bottom: 18px;
-        }
+    .category-card {
+        height: 180px;
+    }
 
-        .footer-column a {
-            display: block;
+    .collection-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-            font-size: 12px;
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
 
-            color: #696e79;
+    .product-info {
+        padding: 9px;
+    }
 
-            margin-bottom: 12px;
-        }
+    .brand {
+        font-size: 12px;
+    }
 
-        .footer-column a:hover {
-            color: #ff3f6c;
-        }
+    .product-name {
+        font-size: 11px;
+    }
 
-        .copyright {
-            border-top: 1px solid #dddddd;
+    .current-price {
+        font-size: 12px;
+    }
 
-            margin-top: 45px;
-            padding-top: 20px;
+    .old-price,
+    .discount {
+        font-size: 10px;
+    }
 
-            text-align: center;
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-            color: #94969f;
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
 
-            font-size: 11px;
-        }
+    .footer-grid > div:first-child {
+        grid-column: 1 / -1;
+    }
 
+    .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+    }
 
-        /* =========================
-           RESPONSIVE
-        ========================= */
+    .subscribe {
+        flex-direction: column;
+        gap: 8px;
+    }
 
-        @media (max-width: 1100px) {
-
-            .main-nav {
-                gap: 14px;
-            }
-
-            .main-nav a {
-                font-size: 11px;
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-
-            .product-image {
-                height: 280px;
-            }
-        }
-
-
-        @media (max-width: 850px) {
-
-            .navbar {
-                height: 64px;
-                padding: 0 16px;
-                gap: 14px;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .main-nav {
-                display: none;
-            }
-
-            .logo {
-                min-width: auto;
-                font-size: 23px;
-            }
-
-            .search-box {
-                max-width: none;
-            }
-
-            .header-actions {
-                gap: 8px;
-            }
-
-            .action {
-                min-width: 30px;
-            }
-
-            .action span:last-child {
-                display: none;
-            }
-
-            .hero {
-                margin-top: 12px;
-                padding: 0 12px;
-            }
-
-            .hero-banner {
-                min-height: 400px;
-                padding: 35px;
-            }
-
-            .section {
-                margin: 45px auto;
-                padding: 0 14px;
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .collection-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .features {
-                grid-template-columns: repeat(2, 1fr);
-                padding: 0 14px;
-            }
-
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-
-        @media (max-width: 550px) {
-
-            .top-bar {
-                font-size: 10px;
-            }
-
-            .navbar {
-                flex-wrap: wrap;
-                height: auto;
-                min-height: 64px;
-                padding: 10px 12px;
-            }
-
-            .mobile-menu {
-                order: 1;
-            }
-
-            .logo {
-                order: 2;
-                flex: 1;
-                text-align: center;
-            }
-
-            .header-actions {
-                order: 3;
-            }
-
-            .search-box {
-                order: 4;
-                flex-basis: 100%;
-                max-width: none;
-                height: 38px;
-            }
-
-            .hero-banner {
-                min-height: 420px;
-                padding: 28px 22px;
-                background-position: 65% center;
-            }
-
-            .hero-title {
-                font-size: 48px;
-            }
-
-            .hero-text {
-                font-size: 14px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .category-card {
-                height: 145px;
-            }
-
-            .collection-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .collection-card {
-                height: 230px;
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-
-            .product-image {
-                height: 240px;
-            }
-
-            .product-brand {
-                font-size: 12px;
-            }
-
-            .product-name {
-                font-size: 11px;
-            }
-
-            .product-price {
-                font-size: 11px;
-                gap: 4px;
-            }
-
-            .deal-banner {
-                padding: 30px 22px;
-            }
-
-            .deal-content h2 {
-                font-size: 31px;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 25px;
-            }
-
-            .footer-brand {
-                grid-column: 1 / -1;
-            }
-        }
-    </style>
+    .subscribe input,
+    .subscribe button {
+        width: 100%;
+        height: 45px;
+    }
+}
+</style>
 </head>
 
 <body>
 
+<!-- =======================================================
+     HEADER
+     ======================================================= -->
 
-    <!-- =========================
-         TOP OFFER
-    ========================== -->
+<header>
 
-    <div class="top-bar">
-        ✨ FREE SHIPPING ON ORDERS ABOVE ₹999 &nbsp; | &nbsp; EXTRA 10% OFF ON FIRST ORDER
+    <div class="navbar">
+
+        <a href="index.html" class="logo">
+            AS <span>FASHIONS</span>
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="#men">MEN</a>
+            <a href="#women">WOMEN</a>
+            <a href="#kids">KIDS</a>
+            <a href="#footwear">FOOTWEAR</a>
+            <a href="#accessories">ACCESSORIES</a>
+            <a href="#beauty">BEAUTY</a>
+
+        </nav>
+
+        <div class="search-box">
+            <div class="search-icon">🔍</div>
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search for products, brands and more"
+            >
+        </div>
+
+        <div class="header-actions">
+
+            <a href="profile.html" class="action">
+                <span class="action-icon">👤</span>
+                Profile
+            </a>
+
+            <a href="wishlist.html" class="action">
+                <span class="action-icon">
+                    ♡
+                    <span class="badge" id="wishlistCount">0</span>
+                </span>
+                Wishlist
+            </a>
+
+            <a href="cart.html" class="action">
+                <span class="action-icon">
+                    🛍️
+                    <span class="badge" id="cartCount">0</span>
+                </span>
+                Bag
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- CATEGORY BAR -->
+
+    <div class="category-bar">
+
+        <div class="category-menu">
+
+            <!-- MEN -->
+
+            <div class="category-item">
+                <a href="#men">MEN</a>
+
+                <div class="dropdown">
+
+                    <h4>T-Shirts</h4>
+                    <a href="#">Oversized T-Shirts</a>
+                    <a href="#">Regular Fit</a>
+                    <a href="#">Polo T-Shirts</a>
+                    <a href="#">Printed T-Shirts</a>
+                    <a href="#">Graphic T-Shirts</a>
+                    <a href="#">Plain T-Shirts</a>
+
+                    <h4>Shirts</h4>
+                    <a href="#">Casual Shirts</a>
+                    <a href="#">Formal Shirts</a>
+                    <a href="#">Oversized Shirts</a>
+                    <a href="#">Linen Shirts</a>
+
+                    <h4>Jeans</h4>
+                    <a href="#">Slim Fit</a>
+                    <a href="#">Straight Fit</a>
+                    <a href="#">Baggy Jeans</a>
+
+                </div>
+            </div>
+
+            <!-- WOMEN -->
+
+            <div class="category-item">
+                <a href="#women">WOMEN</a>
+
+                <div class="dropdown">
+
+                    <h4>Tops</h4>
+                    <a href="#">Casual Tops</a>
+                    <a href="#">Crop Tops</a>
+                    <a href="#">Tank Tops</a>
+                    <a href="#">Blouses</a>
+
+                    <h4>Dresses</h4>
+                    <a href="#">Mini Dresses</a>
+                    <a href="#">Midi Dresses</a>
+                    <a href="#">Maxi Dresses</a>
+                    <a href="#">Party Dresses</a>
+
+                    <h4>Ethnic Wear</h4>
+                    <a href="#">Kurtis</a>
+                    <a href="#">Kurta Sets</a>
+                    <a href="#">Sarees</a>
+                    <a href="#">Anarkali</a>
+
+                </div>
+            </div>
+
+            <!-- KIDS -->
+
+            <div class="category-item">
+                <a href="#kids">KIDS</a>
+
+                <div class="dropdown">
+
+                    <h4>Boys</h4>
+                    <a href="#">T-Shirts</a>
+                    <a href="#">Shirts</a>
+                    <a href="#">Jeans</a>
+                    <a href="#">Shorts</a>
+                    <a href="#">Hoodies</a>
+
+                    <h4>Girls</h4>
+                    <a href="#">Tops</a>
+                    <a href="#">Dresses</a>
+                    <a href="#">Jeans</a>
+                    <a href="#">Skirts</a>
+
+                    <h4>Baby</h4>
+                    <a href="#">Rompers</a>
+                    <a href="#">Sets</a>
+                    <a href="#">Bodysuits</a>
+
+                </div>
+            </div>
+
+            <!-- FOOTWEAR -->
+
+            <div class="category-item">
+                <a href="#footwear">FOOTWEAR</a>
+
+                <div class="dropdown">
+
+                    <h4>Men</h4>
+                    <a href="#">Sneakers — UK 6–11</a>
+                    <a href="#">Casual Shoes — UK 6–11</a>
+                    <a href="#">Formal Shoes — UK 6–11</a>
+                    <a href="#">Sports Shoes — UK 6–11</a>
+                    <a href="#">Sandals — UK 6–11</a>
+
+                    <h4>Women</h4>
+                    <a href="#">Sneakers — UK 3–8</a>
+                    <a href="#">Heels — UK 3–8</a>
+                    <a href="#">Flats — UK 3–8</a>
+                    <a href="#">Boots — UK 3–8</a>
+
+                    <h4>Kids</h4>
+                    <a href="#">Sneakers — UK 10C–3</a>
+                    <a href="#">School Shoes — UK 10C–3</a>
+
+                </div>
+            </div>
+
+            <!-- ACCESSORIES -->
+
+            <div class="category-item">
+                <a href="#accessories">ACCESSORIES</a>
+
+                <div class="dropdown">
+
+                    <a href="#">Bags</a>
+                    <a href="#">Backpacks</a>
+                    <a href="#">Wallets</a>
+                    <a href="#">Belts</a>
+                    <a href="#">Caps</a>
+                    <a href="#">Hats</a>
+                    <a href="#">Sunglasses</a>
+                    <a href="#">Watches</a>
+                    <a href="#">Jewellery</a>
+                    <a href="#">Scarves</a>
+                    <a href="#">Socks</a>
+
+                </div>
+            </div>
+
+            <!-- BEAUTY -->
+
+            <div class="category-item">
+                <a href="#beauty">BEAUTY</a>
+
+                <div class="dropdown">
+
+                    <a href="#">Makeup</a>
+                    <a href="#">Skincare</a>
+                    <a href="#">Haircare</a>
+                    <a href="#">Fragrances</a>
+                    <a href="#">Bath & Body</a>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =======================================================
+     HERO
+     ======================================================= -->
+
+<main>
+
+<section class="hero">
+
+    <div class="hero-banner">
+
+        <div class="hero-content">
+
+            <div class="small-title">
+                AS FASHIONS
+            </div>
+
+            <h1>
+                NEW<br>
+                SEASON
+            </h1>
+
+            <p>
+                Discover the latest fashion trends for Men,
+                Women & Kids. Premium styles at amazing prices.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#products" class="btn btn-primary">
+                    SHOP NOW
+                </a>
+
+                <a href="#collections" class="btn btn-dark">
+                    EXPLORE COLLECTION
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     SHOP BY CATEGORY
+     ======================================================= -->
+
+<section class="section" id="categories">
+
+    <div class="section-title">
+
+        <h2>Shop By Category</h2>
+
+        <p>
+            Find your perfect style
+        </p>
+
+    </div>
+
+    <div class="category-grid">
+
+        <a href="#men" class="category-card">
+            <img
+                src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80"
+                alt="Men Fashion"
+            >
+            <div class="category-overlay">
+                <h3>MEN</h3>
+            </div>
+        </a>
+
+        <a href="#women" class="category-card">
+            <img
+                src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80"
+                alt="Women Fashion"
+            >
+            <div class="category-overlay">
+                <h3>WOMEN</h3>
+            </div>
+        </a>
+
+        <a href="#kids" class="category-card">
+            <img
+                src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80"
+                alt="Kids Fashion"
+            >
+            <div class="category-overlay">
+                <h3>KIDS</h3>
+            </div>
+        </a>
+
+        <a href="#footwear" class="category-card">
+            <img
+                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"
+                alt="Footwear"
+            >
+            <div class="category-overlay">
+                <h3>FOOTWEAR</h3>
+            </div>
+        </a>
+
+        <a href="#accessories" class="category-card">
+            <img
+                src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=80"
+                alt="Accessories"
+            >
+            <div class="category-overlay">
+                <h3>ACCESSORIES</h3>
+            </div>
+        </a>
+
+        <a href="#beauty" class="category-card">
+            <img
+                src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=80"
+                alt="Beauty"
+            >
+            <div class="category-overlay">
+                <h3>BEAUTY</h3>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     SPECIAL COLLECTIONS
+     ======================================================= -->
+
+<section class="section" id="collections">
+
+    <div class="section-title">
+
+        <h2>Special Collections</h2>
+
+        <p>
+            Explore our latest collections
+        </p>
+
+    </div>
+
+    <div class="collection-grid">
+
+        <a href="#" class="collection">
+            <h3>🔥 New Arrivals</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>📈 Trending Now</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>⭐ Best Sellers</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>💎 Premium Collection</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>🖤 Streetwear</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>🎉 Party Wear</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>🪔 Festive Collection</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>❄️ Winter Collection</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>☀️ Summer Collection</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>🏷️ Sale</h3>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     PRODUCTS
+     ======================================================= -->
+
+<section class="section" id="products">
+
+    <div class="section-title">
+
+        <h2>Trending Products</h2>
+
+        <p>
+            Most loved styles at AS FASHIONS
+        </p>
+
+    </div>
+
+    <div class="product-grid" id="productGrid">
+
+        <!-- PRODUCT 1 -->
+
+        <div class="product-card"
+             data-name="oversized graphic t shirt">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"
+                    alt="Oversized T-Shirt"
+                >
+
+                <button class="wishlist"
+                        onclick="addWishlist(this)">
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="brand">
+                    AS FASHIONS
+                </div>
+
+                <div class="product-name">
+                    Oversized Graphic T-Shirt
+                </div>
+
+                <div class="price">
+
+                    <span class="current-price">
+                        ₹699
+                    </span>
+
+                    <span class="old-price">
+                        ₹1,299
+                    </span>
+
+                    <span class="discount">
+                        46% OFF
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+
+        <div class="product-card"
+             data-name="men casual shirt">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=700&q=80"
+                    alt="Casual Shirt"
+                >
+
+                <button class="wishlist"
+                        onclick="addWishlist(this)">
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="brand">
+                    AS FASHIONS
+                </div>
+
+                <div class="product-name">
+                    Premium Casual Shirt
+                </div>
+
+                <div class="price">
+
+                    <span class="current-price">
+                        ₹899
+                    </span>
+
+                    <span class="old-price">
+                        ₹1,799
+                    </span>
+
+                    <span class="discount">
+                        50% OFF
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+
+        <div class="product-card"
+             data-name="women summer dress">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80"
+                    alt="Women Dress"
+                >
+
+                <button class="wishlist"
+                        onclick="addWishlist(this)">
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="brand">
+                    AS FASHIONS
+                </div>
+
+                <div class="product-name">
+                    Summer Midi Dress
+                </div>
+
+                <div class="price">
+
+                    <span class="current-price">
+                        ₹999
+                    </span>
+
+                    <span class="old-price">
+                        ₹1,999
+                    </span>
+
+                    <span class="discount">
+                        50% OFF
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+
+        <div class="product-card"
+             data-name="women crop top">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1564257577054-4f7d6d2d5a3a?auto=format&fit=crop&w=700&q=80"
+                    alt="Crop Top"
+                >
+
+                <button class="wishlist"
+                        onclick="addWishlist(this)">
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="brand">
+                    AS FASHIONS
+                </div>
+
+                <div class="product-name">
+                    Trendy Crop Top
+                </div>
+
+                <div class="price">
+
+                    <span class="current-price">
+                        ₹499
+                    </span>
+
+                    <span class="old-price">
+                        ₹899
+                    </span>
+
+                    <span class="discount">
+                        44% OFF
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 5 -->
+
+        <div class="product-card"
+             data-name="men sneakers">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"
+                    alt="Men Sneakers"
+                >
+
+                <button class="wishlist"
+                        onclick="addWishlist(this)">
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="brand">
+                    AS FASHIONS
+                </div>
+
+                <div class="product-name">
+                    Street Sneakers
+                </div>
+
+                <div class="price">
+
+                    <span class="current-price">
+                        ₹1,499
+                    </span>
+
+                    <span class="old-price">
+                        ₹2,499
+                    </span>
+
+                    <span class="discount">
+                        40% OFF
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     PRICE COLLECTION
+     ======================================================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <h2>Shop By Budget</h2>
+
+    </div>
+
+    <div class="collection-grid">
+
+        <a href="#" class="collection">
+            <h3>Under ₹499</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>Under ₹999</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>₹999 – ₹1,499</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>Premium</h3>
+        </a>
+
+        <a href="#" class="collection">
+            <h3>SALE</h3>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     FEATURES
+     ======================================================= -->
+
+<section class="features">
+
+    <div class="feature-grid">
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🚚
+            </div>
+
+            <h3>FAST DELIVERY</h3>
+
+            <p>
+                Quick & reliable delivery
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🔄
+            </div>
+
+            <h3>EASY RETURNS</h3>
+
+            <p>
+                Simple return experience
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🔒
+            </div>
+
+            <h3>SECURE PAYMENT</h3>
+
+            <p>
+                Safe & secure checkout
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                💯
+            </div>
+
+            <h3>QUALITY PRODUCTS</h3>
+
+            <p>
+                Fashion you'll love
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     NEWSLETTER
+     ======================================================= -->
+
+<section class="newsletter">
+
+    <h2>
+        Get Fashion Updates
+    </h2>
+
+    <p>
+        Subscribe to receive new arrivals, offers and exclusive deals.
+    </p>
+
+    <form class="subscribe"
+          onsubmit="subscribeUser(event)">
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email address"
+            required
+        >
+
+        <button type="submit">
+            SUBSCRIBE
+        </button>
+
+    </form>
+
+</section>
+
+</main>
+
+
+<!-- =======================================================
+     FOOTER
+     ======================================================= -->
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div class="footer-column">
+
+            <div class="footer-logo">
+                AS <span>FASHIONS</span>
+            </div>
+
+            <p>
+                Your destination for modern fashion,
+                premium styles and everyday essentials.
+            </p>
+
+            <p>
+                Men • Women • Kids • Footwear • Accessories
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>ONLINE SHOPPING</h3>
+
+            <a href="#men">Men</a>
+            <a href="#women">Women</a>
+            <a href="#kids">Kids</a>
+            <a href="#footwear">Footwear</a>
+            <a href="#accessories">Accessories</a>
+            <a href="#beauty">Beauty</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>USEFUL LINKS</h3>
+
+            <a href="#">Contact Us</a>
+            <a href="#">About AS FASHIONS</a>
+            <a href="#">Shipping</a>
+            <a href="#">Returns</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>MY ACCOUNT</h3>
+
+            <a href="profile.html">My Profile</a>
+            <a href="orders.html">My Orders</a>
+            <a href="wishlist.html">Wishlist</a>
+            <a href="cart.html">Shopping Bag</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>FOLLOW US</h3>
+
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">YouTube</a>
+            <a href="#">X / Twitter</a>
+
+        </div>
+
     </div>
 
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <div class="footer-bottom">
 
-    <header>
+        <span>
+            © 2026 AS FASHIONS. All Rights Reserved.
+        </span>
 
-        <div class="navbar">
+        <span>
+            Made for Fashion Lovers ❤️
+        </span>
 
-            <div class="mobile-menu" onclick="toggleMenu()">
-                ☰
-            </div>
+    </div>
 
-            <a href="index.html" class="logo">
-                AS<span>FASHIONS</span>
-            </a>
+</footer>
 
 
-            <nav class="main-nav" id="mainNav">
+<!-- =======================================================
+     JAVASCRIPT
+     ======================================================= -->
 
-                <a href="shop.html?category=men">MEN</a>
+<script>
 
-                <a href="shop.html?category=women">WOMEN</a>
+/* =========================================================
+   CART
+   ========================================================= */
 
-                <a href="shop.html?category=kids">KIDS</a>
+let cartCount =
+    Number(localStorage.getItem("asFashionCartCount")) || 0;
 
-                <a href="shop.html?category=footwear">FOOTWEAR</a>
+document.getElementById("cartCount").textContent =
+    cartCount;
 
-                <a href="shop.html?category=accessories">ACCESSORIES</a>
 
-                <a href="shop.html?category=beauty">BEAUTY</a>
+/* =========================================================
+   WISHLIST
+   ========================================================= */
 
-                <a href="shop.html?category=sale">SALE</a>
+let wishlistCount =
+    Number(localStorage.getItem("asFashionWishlistCount")) || 0;
 
-            </nav>
+document.getElementById("wishlistCount").textContent =
+    wishlistCount;
 
 
-            <div class="search-box">
+function addWishlist(button) {
 
-                <div class="search-icon">
-                    🔍
-                </div>
+    const active =
+        button.classList.toggle("active");
 
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search for products, brands and more"
-                    onkeyup="searchProducts(event)"
-                >
+    if (active) {
 
-            </div>
+        button.textContent = "♥";
 
+        wishlistCount++;
 
-            <div class="header-actions">
+    } else {
 
-                <div class="action" onclick="openProfile()">
+        button.textContent = "♡";
 
-                    <div class="action-icon">
-                        👤
-                    </div>
+        wishlistCount--;
 
-                    <span>Profile</span>
+    }
 
-                </div>
+    localStorage.setItem(
+        "asFashionWishlistCount",
+        wishlistCount
+    );
 
+    document.getElementById(
+        "wishlistCount"
+    ).textContent = wishlistCount;
+}
 
-                <div class="action" onclick="openWishlist()">
 
-                    <div class="action-icon">
-                        ♡
-                    </div>
+/* =========================================================
+   SEARCH
+   ========================================================= */
 
-                    <span>Wishlist</span>
+const searchInput =
+    document.getElementById("searchInput");
 
-                </div>
+const productCards =
+    document.querySelectorAll(".product-card");
 
 
-                <div class="action" onclick="openCart()">
+searchInput.addEventListener(
+    "input",
+    function () {
 
-                    <div class="action-icon">
-                        🛍️
-                    </div>
+        const search =
+            this.value
+                .toLowerCase()
+                .trim();
 
-                    <span>Bag</span>
+        productCards.forEach(
+            function (product) {
 
-                </div>
+                const name =
+                    product
+                        .dataset
+                        .name
+                        .toLowerCase();
 
-            </div>
+                if (
+                    name.includes(search)
+                    || search === ""
+                ) {
 
-        </div>
+                    product.style.display =
+                        "";
 
-    </header>
+                } else {
 
+                    product.style.display =
+                        "none";
+                }
 
-    <!-- =========================
-         HERO
-    ========================== -->
-
-    <main>
-
-        <section class="hero">
-
-            <div class="hero-banner">
-
-                <div class="hero-content">
-
-                    <div class="hero-small">
-                        AS FASHIONS
-                    </div>
-
-                    <h1 class="hero-title">
-                        NEW<br>
-                        <span>SEASON.</span>
-                    </h1>
-
-                    <p class="hero-text">
-                        Discover the latest fashion for Men, Women and Kids.
-                        Premium styles. Everyday comfort. Made for you.
-                    </p>
-
-                    <div class="hero-buttons">
-
-                        <button
-                            class="btn btn-primary"
-                            onclick="location.href='shop.html'"
-                        >
-                            SHOP NOW
-                        </button>
-
-                        <button
-                            class="btn btn-outline"
-                            onclick="location.href='shop.html?collection=new-arrivals'"
-                        >
-                            NEW ARRIVALS
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             SHOP BY CATEGORY
-        ========================== -->
-
-        <section class="section">
-
-            <div class="section-heading">
-
-                <h2>Shop By Category</h2>
-
-                <p>
-                    Explore fashion for every style and every occasion
-                </p>
-
-            </div>
-
-
-            <div class="category-grid">
-
-
-                <a class="category-card"
-                   href="shop.html?category=men">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80"
-                        alt="Men Fashion"
-                    >
-
-                    <div class="category-overlay">
-                        <h3>Men</h3>
-                    </div>
-
-                </a>
-
-
-                <a class="category-card"
-                   href="shop.html?category=women">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=600&q=80"
-                        alt="Women Fashion"
-                    >
-
-                    <div class="category-overlay">
-                        <h3>Women</h3>
-                    </div>
-
-                </a>
-
-
-                <a class="category-card"
-                   href="shop.html?category=kids">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=600&q=80"
-                        alt="Kids Fashion"
-                    >
-
-                    <div class="category-overlay">
-                        <h3>Kids</h3>
-                    </div>
-
-                </a>
-
-
-                <a class="category-card"
-                   href="shop.html?category=footwear">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
-                        alt="Footwear"
-                    >
-
-                    <div class="category-overlay">
-                        <h3>Footwear</h3>
-                    </div>
-
-                </a>
-
-
-                <a class="category-card"
-                   href="shop.html?category=accessories">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80"
-                        alt="Accessories"
-                    >
-
-                    <div class="category-overlay">
-                        <h3>Accessories</h3>
-                    </div>
-
-                </a>
-
-
-                <a class="category-card"
-                   href="shop.html?category=beauty">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80"
-                        alt="Beauty"
-                    >
-
-                    <div class="category-overlay">
-                        <h3>Beauty</h3>
-                    </div>
-
-                </a>
-
-
-                <a class="category-card"
-                   href="shop.html?collection=sale">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=600&q=80"
-                        alt="Sale"
-                    >
-
-                    <div class="category-overlay">
-                        <h3>Sale</h3>
-                    </div>
-
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             SPECIAL COLLECTIONS
-        ========================== -->
-
-        <section class="section">
-
-            <div class="section-heading">
-
-                <h2>Special Collections</h2>
-
-                <p>
-                    Find your next favourite look
-                </p>
-
-            </div>
-
-
-            <div class="collection-grid">
-
-
-                <a
-                    href="shop.html?collection=new-arrivals"
-                    class="collection-card"
-                >
-
-                    <img
-                        src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=900&q=80"
-                        alt="New Arrivals"
-                    >
-
-                    <div class="collection-info">
-
-                        <h3>New Arrivals</h3>
-
-                        <p>Fresh styles just dropped</p>
-
-                    </div>
-
-                </a>
-
-
-                <a
-                    href="shop.html?collection=streetwear"
-                    class="collection-card"
-                >
-
-                    <img
-                        src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80"
-                        alt="Streetwear"
-                    >
-
-                    <div class="collection-info">
-
-                        <h3>Streetwear</h3>
-
-                        <p>Own your everyday style</p>
-
-                    </div>
-
-                </a>
-
-
-                <a
-                    href="shop.html?collection=party-wear"
-                    class="collection-card"
-                >
-
-                    <img
-                        src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&q=80"
-                        alt="Party Wear"
-                    >
-
-                    <div class="collection-info">
-
-                        <h3>Party Wear</h3>
-
-                        <p>Looks made to stand out</p>
-
-                    </div>
-
-                </a>
-
-
-                <a
-                    href="shop.html?collection=premium"
-                    class="collection-card"
-                >
-
-                    <img
-                        src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=80"
-                        alt="Premium Collection"
-                    >
-
-                    <div class="collection-info">
-
-                        <h3>Premium</h3>
-
-                        <p>Elevate your wardrobe</p>
-
-                    </div>
-
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             TRENDING PRODUCTS
-        ========================== -->
-
-        <section class="section">
-
-            <div class="section-heading">
-
-                <h2>Trending Now</h2>
-
-                <p>
-                    Most-loved styles at AS FASHIONS
-                </p>
-
-            </div>
-
-
-            <div class="product-grid">
-
-
-                <!-- PRODUCT 1 -->
-
-                <a href="product.html?id=men-oversized-001"
-                   class="product-card">
-
-                    <div class="product-image">
-
-                        <span class="badge">
-                            BESTSELLER
-                        </span>
-
-                        <img
-                            src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"
-                            alt="Oversized T-Shirt"
-                        >
-
-                        <button
-                            class="wishlist"
-                            onclick="event.preventDefault(); addWishlist('men-oversized-001')"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <div class="product-brand">
-                            AS FASHIONS
-                        </div>
-
-                        <div class="product-name">
-                            Premium Oversized T-Shirt
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="price">
-                                ₹599
-                            </span>
-
-                            <span class="old-price">
-                                ₹999
-                            </span>
-
-                            <span class="discount">
-                                40% OFF
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-                <!-- PRODUCT 2 -->
-
-                <a href="product.html?id=women-dress-001"
-                   class="product-card">
-
-                    <div class="product-image">
-
-                        <span class="badge">
-                            NEW
-                        </span>
-
-                        <img
-                            src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80"
-                            alt="Women's Dress"
-                        >
-
-                        <button
-                            class="wishlist"
-                            onclick="event.preventDefault(); addWishlist('women-dress-001')"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <div class="product-brand">
-                            AS FASHIONS
-                        </div>
-
-                        <div class="product-name">
-                            Women's Casual Midi Dress
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="price">
-                                ₹899
-                            </span>
-
-                            <span class="old-price">
-                                ₹1,499
-                            </span>
-
-                            <span class="discount">
-                                40% OFF
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-                <!-- PRODUCT 3 -->
-
-                <a href="product.html?id=men-jeans-001"
-                   class="product-card">
-
-                    <div class="product-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=80"
-                            alt="Men Jeans"
-                        >
-
-                        <button
-                            class="wishlist"
-                            onclick="event.preventDefault(); addWishlist('men-jeans-001')"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <div class="product-brand">
-                            AS FASHIONS
-                        </div>
-
-                        <div class="product-name">
-                            Men's Relaxed Fit Jeans
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="price">
-                                ₹1,199
-                            </span>
-
-                            <span class="old-price">
-                                ₹1,999
-                            </span>
-
-                            <span class="discount">
-                                40% OFF
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-                <!-- PRODUCT 4 -->
-
-                <a href="product.html?id=women-top-001"
-                   class="product-card">
-
-                    <div class="product-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1564257577054-6e6b1e3c8a1f?auto=format&fit=crop&w=700&q=80"
-                            alt="Women's Top"
-                        >
-
-                        <button
-                            class="wishlist"
-                            onclick="event.preventDefault(); addWishlist('women-top-001')"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <div class="product-brand">
-                            AS FASHIONS
-                        </div>
-
-                        <div class="product-name">
-                            Women's Premium Casual Top
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="price">
-                                ₹699
-                            </span>
-
-                            <span class="old-price">
-                                ₹1,199
-                            </span>
-
-                            <span class="discount">
-                                42% OFF
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </a>
-
-
-                <!-- PRODUCT 5 -->
-
-                <a href="product.html?id=men-sneakers-001"
-                   class="product-card">
-
-                    <div class="product-image">
-
-                        <span class="badge">
-                            TRENDING
-                        </span>
-
-                        <img
-                            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"
-                            alt="Men Sneakers"
-                        >
-
-                        <button
-                            class="wishlist"
-                            onclick="event.preventDefault(); addWishlist('men-sneakers-001')"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <div class="product-brand">
-                            AS FASHIONS
-                        </div>
-
-                        <div class="product-name">
-                            Men's Casual Sneakers
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="price">
-                                ₹1,499
-                            </span>
-
-                            <span class="old-price">
-                                ₹2,499
-                            </span>
-
-                            <span class="discount">
-                                40% OFF
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             DEAL BANNER
-        ========================== -->
-
-        <section class="section">
-
-            <div class="deal-banner">
-
-                <div class="deal-content">
-
-                    <h2>
-                        MEGA SALE
-                    </h2>
-
-                    <p>
-                        Up to 70% OFF on selected styles
-                    </p>
-
-                    <button
-                        class="btn btn-primary"
-                        onclick="location.href='shop.html?collection=sale'"
-                    >
-                        SHOP SALE
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             FEATURES
-        ========================== -->
-
-        <section class="features">
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    🚚
-                </div>
-
-                <div>
-                    <h3>FREE SHIPPING</h3>
-                    <p>On orders above ₹999</p>
-                </div>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    🔄
-                </div>
-
-                <div>
-                    <h3>EASY RETURNS</h3>
-                    <p>Simple & hassle-free returns</p>
-                </div>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    🔒
-                </div>
-
-                <div>
-                    <h3>SECURE PAYMENT</h3>
-                    <p>100% secure checkout</p>
-                </div>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    💬
-                </div>
-
-                <div>
-                    <h3>24/7 SUPPORT</h3>
-                    <p>We're here to help</p>
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer>
-
-        <div class="footer-container">
-
-            <div class="footer-grid">
-
-
-                <div class="footer-brand">
-
-                    <h2>
-                        AS<span>FASHIONS</span>
-                    </h2>
-
-                    <p>
-                        Your destination for modern fashion.
-                        Discover clothing, footwear, accessories
-                        and beauty products for every style.
-                    </p>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h3>Men</h3>
-
-                    <a href="shop.html?subcategory=t-shirts">
-                        T-Shirts
-                    </a>
-
-                    <a href="shop.html?subcategory=shirts">
-                        Shirts
-                    </a>
-
-                    <a href="shop.html?subcategory=jeans">
-                        Jeans
-                    </a>
-
-                    <a href="shop.html?subcategory=trousers">
-                        Trousers & Pants
-                    </a>
-
-                    <a href="shop.html?subcategory=hoodies">
-                        Hoodies
-                    </a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h3>Women</h3>
-
-                    <a href="shop.html?subcategory=tops">
-                        Tops
-                    </a>
-
-                    <a href="shop.html?subcategory=dresses">
-                        Dresses
-                    </a>
-
-                    <a href="shop.html?subcategory=women-jeans">
-                        Jeans
-                    </a>
-
-                    <a href="shop.html?subcategory=skirts">
-                        Skirts
-                    </a>
-
-                    <a href="shop.html?subcategory=ethnic-wear">
-                        Ethnic Wear
-                    </a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h3>Help</h3>
-
-                    <a href="#">
-                        Contact Us
-                    </a>
-
-                    <a href="#">
-                        Shipping
-                    </a>
-
-                    <a href="#">
-                        Returns
-                    </a>
-
-                    <a href="#">
-                        FAQs
-                    </a>
-
-                    <a href="#">
-                        Privacy Policy
-                    </a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h3>Quick Links</h3>
-
-                    <a href="shop.html?collection=new-arrivals">
-                        New Arrivals
-                    </a>
-
-                    <a href="shop.html?collection=trending">
-                        Trending Now
-                    </a>
-
-                    <a href="shop.html?collection=best-sellers">
-                        Best Sellers
-                    </a>
-
-                    <a href="shop.html?collection=premium">
-                        Premium Collection
-                    </a>
-
-                    <a href="shop.html?collection=sale">
-                        Sale
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div class="copyright">
-
-                © 2026 AS FASHIONS. All Rights Reserved.
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
-
-    <script>
-
-        /* =========================
-           MOBILE MENU
-        ========================== */
-
-        function toggleMenu() {
-
-            const nav = document.getElementById("mainNav");
-
-            if (nav.style.display === "flex") {
-
-                nav.style.display = "none";
-
-            } else {
-
-                nav.style.display = "flex";
-
-                nav.style.position = "absolute";
-                nav.style.top = "64px";
-                nav.style.left = "0";
-                nav.style.right = "0";
-
-                nav.style.height = "auto";
-                nav.style.padding = "20px";
-
-                nav.style.background = "#ffffff";
-
-                nav.style.flexDirection = "column";
-                nav.style.alignItems = "flex-start";
-
-                nav.style.borderBottom =
-                    "1px solid #eeeeee";
             }
-        }
+        );
+
+    }
+);
 
 
-        /* =========================
-           SEARCH
-        ========================== */
+/* =========================================================
+   NEWSLETTER
+   ========================================================= */
 
-        function searchProducts(event) {
+function subscribeUser(event) {
 
-            if (event.key === "Enter") {
+    event.preventDefault();
 
-                const query =
-                    document.getElementById("searchInput").value.trim();
+    const email =
+        document.getElementById("email").value;
 
-                if (query.length > 0) {
+    alert(
+        "Thank you! " +
+        email +
+        " has been subscribed to AS FASHIONS."
+    );
 
-                    window.location.href =
-                        "shop.html?search=" +
-                        encodeURIComponent(query);
+    document.getElementById("email").value = "";
+}
+
+
+/* =========================================================
+   SMOOTH SCROLL
+   ========================================================= */
+
+document.querySelectorAll(
+    'a[href^="#"]'
+).forEach(
+    function (link) {
+
+        link.addEventListener(
+            "click",
+            function (event) {
+
+                const target =
+                    document.querySelector(
+                        this.getAttribute("href")
+                    );
+
+                if (target) {
+
+                    event.preventDefault();
+
+                    target.scrollIntoView({
+                        behavior: "smooth"
+                    });
 
                 }
-            }
-        }
-
-
-        /* =========================
-           HEADER ACTIONS
-        ========================== */
-
-        function openProfile() {
-
-            window.location.href = "profile.html";
-
-        }
-
-
-        function openWishlist() {
-
-            window.location.href = "wishlist.html";
-
-        }
-
-
-        function openCart() {
-
-            window.location.href = "cart.html";
-
-        }
-
-
-        /* =========================
-           WISHLIST
-        ========================== */
-
-        function addWishlist(productId) {
-
-            let wishlist =
-                JSON.parse(
-                    localStorage.getItem("asFashionWishlist")
-                ) || [];
-
-            if (!wishlist.includes(productId)) {
-
-                wishlist.push(productId);
-
-                localStorage.setItem(
-                    "asFashionWishlist",
-                    JSON.stringify(wishlist)
-                );
-
-                alert("Added to Wishlist ❤️");
-
-            } else {
-
-                alert("Already in Wishlist");
 
             }
-        }
+        );
 
-    </script>
+    }
+);
+
+</script>
 
 </body>
 </html>

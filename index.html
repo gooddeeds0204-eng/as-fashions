@@ -3,65 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS FASHIONS | Online Fashion Shopping</title>
+    <title>AS FASHIONS | Online Shopping for Men, Women & Kids</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Header Section -->
+    <!-- Myntra Style Navbar -->
     <header class="navbar">
-        <div class="logo">AS FASHIONS</div>
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="pages/men.html">Men</a>
-            <a href="pages/women.html">Women</a>
-            <a href="pages/kids.html">Kids</a>
-            <a href="pages/footwear.html">Footwear</a>
-            <a href="pages/accessories.html">Accessories</a>
-        </nav>
+        <div class="logo-container">
+            <a href="index.html" class="logo">AS FASHIONS</a>
+            <nav class="nav-links">
+                <a href="pages/men.html">Men</a>
+                <a href="pages/women.html">Women</a>
+                <a href="pages/kids.html">Kids</a>
+                <a href="pages/footwear.html">Footwear</a>
+                <a href="pages/accessories.html">Accessories</a>
+                <a href="pages/beauty.html">Beauty</a>
+            </nav>
+        </div>
+
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search for products, brands and more">
+        </div>
+
         <div class="nav-actions">
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search for products, brands and more">
-            </div>
-            <a href="pages/wishlist.html"><i class="fa-regular fa-heart"></i><span class="badge">0</span></a>
-            <a href="pages/cart.html"><i class="fa-solid fa-bag-shopping"></i><span class="badge">0</span></a>
-            <a href="pages/profile.html"><i class="fa-regular fa-user"></i></a>
+            <a href="pages/profile.html" class="action-item">
+                <i class="fa-regular fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="pages/wishlist.html" class="action-item">
+                <i class="fa-regular fa-heart"></i>
+                <span>Wishlist</span>
+                <span class="badge">0</span>
+            </a>
+            <a href="pages/cart.html" class="action-item">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span>Bag</span>
+                <span class="badge">0</span>
+            </a>
         </div>
     </header>
 
-    <!-- Main Content Area -->
-    <main>
-        <!-- Hero Banner Section -->
-        <section class="hero-banner">
-            <div class="banner-content">
-                <h1>SUMMER SALE</h1>
-                <p>UP TO 50% OFF ON NEW ARRIVALS</p>
-                <button class="shop-btn">SHOP NOW</button>
-            </div>
-        </section>
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="banner-content">
+            <h1>FLAT 50% OFF</h1>
+            <p>On Trending Styles & Premium Collections</p>
+            <button class="shop-btn">Explore Now</button>
+        </div>
+    </section>
 
-        <!-- Categories Section -->
-        <section class="categories-section">
-            <h2>SHOP BY CATEGORY</h2>
-            <div class="category-grid" id="categoryGrid">
-                <!-- Dynamically loaded or static cards -->
-                <div class="cat-card">Men</div>
-                <div class="cat-card">Women</div>
-                <div class="cat-card">Kids</div>
-                <div class="cat-card">Footwear</div>
-                <div class="cat-card">Accessories</div>
-                <div class="cat-card">Beauty</div>
+    <!-- Medal/Myntra Style Circular Categories -->
+    <h2 class="section-title">Shop By Category</h2>
+    <div class="categories-grid">
+        <a href="pages/men.html" class="category-circle-card">
+            <div class="category-img-box">
+                <!-- Placeholder/Image -->
             </div>
-        </section>
-    </main>
+            <span>Men</span>
+        </a>
+        <a href="pages/women.html" class="category-circle-card">
+            <div class="category-img-box"></div>
+            <span>Women</span>
+        </a>
+        <a href="pages/kids.html" class="category-circle-card">
+            <div class="category-img-box"></div>
+            <span>Kids</span>
+        </a>
+        <a href="pages/footwear.html" class="category-circle-card">
+            <div class="category-img-box"></div>
+            <span>Footwear</span>
+        </a>
+        <a href="pages/accessories.html" class="category-circle-card">
+            <div class="category-img-box"></div>
+            <span>Accessories</span>
+        </a>
+        <a href="pages/beauty.html" class="category-circle-card">
+            <div class="category-img-box"></div>
+            <span>Beauty</span>
+        </a>
+    </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 AS FASHIONS. All Rights Reserved.</p>
+        <p>© 2026 AS FASHIONS. All rights reserved.</p>
     </footer>
 
     <script src="js/app.js"></script>

@@ -2,15 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#ffffff">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AS FASHIONS — Modern Fashion Store</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<meta name="description"
+content="AS FASHIONS — Discover new fashion, trending styles, kids wear, footwear and accessories.">
 
 <style>
 *{
@@ -24,9 +21,9 @@ html{
 }
 
 body{
-    font-family:Inter,Arial,sans-serif;
-    color:#171717;
+    font-family:Arial, Helvetica, sans-serif;
     background:#fff;
+    color:#171717;
     overflow-x:hidden;
 }
 
@@ -39,258 +36,219 @@ button{
     cursor:pointer;
 }
 
-a{
-    color:inherit;
-    text-decoration:none;
-}
+/* ================= TOP PROMO ================= */
 
-/* =========================
-   TOP BAR
-========================= */
-
-.top-bar{
-    height:42px;
+.top-promo{
+    height:40px;
     background:#111;
     color:#fff;
     display:flex;
     align-items:center;
     overflow:hidden;
     white-space:nowrap;
+}
+
+.promo-track{
+    display:flex;
+    width:max-content;
+    animation:promoMove 22s linear infinite;
+}
+
+.promo-item{
+    padding:0 38px;
     font-size:12px;
     font-weight:700;
-    letter-spacing:.7px;
+    letter-spacing:1.3px;
 }
 
-.top-track{
-    display:flex;
-    gap:70px;
-    animation:topMove 20s linear infinite;
-    padding-left:30px;
+.promo-item span{
+    color:#f3c623;
 }
 
-.top-track span{
-    display:inline-flex;
-    gap:8px;
-}
-
-@keyframes topMove{
+@keyframes promoMove{
     from{transform:translateX(0)}
     to{transform:translateX(-50%)}
 }
 
-/* =========================
-   HEADER
-========================= */
+/* ================= HEADER ================= */
 
-.header{
+header{
     background:#fff;
-    border-bottom:1px solid #eee;
     position:sticky;
     top:0;
     z-index:1000;
+    border-bottom:1px solid #eee;
 }
 
-.header-main{
+.navbar{
     height:82px;
     display:flex;
     align-items:center;
-    gap:26px;
-    padding:0 34px;
+    padding:0 42px;
+    gap:28px;
 }
 
-/* hamburger */
-
 .menu-btn{
-    border:0;
-    background:none;
     width:36px;
     height:36px;
+    border:0;
+    background:none;
     display:flex;
     flex-direction:column;
     justify-content:center;
-    gap:5px;
+    gap:6px;
 }
 
 .menu-btn span{
-    width:27px;
+    width:28px;
     height:2px;
     background:#111;
     display:block;
 }
 
-/* logo */
-
 .logo{
+    text-decoration:none;
+    color:#111;
+    white-space:nowrap;
     display:flex;
     align-items:baseline;
-    min-width:230px;
 }
 
-.logo-as{
-    font-family:"Playfair Display",serif;
+.logo-main{
+    font-family:Georgia,serif;
     font-size:38px;
-    font-weight:600;
-    letter-spacing:-3px;
+    font-weight:bold;
+    letter-spacing:-2px;
 }
 
-.logo-fashion{
-    font-family:"Playfair Display",serif;
-    font-size:18px;
+.logo-sub{
+    font-family:Georgia,serif;
+    font-size:17px;
     letter-spacing:5px;
     margin-left:4px;
-    position:relative;
+    border-bottom:1px solid #111;
+    padding-bottom:3px;
 }
 
-.logo-fashion:after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-8px;
-    width:100%;
-    height:1px;
-    background:#111;
-}
-
-/* search */
-
-.search{
+.search-box{
     flex:1;
-    max-width:580px;
+    max-width:550px;
     height:46px;
-    border:1px solid #ddd;
+    margin:auto;
+    border:1px solid #ccc;
     display:flex;
     align-items:center;
-    background:#fafafa;
-}
-
-.search input{
-    width:100%;
-    height:100%;
-    border:0;
-    outline:none;
     padding:0 16px;
-    background:transparent;
-    color:#111;
 }
 
-.search button{
-    width:52px;
-    height:100%;
+.search-box input{
+    width:100%;
     border:0;
-    background:transparent;
-    font-size:21px;
+    outline:0;
+    font-size:15px;
 }
 
-/* actions */
-
-.actions{
-    margin-left:auto;
-    display:flex;
-    align-items:center;
-    gap:22px;
-}
-
-.action{
+.search-btn{
     border:0;
     background:none;
+    font-size:20px;
+}
+
+.nav-actions{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.icon-btn{
     position:relative;
-    font-size:22px;
-    width:35px;
-    height:40px;
+    border:0;
+    background:none;
+    font-size:25px;
 }
 
 .badge{
     position:absolute;
-    top:-4px;
-    right:-5px;
-    min-width:18px;
-    height:18px;
-    border-radius:50%;
+    top:-7px;
+    right:-9px;
     background:#111;
     color:#fff;
+    width:17px;
+    height:17px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
     font-size:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
 }
 
-/* =========================
-   NAV
-========================= */
+/* ================= CATEGORY BAR ================= */
 
-.nav{
-    height:46px;
+.category-bar{
+    height:50px;
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:38px;
-    border-top:1px solid #f1f1f1;
-    overflow:hidden;
+    gap:42px;
+    border-top:1px solid #eee;
+    overflow-x:auto;
+    white-space:nowrap;
 }
 
-.nav a{
-    font-size:12px;
+.category-bar::-webkit-scrollbar{
+    display:none;
+}
+
+.category-bar a{
+    color:#111;
+    text-decoration:none;
+    font-size:13px;
     font-weight:700;
     letter-spacing:1px;
-    white-space:nowrap;
-    transition:.2s;
+    padding:17px 0;
+    position:relative;
 }
 
-.nav a:hover{
-    opacity:.5;
+.category-bar a:hover,
+.category-bar a.active{
+    color:#d32f2f;
 }
 
-.nav .sale{
-    color:#c71919;
-}
-
-/* =========================
-   MOBILE MENU
-========================= */
-
-.menu-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    z-index:2000;
-    visibility:hidden;
-    opacity:0;
-    transition:.25s;
-}
-
-.menu-overlay.open{
-    visibility:visible;
-    opacity:1;
-}
-
-.side-menu{
+.category-bar a.active:after{
+    content:"";
     position:absolute;
     left:0;
+    right:0;
+    bottom:0;
+    height:2px;
+    background:#d32f2f;
+}
+
+/* ================= SIDE MENU ================= */
+
+.side-menu{
+    position:fixed;
     top:0;
-    width:min(390px,88vw);
-    height:100%;
+    left:-360px;
+    width:340px;
+    height:100vh;
     background:#fff;
-    transform:translateX(-100%);
-    transition:.3s;
-    padding:25px;
+    z-index:2000;
+    transition:.35s ease;
+    box-shadow:10px 0 30px rgba(0,0,0,.15);
     overflow-y:auto;
 }
 
-.menu-overlay.open .side-menu{
-    transform:translateX(0);
+.side-menu.open{
+    left:0;
 }
 
-.side-head{
+.menu-head{
+    height:82px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding-bottom:25px;
+    padding:0 25px;
     border-bottom:1px solid #eee;
-}
-
-.side-head strong{
-    font-family:"Playfair Display",serif;
-    font-size:23px;
 }
 
 .close-menu{
@@ -299,121 +257,118 @@ a{
     font-size:30px;
 }
 
-.menu-group{
-    border-bottom:1px solid #eee;
+.menu-links a{
+    display:block;
+    padding:19px 25px;
+    text-decoration:none;
+    color:#111;
+    border-bottom:1px solid #f0f0f0;
+    font-weight:600;
 }
 
-.menu-group button{
-    width:100%;
-    padding:19px 0;
-    border:0;
-    background:#fff;
-    display:flex;
-    justify-content:space-between;
-    font-weight:700;
-    letter-spacing:.7px;
+.menu-links a:hover{
+    background:#f7f7f7;
 }
 
-.sub-menu{
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:1500;
     display:none;
-    padding:0 0 14px;
 }
 
-.sub-menu.open{
+.overlay.show{
     display:block;
 }
 
-.sub-menu a{
-    display:block;
-    padding:9px 0;
-    color:#666;
-    font-size:14px;
-}
-
-/* =========================
-   HERO
-========================= */
+/* ================= HERO ================= */
 
 .hero{
     position:relative;
-    height:560px;
+    width:100%;
+    height:min(680px,75vh);
+    min-height:520px;
     overflow:hidden;
-    background:#ddd;
 }
 
 .hero-slide{
     position:absolute;
     inset:0;
     opacity:0;
+    visibility:hidden;
     transition:opacity .7s ease;
 }
 
 .hero-slide.active{
     opacity:1;
+    visibility:visible;
 }
 
-.hero-slide img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.hero-image{
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
 }
 
-.hero-slide:after{
+.hero-image:after{
     content:"";
     position:absolute;
     inset:0;
     background:linear-gradient(
         90deg,
-        rgba(0,0,0,.62),
-        rgba(0,0,0,.18),
-        rgba(0,0,0,.02)
+        rgba(0,0,0,.63),
+        rgba(0,0,0,.22),
+        rgba(0,0,0,.05)
     );
 }
 
 .hero-content{
     position:absolute;
     z-index:2;
-    left:7%;
+    left:8%;
     top:50%;
     transform:translateY(-50%);
     color:#fff;
-    width:min(560px,80%);
+    max-width:650px;
 }
 
-.hero-kicker{
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:4px;
-    margin-bottom:22px;
-}
-
-.hero h1{
-    font-family:"Playfair Display",serif;
-    font-size:clamp(48px,7vw,90px);
-    line-height:.92;
-    font-weight:500;
+.hero-label{
+    display:inline-block;
+    border:1px solid rgba(255,255,255,.65);
+    padding:12px 18px;
+    font-size:12px;
+    letter-spacing:3px;
     margin-bottom:25px;
 }
 
-.hero p{
-    max-width:560px;
-    font-size:17px;
-    line-height:1.7;
+.hero h1{
+    font-family:Georgia,serif;
+    font-size:clamp(52px,7vw,94px);
+    line-height:.9;
+    font-weight:400;
     margin-bottom:28px;
+}
+
+.hero p{
+    font-size:19px;
+    line-height:1.65;
+    max-width:610px;
+    margin-bottom:30px;
 }
 
 .hero-buttons{
     display:flex;
-    gap:12px;
+    gap:14px;
 }
 
 .hero-btn{
-    padding:16px 29px;
+    padding:17px 32px;
     border:1px solid #fff;
     background:#fff;
     color:#111;
     font-weight:700;
-    font-size:13px;
     letter-spacing:.5px;
 }
 
@@ -424,34 +379,32 @@ a{
 
 .hero-dots{
     position:absolute;
-    bottom:24px;
+    bottom:25px;
     left:50%;
     transform:translateX(-50%);
     z-index:5;
     display:flex;
-    gap:8px;
+    gap:10px;
 }
 
 .hero-dot{
-    width:30px;
+    width:40px;
     height:3px;
-    background:#fff;
+    background:rgba(255,255,255,.5);
     border:0;
-    opacity:.45;
 }
 
 .hero-dot.active{
-    opacity:1;
+    background:#fff;
 }
 
-/* =========================
-   LIVE CATEGORY TICKER
-========================= */
+/* ================= LIVE TICKER ================= */
 
-.live-nav{
-    background:#fff;
+.live-strip{
     border-bottom:1px solid #eee;
+    border-top:1px solid #eee;
     overflow:hidden;
+    background:#fff;
 }
 
 .live-track{
@@ -461,21 +414,19 @@ a{
 }
 
 .live-item{
-    padding:17px 25px;
-    border-right:1px solid #eee;
-    font-size:12px;
-    font-weight:800;
-    letter-spacing:1.1px;
-    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:18px 35px;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
     cursor:pointer;
 }
 
-.live-item:hover{
-    background:#f5f5f5;
-}
-
-.live-item.sale{
-    color:#d51d1d;
+.live-item strong{
+    color:#d32f2f;
 }
 
 @keyframes liveMove{
@@ -483,101 +434,308 @@ a{
     to{transform:translateX(-50%)}
 }
 
-/* =========================
-   SECTION
-========================= */
+/* ================= SECTION ================= */
 
 .section{
-    padding:65px 34px;
-}
-
-.container{
-    max-width:1400px;
-    margin:auto;
+    padding:70px 5%;
 }
 
 .section-head{
     display:flex;
-    align-items:end;
     justify-content:space-between;
-    margin-bottom:28px;
+    align-items:end;
+    margin-bottom:30px;
 }
 
 .eyebrow{
-    font-size:11px;
-    letter-spacing:2px;
-    font-weight:700;
     color:#777;
+    font-size:12px;
+    letter-spacing:3px;
     margin-bottom:8px;
 }
 
-.section-head h2{
-    font-size:30px;
-    letter-spacing:-1px;
+.section-title{
+    font-family:Georgia,serif;
+    font-size:42px;
+    font-weight:400;
 }
 
-.view{
+.view-all{
+    color:#111;
     font-size:13px;
-    font-weight:700;
+    font-weight:bold;
+    text-decoration:none;
     border-bottom:1px solid #111;
-    padding-bottom:4px;
+    padding-bottom:5px;
 }
 
-/* =========================
-   CATEGORY
-========================= */
+/* ================= SHOP CATEGORIES ================= */
 
-.category-scroll{
+.category-grid{
     display:grid;
     grid-template-columns:repeat(6,1fr);
-    gap:12px;
+    gap:14px;
 }
 
 .category-card{
-    height:150px;
-    border:1px solid #e5e5e5;
+    height:330px;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    background:#eee;
+}
+
+.category-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.category-card:hover img{
+    transform:scale(1.06);
+}
+
+.category-card:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(transparent 50%,rgba(0,0,0,.65));
+}
+
+.category-info{
+    position:absolute;
+    z-index:2;
+    bottom:22px;
+    left:20px;
+    color:#fff;
+}
+
+.category-info h3{
+    font-family:Georgia,serif;
+    font-size:25px;
+}
+
+.category-info p{
+    margin-top:5px;
+    font-size:12px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.product-row{
     display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-    transition:.3s;
+    gap:18px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    padding-bottom:10px;
+}
+
+.product-row::-webkit-scrollbar{
+    height:4px;
+}
+
+.product-row::-webkit-scrollbar-thumb{
+    background:#bbb;
+}
+
+.product{
+    flex:0 0 220px;
     cursor:pointer;
 }
 
-.category-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
+.product-image{
+    height:290px;
+    background:#f3f3f3;
+    overflow:hidden;
+    position:relative;
 }
 
-.category-icon{
-    font-size:34px;
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.45s;
 }
 
-.category-card strong{
-    font-size:14px;
+.product:hover img{
+    transform:scale(1.05);
 }
 
-/* =========================
-   KIDS
-========================= */
+.product-tag{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:#111;
+    color:#fff;
+    padding:6px 9px;
+    font-size:10px;
+    letter-spacing:1px;
+}
 
-.kids-section{
-    background:#f7f7f5;
+.product-info{
+    padding-top:12px;
+}
+
+.product-brand{
+    font-weight:bold;
+    font-size:13px;
+}
+
+.product-name{
+    color:#666;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.price{
+    margin-top:8px;
+    font-weight:bold;
+}
+
+.old-price{
+    color:#999;
+    text-decoration:line-through;
+    margin-left:7px;
+    font-weight:normal;
+}
+
+.discount{
+    color:#d32f2f;
+    margin-left:6px;
+    font-size:11px;
+}
+
+/* ================= OWN YOUR STYLE ================= */
+
+.style-section{
+    margin:15px 5% 70px;
+    min-height:520px;
+    position:relative;
+    overflow:hidden;
+    background:#ddd;
+}
+
+.style-section img{
+    width:100%;
+    height:520px;
+    object-fit:cover;
+    display:block;
+}
+
+.style-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(90deg,rgba(0,0,0,.62),rgba(0,0,0,.1));
+}
+
+.style-content{
+    position:absolute;
+    left:7%;
+    top:50%;
+    transform:translateY(-50%);
+    color:#fff;
+    max-width:650px;
+}
+
+.style-content small{
+    letter-spacing:4px;
+    font-weight:bold;
+}
+
+.style-content h2{
+    font-family:Georgia,serif;
+    font-size:clamp(50px,6vw,82px);
+    font-weight:400;
+    line-height:.9;
+    margin:22px 0;
+}
+
+.style-content p{
+    font-size:17px;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+/* ================= OFFERS ================= */
+
+.offer-row{
+    display:flex;
+    gap:16px;
+    overflow-x:auto;
+}
+
+.offer-card{
+    min-width:330px;
+    height:190px;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.offer-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.offer-card:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.4);
+}
+
+.offer-text{
+    position:absolute;
+    z-index:2;
+    color:#fff;
+    left:22px;
+    bottom:20px;
+}
+
+.offer-text small{
+    letter-spacing:2px;
+}
+
+.offer-text h3{
+    font-family:Georgia,serif;
+    font-size:27px;
+    margin-top:5px;
+}
+
+/* ================= KIDS ================= */
+
+.kids-tabs{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    margin-bottom:25px;
+}
+
+.kids-tab{
+    padding:12px 22px;
+    border:1px solid #ddd;
+    background:#fff;
+    white-space:nowrap;
+}
+
+.kids-tab.active{
+    background:#111;
+    color:#fff;
 }
 
 .kids-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(5,1fr);
     gap:15px;
 }
 
 .kids-card{
-    position:relative;
     height:300px;
+    position:relative;
     overflow:hidden;
     cursor:pointer;
-    background:#ddd;
 }
 
 .kids-card img{
@@ -591,386 +749,107 @@ a{
     transform:scale(1.06);
 }
 
+.kids-card div{
+    position:absolute;
+    left:18px;
+    bottom:18px;
+    color:#fff;
+    z-index:2;
+}
+
 .kids-card:after{
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(transparent 40%,rgba(0,0,0,.7));
+    background:linear-gradient(transparent,rgba(0,0,0,.65));
 }
 
-.kids-info{
-    position:absolute;
-    z-index:2;
-    bottom:25px;
-    left:25px;
-    color:#fff;
-}
+/* ================= PROMOTION ================= */
 
-.kids-info span{
-    font-size:11px;
-    letter-spacing:2px;
-}
-
-.kids-info h3{
-    font-family:"Playfair Display",serif;
-    font-size:32px;
-    margin:5px 0;
-}
-
-.kids-info p{
-    font-size:12px;
-}
-
-/* =========================
-   PRODUCT SCROLL
-========================= */
-
-.product-scroll{
-    display:flex;
-    gap:18px;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    scrollbar-width:none;
-    padding-bottom:10px;
-}
-
-.product-scroll::-webkit-scrollbar{
-    display:none;
-}
-
-.product{
-    flex:0 0 270px;
-    scroll-snap-align:start;
-    cursor:pointer;
-}
-
-.product-image{
-    position:relative;
-    height:360px;
-    background:#f1f1f1;
-    overflow:hidden;
-}
-
-.product-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:.45s;
-}
-
-.product:hover .product-image img{
-    transform:scale(1.04);
-}
-
-.product-tag{
-    position:absolute;
-    top:12px;
-    left:12px;
-    background:#fff;
-    padding:6px 9px;
-    font-size:10px;
-    font-weight:800;
-    z-index:2;
-}
-
-.wishlist{
-    position:absolute;
-    right:12px;
-    top:10px;
-    width:34px;
-    height:34px;
-    border:0;
-    background:#fff;
-    border-radius:50%;
-    z-index:4;
-    font-size:18px;
-}
-
-.product-info{
-    padding:13px 2px;
-}
-
-.brand{
-    font-size:10px;
-    font-weight:700;
-    color:#777;
-    letter-spacing:1px;
-}
-
-.product h3{
-    font-size:14px;
-    margin:6px 0;
-}
-
-.rating{
-    font-size:11px;
-    margin-bottom:8px;
-}
-
-.price{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.price strong{
-    font-size:14px;
-}
-
-.price del{
-    color:#999;
-    font-size:12px;
-}
-
-.discount{
-    color:#18863d;
-    font-size:11px;
-    font-weight:700;
-}
-
-/* =========================
-   PROMO BANNER
-========================= */
-
-.promo{
-    margin:20px auto 65px;
-    max-width:1400px;
-    min-height:300px;
+.promo-banner{
+    margin:30px 5%;
+    min-height:250px;
     background:#111;
     color:#fff;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:55px;
+    padding:55px 7%;
 }
 
-.promo small{
-    letter-spacing:3px;
-    font-weight:700;
+.promo-banner h2{
+    font-family:Georgia,serif;
+    font-size:50px;
+    font-weight:400;
 }
 
-.promo h2{
-    font-family:"Playfair Display",serif;
-    font-size:52px;
-    line-height:1;
-    margin:15px 0;
+.promo-banner p{
+    margin-top:10px;
+    color:#ccc;
 }
 
-.promo p{
-    color:#bbb;
-}
-
-.promo button{
-    background:#fff;
-    border:0;
-    padding:16px 28px;
-    font-weight:700;
-}
-
-/* =========================
-   OWN YOUR STYLE
-========================= */
-
-.style-section{
-    margin:0 34px 70px;
-    height:390px;
-    position:relative;
-    overflow:hidden;
-    background:#ddd;
-}
-
-.style-section img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.style-section:after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(90deg,rgba(0,0,0,.7),rgba(0,0,0,.12));
-}
-
-.style-content{
-    position:absolute;
-    z-index:2;
-    left:7%;
-    top:50%;
-    transform:translateY(-50%);
-    color:#fff;
-}
-
-.style-content small{
-    letter-spacing:3px;
-    font-weight:700;
-}
-
-.style-content h2{
-    font-family:"Playfair Display",serif;
-    font-size:58px;
-    line-height:.95;
-    margin:15px 0;
-}
-
-.style-content button{
-    padding:14px 26px;
-    background:#fff;
-    border:0;
-    font-weight:700;
-}
-
-/* =========================
-   FOOTER
-========================= */
+/* ================= FOOTER ================= */
 
 footer{
     background:#111;
     color:#fff;
-    padding:60px 34px 25px;
+    padding:60px 6% 30px;
 }
 
 .footer-grid{
-    max-width:1400px;
-    margin:auto;
     display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:50px;
+    grid-template-columns:2fr repeat(4,1fr);
+    gap:40px;
 }
 
 .footer-logo{
-    font-family:"Playfair Display",serif;
-    font-size:30px;
-    margin-bottom:15px;
+    font-family:Georgia,serif;
+    font-size:34px;
 }
 
-.footer-col h4{
-    font-size:12px;
-    letter-spacing:1.5px;
+footer h4{
     margin-bottom:20px;
 }
 
-.footer-col a{
+footer a{
     display:block;
     color:#aaa;
+    text-decoration:none;
+    margin:10px 0;
     font-size:13px;
-    margin-bottom:12px;
 }
 
-.footer-col p{
-    color:#aaa;
-    font-size:13px;
-    line-height:1.7;
+footer a:hover{
+    color:#fff;
 }
 
 .copyright{
-    max-width:1400px;
-    margin:50px auto 0;
+    margin-top:50px;
     padding-top:20px;
     border-top:1px solid #333;
     color:#777;
-    font-size:11px;
+    font-size:12px;
 }
 
-/* =========================
-   BAG DRAWER
-========================= */
+/* ================= QUICK VIEW ================= */
 
-.drawer-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    z-index:3000;
-    opacity:0;
-    visibility:hidden;
-    transition:.25s;
-}
-
-.drawer-overlay.open{
-    opacity:1;
-    visibility:visible;
-}
-
-.bag{
-    position:absolute;
-    right:0;
-    top:0;
-    width:min(430px,92vw);
-    height:100%;
-    background:#fff;
-    transform:translateX(100%);
-    transition:.3s;
-    display:flex;
-    flex-direction:column;
-}
-
-.drawer-overlay.open .bag{
-    transform:translateX(0);
-}
-
-.bag-head{
-    padding:23px;
-    border-bottom:1px solid #eee;
-    display:flex;
-    justify-content:space-between;
-}
-
-.bag-head button{
-    border:0;
-    background:none;
-    font-size:25px;
-}
-
-.bag-content{
-    flex:1;
-    padding:25px;
-    overflow:auto;
-}
-
-.empty{
-    text-align:center;
-    margin-top:100px;
-    color:#777;
-}
-
-.bag-footer{
-    padding:20px;
-    border-top:1px solid #eee;
-}
-
-.checkout{
-    width:100%;
-    border:0;
-    background:#111;
-    color:#fff;
-    padding:16px;
-    margin-top:15px;
-    font-weight:700;
-}
-
-/* =========================
-   PRODUCT MODAL
-========================= */
-
-.modal-overlay{
+.modal{
     position:fixed;
     inset:0;
     background:rgba(0,0,0,.6);
-    z-index:4000;
+    z-index:3000;
     display:none;
     align-items:center;
     justify-content:center;
     padding:20px;
 }
 
-.modal-overlay.open{
+.modal.show{
     display:flex;
 }
 
-.modal{
+.modal-box{
     width:min(850px,100%);
-    max-height:90vh;
-    overflow:auto;
     background:#fff;
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -978,7 +857,7 @@ footer{
 }
 
 .modal-image{
-    min-height:500px;
+    height:550px;
 }
 
 .modal-image img{
@@ -988,319 +867,219 @@ footer{
 }
 
 .modal-info{
-    padding:45px;
+    padding:50px 35px;
 }
 
 .modal-close{
     position:absolute;
-    right:15px;
+    right:18px;
     top:12px;
+    background:none;
     border:0;
-    background:#fff;
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    font-size:22px;
-    z-index:2;
+    font-size:28px;
 }
 
 .modal-info h2{
-    font-family:"Playfair Display",serif;
+    font-family:Georgia,serif;
     font-size:38px;
-    margin:12px 0;
+    margin-bottom:12px;
 }
 
 .modal-price{
     font-size:22px;
-    font-weight:700;
+    font-weight:bold;
     margin:20px 0;
 }
 
-.add-bag{
+.add-cart{
     width:100%;
-    background:#111;
-    color:#fff;
+    padding:16px;
     border:0;
-    padding:17px;
-    font-weight:700;
-}
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:25px;
-    transform:translate(-50%,30px);
     background:#111;
     color:#fff;
-    padding:13px 22px;
-    font-size:13px;
-    opacity:0;
-    pointer-events:none;
-    transition:.3s;
-    z-index:5000;
+    font-weight:bold;
 }
 
-.toast.show{
-    opacity:1;
-    transform:translate(-50%,0);
-}
+/* ================= RESPONSIVE ================= */
 
-/* =========================
-   RESPONSIVE
-========================= */
+@media(max-width:1000px){
 
-@media(max-width:900px){
-
-    .header-main{
-        height:70px;
-        padding:0 20px;
+    .navbar{
+        padding:0 22px;
         gap:15px;
     }
 
-    .logo{
-        min-width:auto;
+    .logo-main{
+        font-size:30px;
     }
 
-    .logo-as{
-        font-size:31px;
+    .logo-sub{
+        font-size:13px;
     }
 
-    .logo-fashion{
-        font-size:14px;
-        letter-spacing:3px;
+    .search-box{
+        max-width:360px;
     }
 
-    .search{
-        position:absolute;
-        left:20px;
-        right:20px;
-        top:75px;
-        max-width:none;
-        width:auto;
-    }
-
-    .header{
-        padding-bottom:65px;
-    }
-
-    .nav{
-        display:none;
-    }
-
-    .actions{
-        gap:7px;
-    }
-
-    .action{
-        font-size:20px;
-    }
-
-    .hero{
-        height:490px;
-    }
-
-    .hero-content{
-        left:6%;
-        width:88%;
-    }
-
-    .hero h1{
-        font-size:53px;
-    }
-
-    .hero p{
-        font-size:14px;
-        line-height:1.6;
-        max-width:400px;
-    }
-
-    .hero-btn{
-        padding:13px 19px;
-        font-size:11px;
-    }
-
-    .category-scroll{
+    .category-grid{
         grid-template-columns:repeat(3,1fr);
     }
 
-    .category-card{
-        height:125px;
-    }
-
-    .section{
-        padding:45px 20px;
-    }
-
-    .section-head h2{
-        font-size:24px;
-    }
-
-    .product{
-        flex-basis:205px;
-    }
-
-    .product-image{
-        height:275px;
-    }
-
     .kids-grid{
-        grid-template-columns:1fr;
-    }
-
-    .kids-card{
-        height:250px;
-    }
-
-    .promo{
-        margin:0 20px 45px;
-        padding:35px 25px;
-        display:block;
-    }
-
-    .promo h2{
-        font-size:40px;
-    }
-
-    .promo button{
-        margin-top:25px;
-    }
-
-    .style-section{
-        margin:0 20px 50px;
-        height:300px;
-    }
-
-    .style-content h2{
-        font-size:42px;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr 1fr;
-        gap:30px;
-    }
-
-    .modal{
-        grid-template-columns:1fr;
-        max-height:85vh;
-    }
-
-    .modal-image{
-        height:280px;
-        min-height:0;
-    }
-
-    .modal-info{
-        padding:25px;
-    }
-
-    .modal-info h2{
-        font-size:30px;
+        grid-template-columns:repeat(3,1fr);
     }
 }
 
-@media(max-width:520px){
+@media(max-width:700px){
 
-    .top-bar{
+    .top-promo{
         height:36px;
+    }
+
+    .promo-item{
         font-size:10px;
+        padding:0 22px;
     }
 
-    .header-main{
-        height:62px;
-        padding:0 14px;
+    .navbar{
+        height:70px;
+        padding:0 16px;
     }
 
-    .logo-as{
-        font-size:27px;
+    .logo-main{
+        font-size:26px;
     }
 
-    .logo-fashion{
+    .logo-sub{
         font-size:11px;
-        letter-spacing:2.5px;
+        letter-spacing:3px;
     }
 
-    .actions{
-        gap:1px;
+    .nav-actions{
+        gap:10px;
     }
 
-    .action{
-        width:31px;
-        font-size:18px;
+    .icon-btn{
+        font-size:22px;
+    }
+
+    .search-box{
+        position:absolute;
+        top:76px;
+        left:14px;
+        right:14px;
+        max-width:none;
+        height:44px;
+    }
+
+    .category-bar{
+        margin-top:58px;
+        justify-content:flex-start;
+        padding:0 18px;
+        gap:28px;
     }
 
     .hero{
-        height:455px;
+        height:610px;
+        min-height:610px;
+    }
+
+    .hero-content{
+        left:7%;
+        right:7%;
+        top:48%;
     }
 
     .hero h1{
-        font-size:47px;
-    }
-
-    .hero-kicker{
-        font-size:10px;
-        letter-spacing:2.5px;
+        font-size:55px;
     }
 
     .hero p{
-        font-size:13px;
-        margin-bottom:20px;
+        font-size:15px;
+        line-height:1.5;
     }
 
     .hero-buttons{
-        gap:7px;
+        flex-wrap:wrap;
     }
 
     .hero-btn{
-        padding:12px 15px;
+        padding:14px 21px;
     }
 
-    .live-item{
-        padding:14px 18px;
-        font-size:10px;
+    .section{
+        padding:48px 16px;
     }
 
-    .category-scroll{
+    .section-title{
+        font-size:32px;
+    }
+
+    .category-grid{
         grid-template-columns:repeat(2,1fr);
+        gap:10px;
     }
 
-    .category-icon{
-        font-size:28px;
-    }
-
-    .section-head{
-        align-items:center;
-    }
-
-    .view{
-        font-size:11px;
-    }
-
-    .product{
-        flex-basis:185px;
-    }
-
-    .product-image{
-        height:245px;
+    .category-card{
+        height:230px;
     }
 
     .style-section{
-        height:280px;
+        margin:0 16px 50px;
+        min-height:460px;
+    }
+
+    .style-section img{
+        height:460px;
     }
 
     .style-content{
-        left:25px;
+        left:7%;
+        right:7%;
     }
 
     .style-content h2{
+        font-size:52px;
+    }
+
+    .style-content p{
+        font-size:14px;
+    }
+
+    .kids-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .kids-card{
+        height:230px;
+    }
+
+    .promo-banner{
+        margin:20px 16px;
+        padding:40px 25px;
+        display:block;
+    }
+
+    .promo-banner h2{
         font-size:38px;
     }
 
     .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .modal-box{
         grid-template-columns:1fr;
+        max-height:90vh;
+        overflow-y:auto;
+    }
+
+    .modal-image{
+        height:300px;
+    }
+
+    .modal-info{
+        padding:30px 25px;
     }
 }
 </style>
@@ -1308,1278 +1087,1167 @@ footer{
 
 <body>
 
-<!-- =========================
-     TOP OFFER
-========================= -->
+<!-- ================= TOP PROMOTION ================= -->
 
-<div class="top-bar">
-    <div class="top-track">
-        <span>✦ AS FASHIONS SALE — UP TO 70% OFF</span>
-        <span>FREE SHIPPING ON ORDERS ABOVE ₹999</span>
-        <span>NEW USERS GET EXTRA 20% OFF</span>
+<div class="top-promo">
+    <div class="promo-track">
 
-        <span>✦ AS FASHIONS SALE — UP TO 70% OFF</span>
-        <span>FREE SHIPPING ON ORDERS ABOVE ₹999</span>
-        <span>NEW USERS GET EXTRA 20% OFF</span>
+        <div class="promo-item">
+            🔥 <span>MEGA SALE</span> — UP TO 70% OFF
+        </div>
+
+        <div class="promo-item">
+            FREE SHIPPING ON ORDERS ABOVE ₹999
+        </div>
+
+        <div class="promo-item">
+            NEW USERS GET <span>20% OFF</span>
+        </div>
+
+        <div class="promo-item">
+            TRENDING STYLES — SHOP NOW
+        </div>
+
+        <div class="promo-item">
+            🔥 <span>MEGA SALE</span> — UP TO 70% OFF
+        </div>
+
+        <div class="promo-item">
+            FREE SHIPPING ON ORDERS ABOVE ₹999
+        </div>
+
+        <div class="promo-item">
+            NEW USERS GET <span>20% OFF</span>
+        </div>
+
     </div>
 </div>
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- ================= HEADER ================= -->
 
-<header class="header">
+<header>
 
-    <div class="header-main">
+<nav class="navbar">
 
-        <button class="menu-btn" onclick="openMenu()" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
+    <button class="menu-btn" id="menuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <a href="#home" class="logo">
+        <span class="logo-main">AS</span>
+        <span class="logo-sub">FASHIONS</span>
+    </a>
+
+    <div class="search-box">
+        <input
+            id="searchInput"
+            type="search"
+            placeholder="Search for products, brands & more">
+        <button class="search-btn" id="searchBtn">⌕</button>
+    </div>
+
+    <div class="nav-actions">
+
+        <button class="icon-btn" onclick="alert('Login / Account coming next')">
+            ♙
         </button>
 
-        <a href="#" class="logo">
-            <span class="logo-as">AS</span>
-            <span class="logo-fashion">FASHIONS</span>
-        </a>
+        <button class="icon-btn" onclick="showWishlist()">
+            ♡
+            <span class="badge" id="wishCount">0</span>
+        </button>
 
-        <div class="search">
-            <input
-                id="searchInput"
-                type="search"
-                placeholder="Search products, brands & more"
-                oninput="searchProducts(this.value)"
-            >
-            <button onclick="focusSearch()">⌕</button>
-        </div>
-
-        <div class="actions">
-
-            <button class="action" onclick="showToast('Profile coming soon')" aria-label="Profile">
-                ♙
-            </button>
-
-            <button class="action" onclick="showToast('Wishlist opened')" aria-label="Wishlist">
-                ♡
-                <span class="badge" id="wishCount">0</span>
-            </button>
-
-            <button class="action" onclick="openBag()" aria-label="Shopping bag">
-                🛍
-                <span class="badge" id="bagCount">0</span>
-            </button>
-
-        </div>
+        <button class="icon-btn" onclick="showCart()">
+            🛒
+            <span class="badge" id="cartCount">0</span>
+        </button>
 
     </div>
 
-    <nav class="nav">
-        <a href="#new">NEW IN</a>
-        <a href="#women">WOMEN</a>
-        <a href="#men">MEN</a>
-        <a href="#kids">KIDS</a>
-        <a href="#trending">TRENDING</a>
-        <a href="#offers">OFFERS</a>
-        <a href="#sale" class="sale">SALE</a>
-    </nav>
+</nav>
+
+<nav class="category-bar">
+
+    <a href="#all" class="active">ALL</a>
+    <a href="#women">WOMEN</a>
+    <a href="#men">MEN</a>
+    <a href="#kids">KIDS</a>
+    <a href="#dresses">DRESSES</a>
+    <a href="#shirts">SHIRTS</a>
+    <a href="#denim">DENIM</a>
+    <a href="#footwear">FOOTWEAR</a>
+    <a href="#accessories">ACCESSORIES</a>
+    <a href="#sale">SALE</a>
+
+</nav>
 
 </header>
 
-<!-- =========================
-     MOBILE MENU
-========================= -->
+<!-- ================= SIDE MENU ================= -->
 
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu(event)">
+<div class="overlay" id="overlay"></div>
 
-    <aside class="side-menu">
+<aside class="side-menu" id="sideMenu">
 
-        <div class="side-head">
-            <strong>AS FASHIONS</strong>
-            <button class="close-menu" onclick="closeMenu()">×</button>
-        </div>
+    <div class="menu-head">
 
-        <div class="menu-group">
-            <button onclick="toggleSub(this)">
-                WOMEN <span>+</span>
-            </button>
+        <strong>AS FASHIONS</strong>
 
-            <div class="sub-menu">
-                <a href="#women">New Arrivals</a>
-                <a href="#women">Dresses</a>
-                <a href="#women">Tops</a>
-                <a href="#women">Jeans</a>
-                <a href="#women">Ethnic Wear</a>
-                <a href="#women">Footwear</a>
-            </div>
-        </div>
-
-        <div class="menu-group">
-            <button onclick="toggleSub(this)">
-                MEN <span>+</span>
-            </button>
-
-            <div class="sub-menu">
-                <a href="#men">T-Shirts</a>
-                <a href="#men">Shirts</a>
-                <a href="#men">Jeans</a>
-                <a href="#men">Cargo</a>
-                <a href="#men">Sneakers</a>
-            </div>
-        </div>
-
-        <div class="menu-group">
-            <button onclick="toggleSub(this)">
-                KIDS <span>+</span>
-            </button>
-
-            <div class="sub-menu">
-                <a href="#boys">Boys</a>
-                <a href="#girls">Girls</a>
-                <a href="#baby">Baby</a>
-            </div>
-        </div>
-
-        <div class="menu-group">
-            <button onclick="toggleSub(this)">
-                FOOTWEAR <span>+</span>
-            </button>
-
-            <div class="sub-menu">
-                <a href="#trending">Sneakers</a>
-                <a href="#trending">Casual Shoes</a>
-                <a href="#trending">Heels</a>
-                <a href="#trending">Sports Shoes</a>
-            </div>
-        </div>
-
-        <div class="menu-group">
-            <button onclick="toggleSub(this)">
-                ACCESSORIES <span>+</span>
-            </button>
-
-            <div class="sub-menu">
-                <a href="#trending">Bags</a>
-                <a href="#trending">Watches</a>
-                <a href="#trending">Sunglasses</a>
-                <a href="#trending">Jewellery</a>
-            </div>
-        </div>
-
-        <div class="menu-group">
-            <button onclick="goTo('sale')">
-                SALE <span>→</span>
-            </button>
-        </div>
-
-    </aside>
-
-</div>
-
-<!-- =========================
-     HERO
-========================= -->
-
-<section class="hero">
-
-    <article class="hero-slide active">
-
-        <img
-            src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1800&q=85"
-            alt="Women's fashion"
-        >
-
-        <div class="hero-content">
-
-            <div class="hero-kicker">
-                AS FASHIONS / NEW SEASON
-            </div>
-
-            <h1>
-                Own<br>
-                Your<br>
-                Style.
-            </h1>
-
-            <p>
-                Discover elevated fashion designed for modern lifestyles.
-                Fresh silhouettes, premium details and effortless confidence.
-            </p>
-
-            <div class="hero-buttons">
-                <button class="hero-btn" onclick="goTo('women')">
-                    SHOP WOMEN
-                </button>
-
-                <button class="hero-btn dark" onclick="goTo('men')">
-                    SHOP MEN
-                </button>
-            </div>
-
-        </div>
-
-    </article>
-
-
-    <article class="hero-slide">
-
-        <img
-            src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1800&q=85"
-            alt="Fashion collection"
-        >
-
-        <div class="hero-content">
-
-            <div class="hero-kicker">
-                TRENDING NOW
-            </div>
-
-            <h1>
-                New<br>
-                Season.
-            </h1>
-
-            <p>
-                The pieces everyone's wearing right now.
-            </p>
-
-            <div class="hero-buttons">
-                <button class="hero-btn" onclick="goTo('trending')">
-                    EXPLORE TRENDING
-                </button>
-            </div>
-
-        </div>
-
-    </article>
-
-
-    <article class="hero-slide">
-
-        <img
-            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=85"
-            alt="Fashion sale"
-        >
-
-        <div class="hero-content">
-
-            <div class="hero-kicker">
-                LIMITED TIME
-            </div>
-
-            <h1>
-                Up To<br>
-                70% Off.
-            </h1>
-
-            <p>
-                Selected styles. Limited quantities.
-            </p>
-
-            <div class="hero-buttons">
-                <button class="hero-btn" onclick="goTo('sale')">
-                    SHOP SALE
-                </button>
-            </div>
-
-        </div>
-
-    </article>
-
-
-    <div class="hero-dots">
-
-        <button class="hero-dot active" onclick="heroGo(0)"></button>
-        <button class="hero-dot" onclick="heroGo(1)"></button>
-        <button class="hero-dot" onclick="heroGo(2)"></button>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     LIVE CATEGORY SCROLL
-========================= -->
-
-<div class="live-nav">
-
-    <div class="live-track">
-
-        <div class="live-item" onclick="goTo('new')">NEW ARRIVALS</div>
-        <div class="live-item" onclick="goTo('trending')">🔥 TRENDING NOW</div>
-        <div class="live-item" onclick="goTo('offers')">⚡ OFFERS</div>
-        <div class="live-item" onclick="goTo('kids')">👦 KIDS</div>
-        <div class="live-item" onclick="goTo('women')">WOMEN</div>
-        <div class="live-item" onclick="goTo('men')">MEN</div>
-        <div class="live-item" onclick="goTo('new')">NEW DROPS</div>
-        <div class="live-item sale" onclick="goTo('sale')">SALE — UP TO 70%</div>
-
-        <div class="live-item" onclick="goTo('new')">NEW ARRIVALS</div>
-        <div class="live-item" onclick="goTo('trending')">🔥 TRENDING NOW</div>
-        <div class="live-item" onclick="goTo('offers')">⚡ OFFERS</div>
-        <div class="live-item" onclick="goTo('kids')">👦 KIDS</div>
-        <div class="live-item" onclick="goTo('women')">WOMEN</div>
-        <div class="live-item" onclick="goTo('men')">MEN</div>
-        <div class="live-item" onclick="goTo('new')">NEW DROPS</div>
-        <div class="live-item sale" onclick="goTo('sale')">SALE — UP TO 70%</div>
-
-    </div>
-
-</div>
-
-<!-- =========================
-     CATEGORIES
-========================= -->
-
-<section class="section" id="categories">
-
-    <div class="container">
-
-        <div class="section-head">
-            <div>
-                <div class="eyebrow">EXPLORE</div>
-                <h2>SHOP BY CATEGORY</h2>
-            </div>
-
-            <a href="#categories" class="view">
-                VIEW ALL
-            </a>
-        </div>
-
-
-        <div class="category-scroll">
-
-            <div class="category-card" onclick="goTo('men')">
-                <div class="category-icon">👨</div>
-                <strong>Men</strong>
-            </div>
-
-            <div class="category-card" onclick="goTo('women')">
-                <div class="category-icon">👩</div>
-                <strong>Women</strong>
-            </div>
-
-            <div class="category-card" onclick="goTo('kids')">
-                <div class="category-icon">👦</div>
-                <strong>Kids</strong>
-            </div>
-
-            <div class="category-card" onclick="goTo('trending')">
-                <div class="category-icon">👟</div>
-                <strong>Footwear</strong>
-            </div>
-
-            <div class="category-card" onclick="goTo('trending')">
-                <div class="category-icon">👜</div>
-                <strong>Accessories</strong>
-            </div>
-
-            <div class="category-card" onclick="goTo('sale')">
-                <div class="category-icon">🔥</div>
-                <strong>Sale</strong>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     KIDS SECTION
-========================= -->
-
-<section class="section kids-section" id="kids">
-
-    <div class="container">
-
-        <div class="section-head">
-            <div>
-                <div class="eyebrow">LITTLE STYLE</div>
-                <h2>KIDS COLLECTION</h2>
-            </div>
-        </div>
-
-
-        <div class="kids-grid">
-
-            <div class="kids-card" id="boys" onclick="kidsCategory('Boys')">
-
-                <img
-                    src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=1000&q=85"
-                    alt="Boys fashion"
-                >
-
-                <div class="kids-info">
-                    <span>KIDS</span>
-                    <h3>Boys</h3>
-                    <p>Cool everyday styles →</p>
-                </div>
-
-            </div>
-
-
-            <div class="kids-card" id="girls" onclick="kidsCategory('Girls')">
-
-                <img
-                    src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=1000&q=85"
-                    alt="Girls fashion"
-                >
-
-                <div class="kids-info">
-                    <span>KIDS</span>
-                    <h3>Girls</h3>
-                    <p>Fresh looks for every day →</p>
-                </div>
-
-            </div>
-
-
-            <div class="kids-card" id="baby" onclick="kidsCategory('Baby')">
-
-                <img
-                    src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=1000&q=85"
-                    alt="Baby fashion"
-                >
-
-                <div class="kids-info">
-                    <span>KIDS</span>
-                    <h3>Baby</h3>
-                    <p>Soft & comfortable styles →</p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     TRENDING
-========================= -->
-
-<section class="section" id="trending">
-
-    <div class="container">
-
-        <div class="section-head">
-
-            <div>
-                <div class="eyebrow">MOST WANTED</div>
-                <h2>TRENDING NOW</h2>
-            </div>
-
-            <a href="#trending" class="view">
-                VIEW ALL →
-            </a>
-
-        </div>
-
-
-        <div class="product-scroll" id="trendingProducts">
-
-            <!-- Product 1 -->
-
-            <article
-                class="product"
-                data-name="Oversized Streetwear T-Shirt"
-                data-category="Men"
-                data-price="699"
-                data-old="1499"
-                data-discount="53% OFF"
-                data-image="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85"
-                onclick="openProduct(this)"
-            >
-
-                <div class="product-image">
-
-                    <span class="product-tag">
-                        TRENDING
-                    </span>
-
-                    <button
-                        class="wishlist"
-                        onclick="toggleWishlist(event,this)"
-                    >
-                        ♡
-                    </button>
-
-                    <img
-                        src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85"
-                        alt="Oversized T-shirt"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="brand">AS FASHIONS</div>
-
-                    <h3>Oversized Streetwear T-Shirt</h3>
-
-                    <div class="rating">★ 4.7</div>
-
-                    <div class="price">
-                        <strong>₹699</strong>
-                        <del>₹1,499</del>
-                        <span class="discount">53% OFF</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- Product 2 -->
-
-            <article
-                class="product"
-                data-name="Premium Women's Dress"
-                data-category="Women"
-                data-price="1299"
-                data-old="2499"
-                data-discount="48% OFF"
-                data-image="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=85"
-                onclick="openProduct(this)"
-            >
-
-                <div class="product-image">
-
-                    <span class="product-tag">
-                        HOT
-                    </span>
-
-                    <button
-                        class="wishlist"
-                        onclick="toggleWishlist(event,this)"
-                    >
-                        ♡
-                    </button>
-
-                    <img
-                        src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=85"
-                        alt="Women's dress"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="brand">AS FASHIONS</div>
-
-                    <h3>Premium Women's Dress</h3>
-
-                    <div class="rating">★ 4.8</div>
-
-                    <div class="price">
-                        <strong>₹1,299</strong>
-                        <del>₹2,499</del>
-                        <span class="discount">48% OFF</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- Product 3 -->
-
-            <article
-                class="product"
-                data-name="Classic Everyday Sneakers"
-                data-category="Footwear"
-                data-price="1499"
-                data-old="2999"
-                data-discount="50% OFF"
-                data-image="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85"
-                onclick="openProduct(this)"
-            >
-
-                <div class="product-image">
-
-                    <span class="product-tag">
-                        BESTSELLER
-                    </span>
-
-                    <button
-                        class="wishlist"
-                        onclick="toggleWishlist(event,this)"
-                    >
-                        ♡
-                    </button>
-
-                    <img
-                        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85"
-                        alt="Sneakers"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="brand">AS FASHIONS</div>
-
-                    <h3>Classic Everyday Sneakers</h3>
-
-                    <div class="rating">★ 4.6</div>
-
-                    <div class="price">
-                        <strong>₹1,499</strong>
-                        <del>₹2,999</del>
-                        <span class="discount">50% OFF</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- Product 4 -->
-
-            <article
-                class="product"
-                data-name="Relaxed Fit Cargo Pants"
-                data-category="Men"
-                data-price="1199"
-                data-old="2399"
-                data-discount="50% OFF"
-                data-image="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=85"
-                onclick="openProduct(this)"
-            >
-
-                <div class="product-image">
-
-                    <span class="product-tag">
-                        NEW
-                    </span>
-
-                    <button
-                        class="wishlist"
-                        onclick="toggleWishlist(event,this)"
-                    >
-                        ♡
-                    </button>
-
-                    <img
-                        src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=85"
-                        alt="Cargo pants"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="brand">AS FASHIONS</div>
-
-                    <h3>Relaxed Fit Cargo Pants</h3>
-
-                    <div class="rating">★ 4.5</div>
-
-                    <div class="price">
-                        <strong>₹1,199</strong>
-                        <del>₹2,399</del>
-                        <span class="discount">50% OFF</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- Product 5 -->
-
-            <article
-                class="product"
-                data-name="Minimal Women's Handbag"
-                data-category="Accessories"
-                data-price="999"
-                data-old="1999"
-                data-discount="50% OFF"
-                data-image="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=85"
-                onclick="openProduct(this)"
-            >
-
-                <div class="product-image">
-
-                    <span class="product-tag">
-                        TRENDING
-                    </span>
-
-                    <button
-                        class="wishlist"
-                        onclick="toggleWishlist(event,this)"
-                    >
-                        ♡
-                    </button>
-
-                    <img
-                        src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=85"
-                        alt="Handbag"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="brand">AS FASHIONS</div>
-
-                    <h3>Minimal Women's Handbag</h3>
-
-                    <div class="rating">★ 4.4</div>
-
-                    <div class="price">
-                        <strong>₹999</strong>
-                        <del>₹1,999</del>
-                        <span class="discount">50% OFF</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     OFFER
-========================= -->
-
-<section class="promo" id="offers">
-
-    <div>
-
-        <small>LIMITED TIME OFFER</small>
-
-        <h2>
-            STYLE MORE.<br>
-            SPEND LESS.
-        </h2>
-
-        <p>
-            Premium fashion at prices you'll love.
-        </p>
-
-    </div>
-
-    <button onclick="goTo('sale')">
-        SHOP SALE →
-    </button>
-
-</section>
-
-<!-- =========================
-     NEW ARRIVALS
-========================= -->
-
-<section class="section" id="new">
-
-    <div class="container">
-
-        <div class="section-head">
-
-            <div>
-                <div class="eyebrow">JUST DROPPED</div>
-                <h2>NEW ARRIVALS</h2>
-            </div>
-
-            <a href="#new" class="view">
-                VIEW ALL →
-            </a>
-
-        </div>
-
-
-        <div class="product-scroll">
-
-            <article
-                class="product"
-                data-name="Premium Linen Shirt"
-                data-category="Men"
-                data-price="899"
-                data-old="1799"
-                data-discount="50% OFF"
-                data-image="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=800&q=85"
-                onclick="openProduct(this)"
-            >
-
-                <div class="product-image">
-                    <span class="product-tag">NEW</span>
-
-                    <button class="wishlist" onclick="toggleWishlist(event,this)">
-                        ♡
-                    </button>
-
-                    <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=800&q=85">
-                </div>
-
-                <div class="product-info">
-                    <div class="brand">AS FASHIONS</div>
-                    <h3>Premium Linen Shirt</h3>
-                    <div class="rating">★ 4.7</div>
-
-                    <div class="price">
-                        <strong>₹899</strong>
-                        <del>₹1,799</del>
-                        <span class="discount">50% OFF</span>
-                    </div>
-                </div>
-
-            </article>
-
-
-            <article
-                class="product"
-                data-name="Elegant Summer Dress"
-                data-category="Women"
-                data-price="1499"
-                data-old="2999"
-                data-discount="50% OFF"
-                data-image="https://images.unsplash.com/photo-1496217590455-aa63a8350eea?auto=format&fit=crop&w=800&q=85"
-                onclick="openProduct(this)"
-            >
-
-                <div class="product-image">
-
-                    <span class="product-tag">NEW</span>
-
-                    <button class="wishlist" onclick="toggleWishlist(event,this)">
-                        ♡
-                    </button>
-
-                    <img src="https://images.unsplash.com/photo-1496217590455-aa63a8350eea?auto=format&fit=crop&w=800&q=85">
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="brand">AS FASHIONS</div>
-
-                    <h3>Elegant Summer Dress</h3>
-
-                    <div class="rating">★ 4.8</div>
-
-                    <div class="price">
-                        <strong>₹1,499</strong>
-                        <del>₹2,999</del>
-                        <span class="discount">50% OFF</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <article
-                class="product"
-                data-name="Urban Oversized Hoodie"
-                data-category="Men"
-                data-price="1299"
-                data-old="2499"
-                data-discount="48% OFF"
-                data-image="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=85"
-                onclick="openProduct(this)"
-            >
-
-                <div class="product-image">
-
-                    <span class="product-tag">DROP</span>
-
-                    <button class="wishlist" onclick="toggleWishlist(event,this)">
-                        ♡
-                    </button>
-
-                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=85">
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="brand">AS FASHIONS</div>
-
-                    <h3>Urban Oversized Hoodie</h3>
-
-                    <div class="rating">★ 4.6</div>
-
-                    <div class="price">
-                        <strong>₹1,299</strong>
-                        <del>₹2,499</del>
-                        <span class="discount">48% OFF</span>
-                    </div>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     OWN YOUR STYLE
-     COMPACT VERSION
-========================= -->
-
-<section class="style-section" id="style">
-
-    <img
-        src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1800&q=85"
-        alt="AS Fashions style"
-    >
-
-    <div class="style-content">
-
-        <small>AS FASHIONS / STYLE EDIT</small>
-
-        <h2>
-            Own Your<br>
-            Style.
-        </h2>
-
-        <button onclick="goTo('new')">
-            EXPLORE COLLECTION
-        </button>
-
-    </div>
-
-</section>
-
-<!-- =========================
-     SALE
-========================= -->
-
-<section class="promo" id="sale">
-
-    <div>
-
-        <small>AS FASHIONS SALE</small>
-
-        <h2>
-            UP TO 70% OFF.
-        </h2>
-
-        <p>
-            Limited styles. Limited stock.
-        </p>
-
-    </div>
-
-    <button onclick="showToast('Sale collection selected')">
-        SHOP ALL SALE →
-    </button>
-
-</section>
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <div class="footer-grid">
-
-        <div class="footer-col">
-
-            <div class="footer-logo">
-                AS FASHIONS
-            </div>
-
-            <p>
-                Premium fashion for modern lifestyles.
-                Discover new arrivals, trending styles,
-                footwear, accessories and more.
-            </p>
-
-        </div>
-
-
-        <div class="footer-col">
-
-            <h4>SHOP</h4>
-
-            <a href="#women">Women</a>
-            <a href="#men">Men</a>
-            <a href="#kids">Kids</a>
-            <a href="#trending">Trending</a>
-            <a href="#sale">Sale</a>
-
-        </div>
-
-
-        <div class="footer-col">
-
-            <h4>HELP</h4>
-
-            <a href="#" onclick="showToast('Track Order feature')">Track Order</a>
-            <a href="#" onclick="showToast('Returns feature')">Returns</a>
-            <a href="#" onclick="showToast('Shipping information')">Shipping</a>
-            <a href="#" onclick="showToast('Help Center')">Help Center</a>
-
-        </div>
-
-
-        <div class="footer-col">
-
-            <h4>FOLLOW</h4>
-
-            <a href="#">Instagram</a>
-            <a href="#">Facebook</a>
-            <a href="#">YouTube</a>
-            <a href="#">Pinterest</a>
-
-        </div>
-
-    </div>
-
-
-    <div class="copyright">
-        © 2026 AS FASHIONS. All Rights Reserved.
-    </div>
-
-</footer>
-
-<!-- =========================
-     BAG
-========================= -->
-
-<div class="drawer-overlay" id="bagOverlay">
-
-    <aside class="bag">
-
-        <div class="bag-head">
-
-            <strong>
-                SHOPPING BAG
-            </strong>
-
-            <button onclick="closeBag()">
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="bag-content" id="bagContent">
-
-            <div class="empty">
-
-                <div style="font-size:45px;margin-bottom:15px;">
-                    🛍
-                </div>
-
-                <h3>
-                    Your bag is empty
-                </h3>
-
-                <p style="margin-top:8px;">
-                    Add products you love.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="bag-footer">
-
-            <strong>
-                Total:
-                <span id="bagTotal">
-                    ₹0
-                </span>
-            </strong>
-
-            <button class="checkout" onclick="checkout()">
-                CHECKOUT
-            </button>
-
-        </div>
-
-    </aside>
-
-</div>
-
-<!-- =========================
-     PRODUCT MODAL
-========================= -->
-
-<div class="modal-overlay" id="productModal">
-
-    <div class="modal">
-
-        <button class="modal-close" onclick="closeProduct()">
+        <button class="close-menu" id="closeMenu">
             ×
         </button>
 
-        <div class="modal-image">
-            <img id="modalImage" src="" alt="">
-        </div>
+    </div>
 
-        <div class="modal-info">
+    <div class="menu-links">
 
-            <div class="brand">
-                AS FASHIONS
-            </div>
-
-            <h2 id="modalName">
-                Product
-            </h2>
-
-            <p id="modalCategory">
-                Fashion
-            </p>
-
-            <div class="rating">
-                ★ 4.7
-            </div>
-
-            <div class="modal-price">
-
-                <span id="modalPrice">
-                    ₹999
-                </span>
-
-                <del id="modalOld">
-                    ₹1,999
-                </del>
-
-                <span
-                    class="discount"
-                    id="modalDiscount"
-                >
-                    50% OFF
-                </span>
-
-            </div>
-
-            <button
-                class="add-bag"
-                onclick="addCurrentToBag()"
-            >
-                ADD TO BAG
-            </button>
-
-        </div>
+        <a href="#home">Home</a>
+        <a href="#women">Women</a>
+        <a href="#men">Men</a>
+        <a href="#kids">Kids</a>
+        <a href="#footwear">Footwear</a>
+        <a href="#accessories">Accessories</a>
+        <a href="#trending">Trending Now</a>
+        <a href="#offers">Offers & Discounts</a>
+        <a href="#clearance">Clearance Sale</a>
+        <a href="#sale">Mega Sale</a>
 
     </div>
 
+</aside>
+
+<!-- ================= HERO SLIDER ================= -->
+
+<main id="home">
+
+<section class="hero">
+
+<!-- SLIDE 1 -->
+
+<div class="hero-slide active">
+
+<div class="hero-image"
+style="background-image:url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1800&q=85')">
 </div>
 
-<!-- =========================
-     TOAST
-========================= -->
+<div class="hero-content">
 
-<div class="toast" id="toast">
-    Added successfully
+<div class="hero-label">
+AS FASHIONS / NEW SEASON
 </div>
 
+<h1>
+Own<br>
+Your<br>
+Style.
+</h1>
+
+<p>
+Discover elevated fashion designed for modern lifestyles.
+Fresh silhouettes, premium details and effortless confidence.
+</p>
+
+<div class="hero-buttons">
+
+<button class="hero-btn"
+onclick="goTo('women')">
+SHOP WOMEN
+</button>
+
+<button class="hero-btn dark"
+onclick="goTo('men')">
+SHOP MEN
+</button>
+
+</div>
+
+</div>
+</div>
+
+<!-- SLIDE 2 -->
+
+<div class="hero-slide">
+
+<div class="hero-image"
+style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1800&q=85')">
+</div>
+
+<div class="hero-content">
+
+<div class="hero-label">
+NEW ARRIVALS / 2026
+</div>
+
+<h1>
+Fresh<br>
+Fits.
+</h1>
+
+<p>
+New season essentials made for everyday confidence.
+</p>
+
+<div class="hero-buttons">
+
+<button class="hero-btn"
+onclick="goTo('trending')">
+SHOP TRENDING
+</button>
+
+<button class="hero-btn dark"
+onclick="goTo('all')">
+EXPLORE COLLECTION
+</button>
+
+</div>
+
+</div>
+</div>
+
+<!-- SLIDE 3 -->
+
+<div class="hero-slide">
+
+<div class="hero-image"
+style="background-image:url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1800&q=85')">
+</div>
+
+<div class="hero-content">
+
+<div class="hero-label">
+MEGA SALE
+</div>
+
+<h1>
+Up To<br>
+70% Off.
+</h1>
+
+<p>
+Limited-time prices across selected fashion.
+</p>
+
+<div class="hero-buttons">
+
+<button class="hero-btn"
+onclick="goTo('sale')">
+SHOP SALE
+</button>
+
+<button class="hero-btn dark"
+onclick="goTo('clearance')">
+CLEARANCE
+</button>
+
+</div>
+
+</div>
+</div>
+
+<!-- SLIDE 4 -->
+
+<div class="hero-slide">
+
+<div class="hero-image"
+style="background-image:url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1800&q=85')">
+</div>
+
+<div class="hero-content">
+
+<div class="hero-label">
+KIDS COLLECTION
+</div>
+
+<h1>
+Little<br>
+Icons.
+</h1>
+
+<p>
+Playful looks, everyday comfort and fresh kids styles.
+</p>
+
+<div class="hero-buttons">
+
+<button class="hero-btn"
+onclick="goTo('kids')">
+SHOP KIDS
+</button>
+
+</div>
+
+</div>
+</div>
+
+<!-- SLIDE 5 -->
+
+<div class="hero-slide">
+
+<div class="hero-image"
+style="background-image:url('https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=1800&q=85')">
+</div>
+
+<div class="hero-content">
+
+<div class="hero-label">
+STYLE EDIT
+</div>
+
+<h1>
+Trend<br>
+Forward.
+</h1>
+
+<p>
+The pieces everyone is talking about right now.
+</p>
+
+<div class="hero-buttons">
+
+<button class="hero-btn"
+onclick="goTo('trending')">
+EXPLORE TRENDING
+</button>
+
+</div>
+
+</div>
+</div>
+
+<div class="hero-dots">
+
+<button class="hero-dot active" data-slide="0"></button>
+<button class="hero-dot" data-slide="1"></button>
+<button class="hero-dot" data-slide="2"></button>
+<button class="hero-dot" data-slide="3"></button>
+<button class="hero-dot" data-slide="4"></button>
+
+</div>
+
+</section>
+
+<!-- ================= LIVE TRENDING BAR ================= -->
+
+<div class="live-strip" id="trending">
+
+<div class="live-track">
+
+<div class="live-item" onclick="openProduct('Oversized Essential Tee')">
+🔥 Trending Now — <strong>Oversized Tees</strong>
+</div>
+
+<div class="live-item" onclick="openProduct('Wide Leg Denim')">
+🔥 Trending Now — <strong>Wide Leg Denim</strong>
+</div>
+
+<div class="live-item" onclick="openProduct('Floral Summer Dress')">
+🔥 Trending Now — <strong>Summer Dresses</strong>
+</div>
+
+<div class="live-item" onclick="openProduct('Kids Co-ord Set')">
+🔥 Trending Now — <strong>Kids Co-ords</strong>
+</div>
+
+<div class="live-item" onclick="openProduct('Street Sneakers')">
+🔥 Trending Now — <strong>Street Sneakers</strong>
+</div>
+
+<div class="live-item" onclick="openProduct('Oversized Essential Tee')">
+🔥 Trending Now — <strong>Oversized Tees</strong>
+</div>
+
+<div class="live-item" onclick="openProduct('Wide Leg Denim')">
+🔥 Trending Now — <strong>Wide Leg Denim</strong>
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= SHOP BY CATEGORY ================= -->
+
+<section class="section" id="all">
+
+<div class="section-head">
+
+<div>
+<div class="eyebrow">DISCOVER</div>
+<h2 class="section-title">Shop by Categories</h2>
+</div>
+
+<a href="#all" class="view-all">VIEW ALL →</a>
+
+</div>
+
+<div class="category-grid">
+
+<div class="category-card"
+onclick="goTo('women')">
+
+<img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80">
+
+<div class="category-info">
+<h3>Women</h3>
+<p>New season styles</p>
+</div>
+
+</div>
+
+<div class="category-card"
+onclick="goTo('men')">
+
+<img src="https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=800&q=80">
+
+<div class="category-info">
+<h3>Men</h3>
+<p>Modern essentials</p>
+</div>
+
+</div>
+
+<div class="category-card"
+onclick="goTo('kids')">
+
+<img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=800&q=80">
+
+<div class="category-info">
+<h3>Kids</h3>
+<p>Little icons</p>
+</div>
+
+</div>
+
+<div class="category-card"
+onclick="goTo('footwear')">
+
+<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80">
+
+<div class="category-info">
+<h3>Footwear</h3>
+<p>Step into style</p>
+</div>
+
+</div>
+
+<div class="category-card"
+onclick="goTo('accessories')">
+
+<img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=800&q=80">
+
+<div class="category-info">
+<h3>Accessories</h3>
+<p>Complete the look</p>
+</div>
+
+</div>
+
+<div class="category-card"
+onclick="goTo('sale')">
+
+<img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=800&q=80">
+
+<div class="category-info">
+<h3>Sale</h3>
+<p>Up to 70% off</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= OWN YOUR STYLE ================= -->
+
+<section class="style-section">
+
+<img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1800&q=85">
+
+<div class="style-overlay"></div>
+
+<div class="style-content">
+
+<small>AS FASHIONS / STYLE EDIT</small>
+
+<h2>
+Own Your<br>
+Style.
+</h2>
+
+<p>
+Build your wardrobe with premium essentials,
+fresh trends and effortless everyday pieces.
+</p>
+
+<button class="hero-btn"
+onclick="goTo('trending')">
+EXPLORE STYLE
+</button>
+
+</div>
+
+</section>
+
+<!-- ================= WOMEN ================= -->
+
+<section class="section" id="women">
+
+<div class="section-head">
+
+<div>
+<div class="eyebrow">WOMEN</div>
+<h2 class="section-title">Women's Edit</h2>
+</div>
+
+<a href="#women" class="view-all">SHOP WOMEN →</a>
+
+</div>
+
+<div class="product-row">
+
+<div class="product"
+onclick="openProduct('Floral Summer Dress')">
+
+<div class="product-image">
+
+<span class="product-tag">NEW</span>
+
+<img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=80">
+
+</div>
+
+<div class="product-info">
+
+<div class="product-brand">AS FASHIONS</div>
+<div class="product-name">Floral Summer Dress</div>
+
+<div class="price">
+₹1,499
+<span class="old-price">₹2,999</span>
+<span class="discount">50% OFF</span>
+</div>
+
+</div>
+</div>
+
+<div class="product"
+onclick="openProduct('Relaxed Linen Shirt')">
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80">
+
+</div>
+
+<div class="product-info">
+
+<div class="product-brand">AS FASHIONS</div>
+<div class="product-name">Relaxed Linen Shirt</div>
+
+<div class="price">₹1,299</div>
+
+</div>
+</div>
+
+<div class="product"
+onclick="openProduct('Premium Co-ord Set')">
+
+<div class="product-image">
+
+<span class="product-tag">TRENDING</span>
+
+<img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=700&q=80">
+
+</div>
+
+<div class="product-info">
+
+<div class="product-brand">AS FASHIONS</div>
+<div class="product-name">Premium Co-ord Set</div>
+
+<div class="price">₹1,899</div>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= MEN ================= -->
+
+<section class="section" id="men">
+
+<div class="section-head">
+
+<div>
+<div class="eyebrow">MEN</div>
+<h2 class="section-title">Men's Essentials</h2>
+</div>
+
+<a href="#men" class="view-all">SHOP MEN →</a>
+
+</div>
+
+<div class="product-row">
+
+<div class="product"
+onclick="openProduct('Oversized Essential Tee')">
+
+<div class="product-image">
+
+<span class="product-tag">TRENDING</span>
+
+<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80">
+
+</div>
+
+<div class="product-info">
+
+<div class="product-brand">AS FASHIONS</div>
+<div class="product-name">Oversized Essential Tee</div>
+
+<div class="price">₹799</div>
+
+</div>
+</div>
+
+<div class="product"
+onclick="openProduct('Wide Leg Denim')">
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=80">
+
+</div>
+
+<div class="product-info">
+
+<div class="product-brand">AS FASHIONS</div>
+<div class="product-name">Wide Leg Denim</div>
+
+<div class="price">
+₹1,599
+<span class="old-price">₹2,499</span>
+</div>
+
+</div>
+</div>
+
+<div class="product"
+onclick="openProduct('Premium Casual Shirt')">
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=700&q=80">
+
+</div>
+
+<div class="product-info">
+
+<div class="product-brand">AS FASHIONS</div>
+<div class="product-name">Premium Casual Shirt</div>
+
+<div class="price">₹1,199</div>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= KIDS ================= -->
+
+<section class="section" id="kids">
+
+<div class="section-head">
+
+<div>
+<div class="eyebrow">KIDS COLLECTION</div>
+<h2 class="section-title">Kids Catalogue</h2>
+</div>
+
+<a href="#kids" class="view-all">VIEW ALL →</a>
+
+</div>
+
+<div class="kids-tabs">
+
+<button class="kids-tab active"
+onclick="filterKids('all',this)">
+ALL KIDS
+</button>
+
+<button class="kids-tab"
+onclick="filterKids('boys',this)">
+BOYS
+</button>
+
+<button class="kids-tab"
+onclick="filterKids('girls',this)">
+GIRLS
+</button>
+
+<button class="kids-tab"
+onclick="filterKids('baby',this)">
+BABY
+</button>
+
+<button class="kids-tab"
+onclick="filterKids('ethnic',this)">
+KIDS ETHNIC
+</button>
+
+<button class="kids-tab"
+onclick="filterKids('footwear',this)">
+KIDS FOOTWEAR
+</button>
+
+</div>
+
+<div class="kids-grid">
+
+<div class="kids-card" data-kids="boys"
+onclick="openProduct('Boys Casual Set')">
+
+<img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80">
+
+<div>
+<h3>Boys</h3>
+<p>Casual styles →</p>
+</div>
+
+</div>
+
+<div class="kids-card" data-kids="girls"
+onclick="openProduct('Girls Floral Dress')">
+
+<img src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=700&q=80">
+
+<div>
+<h3>Girls</h3>
+<p>Dresses & more →</p>
+</div>
+
+</div>
+
+<div class="kids-card" data-kids="baby"
+onclick="openProduct('Baby Essentials')">
+
+<img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=700&q=80">
+
+<div>
+<h3>Baby</h3>
+<p>Soft essentials →</p>
+</div>
+
+</div>
+
+<div class="kids-card" data-kids="ethnic"
+onclick="openProduct('Kids Ethnic Wear')">
+
+<img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=700&q=80">
+
+<div>
+<h3>Ethnic</h3>
+<p>Festive looks →</p>
+</div>
+
+</div>
+
+<div class="kids-card" data-kids="footwear"
+onclick="openProduct('Kids Sneakers')">
+
+<img src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=700&q=80">
+
+<div>
+<h3>Footwear</h3>
+<p>Mini sneakers →</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= OFFERS ================= -->
+
+<section class="section" id="offers">
+
+<div class="section-head">
+
+<div>
+<div class="eyebrow">DON'T MISS</div>
+<h2 class="section-title">Offers & Discounts</h2>
+</div>
+
+<a href="#sale" class="view-all">SHOP ALL →</a>
+
+</div>
+
+<div class="offer-row">
+
+<div class="offer-card"
+onclick="goTo('sale')">
+
+<img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&fit=crop&w=900&q=80">
+
+<div class="offer-text">
+<small>LIMITED TIME</small>
+<h3>UP TO 70% OFF</h3>
+</div>
+
+</div>
+
+<div class="offer-card"
+onclick="goTo('women')">
+
+<img src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=900&q=80">
+
+<div class="offer-text">
+<small>WOMEN</small>
+<h3>EXTRA 20% OFF</h3>
+</div>
+
+</div>
+
+<div class="offer-card"
+onclick="goTo('men')">
+
+<img src="https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?auto=format&fit=crop&w=900&q=80">
+
+<div class="offer-text">
+<small>MEN</small>
+<h3>STARTING ₹599</h3>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= FOOTWEAR ================= -->
+
+<section class="section" id="footwear">
+
+<div class="section-head">
+
+<div>
+<div class="eyebrow">STEP INTO STYLE</div>
+<h2 class="section-title">Footwear</h2>
+</div>
+
+</div>
+
+<div class="product-row">
+
+<div class="product"
+onclick="openProduct('Street Sneakers')">
+
+<div class="product-image">
+
+<span class="product-tag">TRENDING</span>
+
+<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80">
+
+</div>
+
+<div class="product-info">
+<div class="product-brand">AS FASHIONS</div>
+<div class="product-name">Street Sneakers</div>
+<div class="price">₹1,999</div>
+</div>
+
+</div>
+
+<div class="product"
+onclick="openProduct('Everyday Sneakers')">
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=700&q=80">
+
+</div>
+
+<div class="product-info">
+<div class="product-brand">AS FASHIONS</div>
+<div class="product-name">Everyday Sneakers</div>
+<div class="price">₹1,499</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= ACCESSORIES ================= -->
+
+<section class="section" id="accessories">
+
+<div class="section-head">
+
+<div>
+<div class="eyebrow">FINISH THE LOOK</div>
+<h2 class="section-title">Accessories</h2>
+</div>
+
+</div>
+
+<div class="product-row">
+
+<div class="product"
+onclick="openProduct('Classic Watch')">
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=700&q=80">
+
+</div>
+
+<div class="product-info">
+<div class="product-brand">AS FASHIONS</div>
+<div class="product-name">Classic Watch</div>
+<div class="price">₹1,299</div>
+</div>
+
+</div>
+
+<div class="product"
+onclick="openProduct('Premium Bag')">
+
+<div class="product-image">
+
+<img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80">
+
+</div>
+
+<div class="product-info">
+<div class="product-brand">AS FASHIONS</div>
+<div class="product-name">Premium Bag</div>
+<div class="price">₹1,799</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CLEARANCE ================= -->
+
+<section class="section" id="clearance">
+
+<div class="section-head">
+
+<div>
+<div class="eyebrow">FINAL PRICES</div>
+<h2 class="section-title">Clearance Sale</h2>
+</div>
+
+</div>
+
+<div class="offer-row">
+
+<div class="offer-card"
+onclick="goTo('sale')">
+
+<img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80">
+
+<div class="offer-text">
+<small>FINAL MARKDOWN</small>
+<h3>UP TO 70% OFF</h3>
+</div>
+
+</div>
+
+<div class="offer-card"
+onclick="goTo('women')">
+
+<img src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=900&q=80">
+
+<div class="offer-text">
+<small>LAST CHANCE</small>
+<h3>SHOP WOMEN</h3>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= SALE ================= -->
+
+<section class="promo-banner" id="sale">
+
+<div>
+
+<h2>MEGA SALE</h2>
+
+<p>
+Selected styles up to 70% off.
+Limited quantities available.
+</p>
+
+</div>
+
+<button class="hero-btn"
+onclick="goTo('all')">
+SHOP COLLECTION
+</button>
+
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+
+<div class="footer-logo">
+AS FASHIONS
+</div>
+
+<p style="color:#aaa;margin-top:15px;line-height:1.7;">
+Modern fashion for every side of you.
+New trends, premium essentials and
+everyday styles.
+</p>
+
+</div>
+
+<div>
+
+<h4>SHOP</h4>
+
+<a href="#women">Women</a>
+<a href="#men">Men</a>
+<a href="#kids">Kids</a>
+<a href="#footwear">Footwear</a>
+
+</div>
+
+<div>
+
+<h4>DISCOVER</h4>
+
+<a href="#trending">Trending</a>
+<a href="#offers">Offers</a>
+<a href="#clearance">Clearance</a>
+<a href="#sale">Sale</a>
+
+</div>
+
+<div>
+
+<h4>HELP</h4>
+
+<a href="#" onclick="alert('Order tracking coming soon')">
+Track Order
+</a>
+
+<a href="#" onclick="alert('Help Center coming soon')">
+Help Center
+</a>
+
+<a href="#" onclick="alert('Returns & refunds coming soon')">
+Returns
+</a>
+
+</div>
+
+<div>
+
+<h4>ABOUT</h4>
+
+<a href="#" onclick="alert('AS FASHIONS')">
+About Us
+</a>
+
+<a href="#" onclick="alert('Careers coming soon')">
+Careers
+</a>
+
+<a href="#" onclick="alert('Contact: support@asfashions.in')">
+Contact
+</a>
+
+</div>
+
+</div>
+
+<div class="copyright">
+© 2026 AS FASHIONS. All rights reserved.
+</div>
+
+</footer>
+
+<!-- ================= PRODUCT MODAL ================= -->
+
+<div class="modal" id="productModal">
+
+<div class="modal-box">
+
+<button class="modal-close"
+onclick="closeProduct()">
+×
+</button>
+
+<div class="modal-image">
+<img id="modalImg"
+src="">
+</div>
+
+<div class="modal-info">
+
+<div class="eyebrow">
+AS FASHIONS
+</div>
+
+<h2 id="modalTitle">
+Product
+</h2>
+
+<p>
+Premium fashion designed for modern lifestyles.
+</p>
+
+<div class="modal-price">
+₹1,499
+</div>
+
+<button class="add-cart"
+onclick="addToCart()">
+ADD TO BAG
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 <script>
 
-/* =========================
-   HERO SLIDER
-========================= */
-
-const heroSlides =
-    document.querySelectorAll(".hero-slide");
-
-const heroDots =
-    document.querySelectorAll(".hero-dot");
-
-let heroIndex = 0;
-
-function heroGo(index){
-
-    heroIndex = index;
-
-    heroSlides.forEach(
-        (slide,i)=>{
-            slide.classList.toggle(
-                "active",
-                i === index
-            );
-        }
-    );
-
-    heroDots.forEach(
-        (dot,i)=>{
-            dot.classList.toggle(
-                "active",
-                i === index
-            );
-        }
-    );
-}
-
-setInterval(()=>{
-    heroGo(
-        (heroIndex + 1) % heroSlides.length
-    );
-},5000);
-
-
-/* =========================
-   MENU
-========================= */
-
-function openMenu(){
-
-    document
-        .getElementById("menuOverlay")
-        .classList.add("open");
-
-}
-
-function closeMenu(event){
-
-    if(
-        event &&
-        event.target !==
-        document.getElementById("menuOverlay")
-    ){
-        return;
-    }
-
-    document
-        .getElementById("menuOverlay")
-        .classList.remove("open");
-
-}
-
-function toggleSub(button){
-
-    const menu =
-        button.nextElementSibling;
-
-    menu.classList.toggle("open");
-
-    const icon =
-        button.querySelector("span");
-
-    icon.textContent =
-        menu.classList.contains("open")
-        ? "−"
-        : "+";
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
+/* ================= NAVIGATION ================= */
 
 function goTo(id){
 
-    const target =
-        document.getElementById(id);
+    const element=document.getElementById(id);
 
-    if(target){
+    if(element){
 
-        target.scrollIntoView({
+        element.scrollIntoView({
             behavior:"smooth",
             block:"start"
         });
@@ -2590,52 +2258,288 @@ function goTo(id){
 
 }
 
+/* ================= MENU ================= */
 
-/* =========================
-   SEARCH
-========================= */
+const menuBtn=document.getElementById("menuBtn");
+const closeMenuBtn=document.getElementById("closeMenu");
+const sideMenu=document.getElementById("sideMenu");
+const overlay=document.getElementById("overlay");
 
-function focusSearch(){
+menuBtn.onclick=()=>{
+    sideMenu.classList.add("open");
+    overlay.classList.add("show");
+};
 
-    document
-        .getElementById("searchInput")
-        .focus();
+function closeMenu(){
+
+    sideMenu.classList.remove("open");
+    overlay.classList.remove("show");
 
 }
 
-function searchProducts(value){
+closeMenuBtn.onclick=closeMenu;
+overlay.onclick=closeMenu;
 
-    const query =
-        value.trim().toLowerCase();
+/* ================= HERO SLIDER ================= */
 
-    const products =
-        document.querySelectorAll(".product");
+let currentSlide=0;
+
+const slides=document.querySelectorAll(".hero-slide");
+const dots=document.querySelectorAll(".hero-dot");
+
+function showSlide(index){
+
+    currentSlide=index;
+
+    slides.forEach((slide,i)=>{
+        slide.classList.toggle("active",i===index);
+    });
+
+    dots.forEach((dot,i)=>{
+        dot.classList.toggle("active",i===index);
+    });
+
+}
+
+dots.forEach((dot,index)=>{
+
+    dot.addEventListener("click",()=>{
+
+        showSlide(index);
+
+    });
+
+});
+
+setInterval(()=>{
+
+    currentSlide=(currentSlide+1)%slides.length;
+
+    showSlide(currentSlide);
+
+},5000);
+
+/* ================= SEARCH ================= */
+
+const searchInput=document.getElementById("searchInput");
+
+function searchProducts(){
+
+    const value=searchInput.value.toLowerCase().trim();
+
+    if(!value){
+        goTo("all");
+        return;
+    }
+
+    const products=document.querySelectorAll(".product");
+
+    let found=false;
 
     products.forEach(product=>{
 
-        const name =
-            product
-                .dataset
-                .name
-                .toLowerCase();
+        const text=product.innerText.toLowerCase();
 
-        const category =
-            product
-                .dataset
-                .category
-                .toLowerCase();
+        if(text.includes(value)){
+
+            product.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+            product.style.outline="3px solid #111";
+
+            setTimeout(()=>{
+                product.style.outline="";
+            },1800);
+
+            found=true;
+        }
+
+    });
+
+    if(!found){
+
+        alert(
+            "No products found for: "+searchInput.value
+        );
+
+    }
+
+}
+
+document.getElementById("searchBtn")
+.addEventListener("click",searchProducts);
+
+searchInput.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Enter"){
+        searchProducts();
+    }
+
+});
+
+/* ================= PRODUCT MODAL ================= */
+
+const productImages={
+
+"Floral Summer Dress":
+"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=85",
+
+"Relaxed Linen Shirt":
+"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=900&q=85",
+
+"Premium Co-ord Set":
+"https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=900&q=85",
+
+"Oversized Essential Tee":
+"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85",
+
+"Wide Leg Denim":
+"https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=85",
+
+"Premium Casual Shirt":
+"https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=900&q=85",
+
+"Street Sneakers":
+"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85",
+
+"Everyday Sneakers":
+"https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=900&q=85",
+
+"Classic Watch":
+"https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=900&q=85",
+
+"Premium Bag":
+"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85",
+
+"Boys Casual Set":
+"https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=900&q=85",
+
+"Girls Floral Dress":
+"https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=900&q=85",
+
+"Baby Essentials":
+"https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=85",
+
+"Kids Ethnic Wear":
+"https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=900&q=85",
+
+"Kids Sneakers":
+"https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=900&q=85"
+
+};
+
+function openProduct(name){
+
+    document.getElementById("modalTitle")
+    .textContent=name;
+
+    document.getElementById("modalImg")
+    .src=productImages[name] || productImages["Oversized Essential Tee"];
+
+    document.getElementById("productModal")
+    .classList.add("show");
+
+}
+
+function closeProduct(){
+
+    document.getElementById("productModal")
+    .classList.remove("show");
+
+}
+
+/* ================= CART ================= */
+
+let cartCount=Number(
+    localStorage.getItem("asCart") || 0
+);
+
+let wishCount=Number(
+    localStorage.getItem("asWish") || 0
+);
+
+function updateCounters(){
+
+    document.getElementById("cartCount")
+    .textContent=cartCount;
+
+    document.getElementById("wishCount")
+    .textContent=wishCount;
+
+}
+
+function addToCart(){
+
+    cartCount++;
+
+    localStorage.setItem(
+        "asCart",
+        cartCount
+    );
+
+    updateCounters();
+
+    closeProduct();
+
+    alert("Product added to your bag ✓");
+
+}
+
+function showCart(){
+
+    if(cartCount===0){
+
+        alert("Your bag is empty.");
+
+    }else{
+
+        alert(
+            "You have "+cartCount+
+            " item(s) in your bag."
+        );
+
+    }
+
+}
+
+function showWishlist(){
+
+    alert(
+        wishCount===0
+        ? "Your wishlist is empty."
+        : "You have "+wishCount+" wishlist item(s)."
+    );
+
+}
+
+updateCounters();
+
+/* ================= KIDS FILTER ================= */
+
+function filterKids(category,button){
+
+    document.querySelectorAll(".kids-tab")
+    .forEach(tab=>{
+        tab.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    document.querySelectorAll(".kids-card")
+    .forEach(card=>{
 
         if(
-            !query ||
-            name.includes(query) ||
-            category.includes(query)
+            category==="all" ||
+            card.dataset.kids===category
         ){
 
-            product.style.display="block";
+            card.style.display="block";
 
         }else{
 
-            product.style.display="none";
+            card.style.display="none";
 
         }
 
@@ -2643,371 +2547,35 @@ function searchProducts(value){
 
 }
 
+/* ================= CATEGORY ACTIVE ================= */
 
-/* =========================
-   WISHLIST
-========================= */
+const navLinks=
+document.querySelectorAll(".category-bar a");
 
-let wishlistCount = 0;
+navLinks.forEach(link=>{
 
-function toggleWishlist(event,button){
+    link.addEventListener("click",function(){
 
-    event.stopPropagation();
-
-    const active =
-        button.classList.toggle("active");
-
-    button.textContent =
-        active ? "♥" : "♡";
-
-    wishlistCount +=
-        active ? 1 : -1;
-
-    document
-        .getElementById("wishCount")
-        .textContent =
-        wishlistCount;
-
-    showToast(
-        active
-        ? "Added to wishlist"
-        : "Removed from wishlist"
-    );
-
-}
-
-
-/* =========================
-   PRODUCT MODAL
-========================= */
-
-let currentProduct = null;
-
-function openProduct(product){
-
-    currentProduct = product;
-
-    document
-        .getElementById("modalImage")
-        .src =
-        product.dataset.image;
-
-    document
-        .getElementById("modalName")
-        .textContent =
-        product.dataset.name;
-
-    document
-        .getElementById("modalCategory")
-        .textContent =
-        product.dataset.category;
-
-    document
-        .getElementById("modalPrice")
-        .textContent =
-        "₹" + product.dataset.price;
-
-    document
-        .getElementById("modalOld")
-        .textContent =
-        "₹" + product.dataset.old;
-
-    document
-        .getElementById("modalDiscount")
-        .textContent =
-        product.dataset.discount;
-
-    document
-        .getElementById("productModal")
-        .classList.add("open");
-
-}
-
-function closeProduct(){
-
-    document
-        .getElementById("productModal")
-        .classList.remove("open");
-
-}
-
-
-/* =========================
-   BAG
-========================= */
-
-let bagItems = [];
-let currentBagProduct = null;
-
-function addCurrentToBag(){
-
-    if(!currentProduct) return;
-
-    const product = {
-        name:currentProduct.dataset.name,
-        price:Number(currentProduct.dataset.price),
-        image:currentProduct.dataset.image
-    };
-
-    bagItems.push(product);
-
-    updateBag();
-
-    closeProduct();
-
-    showToast(
-        product.name +
-        " added to bag"
-    );
-
-}
-
-function updateBag(){
-
-    const count =
-        bagItems.length;
-
-    document
-        .getElementById("bagCount")
-        .textContent =
-        count;
-
-    const total =
-        bagItems.reduce(
-            (sum,item)=>
-                sum + item.price,
-            0
+        navLinks.forEach(x=>
+            x.classList.remove("active")
         );
 
-    document
-        .getElementById("bagTotal")
-        .textContent =
-        "₹" + total.toLocaleString("en-IN");
+        this.classList.add("active");
 
+    });
 
-    const container =
-        document.getElementById(
-            "bagContent"
-        );
+});
 
-    if(!bagItems.length){
+/* ================= MODAL OUTSIDE CLICK ================= */
 
-        container.innerHTML = `
-            <div class="empty">
-                <div style="font-size:45px;margin-bottom:15px">
-                    🛍
-                </div>
-                <h3>Your bag is empty</h3>
-                <p style="margin-top:8px">
-                    Add products you love.
-                </p>
-            </div>
-        `;
+document.getElementById("productModal")
+.addEventListener("click",(e)=>{
 
-        return;
-
+    if(e.target.id==="productModal"){
+        closeProduct();
     }
 
-
-    container.innerHTML =
-        bagItems.map(
-            (item,index)=>`
-
-            <div style="
-                display:flex;
-                gap:12px;
-                padding:15px 0;
-                border-bottom:1px solid #eee;
-            ">
-
-                <img
-                    src="${item.image}"
-                    style="
-                        width:75px;
-                        height:90px;
-                        object-fit:cover;
-                    "
-                >
-
-                <div style="flex:1">
-
-                    <strong>
-                        ${item.name}
-                    </strong>
-
-                    <div style="
-                        margin-top:8px;
-                        font-weight:700;
-                    ">
-                        ₹${item.price.toLocaleString("en-IN")}
-                    </div>
-
-                    <button
-                        onclick="removeBag(${index})"
-                        style="
-                            border:0;
-                            background:none;
-                            color:#999;
-                            margin-top:8px;
-                            font-size:11px;
-                        "
-                    >
-                        REMOVE
-                    </button>
-
-                </div>
-
-            </div>
-        `
-        ).join("");
-
-}
-
-function removeBag(index){
-
-    bagItems.splice(index,1);
-
-    updateBag();
-
-}
-
-function openBag(){
-
-    document
-        .getElementById("bagOverlay")
-        .classList.add("open");
-
-}
-
-function closeBag(){
-
-    document
-        .getElementById("bagOverlay")
-        .classList.remove("open");
-
-}
-
-function checkout(){
-
-    if(!bagItems.length){
-
-        showToast(
-            "Your bag is empty"
-        );
-
-        return;
-
-    }
-
-    showToast(
-        "Checkout system coming soon"
-    );
-
-}
-
-
-/* =========================
-   KIDS
-========================= */
-
-function kidsCategory(type){
-
-    showToast(
-        type +
-        " collection selected"
-    );
-
-    goTo("trending");
-
-}
-
-
-/* =========================
-   TOAST
-========================= */
-
-let toastTimer;
-
-function showToast(message){
-
-    const toast =
-        document.getElementById("toast");
-
-    toast.textContent =
-        message;
-
-    toast.classList.add("show");
-
-    clearTimeout(toastTimer);
-
-    toastTimer =
-        setTimeout(
-            ()=>{
-                toast.classList.remove("show");
-            },
-            2200
-        );
-
-}
-
-
-/* =========================
-   CLOSE MODALS ON BACKGROUND
-========================= */
-
-document
-    .getElementById("productModal")
-    .addEventListener(
-        "click",
-        function(e){
-
-            if(
-                e.target === this
-            ){
-                closeProduct();
-            }
-
-        }
-    );
-
-
-document
-    .getElementById("bagOverlay")
-    .addEventListener(
-        "click",
-        function(e){
-
-            if(
-                e.target === this
-            ){
-                closeBag();
-            }
-
-        }
-    );
-
-
-/* =========================
-   ESC KEY
-========================= */
-
-document.addEventListener(
-    "keydown",
-    function(e){
-
-        if(e.key === "Escape"){
-
-            closeProduct();
-            closeBag();
-
-            document
-                .getElementById("menuOverlay")
-                .classList.remove("open");
-
-        }
-
-    }
-);
+});
 
 </script>
 

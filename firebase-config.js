@@ -1,27 +1,19 @@
-// =====================================================
-// AS FASHIONS — Firebase Configuration
-// =====================================================
-// 1. Go to https://console.firebase.google.com
-// 2. Create a free project (takes ~1 minute)
-// 3. In Project Settings > General > Your apps, add a "Web app"
-// 4. Copy the config object Firebase gives you and paste the values below
-// 5. Enable these products in the Firebase console:
-//      - Firestore Database (start in "test mode" for now, lock down later)
-//      - Storage (for product images)
-//      - Authentication > Sign-in method > Email/Password (enable it)
-// 6. Create your admin login: Authentication > Users > Add user
-//      (use that email + password to log into admin.html)
-// =====================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+const firebaseConfig = {
+  apiKey: "AIzaSyBgIseofAVL0KA5XJ4TICetI6R4XKfNZAM",
+  authDomain: "as-fashions-f0e91.firebaseapp.com",
+  projectId: "as-fashions-f0e91",
+  storageBucket: "as-fashions-f0e91.firebasestorage.app",
+  messagingSenderId: "152604088667",
+  appId: "1:152604088667:web:c1d2b2e487ab6d4e84e27e",
+  measurementId: "G-Q784YCEQJF"
 };
 
-// This flag is used by index.html / admin.html to show a setup banner
-// until you've filled in real values above.
-export const isFirebaseConfigured = firebaseConfig.apiKey !== "YOUR_API_KEY";
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
+export const auth = getAuth(app);

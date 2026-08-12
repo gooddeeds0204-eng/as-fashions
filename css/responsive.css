@@ -1,58 +1,65 @@
-/* --- RESPONSIVE DESIGN FOR MOBILE & TABLET --- */
-
-@media screen and (max-width: 992px) {
-    /* Navbar Adjustments */
+@media screen and (max-width: 768px) {
+    /* Mobile Header Layout */
     .navbar {
-        padding: 0 15px;
-        height: 65px;
-        flex-wrap: wrap;
+        padding: 0 12px;
+        height: auto;
+        flex-direction: column;
+        padding-bottom: 10px;
     }
 
     .logo-container {
-        gap: 15px;
         width: 100%;
         justify-content: space-between;
-        padding-top: 10px;
+        height: 55px;
+        gap: 10px;
     }
 
     .logo {
         font-size: 20px;
-        letter-spacing: 1px;
     }
 
-    /* Hide desktop nav links on mobile (Will use a mobile drawer later) */
     .nav-links {
-        display: none; 
+        display: none; /* Hide heavy links on mobile header, can use menu later */
     }
 
-    /* Search bar full width on mobile */
     .search-container {
         width: 100%;
-        margin: 8px 0;
+        margin-bottom: 8px;
         height: 36px;
     }
 
     .nav-actions {
-        gap: 20px;
+        width: 100%;
+        justify-content: space-around;
+        gap: 10px;
+        border-top: 1px solid #f0f0f0;
+        padding-top: 8px;
     }
 
-    .action-item span {
-        display: none; /* Hide text under icons on mobile to save space */
+    .action-item {
+        flex-direction: row;
+        gap: 5px;
+        font-size: 12px;
+        font-weight: 500;
     }
 
     .action-item i {
-        font-size: 20px;
+        font-size: 15px;
+        margin-bottom: 0;
+    }
+
+    .action-item span {
+        display: inline-block; /* Show text neatly on mobile action bar */
     }
 
     /* Hero Banner Mobile */
     .hero-banner {
-        height: 250px;
-        margin: 15px;
-        border-radius: 6px;
+        height: 220px;
+        margin-bottom: 20px;
     }
 
     .banner-content h1 {
-        font-size: 26px;
+        font-size: 24px;
     }
 
     .banner-content p {
@@ -61,60 +68,60 @@
     }
 
     .shop-btn {
-        padding: 10px 24px;
-        font-size: 13px;
+        padding: 8px 20px;
+        font-size: 12px;
     }
 
-    /* Categories Grid for Mobile (Horizontal Scroll or 3 columns) */
+    /* Categories Grid: 3 items per row on mobile */
     .section-title {
         font-size: 16px;
-        margin: 25px 15px 15px 15px;
+        margin: 20px 12px 10px 12px;
     }
 
     .categories-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        padding: 0 15px;
-        margin-bottom: 30px;
+        gap: 10px;
+        padding: 0 12px;
+        margin-bottom: 25px;
     }
 
     .category-circle-card span {
-        font-size: 12px;
+        font-size: 11px;
     }
 
-    /* Products Grid for Mobile (2 columns like Myntra App) */
+    /* Products Grid: 2 items per row (Like Myntra App) */
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        padding: 0 15px;
+        gap: 10px;
+        padding: 0 12px;
         margin-bottom: 30px;
     }
 
     .product-img-container {
-        height: 180px;
+        height: 190px;
     }
 
     .product-details {
-        padding: 10px;
+        padding: 8px;
     }
 
     .product-brand {
-        font-size: 13px;
-    }
-
-    .product-name {
         font-size: 12px;
     }
 
+    .product-name {
+        font-size: 11px;
+    }
+
     .current-price {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .original-price {
-        font-size: 11px;
+        font-size: 10px;
     }
 
     .discount {
-        font-size: 11px;
+        font-size: 10px;
     }
 }

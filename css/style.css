@@ -8,10 +8,10 @@
 body {
     background-color: #f1f3f6;
     color: #282c3f;
-    padding-bottom: 60px; /* Space for bottom nav on mobile */
+    padding-bottom: 60px;
 }
 
-/* --- MYNTRA STYLE DESKTOP HEADER --- */
+/* Navbar */
 .navbar {
     display: flex;
     align-items: center;
@@ -28,45 +28,37 @@ body {
 .nav-left {
     display: flex;
     align-items: center;
-    gap: 40px;
-}
-
-.menu-icon {
-    display: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: #282c3f;
+    gap: 30px;
 }
 
 .logo {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 900;
     letter-spacing: 2px;
     color: #ff3f6c;
     text-decoration: none;
 }
 
-.nav-links {
+.desktop-nav-links {
     display: flex;
-    gap: 30px;
+    gap: 25px;
     height: 80px;
     align-items: center;
 }
 
-.nav-links a {
+.desktop-nav-links a {
     text-decoration: none;
     color: #282c3f;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     height: 100%;
     display: flex;
     align-items: center;
     border-bottom: 4px solid transparent;
-    transition: 0.2s;
 }
 
-.nav-links a:hover {
+.desktop-nav-links a:hover {
     color: #ff3f6c;
     border-bottom: 4px solid #ff3f6c;
 }
@@ -117,10 +109,6 @@ body {
     margin-bottom: 2px;
 }
 
-.icon-item:hover {
-    color: #ff3f6c;
-}
-
 .badge {
     position: absolute;
     top: -5px;
@@ -133,7 +121,7 @@ body {
     font-weight: 700;
 }
 
-/* --- TOP HORIZONTAL CATEGORY SCROLLER (MYNTRA STYLE) --- */
+/* Top Horizontal Category Bubbles */
 .top-categories {
     display: flex;
     gap: 15px;
@@ -168,17 +156,15 @@ body {
     font-size: 20px;
     color: #ff3f6c;
     margin-bottom: 5px;
-    overflow: hidden;
 }
 
 .cat-bubble span {
     font-size: 12px;
     font-weight: 700;
     color: #3e4152;
-    text-align: center;
 }
 
-/* --- HERO BANNER --- */
+/* Hero Banner */
 .hero-banner {
     width: 100%;
     height: 350px;
@@ -215,7 +201,6 @@ body {
     border-radius: 4px;
 }
 
-/* --- SECTION TITLE --- */
 .section-title {
     font-size: 20px;
     font-weight: 800;
@@ -225,7 +210,7 @@ body {
     margin: 25px 20px 15px 20px;
 }
 
-/* --- PRODUCTS GRID (MYNTRA CARD STYLE) --- */
+/* Products Grid */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -241,12 +226,6 @@ body {
     overflow: hidden;
     position: relative;
     cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .product-img-box {
@@ -323,7 +302,7 @@ body {
     font-weight: 700;
 }
 
-/* --- MOBILE BOTTOM NAVBAR (MYNTRA APP STYLE) --- */
+/* Mobile Bottom Navigation */
 .mobile-bottom-nav {
     display: none;
     position: fixed;
@@ -357,7 +336,6 @@ body {
     color: #ff3f6c;
 }
 
-/* --- FOOTER --- */
 footer {
     background: #ffffff;
     padding: 30px;

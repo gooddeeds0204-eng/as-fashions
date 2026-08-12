@@ -2,1594 +2,2135 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AS FASHIONS | Fashion for Everyone</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <meta name="description"
-          content="AS FASHIONS - Shop Men's, Women's and Kids fashion, footwear, accessories, beauty and more.">
+          content="AS FASHIONS - Shop the latest fashion for Men, Women, Kids, Footwear, Accessories and Beauty.">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <meta name="keywords"
+          content="AS Fashions, fashion, clothing, men fashion, women fashion, kids fashion, footwear, accessories">
 
-        :root {
-            --black: #111111;
-            --white: #ffffff;
-            --gray: #666666;
-            --light-gray: #f5f5f5;
-            --border: #e5e5e5;
-            --red: #ff3f6c;
-        }
+    <meta name="author" content="AS FASHIONS">
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #fff;
-            color: var(--black);
-        }
+    <meta name="theme-color" content="#ffffff">
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    <title>AS FASHIONS — Fashion for Everyone</title>
 
-        button {
-            font-family: inherit;
-        }
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        /* ================= HEADER ================= */
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
-        .top-strip {
-            background: #111;
-            color: #fff;
-            text-align: center;
-            padding: 9px;
-            font-size: 12px;
-            letter-spacing: .5px;
-        }
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
 
-        header {
-            height: 76px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            gap: 35px;
-            position: sticky;
-            top: 0;
-            background: rgba(255,255,255,.97);
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 27px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            white-space: nowrap;
-        }
-
-        .logo span {
-            font-weight: 400;
-        }
-
-        .nav {
-            display: flex;
-            gap: 25px;
-            height: 100%;
-            align-items: center;
-        }
-
-        .nav-item {
-            font-size: 13px;
-            font-weight: 700;
-            position: relative;
-            cursor: pointer;
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-item:hover {
-            color: var(--red);
-        }
-
-        /* ================= MEGA MENU ================= */
-
-        .mega-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: min(1100px, 94vw);
-            background: #fff;
-            border: 1px solid var(--border);
-            box-shadow: 0 12px 35px rgba(0,0,0,.12);
-            padding: 28px;
-            display: none;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-        }
-
-        .nav-item:hover .mega-menu {
-            display: grid;
-        }
-
-        .mega-column h3 {
-            font-size: 13px;
-            margin-bottom: 13px;
-            color: var(--red);
-        }
-
-        .mega-column a {
-            display: block;
-            color: #555;
-            font-size: 12px;
-            margin: 9px 0;
-        }
-
-        .mega-column a:hover {
-            color: #111;
-            font-weight: bold;
-        }
-
-        /* ================= SEARCH ================= */
-
-        .search-box {
-            flex: 1;
-            max-width: 420px;
-            position: relative;
-        }
-
-        .search-box input {
-            width: 100%;
-            border: 1px solid #ddd;
-            background: #f7f7f7;
-            padding: 13px 18px 13px 42px;
-            border-radius: 3px;
-            outline: none;
-            font-size: 13px;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 12px;
-            font-size: 16px;
-        }
-
-        /* ================= HEADER ACTIONS ================= */
-
-        .actions {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .action {
-            text-align: center;
-            font-size: 11px;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .action-icon {
-            font-size: 20px;
-            display: block;
-            margin-bottom: 3px;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -7px;
-            right: -9px;
-            background: var(--red);
-            color: white;
-            border-radius: 50%;
-            width: 17px;
-            height: 17px;
-            font-size: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* ================= HERO ================= */
-
-        .hero {
-            min-height: 520px;
-            background:
-                linear-gradient(90deg,
-                rgba(0,0,0,.72),
-                rgba(0,0,0,.18)),
-                url("https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1800&q=85")
-                center/cover;
-            display: flex;
-            align-items: center;
-            padding: 70px 7%;
-            color: #fff;
-        }
-
-        .hero-content {
-            max-width: 580px;
-        }
-
-        .hero-small {
-            font-size: 14px;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-        }
-
-        .hero h1 {
-            font-size: clamp(42px, 7vw, 76px);
-            line-height: .95;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 28px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            border: none;
-            padding: 14px 28px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .btn-white {
-            background: #fff;
-            color: #111;
-        }
-
-        .btn-black {
-            background: #111;
-            color: #fff;
-        }
-
-        /* ================= SECTION ================= */
-
-        .section {
-            padding: 55px 5%;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .section-title h2 {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .section-title p {
-            color: var(--gray);
-            font-size: 13px;
-        }
-
-        /* ================= CATEGORY GRID ================= */
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        .category-card {
-            min-height: 260px;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            background: #eee;
-        }
-
-        .category-card img {
-            width: 100%;
-            height: 100%;
-            min-height: 260px;
-            object-fit: cover;
-            transition: .4s;
-        }
-
-        .category-card:hover img {
-            transform: scale(1.06);
-        }
-
-        .category-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                transparent 40%,
-                rgba(0,0,0,.75)
-            );
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 22px;
-            color: #fff;
-        }
-
-        .category-overlay h3 {
-            font-size: 21px;
-            margin-bottom: 5px;
-        }
-
-        .category-overlay p {
-            font-size: 12px;
-        }
-
-        /* ================= SPECIAL COLLECTIONS ================= */
-
-        .collection-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-        }
-
-        .collection-card {
-            padding: 35px 15px;
-            text-align: center;
-            background: #f7f7f7;
-            border: 1px solid #eee;
-            cursor: pointer;
-            transition: .25s;
-        }
-
-        .collection-card:hover {
-            background: #111;
-            color: #fff;
-            transform: translateY(-4px);
-        }
-
-        .collection-card strong {
-            display: block;
-            font-size: 15px;
-            margin-bottom: 8px;
-        }
-
-        .collection-card span {
-            font-size: 11px;
-            color: #777;
-        }
-
-        .collection-card:hover span {
-            color: #ddd;
-        }
-
-        /* ================= PRODUCTS ================= */
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-        }
-
-        .product-card {
-            cursor: pointer;
-            position: relative;
-        }
-
-        .product-image {
-            position: relative;
-            overflow: hidden;
-            background: #f5f5f5;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 380px;
-            object-fit: cover;
-            display: block;
-            transition: .4s;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.04);
-        }
-
-        .wishlist {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            border: none;
-            background: white;
-            cursor: pointer;
-            font-size: 17px;
-        }
-
-        .badge {
-            position: absolute;
-            left: 10px;
-            bottom: 10px;
-            background: #fff;
-            padding: 6px 9px;
-            font-size: 10px;
-            font-weight: bold;
-        }
-
-        .product-info {
-            padding: 12px 2px;
-        }
-
-        .brand {
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .product-name {
-            color: #666;
-            font-size: 12px;
-            margin: 5px 0;
-        }
-
-        .price {
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .mrp {
-            color: #888;
-            text-decoration: line-through;
-            font-weight: normal;
-            margin-left: 5px;
-        }
-
-        .discount {
-            color: #ff905a;
-            margin-left: 5px;
-        }
-
-        /* ================= FEATURES ================= */
-
-        .features {
-            background: #fafafa;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            text-align: center;
-            padding: 35px 5%;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-        }
-
-        .feature {
-            border-right: 1px solid #ddd;
-        }
-
-        .feature:last-child {
-            border: none;
-        }
-
-        .feature-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .feature strong {
-            display: block;
-            font-size: 13px;
-        }
-
-        .feature span {
-            color: #777;
-            font-size: 11px;
-        }
-
-        /* ================= NEWSLETTER ================= */
-
-        .newsletter {
-            text-align: center;
-            padding: 65px 20px;
-        }
-
-        .newsletter h2 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .newsletter p {
-            color: #777;
-            font-size: 13px;
-            margin-bottom: 22px;
-        }
-
-        .newsletter-form {
-            display: flex;
-            max-width: 480px;
-            margin: auto;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            border: 1px solid #ccc;
-            padding: 14px;
-            outline: none;
-        }
-
-        .newsletter-form button {
-            border: none;
-            background: #111;
-            color: #fff;
-            padding: 0 25px;
-            cursor: pointer;
-        }
-
-        /* ================= FOOTER ================= */
-
-        footer {
-            background: #111;
-            color: #fff;
-            padding: 50px 5% 20px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr repeat(4, 1fr);
-            gap: 35px;
-        }
-
-        .footer-column h3 {
-            font-size: 13px;
-            margin-bottom: 18px;
-        }
-
-        .footer-column a {
-            display: block;
-            color: #aaa;
-            font-size: 11px;
-            margin: 10px 0;
-        }
-
-        .footer-column a:hover {
-            color: #fff;
-        }
-
-        .footer-brand p {
-            color: #aaa;
-            line-height: 1.7;
-            font-size: 12px;
-            max-width: 280px;
-        }
-
-        .copyright {
-            border-top: 1px solid #333;
-            margin-top: 35px;
-            padding-top: 20px;
-            color: #777;
-            font-size: 11px;
-            text-align: center;
-        }
-
-        /* ================= MOBILE ================= */
-
-        .mobile-menu {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 1000px) {
-
-            header {
-                gap: 15px;
-                padding: 0 3%;
-            }
-
-            .nav {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .search-box {
-                max-width: none;
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .collection-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .footer-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 650px) {
-
-            .top-strip {
-                font-size: 10px;
-            }
-
-            header {
-                height: 64px;
-            }
-
-            .logo {
-                font-size: 21px;
-            }
-
-            .actions {
-                gap: 10px;
-            }
-
-            .action span:last-child {
-                display: none;
-            }
-
-            .search-box {
-                position: absolute;
-                top: 64px;
-                left: 3%;
-                right: 3%;
-                width: 94%;
-            }
-
-            .hero {
-                min-height: 460px;
-                padding: 50px 7%;
-            }
-
-            .hero h1 {
-                font-size: 48px;
-            }
-
-            .section {
-                padding: 40px 4%;
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-
-            .category-card,
-            .category-card img {
-                min-height: 190px;
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .product-image img {
-                height: 260px;
-            }
-
-            .collection-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .features {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
-
-            .feature {
-                border: none;
-            }
-
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-brand {
-                grid-column: 1 / -1;
-            }
-
-            .newsletter-form {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .newsletter-form button {
-                padding: 14px;
-            }
-        }
-    </style>
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
 
-<!-- ================= TOP OFFER ================= -->
+<!-- =========================================================
+     TOP OFFER BAR
+========================================================= -->
 
-<div class="top-strip">
-    ✨ FREE SHIPPING ON ORDERS ABOVE ₹999 &nbsp; | &nbsp; EASY RETURNS
+<div class="top-offer-bar">
+    <div class="container">
+        <p>
+            🎉 EXTRA 20% OFF ON YOUR FIRST ORDER
+            <span>|</span>
+            USE CODE: <strong>ASNEW20</strong>
+        </p>
+
+        <div class="top-links">
+            <a href="#">Track Order</a>
+            <a href="#">Help</a>
+        </div>
+    </div>
 </div>
 
-<!-- ================= HEADER ================= -->
 
-<header>
+<!-- =========================================================
+     MAIN HEADER
+========================================================= -->
 
-    <div class="mobile-menu" onclick="toggleMobileMenu()">☰</div>
+<header class="main-header" id="mainHeader">
 
-    <a href="#" class="logo">
-        AS <span>FASHIONS</span>
-    </a>
+    <div class="header-container">
 
-    <nav class="nav">
+        <!-- Mobile Menu -->
+        <button class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                aria-label="Open menu">
+            ☰
+        </button>
 
-        <!-- MEN -->
-        <div class="nav-item">
-            MEN
 
-            <div class="mega-menu">
+        <!-- LOGO -->
 
-                <div class="mega-column">
-                    <h3>T-SHIRTS</h3>
-                    <a href="#">Oversized T-Shirts</a>
-                    <a href="#">Regular Fit</a>
-                    <a href="#">Polo T-Shirts</a>
-                    <a href="#">Printed T-Shirts</a>
-                    <a href="#">Graphic T-Shirts</a>
-                    <a href="#">Plain T-Shirts</a>
-                </div>
+        <a href="index.html"
+           class="brand-logo"
+           aria-label="AS FASHIONS Home">
 
-                <div class="mega-column">
-                    <h3>SHIRTS</h3>
-                    <a href="#">Casual Shirts</a>
-                    <a href="#">Formal Shirts</a>
-                    <a href="#">Oversized Shirts</a>
-                    <a href="#">Printed Shirts</a>
-                    <a href="#">Linen Shirts</a>
-                    <a href="#">Denim Shirts</a>
-                </div>
+            <span class="logo-main">AS</span>
+            <span class="logo-name">FASHIONS</span>
 
-                <div class="mega-column">
-                    <h3>JEANS</h3>
-                    <a href="#">Slim Fit</a>
-                    <a href="#">Regular Fit</a>
-                    <a href="#">Straight Fit</a>
-                    <a href="#">Relaxed Fit</a>
-                    <a href="#">Baggy Jeans</a>
-
-                    <h3 style="margin-top:20px;">TROUSERS & PANTS</h3>
-                    <a href="#">Formal Trousers</a>
-                    <a href="#">Cargo Pants</a>
-                    <a href="#">Joggers</a>
-                    <a href="#">Track Pants</a>
-                    <a href="#">Chinos</a>
-                    <a href="#">Wide Leg Pants</a>
-                </div>
-
-                <div class="mega-column">
-                    <h3>OUTERWEAR</h3>
-                    <a href="#">Hoodies</a>
-                    <a href="#">Sweatshirts</a>
-                    <a href="#">Zip Hoodies</a>
-                    <a href="#">Denim Jackets</a>
-                    <a href="#">Bomber Jackets</a>
-                    <a href="#">Puffer Jackets</a>
-
-                    <h3 style="margin-top:20px;">ETHNIC WEAR</h3>
-                    <a href="#">Kurtas</a>
-                    <a href="#">Kurta Sets</a>
-                    <a href="#">Nehru Jackets</a>
-                    <a href="#">Ethnic Sets</a>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- WOMEN -->
-        <div class="nav-item">
-            WOMEN
-
-            <div class="mega-menu">
-
-                <div class="mega-column">
-                    <h3>TOPS</h3>
-                    <a href="#">Casual Tops</a>
-                    <a href="#">Crop Tops</a>
-                    <a href="#">Tank Tops</a>
-                    <a href="#">Shirts</a>
-                    <a href="#">Blouses</a>
-
-                    <h3 style="margin-top:20px;">DRESSES</h3>
-                    <a href="#">Mini Dresses</a>
-                    <a href="#">Midi Dresses</a>
-                    <a href="#">Maxi Dresses</a>
-                    <a href="#">Party Dresses</a>
-                </div>
-
-                <div class="mega-column">
-                    <h3>JEANS</h3>
-                    <a href="#">Skinny</a>
-                    <a href="#">Straight</a>
-                    <a href="#">Wide Leg</a>
-                    <a href="#">Mom Fit</a>
-                    <a href="#">Baggy</a>
-
-                    <h3 style="margin-top:20px;">TROUSERS</h3>
-                    <a href="#">Wide Leg</a>
-                    <a href="#">Cargo</a>
-                    <a href="#">Formal Pants</a>
-                    <a href="#">Joggers</a>
-                    <a href="#">Flared Pants</a>
-                </div>
-
-                <div class="mega-column">
-                    <h3>ETHNIC WEAR</h3>
-                    <a href="#">Kurtis</a>
-                    <a href="#">Kurta Sets</a>
-                    <a href="#">Salwar Suits</a>
-                    <a href="#">Anarkali</a>
-                    <a href="#">Sarees</a>
-                    <a href="#">Dupattas</a>
-
-                    <h3 style="margin-top:20px;">SKIRTS</h3>
-                    <a href="#">Mini</a>
-                    <a href="#">Midi</a>
-                    <a href="#">Maxi</a>
-                    <a href="#">Denim Skirts</a>
-                </div>
-
-                <div class="mega-column">
-                    <h3>CO-ORDS</h3>
-                    <a href="#">Casual Co-ords</a>
-                    <a href="#">Party Co-ords</a>
-                    <a href="#">Lounge Co-ords</a>
-
-                    <h3 style="margin-top:20px;">OUTERWEAR</h3>
-                    <a href="#">Denim Jackets</a>
-                    <a href="#">Blazers</a>
-                    <a href="#">Bomber Jackets</a>
-                    <a href="#">Shrugs</a>
-
-                    <h3 style="margin-top:20px;">ACTIVEWEAR</h3>
-                    <a href="#">Sports Tops</a>
-                    <a href="#">Leggings</a>
-                    <a href="#">Sports Sets</a>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- KIDS -->
-        <div class="nav-item">
-            KIDS
-
-            <div class="mega-menu">
-
-                <div class="mega-column">
-                    <h3>BOYS</h3>
-                    <a href="#">T-Shirts</a>
-                    <a href="#">Shirts</a>
-                    <a href="#">Jeans</a>
-                    <a href="#">Trousers</a>
-                    <a href="#">Shorts</a>
-                    <a href="#">Hoodies</a>
-                    <a href="#">Ethnic Wear</a>
-                    <a href="#">Co-ord Sets</a>
-                </div>
-
-                <div class="mega-column">
-                    <h3>GIRLS</h3>
-                    <a href="#">Tops</a>
-                    <a href="#">Dresses</a>
-                    <a href="#">Jeans</a>
-                    <a href="#">Skirts</a>
-                    <a href="#">Trousers</a>
-                    <a href="#">Ethnic Wear</a>
-                    <a href="#">Co-ord Sets</a>
-                    <a href="#">Jackets</a>
-                </div>
-
-                <div class="mega-column">
-                    <h3>BABY</h3>
-                    <a href="#">Baby Boys</a>
-                    <a href="#">Baby Girls</a>
-                    <a href="#">Rompers</a>
-                    <a href="#">Sets</a>
-                    <a href="#">Bodysuits</a>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- FOOTWEAR -->
-        <div class="nav-item">
-            FOOTWEAR
-
-            <div class="mega-menu">
-
-                <div class="mega-column">
-                    <h3>MEN</h3>
-                    <a href="#">Sneakers</a>
-                    <a href="#">Casual Shoes</a>
-                    <a href="#">Formal Shoes</a>
-                    <a href="#">Sandals</a>
-                    <a href="#">Slippers</a>
-                    <a href="#">Sports Shoes</a>
-                </div>
-
-                <div class="mega-column">
-                    <h3>WOMEN</h3>
-                    <a href="#">Sneakers</a>
-                    <a href="#">Heels</a>
-                    <a href="#">Flats</a>
-                    <a href="#">Sandals</a>
-                    <a href="#">Boots</a>
-                    <a href="#">Slippers</a>
-                </div>
-
-                <div class="mega-column">
-                    <h3>KIDS</h3>
-                    <a href="#">Sneakers</a>
-                    <a href="#">School Shoes</a>
-                    <a href="#">Sandals</a>
-                    <a href="#">Sports Shoes</a>
-                </div>
-
-                <div class="mega-column">
-                    <h3>SIZE SYSTEM</h3>
-                    <a href="#">Men: UK 6–11</a>
-                    <a href="#">Women: UK 3–8</a>
-                    <a href="#">Kids: UK 10C–3</a>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- ACCESSORIES -->
-        <div class="nav-item">
-            ACCESSORIES
-
-            <div class="mega-menu">
-
-                <div class="mega-column">
-                    <h3>ACCESSORIES</h3>
-                    <a href="#">Bags</a>
-                    <a href="#">Backpacks</a>
-                    <a href="#">Wallets</a>
-                    <a href="#">Belts</a>
-                    <a href="#">Caps</a>
-                    <a href="#">Hats</a>
-                </div>
-
-                <div class="mega-column">
-                    <h3>FASHION</h3>
-                    <a href="#">Sunglasses</a>
-                    <a href="#">Watches</a>
-                    <a href="#">Jewellery</a>
-                    <a href="#">Scarves</a>
-                    <a href="#">Socks</a>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- BEAUTY -->
-        <div class="nav-item">
-            BEAUTY
-
-            <div class="mega-menu">
-
-                <div class="mega-column">
-                    <h3>BEAUTY & PERSONAL CARE</h3>
-                    <a href="#">Makeup</a>
-                    <a href="#">Skincare</a>
-                    <a href="#">Haircare</a>
-                    <a href="#">Fragrances</a>
-                    <a href="#">Bath & Body</a>
-                </div>
-
-            </div>
-        </div>
-
-        <a href="#" class="nav-item" style="color:#ff3f6c;">
-            SALE
         </a>
 
-    </nav>
 
-    <div class="search-box">
-        <span class="search-icon">⌕</span>
-        <input
-            type="search"
-            id="searchInput"
-            placeholder="Search for products, brands and more"
-            onkeyup="searchProducts()">
-    </div>
+        <!-- DESKTOP NAVIGATION -->
 
-    <div class="actions">
+        <nav class="main-nav"
+             id="mainNav"
+             aria-label="Main navigation">
 
-        <div class="action">
-            <span class="action-icon">♙</span>
-            <span>Profile</span>
+            <!-- MEN -->
+
+            <div class="nav-item mega-menu-wrapper">
+
+                <a href="#" class="nav-link">
+                    MEN
+                </a>
+
+                <div class="mega-menu">
+
+                    <div class="mega-column">
+
+                        <h3>Topwear</h3>
+
+                        <a href="#">T-Shirts</a>
+                        <a href="#">Oversized T-Shirts</a>
+                        <a href="#">Regular Fit</a>
+                        <a href="#">Polo T-Shirts</a>
+                        <a href="#">Printed T-Shirts</a>
+                        <a href="#">Graphic T-Shirts</a>
+                        <a href="#">Plain T-Shirts</a>
+
+                        <h3>Shirts</h3>
+
+                        <a href="#">Casual Shirts</a>
+                        <a href="#">Formal Shirts</a>
+                        <a href="#">Oversized Shirts</a>
+                        <a href="#">Printed Shirts</a>
+                        <a href="#">Linen Shirts</a>
+                        <a href="#">Denim Shirts</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Bottomwear</h3>
+
+                        <a href="#">Jeans</a>
+                        <a href="#">Slim Fit</a>
+                        <a href="#">Regular Fit</a>
+                        <a href="#">Straight Fit</a>
+                        <a href="#">Relaxed Fit</a>
+                        <a href="#">Baggy Jeans</a>
+
+                        <a href="#">Trousers & Pants</a>
+                        <a href="#">Formal Trousers</a>
+                        <a href="#">Cargo Pants</a>
+                        <a href="#">Joggers</a>
+                        <a href="#">Track Pants</a>
+                        <a href="#">Chinos</a>
+                        <a href="#">Wide Leg Pants</a>
+
+                        <a href="#">Shorts</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Winterwear</h3>
+
+                        <a href="#">Hoodies</a>
+                        <a href="#">Sweatshirts</a>
+                        <a href="#">Zip Hoodies</a>
+
+                        <a href="#">Jackets & Coats</a>
+                        <a href="#">Denim Jackets</a>
+                        <a href="#">Bomber Jackets</a>
+                        <a href="#">Puffer Jackets</a>
+                        <a href="#">Casual Jackets</a>
+
+                        <h3>Ethnic Wear</h3>
+
+                        <a href="#">Kurtas</a>
+                        <a href="#">Kurta Sets</a>
+                        <a href="#">Nehru Jackets</a>
+                        <a href="#">Ethnic Sets</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Activewear</h3>
+
+                        <a href="#">Sports T-Shirts</a>
+                        <a href="#">Track Pants</a>
+                        <a href="#">Gym Shorts</a>
+                        <a href="#">Sports Sets</a>
+
+                        <h3>Innerwear & Loungewear</h3>
+
+                        <a href="#">Vests</a>
+                        <a href="#">Briefs</a>
+                        <a href="#">Boxers</a>
+                        <a href="#">Lounge Pants</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- WOMEN -->
+
+            <div class="nav-item mega-menu-wrapper">
+
+                <a href="#" class="nav-link">
+                    WOMEN
+                </a>
+
+                <div class="mega-menu">
+
+                    <div class="mega-column">
+
+                        <h3>Tops</h3>
+
+                        <a href="#">Casual Tops</a>
+                        <a href="#">Crop Tops</a>
+                        <a href="#">Tank Tops</a>
+                        <a href="#">Shirts</a>
+                        <a href="#">Blouses</a>
+
+                        <h3>Dresses</h3>
+
+                        <a href="#">Mini Dresses</a>
+                        <a href="#">Midi Dresses</a>
+                        <a href="#">Maxi Dresses</a>
+                        <a href="#">Casual Dresses</a>
+                        <a href="#">Party Dresses</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Jeans</h3>
+
+                        <a href="#">Skinny</a>
+                        <a href="#">Straight</a>
+                        <a href="#">Wide Leg</a>
+                        <a href="#">Mom Fit</a>
+                        <a href="#">Baggy</a>
+
+                        <h3>Trousers & Pants</h3>
+
+                        <a href="#">Wide Leg</a>
+                        <a href="#">Cargo</a>
+                        <a href="#">Formal Pants</a>
+                        <a href="#">Joggers</a>
+                        <a href="#">Flared Pants</a>
+
+                        <h3>Skirts</h3>
+
+                        <a href="#">Mini</a>
+                        <a href="#">Midi</a>
+                        <a href="#">Maxi</a>
+                        <a href="#">Denim Skirts</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Ethnic Wear</h3>
+
+                        <a href="#">Kurtis</a>
+                        <a href="#">Kurta Sets</a>
+                        <a href="#">Salwar Suits</a>
+                        <a href="#">Anarkali</a>
+                        <a href="#">Sarees</a>
+                        <a href="#">Dupattas</a>
+
+                        <h3>Co-ords</h3>
+
+                        <a href="#">Casual Co-ords</a>
+                        <a href="#">Party Co-ords</a>
+                        <a href="#">Lounge Co-ords</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Activewear</h3>
+
+                        <a href="#">Sports Tops</a>
+                        <a href="#">Leggings</a>
+                        <a href="#">Shorts</a>
+                        <a href="#">Sports Sets</a>
+
+                        <h3>Jackets & Outerwear</h3>
+
+                        <a href="#">Denim Jackets</a>
+                        <a href="#">Blazers</a>
+                        <a href="#">Bomber Jackets</a>
+                        <a href="#">Shrugs</a>
+
+                        <h3>Lingerie & Innerwear</h3>
+
+                        <a href="#">Bras</a>
+                        <a href="#">Panties</a>
+                        <a href="#">Camisoles</a>
+                        <a href="#">Shapewear</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- KIDS -->
+
+            <div class="nav-item mega-menu-wrapper">
+
+                <a href="#" class="nav-link">
+                    KIDS
+                </a>
+
+                <div class="mega-menu">
+
+                    <div class="mega-column">
+
+                        <h3>Boys</h3>
+
+                        <a href="#">T-Shirts</a>
+                        <a href="#">Shirts</a>
+                        <a href="#">Jeans</a>
+                        <a href="#">Trousers</a>
+                        <a href="#">Shorts</a>
+                        <a href="#">Hoodies</a>
+                        <a href="#">Ethnic Wear</a>
+                        <a href="#">Co-ord Sets</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Girls</h3>
+
+                        <a href="#">Tops</a>
+                        <a href="#">Dresses</a>
+                        <a href="#">Jeans</a>
+                        <a href="#">Skirts</a>
+                        <a href="#">Trousers</a>
+                        <a href="#">Ethnic Wear</a>
+                        <a href="#">Co-ord Sets</a>
+                        <a href="#">Jackets</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Baby</h3>
+
+                        <a href="#">Baby Boys</a>
+                        <a href="#">Baby Girls</a>
+                        <a href="#">Rompers</a>
+                        <a href="#">Sets</a>
+                        <a href="#">Bodysuits</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTWEAR -->
+
+            <div class="nav-item mega-menu-wrapper">
+
+                <a href="#" class="nav-link">
+                    FOOTWEAR
+                </a>
+
+                <div class="mega-menu">
+
+                    <div class="mega-column">
+
+                        <h3>Men</h3>
+
+                        <a href="#">Sneakers</a>
+                        <a href="#">Casual Shoes</a>
+                        <a href="#">Formal Shoes</a>
+                        <a href="#">Sandals</a>
+                        <a href="#">Slippers</a>
+                        <a href="#">Sports Shoes</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Women</h3>
+
+                        <a href="#">Sneakers</a>
+                        <a href="#">Heels</a>
+                        <a href="#">Flats</a>
+                        <a href="#">Sandals</a>
+                        <a href="#">Boots</a>
+                        <a href="#">Slippers</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Kids</h3>
+
+                        <a href="#">Sneakers</a>
+                        <a href="#">School Shoes</a>
+                        <a href="#">Sandals</a>
+                        <a href="#">Sports Shoes</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Footwear Sizes</h3>
+
+                        <p class="size-info">
+                            Men's UK 6–11
+                        </p>
+
+                        <p class="size-info">
+                            Women's UK 3–8
+                        </p>
+
+                        <p class="size-info">
+                            Kids UK 10C–3
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACCESSORIES -->
+
+            <div class="nav-item mega-menu-wrapper">
+
+                <a href="#" class="nav-link">
+                    ACCESSORIES
+                </a>
+
+                <div class="mega-menu">
+
+                    <div class="mega-column">
+
+                        <h3>Accessories</h3>
+
+                        <a href="#">Bags</a>
+                        <a href="#">Backpacks</a>
+                        <a href="#">Wallets</a>
+                        <a href="#">Belts</a>
+                        <a href="#">Caps</a>
+                        <a href="#">Hats</a>
+
+                    </div>
+
+
+                    <div class="mega-column">
+
+                        <h3>Fashion Accessories</h3>
+
+                        <a href="#">Sunglasses</a>
+                        <a href="#">Watches</a>
+                        <a href="#">Jewellery</a>
+                        <a href="#">Scarves</a>
+                        <a href="#">Socks</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BEAUTY -->
+
+            <div class="nav-item mega-menu-wrapper">
+
+                <a href="#" class="nav-link">
+                    BEAUTY
+                </a>
+
+                <div class="mega-menu">
+
+                    <div class="mega-column">
+
+                        <h3>Beauty & Personal Care</h3>
+
+                        <a href="#">Makeup</a>
+                        <a href="#">Skincare</a>
+                        <a href="#">Haircare</a>
+                        <a href="#">Fragrances</a>
+                        <a href="#">Bath & Body</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SPECIAL -->
+
+            <div class="nav-item">
+
+                <a href="#sale"
+                   class="nav-link sale-link">
+                    SALE
+                </a>
+
+            </div>
+
+        </nav>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-container">
+
+            <span class="search-icon">⌕</span>
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search for products, brands and more"
+                autocomplete="off"
+                aria-label="Search products">
+
         </div>
 
-        <div class="action">
-            <span class="action-icon">♡</span>
-            <span>Wishlist</span>
-        </div>
 
-        <div class="action">
-            <span class="action-icon">🛍️</span>
-            <span>Bag</span>
-            <span class="cart-count" id="cartCount">0</span>
+        <!-- HEADER ACTIONS -->
+
+        <div class="header-actions">
+
+            <a href="#profile"
+               class="header-action"
+               aria-label="Profile">
+
+                <span class="action-icon">♙</span>
+                <span>Profile</span>
+
+            </a>
+
+
+            <a href="#wishlist"
+               class="header-action"
+               aria-label="Wishlist">
+
+                <span class="action-icon">♡</span>
+                <span>Wishlist</span>
+
+            </a>
+
+
+            <a href="#bag"
+               class="header-action bag-action"
+               aria-label="Shopping Bag">
+
+                <span class="action-icon">🛍</span>
+
+                <span>Bag</span>
+
+                <span class="bag-count"
+                      id="bagCount">
+                    0
+                </span>
+
+            </a>
+
         </div>
 
     </div>
 
 </header>
 
-<!-- ================= HERO ================= -->
 
-<section class="hero">
+<!-- =========================================================
+     MOBILE NAVIGATION
+========================================================= -->
 
-    <div class="hero-content">
+<div class="mobile-nav-overlay"
+     id="mobileNavOverlay">
 
-        <div class="hero-small">
-            AS FASHIONS
-        </div>
+    <aside class="mobile-nav"
+           id="mobileNav">
 
-        <h1>
-            YOUR<br>
-            STYLE.<br>
-            YOUR WAY.
-        </h1>
+        <div class="mobile-nav-header">
 
-        <p>
-            Discover the latest fashion for Men, Women & Kids.
-            Premium styles. Everyday comfort. One destination.
-        </p>
+            <div class="mobile-brand">
+                AS FASHIONS
+            </div>
 
-        <div class="hero-buttons">
-            <button class="btn btn-white" onclick="shopCategory('men')">
-                SHOP MEN
+            <button id="mobileNavClose"
+                    aria-label="Close menu">
+                ×
             </button>
 
-            <button class="btn btn-white" onclick="shopCategory('women')">
-                SHOP WOMEN
-            </button>
-
-            <button class="btn btn-black" onclick="shopCategory('kids')">
-                SHOP KIDS
-            </button>
         </div>
 
-    </div>
 
-</section>
+        <div class="mobile-nav-content">
 
-<!-- ================= CATEGORIES ================= -->
+            <a href="#">MEN</a>
+            <a href="#">WOMEN</a>
+            <a href="#">KIDS</a>
+            <a href="#">FOOTWEAR</a>
+            <a href="#">ACCESSORIES</a>
+            <a href="#">BEAUTY</a>
+            <a href="#sale">SALE</a>
 
-<section class="section">
-
-    <div class="section-title">
-        <h2>SHOP BY CATEGORY</h2>
-        <p>Everything you need, all in one place.</p>
-    </div>
-
-    <div class="category-grid">
-
-        <div class="category-card" onclick="shopCategory('men')">
-            <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=900&q=80">
-            <div class="category-overlay">
-                <h3>MEN</h3>
-                <p>Explore Men's Fashion →</p>
-            </div>
         </div>
 
-        <div class="category-card" onclick="shopCategory('women')">
-            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80">
-            <div class="category-overlay">
-                <h3>WOMEN</h3>
-                <p>Explore Women's Fashion →</p>
-            </div>
-        </div>
+    </aside>
 
-        <div class="category-card" onclick="shopCategory('kids')">
-            <img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=900&q=80">
-            <div class="category-overlay">
-                <h3>KIDS</h3>
-                <p>Explore Kids Fashion →</p>
-            </div>
-        </div>
+</div>
 
-        <div class="category-card" onclick="shopCategory('footwear')">
-            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80">
-            <div class="category-overlay">
-                <h3>FOOTWEAR</h3>
-                <p>Sneakers, Heels & More →</p>
-            </div>
-        </div>
 
-    </div>
+<!-- =========================================================
+     HERO SECTION
+========================================================= -->
 
-</section>
+<main>
 
-<!-- ================= SPECIAL COLLECTIONS ================= -->
+<section class="hero-section"
+         aria-label="AS FASHIONS promotional banner">
 
-<section class="section" style="background:#fafafa;">
+    <div class="hero-slider"
+         id="heroSlider">
 
-    <div class="section-title">
-        <h2>SPECIAL COLLECTIONS</h2>
-        <p>Find your next favourite look.</p>
-    </div>
+        <!-- HERO SLIDE 1 -->
 
-    <div class="collection-grid">
+        <article class="hero-slide active">
 
-        <div class="collection-card">
-            <strong>NEW ARRIVALS</strong>
-            <span>Fresh styles</span>
-        </div>
+            <div class="hero-content">
 
-        <div class="collection-card">
-            <strong>TRENDING NOW</strong>
-            <span>What's hot</span>
-        </div>
-
-        <div class="collection-card">
-            <strong>BEST SELLERS</strong>
-            <span>Loved by everyone</span>
-        </div>
-
-        <div class="collection-card">
-            <strong>PREMIUM</strong>
-            <span>Elevated fashion</span>
-        </div>
-
-        <div class="collection-card">
-            <strong>STREETWEAR</strong>
-            <span>Urban style</span>
-        </div>
-
-        <div class="collection-card">
-            <strong>PARTY WEAR</strong>
-            <span>Make an entrance</span>
-        </div>
-
-        <div class="collection-card">
-            <strong>FESTIVE</strong>
-            <span>Celebrate in style</span>
-        </div>
-
-        <div class="collection-card">
-            <strong>WINTER</strong>
-            <span>Winter essentials</span>
-        </div>
-
-        <div class="collection-card">
-            <strong>SUMMER</strong>
-            <span>Light & fresh</span>
-        </div>
-
-        <div class="collection-card">
-            <strong>UNDER ₹499</strong>
-            <span>Budget picks</span>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ================= NEW ARRIVALS ================= -->
-
-<section class="section">
-
-    <div class="section-title">
-        <h2>NEW ARRIVALS</h2>
-        <p>Fresh styles just added to AS FASHIONS.</p>
-    </div>
-
-    <div class="product-grid" id="productGrid">
-
-        <div class="product-card" data-name="oversized graphic t shirt men">
-
-            <div class="product-image">
-
-                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80">
-
-                <button class="wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <span class="badge">
-                    NEW
+                <span class="hero-small-text">
+                    NEW SEASON
                 </span>
 
+                <h1>
+                    DEFINE<br>
+                    YOUR STYLE
+                </h1>
+
+                <p>
+                    Discover the latest fashion
+                    made for you.
+                </p>
+
+                <a href="#new-arrivals"
+                   class="primary-btn">
+                    SHOP NOW
+                </a>
+
             </div>
 
-            <div class="product-info">
-                <div class="brand">AS FASHIONS</div>
-                <div class="product-name">
-                    Oversized Graphic T-Shirt
-                </div>
-
-                <div class="price">
-                    ₹699
-                    <span class="mrp">₹1,199</span>
-                    <span class="discount">42% OFF</span>
-                </div>
+            <div class="hero-image-placeholder">
+                <span>AS FASHIONS</span>
             </div>
 
-        </div>
+        </article>
 
 
-        <div class="product-card" data-name="women casual dress">
+        <!-- HERO SLIDE 2 -->
 
-            <div class="product-image">
+        <article class="hero-slide">
 
-                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80">
+            <div class="hero-content">
 
-                <button class="wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <span class="badge">
-                    NEW
+                <span class="hero-small-text">
+                    TRENDING NOW
                 </span>
 
+                <h1>
+                    STREET<br>
+                    EDIT
+                </h1>
+
+                <p>
+                    Fresh fits. Bold attitude.
+                </p>
+
+                <a href="#trending"
+                   class="primary-btn">
+                    EXPLORE NOW
+                </a>
+
             </div>
 
-            <div class="product-info">
-                <div class="brand">AS FASHIONS</div>
-                <div class="product-name">
-                    Women's Casual Dress
-                </div>
-
-                <div class="price">
-                    ₹999
-                    <span class="mrp">₹1,799</span>
-                    <span class="discount">44% OFF</span>
-                </div>
+            <div class="hero-image-placeholder">
+                <span>STREETWEAR</span>
             </div>
 
-        </div>
+        </article>
 
 
-        <div class="product-card" data-name="men sneakers">
+        <!-- HERO SLIDE 3 -->
 
-            <div class="product-image">
+        <article class="hero-slide">
 
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80">
+            <div class="hero-content">
 
-                <button class="wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <span class="badge">
-                    TRENDING
+                <span class="hero-small-text">
+                    SPECIAL OFFER
                 </span>
 
-            </div>
+                <h1>
+                    UP TO<br>
+                    70% OFF
+                </h1>
 
-            <div class="product-info">
-                <div class="brand">AS FASHIONS</div>
-                <div class="product-name">
-                    Men's Lifestyle Sneakers
-                </div>
+                <p>
+                    Selected styles. Limited time.
+                </p>
 
-                <div class="price">
-                    ₹1,499
-                    <span class="mrp">₹2,499</span>
-                    <span class="discount">40% OFF</span>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="product-card" data-name="women handbag">
-
-            <div class="product-image">
-
-                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80">
-
-                <button class="wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <span class="badge">
-                    BESTSELLER
-                </span>
+                <a href="#sale"
+                   class="primary-btn">
+                    SHOP SALE
+                </a>
 
             </div>
 
-            <div class="product-info">
-                <div class="brand">AS FASHIONS</div>
-                <div class="product-name">
-                    Women's Fashion Handbag
-                </div>
-
-                <div class="price">
-                    ₹1,199
-                    <span class="mrp">₹1,999</span>
-                    <span class="discount">40% OFF</span>
-                </div>
+            <div class="hero-image-placeholder">
+                <span>SALE</span>
             </div>
 
-        </div>
+        </article>
 
     </div>
 
-</section>
 
-<!-- ================= SPECIAL OFFER ================= -->
+    <!-- Slider controls -->
 
-<section style="
-    background:#111;
-    color:#fff;
-    padding:65px 7%;
-    text-align:center;
-">
-
-    <div style="font-size:13px;letter-spacing:3px;margin-bottom:15px;">
-        AS FASHIONS SALE
-    </div>
-
-    <h2 style="font-size:42px;margin-bottom:12px;">
-        STYLE STARTS HERE
-    </h2>
-
-    <p style="color:#bbb;margin-bottom:25px;">
-        Shop amazing fashion deals across all categories.
-    </p>
-
-    <button class="btn btn-white" onclick="shopCategory('sale')">
-        SHOP SALE
+    <button class="hero-arrow hero-prev"
+            id="heroPrev"
+            aria-label="Previous banner">
+        ‹
     </button>
 
-</section>
+    <button class="hero-arrow hero-next"
+            id="heroNext"
+            aria-label="Next banner">
+        ›
+    </button>
 
-<!-- ================= FEATURES ================= -->
 
-<section class="features">
+    <div class="hero-dots"
+         id="heroDots">
 
-    <div class="feature">
-        <div class="feature-icon">🚚</div>
-        <strong>FAST DELIVERY</strong>
-        <span>Quick & reliable delivery</span>
-    </div>
+        <button class="hero-dot active"
+                aria-label="Slide 1"></button>
 
-    <div class="feature">
-        <div class="feature-icon">↩️</div>
-        <strong>EASY RETURNS</strong>
-        <span>Simple return process</span>
-    </div>
+        <button class="hero-dot"
+                aria-label="Slide 2"></button>
 
-    <div class="feature">
-        <div class="feature-icon">🔒</div>
-        <strong>SECURE PAYMENT</strong>
-        <span>100% secure checkout</span>
-    </div>
+        <button class="hero-dot"
+                aria-label="Slide 3"></button>
 
-    <div class="feature">
-        <div class="feature-icon">💬</div>
-        <strong>SUPPORT</strong>
-        <span>We're here to help</span>
     </div>
 
 </section>
 
-<!-- ================= NEWSLETTER ================= -->
 
-<section class="newsletter">
+<!-- =========================================================
+     QUICK CATEGORY STRIP
+========================================================= -->
 
-    <h2>JOIN AS FASHIONS</h2>
+<section class="category-strip-section">
 
-    <p>
-        Get new arrivals, exclusive offers and fashion updates.
-    </p>
+    <div class="container">
 
-    <form class="newsletter-form"
-          onsubmit="subscribeNewsletter(event)">
+        <div class="category-strip">
 
-        <input
-            type="email"
-            id="email"
-            placeholder="Enter your email address"
-            required>
+            <a href="#" class="category-tile">
+                <span>👨</span>
+                <strong>Men</strong>
+            </a>
 
-        <button type="submit">
-            SUBSCRIBE
-        </button>
+            <a href="#" class="category-tile">
+                <span>👩</span>
+                <strong>Women</strong>
+            </a>
 
-    </form>
+            <a href="#" class="category-tile">
+                <span>🧒</span>
+                <strong>Kids</strong>
+            </a>
+
+            <a href="#" class="category-tile">
+                <span>👟</span>
+                <strong>Footwear</strong>
+            </a>
+
+            <a href="#" class="category-tile">
+                <span>👜</span>
+                <strong>Accessories</strong>
+            </a>
+
+            <a href="#" class="category-tile">
+                <span>💄</span>
+                <strong>Beauty</strong>
+            </a>
+
+        </div>
+
+    </div>
 
 </section>
 
-<!-- ================= FOOTER ================= -->
 
-<footer>
+<!-- =========================================================
+     SPECIAL COLLECTIONS
+========================================================= -->
 
-    <div class="footer-grid">
+<section class="section special-collections">
 
-        <div class="footer-brand">
-            <div class="logo" style="margin-bottom:15px;">
-                AS <span>FASHIONS</span>
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="section-eyebrow">
+                    EXPLORE
+                </span>
+
+                <h2>
+                    SPECIAL COLLECTIONS
+                </h2>
             </div>
 
-            <p>
-                Fashion for everyone. Discover clothing,
-                footwear, accessories and more at AS FASHIONS.
-            </p>
+            <a href="#" class="view-all">
+                View All →
+            </a>
+
         </div>
 
 
-        <div class="footer-column">
-            <h3>MEN</h3>
-            <a href="#">T-Shirts</a>
-            <a href="#">Shirts</a>
-            <a href="#">Jeans</a>
-            <a href="#">Trousers</a>
-            <a href="#">Jackets</a>
-            <a href="#">Ethnic Wear</a>
-        </div>
+        <div class="collection-grid">
+
+            <a href="#" class="collection-card">
+
+                <div class="collection-image">
+                    <span>NEW</span>
+                </div>
+
+                <div class="collection-info">
+                    <h3>New Arrivals</h3>
+                    <p>Fresh styles just dropped</p>
+                </div>
+
+            </a>
 
 
-        <div class="footer-column">
-            <h3>WOMEN</h3>
-            <a href="#">Tops</a>
-            <a href="#">Dresses</a>
-            <a href="#">Jeans</a>
-            <a href="#">Skirts</a>
-            <a href="#">Ethnic Wear</a>
-            <a href="#">Co-ords</a>
-        </div>
+            <a href="#" class="collection-card">
+
+                <div class="collection-image">
+                    <span>TRENDING</span>
+                </div>
+
+                <div class="collection-info">
+                    <h3>Trending Now</h3>
+                    <p>What's hot right now</p>
+                </div>
+
+            </a>
 
 
-        <div class="footer-column">
-            <h3>KIDS</h3>
-            <a href="#">Boys</a>
-            <a href="#">Girls</a>
-            <a href="#">Baby</a>
-            <a href="#">Kids Footwear</a>
-        </div>
+            <a href="#" class="collection-card">
+
+                <div class="collection-image">
+                    <span>PREMIUM</span>
+                </div>
+
+                <div class="collection-info">
+                    <h3>Premium Collection</h3>
+                    <p>Elevated everyday fashion</p>
+                </div>
+
+            </a>
 
 
-        <div class="footer-column">
-            <h3>HELP</h3>
-            <a href="#">Contact Us</a>
-            <a href="#">Track Order</a>
-            <a href="#">Shipping</a>
-            <a href="#">Returns</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms & Conditions</a>
+            <a href="#" class="collection-card">
+
+                <div class="collection-image">
+                    <span>STREET</span>
+                </div>
+
+                <div class="collection-info">
+                    <h3>Streetwear</h3>
+                    <p>Own your attitude</p>
+                </div>
+
+            </a>
+
         </div>
 
     </div>
 
-    <div class="copyright">
-        © 2026 AS FASHIONS. All Rights Reserved.
+</section>
+
+
+<!-- =========================================================
+     NEW ARRIVALS
+========================================================= -->
+
+<section class="section product-section"
+         id="new-arrivals">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    JUST DROPPED
+                </span>
+
+                <h2>
+                    NEW ARRIVALS
+                </h2>
+
+            </div>
+
+            <a href="#" class="view-all">
+                View All →
+            </a>
+
+        </div>
+
+
+        <div class="product-grid"
+             id="newArrivalsGrid">
+
+            <!-- Product 1 -->
+
+            <article class="product-card"
+                     data-category="men"
+                     data-product-id="AS001">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        NEW
+                    </span>
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Oversized Graphic T-Shirt
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.5
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹699</strong>
+
+                        <del>₹1,499</del>
+
+                        <span>
+                            53% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- Product 2 -->
+
+            <article class="product-card"
+                     data-category="women"
+                     data-product-id="AS002">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        TRENDING
+                    </span>
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Women's Casual Top
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.4
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹799</strong>
+
+                        <del>₹1,599</del>
+
+                        <span>
+                            50% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- Product 3 -->
+
+            <article class="product-card"
+                     data-category="men"
+                     data-product-id="AS003">
+
+                <div class="product-image">
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Relaxed Fit Cargo Pants
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.6
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹1,299</strong>
+
+                        <del>₹2,499</del>
+
+                        <span>
+                            48% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- Product 4 -->
+
+            <article class="product-card"
+                     data-category="women"
+                     data-product-id="AS004">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        NEW
+                    </span>
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Women's Wide Leg Jeans
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.3
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹1,499</strong>
+
+                        <del>₹2,999</del>
+
+                        <span>
+                            50% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SHOP BY CATEGORY
+========================================================= -->
+
+<section class="section shop-category-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    FIND YOUR STYLE
+                </span>
+
+                <h2>
+                    SHOP BY CATEGORY
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="shop-category-grid">
+
+            <a href="#" class="shop-category-card">
+                <span>MEN</span>
+                <strong>SHOP MEN →</strong>
+            </a>
+
+            <a href="#" class="shop-category-card">
+                <span>WOMEN</span>
+                <strong>SHOP WOMEN →</strong>
+            </a>
+
+            <a href="#" class="shop-category-card">
+                <span>KIDS</span>
+                <strong>SHOP KIDS →</strong>
+            </a>
+
+            <a href="#" class="shop-category-card">
+                <span>FOOTWEAR</span>
+                <strong>SHOP FOOTWEAR →</strong>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TRENDING NOW
+========================================================= -->
+
+<section class="section product-section"
+         id="trending">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    MOST WANTED
+                </span>
+
+                <h2>
+                    TRENDING NOW
+                </h2>
+
+            </div>
+
+            <a href="#" class="view-all">
+                View All →
+            </a>
+
+        </div>
+
+
+        <div class="product-grid"
+             id="trendingGrid">
+
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        HOT
+                    </span>
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Premium Streetwear Hoodie
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.7
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹1,499</strong>
+
+                        <del>₹2,999</del>
+
+                        <span>
+                            50% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Classic Men's Sneakers
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.5
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹1,999</strong>
+
+                        <del>₹3,999</del>
+
+                        <span>
+                            50% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        BESTSELLER
+                    </span>
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Women's Party Dress
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.6
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹1,799</strong>
+
+                        <del>₹3,499</del>
+
+                        <span>
+                            49% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Women's Trendy Handbag
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.4
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹999</strong>
+
+                        <del>₹1,999</del>
+
+                        <span>
+                            50% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     OFFER BANNER
+========================================================= -->
+
+<section class="offer-banner-section">
+
+    <div class="container">
+
+        <div class="offer-banner">
+
+            <div>
+
+                <span>
+                    LIMITED TIME OFFER
+                </span>
+
+                <h2>
+                    STYLE MORE.<br>
+                    SPEND LESS.
+                </h2>
+
+                <p>
+                    Get amazing fashion at unbeatable prices.
+                </p>
+
+            </div>
+
+            <a href="#sale"
+               class="secondary-btn">
+                SHOP SALE
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     BEST SELLERS
+========================================================= -->
+
+<section class="section product-section"
+         id="best-sellers">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    CUSTOMER FAVOURITES
+                </span>
+
+                <h2>
+                    BEST SELLERS
+                </h2>
+
+            </div>
+
+            <a href="#" class="view-all">
+                View All →
+            </a>
+
+        </div>
+
+
+        <div class="product-grid"
+             id="bestSellersGrid">
+
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        BESTSELLER
+                    </span>
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Classic Regular Fit T-Shirt
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.8
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹599</strong>
+
+                        <del>₹1,199</del>
+
+                        <span>
+                            50% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        BESTSELLER
+                    </span>
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Women's Straight Fit Jeans
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.7
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹1,299</strong>
+
+                        <del>₹2,599</del>
+
+                        <span>
+                            50% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Men's Casual Shirt
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.6
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹899</strong>
+
+                        <del>₹1,799</del>
+
+                        <span>
+                            50% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <button class="wishlist-btn"
+                            aria-label="Add to wishlist">
+                        ♡
+                    </button>
+
+                    <div class="product-image-placeholder">
+                        PRODUCT IMAGE
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <p class="product-brand">
+                        AS FASHIONS
+                    </p>
+
+                    <h3>
+                        Women's Casual Sneakers
+                    </h3>
+
+                    <div class="product-rating">
+                        ★ 4.5
+                    </div>
+
+                    <div class="product-price">
+
+                        <strong>₹1,599</strong>
+
+                        <del>₹2,999</del>
+
+                        <span>
+                            47% OFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PRICE COLLECTIONS
+========================================================= -->
+
+<section class="section price-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    SHOP SMART
+                </span>
+
+                <h2>
+                    SHOP BY PRICE
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="price-grid">
+
+            <a href="#" class="price-card">
+                <span>UNDER</span>
+                <strong>₹499</strong>
+                <small>SHOP NOW →</small>
+            </a>
+
+            <a href="#" class="price-card">
+                <span>UNDER</span>
+                <strong>₹999</strong>
+                <small>SHOP NOW →</small>
+            </a>
+
+            <a href="#" class="price-card">
+                <span>SALE</span>
+                <strong>UP TO 70%</strong>
+                <small>SHOP NOW →</small>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SALE SECTION
+========================================================= -->
+
+<section class="section sale-section"
+         id="sale">
+
+    <div class="container">
+
+        <div class="sale-content">
+
+            <span class="section-eyebrow">
+                BIGGEST DEALS
+            </span>
+
+            <h2>
+                THE AS FASHIONS SALE
+            </h2>
+
+            <p>
+                Upgrade your wardrobe without
+                breaking the bank.
+            </p>
+
+            <a href="#"
+               class="primary-btn">
+                SHOP ALL SALE
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TRUST FEATURES
+========================================================= -->
+
+<section class="trust-section">
+
+    <div class="container">
+
+        <div class="trust-grid">
+
+            <div class="trust-item">
+
+                <span class="trust-icon">
+                    🚚
+                </span>
+
+                <div>
+                    <h3>Fast Delivery</h3>
+                    <p>
+                        Quick delivery across India
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="trust-item">
+
+                <span class="trust-icon">
+                    ↩
+                </span>
+
+                <div>
+                    <h3>Easy Returns</h3>
+                    <p>
+                        Simple return experience
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="trust-item">
+
+                <span class="trust-icon">
+                    🔒
+                </span>
+
+                <div>
+                    <h3>Secure Payments</h3>
+                    <p>
+                        Safe & secure checkout
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="trust-item">
+
+                <span class="trust-icon">
+                    ✓
+                </span>
+
+                <div>
+                    <h3>Quality Products</h3>
+                    <p>
+                        Fashion you'll love
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="main-footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+
+            <!-- ONLINE SHOPPING -->
+
+            <div class="footer-column">
+
+                <h3>
+                    ONLINE SHOPPING
+                </h3>
+
+                <a href="#">Men</a>
+                <a href="#">Women</a>
+                <a href="#">Kids</a>
+                <a href="#">Footwear</a>
+                <a href="#">Accessories</a>
+                <a href="#">Beauty</a>
+
+            </div>
+
+
+            <!-- CUSTOMER SERVICE -->
+
+            <div class="footer-column">
+
+                <h3>
+                    CUSTOMER SERVICE
+                </h3>
+
+                <a href="#">Contact Us</a>
+                <a href="#">Track Order</a>
+                <a href="#">Shipping</a>
+                <a href="#">Returns</a>
+                <a href="#">FAQs</a>
+
+            </div>
+
+
+            <!-- AS FASHIONS -->
+
+            <div class="footer-column">
+
+                <h3>
+                    AS FASHIONS
+                </h3>
+
+                <a href="#">About Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Sitemap</a>
+
+            </div>
+
+
+            <!-- CONNECT -->
+
+            <div class="footer-column footer-connect">
+
+                <h3>
+                    KEEP IN TOUCH
+                </h3>
+
+                <p>
+                    Follow AS FASHIONS
+                    for the latest trends,
+                    drops and offers.
+                </p>
+
+
+                <div class="social-links">
+
+                    <a href="#"
+                       aria-label="Instagram">
+                        Instagram
+                    </a>
+
+                    <a href="#"
+                       aria-label="Facebook">
+                        Facebook
+                    </a>
+
+                    <a href="#"
+                       aria-label="YouTube">
+                        YouTube
+                    </a>
+
+                </div>
+
+
+                <div class="newsletter">
+
+                    <h4>
+                        GET STYLE UPDATES
+                    </h4>
+
+                    <div class="newsletter-form">
+
+                        <input
+                            type="email"
+                            id="newsletterEmail"
+                            placeholder="Enter your email"
+                            autocomplete="email">
+
+                        <button type="button"
+                                id="newsletterBtn">
+                            →
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER BOTTOM -->
+
+        <div class="footer-bottom">
+
+            <p>
+                © <span id="currentYear">2026</span>
+                AS FASHIONS. All Rights Reserved.
+            </p>
+
+            <div class="footer-bottom-links">
+
+                <a href="#">
+                    Privacy
+                </a>
+
+                <a href="#">
+                    Terms
+                </a>
+
+                <a href="#">
+                    Security
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
 
 </footer>
 
 
-<script>
+<!-- =========================================================
+     BAG DRAWER
+========================================================= -->
 
-    /* ================= CART ================= */
+<div class="bag-overlay"
+     id="bagOverlay">
 
-    let cartCount = 0;
+    <aside class="bag-drawer"
+           id="bagDrawer">
 
-    function addToCart() {
-        cartCount++;
+        <div class="bag-header">
 
-        document.getElementById("cartCount").textContent = cartCount;
+            <h2>
+                Shopping Bag
+            </h2>
 
-        alert("Product added to bag!");
-    }
+            <button id="bagClose"
+                    aria-label="Close bag">
+                ×
+            </button>
 
-
-    /* ================= WISHLIST ================= */
-
-    function toggleWishlist(button) {
-
-        if (button.textContent.trim() === "♡") {
-            button.textContent = "♥";
-            button.style.color = "#ff3f6c";
-        } else {
-            button.textContent = "♡";
-            button.style.color = "#111";
-        }
-    }
+        </div>
 
 
-    /* ================= SEARCH ================= */
+        <div class="bag-content"
+             id="bagContent">
 
-    function searchProducts() {
+            <div class="empty-bag">
 
-        const search =
-            document.getElementById("searchInput")
-            .value
-            .toLowerCase()
-            .trim();
+                <div class="empty-bag-icon">
+                    🛍
+                </div>
 
-        const products =
-            document.querySelectorAll(".product-card");
+                <h3>
+                    Your bag is empty
+                </h3>
 
-        products.forEach(product => {
+                <p>
+                    Add products you love
+                    to your bag.
+                </p>
 
-            const name =
-                product.getAttribute("data-name");
+                <a href="#new-arrivals"
+                   class="primary-btn">
+                    START SHOPPING
+                </a>
 
-            if (!search || name.includes(search)) {
-                product.style.display = "";
-            } else {
-                product.style.display = "none";
-            }
+            </div>
 
-        });
-    }
-
-
-    /* ================= CATEGORY ================= */
-
-    function shopCategory(category) {
-
-        alert(
-            "AS FASHIONS: Opening " +
-            category.toUpperCase() +
-            " collection..."
-        );
-
-        // Later:
-        // window.location.href =
-        // "products.html?category=" + category;
-    }
+        </div>
 
 
-    /* ================= NEWSLETTER ================= */
+        <div class="bag-footer">
 
-    function subscribeNewsletter(event) {
+            <div class="bag-total">
 
-        event.preventDefault();
+                <span>
+                    Total
+                </span>
 
-        const email =
-            document.getElementById("email").value;
+                <strong id="bagTotal">
+                    ₹0
+                </strong>
 
-        if (email) {
+            </div>
 
-            alert(
-                "Thank you for joining AS FASHIONS!"
-            );
+            <button class="checkout-btn"
+                    id="checkoutBtn">
+                CHECKOUT
+            </button>
 
-            document.getElementById("email").value = "";
-        }
-    }
+        </div>
+
+    </aside>
+
+</div>
 
 
-    /* ================= MOBILE MENU ================= */
+<!-- =========================================================
+     BACK TO TOP
+========================================================= -->
 
-    function toggleMobileMenu() {
+<button class="back-to-top"
+        id="backToTop"
+        aria-label="Back to top">
+    ↑
+</button>
 
-        alert(
-            "Mobile navigation will be connected in the next update."
-        );
-    }
 
-</script>
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="js/app.js"></script>
 
 </body>
 </html>

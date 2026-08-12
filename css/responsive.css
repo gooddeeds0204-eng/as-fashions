@@ -1,57 +1,27 @@
 @media screen and (max-width: 768px) {
-    /* Mobile Header Layout - App Style */
     .navbar {
-        padding: 10px 12px;
-        height: auto;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 8px;
+        height: 65px;
+        padding: 0 15px;
     }
 
-    .logo-container {
-        width: auto;
-        gap: 10px;
+    .menu-icon {
+        display: block;
     }
 
-    .logo {
-        font-size: 18px;
+    .nav-links, .search-bar, .icon-item span {
+        display: none; /* Hide heavy desktop elements on mobile */
     }
 
-    .nav-links {
-        display: none; /* Hide desktop links on mobile */
-    }
-
-    /* Top Right Action Icons properly placed beside logo */
-    .nav-actions {
-        margin-left: auto;
+    .nav-right {
         gap: 15px;
     }
 
-    .action-item {
-        font-size: 10px;
+    .icon-item i {
+        font-size: 22px;
     }
 
-    .action-item span {
-        display: none; /* Hide text under icons on mobile for space */
-    }
-
-    .action-item i {
-        font-size: 18px;
-        color: #282c3f;
-    }
-
-    /* Search bar full width row below logo */
-    .search-container {
-        width: 100%;
-        height: 36px;
-        order: 3;
-        margin-top: 4px;
-    }
-
-    /* Hero Banner Mobile */
     .hero-banner {
-        height: 180px;
-        margin-bottom: 20px;
+        height: 200px;
     }
 
     .banner-content h1 {
@@ -64,60 +34,22 @@
     }
 
     .shop-btn {
-        padding: 6px 18px;
+        padding: 8px 20px;
         font-size: 11px;
     }
 
-    /* Categories Grid: 3 columns */
-    .section-title {
-        font-size: 15px;
-        margin: 20px 12px 10px 12px;
-    }
-
-    .categories-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        padding: 0 12px;
-        margin-bottom: 25px;
-    }
-
-    .category-circle-card span {
-        font-size: 11px;
-    }
-
-    /* Products Grid: 2 columns (Myntra App Style) */
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 12px;
         padding: 0 12px;
-        margin-bottom: 30px;
     }
 
-    .product-img-container {
+    .product-img-box {
         height: 180px;
     }
 
-    .product-details {
-        padding: 8px;
-    }
-
-    .product-brand {
-        font-size: 12px;
-    }
-
-    .product-name {
-        font-size: 10px;
-    }
-
-    .current-price {
-        font-size: 11px;
-    }
-
-    .original-price {
-        font-size: 9px;
-    }
-
-    .discount {
-        font-size: 9px;
+    /* Show Mobile Bottom Navigation */
+    .mobile-bottom-nav {
+        display: flex;
     }
 }

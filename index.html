@@ -4,10 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AS FASHIONS — Modern Fashion Store</title>
-
-<meta name="description"
-content="AS FASHIONS — Discover modern fashion, trending styles, exclusive offers and premium collections.">
+<title>AS Fashions | Premium Fashion</title>
 
 <style>
 *{
@@ -16,29 +13,20 @@ content="AS FASHIONS — Discover modern fashion, trending styles, exclusive off
     box-sizing:border-box;
 }
 
-:root{
-    --black:#111318;
-    --dark:#20222d;
-    --light:#f7f7f8;
-    --border:#e7e7e7;
-    --red:#d9363e;
-    --gold:#b58a4b;
-    --muted:#707070;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
 body{
-    font-family:Arial, Helvetica, sans-serif;
-    color:var(--black);
+    font-family:Arial,Helvetica,sans-serif;
     background:#fff;
-    overflow-x:hidden;
+    color:#111;
 }
 
 button{
-    font-family:inherit;
+    cursor:pointer;
+    border:0;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
 }
 
 /* ================= SPLASH ================= */
@@ -46,145 +34,127 @@ button{
 #splash{
     position:fixed;
     inset:0;
-    background:#111318;
-    color:white;
+    background:#000;
     z-index:99999;
     display:flex;
-    align-items:center;
     justify-content:center;
-    flex-direction:column;
-    transition:opacity .6s ease, visibility .6s ease;
-}
-
-#splash.hide{
-    opacity:0;
-    visibility:hidden;
+    align-items:center;
+    transition:.7s;
 }
 
 .splash-logo{
-    font-size:42px;
-    font-weight:700;
-    letter-spacing:5px;
-}
-
-.splash-line{
-    width:45px;
-    height:2px;
-    background:white;
-    margin:22px 0;
-    animation:lineGrow 1.2s infinite alternate;
-}
-
-.splash-text{
-    font-size:11px;
-    letter-spacing:4px;
-    opacity:.7;
-}
-
-@keyframes lineGrow{
-    from{width:25px}
-    to{width:80px}
-}
-
-/* ================= TOP OFFER ================= */
-
-.top-offer{
-    background:#202232;
     color:#fff;
-    text-align:center;
-    padding:10px 15px;
-    font-size:12px;
-    letter-spacing:.5px;
+    font-size:48px;
+    font-weight:900;
+    letter-spacing:8px;
+    animation:logoIn 1.2s ease;
 }
 
-.top-offer strong{
-    color:#fff;
+.splash-logo span{
+    color:#aaa;
 }
 
-.top-links{
-    margin-top:5px;
+@keyframes logoIn{
+    from{
+        opacity:0;
+        transform:scale(.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
 }
 
-.top-links a{
+/* ================= TOP OFFER BAR ================= */
+
+.offer-strip{
+    background:#111;
     color:white;
-    margin:0 6px;
-    text-decoration:underline;
+    height:38px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+}
+
+.offer-track{
+    display:flex;
+    width:max-content;
+    animation:scrollOffers 25s linear infinite;
+}
+
+.offer-item{
+    padding:0 45px;
+    font-size:12px;
+    letter-spacing:1px;
+    white-space:nowrap;
+}
+
+.offer-item b{
+    color:#f3c969;
+}
+
+@keyframes scrollOffers{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
 }
 
 /* ================= HEADER ================= */
 
 header{
-    background:white;
+    height:76px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    border-bottom:1px solid #eee;
     position:sticky;
     top:0;
     z-index:1000;
-    border-bottom:1px solid #eee;
-}
-
-.header-main{
-    height:78px;
-    display:flex;
-    align-items:center;
-    padding:0 5%;
-    gap:28px;
-}
-
-.menu-btn{
-    width:34px;
-    height:34px;
-    border:0;
-    background:none;
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:5px;
-}
-
-.menu-btn span{
-    width:25px;
-    height:2px;
-    background:#111;
-    display:block;
 }
 
 .logo{
-    font-size:25px;
-    font-weight:700;
-    letter-spacing:-1.5px;
-    white-space:nowrap;
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:3px;
 }
 
 .logo span{
     font-weight:400;
 }
 
-.search{
-    flex:1;
-    max-width:650px;
-    height:44px;
-    border:1px solid #ddd;
-    background:#fafafa;
+.nav{
     display:flex;
-    align-items:center;
-    padding:0 15px;
-    margin-left:auto;
-    margin-right:auto;
+    gap:28px;
+    font-size:13px;
+    font-weight:600;
 }
 
-.search input{
-    border:0;
-    outline:0;
-    background:transparent;
+.nav a{
+    position:relative;
+}
+
+.nav a:hover{
+    color:#d32f2f;
+}
+
+.nav a::after{
+    content:"";
+    position:absolute;
+    width:0;
+    height:2px;
+    background:#111;
+    left:0;
+    bottom:-8px;
+    transition:.3s;
+}
+
+.nav a:hover::after{
     width:100%;
-    font-size:14px;
-}
-
-.search button{
-    border:0;
-    background:none;
-    font-size:20px;
-    cursor:pointer;
 }
 
 .header-actions{
@@ -193,162 +163,105 @@ header{
     align-items:center;
 }
 
-.action{
-    font-size:22px;
-    cursor:pointer;
+.icon-btn{
+    background:none;
+    font-size:20px;
     position:relative;
 }
 
-.action small{
-    display:block;
-    font-size:9px;
-    text-align:center;
-    margin-top:2px;
-}
-
-.bag-count{
+.badge{
     position:absolute;
-    top:-7px;
-    right:-8px;
-    background:#d9363e;
-    color:white;
+    top:-8px;
+    right:-9px;
+    background:#e53935;
+    color:#fff;
     width:17px;
     height:17px;
     border-radius:50%;
-    font-size:9px;
+    font-size:10px;
     display:flex;
-    align-items:center;
     justify-content:center;
-}
-
-/* ================= NAV ================= */
-
-.nav{
-    border-top:1px solid #f2f2f2;
-    height:48px;
-    display:flex;
     align-items:center;
-    justify-content:center;
-    gap:40px;
 }
 
-.nav a{
-    text-decoration:none;
-    color:#20212a;
-    font-size:13px;
-    font-weight:600;
-    letter-spacing:.5px;
-}
-
-.nav a:hover{
-    color:var(--red);
-}
-
-.nav .sale{
-    color:#d9363e;
-}
-
-/* ================= SIDE MENU ================= */
-
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    z-index:2000;
+.menu-btn{
     display:none;
 }
 
-.overlay.active{
-    display:block;
-}
+/* ================= CATEGORY AUTO SCROLL ================= */
 
-.side-menu{
-    position:fixed;
-    left:-340px;
-    top:0;
-    width:320px;
-    height:100vh;
-    background:white;
-    z-index:3000;
-    padding:30px;
-    transition:.35s ease;
-    box-shadow:5px 0 30px rgba(0,0,0,.15);
-}
-
-.side-menu.active{
-    left:0;
-}
-
-.side-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:35px;
-}
-
-.side-header h2{
-    font-size:22px;
-}
-
-.close-menu{
-    border:0;
-    background:none;
-    font-size:28px;
-    cursor:pointer;
-}
-
-.side-menu a{
-    display:block;
-    color:#222;
-    text-decoration:none;
-    padding:16px 0;
+.category-scroll{
+    overflow:hidden;
     border-bottom:1px solid #eee;
-    font-size:15px;
+    background:#fff;
 }
 
-.side-menu .side-sale{
-    color:#d9363e;
-    font-weight:bold;
+.category-track{
+    display:flex;
+    width:max-content;
+    animation:categoryMove 35s linear infinite;
+}
+
+.category{
+    padding:17px 28px;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.5px;
+    white-space:nowrap;
+}
+
+.category.hot{
+    color:#e53935;
+}
+
+@keyframes categoryMove{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
 }
 
 /* ================= HERO ================= */
 
 .hero{
-    min-height:620px;
-    position:relative;
+    min-height:570px;
+    background:
+    linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.12)),
+    url("https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
     display:flex;
     align-items:center;
-    background:
-    linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.28),rgba(0,0,0,.05)),
-    url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1800&q=85")
-    center/cover;
+    padding:0 8%;
+    color:#fff;
 }
 
 .hero-content{
-    color:white;
-    max-width:620px;
-    margin-left:8%;
-    padding:50px 20px;
+    max-width:550px;
 }
 
 .hero-small{
-    font-size:12px;
+    font-size:13px;
     letter-spacing:4px;
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
 .hero h1{
-    font-size:64px;
+    font-size:65px;
     line-height:.95;
-    letter-spacing:-3px;
     margin-bottom:25px;
 }
 
+.hero h1 span{
+    font-weight:300;
+}
+
 .hero p{
-    font-size:17px;
-    line-height:1.6;
-    max-width:500px;
-    margin-bottom:32px;
+    color:#ddd;
+    font-size:16px;
+    line-height:1.7;
+    margin-bottom:30px;
 }
 
 .hero-buttons{
@@ -357,123 +270,91 @@ header{
 }
 
 .btn{
-    padding:15px 28px;
-    border:1px solid white;
-    background:white;
+    padding:15px 27px;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.btn-dark{
+    background:#fff;
     color:#111;
-    font-weight:bold;
-    cursor:pointer;
-    text-decoration:none;
-    display:inline-block;
 }
 
-.btn.dark{
+.btn-outline{
+    border:1px solid #fff;
+    background:transparent;
+    color:#fff;
+}
+
+/* ================= FLASH SALE ================= */
+
+.flash{
+    background:#f7f7f7;
+    padding:35px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.flash h2{
+    font-size:24px;
+}
+
+.flash p{
+    color:#777;
+    font-size:13px;
+    margin-top:7px;
+}
+
+.timer{
+    display:flex;
+    gap:10px;
+}
+
+.time-box{
     background:#111;
-    color:white;
-    border-color:#111;
+    color:#fff;
+    min-width:55px;
+    padding:10px;
+    text-align:center;
 }
 
-.btn:hover{
-    opacity:.85;
+.time-box strong{
+    display:block;
+    font-size:20px;
 }
 
-/* ================= CATEGORY ================= */
+.time-box small{
+    font-size:8px;
+}
+
+/* ================= SECTION ================= */
 
 .section{
-    padding:70px 5%;
+    padding:70px 6%;
 }
 
-.section-title{
+.section-head{
     display:flex;
     justify-content:space-between;
     align-items:end;
     margin-bottom:30px;
 }
 
-.eyebrow{
-    font-size:11px;
-    letter-spacing:3px;
+.section-head h2{
+    font-size:31px;
+}
+
+.section-head p{
     color:#777;
-    margin-bottom:8px;
-}
-
-.section-title h2{
-    font-size:30px;
-    letter-spacing:-1px;
-}
-
-.view-all{
-    color:#111;
     font-size:13px;
-    text-decoration:underline;
+    margin-top:8px;
 }
 
-.categories{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:12px;
-}
-
-.category{
-    height:150px;
-    border:1px solid #e8e8e8;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    gap:12px;
-    transition:.25s;
-    cursor:pointer;
-    background:white;
-}
-
-.category:hover{
-    transform:translateY(-5px);
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
-}
-
-.category-icon{
-    font-size:35px;
-}
-
-.category span{
-    font-size:13px;
-    font-weight:600;
-}
-
-/* ================= OFFER BANNER ================= */
-
-.offer-banner{
-    margin:0 5%;
-    min-height:300px;
-    background:
-    linear-gradient(90deg,rgba(10,10,15,.82),rgba(10,10,15,.2)),
-    url("https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=1800&q=85")
-    center/cover;
-    display:flex;
-    align-items:center;
-    padding:50px 7%;
-    color:white;
-}
-
-.offer-content{
-    max-width:520px;
-}
-
-.offer-content .tag{
-    color:#ddd;
+.view{
     font-size:12px;
-    letter-spacing:3px;
-}
-
-.offer-content h2{
-    font-size:45px;
-    margin:15px 0;
-}
-
-.offer-content p{
-    margin-bottom:25px;
-    line-height:1.5;
+    font-weight:700;
 }
 
 /* ================= PRODUCTS ================= */
@@ -481,23 +362,22 @@ header{
 .products{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:18px;
+    gap:20px;
 }
 
 .product{
     position:relative;
-    background:#fff;
-    cursor:pointer;
+    overflow:hidden;
+    background:#f6f6f6;
 }
 
-.product-image{
+.product-img{
     height:390px;
     overflow:hidden;
     position:relative;
-    background:#f4f4f4;
 }
 
-.product-image img{
+.product-img img{
     width:100%;
     height:100%;
     object-fit:cover;
@@ -505,239 +385,164 @@ header{
 }
 
 .product:hover img{
-    transform:scale(1.04);
+    transform:scale(1.05);
 }
 
-.badge{
+.wishlist{
     position:absolute;
-    top:12px;
-    left:12px;
-    background:white;
-    padding:6px 9px;
-    font-size:10px;
-    font-weight:bold;
-}
-
-.heart{
-    position:absolute;
-    right:12px;
-    top:10px;
-    width:35px;
-    height:35px;
+    top:15px;
+    right:15px;
+    width:38px;
+    height:38px;
     border-radius:50%;
-    background:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background:#fff;
     font-size:18px;
+    z-index:3;
+}
+
+.wishlist.active{
+    color:#e53935;
 }
 
 .product-info{
-    padding:13px 3px;
+    background:#fff;
+    padding:16px 4px;
 }
 
 .brand{
-    font-weight:bold;
-    font-size:13px;
+    font-size:11px;
+    color:#888;
+    text-transform:uppercase;
 }
 
 .product-name{
-    color:#666;
-    font-size:12px;
-    margin-top:5px;
+    font-size:14px;
+    font-weight:600;
+    margin:6px 0;
 }
 
 .price{
-    margin-top:9px;
-    font-size:14px;
-    font-weight:bold;
+    font-size:15px;
+    font-weight:800;
 }
 
-.old-price{
-    color:#999;
+.old{
+    color:#aaa;
     text-decoration:line-through;
-    margin-left:5px;
-    font-weight:normal;
+    margin-left:6px;
+    font-size:12px;
 }
 
 .discount{
-    color:#d9363e;
-    margin-left:5px;
+    color:#e53935;
     font-size:11px;
+    margin-left:6px;
 }
 
-/* ================= TRENDING ================= */
-
-.trending{
-    background:#f6f6f4;
+.add{
+    width:100%;
+    background:#111;
+    color:white;
+    padding:12px;
+    margin-top:12px;
+    font-size:11px;
+    font-weight:700;
 }
 
-.trend-grid{
+/* ================= PROMO GRID ================= */
+
+.promo-grid{
     display:grid;
-    grid-template-columns:1.5fr 1fr 1fr;
+    grid-template-columns:2fr 1fr 1fr;
     gap:15px;
 }
 
-.trend-card{
-    height:450px;
+.promo{
+    height:350px;
     position:relative;
     overflow:hidden;
+    color:white;
 }
 
-.trend-card img{
+.promo img{
     width:100%;
     height:100%;
     object-fit:cover;
     transition:.5s;
 }
 
-.trend-card:hover img{
-    transform:scale(1.04);
+.promo:hover img{
+    transform:scale(1.05);
 }
 
-.trend-text{
+.promo::after{
+    content:"";
     position:absolute;
-    left:25px;
-    bottom:25px;
-    color:white;
+    inset:0;
+    background:linear-gradient(transparent,rgba(0,0,0,.75));
 }
 
-.trend-text h3{
-    font-size:28px;
+.promo-content{
+    position:absolute;
+    z-index:2;
+    bottom:25px;
+    left:25px;
+}
+
+.promo-content h3{
+    font-size:26px;
     margin-bottom:8px;
 }
 
-.trend-text span{
+.promo-content p{
     font-size:12px;
-}
-
-/* ================= COUNTDOWN ================= */
-
-.countdown-section{
-    background:#202232;
-    color:white;
-    text-align:center;
-    padding:60px 20px;
-}
-
-.countdown-section h2{
-    font-size:36px;
-    margin-bottom:12px;
-}
-
-.countdown-section p{
-    color:#ccc;
-    margin-bottom:30px;
-}
-
-.timer{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-}
-
-.time-box{
-    width:75px;
-    padding:15px 5px;
-    background:#303243;
-}
-
-.time-box strong{
-    display:block;
-    font-size:25px;
-}
-
-.time-box span{
-    font-size:9px;
-    color:#aaa;
-    letter-spacing:1px;
-}
-
-/* ================= CLEARANCE ================= */
-
-.clearance{
-    margin:0 5%;
-    background:#eee;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    min-height:350px;
-}
-
-.clearance-img{
-    background:
-    url("https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=1200&q=85")
-    center/cover;
-}
-
-.clearance-content{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:50px;
-}
-
-.clearance-content small{
-    letter-spacing:3px;
-    color:#777;
-}
-
-.clearance-content h2{
-    font-size:48px;
-    margin:15px 0;
-}
-
-.clearance-content p{
-    color:#666;
-    line-height:1.6;
-    margin-bottom:25px;
 }
 
 /* ================= NEWSLETTER ================= */
 
 .newsletter{
-    background:#fafafa;
+    background:#111;
+    color:white;
+    padding:70px 6%;
     text-align:center;
-    padding:70px 20px;
 }
 
 .newsletter h2{
-    font-size:30px;
-    margin-bottom:10px;
+    font-size:35px;
+    margin-bottom:12px;
 }
 
 .newsletter p{
-    color:#777;
+    color:#aaa;
+    font-size:13px;
     margin-bottom:25px;
 }
 
 .email-box{
-    margin:auto;
     display:flex;
-    max-width:480px;
-    height:48px;
+    max-width:500px;
+    margin:auto;
 }
 
 .email-box input{
     flex:1;
-    border:1px solid #ccc;
-    padding:0 15px;
-    outline:none;
+    padding:15px;
+    border:0;
+    outline:0;
 }
 
 .email-box button{
-    background:#111;
-    color:white;
-    border:0;
+    background:#fff;
     padding:0 25px;
-    cursor:pointer;
+    font-weight:700;
 }
 
 /* ================= FOOTER ================= */
 
 footer{
-    background:#111318;
-    color:white;
-    padding:55px 5% 25px;
+    background:#0b0b0b;
+    color:#fff;
+    padding:55px 6% 25px;
 }
 
 .footer-grid{
@@ -747,293 +552,230 @@ footer{
 }
 
 .footer-logo{
-    font-size:25px;
-    font-weight:bold;
-    margin-bottom:15px;
-}
-
-.footer-about{
-    color:#aaa;
-    line-height:1.6;
-    font-size:13px;
-    max-width:350px;
+    font-size:24px;
+    font-weight:900;
+    letter-spacing:3px;
 }
 
 footer h4{
-    margin-bottom:17px;
+    margin-bottom:18px;
+    font-size:13px;
 }
 
+footer p,
 footer a{
     display:block;
-    color:#aaa;
-    text-decoration:none;
-    font-size:13px;
-    margin-bottom:11px;
+    color:#888;
+    font-size:12px;
+    margin:9px 0;
 }
 
-footer a:hover{
-    color:white;
-}
-
-.copyright{
-    border-top:1px solid #292a31;
+.copy{
+    border-top:1px solid #222;
     margin-top:40px;
     padding-top:20px;
-    color:#777;
-    font-size:11px;
     text-align:center;
+    color:#666;
+    font-size:11px;
 }
 
-/* ================= MOBILE NAV ================= */
+/* ================= MOBILE MENU ================= */
 
-.mobile-bottom{
-    display:none;
+.mobile-menu{
+    position:fixed;
+    top:0;
+    left:-100%;
+    width:80%;
+    max-width:350px;
+    height:100vh;
+    background:#fff;
+    z-index:9999;
+    padding:90px 30px;
+    transition:.4s;
+    box-shadow:10px 0 40px rgba(0,0,0,.15);
+}
+
+.mobile-menu.active{
+    left:0;
+}
+
+.mobile-menu a{
+    display:block;
+    padding:17px 0;
+    border-bottom:1px solid #eee;
+    font-weight:600;
+}
+
+.close-menu{
+    position:absolute;
+    top:25px;
+    right:25px;
+    font-size:25px;
+    background:none;
+}
+
+/* ================= CART ================= */
+
+.cart-panel{
+    position:fixed;
+    right:-420px;
+    top:0;
+    width:400px;
+    height:100vh;
+    background:#fff;
+    z-index:9998;
+    padding:30px;
+    box-shadow:-10px 0 30px rgba(0,0,0,.15);
+    transition:.4s;
+}
+
+.cart-panel.active{
+    right:0;
+}
+
+.cart-title{
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid #eee;
+    padding-bottom:20px;
+    margin-bottom:20px;
+}
+
+.empty{
+    color:#777;
+    text-align:center;
+    margin-top:80px;
 }
 
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:900px){
 
-    .header-main{
-        height:68px;
-        padding:0 20px;
-        gap:14px;
-    }
-
-    .logo{
-        font-size:20px;
-    }
-
-    .search{
-        position:absolute;
-        top:78px;
-        left:15px;
-        right:15px;
-        width:auto;
-        max-width:none;
-        margin:0;
-    }
-
-    .header-main{
-        margin-bottom:60px;
-    }
-
-    .header-actions{
-        gap:10px;
-    }
-
-    .action small{
-        display:none;
-    }
-
     .nav{
         display:none;
     }
 
-    .hero{
-        min-height:570px;
+    .menu-btn{
+        display:block;
     }
 
-    .hero-content{
-        margin-left:20px;
-        padding-right:20px;
+    .hero{
+        min-height:520px;
+        padding:0 6%;
     }
 
     .hero h1{
-        font-size:46px;
-    }
-
-    .hero p{
-        font-size:15px;
-    }
-
-    .categories{
-        grid-template-columns:repeat(3,1fr);
+        font-size:48px;
     }
 
     .products{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .product-image{
-        height:300px;
+    .product-img{
+        height:330px;
     }
 
-    .trend-grid{
+    .promo-grid{
         grid-template-columns:1fr 1fr;
     }
 
-    .trend-card{
-        height:350px;
-    }
-
-    .trend-card:first-child{
+    .promo:first-child{
         grid-column:span 2;
-    }
-
-    .clearance{
-        grid-template-columns:1fr;
-    }
-
-    .clearance-img{
-        min-height:300px;
     }
 
     .footer-grid{
         grid-template-columns:1fr 1fr;
     }
-
-    .mobile-bottom{
-        display:flex;
-        position:fixed;
-        bottom:0;
-        left:0;
-        right:0;
-        height:62px;
-        background:white;
-        border-top:1px solid #ddd;
-        z-index:1500;
-        justify-content:space-around;
-        align-items:center;
-    }
-
-    .mobile-bottom a{
-        text-decoration:none;
-        color:#222;
-        text-align:center;
-        font-size:18px;
-    }
-
-    .mobile-bottom span{
-        display:block;
-        font-size:9px;
-        margin-top:3px;
-    }
 }
 
 @media(max-width:600px){
 
-    .top-offer{
-        font-size:10px;
-        padding:9px 5px;
+    header{
+        height:65px;
+        padding:0 18px;
     }
 
-    .top-links{
+    .logo{
+        font-size:21px;
+    }
+
+    .header-actions{
+        gap:12px;
+    }
+
+    .offer-item{
+        padding:0 25px;
         font-size:10px;
+    }
+
+    .category{
+        padding:14px 18px;
     }
 
     .hero{
-        min-height:520px;
+        min-height:500px;
     }
 
     .hero h1{
         font-size:42px;
-        letter-spacing:-2px;
     }
 
     .hero p{
-        font-size:14px;
+        font-size:13px;
     }
 
-    .hero-buttons{
-        flex-direction:row;
+    .flash{
+        padding:25px 18px;
     }
 
-    .btn{
-        padding:13px 17px;
-        font-size:12px;
+    .flash h2{
+        font-size:18px;
+    }
+
+    .timer{
+        gap:4px;
+    }
+
+    .time-box{
+        min-width:42px;
     }
 
     .section{
-        padding:45px 20px;
+        padding:45px 18px;
     }
 
-    .section-title h2{
+    .section-head h2{
         font-size:24px;
-    }
-
-    .categories{
-        grid-template-columns:repeat(3,1fr);
-        gap:8px;
-    }
-
-    .category{
-        height:110px;
-    }
-
-    .category-icon{
-        font-size:25px;
-    }
-
-    .category span{
-        font-size:11px;
-    }
-
-    .offer-banner{
-        margin:0 20px;
-        min-height:300px;
-        padding:35px 25px;
-    }
-
-    .offer-content h2{
-        font-size:35px;
     }
 
     .products{
         gap:12px;
     }
 
-    .product-image{
-        height:250px;
+    .product-img{
+        height:260px;
     }
 
-    .trend-grid{
-        gap:8px;
+    .promo-grid{
+        grid-template-columns:1fr;
     }
 
-    .trend-card{
-        height:280px;
+    .promo:first-child{
+        grid-column:auto;
     }
 
-    .trend-text{
-        left:15px;
-        bottom:15px;
-    }
-
-    .trend-text h3{
-        font-size:20px;
-    }
-
-    .countdown-section{
-        padding:45px 15px;
-    }
-
-    .countdown-section h2{
-        font-size:28px;
-    }
-
-    .time-box{
-        width:62px;
-    }
-
-    .clearance{
-        margin:0 20px;
-    }
-
-    .clearance-content{
-        padding:35px 25px;
-    }
-
-    .clearance-content h2{
-        font-size:38px;
+    .promo{
+        height:300px;
     }
 
     .footer-grid{
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:1fr;
     }
 
-    footer{
-        padding-bottom:90px;
+    .cart-panel{
+        width:100%;
+        right:-100%;
     }
 }
 </style>
@@ -1041,499 +783,375 @@ footer a:hover{
 
 <body>
 
-<!-- ================= SPLASH ================= -->
-
+<!-- SPLASH -->
 <div id="splash">
-    <div class="splash-logo">AS</div>
-    <div class="splash-line"></div>
-    <div class="splash-text">AS FASHIONS</div>
+    <div class="splash-logo">AS <span>FASHIONS</span></div>
 </div>
 
+<!-- OFFER BAR -->
+<div class="offer-strip">
+    <div class="offer-track">
 
-<!-- ================= OFFER BAR ================= -->
+        <div class="offer-item">🔥 <b>MEGA SALE</b> — UP TO 70% OFF</div>
+        <div class="offer-item">🚚 FREE SHIPPING ON ORDERS ABOVE ₹999</div>
+        <div class="offer-item">✨ NEW SEASON — EXTRA 10% OFF</div>
+        <div class="offer-item">⚡ FLASH SALE LIVE NOW</div>
+        <div class="offer-item">💳 EXTRA 5% OFF ON ONLINE PAYMENTS</div>
 
-<div class="top-offer">
-    🎉 EXTRA 20% OFF ON YOUR FIRST ORDER
-    &nbsp; | &nbsp;
-    USE CODE: <strong>ASNEW20</strong>
+        <div class="offer-item">🔥 <b>MEGA SALE</b> — UP TO 70% OFF</div>
+        <div class="offer-item">🚚 FREE SHIPPING ON ORDERS ABOVE ₹999</div>
+        <div class="offer-item">✨ NEW SEASON — EXTRA 10% OFF</div>
+        <div class="offer-item">⚡ FLASH SALE LIVE NOW</div>
+        <div class="offer-item">💳 EXTRA 5% OFF ON ONLINE PAYMENTS</div>
 
-    <div class="top-links">
-        <a href="#">Track Order</a>
-        <a href="#">Help</a>
     </div>
 </div>
 
-
-<!-- ================= HEADER ================= -->
-
+<!-- HEADER -->
 <header>
 
-<div class="header-main">
-
-    <button class="menu-btn" onclick="openMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
+    <button class="icon-btn menu-btn" onclick="openMenu()">☰</button>
 
     <div class="logo">
         AS <span>FASHIONS</span>
     </div>
 
-    <div class="search">
-        <input
-        type="text"
-        placeholder="Search for products, brands & more">
-        <button>⌕</button>
-    </div>
+    <nav class="nav">
+        <a href="#">NEW</a>
+        <a href="#">WOMEN</a>
+        <a href="#">MEN</a>
+        <a href="#">KIDS</a>
+        <a href="#">SHOES</a>
+        <a href="#">ACCESSORIES</a>
+        <a href="#" style="color:#e53935;">SALE</a>
+    </nav>
 
     <div class="header-actions">
 
-        <div class="action">
+        <button class="icon-btn" onclick="searchProducts()">⌕</button>
+
+        <button class="icon-btn" onclick="showAccount()">♙</button>
+
+        <button class="icon-btn" onclick="toggleCart()">
             ♡
-            <small>Wishlist</small>
-        </div>
-
-        <div class="action">
-            ♙
-            <small>Profile</small>
-        </div>
-
-        <div class="action">
-            🛍️
-            <span class="bag-count">0</span>
-            <small>Bag</small>
-        </div>
+            <span class="badge" id="cartCount">0</span>
+        </button>
 
     </div>
-
-</div>
-
-
-<nav class="nav">
-
-<a href="#men">MEN</a>
-<a href="#women">WOMEN</a>
-<a href="#kids">KIDS</a>
-<a href="#footwear">FOOTWEAR</a>
-<a href="#accessories">ACCESSORIES</a>
-<a href="#beauty">BEAUTY</a>
-<a href="#sale" class="sale">SALE</a>
-
-</nav>
 
 </header>
 
+<!-- AUTO CATEGORY -->
+<div class="category-scroll">
 
-<!-- ================= SIDE MENU ================= -->
+<div class="category-track">
 
-<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+    <div class="category hot">🔥 TRENDING</div>
+    <div class="category">NEW ARRIVALS</div>
+    <div class="category hot">⚡ FLASH SALE</div>
+    <div class="category">MEN</div>
+    <div class="category">WOMEN</div>
+    <div class="category">KIDS</div>
+    <div class="category">DENIMS</div>
+    <div class="category">SNEAKERS</div>
+    <div class="category">ACCESSORIES</div>
+    <div class="category hot">🏷️ UP TO 70% OFF</div>
+    <div class="category">CLEARANCE</div>
+    <div class="category">PREMIUM</div>
 
-<div class="side-menu" id="sideMenu">
-
-    <div class="side-header">
-        <h2>AS FASHIONS</h2>
-        <button class="close-menu" onclick="closeMenu()">×</button>
-    </div>
-
-    <a href="#men">Men</a>
-    <a href="#women">Women</a>
-    <a href="#kids">Kids</a>
-    <a href="#footwear">Footwear</a>
-    <a href="#accessories">Accessories</a>
-    <a href="#beauty">Beauty</a>
-    <a href="#trending">Trending Now</a>
-    <a href="#offers">Offers</a>
-    <a href="#clearance">Clearance Sale</a>
-    <a href="#sale" class="side-sale">🔥 SALE</a>
+    <div class="category hot">🔥 TRENDING</div>
+    <div class="category">NEW ARRIVALS</div>
+    <div class="category hot">⚡ FLASH SALE</div>
+    <div class="category">MEN</div>
+    <div class="category">WOMEN</div>
+    <div class="category">KIDS</div>
+    <div class="category">DENIMS</div>
+    <div class="category">SNEAKERS</div>
+    <div class="category">ACCESSORIES</div>
+    <div class="category hot">🏷️ UP TO 70% OFF</div>
+    <div class="category">CLEARANCE</div>
+    <div class="category">PREMIUM</div>
 
 </div>
 
+</div>
 
-<!-- ================= HERO ================= -->
-
+<!-- HERO -->
 <section class="hero">
 
 <div class="hero-content">
 
-    <div class="hero-small">
-        AS FASHIONS — NEW SEASON
-    </div>
+    <div class="hero-small">AS FASHIONS / NEW SEASON 2026</div>
 
     <h1>
-        STYLE MADE<br>
-        FOR YOU.
+        STYLE<br>
+        <span>WITHOUT</span><br>
+        LIMITS.
     </h1>
 
     <p>
-        Discover fresh fits, modern essentials and
-        statement pieces made for every side of you.
+        Discover premium fashion, elevated essentials
+        and the latest trends — curated for your style.
     </p>
 
     <div class="hero-buttons">
-        <a href="#men" class="btn">SHOP MEN</a>
-        <a href="#women" class="btn dark">SHOP WOMEN</a>
+        <button class="btn btn-dark" onclick="shopNow()">SHOP NEW ARRIVALS</button>
+        <button class="btn btn-outline" onclick="shopSale()">EXPLORE SALE</button>
     </div>
 
 </div>
 
 </section>
 
-
-<!-- ================= CATEGORIES ================= -->
-
-<section class="section">
-
-<div class="section-title">
+<!-- FLASH SALE -->
+<section class="flash">
 
 <div>
-<div class="eyebrow">SHOP BY CATEGORY</div>
-<h2>Find Your Style</h2>
+    <h2>⚡ Flash Sale</h2>
+    <p>Limited time. Limited stock.</p>
 </div>
-
-<a href="#" class="view-all">VIEW ALL →</a>
-
-</div>
-
-
-<div class="categories">
-
-<div class="category" id="men">
-<div class="category-icon">👨🏻</div>
-<span>Men</span>
-</div>
-
-<div class="category" id="women">
-<div class="category-icon">👩🏻</div>
-<span>Women</span>
-</div>
-
-<div class="category" id="kids">
-<div class="category-icon">🧒🏻</div>
-<span>Kids</span>
-</div>
-
-<div class="category" id="footwear">
-<div class="category-icon">👟</div>
-<span>Footwear</span>
-</div>
-
-<div class="category" id="accessories">
-<div class="category-icon">👜</div>
-<span>Accessories</span>
-</div>
-
-<div class="category" id="beauty">
-<div class="category-icon">💄</div>
-<span>Beauty</span>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= OFFER ================= -->
-
-<section id="offers">
-
-<div class="offer-banner">
-
-<div class="offer-content">
-
-<div class="tag">
-LIMITED TIME OFFER
-</div>
-
-<h2>
-UP TO 60% OFF
-</h2>
-
-<p>
-Fresh arrivals. Premium styles.
-Big savings. Don't miss your chance.
-</p>
-
-<a href="#sale" class="btn">
-SHOP OFFERS
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= TRENDING ================= -->
-
-<section class="section trending" id="trending">
-
-<div class="section-title">
-
-<div>
-<div class="eyebrow">WHAT'S HOT</div>
-<h2>Trending Now</h2>
-</div>
-
-<a href="#" class="view-all">EXPLORE ALL →</a>
-
-</div>
-
-
-<div class="trend-grid">
-
-<div class="trend-card">
-
-<img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1000&q=85">
-
-<div class="trend-text">
-<h3>New Season</h3>
-<span>Discover the latest looks →</span>
-</div>
-
-</div>
-
-
-<div class="trend-card">
-
-<img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85">
-
-<div class="trend-text">
-<h3>Street Edit</h3>
-<span>Shop the trend →</span>
-</div>
-
-</div>
-
-
-<div class="trend-card">
-
-<img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85">
-
-<div class="trend-text">
-<h3>Minimal</h3>
-<span>Less. Better. Modern. →</span>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= PRODUCTS ================= -->
-
-<section class="section" id="sale">
-
-<div class="section-title">
-
-<div>
-<div class="eyebrow">BEST SELLERS</div>
-<h2>Trending Products</h2>
-</div>
-
-<a href="#" class="view-all">VIEW ALL →</a>
-
-</div>
-
-
-<div class="products">
-
-
-<div class="product">
-
-<div class="product-image">
-
-<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85">
-
-<div class="badge">BESTSELLER</div>
-<div class="heart">♡</div>
-
-</div>
-
-<div class="product-info">
-<div class="brand">AS FASHIONS</div>
-<div class="product-name">Premium Cotton T-Shirt</div>
-<div class="price">
-₹799
-<span class="old-price">₹1,299</span>
-<span class="discount">38% OFF</span>
-</div>
-</div>
-
-</div>
-
-
-<div class="product">
-
-<div class="product-image">
-
-<img src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=700&q=85">
-
-<div class="badge">NEW</div>
-<div class="heart">♡</div>
-
-</div>
-
-<div class="product-info">
-<div class="brand">AS FASHIONS</div>
-<div class="product-name">Oversized Street Jacket</div>
-<div class="price">
-₹1,499
-<span class="old-price">₹2,499</span>
-<span class="discount">40% OFF</span>
-</div>
-</div>
-
-</div>
-
-
-<div class="product">
-
-<div class="product-image">
-
-<img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=85">
-
-<div class="badge">TRENDING</div>
-<div class="heart">♡</div>
-
-</div>
-
-<div class="product-info">
-<div class="brand">AS FASHIONS</div>
-<div class="product-name">Relaxed Fit Trousers</div>
-<div class="price">
-₹999
-<span class="old-price">₹1,799</span>
-<span class="discount">44% OFF</span>
-</div>
-</div>
-
-</div>
-
-
-<div class="product">
-
-<div class="product-image">
-
-<img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=700&q=85">
-
-<div class="badge">SALE</div>
-<div class="heart">♡</div>
-
-</div>
-
-<div class="product-info">
-<div class="brand">AS FASHIONS</div>
-<div class="product-name">Premium Casual Shirt</div>
-<div class="price">
-₹899
-<span class="old-price">₹1,599</span>
-<span class="discount">43% OFF</span>
-</div>
-</div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- ================= FLASH SALE ================= -->
-
-<section class="countdown-section">
-
-<h2>🔥 MEGA FASHION SALE</h2>
-
-<p>
-Extra discounts on selected styles. Hurry, offer ends soon.
-</p>
 
 <div class="timer">
 
-<div class="time-box">
-<strong id="hours">08</strong>
-<span>HOURS</span>
+    <div class="time-box">
+        <strong id="hours">08</strong>
+        <small>HRS</small>
+    </div>
+
+    <div class="time-box">
+        <strong id="minutes">45</strong>
+        <small>MIN</small>
+    </div>
+
+    <div class="time-box">
+        <strong id="seconds">20</strong>
+        <small>SEC</small>
+    </div>
+
 </div>
 
-<div class="time-box">
-<strong id="minutes">24</strong>
-<span>MINUTES</span>
+</section>
+
+<!-- TRENDING -->
+<section class="section">
+
+<div class="section-head">
+
+<div>
+    <h2>Trending Now</h2>
+    <p>The styles everyone is talking about.</p>
 </div>
 
-<div class="time-box">
-<strong id="seconds">59</strong>
-<span>SECONDS</span>
+<a class="view" href="#">VIEW ALL →</a>
+
+</div>
+
+<div class="products">
+
+<!-- PRODUCT 1 -->
+<div class="product">
+
+    <div class="product-img">
+
+        <button class="wishlist" onclick="wishlist(this)">♡</button>
+
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80">
+
+    </div>
+
+    <div class="product-info">
+
+        <div class="brand">AS Studio</div>
+
+        <div class="product-name">Oversized Premium Shirt</div>
+
+        <div>
+            <span class="price">₹1,299</span>
+            <span class="old">₹2,499</span>
+            <span class="discount">48% OFF</span>
+        </div>
+
+        <button class="add" onclick="addCart()">
+            ADD TO BAG
+        </button>
+
+    </div>
+
+</div>
+
+<!-- PRODUCT 2 -->
+<div class="product">
+
+    <div class="product-img">
+
+        <button class="wishlist" onclick="wishlist(this)">♡</button>
+
+        <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=700&q=80">
+
+    </div>
+
+    <div class="product-info">
+
+        <div class="brand">AS Premium</div>
+
+        <div class="product-name">Minimal Streetwear Look</div>
+
+        <div>
+            <span class="price">₹1,799</span>
+            <span class="old">₹3,499</span>
+            <span class="discount">49% OFF</span>
+        </div>
+
+        <button class="add" onclick="addCart()">
+            ADD TO BAG
+        </button>
+
+    </div>
+
+</div>
+
+<!-- PRODUCT 3 -->
+<div class="product">
+
+    <div class="product-img">
+
+        <button class="wishlist" onclick="wishlist(this)">♡</button>
+
+        <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=80">
+
+    </div>
+
+    <div class="product-info">
+
+        <div class="brand">AS Women</div>
+
+        <div class="product-name">Modern Everyday Dress</div>
+
+        <div>
+            <span class="price">₹1,499</span>
+            <span class="old">₹2,999</span>
+            <span class="discount">50% OFF</span>
+        </div>
+
+        <button class="add" onclick="addCart()">
+            ADD TO BAG
+        </button>
+
+    </div>
+
+</div>
+
+<!-- PRODUCT 4 -->
+<div class="product">
+
+    <div class="product-img">
+
+        <button class="wishlist" onclick="wishlist(this)">♡</button>
+
+        <img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=700&q=80">
+
+    </div>
+
+    <div class="product-info">
+
+        <div class="brand">AS Denim</div>
+
+        <div class="product-name">Relaxed Fit Denim</div>
+
+        <div>
+            <span class="price">₹1,999</span>
+            <span class="old">₹3,999</span>
+            <span class="discount">50% OFF</span>
+        </div>
+
+        <button class="add" onclick="addCart()">
+            ADD TO BAG
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+</section>
+
+<!-- PROMOTIONS -->
+<section class="section">
+
+<div class="section-head">
+
+<div>
+    <h2>Shop The Edit</h2>
+    <p>Curated collections for every mood.</p>
+</div>
+
+</div>
+
+<div class="promo-grid">
+
+<div class="promo">
+
+<img src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1000&q=85">
+
+<div class="promo-content">
+    <h3>New Season</h3>
+    <p>Fresh styles. Fresh energy.</p>
+</div>
+
+</div>
+
+<div class="promo">
+
+<img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=85">
+
+<div class="promo-content">
+    <h3>Women</h3>
+    <p>Discover the latest.</p>
+</div>
+
+</div>
+
+<div class="promo">
+
+<img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=700&q=85">
+
+<div class="promo-content">
+    <h3>Men</h3>
+    <p>Modern essentials.</p>
+</div>
+
 </div>
 
 </div>
 
 </section>
 
-
-<!-- ================= CLEARANCE ================= -->
-
-<section class="section" id="clearance">
-
-<div class="clearance">
-
-<div class="clearance-img"></div>
-
-<div class="clearance-content">
-
-<small>FINAL MARKDOWN</small>
-
-<h2>
-CLEARANCE<br>
-SALE
-</h2>
-
-<p>
-Last chance to grab selected styles
-at unbelievable prices. Limited stock only.
-</p>
-
-<a href="#" class="btn dark">
-SHOP CLEARANCE
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= NEWSLETTER ================= -->
+<!-- NEWSLETTER -->
 
 <section class="newsletter">
 
-<h2>Stay in Style</h2>
+<h2>Stay Ahead of the Trend.</h2>
 
 <p>
-Get early access to new drops, exclusive offers and fashion updates.
+Get early access to new drops, private offers and exclusive deals.
 </p>
 
 <div class="email-box">
 
 <input
 type="email"
-placeholder="Enter your email address">
+placeholder="Enter your email address"
+id="email">
 
-<button>
-SUBSCRIBE
+<button onclick="subscribe()">
+JOIN
 </button>
 
 </div>
 
 </section>
 
-
-<!-- ================= FOOTER ================= -->
+<!-- FOOTER -->
 
 <footer>
 
@@ -1545,119 +1163,117 @@ SUBSCRIBE
 AS FASHIONS
 </div>
 
-<div class="footer-about">
-Modern fashion for modern lifestyles.
-Discover premium styles, trending collections
-and exclusive offers at AS FASHIONS.
-</div>
+<p style="margin-top:18px;">
+Modern fashion for the new generation.
+Premium styles, effortless confidence.
+</p>
 
 </div>
-
 
 <div>
 
 <h4>SHOP</h4>
 
-<a href="#men">Men</a>
-<a href="#women">Women</a>
-<a href="#kids">Kids</a>
-<a href="#footwear">Footwear</a>
+<a href="#">Women</a>
+<a href="#">Men</a>
+<a href="#">Kids</a>
+<a href="#">New Arrivals</a>
+<a href="#">Sale</a>
 
 </div>
-
 
 <div>
 
 <h4>HELP</h4>
 
 <a href="#">Contact Us</a>
-<a href="#">Track Order</a>
 <a href="#">Shipping</a>
 <a href="#">Returns</a>
+<a href="#">Track Order</a>
 
 </div>
-
 
 <div>
 
-<h4>ABOUT</h4>
+<h4>FOLLOW</h4>
 
-<a href="#">Our Story</a>
-<a href="#">Careers</a>
-<a href="#">Privacy</a>
-<a href="#">Terms</a>
-
-</div>
+<a href="#">Instagram</a>
+<a href="#">Facebook</a>
+<a href="#">YouTube</a>
+<a href="#">Pinterest</a>
 
 </div>
 
+</div>
 
-<div class="copyright">
-© 2026 AS FASHIONS. All Rights Reserved.
+<div class="copy">
+© 2026 AS Fashions. All Rights Reserved.
 </div>
 
 </footer>
 
+<!-- MOBILE MENU -->
 
-<!-- ================= MOBILE BOTTOM ================= -->
+<div class="mobile-menu" id="mobileMenu">
 
-<div class="mobile-bottom">
+<button class="close-menu" onclick="closeMenu()">×</button>
 
-<a href="#">
-⌂
-<span>Home</span>
-</a>
-
-<a href="#trending">
-⌕
-<span>Explore</span>
-</a>
-
-<a href="#">
-♡
-<span>Wishlist</span>
-</a>
-
-<a href="#">
-♙
-<span>Profile</span>
-</a>
-
-<a href="#">
-🛍️
-<span>Bag</span>
-</a>
+<a href="#">NEW ARRIVALS</a>
+<a href="#">WOMEN</a>
+<a href="#">MEN</a>
+<a href="#">KIDS</a>
+<a href="#">SHOES</a>
+<a href="#">ACCESSORIES</a>
+<a href="#">TRENDING</a>
+<a href="#">CLEARANCE SALE</a>
 
 </div>
 
+<!-- CART -->
+
+<div class="cart-panel" id="cartPanel">
+
+<div class="cart-title">
+
+<h3>Your Bag</h3>
+
+<button onclick="toggleCart()">×</button>
+
+</div>
+
+<div class="empty" id="cartText">
+Your bag is empty.
+</div>
+
+</div>
 
 <script>
 
-/* ================= SPLASH ================= */
+/* SPLASH */
 
 window.addEventListener("load",function(){
 
     setTimeout(function(){
 
-        document
-        .getElementById("splash")
-        .classList.add("hide");
+        document.getElementById("splash").style.opacity="0";
 
-    },1200);
+        setTimeout(function(){
+
+            document.getElementById("splash").style.display="none";
+
+        },700);
+
+    },1400);
 
 });
 
 
-/* ================= MENU ================= */
+/* MOBILE MENU */
 
 function openMenu(){
 
     document
-    .getElementById("sideMenu")
-    .classList.add("active");
-
-    document
-    .getElementById("overlay")
+    .getElementById("mobileMenu")
     .classList.add("active");
 
 }
@@ -1665,75 +1281,175 @@ function openMenu(){
 function closeMenu(){
 
     document
-    .getElementById("sideMenu")
-    .classList.remove("active");
-
-    document
-    .getElementById("overlay")
+    .getElementById("mobileMenu")
     .classList.remove("active");
 
 }
 
 
-/* ================= COUNTDOWN ================= */
+/* CART */
 
-let totalSeconds = 8 * 60 * 60 + 24 * 60 + 59;
+let cart=0;
 
-function updateTimer(){
+function addCart(){
 
-    if(totalSeconds <= 0){
-        totalSeconds = 8 * 60 * 60;
+    cart++;
+
+    document.getElementById("cartCount").innerText=cart;
+
+    document.getElementById("cartText").innerHTML=
+    "<strong>"+cart+
+    "</strong> item(s) added to your bag.<br><br>"+
+    "Ready to checkout.";
+
+}
+
+function toggleCart(){
+
+    document
+    .getElementById("cartPanel")
+    .classList.toggle("active");
+
+}
+
+
+/* WISHLIST */
+
+function wishlist(button){
+
+    button.classList.toggle("active");
+
+    if(button.classList.contains("active")){
+
+        button.innerHTML="♥";
+
+    }else{
+
+        button.innerHTML="♡";
+
     }
 
-    let hours =
-        Math.floor(totalSeconds / 3600);
+}
 
-    let minutes =
-        Math.floor((totalSeconds % 3600) / 60);
 
-    let seconds =
-        totalSeconds % 60;
+/* SEARCH */
 
-    document.getElementById("hours")
-        .textContent =
-        String(hours).padStart(2,"0");
+function searchProducts(){
 
-    document.getElementById("minutes")
-        .textContent =
-        String(minutes).padStart(2,"0");
+    let search=prompt(
+        "What are you looking for?"
+    );
 
-    document.getElementById("seconds")
-        .textContent =
-        String(seconds).padStart(2,"0");
+    if(search){
+
+        alert(
+            "Searching AS Fashions for: "+
+            search
+        );
+
+    }
+
+}
+
+
+/* ACCOUNT */
+
+function showAccount(){
+
+    alert(
+        "AS Fashions Account\n\n"+
+        "Login / Register\n"+
+        "Orders\n"+
+        "Wishlist\n"+
+        "Saved Addresses"
+    );
+
+}
+
+
+/* HERO BUTTONS */
+
+function shopNow(){
+
+    document
+    .querySelector(".section")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+function shopSale(){
+
+    alert(
+        "🔥 Sale Collection\n\n"+
+        "Up to 70% OFF"
+    );
+
+}
+
+
+/* NEWSLETTER */
+
+function subscribe(){
+
+    let email=
+    document
+    .getElementById("email")
+    .value;
+
+    if(!email){
+
+        alert("Please enter your email.");
+
+        return;
+
+    }
+
+    alert(
+        "Welcome to AS Fashions! ✨\n"+
+        "You are now subscribed."
+    );
+
+}
+
+
+/* FLASH COUNTDOWN */
+
+let totalSeconds=8*60*60+45*60+20;
+
+setInterval(function(){
 
     totalSeconds--;
 
-}
+    if(totalSeconds<0){
 
-setInterval(updateTimer,1000);
+        totalSeconds=8*60*60;
 
-updateTimer();
+    }
 
+    let h=
+    Math.floor(totalSeconds/3600);
 
-/* ================= WISHLIST ================= */
+    let m=
+    Math.floor((totalSeconds%3600)/60);
 
-document.querySelectorAll(".heart").forEach(function(btn){
+    let s=
+    totalSeconds%60;
 
-    btn.addEventListener("click",function(e){
+    document.getElementById("hours")
+    .innerText=
+    String(h).padStart(2,"0");
 
-        e.stopPropagation();
+    document.getElementById("minutes")
+    .innerText=
+    String(m).padStart(2,"0");
 
-        if(btn.textContent === "♡"){
-            btn.textContent = "♥";
-            btn.style.color = "#d9363e";
-        }else{
-            btn.textContent = "♡";
-            btn.style.color = "#111";
-        }
+    document.getElementById("seconds")
+    .innerText=
+    String(s).padStart(2,"0");
 
-    });
-
-});
+},1000);
 
 </script>
 

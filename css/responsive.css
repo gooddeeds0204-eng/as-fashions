@@ -8,7 +8,13 @@
 
     .nav-left {
         width: 100%;
+        display: flex;
+        align-items: center;
         justify-content: space-between;
+    }
+
+    .logo {
+        font-size: 20px;
     }
 
     .search-bar {
@@ -17,8 +23,27 @@
         order: 3;
     }
 
+    /* మొబైల్ వెబ్‌సైట్‌లో కుడివైపు టాప్‌లోనే ఐకాన్లు ఉండేలా సెట్ చేద్దాం */
     .nav-right {
-        display: none; /* Handled by bottom navigation on mobile */
+        display: flex !important;
+        gap: 15px;
+    }
+
+    .icon-item span {
+        display: none; /* కేవలం ఐకాన్లు మాత్రమే కనిపించేలా */
+    }
+
+    .icon-item i {
+        font-size: 18px;
+    }
+
+    /* కింద ఉన్న ఆ చెత్త బాటమ్ నావిగేషన్‌ని పూర్తిగా తీసేస్తున్నాం */
+    .mobile-bottom-nav {
+        display: none !important;
+    }
+
+    body {
+        padding-bottom: 0 !important; /* స్పేస్ ప్రాబ్లం పోతుంది */
     }
 
     .hero-banner {
@@ -29,16 +54,6 @@
         font-size: 22px;
     }
 
-    .banner-content p {
-        font-size: 11px;
-        margin-bottom: 10px;
-    }
-
-    .shop-btn {
-        padding: 6px 16px;
-        font-size: 10px;
-    }
-
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
@@ -47,9 +62,5 @@
 
     .product-img-box {
         height: 170px;
-    }
-
-    .mobile-bottom-nav {
-        display: flex !important;
     }
 }

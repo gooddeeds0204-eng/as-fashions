@@ -490,7 +490,6 @@
             <a href="#">My Orders</a>
             <a href="#" onclick="openWishlist()">Wishlist</a>
             <a href="#">Coupons</a>
-            <a href="admin.html" target="_blank">Admin Panel</a>
           </div>
         </div>
         <button class="action" onclick="openWishlist()"><span class="action-icon">♡</span>Wishlist<span class="badge" id="wishlistCount">0</span></button>
@@ -534,7 +533,8 @@
     <button class="mn-cat sale" onclick="filterProducts('All', null); sortProducts('discount'); closeMobileNav(); scrollToSection('allProducts')">Sale</button>
     <a onclick="openWishlist(); closeMobileNav()">My Wishlist</a>
     <a onclick="openCart(); closeMobileNav()">My Bag</a>
-    <a href="admin.html" target="_blank">Admin Panel</a>
+    <a href="#">Track Order</a>
+    <a href="#">Help & Support</a>
   </div>
 
   <main>
@@ -803,7 +803,7 @@
         <a href="#">Pinterest</a>
       </div>
     </div>
-    <div class="copyright">© 2026 AS FASHIONS. All Rights Reserved. &nbsp;·&nbsp; <a href="admin.html" style="color:#aaa">Admin Panel</a></div>
+    <div class="copyright">© 2026 AS FASHIONS. All Rights Reserved.</div>
   </footer>
 
   <!-- CART DRAWER -->
@@ -951,7 +951,6 @@
       }, 1400);
     });
 
-    // Offer Slider
     let currentSlide = 0;
     const slides = document.querySelectorAll('.offer-slide');
     function nextSlide() {

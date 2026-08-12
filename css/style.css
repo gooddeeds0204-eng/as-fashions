@@ -6,11 +6,11 @@
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #f7f8fa;
     color: #282c3f;
 }
 
-/* --- MYNTRA STYLE HEADER --- */
+/* --- TOP HEADER (MYNTRA STYLE) --- */
 .navbar {
     display: flex;
     align-items: center;
@@ -40,7 +40,7 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 25px;
+    gap: 28px;
     height: 100%;
     align-items: center;
 }
@@ -55,10 +55,11 @@ body {
     display: flex;
     align-items: center;
     border-bottom: 4px solid transparent;
-    transition: border-bottom 0.2s;
+    transition: all 0.2s ease;
 }
 
 .nav-links a:hover {
+    color: #ff3f6c;
     border-bottom: 4px solid #ff3f6c;
 }
 
@@ -67,11 +68,12 @@ body {
     background: #f5f5f6;
     display: flex;
     align-items: center;
-    width: 350px;
+    width: 400px;
     height: 40px;
     border-radius: 4px;
     padding: 0 15px;
     border: 1px solid transparent;
+    transition: all 0.3s;
 }
 
 .search-container:focus-within {
@@ -95,7 +97,7 @@ body {
     color: #282c3f;
 }
 
-/* User Actions Profile/Cart/Wishlist */
+/* User Actions */
 .nav-actions {
     display: flex;
     align-items: center;
@@ -115,7 +117,7 @@ body {
 
 .action-item i {
     font-size: 18px;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 
 .action-item:hover {
@@ -134,61 +136,66 @@ body {
     border-radius: 50%;
 }
 
-/* --- BANNER --- */
+/* --- HERO BANNER --- */
 .hero-banner {
     width: 100%;
-    height: 380px;
-    background: url('../assets/banners/hero.jpg') center/cover no-repeat;
-    background-color: #1a1a1a;
+    height: 420px;
+    background: linear-gradient(135deg, #1a1a1a, #282c3f);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
     margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
 }
 
 .banner-content h1 {
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    color: #ff3f6c;
 }
 
 .banner-content p {
-    font-size: 16px;
-    margin-bottom: 20px;
-    letter-spacing: 0.5px;
+    font-size: 18px;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    color: #eaeaec;
 }
 
 .shop-btn {
     background: #ff3f6c;
     color: #fff;
     border: none;
-    padding: 12px 32px;
-    font-size: 14px;
+    padding: 14px 36px;
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-radius: 2px;
-    transition: background 0.2s;
+    border-radius: 4px;
+    transition: background 0.2s, transform 0.2s;
 }
 
 .shop-btn:hover {
     background: #e02f5b;
+    transform: translateY(-2px);
 }
 
-/* --- CATEGORIES CIRCULAR/GRID (MEDAL/MYNTRA STYLE) --- */
+/* --- SECTIONS --- */
 .section-title {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: #3e4152;
-    margin: 40px 40px 25px 40px;
+    margin: 40px 40px 20px 40px;
 }
 
+/* --- CATEGORY CIRCLES --- */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -207,30 +214,131 @@ body {
     width: 100%;
     aspect-ratio: 1;
     border-radius: 50%;
-    background-color: #f5f5f6;
+    background-color: #e2e2e5;
     overflow: hidden;
-    margin-bottom: 10px;
-    border: 2px solid #eaeaec;
-    transition: transform 0.3s;
-}
-
-.category-img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    margin-bottom: 12px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s, border-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #696e79;
 }
 
 .category-circle-card:hover .category-img-box {
-    transform: scale(1.05);
+    transform: scale(1.06);
     border-color: #ff3f6c;
 }
 
 .category-circle-card span {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
 }
 
-/* Footer */
+/* --- PRODUCT GRID (MYNTRA CARD STYLE) --- */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 0 40px;
+    margin-bottom: 50px;
+}
+
+.product-card {
+    background: #fff;
+    border: 1px solid #eaeaec;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+}
+
+.product-img-container {
+    width: 100%;
+    height: 280px;
+    background: #f5f5f6;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a9abb3;
+    font-size: 14px;
+}
+
+.product-rating {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #282c3f;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.product-rating i {
+    color: #03a685;
+    font-size: 11px;
+}
+
+.product-details {
+    padding: 15px;
+}
+
+.product-brand {
+    font-size: 15px;
+    font-weight: 800;
+    color: #282c3f;
+    margin-bottom: 4px;
+}
+
+.product-name {
+    font-size: 13px;
+    color: #535766;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-price-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.current-price {
+    font-weight: 700;
+    color: #282c3f;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #7e818c;
+    font-size: 12px;
+}
+
+.discount {
+    color: #ff905a;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* --- FOOTER --- */
 footer {
     background: #fafbfc;
     padding: 40px;

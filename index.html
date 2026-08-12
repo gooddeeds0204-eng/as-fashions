@@ -12,8 +12,19 @@ content="AS FASHIONS — Discover modern fashion, new arrivals, trending styles 
 <style>
 
 /* =====================================================
-   RESET
+   RESET & VARIABLES
 ===================================================== */
+
+:root{
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-main: #111111;
+    --text-muted: #666666;
+    --accent: #ff3f6c;
+    --accent-dark: #e01d54;
+    --border-color: #eaeaea;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
 
 *{
     margin:0;
@@ -26,10 +37,11 @@ html{
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#fff;
-    color:#171717;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-main);
     overflow-x:hidden;
+    line-height: 1.5;
 }
 
 button,
@@ -55,17 +67,13 @@ a{
     position:fixed;
     inset:0;
     z-index:9999;
-
-    background:#111;
+    background:#0f1016;
     color:#fff;
-
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
-
-    transition:opacity .6s ease,
-               visibility .6s ease;
+    transition: opacity .6s ease, visibility .6s ease;
 }
 
 .splash.hide{
@@ -74,30 +82,32 @@ a{
 }
 
 .splash-logo{
-    font-size:34px;
-    font-weight:700;
-    letter-spacing:7px;
+    font-size:36px;
+    font-weight:800;
+    letter-spacing:8px;
+    background: linear-gradient(45deg, #fff, #aaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .splash-line{
     width:0;
     height:2px;
-    background:#fff;
+    background: var(--accent);
     margin-top:18px;
-    animation:splashLine 1.5s ease forwards;
+    animation:splashLine 1.2s ease forwards;
 }
 
 .splash-text{
     margin-top:15px;
-    font-size:10px;
-    letter-spacing:4px;
-    opacity:.65;
+    font-size:11px;
+    letter-spacing:5px;
+    opacity:.7;
+    text-transform: uppercase;
 }
 
 @keyframes splashLine{
-    to{
-        width:180px;
-    }
+    to{ width:200px; }
 }
 
 
@@ -106,30 +116,35 @@ a{
 ===================================================== */
 
 .top-bar{
-    height:44px;
-    background:#202236;
+    height:40px;
+    background: #111318;
     color:#fff;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
-    font-size:12px;
-    letter-spacing:.4px;
+    font-size:11.5px;
+    letter-spacing:.5px;
 }
 
 .top-bar strong{
-    margin-left:5px;
+    margin-left:6px;
+    color: var(--accent);
 }
 
 .top-bar a{
     text-decoration:underline;
-    margin-left:22px;
+    margin-left:20px;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.top-bar a:hover{
+    opacity: 1;
 }
 
 .top-divider{
-    margin:0 18px;
-    opacity:.5;
+    margin:0 16px;
+    opacity:.3;
 }
 
 
@@ -138,128 +153,136 @@ a{
 ===================================================== */
 
 .header{
-    height:78px;
-    background:#fff;
-
+    height:80px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     display:flex;
     align-items:center;
-
-    padding:0 32px;
-
-    border-bottom:1px solid #eee;
-
-    position:relative;
+    padding:0 40px;
+    border-bottom:1px solid var(--border-color);
+    position:sticky;
+    top:0;
     z-index:100;
 }
 
 .header-left{
     display:flex;
     align-items:center;
-    gap:18px;
+    gap:20px;
 }
 
 .menu-btn{
-    width:32px;
-    height:32px;
-
+    width:36px;
+    height:36px;
     border:0;
     background:none;
-
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
-    gap:5px;
+    gap:6px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.menu-btn:hover{
+    background: var(--bg-secondary);
 }
 
 .menu-btn span{
-    width:24px;
+    width:22px;
     height:2px;
     background:#111;
-    transition:.25s;
+    transition: var(--transition);
 }
 
 .logo{
-    font-size:25px;
-    font-weight:500;
-    letter-spacing:-1.5px;
-    white-space:nowrap;
+    font-size:24px;
+    font-weight:600;
+    letter-spacing:-1px;
 }
 
 .logo span{
-    font-weight:700;
+    font-weight:800;
+    color: var(--accent);
 }
 
 .header-search{
     flex:1;
-    max-width:530px;
-    margin-left:55px;
-
+    max-width:500px;
+    margin-left:60px;
     height:44px;
-
-    border:1px solid #d6d6d6;
-
+    border:1px solid var(--border-color);
+    background: var(--bg-secondary);
+    border-radius: 30px;
     display:flex;
     align-items:center;
+    padding:0 20px;
+    transition: var(--transition);
+}
 
-    padding:0 15px;
+.header-search:focus-within{
+    border-color: var(--text-main);
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .header-search input{
     flex:1;
     border:0;
     outline:0;
-    font-size:14px;
+    font-size:13.5px;
     background:none;
 }
 
 .search-btn{
     border:0;
     background:none;
-    font-size:20px;
+    font-size:18px;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.search-btn:hover{
+    color: var(--accent);
 }
 
 .header-actions{
     margin-left:auto;
-
     display:flex;
     align-items:center;
-    gap:25px;
+    gap:22px;
 }
 
 .icon-btn{
     position:relative;
-
     border:0;
     background:none;
-
-    font-size:23px;
-
-    transition:.2s;
+    font-size:22px;
+    transition: var(--transition);
+    padding: 8px;
+    border-radius: 50%;
 }
 
 .icon-btn:hover{
-    transform:scale(1.1);
+    background: var(--bg-secondary);
+    transform: translateY(-2px);
 }
 
 .cart-count{
     position:absolute;
-    right:-8px;
-    top:-7px;
-
-    width:17px;
-    height:17px;
-
+    right:4px;
+    top:4px;
+    width:18px;
+    height:18px;
     border-radius:50%;
-
-    background:#e63946;
+    background: var(--accent);
     color:#fff;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
-    font-size:9px;
+    font-size:9.5px;
+    font-weight: 700;
 }
 
 
@@ -268,40 +291,39 @@ a{
 ===================================================== */
 
 .nav{
-    height:48px;
-
+    height:46px;
     display:flex;
     align-items:center;
     justify-content:center;
-
-    border-bottom:1px solid #eee;
-
-    gap:40px;
-
+    border-bottom:1px solid var(--border-color);
+    gap:35px;
     white-space:nowrap;
     overflow:hidden;
+    background: #fff;
 }
 
 .nav a{
-    font-size:13px;
-    font-weight:500;
-
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing: .5px;
     position:relative;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.nav a:hover{
+    color: var(--text-main);
 }
 
 .nav a::after{
     content:"";
-
     position:absolute;
-    bottom:-16px;
+    bottom:-14px;
     left:0;
-
     width:0;
     height:2px;
-
-    background:#111;
-
-    transition:.25s;
+    background: var(--text-main);
+    transition: var(--transition);
 }
 
 .nav a:hover::after{
@@ -309,7 +331,10 @@ a{
 }
 
 .nav .sale{
-    color:#d33;
+    color: var(--accent);
+}
+.nav .sale::after{
+    background: var(--accent);
 }
 
 
@@ -320,15 +345,12 @@ a{
 .menu-overlay{
     position:fixed;
     inset:0;
-
-    background:rgba(0,0,0,.45);
-
+    background:rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
     z-index:500;
-
     opacity:0;
     visibility:hidden;
-
-    transition:.3s;
+    transition: var(--transition);
 }
 
 .menu-overlay.active{
@@ -338,24 +360,17 @@ a{
 
 .side-menu{
     position:fixed;
-
     top:0;
     left:0;
-
-    width:min(360px,88vw);
+    width:min(340px, 85vw);
     height:100vh;
-
     background:#fff;
-
     z-index:600;
-
     transform:translateX(-100%);
-
-    transition:.35s ease;
-
-    padding:25px;
-
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding:30px;
     overflow:auto;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.1);
 }
 
 .side-menu.active{
@@ -366,39 +381,47 @@ a{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
-    padding-bottom:25px;
-    border-bottom:1px solid #eee;
+    padding-bottom:20px;
+    border-bottom:1px solid var(--border-color);
 }
 
 .menu-title{
-    font-size:22px;
-    font-weight:700;
+    font-size:20px;
+    font-weight:800;
+    letter-spacing: 1px;
 }
 
 .close-menu{
     border:0;
     background:none;
-    font-size:28px;
+    font-size:26px;
+    transition: var(--transition);
+}
+.close-menu:hover{
+    color: var(--accent);
 }
 
 .menu-links{
-    margin-top:20px;
+    margin-top:15px;
 }
 
 .menu-links a{
     display:flex;
     justify-content:space-between;
+    padding:16px 0;
+    border-bottom:1px solid var(--border-color);
+    font-size:15px;
+    font-weight: 500;
+    transition: var(--transition);
+}
 
-    padding:18px 0;
-
-    border-bottom:1px solid #eee;
-
-    font-size:16px;
+.menu-links a:hover{
+    color: var(--accent);
+    padding-left: 5px;
 }
 
 .menu-links a span{
-    opacity:.5;
+    opacity:.4;
 }
 
 
@@ -408,41 +431,34 @@ a{
 
 .promo-wrap{
     overflow:hidden;
-    background:#f7f7f7;
-    border-bottom:1px solid #eee;
+    background: var(--bg-secondary);
+    border-bottom:1px solid var(--border-color);
 }
 
 .promo-track{
     width:max-content;
-
     display:flex;
-
-    animation:promoMove 28s linear infinite;
+    animation:promoMove 30s linear infinite;
 }
 
 .promo-item{
-    padding:13px 35px;
-
+    padding:12px 40px;
     font-size:11px;
     font-weight:700;
-
-    letter-spacing:1px;
-
+    letter-spacing:1.5px;
     white-space:nowrap;
+    color: var(--text-muted);
 }
 
 .promo-item span{
     margin-left:12px;
-    opacity:.4;
+    opacity:.5;
+    font-weight: 400;
 }
 
 @keyframes promoMove{
-    from{
-        transform:translateX(0);
-    }
-    to{
-        transform:translateX(-50%);
-    }
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
 }
 
 
@@ -452,21 +468,17 @@ a{
 
 .hero{
     position:relative;
-
-    min-height:580px;
-
+    min-height:600px;
     background-image:
         linear-gradient(
             90deg,
-            rgba(0,0,0,.66),
-            rgba(0,0,0,.32),
-            rgba(0,0,0,.08)
+            rgba(0,0,0,0.7),
+            rgba(0,0,0,0.4),
+            rgba(0,0,0,0.1)
         ),
         url("https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=1800&q=85");
-
     background-position:center;
     background-size:cover;
-
     display:flex;
     align-items:center;
 }
@@ -474,63 +486,52 @@ a{
 .hero-content{
     width:1200px;
     max-width:100%;
-
     margin:auto;
-
-    padding:65px 6%;
-
+    padding:60px 6%;
     color:#fff;
 }
 
 .hero-eyebrow{
-    font-size:12px;
+    font-size:11px;
     letter-spacing:4px;
-    font-weight:600;
-
-    margin-bottom:25px;
+    font-weight:700;
+    margin-bottom:20px;
+    color: #ffb7c5;
 }
 
 .hero h1{
-    font-size:clamp(52px,7vw,92px);
-
-    line-height:.88;
-
-    letter-spacing:-4px;
-
-    margin-bottom:28px;
+    font-size:clamp(48px, 6.5vw, 88px);
+    line-height:.92;
+    letter-spacing:-2px;
+    margin-bottom:24px;
+    font-weight: 800;
 }
 
 .hero-description{
-    max-width:610px;
-
-    font-size:18px;
-
+    max-width:550px;
+    font-size:16px;
     line-height:1.6;
-
-    margin-bottom:32px;
+    margin-bottom:30px;
+    opacity: 0.9;
 }
 
 .hero-buttons{
     display:flex;
-    gap:12px;
+    gap:15px;
     flex-wrap:wrap;
 }
 
 .hero-btn{
-    min-height:50px;
-
-    padding:0 28px;
-
+    min-height:48px;
+    padding:0 30px;
     display:inline-flex;
     align-items:center;
     justify-content:center;
-
-    font-size:12px;
+    font-size:11.5px;
     font-weight:700;
-
-    letter-spacing:.6px;
-
-    transition:.25s;
+    letter-spacing:1px;
+    border-radius: 4px;
+    transition: var(--transition);
 }
 
 .hero-btn.primary{
@@ -538,12 +539,21 @@ a{
     color:#111;
 }
 
-.hero-btn.secondary{
-    border:1px solid #fff;
-    color:#fff;
+.hero-btn.primary:hover{
+    background: var(--accent);
+    color: #fff;
+    transform:translateY(-3px);
 }
 
-.hero-btn:hover{
+.hero-btn.secondary{
+    border:1px solid rgba(255,255,255,0.4);
+    color:#fff;
+    backdrop-filter: blur(4px);
+}
+
+.hero-btn.secondary:hover{
+    border-color: #fff;
+    background: rgba(255,255,255,0.1);
     transform:translateY(-3px);
 }
 
@@ -553,23 +563,17 @@ a{
 ===================================================== */
 
 .quick-section{
-    padding:22px 0;
-
+    padding:25px 0;
     overflow:hidden;
-
     background:#fff;
 }
 
 .quick-track{
     display:flex;
-
     width:max-content;
-
-    gap:12px;
-
+    gap:15px;
     padding-left:20px;
-
-    animation:quickScroll 25s linear infinite;
+    animation:quickScroll 28s linear infinite;
 }
 
 .quick-track:hover{
@@ -577,67 +581,61 @@ a{
 }
 
 .quick-card{
-    width:280px;
-    min-height:105px;
-
-    background:#f7f7f7;
-
-    border:1px solid #e6e6e6;
-
-    padding:19px;
-
+    width:290px;
+    min-height:110px;
+    background: var(--bg-secondary);
+    border:1px solid var(--border-color);
+    border-radius: 8px;
+    padding:20px;
     position:relative;
-
-    transition:.25s;
+    transition: var(--transition);
 }
 
 .quick-card:hover{
     background:#111;
     color:#fff;
-
-    transform:translateY(-3px);
+    border-color: #111;
+    transform:translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 .quick-card small{
     display:block;
-
-    font-size:9px;
-
+    font-size:9.5px;
     letter-spacing:1.5px;
-
     opacity:.6;
-
-    margin-bottom:7px;
+    margin-bottom:6px;
+    font-weight: 600;
 }
 
 .quick-card strong{
-    font-size:18px;
+    font-size:17px;
+    font-weight: 700;
 }
 
 .quick-card p{
     font-size:11px;
-    opacity:.65;
-    margin-top:5px;
+    opacity:.7;
+    margin-top:4px;
 }
 
 .quick-arrow{
     position:absolute;
-
-    right:17px;
+    right:18px;
     top:50%;
-
-    font-size:20px;
-
+    font-size:18px;
     transform:translateY(-50%);
+    transition: var(--transition);
+}
+
+.quick-card:hover .quick-arrow{
+    transform: translate(4px, -50%);
+    color: var(--accent);
 }
 
 @keyframes quickScroll{
-    from{
-        transform:translateX(0);
-    }
-    to{
-        transform:translateX(-50%);
-    }
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
 }
 
 
@@ -646,40 +644,42 @@ a{
 ===================================================== */
 
 .section{
-    padding:65px 5%;
+    padding:70px 5%;
 }
 
 .section-head{
     display:flex;
-
     align-items:end;
     justify-content:space-between;
-
-    margin-bottom:28px;
+    margin-bottom:30px;
 }
 
 .section-kicker{
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    color:#777;
-
-    margin-bottom:8px;
+    font-size:10.5px;
+    letter-spacing:2.5px;
+    color: var(--text-muted);
+    margin-bottom:6px;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .section-title{
     font-size:32px;
-
-    letter-spacing:-1.5px;
+    letter-spacing:-1px;
+    font-weight: 800;
 }
 
 .view-all{
     font-size:12px;
+    font-weight: 700;
+    border-bottom:2px solid var(--text-main);
+    padding-bottom:2px;
+    transition: var(--transition);
+}
 
-    border-bottom:1px solid #111;
-
-    padding-bottom:4px;
+.view-all:hover{
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
 
@@ -689,43 +689,44 @@ a{
 
 .category-grid{
     display:grid;
-
     grid-template-columns:repeat(6,1fr);
-
-    gap:12px;
+    gap:16px;
 }
 
 .category{
-    min-height:130px;
-
-    border:1px solid #e5e5e5;
-
+    min-height:140px;
+    border:1px solid var(--border-color);
+    background: var(--bg-secondary);
+    border-radius: 10px;
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     flex-direction:column;
-
-    gap:10px;
-
-    transition:.25s;
+    gap:12px;
+    transition: var(--transition);
 }
 
 .category:hover{
     background:#111;
     color:#fff;
-
-    transform:translateY(-4px);
+    border-color: #111;
+    transform:translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
 }
 
 .category-icon{
-    font-size:30px;
+    font-size:32px;
+    transition: var(--transition);
+}
+
+.category:hover .category-icon{
+    transform: scale(1.1);
 }
 
 .category-name{
     font-size:13px;
-    font-weight:600;
+    font-weight:700;
+    letter-spacing: .5px;
 }
 
 
@@ -735,117 +736,122 @@ a{
 
 .product-grid{
     display:grid;
-
     grid-template-columns:repeat(4,1fr);
-
-    gap:16px;
+    gap:20px;
 }
 
 .product{
     position:relative;
-
     min-width:0;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.product:hover{
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 
 .product-image{
     position:relative;
-
     aspect-ratio:3/4;
-
     overflow:hidden;
-
-    background:#eee;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .product-image img{
     width:100%;
     height:100%;
-
     object-fit:cover;
-
-    transition:.5s;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.product:hover img{
-    transform:scale(1.05);
+.product:hover .product-image img{
+    transform:scale(1.06);
 }
 
 .product-wishlist{
     position:absolute;
-
     right:12px;
     top:12px;
-
-    width:34px;
-    height:34px;
-
+    width:36px;
+    height:36px;
     border:0;
-
-    background:#fff;
-
+    background:rgba(255,255,255,0.9);
+    backdrop-filter: blur(4px);
     border-radius:50%;
-
-    font-size:17px;
-
+    font-size:16px;
     z-index:2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.product-wishlist:hover{
+    background: #fff;
+    transform: scale(1.1);
+    color: var(--accent);
 }
 
 .product-tag{
     position:absolute;
-
-    left:10px;
-    top:10px;
-
-    background:#fff;
-
-    padding:6px 8px;
-
-    font-size:9px;
-
+    left:12px;
+    top:12px;
+    background:#111;
+    color:#fff;
+    padding:5px 10px;
+    font-size:9.5px;
     font-weight:700;
-
-    letter-spacing:.6px;
+    letter-spacing:.8px;
+    border-radius: 4px;
 }
 
 .product-info{
-    padding:12px 2px;
+    padding:14px 4px;
 }
 
 .product-brand{
     font-size:11px;
     font-weight:700;
-
+    color: var(--text-muted);
     margin-bottom:4px;
+    letter-spacing: .5px;
 }
 
 .product-name{
-    font-size:12px;
-    color:#555;
-
+    font-size:13px;
+    font-weight: 600;
+    color: var(--text-main);
     margin-bottom:8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .product-price{
-    font-size:13px;
-    font-weight:700;
+    font-size:14px;
+    font-weight:800;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .old-price{
     text-decoration:line-through;
-
     color:#999;
-
     font-weight:400;
-
-    margin-left:5px;
+    font-size: 12px;
 }
 
 .discount{
-    color:#c33;
-
+    color: var(--accent);
     font-size:11px;
-
-    margin-left:5px;
+    font-weight: 700;
 }
 
 
@@ -854,27 +860,23 @@ a{
 ===================================================== */
 
 .sale-banner{
-    margin:0 5% 65px;
-
-    min-height:330px;
-
+    margin:0 5% 70px;
+    min-height:360px;
     background:
         linear-gradient(
             90deg,
-            rgba(0,0,0,.72),
-            rgba(0,0,0,.25)
+            rgba(0,0,0,0.8),
+            rgba(0,0,0,0.3)
         ),
         url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1800&q=85");
-
     background-size:cover;
     background-position:center;
-
+    border-radius: 16px;
     color:#fff;
-
     display:flex;
     align-items:center;
-
     padding:50px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
 .sale-content{
@@ -883,36 +885,43 @@ a{
 
 .sale-content small{
     letter-spacing:3px;
-    font-size:10px;
+    font-size:10.5px;
+    font-weight: 700;
+    color: #ffb7c5;
 }
 
 .sale-content h2{
-    font-size:52px;
-
-    line-height:.95;
-
-    margin:18px 0;
+    font-size:clamp(40px, 5vw, 56px);
+    line-height: .95;
+    margin:15px 0;
+    font-weight: 800;
+    letter-spacing: -1px;
 }
 
 .sale-content p{
     font-size:15px;
-
-    line-height:1.5;
-
+    line-height:1.6;
     margin-bottom:25px;
+    opacity: 0.9;
 }
 
 .sale-button{
     background:#fff;
     color:#111;
-
     border:0;
+    padding:15px 30px;
+    font-weight:800;
+    font-size:11.5px;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
 
-    padding:15px 25px;
-
-    font-weight:700;
-
-    font-size:11px;
+.sale-button:hover{
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 63, 108, 0.3);
 }
 
 
@@ -921,61 +930,58 @@ a{
 ===================================================== */
 
 .newsletter{
-    background:#f5f5f5;
-
-    padding:60px 20px;
-
+    background: var(--bg-secondary);
+    padding:70px 20px;
     text-align:center;
+    border-top: 1px solid var(--border-color);
 }
 
 .newsletter h2{
     font-size:32px;
-
     letter-spacing:-1px;
-
     margin-bottom:10px;
+    font-weight: 800;
 }
 
 .newsletter p{
-    color:#666;
-
-    font-size:13px;
-
-    margin-bottom:25px;
+    color: var(--text-muted);
+    font-size:13.5px;
+    margin-bottom:30px;
 }
 
 .newsletter-form{
-    width:min(500px,100%);
-
+    width:min(480px, 100%);
     margin:auto;
-
     display:flex;
-
-    border-bottom:1px solid #111;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 6px 6px 6px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
 }
 
 .newsletter-form input{
     flex:1;
-
     border:0;
-
     outline:0;
-
     background:transparent;
-
-    padding:13px 5px;
-
-    font-size:13px;
+    font-size:13.5px;
 }
 
 .newsletter-form button{
     border:0;
-
-    background:none;
-
+    background: #111;
+    color: #fff;
     font-weight:700;
-
     font-size:11px;
+    letter-spacing: 1px;
+    padding: 12px 24px;
+    border-radius: 20px;
+    transition: var(--transition);
+}
+
+.newsletter-form button:hover{
+    background: var(--accent);
 }
 
 
@@ -984,76 +990,63 @@ a{
 ===================================================== */
 
 .footer{
-    background:#151515;
-
+    background:#0f1016;
     color:#fff;
-
-    padding:50px 5% 25px;
+    padding:60px 5% 30px;
 }
 
 .footer-grid{
     display:grid;
-
     grid-template-columns:2fr repeat(3,1fr);
-
     gap:40px;
-
     padding-bottom:40px;
-
-    border-bottom:1px solid #333;
+    border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
 .footer-logo{
-    font-size:23px;
-
-    font-weight:700;
-
-    letter-spacing:2px;
-
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:1px;
     margin-bottom:15px;
+}
+
+.footer-logo span{
+    color: var(--accent);
 }
 
 .footer-about{
     color:#aaa;
-
     max-width:300px;
-
-    font-size:12px;
-
+    font-size:12.5px;
     line-height:1.7;
 }
 
 .footer h4{
     font-size:12px;
-
-    margin-bottom:18px;
-
-    letter-spacing:1px;
+    margin-bottom:20px;
+    letter-spacing:1.5px;
+    font-weight: 700;
+    color: #fff;
 }
 
 .footer a{
     display:block;
-
     color:#aaa;
-
-    font-size:12px;
-
-    margin-bottom:11px;
+    font-size:12.5px;
+    margin-bottom:12px;
+    transition: var(--transition);
 }
 
 .footer a:hover{
     color:#fff;
+    padding-left: 4px;
 }
 
 .copyright{
-    padding-top:22px;
-
+    padding-top:25px;
     color:#777;
-
-    font-size:10px;
-
+    font-size:11px;
     display:flex;
-
     justify-content:space-between;
 }
 
@@ -1064,29 +1057,23 @@ a{
 
 .toast{
     position:fixed;
-
-    bottom:25px;
+    bottom:30px;
     left:50%;
-
-    transform:translate(-50%,120px);
-
+    transform:translate(-50%, 120px);
     background:#111;
     color:#fff;
-
-    padding:13px 20px;
-
-    font-size:12px;
-
+    padding:14px 24px;
+    font-size:12.5px;
+    font-weight: 600;
     z-index:1000;
-
     opacity:0;
-
-    transition:.3s;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
 
 .toast.show{
     opacity:1;
-
     transform:translate(-50%,0);
 }
 
@@ -1096,217 +1083,62 @@ a{
 ===================================================== */
 
 @media(max-width:900px){
-
-    .header{
-        padding:0 20px;
-    }
-
-    .header-search{
-        margin-left:25px;
-    }
-
-    .nav{
-        gap:25px;
-    }
-
-    .category-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .product-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .footer-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
+    .header{ padding:0 20px; }
+    .header-search{ margin-left:20px; }
+    .nav{ gap:20px; }
+    .category-grid{ grid-template-columns:repeat(3,1fr); }
+    .product-grid{ grid-template-columns:repeat(2,1fr); gap:15px; }
+    .footer-grid{ grid-template-columns:repeat(2,1fr); }
 }
 
-
 @media(max-width:650px){
-
-    .top-bar{
-        height:42px;
-
-        font-size:10px;
-
-        padding:0 10px;
-    }
-
-    .top-divider{
-        margin:0 8px;
-    }
-
-    .top-bar a{
-        margin-left:8px;
-    }
-
-    .header{
-        height:64px;
-
-        padding:0 15px;
-    }
-
-    .logo{
-        font-size:20px;
-    }
-
+    .top-bar{ height:auto; padding:8px 10px; text-align:center; flex-wrap:wrap; font-size:10.5px; }
+    .top-divider{ display:none; }
+    .top-bar a{ margin-left:10px; }
+    
+    .header{ height:65px; padding:0 15px; }
     .header-search{
         position:absolute;
-
         left:15px;
         right:15px;
-
-        top:75px;
-
+        top:73px;
         max-width:none;
-
         margin:0;
-
         height:42px;
-
         z-index:10;
     }
-
-    .header-actions{
-        gap:13px;
-    }
-
-    .icon-btn{
-        font-size:20px;
-    }
+    .header-actions{ gap:10px; }
+    .icon-btn{ font-size:20px; padding: 6px; }
 
     .nav{
-        margin-top:53px;
-
+        margin-top:52px;
         justify-content:flex-start;
-
-        height:43px;
-
+        height:42px;
         padding:0 15px;
-
-        gap:28px;
-
+        gap:24px;
         overflow-x:auto;
-
         scrollbar-width:none;
     }
+    .nav::-webkit-scrollbar{ display:none; }
+    .nav a{ font-size:11.5px; }
 
-    .nav::-webkit-scrollbar{
-        display:none;
-    }
+    .hero{ min-height:480px; }
+    .hero-content{ padding:40px 20px; }
+    .hero h1{ font-size:42px; letter-spacing:-1.5px; }
+    .hero-description{ font-size:13.5px; }
 
-    .nav a{
-        font-size:11px;
-    }
+    .section{ padding:50px 15px; }
+    .section-title{ font-size:26px; }
 
-    .hero{
-        min-height:500px;
+    .category-grid{ grid-template-columns:repeat(3,1fr); gap:10px; }
+    .category{ min-height:110px; }
+    .category-icon{ font-size:26px; }
 
-        margin-top:0;
+    .sale-banner{ margin:0 15px 50px; min-height:300px; padding:30px 20px; border-radius: 12px; }
+    .sale-content h2{ font-size:36px; }
 
-        background-position:58% center;
-    }
-
-    .hero-content{
-        padding:50px 25px;
-    }
-
-    .hero-eyebrow{
-        font-size:9px;
-
-        letter-spacing:2.5px;
-
-        margin-bottom:18px;
-    }
-
-    .hero h1{
-        font-size:51px;
-
-        letter-spacing:-2.5px;
-
-        margin-bottom:20px;
-    }
-
-    .hero-description{
-        font-size:14px;
-
-        max-width:340px;
-
-        margin-bottom:23px;
-    }
-
-    .hero-btn{
-        min-height:45px;
-
-        padding:0 18px;
-
-        font-size:10px;
-    }
-
-    .quick-card{
-        width:245px;
-
-        min-height:100px;
-    }
-
-    .section{
-        padding:45px 15px;
-    }
-
-    .section-title{
-        font-size:25px;
-    }
-
-    .category-grid{
-        grid-template-columns:repeat(3,1fr);
-
-        gap:8px;
-    }
-
-    .category{
-        min-height:105px;
-    }
-
-    .category-icon{
-        font-size:25px;
-    }
-
-    .category-name{
-        font-size:11px;
-    }
-
-    .product-grid{
-        gap:12px;
-    }
-
-    .product-info{
-        padding-top:9px;
-    }
-
-    .sale-banner{
-        margin:0 15px 45px;
-
-        min-height:330px;
-
-        padding:30px 25px;
-    }
-
-    .sale-content h2{
-        font-size:42px;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr 1fr;
-
-        gap:30px 20px;
-    }
-
-    .copyright{
-        flex-direction:column;
-
-        gap:8px;
-    }
+    .footer-grid{ grid-template-columns:1fr; gap:30px; }
+    .copyright{ flex-direction:column; gap:8px; text-align: center; }
 }
 
 </style>
@@ -1315,118 +1147,51 @@ a{
 
 <body>
 
-
-<!-- =====================================================
-     SPLASH
-===================================================== -->
-
+<!-- SPLASH -->
 <div class="splash" id="splash">
-
-    <div class="splash-logo">
-        AS FASHIONS
-    </div>
-
+    <div class="splash-logo">AS FASHIONS</div>
     <div class="splash-line"></div>
-
-    <div class="splash-text">
-        STYLE WITHOUT LIMITS
-    </div>
-
+    <div class="splash-text">STYLE WITHOUT LIMITS</div>
 </div>
 
-
-<!-- =====================================================
-     TOP BAR
-===================================================== -->
-
+<!-- TOP BAR -->
 <div class="top-bar">
-
-    🎉 EXTRA 20% OFF ON YOUR FIRST ORDER
-
-    <span class="top-divider">|</span>
-
-    USE CODE:
-    <strong>ASNEW20</strong>
-
-    <a href="#offers">Track Order</a>
-    <a href="#help">Help</a>
-
+    <span>🎉 EXTRA 20% OFF ON YOUR FIRST ORDER</span>
+    <div>
+        USE CODE: <strong>ASNEW20</strong>
+        <a href="#offers">Track Order</a>
+        <a href="#help">Help</a>
+    </div>
 </div>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
+<!-- HEADER -->
 <header class="header">
-
     <div class="header-left">
-
         <button class="menu-btn" id="menuBtn" aria-label="Open menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
-
-        <a href="#" class="logo">
-            AS <span>FASHIONS</span>
-        </a>
-
+        <a href="#" class="logo">AS <span>FASHIONS</span></a>
     </div>
-
 
     <div class="header-search">
-
-        <input
-            id="searchInput"
-            type="text"
-            placeholder="Search for products, brands & more"
-        >
-
-        <button class="search-btn" id="searchBtn">
-            ⌕
-        </button>
-
+        <input id="searchInput" type="text" placeholder="Search for products, brands & more">
+        <button class="search-btn" id="searchBtn">⌕</button>
     </div>
-
 
     <div class="header-actions">
-
-        <button class="icon-btn"
-                onclick="showToast('Wishlist opened ❤️')"
-                aria-label="Wishlist">
-            ♡
-        </button>
-
-        <button class="icon-btn"
-                onclick="showToast('Account section coming soon')"
-                aria-label="Account">
-            ♙
-        </button>
-
-        <button class="icon-btn"
-                onclick="showToast('Your shopping bag is ready 🛍️')"
-                aria-label="Bag">
-
+        <button class="icon-btn" onclick="showToast('Wishlist opened ❤️')" aria-label="Wishlist">♡</button>
+        <button class="icon-btn" onclick="showToast('Account section coming soon')" aria-label="Account">♙</button>
+        <button class="icon-btn" onclick="showToast('Your shopping bag is ready 🛍️')" aria-label="Bag">
             🛍️
-
-            <span class="cart-count" id="cartCount">
-                0
-            </span>
-
+            <span class="cart-count" id="cartCount">0</span>
         </button>
-
     </div>
-
 </header>
 
-
-<!-- =====================================================
-     NAV
-===================================================== -->
-
+<!-- NAV -->
 <nav class="nav">
-
     <a href="#men">MEN</a>
     <a href="#women">WOMEN</a>
     <a href="#kids">KIDS</a>
@@ -1436,1179 +1201,435 @@ a{
     <a href="#trending">TRENDING</a>
     <a href="#new-arrivals">NEW ARRIVALS</a>
     <a href="#sale" class="sale">SALE</a>
-
 </nav>
 
-
-<!-- =====================================================
-     SIDE MENU
-===================================================== -->
-
+<!-- SIDE MENU -->
 <div class="menu-overlay" id="menuOverlay"></div>
-
 <aside class="side-menu" id="sideMenu">
-
     <div class="menu-head">
-
-        <div class="menu-title">
-            AS FASHIONS
-        </div>
-
-        <button class="close-menu" id="closeMenu">
-            ×
-        </button>
-
+        <div class="menu-title">AS FASHIONS</div>
+        <button class="close-menu" id="closeMenu">×</button>
     </div>
-
-
     <div class="menu-links">
-
-        <a href="#men">
-            Men
-            <span>→</span>
-        </a>
-
-        <a href="#women">
-            Women
-            <span>→</span>
-        </a>
-
-        <a href="#kids">
-            Kids
-            <span>→</span>
-        </a>
-
-        <a href="#footwear">
-            Footwear
-            <span>→</span>
-        </a>
-
-        <a href="#accessories">
-            Accessories
-            <span>→</span>
-        </a>
-
-        <a href="#beauty">
-            Beauty
-            <span>→</span>
-        </a>
-
-        <a href="#trending">
-            Trending Now
-            <span>→</span>
-        </a>
-
-        <a href="#new-arrivals">
-            New Arrivals
-            <span>→</span>
-        </a>
-
-        <a href="#sale">
-            Sale
-            <span>→</span>
-        </a>
-
+        <a href="#men">Men <span>→</span></a>
+        <a href="#women">Women <span>→</span></a>
+        <a href="#kids">Kids <span>→</span></a>
+        <a href="#footwear">Footwear <span>→</span></a>
+        <a href="#accessories">Accessories <span>→</span></a>
+        <a href="#beauty">Beauty <span>→</span></a>
+        <a href="#trending">Trending Now <span>→</span></a>
+        <a href="#new-arrivals">New Arrivals <span>→</span></a>
+        <a href="#sale">Sale <span>→</span></a>
     </div>
-
 </aside>
 
-
-<!-- =====================================================
-     PROMO TICKER
-===================================================== -->
-
+<!-- PROMO TICKER -->
 <div class="promo-wrap">
-
     <div class="promo-track">
-
-        <div class="promo-item">
-            🔥 TRENDING NOW
-            <span>Discover the latest styles</span>
-        </div>
-
-        <div class="promo-item">
-            ✨ NEW ARRIVALS
-            <span>Fresh drops every week</span>
-        </div>
-
-        <div class="promo-item">
-            💥 CLEARANCE SALE
-            <span>Up to 70% off</span>
-        </div>
-
-        <div class="promo-item">
-            🎁 FIRST ORDER
-            <span>Extra 20% off — ASNEW20</span>
-        </div>
-
-        <!-- duplicate for infinite movement -->
-
-        <div class="promo-item">
-            🔥 TRENDING NOW
-            <span>Discover the latest styles</span>
-        </div>
-
-        <div class="promo-item">
-            ✨ NEW ARRIVALS
-            <span>Fresh drops every week</span>
-        </div>
-
-        <div class="promo-item">
-            💥 CLEARANCE SALE
-            <span>Up to 70% off</span>
-        </div>
-
-        <div class="promo-item">
-            🎁 FIRST ORDER
-            <span>Extra 20% off — ASNEW20</span>
-        </div>
-
+        <div class="promo-item">🔥 TRENDING NOW <span>Discover the latest styles</span></div>
+        <div class="promo-item">✨ NEW ARRIVALS <span>Fresh drops every week</span></div>
+        <div class="promo-item">💥 CLEARANCE SALE <span>Up to 70% off</span></div>
+        <div class="promo-item">🎁 FIRST ORDER <span>Extra 20% off — ASNEW20</span></div>
+        <!-- duplicate -->
+        <div class="promo-item">🔥 TRENDING NOW <span>Discover the latest styles</span></div>
+        <div class="promo-item">✨ NEW ARRIVALS <span>Fresh drops every week</span></div>
+        <div class="promo-item">💥 CLEARANCE SALE <span>Up to 70% off</span></div>
+        <div class="promo-item">🎁 FIRST ORDER <span>Extra 20% off — ASNEW20</span></div>
     </div>
-
 </div>
 
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
+<!-- HERO -->
 <section class="hero">
-
     <div class="hero-content">
-
-        <p class="hero-eyebrow">
-            AS FASHIONS / NEW SEASON 2026
-        </p>
-
-        <h1>
-            STYLE<br>
-            WITHOUT<br>
-            LIMITS.
-        </h1>
-
-        <p class="hero-description">
-            Discover premium fashion, elevated essentials
-            and the latest trends — curated for your style.
-        </p>
-
+        <p class="hero-eyebrow">AS FASHIONS / NEW SEASON 2026</p>
+        <h1>STYLE<br>WITHOUT<br>LIMITS.</h1>
+        <p class="hero-description">Discover premium fashion, elevated essentials and the latest trends — curated for your style.</p>
         <div class="hero-buttons">
-
-            <a href="#new-arrivals"
-               class="hero-btn primary">
-                SHOP NEW ARRIVALS
-            </a>
-
-            <a href="#sale"
-               class="hero-btn secondary">
-                EXPLORE SALE
-            </a>
-
+            <a href="#new-arrivals" class="hero-btn primary">SHOP NEW ARRIVALS</a>
+            <a href="#sale" class="hero-btn secondary">EXPLORE SALE</a>
         </div>
-
     </div>
-
 </section>
 
-
-<!-- =====================================================
-     QUICK OFFER CARDS
-===================================================== -->
-
+<!-- QUICK OFFERS -->
 <section class="quick-section" id="offers">
-
     <div class="quick-track">
-
         <a href="#sale" class="quick-card">
-
             <small>LIMITED OFFER</small>
-
-            <strong>
-                EXTRA 20% OFF
-            </strong>
-
-            <p>
-                On your first order
-            </p>
-
-            <span class="quick-arrow">
-                →
-            </span>
-
+            <strong>EXTRA 20% OFF</strong>
+            <p>On your first order</p>
+            <span class="quick-arrow">→</span>
         </a>
-
-
         <a href="#trending" class="quick-card">
-
             <small>TRENDING NOW</small>
-
-            <strong>
-                NEW SEASON
-            </strong>
-
-            <p>
-                Fresh styles just dropped
-            </p>
-
-            <span class="quick-arrow">
-                →
-            </span>
-
+            <strong>NEW SEASON</strong>
+            <p>Fresh styles just dropped</p>
+            <span class="quick-arrow">→</span>
         </a>
-
-
         <a href="#sale" class="quick-card">
-
             <small>CLEARANCE SALE</small>
-
-            <strong>
-                UP TO 70% OFF
-            </strong>
-
-            <p>
-                Limited stock only
-            </p>
-
-            <span class="quick-arrow">
-                →
-            </span>
-
+            <strong>UP TO 70% OFF</strong>
+            <p>Limited stock only</p>
+            <span class="quick-arrow">→</span>
         </a>
-
-
         <a href="#new-arrivals" class="quick-card">
-
             <small>JUST IN</small>
-
-            <strong>
-                NEW ARRIVALS
-            </strong>
-
-            <p>
-                Explore the latest collection
-            </p>
-
-            <span class="quick-arrow">
-                →
-            </span>
-
+            <strong>NEW ARRIVALS</strong>
+            <p>Explore the latest collection</p>
+            <span class="quick-arrow">→</span>
         </a>
-
-
-        <!-- DUPLICATES -->
-
+        <!-- duplicates -->
         <a href="#sale" class="quick-card">
-
             <small>LIMITED OFFER</small>
-
-            <strong>
-                EXTRA 20% OFF
-            </strong>
-
-            <p>
-                On your first order
-            </p>
-
-            <span class="quick-arrow">
-                →
-            </span>
-
+            <strong>EXTRA 20% OFF</strong>
+            <p>On your first order</p>
+            <span class="quick-arrow">→</span>
         </a>
-
-
         <a href="#trending" class="quick-card">
-
             <small>TRENDING NOW</small>
-
-            <strong>
-                NEW SEASON
-            </strong>
-
-            <p>
-                Fresh styles just dropped
-            </p>
-
-            <span class="quick-arrow">
-                →
-            </span>
-
+            <strong>NEW SEASON</strong>
+            <p>Fresh styles just dropped</p>
+            <span class="quick-arrow">→</span>
         </a>
-
-
         <a href="#sale" class="quick-card">
-
             <small>CLEARANCE SALE</small>
-
-            <strong>
-                UP TO 70% OFF
-            </strong>
-
-            <p>
-                Limited stock only
-            </p>
-
-            <span class="quick-arrow">
-                →
-            </span>
-
+            <strong>UP TO 70% OFF</strong>
+            <p>Limited stock only</p>
+            <span class="quick-arrow">→</span>
         </a>
-
-
         <a href="#new-arrivals" class="quick-card">
-
             <small>JUST IN</small>
-
-            <strong>
-                NEW ARRIVALS
-            </strong>
-
-            <p>
-                Explore the latest collection
-            </p>
-
-            <span class="quick-arrow">
-                →
-            </span>
-
+            <strong>NEW ARRIVALS</strong>
+            <p>Explore the latest collection</p>
+            <span class="quick-arrow">→</span>
         </a>
-
     </div>
-
 </section>
 
-
-<!-- =====================================================
-     CATEGORIES
-===================================================== -->
-
+<!-- CATEGORIES -->
 <section class="section">
-
     <div class="section-head">
-
         <div>
-            <div class="section-kicker">
-                SHOP BY
-            </div>
-
-            <h2 class="section-title">
-                Categories
-            </h2>
+            <div class="section-kicker">SHOP BY</div>
+            <h2 class="section-title">Categories</h2>
         </div>
-
-        <a href="#" class="view-all">
-            VIEW ALL →
-        </a>
-
+        <a href="#" class="view-all">VIEW ALL →</a>
     </div>
-
 
     <div class="category-grid">
-
         <a href="#men" class="category" id="men">
             <div class="category-icon">👨</div>
             <div class="category-name">Men</div>
         </a>
-
         <a href="#women" class="category" id="women">
             <div class="category-icon">👩</div>
             <div class="category-name">Women</div>
         </a>
-
         <a href="#kids" class="category" id="kids">
             <div class="category-icon">🧒</div>
             <div class="category-name">Kids</div>
         </a>
-
         <a href="#footwear" class="category" id="footwear">
             <div class="category-icon">👟</div>
             <div class="category-name">Footwear</div>
         </a>
-
         <a href="#accessories" class="category" id="accessories">
             <div class="category-icon">👜</div>
             <div class="category-name">Accessories</div>
         </a>
-
         <a href="#beauty" class="category" id="beauty">
             <div class="category-icon">💄</div>
             <div class="category-name">Beauty</div>
         </a>
-
     </div>
-
 </section>
 
-
-<!-- =====================================================
-     TRENDING
-===================================================== -->
-
+<!-- TRENDING -->
 <section class="section" id="trending">
-
     <div class="section-head">
-
         <div>
-            <div class="section-kicker">
-                WHAT'S HOT
-            </div>
-
-            <h2 class="section-title">
-                Trending Now
-            </h2>
+            <div class="section-kicker">WHAT'S HOT</div>
+            <h2 class="section-title">Trending Now</h2>
         </div>
-
-        <a href="#" class="view-all">
-            VIEW ALL →
-        </a>
-
+        <a href="#" class="view-all">VIEW ALL →</a>
     </div>
-
 
     <div class="product-grid">
-
         <article class="product">
-
             <div class="product-image">
-
-                <span class="product-tag">
-                    TRENDING
-                </span>
-
-                <button class="product-wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <img
-                src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80"
-                alt="Fashion product">
-
+                <span class="product-tag">TRENDING</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this)">♡</button>
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" alt="Fashion product">
             </div>
-
             <div class="product-info">
-
-                <div class="product-brand">
-                    AS STUDIO
-                </div>
-
-                <div class="product-name">
-                    Relaxed Premium Shirt
-                </div>
-
-                <div class="product-price">
-                    ₹1,299
-                    <span class="old-price">₹1,999</span>
-                    <span class="discount">35% OFF</span>
-                </div>
-
+                <div class="product-brand">AS STUDIO</div>
+                <div class="product-name">Relaxed Premium Shirt</div>
+                <div class="product-price">₹1,299 <span class="old-price">₹1,999</span> <span class="discount">35% OFF</span></div>
             </div>
-
         </article>
 
-
         <article class="product">
-
             <div class="product-image">
-
-                <span class="product-tag">
-                    NEW
-                </span>
-
-                <button class="product-wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <img
-                src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80"
-                alt="Fashion product">
-
+                <span class="product-tag">NEW</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this)">♡</button>
+                <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80" alt="Fashion product">
             </div>
-
             <div class="product-info">
-
-                <div class="product-brand">
-                    AS WOMEN
-                </div>
-
-                <div class="product-name">
-                    Modern Everyday Dress
-                </div>
-
-                <div class="product-price">
-                    ₹1,599
-                    <span class="old-price">₹2,499</span>
-                    <span class="discount">36% OFF</span>
-                </div>
-
+                <div class="product-brand">AS WOMEN</div>
+                <div class="product-name">Modern Everyday Dress</div>
+                <div class="product-price">₹1,599 <span class="old-price">₹2,499</span> <span class="discount">36% OFF</span></div>
             </div>
-
         </article>
 
-
         <article class="product">
-
             <div class="product-image">
-
-                <span class="product-tag">
-                    HOT
-                </span>
-
-                <button class="product-wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <img
-                src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80"
-                alt="Fashion product">
-
+                <span class="product-tag">HOT</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this)">♡</button>
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80" alt="Fashion product">
             </div>
-
             <div class="product-info">
-
-                <div class="product-brand">
-                    AS EDIT
-                </div>
-
-                <div class="product-name">
-                    Contemporary Street Look
-                </div>
-
-                <div class="product-price">
-                    ₹1,899
-                    <span class="old-price">₹2,799</span>
-                    <span class="discount">32% OFF</span>
-                </div>
-
+                <div class="product-brand">AS EDIT</div>
+                <div class="product-name">Contemporary Street Look</div>
+                <div class="product-price">₹1,899 <span class="old-price">₹2,799</span> <span class="discount">32% OFF</span></div>
             </div>
-
         </article>
 
-
         <article class="product">
-
             <div class="product-image">
-
-                <span class="product-tag">
-                    BESTSELLER
-                </span>
-
-                <button class="product-wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <img
-                src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80"
-                alt="Fashion product">
-
+                <span class="product-tag">BESTSELLER</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this)">♡</button>
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80" alt="Fashion product">
             </div>
-
             <div class="product-info">
-
-                <div class="product-brand">
-                    AS COLLECTION
-                </div>
-
-                <div class="product-name">
-                    Premium Casual Edit
-                </div>
-
-                <div class="product-price">
-                    ₹1,499
-                    <span class="old-price">₹2,299</span>
-                    <span class="discount">35% OFF</span>
-                </div>
-
+                <div class="product-brand">AS COLLECTION</div>
+                <div class="product-name">Premium Casual Edit</div>
+                <div class="product-price">₹1,499 <span class="old-price">₹2,299</span> <span class="discount">35% OFF</span></div>
             </div>
-
         </article>
-
     </div>
-
 </section>
 
-
-<!-- =====================================================
-     NEW ARRIVALS
-===================================================== -->
-
+<!-- NEW ARRIVALS -->
 <section class="section" id="new-arrivals">
-
     <div class="section-head">
-
         <div>
-            <div class="section-kicker">
-                JUST DROPPED
-            </div>
-
-            <h2 class="section-title">
-                New Arrivals
-            </h2>
+            <div class="section-kicker">JUST DROPPED</div>
+            <h2 class="section-title">New Arrivals</h2>
         </div>
-
-        <a href="#" class="view-all">
-            VIEW ALL →
-        </a>
-
+        <a href="#" class="view-all">VIEW ALL →</a>
     </div>
 
-
     <div class="product-grid">
-
         <article class="product">
-
             <div class="product-image">
-
-                <span class="product-tag">
-                    JUST IN
-                </span>
-
-                <button class="product-wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <img
-                src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=800&q=80"
-                alt="New fashion">
-
+                <span class="product-tag">JUST IN</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this)">♡</button>
+                <img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=800&q=80" alt="New fashion">
             </div>
-
             <div class="product-info">
                 <div class="product-brand">AS MEN</div>
                 <div class="product-name">Essential Overshirt</div>
                 <div class="product-price">₹1,699</div>
             </div>
-
         </article>
 
-
         <article class="product">
-
             <div class="product-image">
-
-                <span class="product-tag">
-                    NEW
-                </span>
-
-                <button class="product-wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <img
-                src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80"
-                alt="New fashion">
-
+                <span class="product-tag">NEW</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this)">♡</button>
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80" alt="New fashion">
             </div>
-
             <div class="product-info">
                 <div class="product-brand">AS WOMEN</div>
                 <div class="product-name">Minimal Summer Collection</div>
                 <div class="product-price">₹1,899</div>
             </div>
-
         </article>
 
-
         <article class="product">
-
             <div class="product-image">
-
-                <span class="product-tag">
-                    NEW
-                </span>
-
-                <button class="product-wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <img
-                src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80"
-                alt="New fashion">
-
+                <span class="product-tag">NEW</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this)">♡</button>
+                <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="New fashion">
             </div>
-
             <div class="product-info">
                 <div class="product-brand">AS EDIT</div>
                 <div class="product-name">Urban Relaxed Fit</div>
                 <div class="product-price">₹1,399</div>
             </div>
-
         </article>
 
-
         <article class="product">
-
             <div class="product-image">
-
-                <span class="product-tag">
-                    NEW
-                </span>
-
-                <button class="product-wishlist"
-                        onclick="toggleWishlist(this)">
-                    ♡
-                </button>
-
-                <img
-                src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=800&q=80"
-                alt="New fashion">
-
+                <span class="product-tag">NEW</span>
+                <button class="product-wishlist" onclick="toggleWishlist(this)">♡</button>
+                <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=800&q=80" alt="New fashion">
             </div>
-
             <div class="product-info">
                 <div class="product-brand">AS COLLECTION</div>
                 <div class="product-name">Everyday Essentials</div>
                 <div class="product-price">₹999</div>
             </div>
-
         </article>
-
     </div>
-
 </section>
 
-
-<!-- =====================================================
-     CLEARANCE / SALE
-===================================================== -->
-
+<!-- SALE BANNER -->
 <section class="sale-banner" id="sale">
-
     <div class="sale-content">
-
-        <small>
-            END OF SEASON
-        </small>
-
-        <h2>
-            UP TO<br>
-            70% OFF
-        </h2>
-
-        <p>
-            Last chance to grab your favourite styles
-            before they're gone.
-        </p>
-
-        <button class="sale-button"
-                onclick="showToast('Sale collection opened 🔥')">
-            SHOP CLEARANCE
-        </button>
-
+        <small>END OF SEASON</small>
+        <h2>UP TO<br>70% OFF</h2>
+        <p>Last chance to grab your favourite styles before they're gone.</p>
+        <button class="sale-button" onclick="showToast('Sale collection opened 🔥')">SHOP CLEARANCE</button>
     </div>
-
 </section>
 
-
-<!-- =====================================================
-     NEWSLETTER
-===================================================== -->
-
+<!-- NEWSLETTER -->
 <section class="newsletter" id="help">
-
-    <h2>
-        Stay in the style loop.
-    </h2>
-
-    <p>
-        Get new drops, exclusive offers and fashion updates.
-    </p>
-
-    <form class="newsletter-form"
-          id="newsletterForm">
-
-        <input
-            type="email"
-            placeholder="Enter your email address"
-            required
-        >
-
-        <button type="submit">
-            JOIN →
-        </button>
-
+    <h2>Stay in the style loop.</h2>
+    <p>Get new drops, exclusive offers and fashion updates.</p>
+    <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit">JOIN →</button>
     </form>
-
 </section>
 
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
+<!-- FOOTER -->
 <footer class="footer">
-
     <div class="footer-grid">
-
         <div>
-
-            <div class="footer-logo">
-                AS FASHIONS
-            </div>
-
-            <p class="footer-about">
-                Modern fashion for every side of you.
-                Discover premium styles, everyday essentials
-                and the latest trends.
-            </p>
-
+            <div class="footer-logo">AS <span>FASHIONS</span></div>
+            <p class="footer-about">Modern fashion for every side of you. Discover premium styles, everyday essentials and the latest trends.</p>
         </div>
-
-
         <div>
-
             <h4>SHOP</h4>
-
             <a href="#men">Men</a>
             <a href="#women">Women</a>
             <a href="#kids">Kids</a>
             <a href="#footwear">Footwear</a>
-
         </div>
-
-
         <div>
-
             <h4>DISCOVER</h4>
-
             <a href="#trending">Trending</a>
             <a href="#new-arrivals">New Arrivals</a>
             <a href="#sale">Sale</a>
             <a href="#offers">Offers</a>
-
         </div>
-
-
         <div>
-
             <h4>HELP</h4>
-
             <a href="#help">Contact Us</a>
             <a href="#help">Track Order</a>
             <a href="#help">Returns</a>
             <a href="#help">Support</a>
-
         </div>
-
     </div>
-
-
     <div class="copyright">
-
-        <span>
-            © 2026 AS FASHIONS. All rights reserved.
-        </span>
-
-        <span>
-            Made for modern India.
-        </span>
-
+        <span>© 2026 AS FASHIONS. All rights reserved.</span>
+        <span>Made for modern India.</span>
     </div>
-
 </footer>
 
-
 <!-- TOAST -->
-
 <div class="toast" id="toast"></div>
 
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
+<!-- JAVASCRIPT -->
 <script>
-
-/* =====================================================
-   SPLASH SCREEN
-===================================================== */
-
 window.addEventListener("load", function(){
-
     setTimeout(function(){
-
-        document
-            .getElementById("splash")
-            .classList.add("hide");
-
-    }, 1600);
-
+        document.getElementById("splash").classList.add("hide");
+    }, 1400);
 });
 
-
-/* =====================================================
-   HAMBURGER MENU
-===================================================== */
-
-const menuBtn =
-    document.getElementById("menuBtn");
-
-const closeMenu =
-    document.getElementById("closeMenu");
-
-const sideMenu =
-    document.getElementById("sideMenu");
-
-const menuOverlay =
-    document.getElementById("menuOverlay");
-
+const menuBtn = document.getElementById("menuBtn");
+const closeMenu = document.getElementById("closeMenu");
+const sideMenu = document.getElementById("sideMenu");
+const menuOverlay = document.getElementById("menuOverlay");
 
 function openMenu(){
-
     sideMenu.classList.add("active");
-
     menuOverlay.classList.add("active");
-
     document.body.style.overflow = "hidden";
-
 }
-
 
 function closeSideMenu(){
-
     sideMenu.classList.remove("active");
-
     menuOverlay.classList.remove("active");
-
     document.body.style.overflow = "";
-
 }
 
+menuBtn.addEventListener("click", openMenu);
+closeMenu.addEventListener("click", closeSideMenu);
+menuOverlay.addEventListener("click", closeSideMenu);
 
-menuBtn.addEventListener(
-    "click",
-    openMenu
-);
-
-closeMenu.addEventListener(
-    "click",
-    closeSideMenu
-);
-
-menuOverlay.addEventListener(
-    "click",
-    closeSideMenu
-);
-
-
-/* Close menu after clicking link */
-
-document
-.querySelectorAll(".menu-links a")
-.forEach(function(link){
-
-    link.addEventListener(
-        "click",
-        closeSideMenu
-    );
-
+document.querySelectorAll(".menu-links a").forEach(function(link){
+    link.addEventListener("click", closeSideMenu);
 });
 
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-const searchInput =
-    document.getElementById("searchInput");
-
-const searchBtn =
-    document.getElementById("searchBtn");
-
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
 
 function performSearch(){
-
-    const value =
-        searchInput.value.trim();
-
+    const value = searchInput.value.trim();
     if(!value){
-
-        showToast(
-            "Search for products, brands & more"
-        );
-
+        showToast("Search for products, brands & more");
         searchInput.focus();
-
         return;
     }
-
-    showToast(
-        'Searching for "' + value + '"'
-    );
-
+    showToast('Searching for "' + value + '"');
 }
 
-
-searchBtn.addEventListener(
-    "click",
-    performSearch
-);
-
-
-searchInput.addEventListener(
-    "keydown",
-    function(event){
-
-        if(event.key === "Enter"){
-
-            performSearch();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   WISHLIST
-===================================================== */
-
-function toggleWishlist(button){
-
-    if(button.innerText === "♡"){
-
-        button.innerText = "♥";
-
-        showToast(
-            "Added to wishlist ❤️"
-        );
-
-    }else{
-
-        button.innerText = "♡";
-
-        showToast(
-            "Removed from wishlist"
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   CART
-===================================================== */
-
-let cartCount = 0;
-
-function addToCart(){
-
-    cartCount++;
-
-    document
-        .getElementById("cartCount")
-        .innerText = cartCount;
-
-    showToast(
-        "Added to shopping bag 🛍️"
-    );
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-let toastTimer;
-
-function showToast(message){
-
-    const toast =
-        document.getElementById("toast");
-
-    toast.innerText = message;
-
-    toast.classList.add("show");
-
-    clearTimeout(toastTimer);
-
-    toastTimer =
-        setTimeout(function(){
-
-            toast.classList.remove("show");
-
-        },2500);
-
-}
-
-
-/* =====================================================
-   NEWSLETTER
-===================================================== */
-
-document
-.getElementById("newsletterForm")
-.addEventListener(
-    "submit",
-    function(event){
-
-        event.preventDefault();
-
-        showToast(
-            "Welcome to AS FASHIONS ✨"
-        );
-
-        this.reset();
-
-    }
-);
-
-
-/* =====================================================
-   PRODUCT CLICK
-===================================================== */
-
-document
-.querySelectorAll(".product-image")
-.forEach(function(product){
-
-    product.addEventListener(
-        "click",
-        function(){
-
-            showToast(
-                "Product details coming soon"
-            );
-
-        }
-    );
-
+searchBtn.addEventListener("click", performSearch);
+searchInput.addEventListener("keydown", function(event){
+    if(event.key === "Enter"){ performSearch(); }
 });
 
-
-/* =====================================================
-   PAUSE AUTO SCROLL WHEN USER TOUCHES
-===================================================== */
-
-const quickTrack =
-    document.querySelector(".quick-track");
-
-quickTrack.addEventListener(
-    "touchstart",
-    function(){
-
-        quickTrack.style.animationPlayState =
-            "paused";
-
+function toggleWishlist(button){
+    if(button.innerText === "♡"){
+        button.innerText = "♥";
+        showToast("Added to wishlist ❤️");
+    } else {
+        button.innerText = "♡";
+        showToast("Removed from wishlist");
     }
-);
+}
 
-quickTrack.addEventListener(
-    "touchend",
-    function(){
+let cartCount = 0;
+function addToCart(){
+    cartCount++;
+    document.getElementById("cartCount").innerText = cartCount;
+    showToast("Added to shopping bag 🛍️");
+}
 
-        quickTrack.style.animationPlayState =
-            "running";
+let toastTimer;
+function showToast(message){
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){
+        toast.classList.remove("show");
+    }, 2500);
+}
 
-    }
-);
+document.getElementById("newsletterForm").addEventListener("submit", function(event){
+    event.preventDefault();
+    showToast("Welcome to AS FASHIONS ✨");
+    this.reset();
+});
 
+document.querySelectorAll(".product-image").forEach(function(product){
+    product.addEventListener("click", function(){
+        showToast("Product details coming soon");
+    });
+});
+
+const quickTrack = document.querySelector(".quick-track");
+quickTrack.addEventListener("touchstart", function(){
+    quickTrack.style.animationPlayState = "paused";
+});
+quickTrack.addEventListener("touchend", function(){
+    quickTrack.style.animationPlayState = "running";
+});
 </script>
 
 </body>

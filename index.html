@@ -92,7 +92,6 @@
       border:0;
       color:var(--black);
       text-align:left;
-      cursor:pointer;
     }
 
     .logo span {
@@ -121,7 +120,6 @@
       border:0;
       color:var(--black);
       padding:0;
-      cursor:pointer;
     }
 
     nav a:hover, .nav-drop-btn:hover { color: var(--sale); }
@@ -208,7 +206,6 @@
       background:none;
       border:0;
       color:var(--black);
-      cursor:pointer;
     }
     .action:hover{ color:var(--sale); }
 
@@ -250,7 +247,7 @@
     .account-dropdown.open{ display:block; }
     .account-dropdown a, .account-dropdown button{
       display:block; width:100%; padding:10px 12px; text-align:left;
-      color:var(--black); background:none; border:0; font-size:12.5px; border-radius:4px; cursor:pointer;
+      color:var(--black); background:none; border:0; font-size:12.5px; border-radius:4px;
     }
     .account-dropdown a:hover, .account-dropdown button:hover{ background:var(--light-gray); color:var(--sale); }
 
@@ -765,7 +762,7 @@
     <!-- MOBILE HEADER -->
     <div class="mobile-header">
       <button class="mobile-menu-btn" style="display:block" onclick="openMobileNav()">☰</button>
-      <div class="mobile-logo" onclick="scrollToTop()">AS FASHIONS</div>
+      <div class="mobile-logo">AS FASHIONS</div>
 
       <div class="mobile-icons">
         <button class="mobile-search-toggle" onclick="toggleMobileSearch()">⌕</button>
@@ -799,8 +796,8 @@
     <button class="mn-cat sale" onclick="filterProducts('All', null); sortProducts('discount'); closeMobileNav(); scrollToSection('allProducts')">Sale</button>
     <a onclick="openWishlist(); closeMobileNav()">My Wishlist</a>
     <a onclick="openCart(); closeMobileNav()">My Bag</a>
-    <a onclick="showToast('Track Order feature coming soon!'); closeMobileNav()">Track Order</a>
-    <a onclick="showToast('Help & Support: Call/WhatsApp 9966681276'); closeMobileNav()">Help & Support</a>
+    <a href="#">Track Order</a>
+    <a href="#">Help & Support</a>
   </div>
 
   <main>
@@ -1169,43 +1166,75 @@
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
-  <script>
+  <div id="fbBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#ffd35a;font-size:11.5px;text-align:center;padding:9px 14px;z-index:20000;">
+    ⚠ Firebase not configured yet — running in local demo mode (products won't be shared across devices). See firebase-config.js.
+  </div>
+
+  <script type="module">
+
+    import { firebaseConfig, isFirebaseConfigured } from './firebase-config.js';
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getFirestore, collection, onSnapshot, addDoc, query, orderBy, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    let db = null;
+    if(isFirebaseConfigured){
+      const fbApp = initializeApp(firebaseConfig);
+      db = getFirestore(fbApp);
+    } else {
+      document.getElementById("fbBanner").style.display = "block";
+    }
 
     /* =====================================================
        PRODUCT DATABASE
+       Live data comes from Firestore ("products" collection).
+       This local list is only a fallback/demo seed used when
+       Firebase hasn't been configured yet (see firebase-config.js).
     ===================================================== */
 
     const defaultProducts = [
-      { id:1, brand:"Roadster", name:"Premium Oversized T-Shirt", category:"Men", type:"T-Shirt", price:799, mrp:1499, rating:4.5, ratingCount:"1.2K", discount:46, new:true, trending:true, image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85", description:"Premium cotton oversized T-shirt for everyday styling." },
-      { id:2, brand:"AS Fashions", name:"Premium Casual Shirt", category:"Men", type:"Shirt", price:899, mrp:1799, rating:4.3, ratingCount:"982", discount:50, new:false, trending:true, image:"https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=85", description:"Casual cotton shirt, comfortable everyday fit." },
-      { id:3, brand:"H&M", name:"Women's Floral Dress", category:"Women", type:"Dress", price:999, mrp:1999, rating:4.6, ratingCount:"1.5K", discount:50, new:true, trending:true, image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=85", description:"Flowy floral dress, perfect for summer days." },
-      { id:4, brand:"Zara", name:"Women's Premium Top", category:"Women", type:"Top", price:499, mrp:999, rating:4.4, ratingCount:"1.1K", discount:50, new:false, trending:true, image:"https://images.unsplash.com/photo-1564257577054-8c4b3e5c9b88?auto=format&fit=crop&w=700&q=85", description:"Minimal premium top for everyday wear." },
-      { id:5, brand:"Levi's", name:"Classic Denim Jacket", category:"Men", type:"Jacket", price:1299, mrp:2499, rating:4.6, ratingCount:"753", discount:48, new:true, trending:true, image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=700&q=85", description:"Classic denim jacket, built to last." },
-      { id:6, brand:"Nike", name:"Premium Sneakers", category:"Footwear", type:"Sneakers", price:1499, mrp:2999, rating:4.4, ratingCount:"891", discount:50, new:true, trending:true, image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=85", description:"Everyday performance sneakers." },
-      { id:7, brand:"Levi's", name:"Classic Denim Blue Jeans", category:"Men", type:"Jeans", price:1499, mrp:2999, rating:4.6, ratingCount:"640", discount:50, new:false, trending:true, image:"https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=85", description:"Classic stretch denim jeans with a comfortable fit." },
-      { id:8, brand:"Anouk", name:"Embroidered Kurta Set", category:"Women", type:"Ethnic", price:999, mrp:1999, rating:4.5, ratingCount:"410", discount:50, new:true, trending:false, image:"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=85", description:"Traditional ethnic kurta set." },
-      { id:9, brand:"GAP Kids", name:"Girls Party Wear Frock", category:"Kids", type:"Dress", price:899, mrp:1599, rating:4.4, ratingCount:"322", discount:43, new:true, trending:true, image:"https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=700&q=85", description:"Beautiful party wear frock for girls." },
-      { id:10, brand:"UCB Kids", name:"Boys Casual Set", category:"Kids", type:"Set", price:799, mrp:1299, rating:4.3, ratingCount:"288", discount:38, new:false, trending:true, image:"https://images.unsplash.com/photo-1503944583220-7eeec4934c7b?auto=format&fit=crop&w=700&q=85", description:"Casual outfit set for boys." },
-      { id:11, brand:"Adidas", name:"Street Style Sneakers", category:"Footwear", type:"Sneakers", price:2499, mrp:3999, rating:4.7, ratingCount:"1.3K", discount:38, new:true, trending:true, image:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=700&q=85", description:"Street-style sneakers for everyday wear." },
-      { id:12, brand:"Puma", name:"Performance Gym T-Shirt", category:"Sports", type:"Sportswear", price:899, mrp:1699, rating:4.5, ratingCount:"560", discount:47, new:false, trending:true, image:"https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=700&q=85", description:"Breathable gym T-shirt for training." },
-      { id:13, brand:"ONLY", name:"Wide Leg Fashion Jeans", category:"Women", type:"Jeans", price:1399, mrp:2799, rating:4.4, ratingCount:"470", discount:50, new:true, trending:true, image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=85", description:"Wide-leg jeans with a relaxed fit." },
-      { id:14, brand:"U.S. Polo", name:"Premium Polo T-Shirt", category:"Men", type:"T-Shirt", price:1199, mrp:2199, rating:4.7, ratingCount:"830", discount:45, new:false, trending:true, image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85", description:"Cotton polo T-shirt, classic fit." },
-      { id:15, brand:"Mango", name:"Luxury Shoulder Bag", category:"Bags", type:"Handbag", price:1799, mrp:3499, rating:4.6, ratingCount:"290", discount:49, new:true, trending:true, image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=85", description:"Everyday shoulder bag in premium finish." },
-      { id:16, brand:"Fossil", name:"Classic Fashion Watch", category:"Accessories", type:"Watch", price:4999, mrp:7999, rating:4.8, ratingCount:"512", discount:38, new:false, trending:true, image:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=85", description:"Classic analog watch." }
+      { id:"1", brand:"Roadster", name:"Premium Oversized T-Shirt", category:"Men", type:"T-Shirt", price:799, mrp:1499, rating:4.5, ratingCount:"1.2K", discount:46, new:true, trending:true, image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85", description:"Premium cotton oversized T-shirt for everyday styling." },
+      { id:"2", brand:"AS Fashions", name:"Premium Casual Shirt", category:"Men", type:"Shirt", price:899, mrp:1799, rating:4.3, ratingCount:"982", discount:50, new:false, trending:true, image:"https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=85", description:"Casual cotton shirt, comfortable everyday fit." },
+      { id:"3", brand:"H&M", name:"Women's Floral Dress", category:"Women", type:"Dress", price:999, mrp:1999, rating:4.6, ratingCount:"1.5K", discount:50, new:true, trending:true, image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=85", description:"Flowy floral dress, perfect for summer days." },
+      { id:"4", brand:"Zara", name:"Women's Premium Top", category:"Women", type:"Top", price:499, mrp:999, rating:4.4, ratingCount:"1.1K", discount:50, new:false, trending:true, image:"https://images.unsplash.com/photo-1564257577054-8c4b3e5c9b88?auto=format&fit=crop&w=700&q=85", description:"Minimal premium top for everyday wear." },
+      { id:"5", brand:"Levi's", name:"Classic Denim Jacket", category:"Men", type:"Jacket", price:1299, mrp:2499, rating:4.6, ratingCount:"753", discount:48, new:true, trending:true, image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=700&q=85", description:"Classic denim jacket, built to last." },
+      { id:"6", brand:"Nike", name:"Premium Sneakers", category:"Footwear", type:"Sneakers", price:1499, mrp:2999, rating:4.4, ratingCount:"891", discount:50, new:true, trending:true, image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=85", description:"Everyday performance sneakers." },
+      { id:"7", brand:"Levi's", name:"Classic Denim Blue Jeans", category:"Men", type:"Jeans", price:1499, mrp:2999, rating:4.6, ratingCount:"640", discount:50, new:false, trending:true, image:"https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=85", description:"Classic stretch denim jeans with a comfortable fit." },
+      { id:"8", brand:"Anouk", name:"Embroidered Kurta Set", category:"Women", type:"Ethnic", price:999, mrp:1999, rating:4.5, ratingCount:"410", discount:50, new:true, trending:false, image:"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=85", description:"Traditional ethnic kurta set." },
+      { id:"9", brand:"GAP Kids", name:"Girls Party Wear Frock", category:"Kids", type:"Dress", price:899, mrp:1599, rating:4.4, ratingCount:"322", discount:43, new:true, trending:true, image:"https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=700&q=85", description:"Beautiful party wear frock for girls." },
+      { id:"10", brand:"UCB Kids", name:"Boys Casual Set", category:"Kids", type:"Set", price:799, mrp:1299, rating:4.3, ratingCount:"288", discount:38, new:false, trending:true, image:"https://images.unsplash.com/photo-1503944583220-7eeec4934c7b?auto=format&fit=crop&w=700&q=85", description:"Casual outfit set for boys." },
+      { id:"11", brand:"Adidas", name:"Street Style Sneakers", category:"Footwear", type:"Sneakers", price:2499, mrp:3999, rating:4.7, ratingCount:"1.3K", discount:38, new:true, trending:true, image:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=700&q=85", description:"Street-style sneakers for everyday wear." },
+      { id:"12", brand:"Puma", name:"Performance Gym T-Shirt", category:"Sports", type:"Sportswear", price:899, mrp:1699, rating:4.5, ratingCount:"560", discount:47, new:false, trending:true, image:"https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=700&q=85", description:"Breathable gym T-shirt for training." },
+      { id:"13", brand:"ONLY", name:"Wide Leg Fashion Jeans", category:"Women", type:"Jeans", price:1399, mrp:2799, rating:4.4, ratingCount:"470", discount:50, new:true, trending:true, image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=85", description:"Wide-leg jeans with a relaxed fit." },
+      { id:"14", brand:"U.S. Polo", name:"Premium Polo T-Shirt", category:"Men", type:"T-Shirt", price:1199, mrp:2199, rating:4.7, ratingCount:"830", discount:45, new:false, trending:true, image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85", description:"Cotton polo T-shirt, classic fit." },
+      { id:"15", brand:"Mango", name:"Luxury Shoulder Bag", category:"Bags", type:"Handbag", price:1799, mrp:3499, rating:4.6, ratingCount:"290", discount:49, new:true, trending:true, image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=85", description:"Everyday shoulder bag in premium finish." },
+      { id:"16", brand:"Fossil", name:"Classic Fashion Watch", category:"Accessories", type:"Watch", price:4999, mrp:7999, rating:4.8, ratingCount:"512", discount:38, new:false, trending:true, image:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=85", description:"Classic analog watch." }
     ];
 
-    // Products added from the Admin Panel are stored in localStorage and merged in here
-    function loadCustomProducts(){
-      try{
-        return JSON.parse(localStorage.getItem("as_custom_products") || "[]");
-      } catch(e){
-        return [];
-      }
+    let products = isFirebaseConfigured ? [] : [...defaultProducts];
+
+    function startProductListener(){
+      if(!isFirebaseConfigured) { renderProducts(); return; }
+      const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+      onSnapshot(q, (snapshot) => {
+        products = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        if(products.length === 0){ products = [...defaultProducts]; }
+        currentProducts = [...products];
+        renderProducts();
+      }, (err) => {
+        console.error("Firestore products listener failed, showing demo data:", err);
+        products = [...defaultProducts];
+        currentProducts = [...products];
+        renderProducts();
+      });
     }
-    let products = [...loadCustomProducts(), ...defaultProducts];
 
     /* =====================================================
        STATE & STORAGE
+       Cart / wishlist stay per-device in localStorage.
+       Orders are written to Firestore ("orders" collection)
+       so you have a permanent, shared order history.
     ===================================================== */
 
     let cart = JSON.parse(localStorage.getItem("as_cart") || "[]");
@@ -1215,6 +1244,7 @@
     let selectedColor = "Black";
     let currentProducts = [...products];
     let couponDiscount = 0;
+
 
     function saveState(){
       localStorage.setItem("as_cart", JSON.stringify(cart));
@@ -1269,12 +1299,12 @@
       const wished = wishlist.includes(product.id);
       return `
       <div class="product">
-        <div class="product-img" onclick="openProduct(${product.id})">
-          <button class="wishlist ${wished ? "active":""}" onclick="event.stopPropagation();toggleWishlist(${product.id})">${wished ? "♥":"♡"}</button>
+        <div class="product-img" onclick="openProduct('${product.id}')">
+          <button class="wishlist ${wished ? "active":""}" onclick="event.stopPropagation();toggleWishlist('${product.id}')">${wished ? "♥":"♡"}</button>
           <img src="${product.image}" alt="${product.name}" loading="lazy">
-          <button class="quick-view-btn" onclick="event.stopPropagation();openProduct(${product.id})">QUICK VIEW</button>
+          <button class="quick-view-btn" onclick="event.stopPropagation();openProduct('${product.id}')">QUICK VIEW</button>
         </div>
-        <div class="product-info" onclick="openProduct(${product.id})">
+        <div class="product-info" onclick="openProduct('${product.id}')">
           <div class="brand">${product.brand}</div>
           <div class="product-name">${product.name}</div>
           <div class="price">
@@ -1416,7 +1446,7 @@
       }
       container.innerHTML = wishlist.map(id=>{
         const p = products.find(x=>x.id === id);
-        return `<div class="cart-item"><img src="${p.image}"><div><h4>${p.name}</h4><p>${p.brand}</p><strong>₹${p.price.toLocaleString("en-IN")}</strong></div><button class="remove" onclick="toggleWishlist(${p.id})">Remove</button></div>`;
+        return `<div class="cart-item"><img src="${p.image}"><div><h4>${p.name}</h4><p>${p.brand}</p><strong>₹${p.price.toLocaleString("en-IN")}</strong></div><button class="remove" onclick="toggleWishlist('${p.id}')">Remove</button></div>`;
       }).join("");
     }
 
@@ -1499,7 +1529,7 @@
       const q = query.toLowerCase();
       const matches = products.filter(p=>`${p.name} ${p.brand} ${p.category} ${p.type}`.toLowerCase().includes(q));
       resultsEl.innerHTML = matches.length
-        ? matches.slice(0,8).map(p=>`<div class="search-result" onclick="openProduct(${p.id})"><span>${p.brand} — ${p.name}</span><strong>₹${p.price}</strong></div>`).join("")
+        ? matches.slice(0,8).map(p=>`<div class="search-result" onclick="openProduct('${p.id}')"><span>${p.brand} — ${p.name}</span><strong>₹${p.price}</strong></div>`).join("")
         : `<div class="search-result">No products found</div>`;
       resultsEl.classList.add("open");
     }
@@ -1597,28 +1627,47 @@
       updateCartSummary();
     }
 
-    function placeOrder(){
+    async function placeOrder(){
       const name = document.getElementById("checkoutName").value.trim();
       const phone = document.getElementById("checkoutPhone").value.trim();
       const address = document.getElementById("checkoutAddress").value.trim();
       const pin = document.getElementById("checkoutPin").value.trim();
+      const paymentMethod = document.querySelector('input[name="payment"]:checked')?.parentElement.innerText.trim() || "Cash on Delivery";
 
       if(!name || !phone || !address || !pin){ showToast("Please complete delivery details"); return; }
       if(phone.length !== 10){ showToast("Enter a valid 10-digit mobile number"); return; }
 
       const orderId = "ASF" + Date.now().toString().slice(-7);
-
-      let orderText = `*New Order Placed!* 🛍️%0A*Order ID:* ${orderId}%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Pincode:* ${pin}%0A*Address:* ${address}%0A%0A*Items:*%0A`;
-      cart.forEach(item => {
+      const orderItems = cart.map(item => {
         const p = products.find(x => x.id === item.id);
-        orderText += `- ${p.name} (Size: ${item.size}, Color: ${item.color}) x ${item.qty}%0A`;
+        return { productId: item.id, name: p.name, brand: p.brand, size: item.size, color: item.color, qty: item.qty, price: p.price };
       });
+      const subtotal = orderItems.reduce((s,i)=>s + i.price*i.qty, 0);
+      const delivery = subtotal >= 999 ? 0 : 79;
+      const total = Math.max(0, subtotal + delivery - couponDiscount);
 
-      const totalAmount = document.getElementById("checkoutTotal").innerText;
-      orderText += `%0A*Total Payable:* ${totalAmount}`;
+      // Save the order to Firestore so it shows up in Admin > Orders from any device
+      if(isFirebaseConfigured){
+        try{
+          await addDoc(collection(db, "orders"), {
+            orderId, name, phone, address, pin, paymentMethod,
+            items: orderItems, subtotal, delivery, discount: couponDiscount, total,
+            status: "Pending", createdAt: serverTimestamp()
+          });
+        } catch(err){
+          console.error("Could not save order to Firestore:", err);
+          showToast("Order placed, but couldn't sync to the database — check your connection");
+        }
+      }
+
+      let orderText = `*New Order Placed!* 🛍️%0A*Order ID:* ${orderId}%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Pincode:* ${pin}%0A*Address:* ${address}%0A*Payment:* ${paymentMethod}%0A%0A*Items:*%0A`;
+      orderItems.forEach(item => {
+        orderText += `- ${item.name} (Size: ${item.size}, Color: ${item.color}) x ${item.qty}%0A`;
+      });
+      orderText += `%0A*Total Payable:* ₹${total.toLocaleString("en-IN")}`;
 
       let confirmWhatsApp = confirm(`Order Placed Successfully! 🎉\nOrder ID: ${orderId}\n\nClick OK to send order details directly via WhatsApp to the store owner.`);
-      if(confirmWhatsApp){ window.open(`https://wa.me/919966681276?text=${orderText}`, '_blank'); }
+      if(confirmWhatsApp){ window.open(`https://wa.me/919999999999?text=${orderText}`, '_blank'); }
 
       cart = [];
       couponDiscount = 0;
@@ -1666,10 +1715,22 @@
        INIT
     ===================================================== */
 
-    renderProducts();
+    startProductListener();
     updateCart();
     updateWishlistCount();
     renderWishlist();
+
+    /* Expose functions used by inline onclick="" attributes —
+       required because this is a module script (module-scoped by default) */
+    Object.assign(window, {
+      addModalToCart, addModalToWishlist, applyCoupon, changeQty,
+      closeCart, closeCheckout, closeMobileNav, closeProductModal, closeWishlist,
+      filterCategory, filterProducts, openCart, openCheckout, openMobileNav,
+      openProduct, openWishlist, placeOrder, removeCart, scrollToTop, scrollToSection,
+      searchByBrand, selectColor, selectSizeBtn, subscribe, toggleAccount,
+      toggleMobileSearch, toggleNavDrop, toggleWishlist,
+      searchProducts, searchProductsMobile, sortProducts
+    });
 
   </script>
 

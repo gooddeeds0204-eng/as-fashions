@@ -2,7 +2,7 @@
     .navbar {
         height: auto;
         padding: 10px 15px;
-        flex-direction: column;
+        flex-wrap: wrap;
         gap: 10px;
     }
 
@@ -11,17 +11,14 @@
         justify-content: space-between;
     }
 
-    .desktop-nav-links {
-        display: none !important; /* Force hide broken links */
-    }
-
     .search-bar {
         width: 100%;
-        height: 38px;
+        height: 36px;
+        order: 3;
     }
 
     .nav-right {
-        display: none; /* Hide top icons on mobile, use bottom nav instead */
+        display: none; /* Handled by bottom navigation on mobile */
     }
 
     .hero-banner {

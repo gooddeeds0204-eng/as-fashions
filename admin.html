@@ -1,225 +1,771 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS Fashions - Ultimate Admin Panel</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        body { background-color: #0b0b0b; color: #f3f3f3; padding-bottom: 40px; }
-        
-        header { background: #141414; color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #222; }
-        header h1 { font-size: 1.1rem; color: #d4af37; letter-spacing: 1px; }
-        
-        .container { max-width: 900px; margin: 20px auto; padding: 0 10px; }
-        
-        .card { background: #141414; padding: 20px; border-radius: 8px; border: 1px solid #222; box-shadow: 0 4px 12px rgba(0,0,0,0.5); margin-bottom: 20px; }
-        .card h2 { font-size: 1.1rem; margin-bottom: 15px; color: #fff; border-bottom: 2px solid #d4af37; padding-bottom: 6px; }
-        
-        .form-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-        @media(min-width: 600px) { .form-grid { grid-template-columns: 1fr 1fr; } }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AS FASHIONS | Admin Panel</title>
 
-        .form-group { margin-bottom: 10px; }
-        .form-group.full { grid-column: span 2; }
-        
-        .form-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #ccc; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #333; border-radius: 4px; font-size: 0.9rem; background: #1e1e1e; color: #fff; }
-        .form-group textarea { resize: vertical; height: 80px; }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        .btn { background: #d4af37; color: #000; border: none; padding: 12px; width: 100%; font-weight: 800; border-radius: 4px; cursor: pointer; font-size: 1rem; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .btn:hover { background: #f39c12; }
+:root{
+  --black:#111111;
+  --white:#ffffff;
+  --gray:#666;
+  --light-gray:#f6f6f6;
+  --border:#e5e5e5;
+  --sale:#ff3f6c;
+  --sale-dark:#e01d54;
+  --green:#14958f;
+}
 
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; }
-        table, th, td { border: 1px solid #333; }
-        th, td { padding: 10px; text-align: left; }
-        th { background: #1c1c1c; color: #d4af37; }
-        td { color: #ccc; }
-    </style>
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--black);
+  background: var(--light-gray);
+  min-height:100vh;
+}
+
+button, input, select, textarea { font-family:inherit; }
+button{ cursor:pointer; }
+a{ color:inherit; text-decoration:none; }
+
+/* ============ LOGIN GATE ============ */
+
+.login-screen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--black);
+}
+.login-box{
+  background:#fff;
+  padding:40px 36px;
+  border-radius:8px;
+  width:100%;
+  max-width:360px;
+  text-align:center;
+}
+.login-box h1{
+  font-family: Georgia, serif;
+  font-size:26px;
+  margin-bottom:4px;
+}
+.login-box p{
+  color:var(--gray);
+  font-size:12.5px;
+  margin-bottom:24px;
+}
+.login-box input{
+  width:100%;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:4px;
+  font-size:14px;
+  margin-bottom:12px;
+  outline:none;
+}
+.login-box input:focus{ border-color:var(--sale); }
+.login-box button{
+  width:100%;
+  padding:13px;
+  background:var(--black);
+  color:#fff;
+  border:0;
+  border-radius:4px;
+  font-weight:700;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+}
+.login-box button:hover{ background:var(--sale); }
+.login-error{ color:var(--sale-dark); font-size:11.5px; margin-top:10px; min-height:14px; }
+.login-hint{ margin-top:18px; font-size:10.5px; color:#aaa; }
+
+/* ============ APP SHELL ============ */
+
+.app{ display:none; }
+.app.active{ display:block; }
+
+header.admin-header{
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  height:66px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 26px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.admin-logo{
+  font-family: Georgia, serif;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+.admin-logo span{
+  font-family:Arial, sans-serif;
+  font-size:9px;
+  letter-spacing:2px;
+  color:var(--gray);
+  display:block;
+  margin-top:2px;
+}
+
+.admin-header-actions{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.btn-outline{
+  background:#fff;
+  border:1px solid var(--black);
+  color:var(--black);
+  padding:9px 16px;
+  border-radius:4px;
+  font-size:12px;
+  font-weight:700;
+}
+.btn-outline:hover{ background:var(--light-gray); }
+
+.btn-primary{
+  background:var(--sale);
+  color:#fff;
+  border:0;
+  padding:10px 18px;
+  border-radius:4px;
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:.3px;
+}
+.btn-primary:hover{ background:var(--sale-dark); }
+
+.btn-danger{
+  background:none;
+  border:1px solid var(--sale);
+  color:var(--sale-dark);
+  padding:7px 12px;
+  border-radius:4px;
+  font-size:11px;
+  font-weight:700;
+}
+.btn-danger:hover{ background:#fff0f3; }
+
+/* ============ LAYOUT ============ */
+
+.admin-body{
+  max-width:1300px;
+  margin:auto;
+  padding:26px 20px 60px;
+}
+
+.stats-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:28px;
+}
+.stat-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:18px 20px;
+}
+.stat-card .num{ font-size:26px; font-weight:800; }
+.stat-card .label{ color:var(--gray); font-size:11.5px; margin-top:4px; text-transform:uppercase; letter-spacing:.3px; }
+.stat-card.accent .num{ color:var(--sale); }
+
+.panel{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:6px;
+  margin-bottom:24px;
+  overflow:hidden;
+}
+.panel-header{
+  padding:18px 20px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.panel-header h2{ font-size:16px; }
+.panel-header p{ color:var(--gray); font-size:11.5px; margin-top:2px; }
+
+.panel-body{ padding:20px; }
+
+/* ============ FORM ============ */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+.form-group{ margin-bottom:2px; }
+.form-group.full{ grid-column:1/-1; }
+.form-group label{
+  display:block;
+  font-size:11px;
+  color:var(--gray);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+  margin-bottom:6px;
+}
+.form-group input, .form-group select, .form-group textarea{
+  width:100%;
+  padding:11px;
+  border:1px solid var(--border);
+  border-radius:4px;
+  font-size:13px;
+  outline:none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus{ border-color:var(--sale); }
+
+.checkbox-row{
+  display:flex;
+  gap:22px;
+  align-items:center;
+  margin-top:6px;
+}
+.checkbox-row label{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:12.5px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.form-actions{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+  justify-content:flex-end;
+}
+
+.discount-preview{
+  font-size:11.5px;
+  color:var(--green);
+  margin-top:6px;
+  font-weight:700;
+}
+
+/* ============ TABLE ============ */
+
+.table-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+  border-bottom:1px solid var(--border);
+  gap:10px;
+  flex-wrap:wrap;
+}
+.table-search{
+  flex:1;
+  max-width:320px;
+  padding:10px 14px;
+  border:1px solid var(--border);
+  border-radius:4px;
+  font-size:12.5px;
+  outline:none;
+}
+.table-search:focus{ border-color:var(--sale); }
+
+table{ width:100%; border-collapse:collapse; }
+thead th{
+  text-align:left;
+  font-size:10.5px;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  color:var(--gray);
+  padding:12px 20px;
+  border-bottom:1px solid var(--border);
+  background:var(--light-gray);
+}
+tbody td{
+  padding:12px 20px;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+  vertical-align:middle;
+}
+tbody tr:hover{ background:#fafafa; }
+
+.prod-thumb{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.prod-thumb img{
+  width:44px; height:52px; object-fit:cover; border-radius:3px; flex-shrink:0; background:var(--light-gray);
+}
+.prod-thumb .pname{ font-weight:700; font-size:12.5px; }
+.prod-thumb .pmeta{ color:var(--gray); font-size:11px; margin-top:2px; }
+
+.tag{
+  display:inline-block;
+  font-size:10px;
+  font-weight:700;
+  padding:3px 8px;
+  border-radius:10px;
+  background:var(--light-gray);
+  color:var(--gray);
+  margin-right:4px;
+}
+.tag.new{ background:#e7f7f6; color:var(--green); }
+.tag.trending{ background:#fff0f3; color:var(--sale-dark); }
+.tag.custom{ background:#111; color:#fff; }
+
+.row-actions{ display:flex; gap:8px; }
+.icon-btn{
+  background:none; border:1px solid var(--border); width:30px; height:30px; border-radius:4px; font-size:13px;
+}
+.icon-btn:hover{ border-color:var(--black); }
+.icon-btn.danger:hover{ border-color:var(--sale); color:var(--sale-dark); }
+
+.empty-row td{ text-align:center; padding:50px 20px; color:var(--gray); }
+
+/* ============ TOAST ============ */
+
+.toast{
+  position:fixed; bottom:25px; left:50%; transform:translate(-50%,100px);
+  background:#111; color:#fff; padding:13px 22px; border-radius:4px; font-size:13px;
+  opacity:0; transition:.3s; z-index:9999;
+}
+.toast.show{ transform:translate(-50%,0); opacity:1; }
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width:900px){
+  .form-grid{ grid-template-columns:repeat(2,1fr); }
+  .stats-row{ grid-template-columns:repeat(2,1fr); }
+  table, thead, tbody, th, td, tr{ display:block; }
+  thead{ display:none; }
+  tbody tr{ border-bottom:1px solid var(--border); padding:12px 0; }
+  tbody td{ border:0; padding:6px 20px; }
+  tbody td:first-child{ padding-top:12px; }
+}
+@media (max-width:560px){
+  .form-grid{ grid-template-columns:1fr; }
+  .stats-row{ grid-template-columns:1fr 1fr; }
+  .admin-body{ padding:18px 12px 50px; }
+  header.admin-header{ padding:0 14px; }
+}
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>AS FASHIONS ADMIN</h1>
-        <a href="index.html" style="color: #d4af37; text-decoration: none; font-size: 0.8rem; font-weight: 700;">View Website ↗</a>
-    </header>
+<!-- ============ LOGIN ============ -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <h1>AS FASHIONS</h1>
+    <p>ADMIN PANEL</p>
+    <input type="password" id="loginPassword" placeholder="Enter admin password" onkeypress="if(event.key==='Enter') doLogin()">
+    <button onclick="doLogin()">Login</button>
+    <div class="login-error" id="loginError"></div>
+    <div class="login-hint">Default password: <b>asfashions123</b></div>
+  </div>
+</div>
 
-    <div class="container">
-        
-        <!-- Add Product Section -->
-        <div class="card">
-            <h2>📦 Add New Product to Store</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Product Title / Name</label>
-                    <input type="text" id="pName" placeholder="e.g. Designer Kurta Set">
-                </div>
+<!-- ============ APP ============ -->
+<div class="app" id="app">
 
-                <div class="form-group">
-                    <label>Brand Name</label>
-                    <input type="text" id="pBrand" placeholder="e.g. H&M, Nike, Levis, Roadster">
-                </div>
+  <header class="admin-header">
+    <div class="admin-logo">AS FASHIONS<span>ADMIN PANEL</span></div>
+    <div class="admin-header-actions">
+      <a class="btn-outline" href="index.html" target="_blank">View Store ↗</a>
+      <button class="btn-outline" onclick="doLogout()">Logout</button>
+    </div>
+  </header>
 
-                <div class="form-group">
-                    <label>Store Category</label>
-                    <select id="pCategory">
-                        <option value="Men">Men</option>
-                        <option value="Women">Women</option>
-                        <option value="Kids">Kids (Boys/Girls/Baby)</option>
-                        <option value="Footwear">Footwear</option>
-                        <option value="Bags">Bags</option>
-                        <option value="Accessories">Accessories</option>
-                        <option value="Beauty">Beauty</option>
-                        <option value="Sports">Sports & Fitness</option>
-                        <option value="Home">Home & Lifestyle</option>
-                    </select>
-                </div>
+  <div class="admin-body">
 
-                <div class="form-group">
-                    <label>Collection Tag</label>
-                    <select id="pTag">
-                        <option value="Standard">Standard Collection</option>
-                        <option value="New Arrivals">✨ New Arrivals</option>
-                        <option value="Trending Now">🔥 Trending Now</option>
-                        <option value="Bestsellers">⭐ Bestsellers</option>
-                        <option value="Under 499">🏷️ Under ₹499</option>
-                        <option value="Luxe">💎 Luxe Edition</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Selling Price (₹)</label>
-                    <input type="number" id="pPrice" placeholder="999">
-                </div>
-
-                <div class="form-group">
-                    <label>Original MRP (₹)</label>
-                    <input type="number" id="pMrp" placeholder="1999">
-                </div>
-
-                <div class="form-group">
-                    <label>Discount (%)</label>
-                    <input type="number" id="pDiscount" placeholder="50">
-                </div>
-
-                <div class="form-group">
-                    <label>Rating (e.g. 4.5)</label>
-                    <input type="text" id="pRating" placeholder="4.5">
-                </div>
-
-                <div class="form-group full">
-                    <label>Image Direct URL</label>
-                    <input type="text" id="pImage" placeholder="Paste image link (Unsplash URL)">
-                </div>
-
-                <div class="form-group full">
-                    <label>Product Description</label>
-                    <textarea id="pDesc" placeholder="Write fabric details, fit type, wash care, etc..."></textarea>
-                </div>
-            </div>
-
-            <button class="btn" onclick="publishProduct()">Publish Product to Live Website</button>
-        </div>
-
-        <!-- Add Stories / Reels Section with Video URL -->
-        <div class="card">
-            <h2>📱 Add Homepage Story / Video Reel</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Story / Collection Title</label>
-                    <input type="text" id="sTitle" placeholder="e.g. Summer Kurta Edit">
-                </div>
-
-                <div class="form-group">
-                    <label>Cover Thumbnail Image URL</label>
-                    <input type="text" id="sImage" placeholder="Paste thumbnail image URL">
-                </div>
-            </div>
-
-            <button class="btn" style="background: #35d07f; color: #000;" onclick="alert('Video story reel successfully uploaded to homepage!')">Upload Video Story</button>
-        </div>
-
-        <!-- Orders Management -->
-        <div class="card">
-            <h2>🛒 Customer Orders Overview</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Customer</th>
-                        <th>Item</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#101</td>
-                        <td>Rahul (Guntur)</td>
-                        <td>Floral Maxi Dress</td>
-                        <td><span style="color: #35d07f; font-weight: bold;">Processing</span></td>
-                    </tr>
-                    <tr>
-                        <td>#102</td>
-                        <td>Priya</td>
-                        <td>Casual Slim Shirt</td>
-                        <td><span style="color: #d4af37; font-weight: bold;">Shipped</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
+    <div class="stats-row">
+      <div class="stat-card"><div class="num" id="statTotal">0</div><div class="label">Total Products</div></div>
+      <div class="stat-card accent"><div class="num" id="statCustom">0</div><div class="label">Added by You</div></div>
+      <div class="stat-card"><div class="num" id="statNew">0</div><div class="label">Marked New</div></div>
+      <div class="stat-card"><div class="num" id="statTrending">0</div><div class="label">Marked Trending</div></div>
     </div>
 
-    <script>
-        function publishProduct(){
-            const name = document.getElementById("pName").value.trim();
-            const brand = document.getElementById("pBrand").value.trim();
-            const category = document.getElementById("pCategory").value;
-            const tag = document.getElementById("pTag").value;
-            const price = Number(document.getElementById("pPrice").value);
-            const mrp = Number(document.getElementById("pMrp").value);
-            const discount = Number(document.getElementById("pDiscount").value);
-            const rating = Number(document.getElementById("pRating").value) || 4.5;
-            const image = document.getElementById("pImage").value.trim();
-            const description = document.getElementById("pDesc").value.trim();
+    <!-- ADD / EDIT PRODUCT FORM -->
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <h2 id="formTitle">Add New Product</h2>
+          <p>New products appear instantly on the storefront's product grids.</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <input type="hidden" id="editingId">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Brand</label>
+            <input type="text" id="fBrand" placeholder="e.g. Roadster">
+          </div>
+          <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" id="fName" placeholder="e.g. Premium Cotton Shirt">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="fCategory">
+              <option>Men</option>
+              <option>Women</option>
+              <option>Kids</option>
+              <option>Footwear</option>
+              <option>Bags</option>
+              <option>Accessories</option>
+              <option>Beauty</option>
+              <option>Sports</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Type</label>
+            <input type="text" id="fType" placeholder="e.g. Shirt, Jeans, Sneakers">
+          </div>
+          <div class="form-group">
+            <label>Selling Price (₹)</label>
+            <input type="number" id="fPrice" placeholder="e.g. 899" oninput="updateDiscountPreview()">
+          </div>
+          <div class="form-group">
+            <label>MRP (₹)</label>
+            <input type="number" id="fMrp" placeholder="e.g. 1799" oninput="updateDiscountPreview()">
+          </div>
+          <div class="form-group">
+            <label>Rating (out of 5)</label>
+            <input type="number" step="0.1" min="0" max="5" id="fRating" placeholder="e.g. 4.5">
+          </div>
+          <div class="form-group">
+            <label>Rating Count</label>
+            <input type="text" id="fRatingCount" placeholder="e.g. 1.2K or 340">
+          </div>
+          <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" id="fImage" placeholder="https://...">
+          </div>
+          <div class="form-group full">
+            <label>Description</label>
+            <textarea id="fDescription" rows="2" placeholder="Short product description shown in Quick View"></textarea>
+          </div>
+          <div class="form-group full">
+            <div class="discount-preview" id="discountPreview">Discount will be calculated automatically from Price and MRP.</div>
+            <div class="checkbox-row">
+              <label><input type="checkbox" id="fNew" checked> Mark as New Arrival</label>
+              <label><input type="checkbox" id="fTrending" checked> Mark as Trending</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-outline" onclick="resetForm()">Clear</button>
+          <button class="btn-primary" onclick="saveProduct()" id="saveBtn">Add Product</button>
+        </div>
+      </div>
+    </div>
 
-            if(!name || !price || !image){
-                alert("Dayisi! Name, Price, mariyu Image URL mandatory ga fill cheyandi.");
-                return;
-            }
+    <!-- PRODUCT LIST -->
+    <div class="panel">
+      <div class="table-toolbar">
+        <input type="text" class="table-search" id="tableSearch" placeholder="Search products..." oninput="renderTable()">
+        <button class="btn-danger" onclick="clearAllCustom()">Remove All Custom Products</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Discount</th>
+              <th>Rating</th>
+              <th>Tags</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productTableBody"></tbody>
+        </table>
+      </div>
+    </div>
 
-            let customProducts = JSON.parse(localStorage.getItem("as_custom_products") || "[]");
-            
-            const newProduct = {
-                id: Date.now(),
-                brand: brand || "AS Fashions",
-                name: name,
-                category: category,
-                type: "Fashion",
-                price: price,
-                mrp: mrp || price * 2,
-                rating: rating,
-                discount: discount || 50,
-                new: tag === "New Arrivals" || true,
-                trending: tag === "Trending Now" || true,
-                image: image,
-                description: description || "Premium quality fashion product."
-            };
+  </div>
+</div>
 
-            customProducts.push(newProduct);
-            localStorage.setItem("as_custom_products", JSON.stringify(customProducts));
+<div class="toast" id="toast"></div>
 
-            alert("Product successfully published to live website! 🎉");
+<script>
 
-            // Clear form inputs
-            document.getElementById("pName").value = "";
-            document.getElementById("pBrand").value = "";
-            document.getElementById("pPrice").value = "";
-            document.getElementById("pMrp").value = "";
-            document.getElementById("pDiscount").value = "";
-            document.getElementById("pRating").value = "";
-            document.getElementById("pImage").value = "";
-            document.getElementById("pDesc").value = "";
-        }
-    </script>
+  /* =====================================================
+     DEFAULT CATALOG (read-only reference, mirrors storefront)
+     Only custom products (added here) can be edited/deleted.
+  ===================================================== */
+
+  const defaultProducts = [
+    { id:1, brand:"Roadster", name:"Premium Oversized T-Shirt", category:"Men", type:"T-Shirt", price:799, mrp:1499, rating:4.5, ratingCount:"1.2K", discount:46, new:true, trending:true, image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85", description:"Premium cotton oversized T-shirt for everyday styling." },
+    { id:2, brand:"AS Fashions", name:"Premium Casual Shirt", category:"Men", type:"Shirt", price:899, mrp:1799, rating:4.3, ratingCount:"982", discount:50, new:false, trending:true, image:"https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=85", description:"Casual cotton shirt, comfortable everyday fit." },
+    { id:3, brand:"H&M", name:"Women's Floral Dress", category:"Women", type:"Dress", price:999, mrp:1999, rating:4.6, ratingCount:"1.5K", discount:50, new:true, trending:true, image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=85", description:"Flowy floral dress, perfect for summer days." },
+    { id:4, brand:"Zara", name:"Women's Premium Top", category:"Women", type:"Top", price:499, mrp:999, rating:4.4, ratingCount:"1.1K", discount:50, new:false, trending:true, image:"https://images.unsplash.com/photo-1564257577054-8c4b3e5c9b88?auto=format&fit=crop&w=700&q=85", description:"Minimal premium top for everyday wear." },
+    { id:5, brand:"Levi's", name:"Classic Denim Jacket", category:"Men", type:"Jacket", price:1299, mrp:2499, rating:4.6, ratingCount:"753", discount:48, new:true, trending:true, image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=700&q=85", description:"Classic denim jacket, built to last." },
+    { id:6, brand:"Nike", name:"Premium Sneakers", category:"Footwear", type:"Sneakers", price:1499, mrp:2999, rating:4.4, ratingCount:"891", discount:50, new:true, trending:true, image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=85", description:"Everyday performance sneakers." },
+    { id:7, brand:"Levi's", name:"Classic Denim Blue Jeans", category:"Men", type:"Jeans", price:1499, mrp:2999, rating:4.6, ratingCount:"640", discount:50, new:false, trending:true, image:"https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=85", description:"Classic stretch denim jeans with a comfortable fit." },
+    { id:8, brand:"Anouk", name:"Embroidered Kurta Set", category:"Women", type:"Ethnic", price:999, mrp:1999, rating:4.5, ratingCount:"410", discount:50, new:true, trending:false, image:"https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=85", description:"Traditional ethnic kurta set." },
+    { id:9, brand:"GAP Kids", name:"Girls Party Wear Frock", category:"Kids", type:"Dress", price:899, mrp:1599, rating:4.4, ratingCount:"322", discount:43, new:true, trending:true, image:"https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=700&q=85", description:"Beautiful party wear frock for girls." },
+    { id:10, brand:"UCB Kids", name:"Boys Casual Set", category:"Kids", type:"Set", price:799, mrp:1299, rating:4.3, ratingCount:"288", discount:38, new:false, trending:true, image:"https://images.unsplash.com/photo-1503944583220-7eeec4934c7b?auto=format&fit=crop&w=700&q=85", description:"Casual outfit set for boys." },
+    { id:11, brand:"Adidas", name:"Street Style Sneakers", category:"Footwear", type:"Sneakers", price:2499, mrp:3999, rating:4.7, ratingCount:"1.3K", discount:38, new:true, trending:true, image:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=700&q=85", description:"Street-style sneakers for everyday wear." },
+    { id:12, brand:"Puma", name:"Performance Gym T-Shirt", category:"Sports", type:"Sportswear", price:899, mrp:1699, rating:4.5, ratingCount:"560", discount:47, new:false, trending:true, image:"https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=700&q=85", description:"Breathable gym T-shirt for training." },
+    { id:13, brand:"ONLY", name:"Wide Leg Fashion Jeans", category:"Women", type:"Jeans", price:1399, mrp:2799, rating:4.4, ratingCount:"470", discount:50, new:true, trending:true, image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=85", description:"Wide-leg jeans with a relaxed fit." },
+    { id:14, brand:"U.S. Polo", name:"Premium Polo T-Shirt", category:"Men", type:"T-Shirt", price:1199, mrp:2199, rating:4.7, ratingCount:"830", discount:45, new:false, trending:true, image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85", description:"Cotton polo T-shirt, classic fit." },
+    { id:15, brand:"Mango", name:"Luxury Shoulder Bag", category:"Bags", type:"Handbag", price:1799, mrp:3499, rating:4.6, ratingCount:"290", discount:49, new:true, trending:true, image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=85", description:"Everyday shoulder bag in premium finish." },
+    { id:16, brand:"Fossil", name:"Classic Fashion Watch", category:"Accessories", type:"Watch", price:4999, mrp:7999, rating:4.8, ratingCount:"512", discount:38, new:false, trending:true, image:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=85", description:"Classic analog watch." }
+  ];
+
+  const ADMIN_PASSWORD = "asfashions123";
+
+  /* =====================================================
+     AUTH
+  ===================================================== */
+
+  function doLogin(){
+    const val = document.getElementById("loginPassword").value;
+    if(val === ADMIN_PASSWORD){
+      sessionStorage.setItem("as_admin_auth", "1");
+      showApp();
+    } else {
+      document.getElementById("loginError").innerText = "Incorrect password. Please try again.";
+    }
+  }
+
+  function doLogout(){
+    sessionStorage.removeItem("as_admin_auth");
+    document.getElementById("app").classList.remove("active");
+    document.getElementById("loginScreen").style.display = "flex";
+    document.getElementById("loginPassword").value = "";
+  }
+
+  function showApp(){
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("app").classList.add("active");
+    renderAll();
+  }
+
+  if(sessionStorage.getItem("as_admin_auth") === "1"){ showApp(); }
+
+  /* =====================================================
+     PRODUCT STORAGE
+  ===================================================== */
+
+  function loadCustomProducts(){
+    try{ return JSON.parse(localStorage.getItem("as_custom_products") || "[]"); }
+    catch(e){ return []; }
+  }
+  function saveCustomProducts(list){
+    localStorage.setItem("as_custom_products", JSON.stringify(list));
+  }
+
+  function allProducts(){
+    return [...loadCustomProducts(), ...defaultProducts];
+  }
+
+  function showToast(msg){
+    const t = document.getElementById("toast");
+    t.innerText = msg;
+    t.classList.add("show");
+    setTimeout(()=>t.classList.remove("show"), 2400);
+  }
+
+  /* =====================================================
+     FORM
+  ===================================================== */
+
+  function updateDiscountPreview(){
+    const price = parseFloat(document.getElementById("fPrice").value);
+    const mrp = parseFloat(document.getElementById("fMrp").value);
+    const el = document.getElementById("discountPreview");
+    if(price && mrp && mrp > price){
+      const pct = Math.round(((mrp - price) / mrp) * 100);
+      el.innerText = `Discount will show as ${pct}% OFF on the storefront.`;
+    } else {
+      el.innerText = "Discount will be calculated automatically from Price and MRP.";
+    }
+  }
+
+  function resetForm(){
+    document.getElementById("editingId").value = "";
+    document.getElementById("fBrand").value = "";
+    document.getElementById("fName").value = "";
+    document.getElementById("fCategory").value = "Men";
+    document.getElementById("fType").value = "";
+    document.getElementById("fPrice").value = "";
+    document.getElementById("fMrp").value = "";
+    document.getElementById("fRating").value = "4.5";
+    document.getElementById("fRatingCount").value = "";
+    document.getElementById("fImage").value = "";
+    document.getElementById("fDescription").value = "";
+    document.getElementById("fNew").checked = true;
+    document.getElementById("fTrending").checked = true;
+    document.getElementById("formTitle").innerText = "Add New Product";
+    document.getElementById("saveBtn").innerText = "Add Product";
+    updateDiscountPreview();
+  }
+
+  function saveProduct(){
+    const brand = document.getElementById("fBrand").value.trim();
+    const name = document.getElementById("fName").value.trim();
+    const category = document.getElementById("fCategory").value;
+    const type = document.getElementById("fType").value.trim() || category;
+    const price = parseFloat(document.getElementById("fPrice").value);
+    const mrp = parseFloat(document.getElementById("fMrp").value);
+    const rating = parseFloat(document.getElementById("fRating").value) || 4.5;
+    const ratingCount = document.getElementById("fRatingCount").value.trim() || "New";
+    const image = document.getElementById("fImage").value.trim();
+    const description = document.getElementById("fDescription").value.trim() || `${brand} ${name}`;
+    const isNew = document.getElementById("fNew").checked;
+    const isTrending = document.getElementById("fTrending").checked;
+
+    if(!brand || !name || !price || !mrp || !image){
+      showToast("Please fill in Brand, Name, Price, MRP and Image URL");
+      return;
+    }
+    if(mrp <= price){
+      showToast("MRP must be greater than the Selling Price");
+      return;
+    }
+
+    const discount = Math.round(((mrp - price) / mrp) * 100);
+    const editingId = document.getElementById("editingId").value;
+    let custom = loadCustomProducts();
+
+    if(editingId){
+      custom = custom.map(p => p.id === Number(editingId)
+        ? { ...p, brand, name, category, type, price, mrp, rating, ratingCount, image, description, new:isNew, trending:isTrending, discount }
+        : p
+      );
+      showToast("Product updated");
+    } else {
+      const newId = Date.now();
+      custom.unshift({ id:newId, brand, name, category, type, price, mrp, rating, ratingCount, image, description, new:isNew, trending:isTrending, discount, custom:true });
+      showToast("Product added to the store");
+    }
+
+    saveCustomProducts(custom);
+    resetForm();
+    renderAll();
+  }
+
+  function editProduct(id){
+    const custom = loadCustomProducts();
+    const p = custom.find(x => x.id === id);
+    if(!p) { showToast("Default catalog products can't be edited here — add a new listing instead"); return; }
+
+    document.getElementById("editingId").value = p.id;
+    document.getElementById("fBrand").value = p.brand;
+    document.getElementById("fName").value = p.name;
+    document.getElementById("fCategory").value = p.category;
+    document.getElementById("fType").value = p.type;
+    document.getElementById("fPrice").value = p.price;
+    document.getElementById("fMrp").value = p.mrp;
+    document.getElementById("fRating").value = p.rating;
+    document.getElementById("fRatingCount").value = p.ratingCount;
+    document.getElementById("fImage").value = p.image;
+    document.getElementById("fDescription").value = p.description;
+    document.getElementById("fNew").checked = !!p.new;
+    document.getElementById("fTrending").checked = !!p.trending;
+    document.getElementById("formTitle").innerText = "Edit Product";
+    document.getElementById("saveBtn").innerText = "Save Changes";
+    updateDiscountPreview();
+    window.scrollTo({ top:0, behavior:"smooth" });
+  }
+
+  function deleteProduct(id){
+    if(!confirm("Remove this product from the store?")) return;
+    let custom = loadCustomProducts();
+    custom = custom.filter(p => p.id !== id);
+    saveCustomProducts(custom);
+    showToast("Product removed");
+    renderAll();
+  }
+
+  function clearAllCustom(){
+    const custom = loadCustomProducts();
+    if(custom.length === 0){ showToast("No custom products to remove"); return; }
+    if(!confirm(`Remove all ${custom.length} products you've added? Default catalog items are not affected.`)) return;
+    saveCustomProducts([]);
+    showToast("All custom products removed");
+    renderAll();
+  }
+
+  /* =====================================================
+     TABLE + STATS
+  ===================================================== */
+
+  function renderTable(){
+    const query = document.getElementById("tableSearch").value.toLowerCase().trim();
+    const custom = loadCustomProducts();
+    const list = allProducts().filter(p =>
+      !query || `${p.name} ${p.brand} ${p.category}`.toLowerCase().includes(query)
+    );
+
+    const body = document.getElementById("productTableBody");
+    if(list.length === 0){
+      body.innerHTML = `<tr class="empty-row"><td colspan="7">No products match your search.</td></tr>`;
+      return;
+    }
+
+    body.innerHTML = list.map(p => {
+      const isCustom = custom.some(c => c.id === p.id);
+      return `
+      <tr>
+        <td>
+          <div class="prod-thumb">
+            <img src="${p.image}" alt="${p.name}">
+            <div>
+              <div class="pname">${p.name}</div>
+              <div class="pmeta">${p.brand} · ${p.type}</div>
+            </div>
+          </div>
+        </td>
+        <td>${p.category}</td>
+        <td>₹${p.price.toLocaleString("en-IN")} <span style="color:var(--gray);text-decoration:line-through;font-size:11px">₹${p.mrp.toLocaleString("en-IN")}</span></td>
+        <td>${p.discount}% OFF</td>
+        <td>⭐ ${p.rating}</td>
+        <td>
+          ${p.new ? '<span class="tag new">NEW</span>' : ''}
+          ${p.trending ? '<span class="tag trending">TRENDING</span>' : ''}
+          ${isCustom ? '<span class="tag custom">YOURS</span>' : ''}
+        </td>
+        <td>
+          <div class="row-actions">
+            <button class="icon-btn" title="Edit" onclick="editProduct(${p.id})" ${isCustom ? '' : 'disabled style="opacity:.3;cursor:not-allowed"'}>✎</button>
+            <button class="icon-btn danger" title="Delete" onclick="deleteProduct(${p.id})" ${isCustom ? '' : 'disabled style="opacity:.3;cursor:not-allowed"'}>🗑</button>
+          </div>
+        </td>
+      </tr>`;
+    }).join("");
+  }
+
+  function renderStats(){
+    const custom = loadCustomProducts();
+    const all = allProducts();
+    document.getElementById("statTotal").innerText = all.length;
+    document.getElementById("statCustom").innerText = custom.length;
+    document.getElementById("statNew").innerText = all.filter(p=>p.new).length;
+    document.getElementById("statTrending").innerText = all.filter(p=>p.trending).length;
+  }
+
+  function renderAll(){
+    renderStats();
+    renderTable();
+  }
+
+  resetForm();
+
+</script>
+
 </body>
 </html>

@@ -1,313 +1,445 @@
 /* =========================================================
-   AS FASHIONS - PRODUCTS.JS
-   Product Listing + Filters + Sorting + Wishlist + Cart
+   AS FASHIONS — PRODUCTS.JS
+   Product catalogue + filters + sorting + wishlist + cart
    ========================================================= */
 
-const PRODUCTS = [
+"use strict";
+
+/* =========================================================
+   PRODUCT DATA
+   ========================================================= */
+
+const products = [
+  // ================= WOMEN =================
+
   {
-    id: 1,
+    id: "w001",
     name: "Women Floral Printed Kurti",
-    category: "women",
-    subcategory: "girl",
-    type: "kurti",
-    price: 499,
-    oldPrice: 999,
-    discount: 50,
-    rating: 4.5,
-    reviews: 128,
-    image: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=700&q=80",
-    badge: "🔥 Hot Deal"
-  },
-  {
-    id: 2,
-    name: "Women Premium Casual Dress",
-    category: "women",
-    subcategory: "girl",
-    type: "dress",
+    category: "Women",
+    subcategory: "Kurtis",
+    gender: "Women",
     price: 799,
     oldPrice: 1499,
     discount: 47,
-    rating: 4.6,
-    reviews: 94,
-    image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80",
-    badge: "⚡ Trending"
+    rating: 4.5,
+    reviews: 128,
+    sizes: ["S", "M", "L", "XL"],
+    color: "Pink",
+    badge: "Trending",
+    image:
+      "https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=700&q=80"
   },
+
   {
-    id: 3,
-    name: "Women Elegant Saree",
-    category: "women",
-    subcategory: "girl",
-    type: "saree",
+    id: "w002",
+    name: "Women Oversized Casual T-Shirt",
+    category: "Women",
+    subcategory: "T-Shirts",
+    gender: "Women",
+    price: 499,
+    oldPrice: 999,
+    discount: 50,
+    rating: 4.3,
+    reviews: 96,
+    sizes: ["S", "M", "L", "XL"],
+    color: "White",
+    badge: "Hot Deal",
+    image:
+      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id: "w003",
+    name: "Women Elegant Western Dress",
+    category: "Women",
+    subcategory: "Dresses",
+    gender: "Women",
     price: 999,
     oldPrice: 1999,
     discount: 50,
     rating: 4.7,
-    reviews: 216,
-    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80",
-    badge: "Best Seller"
-  },
-  {
-    id: 4,
-    name: "Women Oversized T-Shirt",
-    category: "women",
-    subcategory: "girl",
-    type: "tops",
-    price: 399,
-    oldPrice: 799,
-    discount: 50,
-    rating: 4.3,
-    reviews: 76,
-    image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80",
-    badge: "Under ₹499"
+    reviews: 214,
+    sizes: ["S", "M", "L"],
+    color: "Black",
+    badge: "Bestseller",
+    image:
+      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80"
   },
 
   {
-    id: 5,
-    name: "Men Slim Fit Casual Shirt",
-    category: "men",
-    subcategory: "boy",
-    type: "shirts",
-    price: 599,
-    oldPrice: 1199,
-    discount: 50,
-    rating: 4.4,
-    reviews: 154,
-    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=700&q=80",
-    badge: "🔥 Hot Deal"
-  },
-  {
-    id: 6,
-    name: "Men Premium Denim Jeans",
-    category: "men",
-    subcategory: "boy",
-    type: "jeans",
+    id: "w004",
+    name: "Women Straight Fit Jeans",
+    category: "Women",
+    subcategory: "Jeans",
+    gender: "Women",
     price: 899,
     oldPrice: 1799,
     discount: 50,
-    rating: 4.6,
-    reviews: 189,
-    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=80",
-    badge: "Best Seller"
-  },
-  {
-    id: 7,
-    name: "Men Oversized Streetwear T-Shirt",
-    category: "men",
-    subcategory: "boy",
-    type: "tshirts",
-    price: 449,
-    oldPrice: 899,
-    discount: 50,
-    rating: 4.5,
-    reviews: 132,
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80",
-    badge: "Under ₹499"
-  },
-  {
-    id: 8,
-    name: "Men Casual Cotton Trousers",
-    category: "men",
-    subcategory: "boy",
-    type: "trousers",
-    price: 699,
-    oldPrice: 1299,
-    discount: 46,
-    rating: 4.2,
-    reviews: 68,
-    image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&q=80",
-    badge: "Trending"
+    rating: 4.4,
+    reviews: 175,
+    sizes: ["28", "30", "32", "34"],
+    color: "Blue",
+    badge: "New",
+    image:
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=700&q=80"
   },
 
   {
-    id: 9,
-    name: "Girls Printed Summer Dress",
-    category: "kids",
-    subcategory: "girl",
-    type: "dress",
-    price: 399,
-    oldPrice: 799,
+    id: "w005",
+    name: "Women Premium Handbag",
+    category: "Women",
+    subcategory: "Bags",
+    gender: "Women",
+    price: 699,
+    oldPrice: 1399,
     discount: 50,
     rating: 4.6,
     reviews: 82,
-    image: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=700&q=80",
-    badge: "👧 Girls"
+    sizes: ["Free Size"],
+    color: "Brown",
+    badge: "Hot Deal",
+    image:
+      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80"
   },
+
+  // ================= MEN =================
+
   {
-    id: 10,
-    name: "Girls Cute Party Frock",
-    category: "kids",
-    subcategory: "girl",
-    type: "frock",
+    id: "m001",
+    name: "Men Premium Casual Shirt",
+    category: "Men",
+    subcategory: "Shirts",
+    gender: "Men",
+    price: 699,
+    oldPrice: 1499,
+    discount: 53,
+    rating: 4.5,
+    reviews: 189,
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    color: "Blue",
+    badge: "Bestseller",
+    image:
+      "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id: "m002",
+    name: "Men Slim Fit T-Shirt",
+    category: "Men",
+    subcategory: "T-Shirts",
+    gender: "Men",
+    price: 399,
+    oldPrice: 799,
+    discount: 50,
+    rating: 4.2,
+    reviews: 114,
+    sizes: ["S", "M", "L", "XL"],
+    color: "Black",
+    badge: "Under ₹499",
+    image:
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id: "m003",
+    name: "Men Relaxed Fit Jeans",
+    category: "Men",
+    subcategory: "Jeans",
+    gender: "Men",
+    price: 899,
+    oldPrice: 1799,
+    discount: 50,
+    rating: 4.4,
+    reviews: 142,
+    sizes: ["30", "32", "34", "36"],
+    color: "Blue",
+    badge: "Trending",
+    image:
+      "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id: "m004",
+    name: "Men Premium Sneakers",
+    category: "Men",
+    subcategory: "Footwear",
+    gender: "Men",
+    price: 1299,
+    oldPrice: 2499,
+    discount: 48,
+    rating: 4.6,
+    reviews: 221,
+    sizes: ["7", "8", "9", "10"],
+    color: "White",
+    badge: "Hot Deal",
+    image:
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"
+  },
+
+  // ================= KIDS — GIRL =================
+
+  {
+    id: "g001",
+    name: "Girls Floral Party Dress",
+    category: "Kids",
+    subcategory: "Dresses",
+    gender: "Girl",
     price: 599,
     oldPrice: 1199,
     discount: 50,
     rating: 4.7,
-    reviews: 114,
-    image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=700&q=80",
-    badge: "✨ New"
+    reviews: 91,
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y"],
+    color: "Pink",
+    badge: "Trending",
+    image:
+      "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=700&q=80"
   },
+
   {
-    id: 11,
-    name: "Boys Casual Printed T-Shirt",
-    category: "kids",
-    subcategory: "boy",
-    type: "tshirts",
+    id: "g002",
+    name: "Girls Cotton Casual Top",
+    category: "Kids",
+    subcategory: "Tops",
+    gender: "Girl",
+    price: 399,
+    oldPrice: 799,
+    discount: 50,
+    rating: 4.4,
+    reviews: 63,
+    sizes: ["2-3Y", "4-5Y", "6-7Y"],
+    color: "Yellow",
+    badge: "Under ₹499",
+    image:
+      "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id: "g003",
+    name: "Girls Denim Jacket",
+    category: "Kids",
+    subcategory: "Jackets",
+    gender: "Girl",
+    price: 799,
+    oldPrice: 1599,
+    discount: 50,
+    rating: 4.5,
+    reviews: 77,
+    sizes: ["4-5Y", "6-7Y", "8-9Y"],
+    color: "Blue",
+    badge: "New",
+    image:
+      "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=700&q=80"
+  },
+
+  // ================= KIDS — BOY =================
+
+  {
+    id: "b001",
+    name: "Boys Casual Printed Shirt",
+    category: "Kids",
+    subcategory: "Shirts",
+    gender: "Boy",
+    price: 499,
+    oldPrice: 999,
+    discount: 50,
+    rating: 4.4,
+    reviews: 84,
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y"],
+    color: "Blue",
+    badge: "Hot Deal",
+    image:
+      "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id: "b002",
+    name: "Boys Premium T-Shirt",
+    category: "Kids",
+    subcategory: "T-Shirts",
+    gender: "Boy",
     price: 349,
     oldPrice: 699,
     discount: 50,
-    rating: 4.4,
-    reviews: 91,
-    image: "https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=700&q=80",
-    badge: "👦 Boys"
+    rating: 4.3,
+    reviews: 69,
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y"],
+    color: "Green",
+    badge: "Under ₹499",
+    image:
+      "https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=700&q=80"
   },
+
   {
-    id: 12,
-    name: "Boys Denim Casual Set",
-    category: "kids",
-    subcategory: "boy",
-    type: "sets",
+    id: "b003",
+    name: "Boys Denim Casual Jeans",
+    category: "Kids",
+    subcategory: "Jeans",
+    gender: "Boy",
     price: 699,
     oldPrice: 1399,
     discount: 50,
     rating: 4.5,
     reviews: 73,
-    image: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80",
-    badge: "🔥 Hot Deal"
+    sizes: ["4-5Y", "6-7Y", "8-9Y", "10-11Y"],
+    color: "Blue",
+    badge: "Bestseller",
+    image:
+      "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80"
   }
 ];
 
 
 /* =========================================================
-   STORAGE
+   STATE
    ========================================================= */
 
-let wishlist = JSON.parse(localStorage.getItem("asWishlist")) || [];
-let cart = JSON.parse(localStorage.getItem("asCart")) || [];
+let currentProducts = [...products];
+
+let wishlist =
+  JSON.parse(localStorage.getItem("asFashionsWishlist")) || [];
+
+let cart =
+  JSON.parse(localStorage.getItem("asFashionsCart")) || [];
 
 
 /* =========================================================
-   CURRENT FILTER STATE
+   URL FILTERS
+   Example:
+   products.html?category=Women
+   products.html?category=Kids&gender=Girl
+   products.html?maxPrice=499
+   products.html?discount=50
    ========================================================= */
 
-let filters = {
-  category: "all",
-  subcategory: "all",
-  minPrice: 0,
-  maxPrice: Infinity,
-  minDiscount: 0,
-  sort: "featured"
-};
+const params = new URLSearchParams(window.location.search);
+
+let selectedCategory = params.get("category") || "All";
+let selectedGender = params.get("gender") || "All";
+let selectedSubcategory = params.get("subcategory") || "All";
+let maxPrice = Number(params.get("maxPrice")) || Infinity;
+let minDiscount = Number(params.get("discount")) || 0;
+let searchQuery = params.get("search") || "";
+let sortValue = params.get("sort") || "featured";
 
 
 /* =========================================================
-   DOM READY
+   HELPERS
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+function saveWishlist() {
+  localStorage.setItem(
+    "asFashionsWishlist",
+    JSON.stringify(wishlist)
+  );
+}
 
-  renderProducts();
+function saveCart() {
+  localStorage.setItem(
+    "asFashionsCart",
+    JSON.stringify(cart)
+  );
+}
 
-  setupCategoryFilters();
-  setupSubcategoryFilters();
-  setupPriceFilters();
-  setupDiscountFilters();
-  setupSorting();
+function isInWishlist(id) {
+  return wishlist.includes(id);
+}
 
-  updateWishlistCount();
-  updateCartCount();
-
-  handleURLFilters();
-
-  setupMobileFilter();
-});
+function getCartQuantity() {
+  return cart.reduce((total, item) => total + item.quantity, 0);
+}
 
 
 /* =========================================================
-   RENDER PRODUCTS
+   FILTER PRODUCTS
    ========================================================= */
 
-function renderProducts() {
+function filterProducts() {
 
-  const container =
-    document.querySelector("#productsGrid") ||
-    document.querySelector(".products-grid") ||
-    document.querySelector("#productGrid");
-
-  if (!container) {
-    console.warn("Products grid not found.");
-    return;
-  }
-
-  let filtered = PRODUCTS.filter(product => {
+  currentProducts = products.filter(product => {
 
     const categoryMatch =
-      filters.category === "all" ||
-      product.category === filters.category;
+      selectedCategory === "All" ||
+      product.category.toLowerCase() ===
+        selectedCategory.toLowerCase();
+
+    const genderMatch =
+      selectedGender === "All" ||
+      product.gender.toLowerCase() ===
+        selectedGender.toLowerCase();
 
     const subcategoryMatch =
-      filters.subcategory === "all" ||
-      product.subcategory === filters.subcategory;
+      selectedSubcategory === "All" ||
+      product.subcategory.toLowerCase() ===
+        selectedSubcategory.toLowerCase();
 
     const priceMatch =
-      product.price >= filters.minPrice &&
-      product.price <= filters.maxPrice;
+      product.price <= maxPrice;
 
     const discountMatch =
-      product.discount >= filters.minDiscount;
+      product.discount >= minDiscount;
+
+    const searchMatch =
+      !searchQuery ||
+      `${product.name} ${product.category} ${product.subcategory}`
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
 
     return (
       categoryMatch &&
+      genderMatch &&
       subcategoryMatch &&
       priceMatch &&
-      discountMatch
+      discountMatch &&
+      searchMatch
     );
   });
 
+  sortProducts();
 
-  /* SORT */
+  renderProducts();
+}
 
-  if (filters.sort === "low") {
-    filtered.sort((a, b) => a.price - b.price);
+
+/* =========================================================
+   SORTING
+   ========================================================= */
+
+function sortProducts() {
+
+  switch (sortValue) {
+
+    case "price-low":
+      currentProducts.sort(
+        (a, b) => a.price - b.price
+      );
+      break;
+
+    case "price-high":
+      currentProducts.sort(
+        (a, b) => b.price - a.price
+      );
+      break;
+
+    case "discount":
+      currentProducts.sort(
+        (a, b) => b.discount - a.discount
+      );
+      break;
+
+    case "rating":
+      currentProducts.sort(
+        (a, b) => b.rating - a.rating
+      );
+      break;
+
+    case "newest":
+      currentProducts.reverse();
+      break;
+
+    default:
+      break;
   }
-
-  if (filters.sort === "high") {
-    filtered.sort((a, b) => b.price - a.price);
-  }
-
-  if (filters.sort === "discount") {
-    filtered.sort((a, b) => b.discount - a.discount);
-  }
-
-  if (filters.sort === "rating") {
-    filtered.sort((a, b) => b.rating - a.rating);
-  }
-
-
-  /* EMPTY */
-
-  if (filtered.length === 0) {
-
-    container.innerHTML = `
-      <div class="no-products">
-        <div style="font-size:50px;">🛍️</div>
-        <h2>No products found</h2>
-        <p>Try changing your filters.</p>
-        <button onclick="clearAllFilters()">
-          Clear Filters
-        </button>
-      </div>
-    `;
-
-    updateProductCount(0);
-    return;
-  }
-
-
-  container.innerHTML = filtered
-    .map(product => createProductCard(product))
-    .join("");
-
-  updateProductCount(filtered.length);
 }
 
 
@@ -317,78 +449,87 @@ function renderProducts() {
 
 function createProductCard(product) {
 
-  const isWishlisted =
-    wishlist.includes(product.id);
-
-  const discountAmount =
-    product.oldPrice - product.price;
+  const liked = isInWishlist(product.id);
 
   return `
-    <article class="product-card">
+    <article class="product-card"
+      data-product-id="${product.id}">
 
-      <div
-        class="product-image-wrap"
-        onclick="openProduct(${product.id})"
-      >
+      <div class="product-image-wrapper">
 
         <img
           src="${product.image}"
-          alt="${escapeHTML(product.name)}"
+          alt="${product.name}"
           class="product-image"
           loading="lazy"
+          onerror="this.src='https://via.placeholder.com/500x650?text=AS+Fashions'"
         >
 
         ${
           product.badge
-            ? `<span class="product-badge">${product.badge}</span>`
+            ? `<span class="product-badge pulse-badge">
+                ${product.badge}
+              </span>`
             : ""
         }
 
         <button
-          class="wishlist-btn ${isWishlisted ? "active" : ""}"
-          onclick="event.stopPropagation(); toggleWishlist(${product.id})"
-          aria-label="Wishlist"
-        >
-          ${isWishlisted ? "♥" : "♡"}
+          class="wishlist-btn ${liked ? "active" : ""}"
+          onclick="toggleWishlist('${product.id}', event)"
+          aria-label="Wishlist">
+
+          ${liked ? "♥" : "♡"}
+
+        </button>
+
+        <button
+          class="quick-view-btn"
+          onclick="openProduct('${product.id}', event)">
+
+          Quick View
+
         </button>
 
       </div>
 
-
       <div class="product-info">
 
-        <div class="product-category">
-          ${capitalize(product.category)}
-          ${
-            product.category === "kids"
-              ? ` · ${capitalize(product.subcategory)}`
-              : ""
-          }
-        </div>
+        <p class="product-category">
+          ${product.category}
+          ${product.gender !== product.category
+            ? ` • ${product.gender}`
+            : ""}
+        </p>
 
-        <h3
-          class="product-name"
-          onclick="openProduct(${product.id})"
-        >
-          ${escapeHTML(product.name)}
+        <h3 class="product-name">
+          ${product.name}
         </h3>
 
-
         <div class="rating">
-          <span>★ ${product.rating}</span>
-          <small>(${product.reviews})</small>
-        </div>
 
+          <span class="rating-star">
+            ★
+          </span>
+
+          <span>
+            ${product.rating}
+          </span>
+
+          <span class="review-count">
+            (${product.reviews})
+          </span>
+
+        </div>
 
         <div class="price-row">
 
-          <strong>
+          <strong class="product-price">
             ₹${product.price.toLocaleString("en-IN")}
           </strong>
 
-          <del>
+          <span class="old-price">
             ₹${product.oldPrice.toLocaleString("en-IN")}
-          </del>
+          </span>
 
           <span class="discount">
             ${product.discount}% OFF
@@ -396,18 +537,25 @@ function createProductCard(product) {
 
         </div>
 
+        <div class="product-actions">
 
-        <div class="save-text">
-          You save ₹${discountAmount.toLocaleString("en-IN")}
+          <button
+            class="add-cart-btn"
+            onclick="addToCart('${product.id}', event)">
+
+            🛒 Add to Cart
+
+          </button>
+
+          <button
+            class="view-product-btn"
+            onclick="openProduct('${product.id}', event)">
+
+            View
+
+          </button>
+
         </div>
-
-
-        <button
-          class="add-cart-btn"
-          onclick="addToCart(${product.id})"
-        >
-          🛒 Add to Cart
-        </button>
 
       </div>
 
@@ -417,167 +565,70 @@ function createProductCard(product) {
 
 
 /* =========================================================
-   CATEGORY FILTER
+   RENDER PRODUCTS
    ========================================================= */
 
-function setupCategoryFilters() {
+function renderProducts() {
 
-  const buttons = document.querySelectorAll(
-    "[data-category], .category-filter"
-  );
+  const container =
+    document.querySelector(
+      "#productsGrid, .products-grid, .product-grid"
+    );
 
-  buttons.forEach(button => {
+  if (!container) return;
 
-    button.addEventListener("click", () => {
+  if (!currentProducts.length) {
 
-      const category =
-        button.dataset.category ||
-        button.value;
+    container.innerHTML = `
+      <div class="no-products">
 
-      filters.category =
-        category || "all";
+        <div class="no-products-icon">
+          🛍️
+        </div>
 
-      filters.subcategory = "all";
+        <h2>No products found</h2>
 
-      updateActiveButton(
-        buttons,
-        button
-      );
+        <p>
+          Try changing your filters or search.
+        </p>
 
-      renderProducts();
-    });
-  });
+        <button
+          onclick="clearAllFilters()">
+
+          Clear Filters
+
+        </button>
+
+      </div>
+    `;
+
+  } else {
+
+    container.innerHTML =
+      currentProducts
+        .map(createProductCard)
+        .join("");
+  }
+
+  updateProductCount();
+  updateWishlistCount();
+  updateCartCount();
 }
 
 
 /* =========================================================
-   GIRL / BOY FILTER
+   PRODUCT COUNT
    ========================================================= */
 
-function setupSubcategoryFilters() {
+function updateProductCount() {
 
-  const buttons = document.querySelectorAll(
-    "[data-subcategory], .subcategory-filter"
+  const elements = document.querySelectorAll(
+    "#productCount, .product-count"
   );
 
-  buttons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      filters.subcategory =
-        button.dataset.subcategory ||
-        button.value ||
-        "all";
-
-      updateActiveButton(
-        buttons,
-        button
-      );
-
-      renderProducts();
-    });
-  });
-}
-
-
-/* =========================================================
-   PRICE FILTER
-   ========================================================= */
-
-function setupPriceFilters() {
-
-  const buttons = document.querySelectorAll(
-    "[data-price], .price-filter"
-  );
-
-  buttons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      const value =
-        button.dataset.price ||
-        button.value;
-
-      if (value === "499") {
-        filters.minPrice = 0;
-        filters.maxPrice = 499;
-      }
-
-      else if (value === "999") {
-        filters.minPrice = 500;
-        filters.maxPrice = 999;
-      }
-
-      else if (value === "1000") {
-        filters.minPrice = 1000;
-        filters.maxPrice = Infinity;
-      }
-
-      else if (value === "all") {
-        filters.minPrice = 0;
-        filters.maxPrice = Infinity;
-      }
-
-      updateActiveButton(buttons, button);
-
-      renderProducts();
-    });
-  });
-}
-
-
-/* =========================================================
-   DISCOUNT FILTER
-   ========================================================= */
-
-function setupDiscountFilters() {
-
-  const buttons = document.querySelectorAll(
-    "[data-discount], .discount-filter"
-  );
-
-  buttons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      const value =
-        Number(
-          button.dataset.discount ||
-          button.value ||
-          0
-        );
-
-      filters.minDiscount = value;
-
-      updateActiveButton(buttons, button);
-
-      renderProducts();
-    });
-  });
-}
-
-
-/* =========================================================
-   SORTING
-   ========================================================= */
-
-function setupSorting() {
-
-  const sortElements = document.querySelectorAll(
-    "#sortSelect, .sort-select, [data-sort]"
-  );
-
-  sortElements.forEach(element => {
-
-    element.addEventListener("change", () => {
-
-      filters.sort =
-        element.value ||
-        element.dataset.sort ||
-        "featured";
-
-      renderProducts();
-    });
+  elements.forEach(el => {
+    el.textContent =
+      `${currentProducts.length} Products`;
   });
 }
 
@@ -586,44 +637,30 @@ function setupSorting() {
    WISHLIST
    ========================================================= */
 
-function toggleWishlist(productId) {
+function toggleWishlist(id, event) {
 
-  const index =
-    wishlist.indexOf(productId);
+  if (event) {
+    event.stopPropagation();
+  }
+
+  const index = wishlist.indexOf(id);
 
   if (index === -1) {
 
-    wishlist.push(productId);
+    wishlist.push(id);
 
-    showToast("❤️ Wishlist లో add అయింది");
+    showToast("❤️ Added to Wishlist");
 
   } else {
 
     wishlist.splice(index, 1);
 
-    showToast("Wishlist నుంచి remove అయింది");
+    showToast("Removed from Wishlist");
   }
 
-  localStorage.setItem(
-    "asWishlist",
-    JSON.stringify(wishlist)
-  );
-
-  updateWishlistCount();
+  saveWishlist();
 
   renderProducts();
-}
-
-
-function updateWishlistCount() {
-
-  const elements = document.querySelectorAll(
-    "#wishlistCount, .wishlist-count"
-  );
-
-  elements.forEach(element => {
-    element.textContent = wishlist.length;
-  });
 }
 
 
@@ -631,59 +668,98 @@ function updateWishlistCount() {
    CART
    ========================================================= */
 
-function addToCart(productId) {
+function addToCart(id, event) {
+
+  if (event) {
+    event.stopPropagation();
+  }
 
   const product =
-    PRODUCTS.find(p => p.id === productId);
+    products.find(p => p.id === id);
 
   if (!product) return;
 
-
   const existing =
-    cart.find(item => item.id === productId);
-
+    cart.find(item => item.id === id);
 
   if (existing) {
 
-    existing.quantity =
-      (existing.quantity || 1) + 1;
+    existing.quantity += 1;
 
   } else {
 
     cart.push({
-      id: product.id,
+      id: id,
       quantity: 1
     });
   }
 
-
-  localStorage.setItem(
-    "asCart",
-    JSON.stringify(cart)
-  );
+  saveCart();
 
   updateCartCount();
 
-  showToast("🛒 Cart లో add అయింది");
+  showToast("🛒 Added to Cart");
 }
 
+
+/* =========================================================
+   REMOVE CART
+   ========================================================= */
+
+function removeFromCart(id) {
+
+  cart =
+    cart.filter(item => item.id !== id);
+
+  saveCart();
+
+  updateCartCount();
+}
+
+
+/* =========================================================
+   CART COUNT
+   ========================================================= */
 
 function updateCartCount() {
 
   const count =
-    cart.reduce(
-      (total, item) =>
-        total + (item.quantity || 1),
-      0
-    );
+    getCartQuantity();
 
-  const elements = document.querySelectorAll(
-    "#cartCount, .cart-count"
-  );
+  document
+    .querySelectorAll(
+      "#cartCount, .cart-count, [data-cart-count]"
+    )
+    .forEach(el => {
 
-  elements.forEach(element => {
-    element.textContent = count;
-  });
+      el.textContent = count;
+
+      el.style.display =
+        count > 0 ? "flex" : "none";
+    });
+}
+
+
+/* =========================================================
+   WISHLIST COUNT
+   ========================================================= */
+
+function updateWishlistCount() {
+
+  document
+    .querySelectorAll(
+      "#wishlistCount, .wishlist-count, [data-wishlist-count]"
+    )
+    .forEach(el => {
+
+      el.textContent =
+        wishlist.length;
+
+      el.style.display =
+        wishlist.length > 0
+          ? "flex"
+          : "none";
+    });
 }
 
 
@@ -691,22 +767,24 @@ function updateCartCount() {
    PRODUCT DETAILS NAVIGATION
    ========================================================= */
 
-function openProduct(productId) {
+function openProduct(id, event) {
+
+  if (event) {
+    event.stopPropagation();
+  }
 
   const product =
-    PRODUCTS.find(p => p.id === productId);
+    products.find(p => p.id === id);
 
   if (!product) return;
 
-
   /*
-    Product details page కోసం ID పంపుతున్నాం.
-    Example:
-    product.html?id=1
+    product.html should read:
+    ?id=w001
   */
 
   window.location.href =
-    `product.html?id=${product.id}`;
+    `product.html?id=${encodeURIComponent(id)}`;
 }
 
 
@@ -714,63 +792,64 @@ function openProduct(productId) {
    CATEGORY NAVIGATION
    ========================================================= */
 
-function goToCategory(category) {
+function goToCategory(category, gender = "All") {
 
-  if (!category) return;
-
-  window.location.href =
+  let url =
     `products.html?category=${encodeURIComponent(category)}`;
+
+  if (gender !== "All") {
+
+    url +=
+      `&gender=${encodeURIComponent(gender)}`;
+  }
+
+  window.location.href = url;
 }
 
 
 /* =========================================================
-   URL FILTER SUPPORT
+   PRICE NAVIGATION
    ========================================================= */
 
-function handleURLFilters() {
+function goToPrice(max) {
 
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-  const category =
-    params.get("category");
-
-  const subcategory =
-    params.get("subcategory");
-
-  const price =
-    params.get("price");
-
-  const discount =
-    params.get("discount");
+  window.location.href =
+    `products.html?category=${encodeURIComponent(
+      selectedCategory === "All"
+        ? "All"
+        : selectedCategory
+    )}&maxPrice=${max}`;
+}
 
 
-  if (category) {
-    filters.category = category;
-  }
+/* =========================================================
+   DISCOUNT NAVIGATION
+   ========================================================= */
 
-  if (subcategory) {
-    filters.subcategory = subcategory;
-  }
+function goToDiscount(discount) {
 
-  if (price === "499") {
-    filters.minPrice = 0;
-    filters.maxPrice = 499;
-  }
+  window.location.href =
+    `products.html?category=${encodeURIComponent(
+      selectedCategory === "All"
+        ? "All"
+        : selectedCategory
+    )}&discount=${discount}`;
+}
 
-  if (price === "999") {
-    filters.minPrice = 500;
-    filters.maxPrice = 999;
-  }
 
-  if (discount) {
-    filters.minDiscount =
-      Number(discount);
-  }
+/* =========================================================
+   SEARCH
+   ========================================================= */
 
-  renderProducts();
+function performSearch(value) {
+
+  const query =
+    String(value || "").trim();
+
+  const url =
+    `products.html?search=${encodeURIComponent(query)}`;
+
+  window.location.href = url;
 }
 
 
@@ -780,118 +859,163 @@ function handleURLFilters() {
 
 function clearAllFilters() {
 
-  filters = {
-    category: "all",
-    subcategory: "all",
-    minPrice: 0,
-    maxPrice: Infinity,
-    minDiscount: 0,
-    sort: "featured"
-  };
-
-
-  document.querySelectorAll(
-    ".filter-btn.active, .category-filter.active, .subcategory-filter.active"
-  ).forEach(button => {
-    button.classList.remove("active");
-  });
-
-
-  const sort =
-    document.querySelector("#sortSelect");
-
-  if (sort) {
-    sort.value = "featured";
-  }
-
-
-  renderProducts();
+  window.location.href =
+    "products.html";
 }
 
 
 /* =========================================================
-   ACTIVE BUTTON
+   APPLY FILTER UI
    ========================================================= */
 
-function updateActiveButton(
-  buttons,
-  selected
-) {
+function setupFilters() {
 
-  buttons.forEach(button => {
-    button.classList.remove("active");
-  });
-
-  if (selected) {
-    selected.classList.add("active");
-  }
-}
-
-
-/* =========================================================
-   PRODUCT COUNT
-   ========================================================= */
-
-function updateProductCount(count) {
-
-  document.querySelectorAll(
-    "#productCount, .product-count"
-  ).forEach(element => {
-
-    element.textContent =
-      `${count} Products`;
-  });
-}
-
-
-/* =========================================================
-   MOBILE FILTER
-   ========================================================= */
-
-function setupMobileFilter() {
-
-  const openButton =
+  const categorySelect =
     document.querySelector(
-      "#mobileFilterBtn, .mobile-filter-btn"
+      "#categoryFilter"
     );
 
-  const closeButton =
+  const genderSelect =
     document.querySelector(
-      "#closeFilter, .close-filter"
+      "#genderFilter"
     );
 
-  const sidebar =
+  const subcategorySelect =
     document.querySelector(
-      "#filterSidebar, .filter-sidebar"
+      "#subcategoryFilter"
+    );
+
+  const priceSelect =
+    document.querySelector(
+      "#priceFilter"
+    );
+
+  const discountSelect =
+    document.querySelector(
+      "#discountFilter"
+    );
+
+  const sortSelect =
+    document.querySelector(
+      "#sortFilter, #sortBy"
     );
 
 
-  if (!sidebar) return;
+  if (categorySelect) {
 
+    categorySelect.value =
+      selectedCategory;
 
-  if (openButton) {
+    categorySelect.addEventListener(
+      "change",
+      function () {
 
-    openButton.addEventListener(
-      "click",
-      () => {
-        sidebar.classList.add("open");
-        document.body.classList.add(
-          "filter-open"
-        );
+        selectedCategory =
+          this.value;
+
+        updateURL();
+        filterProducts();
       }
     );
   }
 
 
-  if (closeButton) {
+  if (genderSelect) {
 
-    closeButton.addEventListener(
-      "click",
-      () => {
-        sidebar.classList.remove("open");
-        document.body.classList.remove(
-          "filter-open"
-        );
+    genderSelect.value =
+      selectedGender;
+
+    genderSelect.addEventListener(
+      "change",
+      function () {
+
+        selectedGender =
+          this.value;
+
+        updateURL();
+        filterProducts();
+      }
+    );
+  }
+
+
+  if (subcategorySelect) {
+
+    subcategorySelect.value =
+      selectedSubcategory;
+
+    subcategorySelect.addEventListener(
+      "change",
+      function () {
+
+        selectedSubcategory =
+          this.value;
+
+        updateURL();
+        filterProducts();
+      }
+    );
+  }
+
+
+  if (priceSelect) {
+
+    priceSelect.value =
+      maxPrice === Infinity
+        ? "all"
+        : maxPrice;
+
+    priceSelect.addEventListener(
+      "change",
+      function () {
+
+        maxPrice =
+          this.value === "all"
+            ? Infinity
+            : Number(this.value);
+
+        updateURL();
+        filterProducts();
+      }
+    );
+  }
+
+
+  if (discountSelect) {
+
+    discountSelect.value =
+      minDiscount || "all";
+
+    discountSelect.addEventListener(
+      "change",
+      function () {
+
+        minDiscount =
+          this.value === "all"
+            ? 0
+            : Number(this.value);
+
+        updateURL();
+        filterProducts();
+      }
+    );
+  }
+
+
+  if (sortSelect) {
+
+    sortSelect.value =
+      sortValue;
+
+    sortSelect.addEventListener(
+      "change",
+      function () {
+
+        sortValue =
+          this.value;
+
+        updateURL();
+        filterProducts();
       }
     );
   }
@@ -899,94 +1023,342 @@ function setupMobileFilter() {
 
 
 /* =========================================================
-   TOAST
+   UPDATE URL WITHOUT RELOADING
+   ========================================================= */
+
+function updateURL() {
+
+  const url =
+    new URL(
+      window.location.href
+    );
+
+  url.search = "";
+
+  if (
+    selectedCategory &&
+    selectedCategory !== "All"
+  ) {
+
+    url.searchParams.set(
+      "category",
+      selectedCategory
+    );
+  }
+
+  if (
+    selectedGender &&
+    selectedGender !== "All"
+  ) {
+
+    url.searchParams.set(
+      "gender",
+      selectedGender
+    );
+  }
+
+  if (
+    selectedSubcategory &&
+    selectedSubcategory !== "All"
+  ) {
+
+    url.searchParams.set(
+      "subcategory",
+      selectedSubcategory
+    );
+  }
+
+  if (maxPrice !== Infinity) {
+
+    url.searchParams.set(
+      "maxPrice",
+      maxPrice
+    );
+  }
+
+  if (minDiscount > 0) {
+
+    url.searchParams.set(
+      "discount",
+      minDiscount
+    );
+  }
+
+  if (searchQuery) {
+
+    url.searchParams.set(
+      "search",
+      searchQuery
+    );
+  }
+
+  if (sortValue !== "featured") {
+
+    url.searchParams.set(
+      "sort",
+      sortValue
+    );
+  }
+
+  history.replaceState(
+    {},
+    "",
+    url
+  );
+}
+
+
+/* =========================================================
+   SEARCH BOX SETUP
+   ========================================================= */
+
+function setupSearch() {
+
+  const searchInputs =
+    document.querySelectorAll(
+      "#searchInput, .search-input"
+    );
+
+  searchInputs.forEach(input => {
+
+    input.value =
+      searchQuery;
+
+    input.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Enter"
+        ) {
+
+          performSearch(
+            input.value
+          );
+        }
+      }
+    );
+  });
+}
+
+
+/* =========================================================
+   TOAST MESSAGE
    ========================================================= */
 
 function showToast(message) {
 
   let toast =
-    document.querySelector("#asToast");
-
+    document.querySelector(
+      "#asToast"
+    );
 
   if (!toast) {
 
     toast =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
-    toast.id = "asToast";
+    toast.id =
+      "asToast";
 
-    toast.style.position = "fixed";
-    toast.style.bottom = "25px";
-    toast.style.left = "50%";
-    toast.style.transform =
-      "translateX(-50%)";
-    toast.style.background =
-      "#111";
-    toast.style.color =
-      "#fff";
-    toast.style.padding =
-      "12px 20px";
-    toast.style.borderRadius =
-      "30px";
-    toast.style.zIndex =
-      "99999";
-    toast.style.fontSize =
-      "14px";
-    toast.style.boxShadow =
-      "0 10px 30px rgba(0,0,0,.2)";
+    toast.className =
+      "as-toast";
 
-    document.body.appendChild(toast);
+    document.body.appendChild(
+      toast
+    );
   }
 
+  toast.textContent =
+    message;
 
-  toast.textContent = message;
-
-  toast.style.opacity = "1";
-
+  toast.classList.add(
+    "show"
+  );
 
   clearTimeout(
     window.asToastTimer
   );
 
-
   window.asToastTimer =
     setTimeout(() => {
 
-      toast.style.opacity = "0";
+      toast.classList.remove(
+        "show"
+      );
 
     }, 2200);
 }
 
 
 /* =========================================================
-   HELPER FUNCTIONS
+   HEADER NAVIGATION
    ========================================================= */
 
-function capitalize(text) {
+function setupHeaderNavigation() {
 
-  if (!text) return "";
+  document
+    .querySelectorAll(
+      "[data-category]"
+    )
+    .forEach(button => {
 
-  return text.charAt(0).toUpperCase() +
-    text.slice(1);
-}
+      button.addEventListener(
+        "click",
+        function () {
 
+          const category =
+            this.dataset.category;
 
-function escapeHTML(text) {
+          const gender =
+            this.dataset.gender ||
+            "All";
 
-  const div =
-    document.createElement("div");
-
-  div.textContent = text;
-
-  return div.innerHTML;
+          goToCategory(
+            category,
+            gender
+          );
+        }
+      );
+    });
 }
 
 
 /* =========================================================
-   GLOBAL ACCESS
+   CART PAGE
    ========================================================= */
 
-window.PRODUCTS = PRODUCTS;
+function openCart() {
+
+  window.location.href =
+    "cart.html";
+}
+
+
+/* =========================================================
+   WISHLIST PAGE
+   ========================================================= */
+
+function openWishlist() {
+
+  window.location.href =
+    "wishlist.html";
+}
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+function setupMobileMenu() {
+
+  const menuButton =
+    document.querySelector(
+      "#menuButton, .menu-button, .hamburger"
+    );
+
+  const mobileMenu =
+    document.querySelector(
+      "#mobileMenu, .mobile-menu"
+    );
+
+  if (
+    !menuButton ||
+    !mobileMenu
+  ) return;
+
+  menuButton.addEventListener(
+    "click",
+    () => {
+
+      mobileMenu.classList.toggle(
+        "active"
+      );
+
+      menuButton.classList.toggle(
+        "active"
+      );
+    }
+  );
+}
+
+
+/* =========================================================
+   CARD CLICK
+   ========================================================= */
+
+function setupCardClicks() {
+
+  document.addEventListener(
+    "click",
+    event => {
+
+      const card =
+        event.target.closest(
+          ".product-card"
+        );
+
+      if (!card) return;
+
+      if (
+        event.target.closest(
+          "button"
+        )
+      ) return;
+
+      const id =
+        card.dataset.productId;
+
+      if (id) {
+        openProduct(id);
+      }
+    }
+  );
+}
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    setupFilters();
+
+    setupSearch();
+
+    setupHeaderNavigation();
+
+    setupMobileMenu();
+
+    setupCardClicks();
+
+    filterProducts();
+
+    updateCartCount();
+
+    updateWishlistCount();
+
+  }
+);
+
+
+/* =========================================================
+   GLOBAL FUNCTIONS
+   ========================================================= */
+
+window.products =
+  products;
+
+window.filterProducts =
+  filterProducts;
+
+window.renderProducts =
+  renderProducts;
 
 window.toggleWishlist =
   toggleWishlist;
@@ -994,11 +1366,29 @@ window.toggleWishlist =
 window.addToCart =
   addToCart;
 
+window.removeFromCart =
+  removeFromCart;
+
 window.openProduct =
   openProduct;
 
 window.goToCategory =
   goToCategory;
 
+window.goToPrice =
+  goToPrice;
+
+window.goToDiscount =
+  goToDiscount;
+
+window.performSearch =
+  performSearch;
+
 window.clearAllFilters =
   clearAllFilters;
+
+window.openCart =
+  openCart;
+
+window.openWishlist =
+  openWishlist;

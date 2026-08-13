@@ -1,34 +1,38 @@
 /* =========================================================
    AS FASHIONS
-   FINAL CATEGORY & SUBCATEGORY DATABASE
-========================================================= */
+   FINAL CATEGORY / SUBCATEGORY DATABASE
+   js/categories.js
+   ========================================================= */
 
-const categories = [
+const CATEGORIES = [
 
     /* =====================================================
        1. MEN
-    ===================================================== */
+       ===================================================== */
 
     {
         id: "men",
         name: "Men",
-        icon: "👔",
+        slug: "men",
+        icon: "👨",
+        featured: true,
 
         subcategories: [
 
             {
                 id: "men-topwear",
                 name: "Topwear",
+                slug: "topwear",
+
                 items: [
                     "T-Shirts",
                     "Casual Shirts",
                     "Formal Shirts",
                     "Polo T-Shirts",
                     "Oversized T-Shirts",
-                    "Printed T-Shirts",
-                    "Graphic T-Shirts",
-                    "Sweatshirts",
                     "Hoodies",
+                    "Sweatshirts",
+                    "Tank Tops",
                     "Jackets",
                     "Sweaters",
                     "Kurtas",
@@ -39,40 +43,46 @@ const categories = [
             {
                 id: "men-bottomwear",
                 name: "Bottomwear",
+                slug: "bottomwear",
+
                 items: [
                     "Jeans",
                     "Casual Trousers",
                     "Formal Trousers",
-                    "Track Pants",
+                    "Cargo Trousers",
                     "Joggers",
-                    "Cargo Pants",
-                    "Chinos",
+                    "Track Pants",
                     "Shorts",
-                    "Boxers",
-                    "Pyjamas"
+                    "Chinos",
+                    "Dhoti Pants"
                 ]
             },
 
             {
-                id: "men-indianwear",
-                name: "Indian Wear",
+                id: "men-ethnic",
+                name: "Indian & Ethnic Wear",
+                slug: "ethnic-wear",
+
                 items: [
                     "Kurtas",
                     "Kurta Sets",
                     "Sherwanis",
                     "Nehru Jackets",
+                    "Bandhgalas",
+                    "Indo-Western",
                     "Dhotis",
-                    "Ethnic Jackets",
-                    "Festive Wear"
+                    "Ethnic Bottomwear"
                 ]
             },
 
             {
                 id: "men-suits",
                 name: "Suits & Blazers",
+                slug: "suits-blazers",
+
                 items: [
                     "Blazers",
-                    "Suit Sets",
+                    "Suits",
                     "Tuxedos",
                     "Waistcoats",
                     "Formal Jackets"
@@ -80,29 +90,51 @@ const categories = [
             },
 
             {
-                id: "men-activewear",
-                name: "Activewear",
+                id: "men-innerwear",
+                name: "Innerwear & Sleepwear",
+                slug: "innerwear-sleepwear",
+
                 items: [
-                    "Sports T-Shirts",
-                    "Track Pants",
-                    "Training Shorts",
-                    "Gym Vests",
-                    "Running Wear",
-                    "Sports Jackets"
+                    "Briefs",
+                    "Boxers",
+                    "Trunks",
+                    "Vests",
+                    "Innerwear Sets",
+                    "Night Suits",
+                    "Lounge Pants"
                 ]
             },
 
             {
-                id: "men-innerwear",
-                name: "Innerwear & Loungewear",
+                id: "men-sportswear",
+                name: "Sportswear",
+                slug: "sportswear",
+
                 items: [
-                    "Briefs",
-                    "Trunks",
-                    "Boxers",
-                    "Vests",
-                    "Lounge Pants",
-                    "Lounge Shorts",
-                    "Night Suits"
+                    "Sports T-Shirts",
+                    "Sports Shorts",
+                    "Track Pants",
+                    "Track Jackets",
+                    "Compression Wear",
+                    "Gym Wear",
+                    "Running Wear",
+                    "Cricket Wear"
+                ]
+            },
+
+            {
+                id: "men-winter",
+                name: "Winter Wear",
+                slug: "winter-wear",
+
+                items: [
+                    "Sweaters",
+                    "Sweatshirts",
+                    "Hoodies",
+                    "Jackets",
+                    "Puffer Jackets",
+                    "Thermal Wear",
+                    "Fleece Wear"
                 ]
             }
         ]
@@ -111,62 +143,88 @@ const categories = [
 
     /* =====================================================
        2. WOMEN
-    ===================================================== */
+       ===================================================== */
 
     {
         id: "women",
         name: "Women",
-        icon: "👗",
+        slug: "women",
+        icon: "👩",
+        featured: true,
 
         subcategories: [
 
             {
                 id: "women-western",
                 name: "Western Wear",
+                slug: "western-wear",
+
                 items: [
-                    "Tops",
                     "T-Shirts",
+                    "Tops",
                     "Shirts",
                     "Blouses",
-                    "Dresses",
-                    "Jumpsuits",
-                    "Co-ord Sets",
-                    "Bodysuits",
                     "Tunics",
-                    "Shrugs",
-                    "Jackets"
+                    "Crop Tops",
+                    "Bodysuits",
+                    "Sweatshirts",
+                    "Hoodies",
+                    "Jackets",
+                    "Shrugs"
+                ]
+            },
+
+            {
+                id: "women-dresses",
+                name: "Dresses",
+                slug: "dresses",
+
+                items: [
+                    "Casual Dresses",
+                    "Party Dresses",
+                    "Maxi Dresses",
+                    "Midi Dresses",
+                    "Mini Dresses",
+                    "Bodycon Dresses",
+                    "Shirt Dresses",
+                    "Wrap Dresses",
+                    "A-Line Dresses"
                 ]
             },
 
             {
                 id: "women-bottomwear",
                 name: "Bottomwear",
+                slug: "women-bottomwear",
+
                 items: [
                     "Jeans",
                     "Trousers",
-                    "Wide Leg Pants",
                     "Cargo Pants",
                     "Joggers",
                     "Track Pants",
                     "Shorts",
                     "Skirts",
+                    "Palazzos",
+                    "Jeggings",
                     "Leggings"
                 ]
             },
 
             {
-                id: "women-indianwear",
-                name: "Indian Wear",
+                id: "women-indian",
+                name: "Indian & Ethnic Wear",
+                slug: "indian-wear",
+
                 items: [
                     "Kurtas",
                     "Kurta Sets",
                     "Kurtis",
-                    "Anarkali",
-                    "Salwar Suits",
-                    "Palazzos",
+                    "Sarees",
                     "Lehengas",
+                    "Anarkalis",
                     "Sharara Sets",
-                    "Gharara Sets",
+                    "Palazzo Sets",
                     "Ethnic Dresses"
                 ]
             },
@@ -174,57 +232,65 @@ const categories = [
             {
                 id: "women-sarees",
                 name: "Sarees",
+                slug: "sarees",
+
                 items: [
                     "Silk Sarees",
                     "Cotton Sarees",
                     "Georgette Sarees",
                     "Chiffon Sarees",
-                    "Linen Sarees",
+                    "Organza Sarees",
                     "Party Wear Sarees",
-                    "Wedding Sarees",
                     "Printed Sarees",
                     "Designer Sarees"
                 ]
             },
 
             {
-                id: "women-ethnic",
-                name: "Ethnic Sets",
-                items: [
-                    "Kurta Sets",
-                    "Sharara Sets",
-                    "Anarkali Sets",
-                    "Pant Sets",
-                    "Dupatta Sets",
-                    "Festive Sets"
-                ]
-            },
-
-            {
                 id: "women-activewear",
                 name: "Activewear",
+                slug: "activewear",
+
                 items: [
+                    "Sports T-Shirts",
                     "Sports Bras",
                     "Gym Tops",
-                    "Training T-Shirts",
-                    "Yoga Pants",
+                    "Leggings",
                     "Track Pants",
-                    "Running Shorts",
-                    "Activewear Sets"
+                    "Shorts",
+                    "Yoga Wear",
+                    "Running Wear"
                 ]
             },
 
             {
-                id: "women-lingerie",
-                name: "Lingerie & Innerwear",
+                id: "women-winter",
+                name: "Winter Wear",
+                slug: "women-winter-wear",
+
                 items: [
-                    "Bras",
-                    "Panties",
-                    "Bra Sets",
-                    "Shapewear",
-                    "Camisoles",
-                    "Slips",
-                    "Nightwear"
+                    "Sweaters",
+                    "Cardigans",
+                    "Sweatshirts",
+                    "Hoodies",
+                    "Jackets",
+                    "Coats",
+                    "Puffer Jackets",
+                    "Thermals"
+                ]
+            },
+
+            {
+                id: "women-maternity",
+                name: "Maternity Wear",
+                slug: "maternity-wear",
+
+                items: [
+                    "Maternity Dresses",
+                    "Maternity Kurtas",
+                    "Maternity Tops",
+                    "Maternity Trousers",
+                    "Nursing Tops"
                 ]
             }
         ]
@@ -233,18 +299,22 @@ const categories = [
 
     /* =====================================================
        3. KIDS
-    ===================================================== */
+       ===================================================== */
 
     {
         id: "kids",
         name: "Kids",
+        slug: "kids",
         icon: "🧒",
+        featured: true,
 
         subcategories: [
 
             {
                 id: "kids-boys",
                 name: "Boys",
+                slug: "boys",
+
                 items: [
                     "T-Shirts",
                     "Shirts",
@@ -253,9 +323,8 @@ const categories = [
                     "Shorts",
                     "Joggers",
                     "Ethnic Wear",
-                    "Party Wear",
+                    "Suits & Blazers",
                     "Sweatshirts",
-                    "Hoodies",
                     "Jackets"
                 ]
             },
@@ -263,56 +332,77 @@ const categories = [
             {
                 id: "kids-girls",
                 name: "Girls",
+                slug: "girls",
+
                 items: [
+                    "Dresses",
                     "Tops",
                     "T-Shirts",
-                    "Dresses",
                     "Skirts",
                     "Jeans",
                     "Trousers",
-                    "Jumpsuits",
+                    "Leggings",
                     "Ethnic Wear",
-                    "Party Wear",
-                    "Sweatshirts",
+                    "Jumpsuits",
                     "Jackets"
                 ]
             },
 
             {
-                id: "kids-baby",
-                name: "Baby",
+                id: "kids-infants",
+                name: "Infants",
+                slug: "infants",
+
                 items: [
                     "Bodysuits",
                     "Romper Sets",
-                    "Baby Dresses",
-                    "Baby T-Shirts",
-                    "Baby Pants",
-                    "Baby Sets",
-                    "Sleepwear"
+                    "Dresses",
+                    "T-Shirts",
+                    "Trousers",
+                    "Sleepwear",
+                    "Newborn Sets"
                 ]
             },
 
             {
                 id: "kids-ethnic",
-                name: "Kids Ethnic Wear",
+                name: "Ethnic Wear",
+                slug: "kids-ethnic-wear",
+
                 items: [
                     "Kurta Sets",
-                    "Sherwani Sets",
-                    "Lehenga Sets",
-                    "Anarkali Dresses",
-                    "Festive Wear"
+                    "Lehengas",
+                    "Sherwanis",
+                    "Ethnic Dresses",
+                    "Nehru Jackets"
                 ]
             },
 
             {
                 id: "kids-sports",
-                name: "Kids Sportswear",
+                name: "Sportswear",
+                slug: "kids-sportswear",
+
                 items: [
                     "Sports T-Shirts",
                     "Track Pants",
                     "Shorts",
                     "Sports Sets",
-                    "Training Wear"
+                    "Activewear"
+                ]
+            },
+
+            {
+                id: "kids-winter",
+                name: "Winter Wear",
+                slug: "kids-winter-wear",
+
+                items: [
+                    "Sweaters",
+                    "Hoodies",
+                    "Jackets",
+                    "Thermals",
+                    "Winter Sets"
                 ]
             }
         ]
@@ -321,23 +411,27 @@ const categories = [
 
     /* =====================================================
        4. FOOTWEAR
-    ===================================================== */
+       ===================================================== */
 
     {
         id: "footwear",
         name: "Footwear",
+        slug: "footwear",
         icon: "👟",
+        featured: true,
 
         subcategories: [
 
             {
                 id: "footwear-men",
                 name: "Men's Footwear",
+                slug: "mens-footwear",
+
                 items: [
                     "Casual Shoes",
                     "Sneakers",
-                    "Running Shoes",
                     "Sports Shoes",
+                    "Running Shoes",
                     "Formal Shoes",
                     "Loafers",
                     "Boots",
@@ -350,99 +444,96 @@ const categories = [
             {
                 id: "footwear-women",
                 name: "Women's Footwear",
+                slug: "womens-footwear",
+
                 items: [
                     "Heels",
+                    "Block Heels",
+                    "Wedges",
                     "Flats",
                     "Sneakers",
-                    "Casual Shoes",
                     "Sports Shoes",
-                    "Running Shoes",
                     "Boots",
+                    "Loafers",
                     "Sandals",
-                    "Sliders",
-                    "Juttis",
-                    "Mojaris"
+                    "Flip Flops",
+                    "Juttis"
                 ]
             },
 
             {
                 id: "footwear-kids",
                 name: "Kids' Footwear",
+                slug: "kids-footwear",
+
                 items: [
                     "School Shoes",
                     "Sneakers",
                     "Sports Shoes",
                     "Sandals",
-                    "Slippers",
-                    "Boots"
+                    "Flip Flops",
+                    "Boots",
+                    "Party Shoes"
                 ]
             },
 
             {
                 id: "footwear-sports",
                 name: "Sports Footwear",
+                slug: "sports-footwear",
+
                 items: [
-                    "Running",
-                    "Training",
-                    "Walking",
-                    "Gym",
-                    "Football",
-                    "Cricket",
-                    "Basketball"
+                    "Running Shoes",
+                    "Training Shoes",
+                    "Walking Shoes",
+                    "Basketball Shoes",
+                    "Football Shoes",
+                    "Cricket Shoes",
+                    "Trekking Shoes"
+                ]
+            },
+
+            {
+                id: "footwear-sizes",
+                name: "Shop By Size",
+                slug: "footwear-sizes",
+
+                items: [
+                    "UK 3",
+                    "UK 4",
+                    "UK 5",
+                    "UK 6",
+                    "UK 7",
+                    "UK 8",
+                    "UK 9",
+                    "UK 10",
+                    "UK 11",
+                    "UK 12",
+                    "UK 13"
                 ]
             }
-        ],
-
-        sizes: {
-            men: [
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "11",
-                "12"
-            ],
-
-            women: [
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9"
-            ],
-
-            kids: [
-                "10C",
-                "11C",
-                "12C",
-                "13C",
-                "1",
-                "2",
-                "3",
-                "4",
-                "5"
-            ]
-        }
+        ]
     },
 
 
     /* =====================================================
        5. BAGS
-    ===================================================== */
+       ===================================================== */
 
     {
         id: "bags",
         name: "Bags",
+        slug: "bags",
         icon: "👜",
+        featured: true,
 
         subcategories: [
 
             {
                 id: "bags-women",
                 name: "Women's Bags",
+                slug: "womens-bags",
+
                 items: [
                     "Handbags",
                     "Shoulder Bags",
@@ -457,24 +548,27 @@ const categories = [
             {
                 id: "bags-men",
                 name: "Men's Bags",
+                slug: "mens-bags",
+
                 items: [
                     "Backpacks",
                     "Laptop Bags",
-                    "Messenger Bags",
                     "Sling Bags",
-                    "Crossbody Bags",
-                    "Duffle Bags",
-                    "Travel Bags"
+                    "Messenger Bags",
+                    "Travel Bags",
+                    "Crossbody Bags"
                 ]
             },
 
             {
                 id: "bags-travel",
                 name: "Travel Bags",
+                slug: "travel-bags",
+
                 items: [
+                    "Duffle Bags",
                     "Trolley Bags",
                     "Suitcases",
-                    "Duffle Bags",
                     "Travel Backpacks",
                     "Weekender Bags"
                 ]
@@ -482,12 +576,14 @@ const categories = [
 
             {
                 id: "bags-school",
-                name: "School & College",
+                name: "School & College Bags",
+                slug: "school-college-bags",
+
                 items: [
-                    "School Bags",
+                    "School Backpacks",
                     "College Backpacks",
                     "Laptop Backpacks",
-                    "Laptop Sleeves"
+                    "Kids Backpacks"
                 ]
             }
         ]
@@ -496,30 +592,22 @@ const categories = [
 
     /* =====================================================
        6. ACCESSORIES
-    ===================================================== */
+       ===================================================== */
 
     {
         id: "accessories",
         name: "Accessories",
+        slug: "accessories",
         icon: "🕶️",
+        featured: true,
 
         subcategories: [
 
             {
-                id: "accessories-watches",
-                name: "Watches",
-                items: [
-                    "Analog Watches",
-                    "Digital Watches",
-                    "Chronograph Watches",
-                    "Smart Watches",
-                    "Couple Watches"
-                ]
-            },
-
-            {
                 id: "accessories-jewellery",
                 name: "Jewellery",
+                slug: "jewellery",
+
                 items: [
                     "Earrings",
                     "Necklaces",
@@ -531,63 +619,60 @@ const categories = [
             },
 
             {
-                id: "accessories-sunglasses",
-                name: "Sunglasses",
-                items: [
-                    "Aviators",
-                    "Wayfarers",
-                    "Round",
-                    "Rectangle",
-                    "Sports Sunglasses",
-                    "Polarized Sunglasses"
-                ]
-            },
+                id: "accessories-watches",
+                name: "Watches",
+                slug: "watches",
 
-            {
-                id: "accessories-belts",
-                name: "Belts",
                 items: [
-                    "Leather Belts",
-                    "Casual Belts",
-                    "Formal Belts",
-                    "Reversible Belts"
+                    "Analog Watches",
+                    "Digital Watches",
+                    "Smart Watches",
+                    "Chronograph Watches",
+                    "Couple Watches"
                 ]
             },
 
             {
                 id: "accessories-wallets",
-                name: "Wallets",
+                name: "Wallets & Belts",
+                slug: "wallets-belts",
+
                 items: [
-                    "Bi-Fold Wallets",
-                    "Tri-Fold Wallets",
+                    "Wallets",
                     "Card Holders",
-                    "Coin Pouches"
+                    "Belts",
+                    "Money Clips"
                 ]
             },
 
             {
-                id: "accessories-caps",
-                name: "Caps & Hats",
+                id: "accessories-eyewear",
+                name: "Eyewear",
+                slug: "eyewear",
+
                 items: [
-                    "Baseball Caps",
-                    "Snapback Caps",
-                    "Bucket Hats",
-                    "Beanies",
-                    "Sun Hats"
+                    "Sunglasses",
+                    "Blue Light Glasses",
+                    "Eyeglasses Frames",
+                    "Sports Sunglasses"
                 ]
             },
 
             {
                 id: "accessories-fashion",
                 name: "Fashion Accessories",
+                slug: "fashion-accessories",
+
                 items: [
+                    "Caps",
+                    "Hats",
                     "Scarves",
                     "Stoles",
+                    "Gloves",
+                    "Socks",
                     "Ties",
                     "Pocket Squares",
-                    "Hair Accessories",
-                    "Socks",
-                    "Gloves"
+                    "Hair Accessories"
                 ]
             }
         ]
@@ -596,36 +681,43 @@ const categories = [
 
     /* =====================================================
        7. SPORTS
-    ===================================================== */
+       ===================================================== */
 
     {
         id: "sports",
         name: "Sports",
+        slug: "sports",
         icon: "🏃",
+        featured: true,
 
         subcategories: [
 
             {
                 id: "sports-men",
                 name: "Men's Sportswear",
+                slug: "mens-sportswear",
+
                 items: [
                     "T-Shirts",
-                    "Track Pants",
                     "Shorts",
-                    "Training Wear",
-                    "Running Wear",
-                    "Gym Wear"
+                    "Track Pants",
+                    "Track Jackets",
+                    "Compression Wear",
+                    "Training Wear"
                 ]
             },
 
             {
                 id: "sports-women",
                 name: "Women's Sportswear",
+                slug: "womens-sportswear",
+
                 items: [
                     "Sports Bras",
+                    "Tops",
                     "T-Shirts",
-                    "Tights",
-                    "Yoga Pants",
+                    "Leggings",
+                    "Shorts",
                     "Track Pants",
                     "Training Wear"
                 ]
@@ -634,6 +726,8 @@ const categories = [
             {
                 id: "sports-running",
                 name: "Running",
+                slug: "running",
+
                 items: [
                     "Running Shoes",
                     "Running T-Shirts",
@@ -644,26 +738,43 @@ const categories = [
             },
 
             {
-                id: "sports-training",
-                name: "Training & Gym",
+                id: "sports-gym",
+                name: "Gym & Training",
+                slug: "gym-training",
+
                 items: [
                     "Gym T-Shirts",
                     "Gym Shorts",
-                    "Track Pants",
+                    "Gym Leggings",
                     "Training Shoes",
                     "Gym Accessories"
                 ]
             },
 
             {
-                id: "sports-team",
-                name: "Team Sports",
+                id: "sports-cricket",
+                name: "Cricket",
+                slug: "cricket",
+
                 items: [
-                    "Football",
-                    "Cricket",
-                    "Basketball",
-                    "Badminton",
-                    "Tennis"
+                    "Cricket Jerseys",
+                    "Cricket Trousers",
+                    "Cricket Shoes",
+                    "Cricket Kits",
+                    "Cricket Accessories"
+                ]
+            },
+
+            {
+                id: "sports-football",
+                name: "Football",
+                slug: "football",
+
+                items: [
+                    "Football Jerseys",
+                    "Football Shorts",
+                    "Football Shoes",
+                    "Football Accessories"
                 ]
             }
         ]
@@ -672,66 +783,63 @@ const categories = [
 
     /* =====================================================
        8. WINTER WEAR
-    ===================================================== */
+       ===================================================== */
 
     {
-        id: "winter",
+        id: "winter-wear",
         name: "Winter Wear",
+        slug: "winter-wear",
         icon: "🧥",
+        featured: true,
 
         subcategories: [
 
             {
                 id: "winter-men",
                 name: "Men",
+                slug: "men-winter",
+
                 items: [
-                    "Sweaters",
-                    "Sweatshirts",
-                    "Hoodies",
                     "Jackets",
                     "Puffer Jackets",
-                    "Winter Coats",
-                    "Thermals"
+                    "Sweaters",
+                    "Hoodies",
+                    "Sweatshirts",
+                    "Coats",
+                    "Thermals",
+                    "Fleece"
                 ]
             },
 
             {
                 id: "winter-women",
                 name: "Women",
+                slug: "women-winter",
+
                 items: [
+                    "Jackets",
+                    "Puffer Jackets",
                     "Sweaters",
                     "Cardigans",
-                    "Sweatshirts",
                     "Hoodies",
-                    "Jackets",
                     "Coats",
-                    "Puffer Jackets",
-                    "Thermals"
+                    "Thermals",
+                    "Fleece"
                 ]
             },
 
             {
                 id: "winter-kids",
                 name: "Kids",
+                slug: "kids-winter",
+
                 items: [
+                    "Jackets",
                     "Sweaters",
                     "Hoodies",
-                    "Jackets",
-                    "Puffer Jackets",
                     "Winter Sets",
-                    "Thermals"
-                ]
-            },
-
-            {
-                id: "winter-accessories",
-                name: "Winter Accessories",
-                items: [
-                    "Beanies",
-                    "Scarves",
-                    "Gloves",
-                    "Mufflers",
-                    "Winter Socks"
+                    "Thermals",
+                    "Fleece"
                 ]
             }
         ]
@@ -739,53 +847,60 @@ const categories = [
 
 
     /* =====================================================
-       9. INNERWEAR & LOUNGE
-    ===================================================== */
+       9. TRENDING
+       ===================================================== */
 
     {
-        id: "innerwear",
-        name: "Innerwear & Lounge",
-        icon: "🩳",
+        id: "trending",
+        name: "Trending",
+        slug: "trending",
+        icon: "🔥",
+        featured: true,
 
         subcategories: [
 
             {
-                id: "innerwear-men",
-                name: "Men",
+                id: "trending-fashion",
+                name: "Trending Fashion",
+                slug: "trending-fashion",
+
                 items: [
-                    "Briefs",
-                    "Trunks",
-                    "Boxers",
-                    "Vests",
-                    "Thermals",
-                    "Night Suits",
-                    "Lounge Pants"
+                    "Oversized Fits",
+                    "Streetwear",
+                    "Co-ord Sets",
+                    "Cargo Fashion",
+                    "Minimal Fashion",
+                    "Old Money Style",
+                    "Y2K Fashion",
+                    "Quiet Luxury"
                 ]
             },
 
             {
-                id: "innerwear-women",
-                name: "Women",
+                id: "trending-footwear",
+                name: "Trending Footwear",
+                slug: "trending-footwear",
+
                 items: [
-                    "Bras",
-                    "Panties",
-                    "Bra Sets",
-                    "Camisoles",
-                    "Shapewear",
-                    "Nightwear",
-                    "Lounge Sets"
+                    "Chunky Sneakers",
+                    "Retro Sneakers",
+                    "Running Sneakers",
+                    "Platform Shoes",
+                    "Loafers"
                 ]
             },
 
             {
-                id: "innerwear-kids",
-                name: "Kids",
+                id: "trending-accessories",
+                name: "Trending Accessories",
+                slug: "trending-accessories",
+
                 items: [
-                    "Innerwear Sets",
-                    "Briefs",
-                    "Vests",
-                    "Nightwear",
-                    "Thermals"
+                    "Statement Bags",
+                    "Sunglasses",
+                    "Caps",
+                    "Minimal Jewellery",
+                    "Smart Watches"
                 ]
             }
         ]
@@ -794,49 +909,71 @@ const categories = [
 
     /* =====================================================
        10. NEW ARRIVALS
-    ===================================================== */
+       ===================================================== */
 
     {
         id: "new-arrivals",
         name: "New Arrivals",
+        slug: "new-arrivals",
         icon: "✨",
+        featured: true,
 
         subcategories: [
+
             {
                 id: "new-men",
                 name: "Men",
+                slug: "new-men",
+
                 items: [
                     "New T-Shirts",
                     "New Shirts",
                     "New Jeans",
                     "New Trousers",
-                    "New Shoes",
-                    "New Accessories"
+                    "New Jackets",
+                    "New Ethnic Wear"
                 ]
             },
 
             {
                 id: "new-women",
                 name: "Women",
+                slug: "new-women",
+
                 items: [
                     "New Tops",
                     "New Dresses",
+                    "New Jeans",
                     "New Kurtas",
                     "New Sarees",
-                    "New Jeans",
-                    "New Shoes",
-                    "New Accessories"
+                    "New Ethnic Wear"
                 ]
             },
 
             {
                 id: "new-kids",
                 name: "Kids",
+                slug: "new-kids",
+
                 items: [
-                    "New Boys",
-                    "New Girls",
-                    "New Baby",
-                    "New Footwear"
+                    "New Boys Wear",
+                    "New Girls Wear",
+                    "New Baby Wear",
+                    "New Ethnic Wear"
+                ]
+            },
+
+            {
+                id: "new-footwear",
+                name: "Footwear",
+                slug: "new-footwear",
+
+                items: [
+                    "New Sneakers",
+                    "New Heels",
+                    "New Sports Shoes",
+                    "New Sandals",
+                    "New Formal Shoes"
                 ]
             }
         ]
@@ -844,114 +981,87 @@ const categories = [
 
 
     /* =====================================================
-       11. TRENDING
-    ===================================================== */
-
-    {
-        id: "trending",
-        name: "Trending",
-        icon: "🔥",
-
-        subcategories: [
-
-            {
-                id: "trend-fashion",
-                name: "Trending Fashion",
-                items: [
-                    "Oversized",
-                    "Streetwear",
-                    "Co-ord Sets",
-                    "Cargo",
-                    "Minimal Fashion",
-                    "Old Money",
-                    "Y2K",
-                    "Athleisure"
-                ]
-            },
-
-            {
-                id: "trend-viral",
-                name: "Viral Now",
-                items: [
-                    "Instagram Trends",
-                    "Social Media Picks",
-                    "Celebrity Styles",
-                    "Influencer Picks",
-                    "Bestsellers"
-                ]
-            },
-
-            {
-                id: "trend-season",
-                name: "Seasonal Trends",
-                items: [
-                    "Summer Trends",
-                    "Monsoon Trends",
-                    "Winter Trends",
-                    "Festive Trends",
-                    "Wedding Trends"
-                ]
-            }
-        ]
-    },
-
-
-    /* =====================================================
-       12. SALE
-    ===================================================== */
+       11. SALE
+       ===================================================== */
 
     {
         id: "sale",
         name: "Sale",
+        slug: "sale",
         icon: "🏷️",
+        featured: true,
 
         subcategories: [
 
             {
                 id: "sale-men",
-                name: "Men Sale",
+                name: "Men",
+                slug: "men-sale",
+
                 items: [
                     "Under ₹499",
                     "Under ₹799",
                     "Under ₹999",
-                    "50% Off & Above",
-                    "70% Off & Above"
+                    "Under ₹1499",
+                    "50% & Above",
+                    "70% & Above"
                 ]
             },
 
             {
                 id: "sale-women",
-                name: "Women Sale",
+                name: "Women",
+                slug: "women-sale",
+
                 items: [
                     "Under ₹499",
                     "Under ₹799",
                     "Under ₹999",
-                    "50% Off & Above",
-                    "70% Off & Above"
+                    "Under ₹1499",
+                    "50% & Above",
+                    "70% & Above"
                 ]
             },
 
             {
                 id: "sale-kids",
-                name: "Kids Sale",
+                name: "Kids",
+                slug: "kids-sale",
+
                 items: [
                     "Under ₹399",
                     "Under ₹599",
-                    "Under ₹799",
-                    "50% Off & Above",
-                    "70% Off & Above"
+                    "Under ₹999",
+                    "50% & Above",
+                    "70% & Above"
                 ]
             },
 
             {
                 id: "sale-footwear",
-                name: "Footwear Sale",
+                name: "Footwear",
+                slug: "footwear-sale",
+
                 items: [
                     "Under ₹499",
+                    "Under ₹799",
                     "Under ₹999",
-                    "Sneakers Sale",
-                    "Sports Shoes Sale",
-                    "50% Off & Above"
+                    "50% & Above",
+                    "70% & Above"
+                ]
+            },
+
+            {
+                id: "sale-bags-accessories",
+                name: "Bags & Accessories",
+                slug: "bags-accessories-sale",
+
+                items: [
+                    "Under ₹499",
+                    "Under ₹799",
+                    "Under ₹999",
+                    "50% & Above",
+                    "70% & Above"
                 ]
             }
         ]
@@ -961,239 +1071,59 @@ const categories = [
 
 
 /* =========================================================
-   QUICK ACCESS CATEGORIES
-========================================================= */
+   CATEGORY HELPERS
+   ========================================================= */
 
-const quickCategories = [
-    {
-        id: "men",
-        name: "Men",
-        icon: "👔"
-    },
-    {
-        id: "women",
-        name: "Women",
-        icon: "👗"
-    },
-    {
-        id: "kids",
-        name: "Kids",
-        icon: "🧒"
-    },
-    {
-        id: "footwear",
-        name: "Footwear",
-        icon: "👟"
-    },
-    {
-        id: "bags",
-        name: "Bags",
-        icon: "👜"
-    },
-    {
-        id: "accessories",
-        name: "Accessories",
-        icon: "🕶️"
-    },
-    {
-        id: "sports",
-        name: "Sports",
-        icon: "🏃"
-    },
-    {
-        id: "winter",
-        name: "Winter Wear",
-        icon: "🧥"
-    }
-];
-
-
-/* =========================================================
-   FILTER OPTIONS
-========================================================= */
-
-const filterOptions = {
-
-    gender: [
-        "Men",
-        "Women",
-        "Kids"
-    ],
-
-    categories: [
-        "T-Shirts",
-        "Shirts",
-        "Jeans",
-        "Trousers",
-        "Dresses",
-        "Kurtas",
-        "Sarees",
-        "Footwear",
-        "Bags",
-        "Accessories",
-        "Sportswear",
-        "Winter Wear"
-    ],
-
-    sizes: [
-        "XS",
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL",
-        "3XL",
-        "4XL"
-    ],
-
-    footwearSizes: [
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
-    ],
-
-    price: [
-        {
-            label: "Under ₹499",
-            min: 0,
-            max: 499
-        },
-        {
-            label: "₹500 - ₹999",
-            min: 500,
-            max: 999
-        },
-        {
-            label: "₹1,000 - ₹1,499",
-            min: 1000,
-            max: 1499
-        },
-        {
-            label: "₹1,500 - ₹2,499",
-            min: 1500,
-            max: 2499
-        },
-        {
-            label: "₹2,500 - ₹4,999",
-            min: 2500,
-            max: 4999
-        },
-        {
-            label: "₹5,000+",
-            min: 5000,
-            max: Infinity
-        }
-    ],
-
-    discount: [
-        "10% and above",
-        "20% and above",
-        "30% and above",
-        "40% and above",
-        "50% and above",
-        "60% and above",
-        "70% and above"
-    ],
-
-    colors: [
-        "Black",
-        "White",
-        "Grey",
-        "Blue",
-        "Navy",
-        "Red",
-        "Green",
-        "Yellow",
-        "Pink",
-        "Purple",
-        "Brown",
-        "Beige",
-        "Orange"
-    ]
-};
-
-
-/* =========================================================
-   SORT OPTIONS
-========================================================= */
-
-const sortOptions = [
-    {
-        value: "recommended",
-        label: "Recommended"
-    },
-    {
-        value: "newest",
-        label: "What's New"
-    },
-    {
-        value: "popular",
-        label: "Popularity"
-    },
-    {
-        value: "price-low",
-        label: "Price: Low to High"
-    },
-    {
-        value: "price-high",
-        label: "Price: High to Low"
-    },
-    {
-        value: "discount",
-        label: "Better Discount"
-    },
-    {
-        value: "rating",
-        label: "Customer Rating"
-    }
-];
-
-
-/* =========================================================
-   CATEGORY HELPER FUNCTIONS
-========================================================= */
-
-function getCategory(categoryId) {
-    return categories.find(category => category.id === categoryId);
-}
-
-
-function getSubcategory(categoryId, subcategoryId) {
-
-    const category = getCategory(categoryId);
-
-    if (!category) {
-        return null;
-    }
-
-    return category.subcategories.find(
-        subcategory => subcategory.id === subcategoryId
+/**
+ * Get a category by ID.
+ */
+function getCategoryById(categoryId) {
+    return CATEGORIES.find(
+        category => category.id === categoryId
     ) || null;
 }
 
 
-function getAllSubcategories(categoryId) {
-
-    const category = getCategory(categoryId);
-
-    if (!category) {
-        return [];
-    }
-
-    return category.subcategories;
+/**
+ * Get a category by slug.
+ */
+function getCategoryBySlug(slug) {
+    return CATEGORIES.find(
+        category => category.slug === slug
+    ) || null;
 }
 
 
-function getAllCategoryItems(categoryId) {
+/**
+ * Get a subcategory by ID.
+ */
+function getSubcategoryById(subcategoryId) {
 
-    const category = getCategory(categoryId);
+    for (const category of CATEGORIES) {
+
+        const subcategory = category.subcategories.find(
+            item => item.id === subcategoryId
+        );
+
+        if (subcategory) {
+            return {
+                category,
+                subcategory
+            };
+        }
+    }
+
+    return null;
+}
+
+
+/**
+ * Get all products/category filter values
+ * belonging to a category.
+ */
+function getCategoryItems(categoryId) {
+
+    const category = getCategoryById(categoryId);
 
     if (!category) {
         return [];
@@ -1205,46 +1135,81 @@ function getAllCategoryItems(categoryId) {
 }
 
 
+/**
+ * Get only featured categories.
+ */
+function getFeaturedCategories() {
+    return CATEGORIES.filter(
+        category => category.featured
+    );
+}
+
+
+/**
+ * Search category/subcategory/item names.
+ */
 function searchCategories(query) {
 
-    const search = query
-        .toLowerCase()
-        .trim();
+    const searchTerm = String(query || "")
+        .trim()
+        .toLowerCase();
 
-    if (!search) {
+    if (!searchTerm) {
         return [];
     }
 
     const results = [];
 
-    categories.forEach(category => {
+    CATEGORIES.forEach(category => {
+
+        if (
+            category.name
+                .toLowerCase()
+                .includes(searchTerm)
+        ) {
+            results.push({
+                type: "category",
+                categoryId: category.id,
+                categoryName: category.name,
+                name: category.name
+            });
+        }
 
         category.subcategories.forEach(subcategory => {
+
+            if (
+                subcategory.name
+                    .toLowerCase()
+                    .includes(searchTerm)
+            ) {
+                results.push({
+                    type: "subcategory",
+                    categoryId: category.id,
+                    categoryName: category.name,
+                    subcategoryId: subcategory.id,
+                    name: subcategory.name
+                });
+            }
 
             subcategory.items.forEach(item => {
 
                 if (
-                    item.toLowerCase().includes(search) ||
-                    subcategory.name.toLowerCase().includes(search) ||
-                    category.name.toLowerCase().includes(search)
+                    item
+                        .toLowerCase()
+                        .includes(searchTerm)
                 ) {
-
                     results.push({
+                        type: "item",
                         categoryId: category.id,
                         categoryName: category.name,
-
                         subcategoryId: subcategory.id,
                         subcategoryName: subcategory.name,
-
-                        item: item
+                        name: item
                     });
-
                 }
 
             });
-
         });
-
     });
 
     return results;
@@ -1252,18 +1217,53 @@ function searchCategories(query) {
 
 
 /* =========================================================
-   EXPORT TO GLOBAL WINDOW
-========================================================= */
+   MEGA MENU DATA
+   ========================================================= */
 
-window.ASFashionCategories = {
-    categories,
-    quickCategories,
-    filterOptions,
-    sortOptions,
+const MEGA_MENU_CATEGORIES = getFeaturedCategories();
 
-    getCategory,
-    getSubcategory,
-    getAllSubcategories,
-    getAllCategoryItems,
-    searchCategories
+
+/* =========================================================
+   GLOBAL CATEGORY CONFIG
+   ========================================================= */
+
+const CATEGORY_CONFIG = {
+
+    maxMegaMenuColumns: 4,
+
+    showIcons: true,
+
+    enableCategorySearch: true,
+
+    enableSubcategoryFilter: true,
+
+    enableItemFilter: true,
+
+    mobileAccordion: true,
+
+    desktopMegaMenu: true,
+
+    saleCategory: "sale",
+
+    defaultCategory: "new-arrivals"
 };
+
+
+/* =========================================================
+   FREEZE DATABASE
+   Prevent accidental runtime modification.
+   ========================================================= */
+
+Object.freeze(CATEGORIES);
+
+CATEGORIES.forEach(category => {
+
+    Object.freeze(category);
+    Object.freeze(category.subcategories);
+
+    category.subcategories.forEach(subcategory => {
+        Object.freeze(subcategory);
+        Object.freeze(subcategory.items);
+    });
+
+});

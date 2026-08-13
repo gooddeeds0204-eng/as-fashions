@@ -117,9 +117,26 @@ img{
 
 .header-main{
     height:78px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:20px;
+}
+
+.header-left{
     display:flex;
     align-items:center;
-    gap:30px;
+    gap:24px;
+    justify-self:start;
+    min-width:0;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    justify-self:end;
+    min-width:0;
 }
 
 .menu-btn{
@@ -127,6 +144,7 @@ img{
     border:0;
     background:none;
     width:32px;
+    flex-shrink:0;
 }
 
 .menu-btn span{
@@ -147,6 +165,7 @@ img{
     align-items:baseline;
     gap:5px;
     white-space:nowrap;
+    justify-self:center;
 }
 
 .logo-as{
@@ -173,7 +192,6 @@ img{
     display:flex;
     align-items:center;
     gap:24px;
-    flex:1;
 }
 
 .nav a{
@@ -246,6 +264,16 @@ img{
     position:relative;
     font-size:20px;
     padding:5px;
+    transition:transform .2s ease, color .2s ease;
+}
+
+.action-btn:hover{
+    transform:translateY(-2px);
+    color:#d92323;
+}
+
+.action-btn:active{
+    transform:translateY(0) scale(.92);
 }
 
 .badge{
@@ -260,6 +288,17 @@ img{
     font-size:9px;
     display:grid;
     place-items:center;
+    transition:transform .2s ease;
+}
+
+.badge.bump{
+    animation:badgeBump .35s ease;
+}
+
+@keyframes badgeBump{
+    0%{ transform:scale(1); }
+    40%{ transform:scale(1.4); }
+    100%{ transform:scale(1); }
 }
 
 
@@ -736,6 +775,12 @@ img{
     background:#fff;
     cursor:pointer;
     position:relative;
+    transition:transform .3s ease, box-shadow .3s ease;
+}
+
+.product-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 14px 30px rgba(0,0,0,.09);
 }
 
 .product-image{
@@ -1417,6 +1462,42 @@ img{
 
 
 /* =========================================================
+   SCROLL REVEAL (sections fade + rise into view)
+========================================================= */
+
+section.section,
+.hero,
+.flash-strip,
+.style-section,
+.newsletter{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .7s ease, transform .7s ease;
+}
+
+section.section.in-view,
+.hero.in-view,
+.flash-strip.in-view,
+.style-section.in-view,
+.newsletter.in-view{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media(prefers-reduced-motion: reduce){
+    section.section,
+    .hero,
+    .flash-strip,
+    .style-section,
+    .newsletter{
+        opacity:1;
+        transform:none;
+        transition:none;
+    }
+}
+
+
+/* =========================================================
    RESPONSIVE
 ========================================================= */
 
@@ -1751,16 +1832,33 @@ img{
 
     <div class="container header-main">
 
-        <button
-            class="menu-btn"
-            onclick="openMenu()"
-            aria-label="Open menu">
+        <div class="header-left">
 
-            <span></span>
-            <span></span>
-            <span></span>
+            <button
+                class="menu-btn"
+                onclick="openMenu()"
+                aria-label="Open menu">
 
-        </button>
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+
+            <nav class="nav">
+
+                <a href="#new">NEW IN</a>
+                <a href="#women">WOMEN</a>
+                <a href="#men">MEN</a>
+                <a href="#kids">KIDS</a>
+                <a href="#trending">TRENDING</a>
+                <a href="#categories">CATEGORIES</a>
+                <a href="#clearance" class="sale-link">SALE</a>
+
+            </nav>
+
+        </div>
 
 
         <a href="#home" class="logo">
@@ -1771,70 +1869,61 @@ img{
         </a>
 
 
-        <nav class="nav">
+        <div class="header-right">
 
-            <a href="#new">NEW IN</a>
-            <a href="#women">WOMEN</a>
-            <a href="#men">MEN</a>
-            <a href="#kids">KIDS</a>
-            <a href="#trending">TRENDING</a>
-            <a href="#categories">CATEGORIES</a>
-            <a href="#clearance" class="sale-link">SALE</a>
+            <div class="search">
 
-        </nav>
+                <span class="search-icon">⌕</span>
 
+                <input
+                    id="searchInput"
+                    type="search"
+                    placeholder="Search products, brands & more"
+                    oninput="searchProducts()">
 
-        <div class="search">
-
-            <span class="search-icon">⌕</span>
-
-            <input
-                id="searchInput"
-                type="search"
-                placeholder="Search products, brands & more"
-                oninput="searchProducts()">
-
-        </div>
+            </div>
 
 
-        <div class="actions">
+            <div class="actions">
 
-            <button
-                class="action-btn"
-                onclick="openProfile()"
-                aria-label="Profile">
-                ♙
-            </button>
+                <button
+                    class="action-btn"
+                    onclick="openProfile()"
+                    aria-label="Profile">
+                    ♙
+                </button>
 
-            <button
-                class="action-btn"
-                onclick="openWishlist()"
-                aria-label="Wishlist">
+                <button
+                    class="action-btn"
+                    onclick="openWishlist()"
+                    aria-label="Wishlist">
 
-                ♡
+                    ♡
 
-                <span
-                    class="badge"
-                    id="wishCount">
-                    0
-                </span>
+                    <span
+                        class="badge"
+                        id="wishCount">
+                        0
+                    </span>
 
-            </button>
+                </button>
 
-            <button
-                class="action-btn"
-                onclick="openCart()"
-                aria-label="Bag">
+                <button
+                    class="action-btn"
+                    onclick="openCart()"
+                    aria-label="Bag">
 
-                🛍
+                    🛍
 
-                <span
-                    class="badge"
-                    id="bagCount">
-                    0
-                </span>
+                    <span
+                        class="badge"
+                        id="bagCount">
+                        0
+                    </span>
 
-            </button>
+                </button>
+
+            </div>
 
         </div>
 
@@ -4627,16 +4716,28 @@ function openProfile(){
 
 function updateCounts(){
 
-    document.getElementById("bagCount")
-        .textContent =
-        cart.reduce(
+    const bagEl = document.getElementById("bagCount");
+    const wishEl = document.getElementById("wishCount");
+
+    const newBag = cart.reduce(
             (sum,p) => sum + p.qty,
             0
         );
+    const newWish = wishlist.length;
 
-    document.getElementById("wishCount")
-        .textContent =
-        wishlist.length;
+    if(bagEl.textContent != newBag){
+        bagEl.textContent = newBag;
+        bagEl.classList.remove("bump");
+        void bagEl.offsetWidth;
+        bagEl.classList.add("bump");
+    }
+
+    if(wishEl.textContent != newWish){
+        wishEl.textContent = newWish;
+        wishEl.classList.remove("bump");
+        void wishEl.offsetWidth;
+        wishEl.classList.add("bump");
+    }
 
 }
 
@@ -5223,36 +5324,4 @@ window.addEventListener(
         const hash =
             location.hash.replace("#","");
 
-        if(!hash) return;
-
-        if(
-            [
-                "women",
-                "men",
-                "kids",
-                "dresses",
-                "shirts",
-                "denim",
-                "footwear",
-                "accessories",
-                "sale",
-                "under499",
-                "under999",
-                "trending"
-            ].includes(hash)
-        ){
-
-            setTimeout(
-                () => goTo(hash),
-                300
-            );
-
-        }
-
-    }
-);
-
-</script>
-
-</body>
-</html>
+   

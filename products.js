@@ -1,600 +1,584 @@
 /* =========================================================
-   AS FASHIONS — PRODUCTS DATA
-   Works with: products.html
+   AS FASHIONS - PRODUCTS.JS
+   Product Listing + Filters + Sorting + Wishlist + Cart
    ========================================================= */
 
 const PRODUCTS = [
-
-  /* ===================== WOMEN ===================== */
-
   {
-    id: "W001",
-    name: "Floral Printed Kurti",
-    category: "Women",
-    subcategory: "Kurtis",
-    gender: "Women",
-    price: 699,
-    oldPrice: 1299,
-    discount: 46,
-    rating: 4.5,
-    reviews: 128,
-    image: "assets/products/women-kurti-1.jpg",
-    badge: "Trending",
-    tag: "Bestseller",
-    colors: ["Black", "Pink", "Blue"],
-    sizes: ["S", "M", "L", "XL"],
-    stock: 18
-  },
-
-  {
-    id: "W002",
-    name: "Women Relaxed Fit Top",
-    category: "Women",
-    subcategory: "Tops",
-    gender: "Women",
+    id: 1,
+    name: "Women Floral Printed Kurti",
+    category: "women",
+    subcategory: "girl",
+    type: "kurti",
     price: 499,
     oldPrice: 999,
     discount: 50,
-    rating: 4.4,
-    reviews: 96,
-    image: "assets/products/women-top-1.jpg",
-    badge: "Hot Deal",
-    tag: "Under ₹499",
-    colors: ["White", "Black", "Green"],
-    sizes: ["S", "M", "L", "XL"],
-    stock: 25
+    rating: 4.5,
+    reviews: 128,
+    image: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=700&q=80",
+    badge: "🔥 Hot Deal"
   },
-
   {
-    id: "W003",
-    name: "High Waist Wide Leg Jeans",
-    category: "Women",
-    subcategory: "Jeans",
-    gender: "Women",
-    price: 899,
-    oldPrice: 1799,
-    discount: 50,
+    id: 2,
+    name: "Women Premium Casual Dress",
+    category: "women",
+    subcategory: "girl",
+    type: "dress",
+    price: 799,
+    oldPrice: 1499,
+    discount: 47,
     rating: 4.6,
-    reviews: 214,
-    image: "assets/products/women-jeans-1.jpg",
-    badge: "Trending",
-    tag: "50% OFF",
-    colors: ["Blue", "Black"],
-    sizes: ["26", "28", "30", "32", "34"],
-    stock: 12
+    reviews: 94,
+    image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80",
+    badge: "⚡ Trending"
   },
-
   {
-    id: "W004",
-    name: "Women Casual Co-ord Set",
-    category: "Women",
-    subcategory: "Co-ord Sets",
-    gender: "Women",
+    id: 3,
+    name: "Women Elegant Saree",
+    category: "women",
+    subcategory: "girl",
+    type: "saree",
     price: 999,
     oldPrice: 1999,
     discount: 50,
     rating: 4.7,
-    reviews: 173,
-    image: "assets/products/women-coord-1.jpg",
-    badge: "Bestseller",
-    tag: "Under ₹999",
-    colors: ["Beige", "Black", "Pink"],
-    sizes: ["S", "M", "L", "XL"],
-    stock: 9
+    reviews: 216,
+    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80",
+    badge: "Best Seller"
+  },
+  {
+    id: 4,
+    name: "Women Oversized T-Shirt",
+    category: "women",
+    subcategory: "girl",
+    type: "tops",
+    price: 399,
+    oldPrice: 799,
+    discount: 50,
+    rating: 4.3,
+    reviews: 76,
+    image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80",
+    badge: "Under ₹499"
   },
 
   {
-    id: "W005",
-    name: "Elegant Anarkali Dress",
-    category: "Women",
-    subcategory: "Ethnic Wear",
-    gender: "Women",
-    price: 1199,
-    oldPrice: 2499,
-    discount: 52,
-    rating: 4.8,
-    reviews: 301,
-    image: "assets/products/women-anarkali-1.jpg",
-    badge: "New",
-    tag: "52% OFF",
-    colors: ["Maroon", "Navy", "Green"],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    stock: 15
-  },
-
-  /* ===================== MEN ===================== */
-
-  {
-    id: "M001",
+    id: 5,
     name: "Men Slim Fit Casual Shirt",
-    category: "Men",
-    subcategory: "Shirts",
-    gender: "Men",
+    category: "men",
+    subcategory: "boy",
+    type: "shirts",
     price: 599,
     oldPrice: 1199,
     discount: 50,
     rating: 4.4,
-    reviews: 142,
-    image: "assets/products/men-shirt-1.jpg",
-    badge: "Trending",
-    tag: "Under ₹999",
-    colors: ["White", "Blue", "Black"],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    stock: 20
+    reviews: 154,
+    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=700&q=80",
+    badge: "🔥 Hot Deal"
   },
-
   {
-    id: "M002",
-    name: "Men Oversized Graphic T-Shirt",
-    category: "Men",
-    subcategory: "T-Shirts",
-    gender: "Men",
+    id: 6,
+    name: "Men Premium Denim Jeans",
+    category: "men",
+    subcategory: "boy",
+    type: "jeans",
+    price: 899,
+    oldPrice: 1799,
+    discount: 50,
+    rating: 4.6,
+    reviews: 189,
+    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=80",
+    badge: "Best Seller"
+  },
+  {
+    id: 7,
+    name: "Men Oversized Streetwear T-Shirt",
+    category: "men",
+    subcategory: "boy",
+    type: "tshirts",
     price: 449,
     oldPrice: 899,
     discount: 50,
     rating: 4.5,
-    reviews: 189,
-    image: "assets/products/men-tshirt-1.jpg",
-    badge: "Hot Deal",
-    tag: "Under ₹499",
-    colors: ["Black", "White", "Grey"],
-    sizes: ["S", "M", "L", "XL"],
-    stock: 31
+    reviews: 132,
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80",
+    badge: "Under ₹499"
   },
-
   {
-    id: "M003",
-    name: "Men Relaxed Cargo Pants",
-    category: "Men",
-    subcategory: "Trousers",
-    gender: "Men",
-    price: 799,
-    oldPrice: 1599,
-    discount: 50,
-    rating: 4.6,
-    reviews: 117,
-    image: "assets/products/men-cargo-1.jpg",
-    badge: "Trending",
-    tag: "50% OFF",
-    colors: ["Black", "Olive", "Beige"],
-    sizes: ["30", "32", "34", "36"],
-    stock: 16
-  },
-
-  {
-    id: "M004",
-    name: "Men Premium Denim Jacket",
-    category: "Men",
-    subcategory: "Jackets",
-    gender: "Men",
-    price: 999,
-    oldPrice: 2199,
-    discount: 55,
-    rating: 4.7,
-    reviews: 84,
-    image: "assets/products/men-jacket-1.jpg",
-    badge: "Bestseller",
-    tag: "55% OFF",
-    colors: ["Blue", "Black"],
-    sizes: ["M", "L", "XL", "XXL"],
-    stock: 11
-  },
-
-  /* ===================== KIDS — GIRL ===================== */
-
-  {
-    id: "KG001",
-    name: "Girls Floral Party Dress",
-    category: "Kids",
-    subcategory: "Girls Dresses",
-    gender: "Girl",
+    id: 8,
+    name: "Men Casual Cotton Trousers",
+    category: "men",
+    subcategory: "boy",
+    type: "trousers",
     price: 699,
-    oldPrice: 1399,
-    discount: 50,
-    rating: 4.7,
-    reviews: 91,
-    image: "assets/products/kids-girl-dress-1.jpg",
-    badge: "Trending",
-    tag: "50% OFF",
-    colors: ["Pink", "Purple", "Yellow"],
-    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y"],
-    stock: 14
+    oldPrice: 1299,
+    discount: 46,
+    rating: 4.2,
+    reviews: 68,
+    image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&q=80",
+    badge: "Trending"
   },
 
   {
-    id: "KG002",
-    name: "Girls Printed Cotton Top",
-    category: "Kids",
-    subcategory: "Girls Tops",
-    gender: "Girl",
+    id: 9,
+    name: "Girls Printed Summer Dress",
+    category: "kids",
+    subcategory: "girl",
+    type: "dress",
     price: 399,
     oldPrice: 799,
     discount: 50,
-    rating: 4.4,
-    reviews: 63,
-    image: "assets/products/kids-girl-top-1.jpg",
-    badge: "Hot Deal",
-    tag: "Under ₹499",
-    colors: ["Pink", "White", "Blue"],
-    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y"],
-    stock: 22
-  },
-
-  {
-    id: "KG003",
-    name: "Girls Denim Jacket",
-    category: "Kids",
-    subcategory: "Girls Jackets",
-    gender: "Girl",
-    price: 799,
-    oldPrice: 1599,
-    discount: 50,
     rating: 4.6,
-    reviews: 48,
-    image: "assets/products/kids-girl-jacket-1.jpg",
-    badge: "New",
-    tag: "50% OFF",
-    colors: ["Blue", "Pink"],
-    sizes: ["4-5Y", "6-7Y", "8-9Y", "10-11Y"],
-    stock: 10
+    reviews: 82,
+    image: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=700&q=80",
+    badge: "👧 Girls"
   },
-
-  /* ===================== KIDS — BOY ===================== */
-
   {
-    id: "KB001",
-    name: "Boys Casual Shirt",
-    category: "Kids",
-    subcategory: "Boys Shirts",
-    gender: "Boy",
-    price: 499,
-    oldPrice: 999,
+    id: 10,
+    name: "Girls Cute Party Frock",
+    category: "kids",
+    subcategory: "girl",
+    type: "frock",
+    price: 599,
+    oldPrice: 1199,
     discount: 50,
-    rating: 4.5,
-    reviews: 76,
-    image: "assets/products/kids-boy-shirt-1.jpg",
-    badge: "Trending",
-    tag: "Under ₹499",
-    colors: ["Blue", "White", "Green"],
-    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y"],
-    stock: 19
+    rating: 4.7,
+    reviews: 114,
+    image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=700&q=80",
+    badge: "✨ New"
   },
-
   {
-    id: "KB002",
-    name: "Boys Graphic T-Shirt",
-    category: "Kids",
-    subcategory: "Boys T-Shirts",
-    gender: "Boy",
+    id: 11,
+    name: "Boys Casual Printed T-Shirt",
+    category: "kids",
+    subcategory: "boy",
+    type: "tshirts",
     price: 349,
     oldPrice: 699,
     discount: 50,
     rating: 4.4,
-    reviews: 105,
-    image: "assets/products/kids-boy-tshirt-1.jpg",
-    badge: "Hot Deal",
-    tag: "Under ₹499",
-    colors: ["Black", "Red", "Blue"],
-    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y"],
-    stock: 28
+    reviews: 91,
+    image: "https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=700&q=80",
+    badge: "👦 Boys"
   },
-
   {
-    id: "KB003",
-    name: "Boys Cargo Joggers",
-    category: "Kids",
-    subcategory: "Boys Bottomwear",
-    gender: "Boy",
-    price: 599,
-    oldPrice: 1199,
+    id: 12,
+    name: "Boys Denim Casual Set",
+    category: "kids",
+    subcategory: "boy",
+    type: "sets",
+    price: 699,
+    oldPrice: 1399,
     discount: 50,
-    rating: 4.6,
-    reviews: 57,
-    image: "assets/products/kids-boy-cargo-1.jpg",
-    badge: "Bestseller",
-    tag: "50% OFF",
-    colors: ["Black", "Olive", "Grey"],
-    sizes: ["4-5Y", "6-7Y", "8-9Y", "10-11Y"],
-    stock: 13
-  },
-
-  /* ===================== SPECIAL SALE ===================== */
-
-  {
-    id: "S001",
-    name: "Premium Women's Fashion Combo",
-    category: "Women",
-    subcategory: "Combo Offers",
-    gender: "Women",
-    price: 999,
-    oldPrice: 2999,
-    discount: 67,
-    rating: 4.8,
-    reviews: 226,
-    image: "assets/products/sale-women-1.jpg",
-    badge: "🔥 Mega Deal",
-    tag: "67% OFF",
-    colors: ["Black", "Pink"],
-    sizes: ["S", "M", "L", "XL"],
-    stock: 7
-  },
-
-  {
-    id: "S002",
-    name: "Men Fashion Combo",
-    category: "Men",
-    subcategory: "Combo Offers",
-    gender: "Men",
-    price: 899,
-    oldPrice: 2499,
-    discount: 64,
-    rating: 4.7,
-    reviews: 154,
-    image: "assets/products/sale-men-1.jpg",
-    badge: "⚡ Lightning Deal",
-    tag: "64% OFF",
-    colors: ["Black", "Blue"],
-    sizes: ["M", "L", "XL", "XXL"],
-    stock: 8
+    rating: 4.5,
+    reviews: 73,
+    image: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80",
+    badge: "🔥 Hot Deal"
   }
-
 ];
 
 
 /* =========================================================
-   CATEGORY CONFIG
-   Used by filters / navigation / menus
+   STORAGE
    ========================================================= */
 
-const CATEGORY_DATA = {
+let wishlist = JSON.parse(localStorage.getItem("asWishlist")) || [];
+let cart = JSON.parse(localStorage.getItem("asCart")) || [];
 
-  Women: {
-    label: "Women",
-    subcategories: [
-      "All",
-      "Kurtis",
-      "Tops",
-      "Jeans",
-      "Co-ord Sets",
-      "Ethnic Wear",
-      "Combo Offers"
-    ]
-  },
 
-  Men: {
-    label: "Men",
-    subcategories: [
-      "All",
-      "Shirts",
-      "T-Shirts",
-      "Trousers",
-      "Jackets",
-      "Combo Offers"
-    ]
-  },
+/* =========================================================
+   CURRENT FILTER STATE
+   ========================================================= */
 
-  Kids: {
-    label: "Kids",
-    subcategories: [
-      "All",
-      "Girls Dresses",
-      "Girls Tops",
-      "Girls Jackets",
-      "Boys Shirts",
-      "Boys T-Shirts",
-      "Boys Bottomwear"
-    ]
-  }
-
+let filters = {
+  category: "all",
+  subcategory: "all",
+  minPrice: 0,
+  maxPrice: Infinity,
+  minDiscount: 0,
+  sort: "featured"
 };
 
 
 /* =========================================================
-   PRICE FILTERS
+   DOM READY
    ========================================================= */
 
-const PRICE_FILTERS = [
-  {
-    id: "under499",
-    label: "Under ₹499",
-    max: 499
-  },
-  {
-    id: "under999",
-    label: "Under ₹999",
-    max: 999
-  },
-  {
-    id: "under1499",
-    label: "Under ₹1499",
-    max: 1499
-  }
-];
+document.addEventListener("DOMContentLoaded", () => {
+
+  renderProducts();
+
+  setupCategoryFilters();
+  setupSubcategoryFilters();
+  setupPriceFilters();
+  setupDiscountFilters();
+  setupSorting();
+
+  updateWishlistCount();
+  updateCartCount();
+
+  handleURLFilters();
+
+  setupMobileFilter();
+});
 
 
 /* =========================================================
-   QUICK FILTERS
+   RENDER PRODUCTS
    ========================================================= */
 
-const QUICK_FILTERS = [
-  {
-    id: "trending",
-    label: "Trending Now"
-  },
-  {
-    id: "bestseller",
-    label: "Bestsellers"
-  },
-  {
-    id: "new",
-    label: "New Arrivals"
-  },
-  {
-    id: "deals",
-    label: "Hot Deals"
-  },
-  {
-    id: "discount70",
-    label: "70% OFF"
-  }
-];
+function renderProducts() {
 
+  const container =
+    document.querySelector("#productsGrid") ||
+    document.querySelector(".products-grid") ||
+    document.querySelector("#productGrid");
 
-/* =========================================================
-   HELPER FUNCTIONS
-   ========================================================= */
-
-function getProductById(id) {
-  return PRODUCTS.find(product => product.id === id);
-}
-
-
-function getProductsByCategory(category) {
-  return PRODUCTS.filter(
-    product => product.category.toLowerCase() === category.toLowerCase()
-  );
-}
-
-
-function getProductsByGender(gender) {
-  return PRODUCTS.filter(
-    product => product.gender.toLowerCase() === gender.toLowerCase()
-  );
-}
-
-
-function getProductsBySubcategory(subcategory) {
-  if (subcategory === "All") {
-    return PRODUCTS;
+  if (!container) {
+    console.warn("Products grid not found.");
+    return;
   }
 
-  return PRODUCTS.filter(
-    product =>
-      product.subcategory.toLowerCase() === subcategory.toLowerCase()
-  );
-}
+  let filtered = PRODUCTS.filter(product => {
+
+    const categoryMatch =
+      filters.category === "all" ||
+      product.category === filters.category;
+
+    const subcategoryMatch =
+      filters.subcategory === "all" ||
+      product.subcategory === filters.subcategory;
+
+    const priceMatch =
+      product.price >= filters.minPrice &&
+      product.price <= filters.maxPrice;
+
+    const discountMatch =
+      product.discount >= filters.minDiscount;
+
+    return (
+      categoryMatch &&
+      subcategoryMatch &&
+      priceMatch &&
+      discountMatch
+    );
+  });
 
 
-function getProductsUnderPrice(maxPrice) {
-  return PRODUCTS.filter(product => product.price <= maxPrice);
-}
+  /* SORT */
+
+  if (filters.sort === "low") {
+    filtered.sort((a, b) => a.price - b.price);
+  }
+
+  if (filters.sort === "high") {
+    filtered.sort((a, b) => b.price - a.price);
+  }
+
+  if (filters.sort === "discount") {
+    filtered.sort((a, b) => b.discount - a.discount);
+  }
+
+  if (filters.sort === "rating") {
+    filtered.sort((a, b) => b.rating - a.rating);
+  }
 
 
-function getDiscountProducts(minDiscount) {
-  return PRODUCTS.filter(product => product.discount >= minDiscount);
-}
+  /* EMPTY */
+
+  if (filtered.length === 0) {
+
+    container.innerHTML = `
+      <div class="no-products">
+        <div style="font-size:50px;">🛍️</div>
+        <h2>No products found</h2>
+        <p>Try changing your filters.</p>
+        <button onclick="clearAllFilters()">
+          Clear Filters
+        </button>
+      </div>
+    `;
+
+    updateProductCount(0);
+    return;
+  }
 
 
-function getTrendingProducts() {
-  return PRODUCTS.filter(
-    product =>
-      product.badge === "Trending" ||
-      product.tag === "Bestseller"
-  );
-}
+  container.innerHTML = filtered
+    .map(product => createProductCard(product))
+    .join("");
 
-
-function getNewProducts() {
-  return PRODUCTS.filter(
-    product => product.badge === "New"
-  );
-}
-
-
-function getHotDeals() {
-  return PRODUCTS.filter(
-    product =>
-      product.badge === "Hot Deal" ||
-      product.badge === "⚡ Lightning Deal" ||
-      product.badge === "🔥 Mega Deal"
-  );
+  updateProductCount(filtered.length);
 }
 
 
 /* =========================================================
-   URL NAVIGATION HELPERS
-   products.html?category=Women
-   products.html?category=Women&subcategory=Kurtis
-   products.html?gender=Girl
-   products.html?price=499
+   PRODUCT CARD
    ========================================================= */
 
-function productURL(product) {
-  return `product.html?id=${encodeURIComponent(product.id)}`;
-}
+function createProductCard(product) {
+
+  const isWishlisted =
+    wishlist.includes(product.id);
+
+  const discountAmount =
+    product.oldPrice - product.price;
+
+  return `
+    <article class="product-card">
+
+      <div
+        class="product-image-wrap"
+        onclick="openProduct(${product.id})"
+      >
+
+        <img
+          src="${product.image}"
+          alt="${escapeHTML(product.name)}"
+          class="product-image"
+          loading="lazy"
+        >
+
+        ${
+          product.badge
+            ? `<span class="product-badge">${product.badge}</span>`
+            : ""
+        }
+
+        <button
+          class="wishlist-btn ${isWishlisted ? "active" : ""}"
+          onclick="event.stopPropagation(); toggleWishlist(${product.id})"
+          aria-label="Wishlist"
+        >
+          ${isWishlisted ? "♥" : "♡"}
+        </button>
+
+      </div>
 
 
-function categoryURL(category) {
-  return `products.html?category=${encodeURIComponent(category)}`;
-}
+      <div class="product-info">
+
+        <div class="product-category">
+          ${capitalize(product.category)}
+          ${
+            product.category === "kids"
+              ? ` · ${capitalize(product.subcategory)}`
+              : ""
+          }
+        </div>
+
+        <h3
+          class="product-name"
+          onclick="openProduct(${product.id})"
+        >
+          ${escapeHTML(product.name)}
+        </h3>
 
 
-function subcategoryURL(category, subcategory) {
-  return `products.html?category=${encodeURIComponent(category)}&subcategory=${encodeURIComponent(subcategory)}`;
-}
+        <div class="rating">
+          <span>★ ${product.rating}</span>
+          <small>(${product.reviews})</small>
+        </div>
 
 
-function genderURL(gender) {
-  return `products.html?gender=${encodeURIComponent(gender)}`;
-}
+        <div class="price-row">
+
+          <strong>
+            ₹${product.price.toLocaleString("en-IN")}
+          </strong>
+
+          <del>
+            ₹${product.oldPrice.toLocaleString("en-IN")}
+          </del>
+
+          <span class="discount">
+            ${product.discount}% OFF
+          </span>
+
+        </div>
 
 
-function priceURL(price) {
-  return `products.html?price=${encodeURIComponent(price)}`;
-}
+        <div class="save-text">
+          You save ₹${discountAmount.toLocaleString("en-IN")}
+        </div>
 
 
-function filterURL(filter) {
-  return `products.html?filter=${encodeURIComponent(filter)}`;
+        <button
+          class="add-cart-btn"
+          onclick="addToCart(${product.id})"
+        >
+          🛒 Add to Cart
+        </button>
+
+      </div>
+
+    </article>
+  `;
 }
 
 
 /* =========================================================
-   CART
+   CATEGORY FILTER
    ========================================================= */
 
-function getCart() {
-  try {
-    return JSON.parse(localStorage.getItem("asFashionsCart")) || [];
-  } catch (error) {
-    return [];
-  }
-}
+function setupCategoryFilters() {
 
+  const buttons = document.querySelectorAll(
+    "[data-category], .category-filter"
+  );
 
-function saveCart(cart) {
-  localStorage.setItem("asFashionsCart", JSON.stringify(cart));
-}
+  buttons.forEach(button => {
 
+    button.addEventListener("click", () => {
 
-function addToCart(productId, quantity = 1) {
+      const category =
+        button.dataset.category ||
+        button.value;
 
-  const product = getProductById(productId);
+      filters.category =
+        category || "all";
 
-  if (!product) return false;
+      filters.subcategory = "all";
 
-  const cart = getCart();
+      updateActiveButton(
+        buttons,
+        button
+      );
 
-  const existing = cart.find(item => item.id === productId);
-
-  if (existing) {
-    existing.quantity += quantity;
-  } else {
-    cart.push({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-      size: product.sizes?.[0] || "",
-      quantity
+      renderProducts();
     });
-  }
+  });
+}
 
-  saveCart(cart);
 
-  window.dispatchEvent(new Event("cartUpdated"));
+/* =========================================================
+   GIRL / BOY FILTER
+   ========================================================= */
 
-  return true;
+function setupSubcategoryFilters() {
+
+  const buttons = document.querySelectorAll(
+    "[data-subcategory], .subcategory-filter"
+  );
+
+  buttons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      filters.subcategory =
+        button.dataset.subcategory ||
+        button.value ||
+        "all";
+
+      updateActiveButton(
+        buttons,
+        button
+      );
+
+      renderProducts();
+    });
+  });
+}
+
+
+/* =========================================================
+   PRICE FILTER
+   ========================================================= */
+
+function setupPriceFilters() {
+
+  const buttons = document.querySelectorAll(
+    "[data-price], .price-filter"
+  );
+
+  buttons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const value =
+        button.dataset.price ||
+        button.value;
+
+      if (value === "499") {
+        filters.minPrice = 0;
+        filters.maxPrice = 499;
+      }
+
+      else if (value === "999") {
+        filters.minPrice = 500;
+        filters.maxPrice = 999;
+      }
+
+      else if (value === "1000") {
+        filters.minPrice = 1000;
+        filters.maxPrice = Infinity;
+      }
+
+      else if (value === "all") {
+        filters.minPrice = 0;
+        filters.maxPrice = Infinity;
+      }
+
+      updateActiveButton(buttons, button);
+
+      renderProducts();
+    });
+  });
+}
+
+
+/* =========================================================
+   DISCOUNT FILTER
+   ========================================================= */
+
+function setupDiscountFilters() {
+
+  const buttons = document.querySelectorAll(
+    "[data-discount], .discount-filter"
+  );
+
+  buttons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const value =
+        Number(
+          button.dataset.discount ||
+          button.value ||
+          0
+        );
+
+      filters.minDiscount = value;
+
+      updateActiveButton(buttons, button);
+
+      renderProducts();
+    });
+  });
+}
+
+
+/* =========================================================
+   SORTING
+   ========================================================= */
+
+function setupSorting() {
+
+  const sortElements = document.querySelectorAll(
+    "#sortSelect, .sort-select, [data-sort]"
+  );
+
+  sortElements.forEach(element => {
+
+    element.addEventListener("change", () => {
+
+      filters.sort =
+        element.value ||
+        element.dataset.sort ||
+        "featured";
+
+      renderProducts();
+    });
+  });
 }
 
 
@@ -602,81 +586,419 @@ function addToCart(productId, quantity = 1) {
    WISHLIST
    ========================================================= */
 
-function getWishlist() {
-  try {
-    return JSON.parse(localStorage.getItem("asFashionsWishlist")) || [];
-  } catch (error) {
-    return [];
-  }
-}
-
-
-function saveWishlist(wishlist) {
-  localStorage.setItem(
-    "asFashionsWishlist",
-    JSON.stringify(wishlist)
-  );
-}
-
-
 function toggleWishlist(productId) {
 
-  const wishlist = getWishlist();
+  const index =
+    wishlist.indexOf(productId);
 
-  const index = wishlist.indexOf(productId);
+  if (index === -1) {
 
-  if (index >= 0) {
-    wishlist.splice(index, 1);
-  } else {
     wishlist.push(productId);
+
+    showToast("❤️ Wishlist లో add అయింది");
+
+  } else {
+
+    wishlist.splice(index, 1);
+
+    showToast("Wishlist నుంచి remove అయింది");
   }
 
-  saveWishlist(wishlist);
+  localStorage.setItem(
+    "asWishlist",
+    JSON.stringify(wishlist)
+  );
 
-  window.dispatchEvent(new Event("wishlistUpdated"));
+  updateWishlistCount();
 
-  return wishlist.includes(productId);
+  renderProducts();
 }
 
 
-function isWishlisted(productId) {
-  return getWishlist().includes(productId);
+function updateWishlistCount() {
+
+  const elements = document.querySelectorAll(
+    "#wishlistCount, .wishlist-count"
+  );
+
+  elements.forEach(element => {
+    element.textContent = wishlist.length;
+  });
 }
 
 
 /* =========================================================
-   EXPORT FOR OTHER JS FILES
+   CART
    ========================================================= */
 
-window.ASFashions = {
-  PRODUCTS,
-  CATEGORY_DATA,
-  PRICE_FILTERS,
-  QUICK_FILTERS,
+function addToCart(productId) {
 
-  getProductById,
-  getProductsByCategory,
-  getProductsByGender,
-  getProductsBySubcategory,
-  getProductsUnderPrice,
-  getDiscountProducts,
-  getTrendingProducts,
-  getNewProducts,
-  getHotDeals,
+  const product =
+    PRODUCTS.find(p => p.id === productId);
 
-  productURL,
-  categoryURL,
-  subcategoryURL,
-  genderURL,
-  priceURL,
-  filterURL,
+  if (!product) return;
 
-  getCart,
-  saveCart,
-  addToCart,
 
-  getWishlist,
-  saveWishlist,
-  toggleWishlist,
-  isWishlisted
-};
+  const existing =
+    cart.find(item => item.id === productId);
+
+
+  if (existing) {
+
+    existing.quantity =
+      (existing.quantity || 1) + 1;
+
+  } else {
+
+    cart.push({
+      id: product.id,
+      quantity: 1
+    });
+  }
+
+
+  localStorage.setItem(
+    "asCart",
+    JSON.stringify(cart)
+  );
+
+  updateCartCount();
+
+  showToast("🛒 Cart లో add అయింది");
+}
+
+
+function updateCartCount() {
+
+  const count =
+    cart.reduce(
+      (total, item) =>
+        total + (item.quantity || 1),
+      0
+    );
+
+  const elements = document.querySelectorAll(
+    "#cartCount, .cart-count"
+  );
+
+  elements.forEach(element => {
+    element.textContent = count;
+  });
+}
+
+
+/* =========================================================
+   PRODUCT DETAILS NAVIGATION
+   ========================================================= */
+
+function openProduct(productId) {
+
+  const product =
+    PRODUCTS.find(p => p.id === productId);
+
+  if (!product) return;
+
+
+  /*
+    Product details page కోసం ID పంపుతున్నాం.
+    Example:
+    product.html?id=1
+  */
+
+  window.location.href =
+    `product.html?id=${product.id}`;
+}
+
+
+/* =========================================================
+   CATEGORY NAVIGATION
+   ========================================================= */
+
+function goToCategory(category) {
+
+  if (!category) return;
+
+  window.location.href =
+    `products.html?category=${encodeURIComponent(category)}`;
+}
+
+
+/* =========================================================
+   URL FILTER SUPPORT
+   ========================================================= */
+
+function handleURLFilters() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const category =
+    params.get("category");
+
+  const subcategory =
+    params.get("subcategory");
+
+  const price =
+    params.get("price");
+
+  const discount =
+    params.get("discount");
+
+
+  if (category) {
+    filters.category = category;
+  }
+
+  if (subcategory) {
+    filters.subcategory = subcategory;
+  }
+
+  if (price === "499") {
+    filters.minPrice = 0;
+    filters.maxPrice = 499;
+  }
+
+  if (price === "999") {
+    filters.minPrice = 500;
+    filters.maxPrice = 999;
+  }
+
+  if (discount) {
+    filters.minDiscount =
+      Number(discount);
+  }
+
+  renderProducts();
+}
+
+
+/* =========================================================
+   CLEAR FILTERS
+   ========================================================= */
+
+function clearAllFilters() {
+
+  filters = {
+    category: "all",
+    subcategory: "all",
+    minPrice: 0,
+    maxPrice: Infinity,
+    minDiscount: 0,
+    sort: "featured"
+  };
+
+
+  document.querySelectorAll(
+    ".filter-btn.active, .category-filter.active, .subcategory-filter.active"
+  ).forEach(button => {
+    button.classList.remove("active");
+  });
+
+
+  const sort =
+    document.querySelector("#sortSelect");
+
+  if (sort) {
+    sort.value = "featured";
+  }
+
+
+  renderProducts();
+}
+
+
+/* =========================================================
+   ACTIVE BUTTON
+   ========================================================= */
+
+function updateActiveButton(
+  buttons,
+  selected
+) {
+
+  buttons.forEach(button => {
+    button.classList.remove("active");
+  });
+
+  if (selected) {
+    selected.classList.add("active");
+  }
+}
+
+
+/* =========================================================
+   PRODUCT COUNT
+   ========================================================= */
+
+function updateProductCount(count) {
+
+  document.querySelectorAll(
+    "#productCount, .product-count"
+  ).forEach(element => {
+
+    element.textContent =
+      `${count} Products`;
+  });
+}
+
+
+/* =========================================================
+   MOBILE FILTER
+   ========================================================= */
+
+function setupMobileFilter() {
+
+  const openButton =
+    document.querySelector(
+      "#mobileFilterBtn, .mobile-filter-btn"
+    );
+
+  const closeButton =
+    document.querySelector(
+      "#closeFilter, .close-filter"
+    );
+
+  const sidebar =
+    document.querySelector(
+      "#filterSidebar, .filter-sidebar"
+    );
+
+
+  if (!sidebar) return;
+
+
+  if (openButton) {
+
+    openButton.addEventListener(
+      "click",
+      () => {
+        sidebar.classList.add("open");
+        document.body.classList.add(
+          "filter-open"
+        );
+      }
+    );
+  }
+
+
+  if (closeButton) {
+
+    closeButton.addEventListener(
+      "click",
+      () => {
+        sidebar.classList.remove("open");
+        document.body.classList.remove(
+          "filter-open"
+        );
+      }
+    );
+  }
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+function showToast(message) {
+
+  let toast =
+    document.querySelector("#asToast");
+
+
+  if (!toast) {
+
+    toast =
+      document.createElement("div");
+
+    toast.id = "asToast";
+
+    toast.style.position = "fixed";
+    toast.style.bottom = "25px";
+    toast.style.left = "50%";
+    toast.style.transform =
+      "translateX(-50%)";
+    toast.style.background =
+      "#111";
+    toast.style.color =
+      "#fff";
+    toast.style.padding =
+      "12px 20px";
+    toast.style.borderRadius =
+      "30px";
+    toast.style.zIndex =
+      "99999";
+    toast.style.fontSize =
+      "14px";
+    toast.style.boxShadow =
+      "0 10px 30px rgba(0,0,0,.2)";
+
+    document.body.appendChild(toast);
+  }
+
+
+  toast.textContent = message;
+
+  toast.style.opacity = "1";
+
+
+  clearTimeout(
+    window.asToastTimer
+  );
+
+
+  window.asToastTimer =
+    setTimeout(() => {
+
+      toast.style.opacity = "0";
+
+    }, 2200);
+}
+
+
+/* =========================================================
+   HELPER FUNCTIONS
+   ========================================================= */
+
+function capitalize(text) {
+
+  if (!text) return "";
+
+  return text.charAt(0).toUpperCase() +
+    text.slice(1);
+}
+
+
+function escapeHTML(text) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+}
+
+
+/* =========================================================
+   GLOBAL ACCESS
+   ========================================================= */
+
+window.PRODUCTS = PRODUCTS;
+
+window.toggleWishlist =
+  toggleWishlist;
+
+window.addToCart =
+  addToCart;
+
+window.openProduct =
+  openProduct;
+
+window.goToCategory =
+  goToCategory;
+
+window.clearAllFilters =
+  clearAllFilters;

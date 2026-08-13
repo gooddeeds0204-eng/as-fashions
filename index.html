@@ -5323,5 +5323,70 @@ window.addEventListener(
 
         const hash =
             location.hash.replace("#","");
+       if(!hash) return;
+
+        if(
+            [
+                "women",
+                "men",
+                "kids",
+                "dresses",
+                "shirts",
+                "denim",
+                "footwear",
+                "accessories",
+                "sale",
+                "under499",
+                "under999",
+                "trending"
+            ].includes(hash)
+        ){
+
+            setTimeout(
+                () => goTo(hash),
+                300
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SCROLL REVEAL — fade + rise sections into view
+========================================================= */
+
+(function(){
+
+    const revealTargets = document.querySelectorAll(
+        "section.section, .hero, .flash-strip, .style-section, .newsletter"
+    );
+
+    if(!("IntersectionObserver" in window) || revealTargets.length === 0){
+        revealTargets.forEach(el => el.classList.add("in-view"));
+        return;
+    }
+
+    const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add("in-view");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold:0.12, rootMargin:"0px 0px -60px 0px" }
+    );
+
+    revealTargets.forEach(el => revealObserver.observe(el));
+
+})();
+
+</script>
+
+</body>
+</html>
 
    

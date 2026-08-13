@@ -1,979 +1,1579 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>AS Fashions | Product</title>
-
-  <meta
-    name="description"
-    content="Shop fashion for women, men and kids at AS Fashions."
-  >
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #fff;
-      color: #171717;
-    }
-
-    button {
-      font-family: inherit;
-      cursor: pointer;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* =========================
-       TOP OFFER BAR
-    ========================= */
-
-    .top-bar {
-      background: #111;
-      color: #fff;
-      height: 34px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
-      font-size: 12px;
-    }
-
-    .ticker {
-      display: inline-block;
-      padding-left: 100%;
-      animation: ticker 18s linear infinite;
-    }
-
-    .ticker span {
-      margin-right: 70px;
-    }
-
-    @keyframes ticker {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-100%);
-      }
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    .header {
-      height: 72px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 5%;
-      background: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .brand {
-      font-family: Georgia, serif;
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .header-icon {
-      border: 0;
-      background: transparent;
-      font-size: 23px;
-      position: relative;
-    }
-
-    .count {
-      position: absolute;
-      top: -8px;
-      right: -9px;
-      background: #ff304f;
-      color: #fff;
-      width: 17px;
-      height: 17px;
-      border-radius: 50%;
-      font-size: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* =========================
-       BREADCRUMB
-    ========================= */
-
-    .breadcrumb {
-      width: 90%;
-      max-width: 1400px;
-      margin: 20px auto;
-      color: #777;
-      font-size: 13px;
-    }
-
-    .breadcrumb span {
-      color: #111;
-      font-weight: 600;
-    }
-
-    /* =========================
-       PRODUCT SECTION
-    ========================= */
-
-    .product-container {
-      width: 90%;
-      max-width: 1400px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 55% 45%;
-      gap: 45px;
-      padding-bottom: 60px;
-    }
-
-    /* =========================
-       IMAGE
-    ========================= */
-
-    .product-gallery {
-      display: grid;
-      grid-template-columns: 90px 1fr;
-      gap: 15px;
-    }
-
-    .thumbnail-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .thumbnail {
-      width: 82px;
-      height: 105px;
-      object-fit: cover;
-      border: 1px solid #ddd;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    .thumbnail.active {
-      border: 2px solid #111;
-    }
-
-    .main-image-wrapper {
-      position: relative;
-      background: #f7f7f7;
-      border-radius: 8px;
-      overflow: hidden;
-      min-height: 600px;
-    }
-
-    .main-image {
-      width: 100%;
-      height: 600px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .image-wishlist {
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      width: 45px;
-      height: 45px;
-      border: 0;
-      border-radius: 50%;
-      background: #fff;
-      font-size: 23px;
-      box-shadow: 0 3px 15px rgba(0,0,0,.12);
-    }
-
-    /* =========================
-       PRODUCT DETAILS
-    ========================= */
-
-    .details {
-      padding: 10px 0;
-    }
-
-    .brand-small {
-      font-size: 13px;
-      color: #777;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 10px;
-    }
-
-    .product-title {
-      font-size: 30px;
-      line-height: 1.25;
-      margin-bottom: 15px;
-    }
-
-    .rating-box {
-      display: inline-flex;
-      gap: 7px;
-      align-items: center;
-      background: #087f23;
-      color: #fff;
-      padding: 6px 10px;
-      border-radius: 4px;
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
-
-    .review-text {
-      color: #777;
-      font-size: 13px;
-      margin-left: 8px;
-    }
-
-    .price {
-      font-size: 30px;
-      font-weight: 700;
-    }
-
-    .mrp {
-      color: #777;
-      text-decoration: line-through;
-      margin-left: 10px;
-    }
-
-    .discount {
-      color: #087f23;
-      font-weight: 700;
-      margin-left: 10px;
-    }
-
-    .tax {
-      font-size: 12px;
-      color: #777;
-      margin-top: 8px;
-    }
-
-    .divider {
-      height: 1px;
-      background: #eee;
-      margin: 25px 0;
-    }
-
-    /* =========================
-       OFFER BOX
-    ========================= */
-
-    .offer-box {
-      background: #fff5f5;
-      border: 1px dashed #ff304f;
-      padding: 16px;
-      border-radius: 8px;
-      margin-bottom: 25px;
-    }
-
-    .offer-title {
-      font-weight: 700;
-      margin-bottom: 7px;
-    }
-
-    .offer-code {
-      font-size: 13px;
-      color: #555;
-    }
-
-    /* =========================
-       SIZE
-    ========================= */
-
-    .size-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
-
-    .size-guide {
-      color: #ff304f;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .sizes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .size-btn {
-      min-width: 52px;
-      height: 44px;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-weight: 600;
-    }
-
-    .size-btn:hover,
-    .size-btn.selected {
-      border-color: #111;
-      background: #111;
-      color: #fff;
-    }
-
-    /* =========================
-       QUANTITY
-    ========================= */
-
-    .quantity-section {
-      margin-top: 25px;
-    }
-
-    .quantity {
-      display: flex;
-      align-items: center;
-      border: 1px solid #ddd;
-      width: fit-content;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .quantity button {
-      width: 40px;
-      height: 40px;
-      border: 0;
-      background: #f5f5f5;
-      font-size: 18px;
-    }
-
-    .quantity span {
-      width: 45px;
-      text-align: center;
-      font-weight: 600;
-    }
-
-    /* =========================
-       ACTION BUTTONS
-    ========================= */
-
-    .actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 25px;
-    }
-
-    .add-cart,
-    .buy-now {
-      height: 52px;
-      border-radius: 5px;
-      font-size: 15px;
-      font-weight: 700;
-      border: 1px solid #111;
-    }
-
-    .add-cart {
-      background: #fff;
-      color: #111;
-    }
-
-    .buy-now {
-      background: #111;
-      color: #fff;
-    }
-
-    .add-cart:hover {
-      background: #111;
-      color: #fff;
-    }
-
-    .buy-now:hover {
-      opacity: .85;
-    }
-
-    /* =========================
-       DELIVERY
-    ========================= */
-
-    .delivery {
-      margin-top: 30px;
-    }
-
-    .delivery h3 {
-      font-size: 16px;
-      margin-bottom: 12px;
-    }
-
-    .delivery-input {
-      display: flex;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .delivery-input input {
-      flex: 1;
-      height: 45px;
-      border: 0;
-      outline: 0;
-      padding: 0 12px;
-    }
-
-    .delivery-input button {
-      width: 90px;
-      border: 0;
-      background: #fff;
-      color: #ff304f;
-      font-weight: 700;
-    }
-
-    .delivery-info {
-      font-size: 12px;
-      color: #777;
-      margin-top: 10px;
-    }
-
-    /* =========================
-       FEATURES
-    ========================= */
-
-    .feature-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 25px;
-    }
-
-    .feature {
-      background: #f8f8f8;
-      padding: 14px 8px;
-      text-align: center;
-      border-radius: 5px;
-      font-size: 12px;
-    }
-
-    .feature strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    /* =========================
-       DESCRIPTION
-    ========================= */
-
-    .description {
-      width: 90%;
-      max-width: 1400px;
-      margin: auto;
-      border-top: 1px solid #eee;
-      padding: 40px 0;
-    }
-
-    .description h2 {
-      font-size: 22px;
-      margin-bottom: 15px;
-    }
-
-    .description p {
-      color: #666;
-      line-height: 1.7;
-      max-width: 900px;
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    #toast {
-      position: fixed;
-      left: 50%;
-      bottom: 25px;
-      transform: translateX(-50%) translateY(20px);
-      background: #111;
-      color: #fff;
-      padding: 13px 22px;
-      border-radius: 30px;
-      font-size: 13px;
-      opacity: 0;
-      pointer-events: none;
-      transition: .3s;
-      z-index: 9999;
-    }
-
-    #toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 900px) {
-
-      .header {
-        padding: 0 4%;
-      }
-
-      .brand {
-        font-size: 23px;
-      }
-
-      .header-actions {
-        gap: 12px;
-      }
-
-      .product-container {
-        grid-template-columns: 1fr;
-        width: 94%;
-        gap: 25px;
-      }
-
-      .product-gallery {
-        grid-template-columns: 65px 1fr;
-      }
-
-      .thumbnail {
-        width: 58px;
-        height: 75px;
-      }
-
-      .main-image-wrapper {
-        min-height: 450px;
-      }
-
-      .main-image {
-        height: 450px;
-      }
-
-      .product-title {
-        font-size: 23px;
-      }
-
-      .price {
-        font-size: 25px;
-      }
-
-      .feature-list {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-
-      .top-bar {
-        font-size: 10px;
-      }
-
-      .header {
-        height: 62px;
-      }
-
-      .brand {
-        font-size: 21px;
-      }
-
-      .header-actions {
-        gap: 8px;
-      }
-
-      .header-icon {
-        font-size: 19px;
-      }
-
-      .breadcrumb {
-        width: 94%;
-        margin: 15px auto;
-      }
-
-      .product-gallery {
-        display: flex;
-        flex-direction: column-reverse;
-      }
-
-      .thumbnail-list {
-        flex-direction: row;
-        overflow-x: auto;
-      }
-
-      .thumbnail {
-        flex: 0 0 60px;
-      }
-
-      .main-image-wrapper {
-        min-height: 430px;
-      }
-
-      .main-image {
-        height: 430px;
-      }
-
-      .actions {
-        grid-template-columns: 1fr;
-      }
-
-      .feature-list {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
-
-      .description {
-        width: 94%;
-      }
-    }
-  </style>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>AS FASHIONS — Shop</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet">
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:"DM Sans",sans-serif;
+  color:#171717;
+  background:#fff;
+}
+
+button,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.topbar{
+  background:#111;
+  color:#fff;
+  height:42px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  white-space:nowrap;
+}
+
+.marquee{
+  display:flex;
+  width:max-content;
+  animation:move 24s linear infinite;
+  gap:70px;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:1px;
+}
+
+.marquee span{
+  padding-right:70px;
+}
+
+@keyframes move{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-50%);
+  }
+}
+
+.header{
+  height:92px;
+  border-bottom:1px solid #eee;
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  align-items:center;
+  padding:0 4%;
+  gap:20px;
+  background:#fff;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.menu{
+  font-size:30px;
+  border:0;
+  background:none;
+}
+
+.logo{
+  font-family:"Playfair Display",serif;
+  font-size:34px;
+  cursor:pointer;
+  width:max-content;
+}
+
+.logo span{
+  font-family:"DM Sans",sans-serif;
+  font-size:13px;
+  letter-spacing:5px;
+  margin-left:5px;
+}
+
+.actions{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.action{
+  border:0;
+  background:none;
+  font-size:25px;
+  position:relative;
+}
+
+.badge{
+  position:absolute;
+  right:-8px;
+  top:-8px;
+  background:#e92735;
+  color:#fff;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  font-size:10px;
+  display:grid;
+  place-items:center;
+}
+
+.mobileMenu{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#fff;
+  padding:25px;
+}
+
+.mobileMenu.active{
+  display:block;
+}
+
+.menuClose{
+  border:0;
+  background:none;
+  font-size:28px;
+  float:right;
+}
+
+.mobileMenu h2{
+  clear:both;
+  padding-top:60px;
+  font-family:"Playfair Display",serif;
+  font-size:32px;
+}
+
+.mobileMenu a{
+  display:block;
+  padding:18px 0;
+  border-bottom:1px solid #eee;
+  font-size:18px;
+  text-decoration:none;
+  color:#111;
+}
+
+.breadcrumb{
+  max-width:1400px;
+  margin:0 auto;
+  padding:28px 4% 15px;
+  color:#777;
+  font-size:14px;
+}
+
+.breadcrumb span{
+  color:#111;
+}
+
+.shopLayout{
+  max-width:1400px;
+  margin:auto;
+  padding:0 4% 70px;
+  display:grid;
+  grid-template-columns:230px 1fr;
+  gap:30px;
+}
+
+.filters{
+  border-right:1px solid #eee;
+  padding-right:20px;
+}
+
+.filters h3{
+  font-size:15px;
+  margin-bottom:18px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.filterGroup{
+  padding:18px 0;
+  border-bottom:1px solid #eee;
+}
+
+.filterGroup label{
+  display:flex;
+  gap:10px;
+  padding:8px 0;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.clearBtn{
+  margin-top:20px;
+  width:100%;
+  padding:12px;
+  background:#111;
+  color:#fff;
+  border:0;
+}
+
+.shopTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+  gap:20px;
+}
+
+.shopTop h1{
+  font-family:"Playfair Display",serif;
+  font-size:40px;
+}
+
+.resultText{
+  color:#777;
+  margin-top:6px;
+}
+
+.sortBox select{
+  border:1px solid #ccc;
+  padding:12px 15px;
+  background:#fff;
+}
+
+.chips{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  margin-bottom:20px;
+  scrollbar-width:none;
+}
+
+.chips button{
+  white-space:nowrap;
+  border:1px solid #ddd;
+  background:#fff;
+  padding:9px 15px;
+  border-radius:30px;
+}
+
+.chips button.active{
+  background:#111;
+  color:#fff;
+}
+
+.productGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.productCard{
+  position:relative;
+  min-width:0;
+}
+
+.imageWrap{
+  position:relative;
+  aspect-ratio:3/4;
+  background:#f5f5f5;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.imageWrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:.5s ease;
+}
+
+.productCard:hover img{
+  transform:scale(1.04);
+}
+
+.productBadge{
+  position:absolute;
+  left:10px;
+  top:10px;
+  background:#fff;
+  padding:6px 9px;
+  font-size:11px;
+  font-weight:700;
+  z-index:2;
+}
+
+.wishBtn{
+  position:absolute;
+  right:10px;
+  top:10px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:#fff;
+  font-size:20px;
+  z-index:3;
+}
+
+.wishBtn.active{
+  color:#e52332;
+}
+
+.productInfo{
+  padding:12px 2px;
+}
+
+.brand{
+  font-size:11px;
+  color:#777;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.productName{
+  font-size:14px;
+  margin:5px 0;
+  cursor:pointer;
+}
+
+.priceRow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:8px;
+}
+
+.price{
+  font-weight:700;
+}
+
+.mrp{
+  text-decoration:line-through;
+  color:#999;
+  font-size:12px;
+}
+
+.discount{
+  color:#16833b;
+  font-size:12px;
+  font-weight:700;
+}
+
+.rating{
+  display:inline-block;
+  margin-top:8px;
+  background:#16833b;
+  color:#fff;
+  padding:4px 7px;
+  font-size:11px;
+}
+
+.empty{
+  padding:80px 20px;
+  text-align:center;
+  grid-column:1/-1;
+}
+
+.detail{
+  display:none;
+  max-width:1250px;
+  margin:auto;
+  padding:30px 4% 80px;
+}
+
+.detail.active{
+  display:block;
+}
+
+.listing.hidden{
+  display:none;
+}
+
+.detailGrid{
+  display:grid;
+  grid-template-columns:55% 45%;
+  gap:50px;
+}
+
+.detailImage{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  background:#f5f5f5;
+}
+
+.detailBrand{
+  font-size:13px;
+  letter-spacing:3px;
+  color:#777;
+  margin-bottom:15px;
+}
+
+.detail h1{
+  font-family:"Playfair Display",serif;
+  font-size:46px;
+  line-height:1.1;
+  margin-bottom:20px;
+}
+
+.detailRating{
+  display:inline-block;
+  background:#16833b;
+  color:#fff;
+  padding:6px 10px;
+  margin-bottom:25px;
+}
+
+.detailPrice{
+  font-size:30px;
+  font-weight:700;
+}
+
+.detailMrp{
+  color:#888;
+  text-decoration:line-through;
+  margin-left:12px;
+}
+
+.detailDiscount{
+  color:#16833b;
+  margin-left:10px;
+}
+
+.detailLine{
+  border:0;
+  border-top:1px solid #eee;
+  margin:25px 0;
+}
+
+.sizeTitle{
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+.sizes{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.sizeBtn{
+  min-width:50px;
+  padding:12px;
+  background:#fff;
+  border:1px solid #bbb;
+}
+
+.sizeBtn.active{
+  border:2px solid #111;
+}
+
+.buyActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:30px;
+}
+
+.addCart,
+.buyNow{
+  padding:17px;
+  border:1px solid #111;
+  font-weight:700;
+}
+
+.addCart{
+  background:#fff;
+}
+
+.buyNow{
+  background:#111;
+  color:#fff;
+}
+
+.backBtn{
+  border:0;
+  background:none;
+  margin-bottom:25px;
+  font-size:14px;
+}
+
+.noScroll{
+  overflow:hidden;
+}
+
+@media(max-width:1000px){
+
+  .productGrid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .shopLayout{
+    grid-template-columns:190px 1fr;
+  }
+
+}
+
+@media(max-width:700px){
+
+  .topbar{
+    height:36px;
+  }
+
+  .marquee{
+    font-size:10px;
+  }
+
+  .header{
+    height:72px;
+    grid-template-columns:48px 1fr auto;
+    padding:0 20px;
+    gap:8px;
+  }
+
+  .menu{
+    font-size:27px;
+  }
+
+  .logo{
+    font-size:27px;
+    justify-self:center;
+  }
+
+  .logo span{
+    font-size:9px;
+    letter-spacing:3px;
+  }
+
+  .actions{
+    gap:10px;
+  }
+
+  .action{
+    font-size:21px;
+  }
+
+  .breadcrumb{
+    padding:20px;
+  }
+
+  .shopLayout{
+    display:block;
+    padding:0 20px 60px;
+  }
+
+  .filters{
+    display:none;
+  }
+
+  .shopTop{
+    align-items:flex-start;
+  }
+
+  .shopTop h1{
+    font-size:30px;
+  }
+
+  .sortBox select{
+    padding:9px;
+    font-size:12px;
+  }
+
+  .productGrid{
+    grid-template-columns:repeat(2,1fr);
+    gap:18px 10px;
+  }
+
+  .productName{
+    font-size:13px;
+  }
+
+  .detail{
+    padding:20px;
+  }
+
+  .detailGrid{
+    display:block;
+  }
+
+  .detailImage{
+    margin-bottom:25px;
+  }
+
+  .detail h1{
+    font-size:34px;
+  }
+
+  .buyActions{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <!-- TOP OFFER BAR -->
-  <div class="top-bar">
-    <div class="ticker">
-      <span>🔥 EXTRA 10% OFF ON FIRST ORDER</span>
-      <span>⚡ FLAT 50% OFF SELECTED STYLES</span>
-      <span>🚚 FREE SHIPPING ABOVE ₹999</span>
-      <span>💳 EXTRA DISCOUNT ON ONLINE PAYMENT</span>
-    </div>
+<div class="topbar">
+  <div class="marquee">
+    <span>🔥 EXTRA 20% OFF — USE CODE ASNEW20</span>
+    <span>🚚 FREE SHIPPING ABOVE ₹999</span>
+    <span>⚡ CLEARANCE SALE — UP TO 70% OFF</span>
+    <span>🔥 EXTRA 20% OFF — USE CODE ASNEW20</span>
+    <span>🚚 FREE SHIPPING ABOVE ₹999</span>
+  </div>
+</div>
+
+
+<header class="header">
+
+  <button class="menu" onclick="openMenu()">☰</button>
+
+  <div class="logo" onclick="goHome()">
+    AS <span>FASHIONS</span>
   </div>
 
+  <div class="actions">
 
-  <!-- HEADER -->
-  <header class="header">
+    <button class="action"
+            onclick="openWishlist()">
+      ♡
+      <span class="badge"
+            data-wishlist-count>0</span>
+    </button>
 
-    <a href="index.html" class="brand">
-      AS Fashions
-    </a>
+    <button class="action"
+            onclick="openCart()">
+      🛒
+      <span class="badge"
+            data-cart-count>0</span>
+    </button>
 
-    <div class="header-actions">
-
-      <button
-        class="header-icon"
-        onclick="goWishlist()"
-        aria-label="Wishlist"
-      >
-        ♡
-        <span class="count" id="wishlistCount">0</span>
-      </button>
-
-      <button
-        class="header-icon"
-        onclick="goCart()"
-        aria-label="Cart"
-      >
-        🛒
-        <span class="count" id="cartCount">0</span>
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- BREADCRUMB -->
-  <div class="breadcrumb">
-    Home / Products / <span id="breadcrumbName">Product</span>
   </div>
 
+</header>
 
-  <!-- PRODUCT -->
-  <main class="product-container">
 
-    <!-- GALLERY -->
+<div class="mobileMenu" id="mobileMenu">
 
-    <section class="product-gallery">
+  <button class="menuClose"
+          onclick="closeMenu()">×</button>
 
-      <div class="thumbnail-list" id="thumbnailList">
-        <!-- JS -->
+  <h2>AS FASHIONS</h2>
+
+  <a href="index.html">Home</a>
+  <a href="products.html?category=Women">Women</a>
+  <a href="products.html?category=Men">Men</a>
+  <a href="products.html?category=Kids">Kids</a>
+  <a href="products.html?subcategory=Girl">Girls</a>
+  <a href="products.html?subcategory=Boy">Boys</a>
+  <a href="products.html?max=499">Under ₹499</a>
+  <a href="products.html?discount=70">70% OFF</a>
+
+</div>
+
+
+<div class="breadcrumb">
+
+  <span onclick="goHome()" style="cursor:pointer">
+    Home
+  </span>
+
+  /
+  <span>Products</span>
+
+</div>
+
+
+<section class="listing" id="listing">
+
+  <div class="shopLayout">
+
+    <aside class="filters">
+
+      <h3>Filters</h3>
+
+      <div class="filterGroup">
+
+        <strong>Category</strong>
+
+        <label>
+          <input type="checkbox"
+                 value="Women"
+                 class="categoryFilter">
+          Women
+        </label>
+
+        <label>
+          <input type="checkbox"
+                 value="Men"
+                 class="categoryFilter">
+          Men
+        </label>
+
+        <label>
+          <input type="checkbox"
+                 value="Kids"
+                 class="categoryFilter">
+          Kids
+        </label>
+
       </div>
 
-      <div class="main-image-wrapper">
+
+      <div class="filterGroup">
+
+        <strong>Kids</strong>
+
+        <label>
+          <input type="checkbox"
+                 value="Girl"
+                 class="subFilter">
+          Girl
+        </label>
+
+        <label>
+          <input type="checkbox"
+                 value="Boy"
+                 class="subFilter">
+          Boy
+        </label>
+
+      </div>
+
+
+      <div class="filterGroup">
+
+        <strong>Price</strong>
+
+        <label>
+          <input type="checkbox"
+                 value="499"
+                 class="priceFilter">
+          Under ₹499
+        </label>
+
+        <label>
+          <input type="checkbox"
+                 value="999"
+                 class="priceFilter">
+          Under ₹999
+        </label>
+
+        <label>
+          <input type="checkbox"
+                 value="1499"
+                 class="priceFilter">
+          Under ₹1499
+        </label>
+
+      </div>
+
+
+      <div class="filterGroup">
+
+        <strong>Discount</strong>
+
+        <label>
+          <input type="checkbox"
+                 value="30"
+                 class="discountFilter">
+          30% & Above
+        </label>
+
+        <label>
+          <input type="checkbox"
+                 value="50"
+                 class="discountFilter">
+          50% & Above
+        </label>
+
+        <label>
+          <input type="checkbox"
+                 value="70"
+                 class="discountFilter">
+          70% OFF
+        </label>
+
+      </div>
+
+      <button class="clearBtn"
+              onclick="clearFilters()">
+        CLEAR FILTERS
+      </button>
+
+    </aside>
+
+
+    <main>
+
+      <div class="shopTop">
+
+        <div>
+          <h1 id="pageTitle">All Products</h1>
+          <p class="resultText"
+             id="resultText"></p>
+        </div>
+
+        <div class="sortBox">
+
+          <select id="sortSelect"
+                  onchange="renderProducts()">
+
+            <option value="default">
+              Sort: Recommended
+            </option>
+
+            <option value="low">
+              Price: Low to High
+            </option>
+
+            <option value="high">
+              Price: High to Low
+            </option>
+
+            <option value="discount">
+              Biggest Discount
+            </option>
+
+            <option value="rating">
+              Top Rated
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="chips">
+
+        <button onclick="setQuick('all')">
+          All
+        </button>
+
+        <button onclick="setQuick('Women')">
+          Women
+        </button>
+
+        <button onclick="setQuick('Men')">
+          Men
+        </button>
+
+        <button onclick="setQuick('Kids')">
+          Kids
+        </button>
+
+        <button onclick="setQuick('Girl')">
+          Girls
+        </button>
+
+        <button onclick="setQuick('Boy')">
+          Boys
+        </button>
+
+        <button onclick="setQuick('499')">
+          Under ₹499
+        </button>
+
+        <button onclick="setQuick('999')">
+          Under ₹999
+        </button>
+
+        <button onclick="setQuick('70off')">
+          70% OFF
+        </button>
+
+      </div>
+
+
+      <div class="productGrid"
+           id="productGrid"></div>
+
+    </main>
+
+  </div>
+
+</section>
+
+
+<section class="detail"
+         id="detail">
+
+  <button class="backBtn"
+          onclick="showListing()">
+    ← Back to Products
+  </button>
+
+  <div class="detailGrid">
+
+    <div>
+
+      <img id="detailImage"
+           class="detailImage"
+           src=""
+           alt="Product">
+
+    </div>
+
+
+    <div>
+
+      <div class="detailBrand">
+        AS FASHIONS
+      </div>
+
+      <h1 id="detailName"></h1>
+
+      <div id="detailRating"
+           class="detailRating">
+      </div>
+
+      <div>
+
+        <span id="detailPrice"
+              class="detailPrice">
+        </span>
+
+        <span id="detailMrp"
+              class="detailMrp">
+        </span>
+
+        <span id="detailDiscount"
+              class="detailDiscount">
+        </span>
+
+      </div>
+
+      <p style="color:#777;margin-top:10px">
+        MRP inclusive of all taxes
+      </p>
+
+      <hr class="detailLine">
+
+
+      <div class="sizeTitle">
+        Select Size
+      </div>
+
+      <div class="sizes"
+           id="sizes">
+      </div>
+
+
+      <hr class="detailLine">
+
+
+      <p id="detailBadge"
+         style="font-weight:700">
+      </p>
+
+      <p style="margin-top:10px;color:#666">
+        🚚 Free delivery on orders above ₹999
+      </p>
+
+      <p style="margin-top:8px;color:#666">
+        ↩️ Easy returns available
+      </p>
+
+
+      <div class="buyActions">
+
+        <button class="addCart"
+                onclick="detailAddToCart()">
+          🛒 ADD TO BAG
+        </button>
+
+        <button class="buyNow"
+                onclick="detailBuyNow()">
+          BUY NOW
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script src="products.js"></script>
+
+<script>
+
+let currentProducts = [...AS_PRODUCTS];
+let selectedSize = null;
+
+
+/* ================= MENU ================= */
+
+function openMenu(){
+  document
+    .getElementById("mobileMenu")
+    .classList.add("active");
+
+  document.body.classList.add("noScroll");
+}
+
+function closeMenu(){
+  document
+    .getElementById("mobileMenu")
+    .classList.remove("active");
+
+  document.body.classList.remove("noScroll");
+}
+
+
+/* ================= URL ================= */
+
+const params =
+  new URLSearchParams(window.location.search);
+
+const productId = params.get("product");
+const urlCategory = params.get("category");
+const urlSubcategory = params.get("subcategory");
+const urlMax = params.get("max");
+const urlDiscount = params.get("discount");
+const urlWishlist = params.get("wishlist");
+
+
+/* ================= DETAIL ================= */
+
+function showProduct(product){
+
+  if(!product) return;
+
+  document
+    .getElementById("listing")
+    .classList.add("hidden");
+
+  document
+    .getElementById("detail")
+    .classList.add("active");
+
+  document.title =
+    product.name + " — AS FASHIONS";
+
+  document.getElementById("detailImage").src =
+    product.image;
+
+  document.getElementById("detailImage").alt =
+    product.name;
+
+  document.getElementById("detailName").textContent =
+    product.name;
+
+  document.getElementById("detailRating").textContent =
+    "★ " + product.rating + "   " +
+    product.reviews + " Reviews";
+
+  document.getElementById("detailPrice").textContent =
+    "₹" + product.price;
+
+  document.getElementById("detailMrp").textContent =
+    "₹" + product.mrp;
+
+  document.getElementById("detailDiscount").textContent =
+    product.discount + "% OFF";
+
+  document.getElementById("detailBadge").textContent =
+    product.badge;
+
+  const sizes =
+    document.getElementById("sizes");
+
+  sizes.innerHTML = "";
+
+  selectedSize = null;
+
+  product.sizes.forEach(size => {
+
+    const btn =
+      document.createElement("button");
+
+    btn.className = "sizeBtn";
+
+    btn.textContent = size;
+
+    btn.onclick = () => {
+
+      document
+        .querySelectorAll(".sizeBtn")
+        .forEach(b =>
+          b.classList.remove("active")
+        );
+
+      btn.classList.add("active");
+
+      selectedSize = size;
+    };
+
+    sizes.appendChild(btn);
+
+  });
+}
+
+
+function showListing(){
+
+  document
+    .getElementById("detail")
+    .classList.remove("active");
+
+  document
+    .getElementById("listing")
+    .classList.remove("hidden");
+
+  history.replaceState(
+    {},
+    "",
+    "products.html"
+  );
+
+  renderProducts();
+}
+
+
+/* ================= PRODUCT CARD ================= */
+
+function productCard(product){
+
+  const wishlist =
+    getWishlist().includes(product.id);
+
+  return `
+
+    <article class="productCard">
+
+      <div class="imageWrap"
+           onclick="openProduct('${product.id}')">
+
+        <span class="productBadge">
+          ${product.badge}
+        </span>
+
+        <button
+          class="wishBtn ${wishlist ? "active" : ""}"
+          onclick="event.stopPropagation();cardWishlist('${product.id}',this)">
+          ${wishlist ? "♥" : "♡"}
+        </button>
 
         <img
-          id="mainProductImage"
-          class="main-image"
-          src=""
-          alt="Product"
-        >
-
-        <button
-          class="image-wishlist"
-          id="wishlistButton"
-          onclick="toggleProductWishlist()"
-        >
-          ♡
-        </button>
+          src="${product.image}"
+          alt="${product.name}"
+          loading="lazy">
 
       </div>
 
-    </section>
+      <div class="productInfo">
 
-
-    <!-- DETAILS -->
-
-    <section class="details">
-
-      <div class="brand-small">
-        AS Fashions
-      </div>
-
-      <h1
-        class="product-title"
-        id="productTitle"
-      >
-        Loading...
-      </h1>
-
-
-      <div>
-        <span class="rating-box" id="ratingBox">
-          ★ 4.5
-        </span>
-
-        <span
-          class="review-text"
-          id="reviewText"
-        >
-          100 Reviews
-        </span>
-      </div>
-
-
-      <div>
-
-        <span
-          class="price"
-          id="productPrice"
-        >
-          ₹0
-        </span>
-
-        <span
-          class="mrp"
-          id="productMRP"
-        >
-          ₹0
-        </span>
-
-        <span
-          class="discount"
-          id="productDiscount"
-        >
-          0% OFF
-        </span>
-
-      </div>
-
-      <div class="tax">
-        MRP inclusive of all taxes
-      </div>
-
-
-      <div class="divider"></div>
-
-
-      <!-- OFFER -->
-
-      <div class="offer-box">
-
-        <div class="offer-title">
-          🎁 Special Offer
+        <div class="brand">
+          AS FASHIONS
         </div>
 
-        <div class="offer-code">
-          Get extra 10% OFF on your first order.
-          Use code <strong>ASNEW10</strong>
+        <div class="productName"
+             onclick="openProduct('${product.id}')">
+          ${product.name}
         </div>
 
-      </div>
+        <div class="priceRow">
 
-
-      <!-- SIZE -->
-
-      <div class="size-header">
-
-        <strong>Select Size</strong>
-
-        <span class="size-guide">
-          Size Guide
-        </span>
-
-      </div>
-
-      <div class="sizes">
-
-        <button class="size-btn" onclick="selectSize(this)">
-          XS
-        </button>
-
-        <button class="size-btn" onclick="selectSize(this)">
-          S
-        </button>
-
-        <button class="size-btn" onclick="selectSize(this)">
-          M
-        </button>
-
-        <button class="size-btn" onclick="selectSize(this)">
-          L
-        </button>
-
-        <button class="size-btn" onclick="selectSize(this)">
-          XL
-        </button>
-
-        <button class="size-btn" onclick="selectSize(this)">
-          XXL
-        </button>
-
-      </div>
-
-
-      <!-- QUANTITY -->
-
-      <div class="quantity-section">
-
-        <strong>Quantity</strong>
-
-        <div class="quantity">
-
-          <button onclick="changeQuantity(-1)">
-            −
-          </button>
-
-          <span id="quantity">
-            1
+          <span class="price">
+            ₹${product.price}
           </span>
 
-          <button onclick="changeQuantity(1)">
-            +
-          </button>
+          <span class="mrp">
+            ₹${product.mrp}
+          </span>
+
+          <span class="discount">
+            ${product.discount}% OFF
+          </span>
 
         </div>
+
+        <span class="rating">
+          ★ ${product.rating}
+        </span>
 
       </div>
 
+    </article>
 
-      <!-- ACTIONS -->
+  `;
+}
 
-      <div class="actions">
 
-        <button
-          class="add-cart"
-          onclick="addProductToCart()"
-        >
-          🛒 ADD TO CART
-        </button>
+function cardWishlist(id,button){
 
-        <button
-          class="buy-now"
-          onclick="buyNow()"
-        >
-          ⚡ BUY NOW
-        </button>
+  const active =
+    toggleWishlist(id);
 
+  button.classList.toggle(
+    "active",
+    active
+  );
+
+  button.textContent =
+    active ? "♥" : "♡";
+}
+
+
+/* ================= FILTERS ================= */
+
+function renderProducts(){
+
+  let products =
+    [...AS_PRODUCTS];
+
+  const categories =
+    [...document.querySelectorAll(".categoryFilter:checked")]
+      .map(x => x.value);
+
+  const subs =
+    [...document.querySelectorAll(".subFilter:checked")]
+      .map(x => x.value);
+
+  const prices =
+    [...document.querySelectorAll(".priceFilter:checked")]
+      .map(x => Number(x.value));
+
+  const discounts =
+    [...document.querySelectorAll(".discountFilter:checked")]
+      .map(x => Number(x.value));
+
+
+  if(categories.length){
+
+    products =
+      products.filter(p =>
+        categories.includes(p.category)
+      );
+
+  }
+
+
+  if(subs.length){
+
+    products =
+      products.filter(p =>
+        subs.includes(p.subcategory)
+      );
+
+  }
+
+
+  if(prices.length){
+
+    const max =
+      Math.min(...prices);
+
+    products =
+      products.filter(p =>
+        p.price <= max
+      );
+
+  }
+
+
+  if(discounts.length){
+
+    const min =
+      Math.max(...discounts);
+
+    products =
+      products.filter(p =>
+        p.discount >= min
+      );
+
+  }
+
+
+  if(urlWishlist === "true"){
+
+    const wishlist =
+      getWishlist();
+
+    products =
+      products.filter(p =>
+        wishlist.includes(p.id)
+      );
+
+  }
+
+
+  const sort =
+    document.getElementById("sortSelect").value;
+
+  if(sort === "low"){
+    products.sort(
+      (a,b) => a.price - b.price
+    );
+  }
+
+  if(sort === "high"){
+    products.sort(
+      (a,b) => b.price - a.price
+    );
+  }
+
+  if(sort === "discount"){
+    products.sort(
+      (a,b) => b.discount - a.discount
+    );
+  }
+
+  if(sort === "rating"){
+    products.sort(
+      (a,b) => b.rating - a.rating
+    );
+  }
+
+
+  currentProducts = products;
+
+  const grid =
+    document.getElementById("productGrid");
+
+  if(!products.length){
+
+    grid.innerHTML = `
+      <div class="empty">
+        <h2>No products found</h2>
+        <p style="color:#777;margin-top:10px">
+          Try changing your filters.
+        </p>
       </div>
+    `;
+
+  }else{
+
+    grid.innerHTML =
+      products.map(productCard).join("");
+
+  }
 
 
-      <!-- DELIVERY -->
+  document.getElementById("resultText")
+    .textContent =
+    products.length +
+    " products available";
 
-      <div class="delivery">
-
-        <h3>
-          🚚 Check Delivery
-        </h3>
-
-        <div class="delivery-input">
-
-          <input
-            type="text"
-            id="pincode"
-            maxlength="6"
-            placeholder="Enter Pincode"
-          >
-
-          <button onclick="checkDelivery()">
-            CHECK
-          </button>
-
-        </div>
-
-        <div
-          class="delivery-info"
-          id="deliveryInfo"
-        >
-          Enter your pincode to check delivery availability.
-        </div>
-
-      </div>
+}
 
 
-      <!-- FEATURES -->
+/* ================= QUICK FILTER ================= */
 
-      <div class="feature-list">
+function setQuick(type){
 
-        <div class="feature">
-          <strong>🚚 Fast Delivery</strong>
-          Quick shipping
-        </div>
-
-        <div class="feature">
-          <strong>🔄 Easy Returns</strong>
-          7 day returns
-        </div>
-
-        <div class="feature">
-          <strong>🔒 Secure Payment</strong>
-          100% secure
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
+  document
+    .querySelectorAll(
+      ".categoryFilter,.subFilter,.priceFilter,.discountFilter"
+    )
+    .forEach(x => x.checked = false);
 
 
-  <!-- DESCRIPTION -->
+  if(type === "Women"){
+    document.querySelector(
+      '.categoryFilter[value="Women"]'
+    ).checked = true;
+  }
 
-  <section class="description">
+  if(type === "Men"){
+    document.querySelector(
+      '.categoryFilter[value="Men"]'
+    ).checked = true;
+  }
 
-    <h2>
-      Product Details
-    </h2>
+  if(type === "Kids"){
+    document.querySelector(
+      '.categoryFilter[value="Kids"]'
+    ).checked = true;
+  }
 
-    <p id="productDescription">
-      Discover stylish fashion at AS Fashions.
-      Product details, quality and availability may vary.
-      Please check the selected size before placing your order.
-    </p>
+  if(type === "Girl"){
+    document.querySelector(
+      '.subFilter[value="Girl"]'
+    ).checked = true;
+  }
 
-  </section>
+  if(type === "Boy"){
+    document.querySelector(
+      '.subFilter[value="Boy"]'
+    ).checked = true;
+  }
+
+  if(type === "499"){
+    document.querySelector(
+      '.priceFilter[value="499"]'
+    ).checked = true;
+  }
+
+  if(type === "999"){
+    document.querySelector(
+      '.priceFilter[value="999"]'
+    ).checked = true;
+  }
+
+  if(type === "70off"){
+    document.querySelector(
+      '.discountFilter[value="70"]'
+    ).checked = true;
+  }
+
+  renderProducts();
+}
 
 
-  <!-- TOAST -->
+/* ================= CLEAR ================= */
 
-  <div id="toast"></div>
+function clearFilters(){
+
+  document
+    .querySelectorAll(
+      ".categoryFilter,.subFilter,.priceFilter,.discountFilter"
+    )
+    .forEach(x => x.checked = false);
+
+  renderProducts();
+}
 
 
-  <!-- PRODUCT JAVASCRIPT -->
+/* ================= DETAIL CART ================= */
 
-  <script src="product.js"></script>
+function detailAddToCart(){
+
+  const id =
+    new URLSearchParams(
+      window.location.search
+    ).get("product");
+
+  if(!id) return;
+
+  const product =
+    AS_PRODUCTS.find(
+      p => p.id === id
+    );
+
+  if(!product) return;
+
+  if(product.sizes.length && !selectedSize){
+
+    alert("దయచేసి ముందుగా Size select చేయండి.");
+
+    return;
+  }
+
+  addToCart(
+    id,
+    selectedSize
+  );
+}
+
+
+function detailBuyNow(){
+
+  detailAddToCart();
+
+  setTimeout(() => {
+    openCart();
+  },300);
+
+}
+
+
+/* ================= INITIAL LOAD ================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    if(productId){
+
+      const product =
+        AS_PRODUCTS.find(
+          p => p.id === productId
+        );
+
+      if(product){
+
+        showProduct(product);
+
+        return;
+
+      }
+
+    }
+
+
+    if(urlCategory){
+
+      const checkbox =
+        document.querySelector(
+          `.categoryFilter[value="${urlCategory}"]`
+        );
+
+      if(checkbox)
+        checkbox.checked = true;
+
+    }
+
+
+    if(urlSubcategory){
+
+      const checkbox =
+        document.querySelector(
+          `.subFilter[value="${urlSubcategory}"]`
+        );
+
+      if(checkbox)
+        checkbox.checked = true;
+
+    }
+
+
+    if(urlMax){
+
+      const checkbox =
+        document.querySelector(
+          `.priceFilter[value="${urlMax}"]`
+        );
+
+      if(checkbox)
+        checkbox.checked = true;
+
+    }
+
+
+    if(urlDiscount){
+
+      const checkbox =
+        document.querySelector(
+          `.discountFilter[value="${urlDiscount}"]`
+        );
+
+      if(checkbox)
+        checkbox.checked = true;
+
+    }
+
+
+    renderProducts();
+
+  }
+);
+
+</script>
 
 </body>
 </html>

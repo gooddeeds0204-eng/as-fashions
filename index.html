@@ -1,292 +1,2323 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#111111">
-  <meta name="description" content="AS FASHIONS — premium fashion marketplace. Discover new arrivals, trending styles, footwear, bags and more.">
-  <title>AS FASHIONS — Premium Fashion Store</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AS FASHIONS — Premium Fashion Store</title>
+
+    <meta
+        name="description"
+        content="AS FASHIONS — Premium fashion for men, women and kids."
+    >
+
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="announcement">
-    <div class="container announcement__inner">
-      <span>FREE SHIPPING ON ORDERS ABOVE ₹999</span>
-      <span class="announcement__sale">END OF SEASON SALE · UP TO 80% OFF</span>
-      <button class="announcement__link" data-scroll="#sale">SHOP SALE</button>
+
+<!-- =========================================================
+     SALE / TOP ANNOUNCEMENT BAR
+========================================================= -->
+
+<div class="top-announcement" id="topAnnouncement">
+    <div class="announcement-track">
+
+        <span>🔥 FLAT 70% OFF</span>
+        <span>•</span>
+
+        <span>NEW SEASON COLLECTION</span>
+        <span>•</span>
+
+        <span>FREE SHIPPING ON ORDERS ABOVE ₹999</span>
+        <span>•</span>
+
+        <span>EXTRA 10% OFF WITH SELECTED COUPONS</span>
+
     </div>
-  </div>
+</div>
 
-  <header class="site-header" id="top">
-    <div class="container header-main">
-      <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
-      <a class="brand" href="#home" aria-label="AS FASHIONS home">
-        <span class="brand__mark">AS</span>
-        <span class="brand__name">FASHIONS</span>
-      </a>
 
-      <nav class="desktop-nav" id="desktopNav" aria-label="Primary navigation"></nav>
+<!-- =========================================================
+     MAIN HEADER
+========================================================= -->
 
-      <div class="header-actions">
-        <div class="search-wrap">
-          <span class="search-icon">⌕</span>
-          <input id="searchInput" type="search" autocomplete="off" placeholder="Search for products, categories..." aria-label="Search products">
-          <div class="search-suggestions" id="searchSuggestions"></div>
+<header class="site-header" id="siteHeader">
+
+    <div class="header-container">
+
+        <!-- Mobile Menu -->
+        <button
+            class="icon-btn mobile-menu-btn"
+            id="mobileMenuBtn"
+            aria-label="Open menu"
+            type="button"
+        >
+            ☰
+        </button>
+
+
+        <!-- LOGO -->
+
+        <a href="#" class="brand-logo" id="brandLogo">
+            <span class="brand-main">AS</span>
+            <span class="brand-name">FASHIONS</span>
+        </a>
+
+
+        <!-- DESKTOP NAVIGATION -->
+
+        <nav class="main-navigation" id="mainNavigation">
+
+            <div class="nav-item has-mega-menu">
+                <button class="nav-link" type="button">
+                    MEN
+                </button>
+
+                <div class="mega-menu">
+                    <div class="mega-column">
+
+                        <h4>Topwear</h4>
+
+                        <a href="#" data-category="men-shirts">
+                            Shirts
+                        </a>
+
+                        <a href="#" data-category="men-tshirts">
+                            T-Shirts
+                        </a>
+
+                        <a href="#" data-category="men-polos">
+                            Polos
+                        </a>
+
+                        <a href="#" data-category="men-sweatshirts">
+                            Sweatshirts
+                        </a>
+
+                        <a href="#" data-category="men-hoodies">
+                            Hoodies
+                        </a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Bottomwear</h4>
+
+                        <a href="#">Jeans</a>
+                        <a href="#">Trousers</a>
+                        <a href="#">Cargos</a>
+                        <a href="#">Shorts</a>
+                        <a href="#">Track Pants</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Indian Wear</h4>
+
+                        <a href="#">Kurtas</a>
+                        <a href="#">Kurta Sets</a>
+                        <a href="#">Nehru Jackets</a>
+                        <a href="#">Sherwanis</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Collections</h4>
+
+                        <a href="#">New Arrivals</a>
+                        <a href="#">Trending</a>
+                        <a href="#">Best Sellers</a>
+                        <a href="#">Sale</a>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="nav-item has-mega-menu">
+
+                <button class="nav-link" type="button">
+                    WOMEN
+                </button>
+
+                <div class="mega-menu">
+
+                    <div class="mega-column">
+
+                        <h4>Indian Wear</h4>
+
+                        <a href="#">Kurtas</a>
+                        <a href="#">Kurtis</a>
+                        <a href="#">Sarees</a>
+                        <a href="#">Salwar Suits</a>
+                        <a href="#">Lehenga Choli</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Western Wear</h4>
+
+                        <a href="#">Dresses</a>
+                        <a href="#">Tops</a>
+                        <a href="#">Shirts</a>
+                        <a href="#">Jeans</a>
+                        <a href="#">Trousers</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Activewear</h4>
+
+                        <a href="#">Sports Bras</a>
+                        <a href="#">Gym Tops</a>
+                        <a href="#">Track Pants</a>
+                        <a href="#">Leggings</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Collections</h4>
+
+                        <a href="#">New Arrivals</a>
+                        <a href="#">Trending</a>
+                        <a href="#">Best Sellers</a>
+                        <a href="#">Sale</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="nav-item has-mega-menu">
+
+                <button class="nav-link" type="button">
+                    KIDS
+                </button>
+
+                <div class="mega-menu">
+
+                    <div class="mega-column">
+
+                        <h4>Boys</h4>
+
+                        <a href="#">T-Shirts</a>
+                        <a href="#">Shirts</a>
+                        <a href="#">Jeans</a>
+                        <a href="#">Shorts</a>
+                        <a href="#">Ethnic Wear</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Girls</h4>
+
+                        <a href="#">Dresses</a>
+                        <a href="#">Tops</a>
+                        <a href="#">Skirts</a>
+                        <a href="#">Jeans</a>
+                        <a href="#">Ethnic Wear</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Baby</h4>
+
+                        <a href="#">Newborn</a>
+                        <a href="#">Bodysuits</a>
+                        <a href="#">Sets</a>
+                        <a href="#">Sleepwear</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="nav-item has-mega-menu">
+
+                <button class="nav-link" type="button">
+                    FOOTWEAR
+                </button>
+
+                <div class="mega-menu">
+
+                    <div class="mega-column">
+
+                        <h4>Men</h4>
+
+                        <a href="#">Casual Shoes</a>
+                        <a href="#">Sports Shoes</a>
+                        <a href="#">Sneakers</a>
+                        <a href="#">Formal Shoes</a>
+                        <a href="#">Sandals</a>
+                        <a href="#">Slippers</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Women</h4>
+
+                        <a href="#">Heels</a>
+                        <a href="#">Flats</a>
+                        <a href="#">Sneakers</a>
+                        <a href="#">Boots</a>
+                        <a href="#">Sandals</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Kids</h4>
+
+                        <a href="#">School Shoes</a>
+                        <a href="#">Sports Shoes</a>
+                        <a href="#">Casual Shoes</a>
+                        <a href="#">Sandals</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="nav-item has-mega-menu">
+
+                <button class="nav-link" type="button">
+                    BAGS
+                </button>
+
+                <div class="mega-menu">
+
+                    <div class="mega-column">
+
+                        <h4>Backpacks</h4>
+                        <a href="#">Laptop Backpacks</a>
+                        <a href="#">College Backpacks</a>
+                        <a href="#">Travel Backpacks</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Women</h4>
+                        <a href="#">Handbags</a>
+                        <a href="#">Sling Bags</a>
+                        <a href="#">Tote Bags</a>
+                        <a href="#">Clutches</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Travel</h4>
+                        <a href="#">Duffel Bags</a>
+                        <a href="#">Trolley Bags</a>
+                        <a href="#">Travel Organizers</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="nav-item has-mega-menu">
+
+                <button class="nav-link" type="button">
+                    ACCESSORIES
+                </button>
+
+                <div class="mega-menu">
+
+                    <div class="mega-column">
+
+                        <h4>Fashion Accessories</h4>
+
+                        <a href="#">Belts</a>
+                        <a href="#">Wallets</a>
+                        <a href="#">Caps</a>
+                        <a href="#">Sunglasses</a>
+                        <a href="#">Scarves</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Jewellery</h4>
+
+                        <a href="#">Necklaces</a>
+                        <a href="#">Bracelets</a>
+                        <a href="#">Earrings</a>
+                        <a href="#">Rings</a>
+
+                    </div>
+
+                    <div class="mega-column">
+
+                        <h4>Watches</h4>
+
+                        <a href="#">Men's Watches</a>
+                        <a href="#">Women's Watches</a>
+                        <a href="#">Smart Watches</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="nav-item">
+                <button
+                    class="nav-link sale-link"
+                    type="button"
+                    data-category="sale"
+                >
+                    SALE
+                </button>
+            </div>
+
+        </nav>
+
+
+        <!-- HEADER SEARCH -->
+
+        <div class="header-search">
+
+            <span class="search-icon">⌕</span>
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search for products, brands and more"
+                autocomplete="off"
+            >
+
+            <button
+                type="button"
+                class="search-clear"
+                id="searchClear"
+                aria-label="Clear search"
+            >
+                ×
+            </button>
+
+            <div
+                class="search-suggestions"
+                id="searchSuggestions"
+            ></div>
+
         </div>
-        <button class="action-btn" id="accountBtn" aria-label="Account"><span>♙</span><small>Account</small></button>
-        <button class="action-btn" id="wishlistBtn" aria-label="Wishlist"><span>♡</span><small>Wishlist</small><b class="count-badge" id="wishlistCount">0</b></button>
-        <button class="action-btn bag-btn" id="bagBtn" aria-label="Shopping bag"><span>🛍</span><small>Bag</small><b class="count-badge" id="bagCount">0</b></button>
-      </div>
+
+
+        <!-- HEADER ACTIONS -->
+
+        <div class="header-actions">
+
+            <button
+                class="header-action"
+                id="profileBtn"
+                type="button"
+            >
+                <span class="action-icon">♙</span>
+                <span class="action-label">Profile</span>
+            </button>
+
+
+            <button
+                class="header-action"
+                id="wishlistBtn"
+                type="button"
+            >
+                <span class="action-icon">♡</span>
+                <span class="action-label">Wishlist</span>
+                <span
+                    class="action-count"
+                    id="wishlistCount"
+                >
+                    0
+                </span>
+            </button>
+
+
+            <button
+                class="header-action"
+                id="cartBtn"
+                type="button"
+            >
+                <span class="action-icon">🛍</span>
+                <span class="action-label">Bag</span>
+                <span
+                    class="action-count"
+                    id="cartCount"
+                >
+                    0
+                </span>
+            </button>
+
+        </div>
+
     </div>
-    <div class="mobile-search container">
-      <div class="search-wrap">
-        <span class="search-icon">⌕</span>
-        <input id="mobileSearchInput" type="search" autocomplete="off" placeholder="Search styles, products..." aria-label="Search products">
-      </div>
+
+</header>
+
+
+<!-- =========================================================
+     MOBILE NAVIGATION
+========================================================= -->
+
+<div
+    class="mobile-menu-overlay"
+    id="mobileMenuOverlay"
+></div>
+
+<aside
+    class="mobile-drawer"
+    id="mobileDrawer"
+>
+
+    <div class="mobile-drawer-header">
+
+        <a href="#" class="brand-logo">
+            <span class="brand-main">AS</span>
+            <span class="brand-name">FASHIONS</span>
+        </a>
+
+        <button
+            class="icon-btn"
+            id="mobileMenuClose"
+            type="button"
+        >
+            ×
+        </button>
+
     </div>
-    <div class="mega-overlay" id="megaOverlay"></div>
-    <div class="mega-menu" id="megaMenu"></div>
-  </header>
 
-  <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
-    <div class="drawer-head">
-      <strong>AS FASHIONS</strong>
-      <button class="icon-btn" id="closeDrawer">×</button>
+
+    <div class="mobile-user-card">
+
+        <div class="mobile-user-icon">
+            ♙
+        </div>
+
+        <div>
+            <strong>Welcome to AS FASHIONS</strong>
+            <small>Login for a better experience</small>
+        </div>
+
     </div>
-    <div id="mobileCategoryList"></div>
-  </aside>
-  <div class="drawer-backdrop" id="drawerBackdrop"></div>
 
-  <main id="home">
-    <section class="hero" aria-label="Featured sale">
-      <div class="hero-slider" id="heroSlider"></div>
-      <button class="hero-control hero-prev" id="heroPrev" aria-label="Previous slide">‹</button>
-      <button class="hero-control hero-next" id="heroNext" aria-label="Next slide">›</button>
-      <div class="hero-dots" id="heroDots"></div>
-    </section>
 
-    <section class="section container">
-      <div class="section-head">
+    <nav class="mobile-navigation">
+
+        <button class="mobile-nav-item" data-category="men">
+            Men
+            <span>›</span>
+        </button>
+
+        <button class="mobile-nav-item" data-category="women">
+            Women
+            <span>›</span>
+        </button>
+
+        <button class="mobile-nav-item" data-category="kids">
+            Kids
+            <span>›</span>
+        </button>
+
+        <button class="mobile-nav-item" data-category="footwear">
+            Footwear
+            <span>›</span>
+        </button>
+
+        <button class="mobile-nav-item" data-category="bags">
+            Bags
+            <span>›</span>
+        </button>
+
+        <button class="mobile-nav-item" data-category="accessories">
+            Accessories
+            <span>›</span>
+        </button>
+
+        <button class="mobile-nav-item sale-mobile-item" data-category="sale">
+            Sale
+            <span>›</span>
+        </button>
+
+    </nav>
+
+</aside>
+
+
+<!-- =========================================================
+     HERO SECTION
+========================================================= -->
+
+<main>
+
+<section class="hero-section">
+
+    <div class="hero-slider" id="heroSlider">
+
+        <!-- Slide 1 -->
+
+        <article class="hero-slide active">
+
+            <div class="hero-content">
+
+                <span class="hero-eyebrow">
+                    THE NEW SEASON
+                </span>
+
+                <h1>
+                    Style That<br>
+                    Speaks For You
+                </h1>
+
+                <p>
+                    Discover premium fashion curated
+                    for your everyday statement.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    data-category="new-arrivals"
+                    type="button"
+                >
+                    SHOP NEW ARRIVALS
+                    <span>→</span>
+                </button>
+
+            </div>
+
+            <div class="hero-image-placeholder">
+                <div class="hero-placeholder-content">
+                    <span>NEW SEASON</span>
+                    <strong>2026</strong>
+                </div>
+            </div>
+
+        </article>
+
+
+        <!-- Slide 2 -->
+
+        <article class="hero-slide">
+
+            <div class="hero-content">
+
+                <span class="hero-eyebrow">
+                    MEGA SALE
+                </span>
+
+                <h1>
+                    Up To<br>
+                    70% Off
+                </h1>
+
+                <p>
+                    Your favourite styles.
+                    Unmissable prices.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    data-category="sale"
+                    type="button"
+                >
+                    SHOP SALE
+                    <span>→</span>
+                </button>
+
+            </div>
+
+            <div class="hero-image-placeholder">
+                <div class="hero-placeholder-content">
+                    <span>SALE</span>
+                    <strong>70% OFF</strong>
+                </div>
+            </div>
+
+        </article>
+
+
+        <!-- Slide 3 -->
+
+        <article class="hero-slide">
+
+            <div class="hero-content">
+
+                <span class="hero-eyebrow">
+                    PREMIUM EDIT
+                </span>
+
+                <h1>
+                    Everyday<br>
+                    Essentials
+                </h1>
+
+                <p>
+                    Timeless pieces made for
+                    modern wardrobes.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    data-category="trending"
+                    type="button"
+                >
+                    EXPLORE COLLECTION
+                    <span>→</span>
+                </button>
+
+            </div>
+
+            <div class="hero-image-placeholder">
+                <div class="hero-placeholder-content">
+                    <span>PREMIUM</span>
+                    <strong>EDIT</strong>
+                </div>
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <!-- Slider Controls -->
+
+    <button
+        class="slider-arrow slider-prev"
+        id="heroPrev"
+        type="button"
+        aria-label="Previous slide"
+    >
+        ‹
+    </button>
+
+    <button
+        class="slider-arrow slider-next"
+        id="heroNext"
+        type="button"
+        aria-label="Next slide"
+    >
+        ›
+    </button>
+
+
+    <div class="slider-dots" id="heroDots">
+
+        <button class="slider-dot active" type="button"></button>
+        <button class="slider-dot" type="button"></button>
+        <button class="slider-dot" type="button"></button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     URGENCY / SALE STRIP
+========================================================= -->
+
+<section class="sale-urgency">
+
+    <div class="sale-urgency-inner">
+
+        <div class="urgency-title">
+            <span>⚡</span>
+            <strong>FLASH SALE</strong>
+        </div>
+
+        <div class="urgency-message">
+            Limited time. Limited styles.
+        </div>
+
+        <div class="countdown" id="saleCountdown">
+
+            <div class="countdown-box">
+                <strong id="countHours">04</strong>
+                <small>HRS</small>
+            </div>
+
+            <span>:</span>
+
+            <div class="countdown-box">
+                <strong id="countMinutes">59</strong>
+                <small>MIN</small>
+            </div>
+
+            <span>:</span>
+
+            <div class="countdown-box">
+                <strong id="countSeconds">59</strong>
+                <small>SEC</small>
+            </div>
+
+        </div>
+
+        <button
+            class="urgency-btn"
+            data-category="sale"
+            type="button"
+        >
+            SHOP NOW →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CATEGORY DISCOVERY
+========================================================= -->
+
+<section class="section category-section">
+
+    <div class="section-heading">
+
         <div>
-          <p class="eyebrow">DISCOVER YOUR STYLE</p>
-          <h2>Shop by Category</h2>
-        </div>
-        <button class="text-btn" data-view-all="all">View All →</button>
-      </div>
-      <div class="category-grid" id="categoryGrid"></div>
-    </section>
+            <span class="section-eyebrow">
+                EXPLORE
+            </span>
 
-    <section class="section section--dark" id="flashSale">
-      <div class="container">
-        <div class="section-head section-head--light">
-          <div>
-            <p class="eyebrow">LIMITED TIME</p>
-            <h2>⚡ Flash Sale</h2>
-          </div>
-          <div class="sale-clock" id="flashClock">00h : 00m : 00s</div>
+            <h2>
+                Shop By Category
+            </h2>
         </div>
-        <div class="product-row" id="flashProducts"></div>
-      </div>
-    </section>
 
-    <section class="section container" id="trending">
-      <div class="section-head">
+        <button
+            class="text-btn"
+            id="viewAllCategories"
+            type="button"
+        >
+            View All →
+        </button>
+
+    </div>
+
+
+    <div
+        class="category-grid"
+        id="categoryGrid"
+    >
+
+        <!-- JS renders categories -->
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TRENDING NOW
+========================================================= -->
+
+<section class="section trending-section">
+
+    <div class="section-heading">
+
         <div>
-          <p class="eyebrow">WHAT'S HOT</p>
-          <h2>Trending Now</h2>
-        </div>
-        <button class="text-btn" data-tag-filter="Trending">Explore →</button>
-      </div>
-      <div class="product-grid" id="trendingProducts"></div>
-    </section>
+            <span class="section-eyebrow">
+                WHAT'S HOT
+            </span>
 
-    <section class="editorial container">
-      <div class="editorial-card editorial-card--men">
-        <div class="editorial-copy">
-          <span>THE MODERN EDIT</span>
-          <h2>Men's New Season</h2>
-          <p>Sharp essentials, relaxed silhouettes and everyday icons.</p>
-          <button class="light-btn" data-category="Men">Shop Men</button>
+            <h2>
+                Trending Now
+            </h2>
         </div>
-      </div>
-      <div class="editorial-card editorial-card--women">
-        <div class="editorial-copy">
-          <span>NEW SEASON</span>
-          <h2>Women's Edit</h2>
-          <p>Statement pieces and effortless everyday dressing.</p>
-          <button class="light-btn" data-category="Women">Shop Women</button>
-        </div>
-      </div>
-    </section>
 
-    <section class="section container" id="newArrivals">
-      <div class="section-head">
+        <button
+            class="text-btn"
+            data-category="trending"
+            type="button"
+        >
+            Explore All →
+        </button>
+
+    </div>
+
+
+    <div
+        class="product-grid"
+        id="trendingProducts"
+    >
+
+        <!-- Products rendered by JS -->
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     OFFER BANNERS
+========================================================= -->
+
+<section class="section offers-section">
+
+    <div class="offer-grid">
+
+        <article class="offer-card offer-large">
+
+            <div class="offer-content">
+
+                <span>
+                    LIMITED TIME
+                </span>
+
+                <h3>
+                    Flat 50% Off
+                </h3>
+
+                <p>
+                    On selected styles
+                </p>
+
+                <button
+                    class="offer-btn"
+                    data-category="sale"
+                    type="button"
+                >
+                    SHOP OFFER →
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="offer-card">
+
+            <div class="offer-content">
+
+                <span>
+                    NEW USERS
+                </span>
+
+                <h3>
+                    EXTRA ₹500 OFF
+                </h3>
+
+                <p>
+                    On your first order
+                </p>
+
+                <button
+                    class="offer-btn"
+                    id="newUserOffer"
+                    type="button"
+                >
+                    GET OFFER →
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="offer-card">
+
+            <div class="offer-content">
+
+                <span>
+                    MEMBERS ONLY
+                </span>
+
+                <h3>
+                    EXTRA 10% OFF
+                </h3>
+
+                <p>
+                    On selected products
+                </p>
+
+                <button
+                    class="offer-btn"
+                    id="memberOffer"
+                    type="button"
+                >
+                    VIEW DEALS →
+                </button>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     NEW ARRIVALS
+========================================================= -->
+
+<section class="section products-section">
+
+    <div class="section-heading">
+
         <div>
-          <p class="eyebrow">JUST IN</p>
-          <h2>New Arrivals</h2>
-        </div>
-        <button class="text-btn" data-tag-filter="New Arrival">View New Arrivals →</button>
-      </div>
-      <div class="product-grid" id="newProducts"></div>
-    </section>
 
-    <section class="section container">
-      <div class="section-head">
+            <span class="section-eyebrow">
+                JUST IN
+            </span>
+
+            <h2>
+                New Arrivals
+            </h2>
+
+        </div>
+
+        <button
+            class="text-btn"
+            data-category="new-arrivals"
+            type="button"
+        >
+            View All →
+        </button>
+
+    </div>
+
+
+    <div
+        class="product-grid"
+        id="newProducts"
+    >
+
+        <!-- JS -->
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SHOP BY OCCASION
+========================================================= -->
+
+<section class="section occasion-section">
+
+    <div class="section-heading centered">
+
+        <span class="section-eyebrow">
+            FIND YOUR STYLE
+        </span>
+
+        <h2>
+            Shop By Occasion
+        </h2>
+
+    </div>
+
+
+    <div class="occasion-grid">
+
+        <button
+            class="occasion-card"
+            data-occasion="casual"
+            type="button"
+        >
+            <span>CASUAL</span>
+            <strong>Everyday Style</strong>
+        </button>
+
+
+        <button
+            class="occasion-card"
+            data-occasion="work"
+            type="button"
+        >
+            <span>WORKWEAR</span>
+            <strong>Smart & Sharp</strong>
+        </button>
+
+
+        <button
+            class="occasion-card"
+            data-occasion="party"
+            type="button"
+        >
+            <span>PARTY</span>
+            <strong>Make An Entrance</strong>
+        </button>
+
+
+        <button
+            class="occasion-card"
+            data-occasion="sport"
+            type="button"
+        >
+            <span>ACTIVE</span>
+            <strong>Move In Style</strong>
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     BEST SELLERS
+========================================================= -->
+
+<section class="section products-section">
+
+    <div class="section-heading">
+
         <div>
-          <p class="eyebrow">ESSENTIALS</p>
-          <h2>Best Sellers</h2>
-        </div>
-        <button class="text-btn" data-tag-filter="Best Seller">Shop Best Sellers →</button>
-      </div>
-      <div class="product-grid" id="bestProducts"></div>
-    </section>
 
-    <section class="offer-strip" id="sale">
-      <div class="container offer-strip__inner">
+            <span class="section-eyebrow">
+                CUSTOMER FAVOURITES
+            </span>
+
+            <h2>
+                Best Sellers
+            </h2>
+
+        </div>
+
+        <button
+            class="text-btn"
+            data-category="best-sellers"
+            type="button"
+        >
+            View All →
+        </button>
+
+    </div>
+
+
+    <div
+        class="product-grid"
+        id="bestSellerProducts"
+    >
+
+        <!-- JS -->
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PRODUCT DISCOVERY / SHOPPING AREA
+========================================================= -->
+
+<section
+    class="shop-section"
+    id="shopSection"
+>
+
+    <div class="shop-header">
+
         <div>
-          <p class="eyebrow">AS FASHIONS EXCLUSIVE</p>
-          <h2>FLAT 80% OFF</h2>
-          <p>Limited-time styles. Limited quantities. Shop before the clock runs out.</p>
-        </div>
-        <div class="offer-strip__actions">
-          <div class="big-clock" id="saleClock">00 : 00 : 00</div>
-          <button class="primary-btn" data-tag-filter="Sale">Shop Sale</button>
-        </div>
-      </div>
-    </section>
 
-    <section class="section container">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">COMPLETE THE LOOK</p>
-          <h2>Style Collections</h2>
-        </div>
-      </div>
-      <div class="collection-grid">
-        <button class="collection-card collection-card--street" data-tag-filter="Streetwear"><span>Streetwear</span><b>Explore →</b></button>
-        <button class="collection-card collection-card--festive" data-tag-filter="Festive"><span>Festive Edit</span><b>Explore →</b></button>
-        <button class="collection-card collection-card--sport" data-category="Sports & Fitness"><span>Move in Style</span><b>Explore →</b></button>
-        <button class="collection-card collection-card--foot" data-category="Footwear"><span>Sneaker Culture</span><b>Explore →</b></button>
-      </div>
-    </section>
+            <span class="section-eyebrow">
+                AS FASHIONS
+            </span>
 
-    <section class="trust-bar">
-      <div class="container trust-grid">
-        <div><strong>✓</strong><span>Authentic products</span></div>
-        <div><strong>↺</strong><span>Easy returns</span></div>
-        <div><strong>⌁</strong><span>Secure payments</span></div>
-        <div><strong>⚡</strong><span>Fast delivery</span></div>
-      </div>
-    </section>
-  </main>
+            <h2 id="shopTitle">
+                All Products
+            </h2>
 
-  <section class="catalog-page" id="catalogPage" hidden>
-    <div class="container">
-      <div class="breadcrumb" id="breadcrumb"></div>
-      <div class="catalog-head">
-        <div>
-          <p class="eyebrow" id="catalogEyebrow">COLLECTION</p>
-          <h1 id="catalogTitle">All Products</h1>
-          <p id="catalogMeta"></p>
+            <p id="shopResultText">
+                Discover your next favourite style.
+            </p>
+
         </div>
-      </div>
-      <div class="subcat-chips" id="subcatChips"></div>
-      <div class="catalog-toolbar">
-        <button class="filter-toggle" id="filterToggle">☷ Filters</button>
-        <div class="active-filters" id="activeFilters"></div>
-        <select id="sortSelect" aria-label="Sort products">
-          <option value="recommended">Recommended</option>
-          <option value="newest">What's New</option>
-          <option value="priceLow">Price: Low to High</option>
-          <option value="priceHigh">Price: High to Low</option>
-          <option value="discount">Discount</option>
-          <option value="rating">Rating</option>
-        </select>
-      </div>
-      <div class="catalog-layout">
-        <aside class="filters-panel" id="filtersPanel">
-          <div class="filter-head"><strong>Filters</strong><button id="clearFilters">Clear All</button></div>
-          <div class="filter-group"><button class="filter-title">Category <span>+</span></button><div class="filter-options" id="filterCategories"></div></div>
-          <div class="filter-group"><button class="filter-title">Size <span>+</span></button><div class="filter-options" id="filterSizes"></div></div>
-          <div class="filter-group"><button class="filter-title">Color <span>+</span></button><div class="filter-options" id="filterColors"></div></div>
-          <div class="filter-group"><button class="filter-title">Price <span>+</span></button><div class="filter-options">
-            <label><input type="radio" name="price" value="0-499"> Under ₹499</label>
-            <label><input type="radio" name="price" value="500-999"> ₹500–₹999</label>
-            <label><input type="radio" name="price" value="1000-1999"> ₹1,000–₹1,999</label>
-            <label><input type="radio" name="price" value="2000-999999"> ₹2,000+</label>
-          </div></div>
-          <div class="filter-group"><button class="filter-title">Discount <span>+</span></button><div class="filter-options">
-            <label><input type="radio" name="discount" value="20"> 20% and above</label>
-            <label><input type="radio" name="discount" value="40"> 40% and above</label>
-            <label><input type="radio" name="discount" value="60"> 60% and above</label>
-          </div></div>
-          <div class="filter-group"><button class="filter-title">Rating <span>+</span></button><div class="filter-options">
-            <label><input type="radio" name="rating" value="4"> 4★ & above</label>
-            <label><input type="radio" name="rating" value="3"> 3★ & above</label>
-          </div></div>
+
+
+        <div class="shop-controls">
+
+            <button
+                class="filter-mobile-btn"
+                id="filterMobileBtn"
+                type="button"
+            >
+                ☰ Filters
+            </button>
+
+            <select
+                id="sortSelect"
+                class="sort-select"
+            >
+                <option value="recommended">
+                    Recommended
+                </option>
+
+                <option value="newest">
+                    Newest
+                </option>
+
+                <option value="price-low">
+                    Price: Low to High
+                </option>
+
+                <option value="price-high">
+                    Price: High to Low
+                </option>
+
+                <option value="rating">
+                    Customer Rating
+                </option>
+
+                <option value="discount">
+                    Highest Discount
+                </option>
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="shop-layout">
+
+
+        <!-- FILTER SIDEBAR -->
+
+        <aside
+            class="filter-sidebar"
+            id="filterSidebar"
+        >
+
+            <div class="filter-header">
+
+                <strong>
+                    FILTERS
+                </strong>
+
+                <button
+                    id="clearFilters"
+                    type="button"
+                >
+                    Clear All
+                </button>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <button
+                    class="filter-group-title"
+                    type="button"
+                >
+                    Category
+                    <span>−</span>
+                </button>
+
+                <div class="filter-options">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="men"
+                            data-filter="category"
+                        >
+                        Men
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="women"
+                            data-filter="category"
+                        >
+                        Women
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="kids"
+                            data-filter="category"
+                        >
+                        Kids
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="footwear"
+                            data-filter="category"
+                        >
+                        Footwear
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="bags"
+                            data-filter="category"
+                        >
+                        Bags
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="accessories"
+                            data-filter="category"
+                        >
+                        Accessories
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <button
+                    class="filter-group-title"
+                    type="button"
+                >
+                    Gender
+                    <span>−</span>
+                </button>
+
+                <div class="filter-options">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="men"
+                            data-filter="gender"
+                        >
+                        Men
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="women"
+                            data-filter="gender"
+                        >
+                        Women
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="unisex"
+                            data-filter="gender"
+                        >
+                        Unisex
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="kids"
+                            data-filter="gender"
+                        >
+                        Kids
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <button
+                    class="filter-group-title"
+                    type="button"
+                >
+                    Price
+                    <span>−</span>
+                </button>
+
+                <div class="filter-options">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="0-999"
+                            data-filter="price"
+                        >
+                        Under ₹999
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="1000-1999"
+                            data-filter="price"
+                        >
+                        ₹1,000 – ₹1,999
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="2000-3999"
+                            data-filter="price"
+                        >
+                        ₹2,000 – ₹3,999
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="4000-999999"
+                            data-filter="price"
+                        >
+                        ₹4,000+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <button
+                    class="filter-group-title"
+                    type="button"
+                >
+                    Discount
+                    <span>−</span>
+                </button>
+
+                <div class="filter-options">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="10"
+                            data-filter="discount"
+                        >
+                        10% and above
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="30"
+                            data-filter="discount"
+                        >
+                        30% and above
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="50"
+                            data-filter="discount"
+                        >
+                        50% and above
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="70"
+                            data-filter="discount"
+                        >
+                        70% and above
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <button
+                    class="filter-group-title"
+                    type="button"
+                >
+                    Size
+                    <span>−</span>
+                </button>
+
+                <div class="filter-options size-filter">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="XS"
+                            data-filter="size"
+                        >
+                        XS
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="S"
+                            data-filter="size"
+                        >
+                        S
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="M"
+                            data-filter="size"
+                        >
+                        M
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="L"
+                            data-filter="size"
+                        >
+                        L
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="XL"
+                            data-filter="size"
+                        >
+                        XL
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="XXL"
+                            data-filter="size"
+                        >
+                        XXL
+                    </label>
+
+                </div>
+
+            </div>
+
         </aside>
-        <div class="catalog-results">
-          <div class="product-grid" id="catalogProducts"></div>
-          <div class="empty-state" id="emptyState" hidden>
-            <div>⌕</div><h3>No products found</h3><p>Try another category, size or price range.</p><button class="primary-btn" id="resetSearch">Clear filters</button>
-          </div>
+
+
+        <!-- PRODUCT RESULTS -->
+
+        <div class="shop-products">
+
+            <div
+                class="active-filters"
+                id="activeFilters"
+            ></div>
+
+
+            <div
+                class="product-grid"
+                id="productGrid"
+            >
+
+                <!-- products.js + app.js -->
+
+            </div>
+
+
+            <div
+                class="no-products"
+                id="noProducts"
+                hidden
+            >
+
+                <div class="no-products-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No products found
+                </h3>
+
+                <p>
+                    Try changing your filters or search.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    id="resetSearch"
+                    type="button"
+                >
+                    VIEW ALL PRODUCTS
+                </button>
+
+            </div>
+
         </div>
-      </div>
+
     </div>
-  </section>
 
-  <div class="modal-backdrop" id="modalBackdrop"></div>
+</section>
 
-  <section class="modal product-modal" id="productModal" aria-hidden="true">
-    <button class="modal-close" data-close-modal>×</button>
-    <div class="product-detail" id="productDetail"></div>
-  </section>
 
-  <section class="modal bag-modal" id="bagModal" aria-hidden="true">
-    <button class="modal-close" data-close-modal>×</button>
-    <div class="modal-title"><span>YOUR BAG</span><b id="bagModalCount">0 items</b></div>
-    <div id="bagItems"></div>
-    <div class="bag-summary" id="bagSummary"></div>
-  </section>
+<!-- =========================================================
+     BRAND PROMISE / FEATURES
+========================================================= -->
 
-  <section class="modal account-modal" id="accountModal" aria-hidden="true">
-    <button class="modal-close" data-close-modal>×</button>
-    <div class="account-box">
-      <p class="eyebrow">WELCOME TO</p><h2>AS FASHIONS</h2>
-      <p>Sign in to access your orders, wishlist and saved preferences.</p>
-      <button class="primary-btn" id="demoLogin">Continue as Guest</button>
+<section class="features-section">
+
+    <div class="features-container">
+
+        <div class="feature-item">
+
+            <div class="feature-icon">
+                🚚
+            </div>
+
+            <div>
+                <strong>
+                    Free Shipping
+                </strong>
+
+                <span>
+                    On orders above ₹999
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="feature-item">
+
+            <div class="feature-icon">
+                ↩
+            </div>
+
+            <div>
+                <strong>
+                    Easy Returns
+                </strong>
+
+                <span>
+                    Hassle-free returns
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="feature-item">
+
+            <div class="feature-icon">
+                🔒
+            </div>
+
+            <div>
+                <strong>
+                    Secure Payments
+                </strong>
+
+                <span>
+                    100% secure checkout
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="feature-item">
+
+            <div class="feature-icon">
+                ✓
+            </div>
+
+            <div>
+                <strong>
+                    Quality Assured
+                </strong>
+
+                <span>
+                    Curated products
+                </span>
+            </div>
+
+        </div>
+
     </div>
-  </section>
 
-  <section class="modal scratch-modal" id="scratchModal" aria-hidden="true">
-    <button class="modal-close" data-close-modal>×</button>
-    <div class="scratch-box">
-      <span class="gift-icon">🎁</span><p class="eyebrow">WELCOME OFFER</p>
-      <h2>Scratch & Win</h2>
-      <div class="scratch-card" id="scratchCard"><span id="scratchText">SCRATCH HERE</span></div>
-      <p id="scratchResult">Reveal your first-order coupon.</p>
-      <button class="primary-btn" id="claimCoupon" disabled>Reveal Coupon</button>
+</section>
+
+
+<!-- =========================================================
+     NEWSLETTER
+========================================================= -->
+
+<section class="newsletter-section">
+
+    <div class="newsletter-content">
+
+        <span class="section-eyebrow">
+            STAY IN STYLE
+        </span>
+
+        <h2>
+            Get The Latest Drops
+        </h2>
+
+        <p>
+            Sign up for exclusive offers, new arrivals
+            and fashion inspiration.
+        </p>
+
+
+        <form
+            class="newsletter-form"
+            id="newsletterForm"
+        >
+
+            <input
+                type="email"
+                id="newsletterEmail"
+                placeholder="Enter your email address"
+                required
+            >
+
+            <button
+                type="submit"
+            >
+                SUBSCRIBE
+            </button>
+
+        </form>
+
+        <small id="newsletterMessage"></small>
+
     </div>
-  </section>
 
-  <div class="toast" id="toast"></div>
+</section>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand"><a class="brand brand--footer" href="#home"><span class="brand__mark">AS</span><span class="brand__name">FASHIONS</span></a><p>Premium fashion, thoughtfully curated.</p></div>
-      <div><h4>Shop</h4><button data-category="Men">Men</button><button data-category="Women">Women</button><button data-category="Kids">Kids</button><button data-category="Footwear">Footwear</button></div>
-      <div><h4>Explore</h4><button data-tag-filter="Trending">Trending</button><button data-tag-filter="New Arrival">New Arrivals</button><button data-tag-filter="Sale">Sale</button><button data-category="Sports & Fitness">Sports & Fitness</button></div>
-      <div><h4>Help</h4><button>Shipping & Delivery</button><button>Returns</button><button>Size Guide</button><button>Contact Us</button></div>
-      <div><h4>Stay in the loop</h4><p>Get new drops and exclusive offers.</p><div class="newsletter"><input type="email" placeholder="Your email"><button id="subscribeBtn">→</button></div></div>
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <a href="#" class="brand-logo footer-logo">
+
+                <span class="brand-main">
+                    AS
+                </span>
+
+                <span class="brand-name">
+                    FASHIONS
+                </span>
+
+            </a>
+
+            <p>
+                Premium fashion for every moment.
+                Discover styles that define you.
+            </p>
+
+            <div class="social-links">
+
+                <a href="#" aria-label="Instagram">
+                    ◎
+                </a>
+
+                <a href="#" aria-label="Facebook">
+                    f
+                </a>
+
+                <a href="#" aria-label="Pinterest">
+                    p
+                </a>
+
+                <a href="#" aria-label="X">
+                    𝕏
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>ONLINE SHOPPING</h4>
+
+            <a href="#" data-category="men">
+                Men
+            </a>
+
+            <a href="#" data-category="women">
+                Women
+            </a>
+
+            <a href="#" data-category="kids">
+                Kids
+            </a>
+
+            <a href="#" data-category="footwear">
+                Footwear
+            </a>
+
+            <a href="#" data-category="bags">
+                Bags
+            </a>
+
+            <a href="#" data-category="accessories">
+                Accessories
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>USEFUL LINKS</h4>
+
+            <a href="#" id="footerTrackOrder">
+                Track Order
+            </a>
+
+            <a href="#" id="footerReturns">
+                Returns
+            </a>
+
+            <a href="#" id="footerShipping">
+                Shipping
+            </a>
+
+            <a href="#" id="footerContact">
+                Contact Us
+            </a>
+
+            <a href="#" id="footerFaq">
+                FAQ
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>ABOUT AS FASHIONS</h4>
+
+            <a href="#">
+                About Us
+            </a>
+
+            <a href="#">
+                Careers
+            </a>
+
+            <a href="#">
+                Terms & Conditions
+            </a>
+
+            <a href="#">
+                Privacy Policy
+            </a>
+
+        </div>
+
+
+        <div class="footer-column footer-app">
+
+            <h4>EXPERIENCE AS FASHIONS</h4>
+
+            <p>
+                Shop smarter. Shop faster.
+            </p>
+
+            <div class="app-buttons">
+
+                <button type="button">
+                    <small>GET IT ON</small>
+                    <strong>Google Play</strong>
+                </button>
+
+                <button type="button">
+                    <small>DOWNLOAD ON</small>
+                    <strong>App Store</strong>
+                </button>
+
+            </div>
+
+        </div>
+
     </div>
-    <div class="container footer-bottom"><span>© 2026 AS FASHIONS</span><span>Premium Fashion Store</span></div>
-  </footer>
 
-  <script src="categories.js"></script>
-  <script src="products.js"></script>
-  <script src="app.js"></script>
-</body>
-</html>
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 AS FASHIONS. All rights reserved.
+        </span>
+
+        <div>
+            <span>Secure Payments</span>
+            <span>•</span>
+            <span>Made With Style</span>
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     PRODUCT QUICK VIEW MODAL
+========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="productModal"
+    hidden
+>
+
+    <div
+        class="product-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Product details"
+    >
+
+        <button
+            class="modal-close"
+            id="productModalClose"
+            type="button"
+        >
+            ×
+        </button>
+
+
+        <div class="product-modal-content">
+
+            <div class="modal-product-image" id="modalProductImage">
+                <span>PRODUCT</span>
+            </div>
+
+
+            <div class="modal-product-info">
+
+                <span
+                    class="modal-product-brand"
+                    id="modalProductBrand"
+                >
+                    AS FASHIONS
+                </span>
+
+                <h2 id="modalProductName">
+                    Product Name
+                </h2>
+
+                <div
+                    class="modal-rating"
+                    id="modalProductRating"
+                >
+                    ★ 4.5
+                </div>
+
+                <div class="modal-price">
+
+                    <strong id="modalProductPrice">
+                        ₹1,999
+                    </strong>
+
+                    <del id="modalProductOriginalPrice">
+                        ₹3,999
+                    </del>
+
+                    <span id="modalProductDiscount">
+                        50% OFF
+                    </span>
+
+                </div>
+
+
+                <div class="modal-divider"></div>
+
+
+                <div class="modal-size-section">
+
+                    <div class="modal-size-header">
+
+                        <strong>
+                            Select Size
+                        </strong>
+
+                        <button
+                            type="button"
+                            id="sizeGuideBtn"
+                        >
+                            Size Guide
+                        </button>
+
+                    </div>
+
+                    <div
+                        class="modal-sizes"
+                        id="modalSizes"
+                    ></div>
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        class="modal-add-cart"
+                        id="modalAddCart"
+                        type="button"
+                    >
+                        ADD TO BAG
+                    </button>
+
+                    <button
+                        class="modal-wishlist"
+                        id="modalWishlist"
+                        type="button"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="modal-delivery">
+
+                    <strong>
+                        Delivery
+                    </strong>
+
+                    <div class="delivery-input">
+
+                        <input
+                            type="text"
+                            id="pincodeInput"
+                            placeholder="Enter pincode"
+                            maxlength="6"
+                        >
+
+                        <button
+                            type="button"
+                            id="checkPincode"
+                        >
+                            CHECK
+                        </button>
+
+                    </div>
+
+                    <small id="deliveryMessage"></small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CART DRAWER
+========================================================= -->
+
+<div
+    class="cart-overlay"
+    id="cartOverlay"
+    hidden
+></div>
+
+<aside
+    class="cart-drawer"
+    id="cartDrawer"
+>
+
+    <div class="cart-header">
+
+        <div>
+            <span class="section-eyebrow">
+                YOUR SHOPPING BAG
+            </span>
+
+            <h2>
+                My Bag
+            </h2>
+        </div>
+
+        <button
+            class="icon-btn"
+            id="cartClose"
+            type="button"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        class="cart-items"
+        id="cartItems"
+    >
+
+        <!-- JS -->
+
+    </div>
+
+
+    <div
+        class="cart-empty"
+        id="cartEmpty"
+    >
+
+        <div>
+            🛍
+        </div>
+
+        <h3>
+            Your bag is empty
+        </h3>
+
+        <p>
+            Add something you love.
+        </p>
+
+        <button
+            class="primary-btn"
+            id="startShoppingBtn"
+            type="button"
+        >
+            START SHOPPING
+        </button>
+
+    </div>
+
+
+    <div
+        class="cart-summary"
+        id="cartSummary"
+    >
+
+        <div class="summary-row">
+            <span>Subtotal</span>
+            <strong id="cartSubtotal">₹0</strong>
+        </div>
+
+        <div class="summary-row">
+            <span>Discount</span>
+            <strong id="cartDiscount">− ₹0</strong>
+        </div>
+
+        <div class="summary-row">
+            <span>Shipping</span>
+            <strong id="cartShipping">FREE</strong>
+        </div>
+
+        <div class="summary-total">
+            <span>Total</span>
+            <strong id="cartTotal">₹0</strong>
+        </div>
+
+        <button
+            class="checkout-btn"
+            id="checkoutBtn"
+            type="button"
+        >
+            PROCEED TO CHECKOUT
+            <span>→</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================================================
+     WISHLIST DRAWER
+========================================================= -->
+
+<div
+    class="wishlist-overlay"
+    id="wishlistOverlay"
+    hidden
+></div>
+
+<aside
+    class="wishlist-drawer"
+    id="wishlistDrawer"
+>
+
+    <div class="drawer-header">
+
+        <div>
+
+            <span class="section-eyebrow">
+                SAVED FOR LATER
+            </span>
+
+            <h2>
+                Wishlist
+            </h2>
+
+        </div>
+
+        <button
+            class="icon-btn"
+            id="wishlistClose"
+            type="button"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        class="wishlist-items"
+        id="wishlistItems"
+    ></div>
+
+</aside>
+
+
+<!-- =========================================================
+     PROFILE MODAL
+========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="profileModal"
+    hidden
+>
+
+    <div class="profile-modal">
+
+        <button
+            class="modal-close"
+            id="profileModalClose"
+            type="button"
+        >
+            ×
+        </button>
+
+        <div class="profile-icon">
+            ♙
+        </div>
+
+        <h2>
+            Welcome to AS FASHIONS
+        </h2>
+
+        <p>
+            Login to access your wishlist,
+            orders and personalised experience.
+        </p>
+
+        <button
+            class="primary-btn full-btn"
+            id="loginBtn"
+            type="button"
+        >
+            LOGIN / SIGN UP
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     COUPON / SCRATCH CARD
+========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="couponModal"
+    hidden
+>
+
+    <div class="coupon-modal">
+
+        <button
+            class="modal-close"
+            id="couponModalClose"
+            type="button"
+        >
+            ×
+        </button>
+
+        <span class="section-eyebrow">
+            EXCLUSIVE OFFER
+        </span>
+
+        <h2>
+            Unlock Your Deal
+        </h2>
+
+        <p>
+            Scratch to reveal your special coupon.
+        </p>
+
+        <div
+            class="scratch-card"
+            id="scratchCard"
+        >
+            <span>
+                SCRATCH HERE
+            </span>
+        </div>
+
+        <div
+            class="coupon-result"
+            id="couponResult"
+            hidden
+        >
+            <strong>
+                ASNEW10
+            </strong>
+
+            <span>
+                Get extra 10% OFF
+            </span>
+
+            <button
+                type="button"
+                id="copyCoupon"
+            >
+                COPY CODE

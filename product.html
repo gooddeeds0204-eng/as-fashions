@@ -1,900 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - AS Fashions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0b0f19;
+            --surface: rgba(30, 41, 59, 0.7);
+            --primary: #ec4899;
+            --secondary: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-deep); color: var(--text-main); min-height: 100vh; }
+        
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 5%; background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(16px); border-bottom: 1px solid var(--border);
+        }
+        .logo { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #ec4899, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .details-container {
+            max-width: 1200px; margin: 4rem auto; padding: 0 5%;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+        }
+        .img-box {
+            width: 100%; height: 500px; border-radius: 24px; overflow: hidden;
+            border: 1px solid var(--border); background: var(--surface);
+        }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .info-box h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .info-box .price { font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 1.5rem; display: block; }
+        .info-box p { color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem; }
+        
+        .sizes { display: flex; gap: 1rem; margin-bottom: 2rem; }
+        .size-btn {
+            background: var(--surface); border: 1px solid var(--border);
+            color: white; padding: 0.8rem 1.2rem; border-radius: 12px; cursor: pointer; font-weight: 700; transition: 0.3s;
+        }
+        .size-btn:hover, .size-btn.selected { border-color: var(--primary); background: rgba(236,72,153,0.1); }
+        
+        .cta-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none; width: 100%; padding: 1rem; border-radius: 14px;
+            color: white; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+        }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(236, 72, 153, 0.5); }
 
-<title>AS FASHIONS — Product</title>
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    color:#111;
-    background:#fff;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-.topbar{
-    height:44px;
-    background:#111;
-    color:#fff;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-}
-
-.marquee{
-    white-space:nowrap;
-    animation:move 22s linear infinite;
-    font-size:13px;
-    letter-spacing:1px;
-}
-
-@keyframes move{
-    from{transform:translateX(100%)}
-    to{transform:translateX(-100%)}
-}
-
-.header{
-    height:88px;
-    border-bottom:1px solid #eee;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 5%;
-}
-
-.logo{
-    font-family:Georgia,serif;
-    font-size:34px;
-    letter-spacing:5px;
-}
-
-.logo span{
-    font-size:12px;
-    letter-spacing:6px;
-    display:block;
-    text-align:center;
-    margin-top:3px;
-}
-
-.header-actions{
-    display:flex;
-    gap:22px;
-    align-items:center;
-}
-
-.header-actions a{
-    font-size:25px;
-    position:relative;
-}
-
-.badge{
-    position:absolute;
-    top:-10px;
-    right:-10px;
-    width:20px;
-    height:20px;
-    border-radius:50%;
-    background:#e21b2d;
-    color:white;
-    font-size:11px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.breadcrumb{
-    padding:22px 5%;
-    color:#777;
-    font-size:15px;
-}
-
-.product-container{
-    max-width:1400px;
-    margin:auto;
-    padding:20px 5% 80px;
-    display:grid;
-    grid-template-columns:1.05fr .95fr;
-    gap:55px;
-}
-
-.image-area{
-    position:relative;
-}
-
-.product-image{
-    width:100%;
-    aspect-ratio:4/5;
-    object-fit:cover;
-    background:#f5f5f5;
-    display:block;
-}
-
-.image-fallback{
-    display:none;
-    width:100%;
-    aspect-ratio:4/5;
-    background:#f4f4f4;
-    align-items:center;
-    justify-content:center;
-    font-size:60px;
-}
-
-.wishlist-btn{
-    position:absolute;
-    right:20px;
-    top:20px;
-    width:54px;
-    height:54px;
-    border-radius:50%;
-    border:none;
-    background:#fff;
-    box-shadow:0 5px 20px #0002;
-    font-size:27px;
-    cursor:pointer;
-}
-
-.brand{
-    font-size:13px;
-    letter-spacing:3px;
-    color:#777;
-    margin-bottom:14px;
-}
-
-.product-name{
-    font-family:Georgia,serif;
-    font-size:42px;
-    line-height:1.08;
-    margin-bottom:18px;
-}
-
-.rating{
-    display:inline-flex;
-    background:#16843b;
-    color:#fff;
-    padding:8px 12px;
-    border-radius:5px;
-    font-size:14px;
-    margin-bottom:25px;
-}
-
-.price-row{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:8px;
-}
-
-.price{
-    font-size:30px;
-    font-weight:700;
-}
-
-.old-price{
-    color:#888;
-    text-decoration:line-through;
-    font-size:18px;
-}
-
-.discount{
-    color:#16843b;
-    font-weight:bold;
-}
-
-.tax{
-    color:#777;
-    font-size:13px;
-    margin-bottom:30px;
-}
-
-.option-title{
-    font-weight:bold;
-    margin:22px 0 12px;
-}
-
-.size-list{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.size{
-    min-width:55px;
-    padding:12px 15px;
-    border:1px solid #ccc;
-    background:#fff;
-    cursor:pointer;
-}
-
-.size.active{
-    border:2px solid #111;
-}
-
-.buttons{
-    display:flex;
-    gap:12px;
-    margin-top:30px;
-}
-
-.add-cart,
-.buy-now{
-    flex:1;
-    padding:18px;
-    border:none;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.add-cart{
-    background:#fff;
-    border:1px solid #111;
-}
-
-.buy-now{
-    background:#111;
-    color:#fff;
-}
-
-.info{
-    margin-top:35px;
-    border-top:1px solid #eee;
-}
-
-.info-row{
-    padding:18px 0;
-    border-bottom:1px solid #eee;
-}
-
-.not-found{
-    min-height:60vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    flex-direction:column;
-    gap:18px;
-}
-
-.not-found h1{
-    font-size:40px;
-}
-
-.back-btn{
-    background:#111;
-    color:#fff;
-    padding:15px 30px;
-}
-
-@media(max-width:768px){
-
-    .topbar{
-        height:38px;
-    }
-
-    .header{
-        height:76px;
-        padding:0 22px;
-    }
-
-    .logo{
-        font-size:25px;
-        letter-spacing:3px;
-    }
-
-    .logo span{
-        font-size:8px;
-        letter-spacing:4px;
-    }
-
-    .header-actions{
-        gap:15px;
-    }
-
-    .header-actions a{
-        font-size:22px;
-    }
-
-    .breadcrumb{
-        padding:18px 20px;
-    }
-
-    .product-container{
-        display:block;
-        padding:0 20px 50px;
-    }
-
-    .product-info{
-        padding-top:30px;
-    }
-
-    .product-name{
-        font-size:32px;
-    }
-
-    .product-image{
-        aspect-ratio:4/5;
-    }
-
-    .buttons{
-        position:sticky;
-        bottom:0;
-        background:#fff;
-        padding:12px 0;
-        z-index:20;
-    }
-}
-</style>
+        @media(max-width: 768px) { .details-container { grid-template-columns: 1fr; gap: 2rem; } }
+    </style>
 </head>
-
 <body>
 
-<div class="topbar">
-    <div class="marquee">
-        🔥 EXTRA 20% OFF ON FIRST ORDER &nbsp;&nbsp; | &nbsp;&nbsp;
-        🚚 FREE SHIPPING ABOVE ₹999 &nbsp;&nbsp; | &nbsp;&nbsp;
-        ⚡ CLEARANCE SALE UP TO 70% OFF
-    </div>
-</div>
+    <header>
+        <div class="logo">AS FASHIONS</div>
+        <a href="products.html" style="color: var(--text-muted); text-decoration: none; font-weight: 600;">← Back to Shop</a>
+    </header>
 
-<header class="header">
-
-    <a href="index.html" class="logo">
-        AS
-        <span>FASHIONS</span>
-    </a>
-
-    <div class="header-actions">
-        <a href="wishlist.html">♡
-            <span class="badge" id="wishCount">0</span>
-        </a>
-
-        <a href="cart.html">🛍
-            <span class="badge" id="cartCount">0</span>
-        </a>
+    <div class="details-container" id="product-detail-view">
+        <!-- Dynamically Loaded via URL parameters -->
     </div>
 
-</header>
+    <script src="products.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id')) || 1;
+        const currentProd = products.find(p => p.id === productId) || products[0];
 
-<div class="breadcrumb">
-    <a href="index.html">Home</a>
-    /
-    <a href="products.html">Products</a>
-    /
-    <span id="breadName">Product</span>
-</div>
-
-<main id="productRoot">
-
-    <div class="not-found">
-        <h1>Loading...</h1>
-    </div>
-
-</main>
-
-
-<!-- IMPORTANT:
-     products.js must be loaded BEFORE this page script.
--->
-<script src="products.js"></script>
-
-<script>
-
-/* =========================================================
-   AS FASHIONS — PRODUCT DETAIL ENGINE
-   ========================================================= */
-
-(function(){
-
-    const params = new URLSearchParams(window.location.search);
-
-    const requestedId = String(
-        params.get("id") || ""
-    ).trim().toLowerCase();
-
-    const root = document.getElementById("productRoot");
-
-    function getProducts(){
-
-        /*
-         Supports the current AS FASHIONS products.js
-         and also older versions.
-        */
-
-        if(Array.isArray(window.PRODUCTS)){
-            return window.PRODUCTS;
-        }
-
-        if(Array.isArray(window.AS_PRODUCTS)){
-            return window.AS_PRODUCTS;
-        }
-
-        if(Array.isArray(window.products)){
-            return window.products;
-        }
-
-        return [];
-    }
-
-
-    function findProduct(){
-
-        const list = getProducts();
-
-        if(!requestedId){
-            return null;
-        }
-
-        return list.find(product => {
-
-            if(!product) return false;
-
-            const id = String(
-                product.id ??
-                product.productId ??
-                product.sku ??
-                ""
-            ).trim().toLowerCase();
-
-            return id === requestedId;
-
-        }) || null;
-    }
-
-
-    function safe(value){
-
-        return String(value ?? "")
-            .replace(/&/g,"&amp;")
-            .replace(/</g,"&lt;")
-            .replace(/>/g,"&gt;")
-            .replace(/"/g,"&quot;");
-    }
-
-
-    function money(value){
-
-        const number = Number(value || 0);
-
-        return "₹" + number.toLocaleString("en-IN");
-    }
-
-
-    function render(product){
-
-        if(!product){
-
-            root.innerHTML = `
-                <div class="not-found">
-
-                    <h1>Product Not Found</h1>
-
-                    <p>
-                        ఈ product ప్రస్తుతం అందుబాటులో లేదు.
-                    </p>
-
-                    <a href="products.html"
-                       class="back-btn">
-                        BACK TO PRODUCTS
-                    </a>
-
+        document.getElementById("product-detail-view").innerHTML = `
+            <div class="img-box">
+                <img src="${currentProd.image}" alt="${currentProd.name}">
+            </div>
+            <div class="info-box">
+                <span style="color: var(--secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">${currentProd.category} Collection</span>
+                <h1>${currentProd.name}</h1>
+                <span class="price">₹${currentProd.price}</span>
+                <p>Crafted with elite fabrics, designed for supreme comfort and standout streetwear vibes. Standard fit tailored for the modern trendsetters.</p>
+                
+                <label style="display:block; margin-bottom: 0.8rem; font-weight: 700;">Select Size:</label>
+                <div class="sizes">
+                    <button class="size-btn selected">S</button>
+                    <button class="size-btn">M</button>
+                    <button class="size-btn">L</button>
+                    <button class="size-btn">XL</button>
                 </div>
-            `;
-
-            return;
-        }
-
-
-        const image =
-            product.image ||
-            product.imageUrl ||
-            product.img ||
-            "";
-
-
-        const name =
-            product.name ||
-            product.title ||
-            "Fashion Product";
-
-
-        const brand =
-            product.brand ||
-            "AS FASHIONS";
-
-
-        const price =
-            product.price ??
-            product.salePrice ??
-            0;
-
-
-        const oldPrice =
-            product.oldPrice ??
-            product.mrp ??
-            price;
-
-
-        const discount =
-            product.discount ??
-            (
-                oldPrice > price
-                ? Math.round(
-                    ((oldPrice-price)/oldPrice)*100
-                  )
-                : 0
-            );
-
-
-        const rating =
-            product.rating ??
-            4.5;
-
-
-        const reviews =
-            product.reviews ??
-            100;
-
-
-        const sizes =
-            Array.isArray(product.sizes)
-            ? product.sizes
-            : ["S","M","L","XL"];
-
-
-        const category =
-            product.category ||
-            "";
-
-
-        const subcategory =
-            product.subcategory ||
-            "";
-
-
-        document.title =
-            `${name} — AS FASHIONS`;
-
-
-        document.getElementById("breadName")
-            .textContent = name;
-
-
-        root.innerHTML = `
-
-            <div class="product-container">
-
-                <section class="image-area">
-
-                    <img
-                        class="product-image"
-                        src="${safe(image)}"
-                        alt="${safe(name)}"
-                        onerror="this.style.display='none';
-                                 this.nextElementSibling.style.display='flex';"
-                    >
-
-                    <div class="image-fallback">
-                        👗
-                    </div>
-
-                    <button
-                        class="wishlist-btn"
-                        id="detailWish"
-                        aria-label="Wishlist">
-                        ♡
-                    </button>
-
-                </section>
-
-
-                <section class="product-info">
-
-                    <div class="brand">
-                        ${safe(brand)}
-                    </div>
-
-                    <h1 class="product-name">
-                        ${safe(name)}
-                    </h1>
-
-                    <div class="rating">
-                        ★ ${safe(rating)}
-                        &nbsp; ${safe(reviews)} Reviews
-                    </div>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ${money(price)}
-                        </span>
-
-                        ${
-                            Number(oldPrice) > Number(price)
-                            ? `
-                                <span class="old-price">
-                                    ${money(oldPrice)}
-                                </span>
-
-                                <span class="discount">
-                                    ${safe(discount)}% OFF
-                                </span>
-                            `
-                            : ""
-                        }
-
-                    </div>
-
-                    <div class="tax">
-                        MRP inclusive of all taxes
-                    </div>
-
-
-                    <div class="option-title">
-                        Select Size
-                    </div>
-
-                    <div class="size-list">
-
-                        ${
-                            sizes.map((size,index)=>`
-
-                                <button
-                                    class="size ${index===0?'active':''}"
-                                    data-size="${safe(size)}">
-                                    ${safe(size)}
-                                </button>
-
-                            `).join("")
-                        }
-
-                    </div>
-
-
-                    <div class="buttons">
-
-                        <button
-                            class="add-cart"
-                            id="addCart">
-                            ADD TO BAG
-                        </button>
-
-                        <button
-                            class="buy-now"
-                            id="buyNow">
-                            BUY NOW
-                        </button>
-
-                    </div>
-
-
-                    <div class="info">
-
-                        <div class="info-row">
-                            <strong>Category</strong><br>
-                            ${safe(category)}
-                        </div>
-
-                        <div class="info-row">
-                            <strong>Style</strong><br>
-                            ${safe(subcategory)}
-                        </div>
-
-                        <div class="info-row">
-                            <strong>Delivery</strong><br>
-                            Check delivery availability at your location
-                        </div>
-
-                        <div class="info-row">
-                            <strong>Returns</strong><br>
-                            Easy returns as per AS FASHIONS policy
-                        </div>
-
-                    </div>
-
-                </section>
-
+                
+                <button class="cta-btn" onclick="addToCart(${currentProd.id})">⚡ Add to Cart Now</button>
             </div>
         `;
-
-
-        /* SIZE */
-
-        document
-            .querySelectorAll(".size")
-            .forEach(button => {
-
-                button.addEventListener("click",()=>{
-
-                    document
-                        .querySelectorAll(".size")
-                        .forEach(item =>
-                            item.classList.remove("active")
-                        );
-
-                    button.classList.add("active");
-
-                });
-
-            });
-
-
-        /* WISHLIST */
-
-        document
-            .getElementById("detailWish")
-            .addEventListener("click",()=>{
-
-                let wishlist =
-                    JSON.parse(
-                        localStorage.getItem("asWishlist")
-                        || "[]"
-                    );
-
-                const exists =
-                    wishlist.some(
-                        item =>
-                        String(item.id).toLowerCase()
-                        === String(product.id).toLowerCase()
-                    );
-
-                if(!exists){
-
-                    wishlist.push(product);
-
-                    localStorage.setItem(
-                        "asWishlist",
-                        JSON.stringify(wishlist)
-                    );
-
-                    document.getElementById("detailWish")
-                        .textContent = "♥";
-
-                }
-
-                updateCounts();
-
-            });
-
-
-        /* ADD CART */
-
-        document
-            .getElementById("addCart")
-            .addEventListener("click",()=>{
-
-                addToCart(product);
-
-                alert("Product cart లో add అయింది.");
-
-                updateCounts();
-
-            });
-
-
-        /* BUY NOW */
-
-        document
-            .getElementById("buyNow")
-            .addEventListener("click",()=>{
-
-                addToCart(product);
-
-                window.location.href =
-                    "cart.html";
-
-            });
-
-    }
-
-
-    function addToCart(product){
-
-        let cart =
-            JSON.parse(
-                localStorage.getItem("asCart")
-                || "[]"
-            );
-
-
-        const selectedSize =
-            document.querySelector(".size.active")
-            ?.dataset.size || "";
-
-
-        const existing =
-            cart.find(item =>
-                String(item.id).toLowerCase()
-                === String(product.id).toLowerCase()
-                &&
-                item.size === selectedSize
-            );
-
-
-        if(existing){
-
-            existing.quantity =
-                Number(existing.quantity || 1) + 1;
-
-        }else{
-
-            cart.push({
-
-                ...product,
-
-                size:selectedSize,
-
-                quantity:1
-
-            });
-
-        }
-
-
-        localStorage.setItem(
-            "asCart",
-            JSON.stringify(cart)
-        );
-
-    }
-
-
-    function updateCounts(){
-
-        const cart =
-            JSON.parse(
-                localStorage.getItem("asCart")
-                || "[]"
-            );
-
-        const wishlist =
-            JSON.parse(
-                localStorage.getItem("asWishlist")
-                || "[]"
-            );
-
-
-        const cartCount =
-            cart.reduce(
-                (sum,item)=>
-                sum + Number(item.quantity || 1),
-                0
-            );
-
-
-        document.getElementById("cartCount")
-            .textContent = cartCount;
-
-
-        document.getElementById("wishCount")
-            .textContent = wishlist.length;
-
-    }
-
-
-    /* START */
-
-    const product = findProduct();
-
-    render(product);
-
-    updateCounts();
-
-
-})();
-
-</script>
-
+    </script>
 </body>
 </html>

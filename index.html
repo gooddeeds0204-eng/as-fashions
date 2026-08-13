@@ -488,6 +488,9 @@ header.premium-scrolled{box-shadow:0 10px 35px rgba(0,0,0,.10)}
 @media(max-width:900px){.price-grid{grid-template-columns:1fr 1fr}.kids-catalogue{grid-template-columns:repeat(2,1fr)}.style-banner{min-height:600px}.style-content{padding:95px 7%}.style-content h2{font-size:70px}}
 @media(max-width:600px){.price-grid{grid-template-columns:1fr}.kids-catalogue{grid-template-columns:1fr 1fr}.kids-catalogue img{height:190px}.style-banner{min-height:610px}.style-content{padding:95px 8%}.style-content h2{font-size:68px}.style-content p{font-size:14px}}
 
+/* ===== MYNTRA-STYLE PLP ===== */
+.catalog-section{margin-top:56px}.catalog-breadcrumbs{display:flex;gap:8px;align-items:center;font-size:11px;color:#777;margin-bottom:14px}.catalog-breadcrumbs strong{color:#222}.catalog-head{display:flex;justify-content:space-between;align-items:end;gap:20px;border-bottom:1px solid #e6e6e6;padding-bottom:18px}.catalog-head h2{font-size:22px}.catalog-head p{font-size:11px;color:#777;margin-top:5px}.catalog-actions{display:flex;align-items:center;gap:12px;font-size:11px}.catalog-actions label{display:flex;align-items:center;gap:7px}.catalog-layout{display:grid;grid-template-columns:235px minmax(0,1fr);gap:22px}.catalog-filters{border-right:1px solid #e5e5e5;padding:18px 20px 20px 0}.filter-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid #e5e5e5;font-size:12px}.filter-header button{border:0;background:none;color:var(--accent);font-size:10px;font-weight:800}.filter-group{padding:18px 0;border-bottom:1px solid #eee}.filter-title{display:flex;justify-content:space-between;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px}.filter-group label{display:flex;align-items:center;gap:8px;font-size:11px;color:#555;margin:10px 0;cursor:pointer}.filter-group input[type=checkbox]{accent-color:var(--accent)}.filter-search{width:100%;height:34px;border:1px solid #ddd;padding:0 10px;font-size:11px;outline:none}.filter-list-scroll{max-height:180px;overflow:auto}.color-filter{display:flex;gap:9px;flex-wrap:wrap}.color-dot{width:25px;height:25px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #ddd;cursor:pointer}.color-dot.active{box-shadow:0 0 0 2px var(--accent)}.catalog-results{min-width:0;padding-top:18px}.active-filter-row{display:flex;gap:7px;flex-wrap:wrap;min-height:30px}.active-filter{border:1px solid #ddd;background:#fff;padding:7px 10px;border-radius:2px;font-size:10px}.catalog-products{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.catalog-products .product{border-radius:0;border-color:#eee}.catalog-products .product-img{height:360px}.catalog-products .product-info{padding:11px 4px 15px}.mobile-filter-toggle{display:none;background:#fff;border:1px solid #ddd;padding:9px 12px;font-size:10px;font-weight:800}.category-filter-link{display:block;width:100%;border:0;background:none;text-align:left;padding:6px 0;font-size:11px;color:#555;cursor:pointer}.brand-filter-row{display:flex;gap:7px;align-items:center;font-size:11px;margin:9px 0}
+@media(max-width:1200px){.catalog-products{grid-template-columns:repeat(3,minmax(0,1fr))}.catalog-layout{grid-template-columns:210px minmax(0,1fr)}}@media(max-width:850px){.mobile-filter-toggle{display:block}.catalog-layout{display:block}.catalog-filters{display:none;border:1px solid #e5e5e5;padding:16px}.catalog-filters.open{display:block}.catalog-products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.catalog-products .product-img{height:280px}.catalog-head h2{font-size:17px}}@media(max-width:480px){.catalog-products .product-img{height:235px}.catalog-actions .sort-select{max-width:125px}}
 </style>
 </head>
 
@@ -531,9 +534,9 @@ header.premium-scrolled{box-shadow:0 10px 35px rgba(0,0,0,.10)}
         <div class="nav-item">
           <button class="nav-drop-btn" onclick="toggleNavDrop(this.parentElement, event)">MEN</button>
           <div class="mega-menu">
-            <div><h4>Topwear</h4><a onclick="filterSubcategory('Men','Casual Shirts')">Casual Shirts</a><a onclick="filterSubcategory('Men','T-Shirts')">T-Shirts</a></div>
-            <div><h4>Bottomwear</h4><a onclick="filterSubcategory('Men','Jeans')">Jeans</a><a onclick="filterSubcategory('Men','Casual Trousers')">Trousers</a></div>
-            <div><h4>Footwear</h4><a onclick="filterContext('Footwear')">Sneakers</a></div>
+            <div><h4>Topwear</h4><a onclick="filterSubcategory('Men','T-Shirts')">T-Shirts</a><a onclick="filterSubcategory('Men','Casual Shirts')">Casual Shirts</a><a onclick="filterSubcategory('Men','Formal Shirts')">Formal Shirts</a><a onclick="filterSubcategory('Men','Sweatshirts')">Sweatshirts</a><a onclick="filterSubcategory('Men','Jackets')">Jackets</a><a onclick="filterSubcategory('Men','Sweaters')">Sweaters</a><a onclick="filterSubcategory('Men','Blazers & Coats')">Blazers & Coats</a><a onclick="filterSubcategory('Men','Suits')">Suits</a></div>
+            <div><h4>Bottomwear</h4><a onclick="filterSubcategory('Men','Jeans')">Jeans</a><a onclick="filterSubcategory('Men','Casual Trousers')">Casual Trousers</a><a onclick="filterSubcategory('Men','Formal Trousers')">Formal Trousers</a><a onclick="filterSubcategory('Men','Shorts')">Shorts</a><a onclick="filterSubcategory('Men','Track Pants')">Track Pants</a><a onclick="filterSubcategory('Men','Joggers')">Joggers</a></div>
+            <div><h4>Footwear & Accessories</h4><a onclick="filterSubcategory('Men','Casual Shoes')">Casual Shoes</a><a onclick="filterSubcategory('Men','Sports Shoes')">Sports Shoes</a><a onclick="filterSubcategory('Men','Sneakers')">Sneakers</a><a onclick="filterSubcategory('Men','Sandals')">Sandals</a><a onclick="filterContext('Accessories')">Accessories</a><a onclick="filterContext('Bags')">Bags</a></div>
           </div>
         </div>
         <div class="nav-item">
@@ -792,35 +795,13 @@ header.premium-scrolled{box-shadow:0 10px 35px rgba(0,0,0,.10)}
       </div>
     </section>
 
-    <!-- ALL PRODUCTS -->
-    <section class="section" id="allProducts">
-      <div class="section-title">
-        <h2>ALL PRODUCTS</h2>
-      </div>
-      <div class="toolbar">
-        <div class="filter-buttons">
-          <button class="filter-btn active" onclick="filterProducts('All', this)">All</button>
-          <button class="filter-btn" onclick="filterProducts('Men', this)">Men</button>
-          <button class="filter-btn" onclick="filterProducts('Women', this)">Women</button>
-          <button class="filter-btn" onclick="filterProducts('Kids', this)">Kids</button>
-          <button class="filter-btn" onclick="filterProducts('Footwear', this)">Footwear</button>
-          <button class="filter-btn" onclick="filterProducts('Bags', this)">Bags</button>
-          <button class="filter-btn" onclick="filterProducts('Accessories', this)">Accessories</button>
-          <button class="filter-btn" onclick="filterProducts('Sports', this)">Sports</button>
-        </div>
-        <select class="sort-select" onchange="sortProducts(this.value)">
-          <option value="">Sort By</option>
-          <option value="priceLow">Price: Low to High</option>
-          <option value="priceHigh">Price: High to Low</option>
-          <option value="discount">Highest Discount</option>
-          <option value="rating">Best Rated</option>
-          <option value="newest">Newest First</option>
-        </select>
-      </div>
-      <div class="products" id="allProductGrid"></div>
+    <!-- MYNTRA-STYLE CATALOG / PLP -->
+    <section class="section catalog-section" id="allProducts">
+      <div class="catalog-breadcrumbs"><span>Home</span><b>/</b><span id="crumbDepartment">All Fashion</span><b>/</b><strong id="crumbSubcategory">All Products</strong></div>
+      <div class="catalog-head"><div><h2 id="catalogTitle">ALL PRODUCTS</h2><p id="catalogCount">0 items</p></div><div class="catalog-actions"><button class="mobile-filter-toggle" onclick="toggleCatalogFilters()">☰ FILTERS</button><label>Sort by <select class="sort-select" onchange="sortProducts(this.value)"><option value="recommended">Recommended</option><option value="newest">What's New</option><option value="priceLow">Price: Low to High</option><option value="priceHigh">Price: High to Low</option><option value="rating">Customer Rating</option><option value="discount">Better Discount</option></select></label></div></div>
+      <div class="catalog-layout"><aside class="catalog-filters" id="catalogFilters"><div class="filter-header"><strong>FILTERS</strong><button onclick="clearCatalogFilters()">CLEAR ALL</button></div><div class="filter-group"><div class="filter-title">Categories <span>⌃</span></div><div id="categoryFilterList"></div></div><div class="filter-group"><div class="filter-title">Gender <span>⌃</span></div><label><input type="checkbox" value="Men" data-filter-gender> Men</label><label><input type="checkbox" value="Women" data-filter-gender> Women</label><label><input type="checkbox" value="Kids" data-filter-gender> Kids</label></div><div class="filter-group"><div class="filter-title">Brand <span>⌃</span></div><input class="filter-search" id="brandFilterSearch" placeholder="Search Brand" oninput="renderBrandFilters()"><div id="brandFilterList"></div></div><div class="filter-group"><div class="filter-title">Price <span>⌃</span></div><label><input type="checkbox" value="499" data-filter-price> Under ₹499</label><label><input type="checkbox" value="999" data-filter-price> ₹500 - ₹999</label><label><input type="checkbox" value="1999" data-filter-price> ₹1,000 - ₹1,999</label><label><input type="checkbox" value="2000" data-filter-price> ₹2,000+</label></div><div class="filter-group"><div class="filter-title">Discount <span>⌃</span></div><label><input type="checkbox" value="10" data-filter-discount> 10% and above</label><label><input type="checkbox" value="20" data-filter-discount> 20% and above</label><label><input type="checkbox" value="40" data-filter-discount> 40% and above</label><label><input type="checkbox" value="60" data-filter-discount> 60% and above</label></div><div class="filter-group"><div class="filter-title">Color <span>⌃</span></div><div class="color-filter" id="colorFilterList"></div></div><div class="filter-group"><div class="filter-title">Rating <span>⌃</span></div><label><input type="checkbox" value="4" data-filter-rating> 4★ & above</label><label><input type="checkbox" value="3" data-filter-rating> 3★ & above</label></div></aside><div class="catalog-results"><div class="active-filter-row" id="activeFilterRow"></div><div class="products catalog-products" id="allProductGrid"></div></div></div>
     </section>
 
-    
 <!-- PREMIUM PROMOTION HUB -->
 <section class="promo-hub premium-reveal" id="promotionHub">
   <div class="section" style="padding:0 4%;max-width:1440px;margin:auto">
@@ -1680,6 +1661,22 @@ header.premium-scrolled{box-shadow:0 10px 35px rgba(0,0,0,.10)}
       document.getElementById("emailInput").value = "";
     }
 
+    /* ===== CATALOG FILTER UX ===== */
+    const ASF_CATEGORY_MAP={Men:["T-Shirts","Casual Shirts","Formal Shirts","Sweatshirts","Jackets","Sweaters","Blazers & Coats","Suits","Jeans","Casual Trousers","Formal Trousers","Shorts","Track Pants","Joggers","Casual Shoes","Sports Shoes","Sneakers","Sandals"],Women:["Kurtas & Suits","Sarees","Ethnic Dresses","Lehengas","Dupattas","Dresses","Tops","T-Shirts","Jeans & Jeggings","Trousers","Skirts","Heels","Flats","Sneakers","Boots"],Kids:["Dresses","Shirts","T-Shirts","Jeans","Trousers","Shorts","Clothing Sets","Party Wear","Sportswear","Sandals","Sneakers"],Footwear:["Sneakers","Casual Shoes","Sports Shoes","Formal Shoes","Heels","Flats","Sandals","Boots"],Accessories:["Watches","Belts","Wallets","Sunglasses","Caps","Jewellery","Earrings"],Bags:["Backpacks","Handbags","Slings","Wallets","Travel Bags"]};
+    let catalogState={gender:[],brands:[],prices:[],discounts:[],ratings:[],colors:[],subcategories:[]};
+    const colorMap={Black:'#111',White:'#fff',Beige:'#d8c3a5',Blue:'#2877d3',Navy:'#172554',Red:'#d92332',Green:'#228b57',Pink:'#ed6f9b',Brown:'#8b5e3c',Grey:'#999'};
+    function initCatalogFilters(){const cat=document.getElementById('categoryFilterList');if(cat)cat.innerHTML=Object.entries(ASF_CATEGORY_MAP).map(([g,a])=>`<button class="category-filter-link" onclick="applyCatalogCategory('${g}')">${g}</button>${a.map(x=>`<button class="category-filter-link" onclick="applyCatalogSubcategory('${g}',${JSON.stringify(x)})">↳ ${x}</button>`).join('')}`).join('');renderBrandFilters();renderColorFilters();document.querySelectorAll('[data-filter-gender],[data-filter-price],[data-filter-discount],[data-filter-rating]').forEach(e=>e.addEventListener('change',applyCatalogFilters));}
+    function renderBrandFilters(){const b=document.getElementById('brandFilterList');if(!b)return;const q=(document.getElementById('brandFilterSearch')?.value||'').toLowerCase();const brands=[...new Set(products.map(p=>p.brand).filter(Boolean))].filter(x=>x.toLowerCase().includes(q)).sort().slice(0,40);b.innerHTML=brands.map(x=>`<label class="brand-filter-row"><input type="checkbox" value="${x.replace(/"/g,'&quot;')}" data-filter-brand> ${x}</label>`).join('');b.querySelectorAll('[data-filter-brand]').forEach(e=>e.addEventListener('change',applyCatalogFilters));}
+    function renderColorFilters(){const b=document.getElementById('colorFilterList');if(!b)return;const colors=[...new Set(products.flatMap(p=>Array.isArray(p.colors)?p.colors:[]))].filter(x=>colorMap[x]).slice(0,12);b.innerHTML=colors.map(x=>`<button class="color-dot" title="${x}" style="background:${colorMap[x]}" data-color="${x}" onclick="toggleCatalogColor(this)"></button>`).join('');}
+    function toggleCatalogColor(btn){btn.classList.toggle('active');catalogState.colors=[...document.querySelectorAll('.color-dot.active')].map(x=>x.dataset.color);applyCatalogFilters();}
+    function applyCatalogCategory(g){catalogState.subcategories=[];activeDepartment=g;activeSubcategory='All';applyCatalogFilters();}
+    function applyCatalogSubcategory(g,s){activeDepartment=g;activeSubcategory=s;catalogState.subcategories=[s];applyCatalogFilters();}
+    function applyCatalogFilters(){catalogState.gender=[...document.querySelectorAll('[data-filter-gender]:checked')].map(x=>x.value);catalogState.brands=[...document.querySelectorAll('[data-filter-brand]:checked')].map(x=>x.value);catalogState.prices=[...document.querySelectorAll('[data-filter-price]:checked')].map(x=>+x.value);catalogState.discounts=[...document.querySelectorAll('[data-filter-discount]:checked')].map(x=>+x.value);catalogState.ratings=[...document.querySelectorAll('[data-filter-rating]:checked')].map(x=>+x.value);currentProducts=products.filter(p=>{if(activeDepartment!=='All'&&!isContextMatch(p,activeDepartment))return false;if(activeSubcategory!=='All'&&!subcategoryMatches(p,activeSubcategory))return false;if(catalogState.gender.length&&!catalogState.gender.includes(p.category))return false;if(catalogState.brands.length&&!catalogState.brands.includes(p.brand))return false;if(catalogState.discounts.length&&!catalogState.discounts.some(d=>(+p.discount||0)>=d))return false;if(catalogState.ratings.length&&!catalogState.ratings.some(r=>(+p.rating||0)>=r))return false;if(catalogState.prices.length){const v=+p.price||0;if(!catalogState.prices.some(m=>m===499?v<=499:m===999?v>=500&&v<=999:m===1999?v>=1000&&v<=1999:v>=2000))return false;}if(catalogState.colors.length&&!(p.colors||[]).some(c=>catalogState.colors.includes(c)))return false;return true;});renderCatalogFromState();}
+    function clearCatalogFilters(){catalogState={gender:[],brands:[],prices:[],discounts:[],ratings:[],colors:[],subcategories:[]};document.querySelectorAll('#catalogFilters input').forEach(x=>x.checked=false);document.querySelectorAll('.color-dot.active').forEach(x=>x.classList.remove('active'));activeDepartment='All';activeSubcategory='All';currentProducts=[...products];renderCatalogFromState();}
+    function renderCatalogFromState(){const t=document.getElementById('catalogTitle'),c=document.getElementById('catalogCount'),d=document.getElementById('crumbDepartment'),s=document.getElementById('crumbSubcategory');if(t)t.innerText=`${activeDepartment==='All'?'ALL PRODUCTS':activeDepartment.toUpperCase()}${activeSubcategory!=='All'?' • '+activeSubcategory.toUpperCase():''}`;if(c)c.innerText=`${currentProducts.length.toLocaleString('en-IN')} items`;if(d)d.innerText=activeDepartment==='All'?'All Fashion':activeDepartment;if(s)s.innerText=activeSubcategory==='All'?'All Products':activeSubcategory;const g=document.getElementById('allProductGrid');if(g)g.innerHTML=currentProducts.length?currentProducts.map(productCard).join(''):`<div class="empty-state" style="grid-column:1/-1"><div>🔎</div><p>No products match these filters.</p><button class="btn btn-black" onclick="clearCatalogFilters()">Clear Filters</button></div>`;}
+    function toggleCatalogFilters(){document.getElementById('catalogFilters')?.classList.toggle('open')}
+    window.addEventListener('load',()=>setTimeout(()=>{initCatalogFilters();renderCatalogFromState()},300));
+
     function startProductListener(){
       // products.js is the master demo catalogue.
       // Firestore product sync is opt-in so the connected catalog is never silently replaced.
@@ -1718,7 +1715,7 @@ header.premium-scrolled{box-shadow:0 10px 35px rgba(0,0,0,.10)}
       searchByBrand, selectColor, selectSizeBtn, subscribe, toggleAccount,
       toggleMobileSearch, toggleNavDrop, toggleWishlist,
       searchProducts, searchProductsMobile, sortProducts, filterPrice, filterDiscount, filterSubcategory,
-      showTrending, showNew, updateContextLabels
+      showTrending, showNew, updateContextLabels, toggleCatalogFilters, clearCatalogFilters, applyCatalogFilters, applyCatalogCategory, applyCatalogSubcategory, toggleCatalogColor, renderBrandFilters
     });
     Object.defineProperty(window,'activeDepartment',{get:()=>activeDepartment});
   </script>

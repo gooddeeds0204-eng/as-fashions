@@ -5254,4 +5254,474 @@ function showHero(index){
         slide.classList.toggle(
             "active",
             i === heroIndex
+        )
+    );
+
+}
+
+
+function nextHero(){
+
+    showHero(heroIndex + 1);
+
+}
+
+
+function prevHero(){
+
+    showHero(heroIndex - 1);
+
+}
+
+
+heroDots.forEach(
+    (dot,i) => {
+
+        dot.onclick =
+            () => showHero(i);
+
+    }
+);
+
+
+/* auto hero */
+
+setInterval(
+    () => nextHero(),
+    5500
+);
+
+
+/* =========================================================
+   TRENDING AUTO SCROLL
+========================================================= */
+
+let trendDirection = 1;
+
+setInterval(
+    () => {
+
+        if(!trendingRow) return;
+
+        const max =
+            trendingRow.scrollWidth -
+            trendingRow.clientWidth;
+
+        if(max <= 0) return;
+
+        trendingRow.scrollLeft +=
+            trendDirection * 1;
+
+        if(
+            trendingRow.scrollLeft >= max
+        ){
+            trendDirection = -1;
+        }
+
+        if(
+            trendingRow.scrollLeft <= 0
+        ){
+            trendDirection = 1;
+        }
+
+    },
+    30
+);
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+let saleEnd =
+    Date.now() +
+    5 * 60 * 60 * 1000 +
+    42 * 60 * 1000;
+
+
+function updateCountdown(){
+
+    let distance =
+        saleEnd - Date.now();
+
+    if(distance <= 0){
+
+        saleEnd =
+            Date.now() +
+            5 * 60 * 60 * 1000;
+
+        distance =
+            saleEnd - Date.now();
+
+    }
+
+    const hours =
+        Math.floor(
+            distance / (1000*60*60)
+        );
+
+    const minutes =
+        Math.floor(
+            (distance % (1000*60*60))
+            / (1000*60)
+        );
+
+    const seconds =
+        Math.floor(
+            (distance % (1000*60))
+            / 1000
+        );
+
+    document.getElementById("hours")
+        .textContent =
+        String(hours).padStart(2,"0");
+
+    document.getElementById("minutes")
+        .textContent =
+        String(minutes).padStart(2,"0");
+
+    document.getElementById("seconds")
+        .textContent =
+        String(seconds).padStart(2,"0");
+
+}
+
+setInterval(updateCountdown,1000);
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+function openMenu(){
+
+    document
+        .getElementById("drawerOverlay")
+        .classList.add("active");
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+function closeMenu(){
+
+    document
+        .getElementById("drawerOverlay")
+        .classList.remove("active");
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function closeModal(event,id){
+
+    if(
+        !event ||
+        event.target.classList.contains("modal")
+    ){
+
+        document
+            .getElementById(id)
+            .classList.remove("active");
+
+    }
+
+}
+
+
+/* =========================================================
+   COUPON
+========================================================= */
+
+function copyText(text){
+
+    navigator.clipboard
+        .writeText(text)
+        .then(
+            () =>
+            showToast(
+                "Coupon copied: " + text
+            )
+        )
+        .catch(
+            () =>
+            showToast(
+                "Coupon: " + text
+            )
+        );
+
+}
+
+
+function copyCoupon(){
+
+    copyText("ASNEW20");
+
+}
+
+
+/* =========================================================
+   NEWSLETTER
+========================================================= */
+
+function subscribe(event){
+
+    event.preventDefault();
+
+    const email =
+        document
+        .getElementById("emailInput")
+        .value
+        .trim();
+
+    if(!email) return;
+
+    showToast(
+        "You're subscribed to AS FASHIONS."
+    );
+
+    document
+        .getElementById("emailInput")
+        .value = "";
+
+}
+
+
+/* =========================================================
+   SPIN WHEEL
+========================================================= */
+
+function spinWheel(){
+
+    const wheel =
+        document.getElementById("wheel");
+
+    const rotation =
+        1800 +
+        Math.floor(
+            Math.random() * 1000
+        );
+
+    wheel.style.transform =
+        `rotate(${rotation}deg)`;
+
+    setTimeout(
+        () => {
+
+            document
+                .getElementById("spinResult")
+                .textContent =
+                "🎉 You won ASNEW15 — 15% OFF!";
+
+        },
+        3000
+    );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(
+            () =>
+            toast.classList.remove("show"),
+            2500
+        );
+
+}
+
+
+/* =========================================================
+   PROMOTIONAL POPUP
+========================================================= */
+
+let popupShown = false;
+
+setTimeout(
+    () => {
+
+        if(
+            !sessionStorage.getItem(
+                "asSpinShown"
+            )
+        ){
+
+            document
+                .getElementById("spinModal")
+                .classList.add("active");
+
+            sessionStorage.setItem(
+                "asSpinShown",
+                "yes"
+            );
+
+        }
+
+    },
+    2500
+);
+
+
+/* exit intent */
+
+document.addEventListener(
+    "mouseleave",
+    event => {
+
+        if(
+            event.clientY <= 5 &&
+            !popupShown
+        ){
+
+            popupShown = true;
+
+            document
+                .getElementById("exitModal")
+                .classList.add("active");
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SIZE BUTTONS
+========================================================= */
+
+document.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target.classList.contains("size")
+        ){
+
+            document
+                .querySelectorAll(".size")
+                .forEach(
+                    b =>
+                    b.classList.remove("active")
+                );
+
+            event.target.classList.add("active");
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+renderProducts();
+
+updateCounts();
+
+updateCountdown();
+
+
+/* =========================================================
+   URL HASH NAVIGATION
+========================================================= */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        const hash =
+            location.hash.replace("#","");
+
+        if(!hash) return;
+
+        if(
+            [
+                "women",
+                "men",
+                "kids",
+                "dresses",
+                "shirts",
+                "denim",
+                "footwear",
+                "accessories",
+                "sale",
+                "under499",
+                "under999",
+                "trending"
+            ].includes(hash)
+        ){
+
+            setTimeout(
+                () => goTo(hash),
+                300
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SCROLL REVEAL — fade + rise sections into view
+========================================================= */
+
+(function(){
+
+    const revealTargets = document.querySelectorAll(
+        "section.section, .hero, .flash-strip, .style-section, .newsletter"
+    );
+
+    if(!("IntersectionObserver" in window) || revealTargets.length === 0){
+        revealTargets.forEach(el => el.classList.add("in-view"));
+        return;
+    }
+
+    const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add("in-view");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold:0.12, rootMargin:"0px 0px -60px 0px" }
+    );
+
+    revealTargets.forEach(el => revealObserver.observe(el));
+
+})();
+
+</script>
+
+</body>
+</html>
      

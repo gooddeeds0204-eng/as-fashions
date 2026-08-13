@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width,initial-scale=1.0">
+<title>AS FASHIONS — Premium Fashion Store</title>
 
-<title>AS FASHIONS — Modern Fashion</title>
-
-<link rel="preconnect"
-      href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
-      rel="stylesheet">
-
+<meta name="description"
+content="AS FASHIONS — premium fashion, trending styles, new arrivals and exclusive offers.">
 
 <style>
+:root{
+  --black:#111111;
+  --ink:#202020;
+  --muted:#777;
+  --white:#fff;
+  --cream:#f7f5f0;
+  --line:#e7e7e7;
+  --sale:#e31b23;
+  --gold:#b08a45;
+  --soft:#f3f1ec;
+}
 
 *{
   box-sizing:border-box;
@@ -33,13 +33,18 @@ html{
 }
 
 body{
-  font-family:"DM Sans",sans-serif;
-  color:#111;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
   background:#fff;
+  overflow-x:hidden;
+}
+
+button,
+input{
+  font:inherit;
 }
 
 button{
-  font:inherit;
   cursor:pointer;
 }
 
@@ -48,674 +53,939 @@ a{
   text-decoration:none;
 }
 
+/* =========================
+   TOP PROMO TICKER
+========================= */
 
-/* ================= TOP BAR ================= */
-
-.topbar{
-  height:40px;
+.top-ticker{
+  height:42px;
   background:#111;
   color:#fff;
   overflow:hidden;
   display:flex;
   align-items:center;
+  position:relative;
+  z-index:1000;
 }
 
-.marquee{
+.ticker-track{
   display:flex;
   width:max-content;
-  animation:marquee 25s linear infinite;
-  gap:70px;
+  animation:tickerMove 30s linear infinite;
+  white-space:nowrap;
+}
+
+.ticker-item{
+  padding:0 42px;
   font-size:12px;
   font-weight:700;
-  letter-spacing:1px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
 }
 
-.marquee span{
-  padding-right:70px;
+.ticker-item strong{
+  color:#ffd43b;
 }
 
-@keyframes marquee{
-  from{
-    transform:translateX(0);
-  }
-  to{
-    transform:translateX(-50%);
-  }
+@keyframes tickerMove{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
 }
 
-
-/* ================= HEADER ================= */
+/* =========================
+   HEADER
+========================= */
 
 .header{
-  height:88px;
-  display:grid;
-  grid-template-columns:70px 1fr auto;
-  align-items:center;
-  padding:0 4%;
-  border-bottom:1px solid #eee;
+  height:92px;
   background:#fff;
+  border-bottom:1px solid var(--line);
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:0 38px;
   position:sticky;
   top:0;
-  z-index:80;
+  z-index:900;
 }
 
-.menu{
-  background:none;
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+
+.menu-btn{
   border:0;
-  font-size:30px;
+  background:none;
+  width:42px;
+  height:42px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+}
+
+.menu-btn span{
+  display:block;
+  width:30px;
+  height:2px;
+  background:#111;
 }
 
 .logo{
-  font-family:"Playfair Display",serif;
-  font-size:38px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:37px;
+  letter-spacing:-2px;
   text-align:center;
-  cursor:pointer;
-  letter-spacing:-1px;
+  white-space:nowrap;
 }
 
 .logo span{
-  font-family:"DM Sans",sans-serif;
+  font-family:Arial,sans-serif;
   font-size:12px;
   letter-spacing:6px;
-  margin-left:5px;
+  margin-left:6px;
+  vertical-align:middle;
 }
 
-.actions{
+.header-right{
   display:flex;
-  gap:18px;
+  justify-content:flex-end;
   align-items:center;
+  gap:20px;
 }
 
-.action{
+.icon-btn{
+  position:relative;
   border:0;
   background:none;
-  font-size:24px;
-  position:relative;
+  font-size:25px;
+  width:38px;
+  height:42px;
 }
 
-.badge{
+.icon-btn small{
   position:absolute;
-  right:-7px;
-  top:-8px;
-  width:18px;
-  height:18px;
+  right:-4px;
+  top:-4px;
+  width:19px;
+  height:19px;
   border-radius:50%;
-  background:#e32232;
+  background:#e21c2a;
   color:#fff;
   font-size:10px;
   display:grid;
   place-items:center;
 }
 
+/* =========================
+   SEARCH
+========================= */
 
-/* ================= MENU ================= */
-
-.mobileMenu{
-  display:none;
-  position:fixed;
-  inset:0;
+.search-area{
+  padding:14px 38px;
+  border-bottom:1px solid var(--line);
   background:#fff;
-  z-index:200;
-  padding:25px;
-  overflow:auto;
 }
 
-.mobileMenu.active{
-  display:block;
-}
-
-.closeMenu{
-  float:right;
-  border:0;
-  background:none;
-  font-size:30px;
-}
-
-.mobileMenu h2{
-  clear:both;
-  padding-top:60px;
-  font-family:"Playfair Display",serif;
-  font-size:35px;
-}
-
-.mobileMenu a{
-  display:block;
-  padding:18px 0;
-  border-bottom:1px solid #eee;
-  font-size:17px;
-}
-
-
-/* ================= CATEGORY NAV ================= */
-
-.categoryNav{
+.search-box{
+  max-width:720px;
+  margin:auto;
+  border:1px solid #d8d8d8;
+  height:48px;
   display:flex;
-  gap:38px;
-  height:58px;
   align-items:center;
-  justify-content:center;
-  border-bottom:1px solid #eee;
-  overflow-x:auto;
-  white-space:nowrap;
-  scrollbar-width:none;
-  position:relative;
-  z-index:20;
-  background:#fff;
+  padding:0 16px;
+  background:#fafafa;
 }
 
-.categoryNav button{
+.search-box input{
+  flex:1;
+  border:0;
+  outline:0;
+  background:none;
+  font-size:15px;
+}
+
+.search-box button{
   border:0;
   background:none;
+  font-size:20px;
+}
+
+/* =========================
+   CATEGORY BAR
+========================= */
+
+.category-bar{
+  height:54px;
+  border-bottom:1px solid var(--line);
+  background:#fff;
+  display:flex;
+  align-items:center;
+  overflow-x:auto;
+  scrollbar-width:none;
+  position:sticky;
+  top:92px;
+  z-index:800;
+}
+
+.category-bar::-webkit-scrollbar{
+  display:none;
+}
+
+.category-link{
+  flex:0 0 auto;
+  height:54px;
+  display:flex;
+  align-items:center;
+  padding:0 25px;
   font-size:13px;
   font-weight:700;
   letter-spacing:1px;
+  position:relative;
 }
 
-.categoryNav button:hover{
-  color:#c51f2d;
+.category-link:hover{
+  color:var(--sale);
 }
 
+.category-link.sale{
+  color:var(--sale);
+}
 
-/* ================= HERO ================= */
+.category-link.active::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:22px;
+  right:22px;
+  height:3px;
+  background:#111;
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
   position:relative;
-  width:100%;
-  height:min(720px,78vh);
-  min-height:570px;
+  height:min(720px,calc(100vh - 188px));
+  min-height:560px;
   overflow:hidden;
+  background:#ddd;
 }
 
-.slide{
+.hero-slide{
   position:absolute;
   inset:0;
   opacity:0;
-  transition:opacity .8s ease;
-  pointer-events:none;
+  visibility:hidden;
+  transition:opacity .7s ease;
 }
 
-.slide.active{
+.hero-slide.active{
   opacity:1;
-  pointer-events:auto;
+  visibility:visible;
 }
 
-.slide img{
+.hero-slide::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.65),rgba(0,0,0,.15) 65%,rgba(0,0,0,.05));
+}
+
+.hero-image{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.slideOverlay{
+.hero-content{
   position:absolute;
-  inset:0;
-  background:linear-gradient(
-    90deg,
-    rgba(0,0,0,.58),
-    rgba(0,0,0,.12),
-    rgba(0,0,0,.05)
-  );
-}
-
-.heroContent{
-  position:absolute;
-  left:7%;
+  z-index:2;
+  left:8%;
   top:50%;
   transform:translateY(-50%);
   color:#fff;
   max-width:650px;
 }
 
-.kicker{
-  border:1px solid rgba(255,255,255,.7);
+.hero-kicker{
   display:inline-block;
-  padding:11px 17px;
+  border:1px solid rgba(255,255,255,.65);
+  padding:11px 18px;
+  letter-spacing:4px;
   font-size:12px;
-  letter-spacing:3px;
   font-weight:700;
-  margin-bottom:25px;
+  margin-bottom:26px;
 }
 
-.hero h1{
-  font-family:"Playfair Display",serif;
-  font-size:clamp(55px,7vw,105px);
-  line-height:.93;
-  margin-bottom:25px;
+.hero-title{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(58px,7vw,108px);
+  line-height:.88;
+  font-weight:400;
+  margin-bottom:28px;
 }
 
-.hero p{
+.hero-copy{
+  max-width:600px;
   font-size:18px;
-  line-height:1.6;
-  max-width:650px;
+  line-height:1.65;
   margin-bottom:30px;
 }
 
-.heroButtons{
+.hero-buttons{
   display:flex;
-  gap:12px;
+  gap:14px;
   flex-wrap:wrap;
 }
 
-.heroBtn{
-  padding:17px 30px;
+.hero-btn{
+  min-width:185px;
+  height:55px;
+  padding:0 28px;
   border:1px solid #fff;
   background:#fff;
   color:#111;
   font-weight:700;
+  letter-spacing:.5px;
 }
 
-.heroBtn.dark{
+.hero-btn.dark{
   background:#111;
   color:#fff;
 }
 
-.heroDots{
+.hero-arrow{
   position:absolute;
-  bottom:28px;
+  z-index:5;
+  top:50%;
+  transform:translateY(-50%);
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.7);
+  background:rgba(0,0,0,.2);
+  color:#fff;
+  font-size:24px;
+}
+
+.hero-prev{left:25px}
+.hero-next{right:25px}
+
+.hero-dots{
+  position:absolute;
+  z-index:6;
+  bottom:25px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
   gap:8px;
 }
 
-.heroDot{
-  width:45px;
+.hero-dot{
+  width:42px;
   height:3px;
-  background:rgba(255,255,255,.5);
   border:0;
+  background:rgba(255,255,255,.45);
 }
 
-.heroDot.active{
+.hero-dot.active{
   background:#fff;
 }
 
+/* =========================
+   FLOATING COUPON
+========================= */
 
-/* ================= TRENDING ================= */
-
-.section{
-  padding:70px 4%;
-}
-
-.sectionHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  margin-bottom:25px;
-}
-
-.eyebrow{
-  color:#777;
-  font-size:12px;
-  letter-spacing:3px;
-  font-weight:700;
-}
-
-.section h2{
-  font-family:"Playfair Display",serif;
-  font-size:44px;
-  margin-top:6px;
-}
-
-.viewAll{
-  text-decoration:underline;
-  font-size:13px;
-  font-weight:700;
-}
-
-.trendingTrack{
-  display:flex;
-  gap:15px;
-  overflow-x:auto;
-  scrollbar-width:none;
-}
-
-.trendCard{
-  min-width:250px;
-  height:310px;
-  position:relative;
-  overflow:hidden;
-  cursor:pointer;
-}
-
-.trendCard img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:.5s;
-}
-
-.trendCard:hover img{
-  transform:scale(1.06);
-}
-
-.trendOverlay{
-  position:absolute;
-  inset:auto 0 0;
-  padding:25px;
-  color:#fff;
-  background:linear-gradient(
-    transparent,
-    rgba(0,0,0,.75)
-  );
-}
-
-.live{
-  display:inline-block;
-  background:#e32332;
-  padding:5px 9px;
-  font-size:10px;
-  font-weight:700;
-  margin-bottom:7px;
-  animation:pulse 1.4s infinite;
-}
-
-@keyframes pulse{
-  50%{
-    opacity:.45;
-  }
-}
-
-
-/* ================= CATEGORY TILES ================= */
-
-.categoryGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-}
-
-.categoryTile{
-  height:360px;
-  position:relative;
-  overflow:hidden;
-  cursor:pointer;
-}
-
-.categoryTile img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:.5s;
-}
-
-.categoryTile:hover img{
-  transform:scale(1.06);
-}
-
-.categoryTile:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    transparent 40%,
-    rgba(0,0,0,.7)
-  );
-}
-
-.tileText{
-  position:absolute;
-  bottom:25px;
-  left:25px;
-  color:#fff;
-  z-index:2;
-}
-
-.tileText h3{
-  font-family:"Playfair Display",serif;
-  font-size:30px;
-}
-
-.tileText p{
-  margin-top:5px;
-}
-
-
-/* ================= OFFER GRID ================= */
-
-.offerGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-}
-
-.offer{
-  min-height:210px;
-  padding:28px;
-  background:#f3f0ea;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.offer:hover{
-  transform:translateY(-4px);
-}
-
-.offer.hot{
-  background:#d70f19;
-  color:#fff;
-}
-
-.offer .emoji{
-  font-size:22px;
-}
-
-.offer h3{
-  font-family:"Playfair Display",serif;
-  font-size:30px;
-  margin:25px 0 8px;
-}
-
-
-/* ================= SALE BANNER ================= */
-
-.saleBanner{
-  margin:0 4%;
-  min-height:420px;
+.floating-coupon{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:1000;
   background:#111;
   color:#fff;
   display:flex;
   align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:50px 20px;
+  gap:20px;
+  padding:15px 17px 15px 20px;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
 }
 
-.saleBanner small{
-  letter-spacing:5px;
+.floating-coupon strong{
   color:#ffd43b;
 }
 
-.saleBanner h2{
-  font-family:"Playfair Display",serif;
-  font-size:clamp(55px,8vw,110px);
-  line-height:.9;
-  margin:25px 0;
+.coupon-copy{
+  background:#fff;
+  color:#111;
+  border:0;
+  padding:10px 17px;
+  font-weight:700;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+  padding:70px 38px;
+  max-width:1500px;
+  margin:auto;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:28px;
+}
+
+.section-kicker{
+  color:#888;
+  font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.section-title{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:42px;
+  font-weight:400;
+}
+
+.view-all{
+  font-size:13px;
+  font-weight:700;
+  text-decoration:underline;
+}
+
+/* =========================
+   CATEGORY CARDS
+========================= */
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:14px;
+}
+
+.category-card{
+  position:relative;
+  min-height:230px;
+  overflow:hidden;
+  background:#eee;
+}
+
+.category-card img{
+  width:100%;
+  height:100%;
+  min-height:230px;
+  object-fit:cover;
+  transition:transform .5s ease;
+}
+
+.category-card:hover img{
+  transform:scale(1.06);
+}
+
+.category-overlay{
+  position:absolute;
+  inset:auto 0 0;
+  padding:28px 18px 18px;
+  color:#fff;
+  background:linear-gradient(transparent,rgba(0,0,0,.75));
+}
+
+.category-overlay h3{
+  font-family:Georgia,serif;
+  font-size:24px;
+}
+
+/* =========================
+   PROMO GRID
+========================= */
+
+.promo-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.promo-card{
+  min-height:210px;
+  background:var(--soft);
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:transform .3s ease;
+}
+
+.promo-card:hover{
+  transform:translateY(-5px);
+}
+
+.promo-card.sale{
+  background:#d10e15;
+  color:#fff;
+}
+
+.promo-card.dark{
+  background:#151515;
+  color:#fff;
+}
+
+.promo-icon{
+  font-size:25px;
+}
+
+.promo-card h3{
+  font-family:Georgia,serif;
+  font-size:28px;
+  line-height:1;
+}
+
+.promo-card p{
+  color:inherit;
+  opacity:.75;
+  margin-top:10px;
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+.countdown{
+  background:#111;
+  color:#fff;
+  padding:45px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+}
+
+.countdown h2{
+  font-family:Georgia,serif;
+  font-size:42px;
+  font-weight:400;
 }
 
 .timer{
   display:flex;
-  justify-content:center;
   gap:10px;
-  margin:25px 0;
 }
 
-.timeBox{
+.time-box{
   min-width:70px;
-  padding:12px;
-  background:#fff;
-  color:#111;
+  text-align:center;
 }
 
-.timeBox strong{
+.time-box strong{
   display:block;
-  font-size:22px;
+  font-size:28px;
 }
 
-
-/* ================= KIDS ================= */
-
-.kidsBox{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
+.time-box span{
+  font-size:10px;
+  letter-spacing:2px;
+  color:#aaa;
 }
 
-.kidsCard{
-  min-height:350px;
+/* =========================
+   TRENDING SCROLLER
+========================= */
+
+.trending-wrap{
+  overflow:hidden;
+}
+
+.trending-track{
+  display:flex;
+  width:max-content;
+  gap:16px;
+  animation:trendMove 32s linear infinite;
+}
+
+.trend-card{
+  width:260px;
+  height:320px;
   position:relative;
   overflow:hidden;
-  cursor:pointer;
+  background:#eee;
 }
 
-.kidsCard img{
+.trend-card img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.kidsText{
+.trend-label{
   position:absolute;
-  left:30px;
-  bottom:30px;
-  color:#fff;
-  z-index:2;
-}
-
-.kidsText h3{
-  font-family:"Playfair Display",serif;
-  font-size:42px;
-}
-
-
-/* ================= FLOAT OFFER ================= */
-
-.floatingOffer{
-  position:fixed;
-  bottom:18px;
-  left:50%;
-  transform:translateX(-50%);
+  top:12px;
+  left:12px;
   background:#111;
   color:#fff;
-  width:min(680px,92%);
-  padding:14px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:90;
-  box-shadow:0 8px 30px rgba(0,0,0,.2);
+  padding:7px 10px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1px;
 }
 
-.copyBtn{
-  background:#fff;
+@keyframes trendMove{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* =========================
+   KIDS
+========================= */
+
+.kids-section{
+  background:#f8f3ed;
+}
+
+.kids-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.kids-card{
+  min-height:300px;
+  position:relative;
+  overflow:hidden;
+}
+
+.kids-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.kids-card-content{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:45px 20px 20px;
+  color:#fff;
+  background:linear-gradient(transparent,rgba(0,0,0,.75));
+}
+
+.kids-card-content h3{
+  font-family:Georgia,serif;
+  font-size:28px;
+}
+
+/* =========================
+   FLASH DEALS
+========================= */
+
+.flash{
+  background:#fff7dc;
+}
+
+.flash-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
+
+.live{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:#d71920;
+  font-size:12px;
+  font-weight:800;
+}
+
+.live::before{
+  content:"";
+  width:8px;
+  height:8px;
+  background:#e31b23;
+  border-radius:50%;
+  animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.3;transform:scale(1.5)}
+}
+
+/* =========================
+   NEWSLETTER
+========================= */
+
+.newsletter{
+  background:#111;
+  color:#fff;
+  padding:70px 30px;
+  text-align:center;
+}
+
+.newsletter h2{
+  font-family:Georgia,serif;
+  font-size:42px;
+  font-weight:400;
+  margin-bottom:10px;
+}
+
+.newsletter p{
+  color:#aaa;
+  margin-bottom:25px;
+}
+
+.newsletter-form{
+  max-width:500px;
+  margin:auto;
+  display:flex;
+}
+
+.newsletter-form input{
+  flex:1;
+  height:50px;
   border:0;
-  padding:10px 18px;
+  padding:0 15px;
+}
+
+.newsletter-form button{
+  width:120px;
+  border:0;
+  background:#fff;
+  color:#111;
   font-weight:700;
 }
 
+/* =========================
+   FOOTER
+========================= */
 
-/* ================= POPUP ================= */
+footer{
+  background:#f4f4f4;
+  padding:50px 38px 30px;
+}
 
-.popup{
+.footer-grid{
+  max-width:1400px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:2fr repeat(4,1fr);
+  gap:35px;
+}
+
+.footer-brand{
+  font-family:Georgia,serif;
+  font-size:30px;
+}
+
+footer h4{
+  margin-bottom:16px;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+footer a{
+  display:block;
+  margin:10px 0;
+  color:#666;
+  font-size:13px;
+}
+
+.copyright{
+  max-width:1400px;
+  margin:40px auto 0;
+  padding-top:20px;
+  border-top:1px solid #ddd;
+  font-size:12px;
+  color:#888;
+}
+
+/* =========================
+   DRAWER
+========================= */
+
+.drawer-overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.6);
-  z-index:300;
-  display:none;
+  background:rgba(0,0,0,.55);
+  z-index:2000;
+  opacity:0;
+  visibility:hidden;
+  transition:.3s;
+}
+
+.drawer-overlay.open{
+  opacity:1;
+  visibility:visible;
+}
+
+.drawer{
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:min(390px,88vw);
+  background:#fff;
+  transform:translateX(-100%);
+  transition:.35s ease;
+  overflow-y:auto;
+}
+
+.drawer-overlay.open .drawer{
+  transform:translateX(0);
+}
+
+.drawer-head{
+  padding:25px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
   align-items:center;
-  justify-content:center;
+}
+
+.drawer-logo{
+  font-family:Georgia,serif;
+  font-size:27px;
+}
+
+.drawer-close{
+  border:0;
+  background:none;
+  font-size:28px;
+}
+
+.drawer-section{
+  padding:22px 25px;
+  border-bottom:1px solid var(--line);
+}
+
+.drawer-section h4{
+  font-size:12px;
+  letter-spacing:2px;
+  margin-bottom:14px;
+  color:#888;
+}
+
+.drawer-link{
+  display:block;
+  padding:10px 0;
+  font-weight:600;
+}
+
+/* =========================
+   POPUP
+========================= */
+
+.popup-overlay{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  background:rgba(0,0,0,.65);
+  display:none;
+  place-items:center;
   padding:20px;
 }
 
-.popup.active{
-  display:flex;
+.popup-overlay.show{
+  display:grid;
 }
 
-.popupBox{
-  width:min(430px,100%);
+.popup{
+  width:min(440px,100%);
   background:#fff;
-  padding:40px 25px;
+  padding:38px;
   text-align:center;
   position:relative;
 }
 
-.popupClose{
+.popup-close{
   position:absolute;
   right:15px;
-  top:10px;
+  top:12px;
   border:0;
   background:none;
   font-size:25px;
 }
 
-.popupBox h2{
-  font-family:"Playfair Display",serif;
-  font-size:40px;
+.popup h2{
+  font-family:Georgia,serif;
+  font-size:38px;
+  margin-bottom:12px;
 }
+
+.popup p{
+  color:#666;
+  line-height:1.6;
+}
+
+.popup-code{
+  margin:20px 0;
+  padding:15px;
+  border:1px dashed #111;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
+/* =========================
+   SPIN WHEEL
+========================= */
 
 .spin{
-  margin:25px auto;
-  width:150px;
-  height:150px;
+  width:210px;
+  height:210px;
+  margin:20px auto;
   border-radius:50%;
   background:conic-gradient(
-    #111 0 25%,
-    #e52635 25% 50%,
-    #ffd43b 50% 75%,
-    #eee 75% 100%
+    #111 0 60deg,
+    #eee 60deg 120deg,
+    #d10e15 120deg 180deg,
+    #f5d36b 180deg 240deg,
+    #111 240deg 300deg,
+    #eee 300deg
   );
+  border:8px solid #fff;
+  box-shadow:0 5px 25px rgba(0,0,0,.2);
+  transition:transform 3s cubic-bezier(.12,.72,.2,1);
   display:grid;
   place-items:center;
-  font-size:40px;
 }
 
-.spinBtn{
-  background:#111;
-  color:#fff;
-  border:0;
-  padding:15px 30px;
-  font-weight:700;
-}
-
-
-/* ================= FOOTER ================= */
-
-footer{
-  background:#111;
-  color:#fff;
-  padding:60px 4%;
-}
-
-.footerGrid{
+.spin span{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:#fff;
   display:grid;
-  grid-template-columns:2fr 1fr 1fr 1fr;
-  gap:40px;
+  place-items:center;
+  font-weight:900;
 }
 
-footer h3{
-  font-family:"Playfair Display",serif;
-  font-size:28px;
-  margin-bottom:15px;
-}
+/* =========================
+   RESPONSIVE
+========================= */
 
-footer a{
-  display:block;
-  color:#bbb;
-  margin:10px 0;
-  font-size:14px;
-}
-
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:800px){
+@media(max-width:900px){
 
   .header{
-    height:72px;
-    grid-template-columns:50px 1fr auto;
+    height:76px;
     padding:0 20px;
+    grid-template-columns:1fr auto 1fr;
   }
 
   .logo{
-    font-size:28px;
+    font-size:30px;
   }
 
   .logo span{
@@ -723,359 +993,473 @@ footer a{
     letter-spacing:4px;
   }
 
-  .actions{
-    gap:10px;
+  .header-left{
+    gap:8px;
   }
 
-  .action{
-    font-size:21px;
+  .header-right{
+    gap:4px;
   }
 
-  .categoryNav{
-    justify-content:flex-start;
-    padding:0 20px;
-    gap:28px;
+  .icon-btn{
+    font-size:22px;
+  }
+
+  .search-area{
+    padding:10px 18px;
+  }
+
+  .category-bar{
+    top:76px;
+  }
+
+  .category-link{
+    padding:0 19px;
   }
 
   .hero{
-    height:calc(100svh - 150px);
-    min-height:570px;
+    height:620px;
+    min-height:620px;
   }
 
-  .heroContent{
-    left:25px;
-    right:25px;
+  .hero-content{
+    left:28px;
+    right:28px;
+    top:48%;
   }
 
-  .hero h1{
-    font-size:58px;
-  }
-
-  .hero p{
-    font-size:15px;
-  }
-
-  .heroBtn{
-    padding:14px 20px;
-  }
-
-  .section{
-    padding:50px 20px;
-  }
-
-  .section h2{
-    font-size:35px;
-  }
-
-  .categoryGrid{
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-  }
-
-  .categoryTile{
-    height:250px;
-  }
-
-  .offerGrid{
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-  }
-
-  .offer{
-    min-height:170px;
-    padding:20px;
-  }
-
-  .offer h3{
-    font-size:24px;
-  }
-
-  .kidsBox{
-    grid-template-columns:1fr;
-  }
-
-  .kidsCard{
-    min-height:300px;
-  }
-
-  .saleBanner{
-    margin:0;
-    min-height:400px;
-  }
-
-  .saleBanner h2{
+  .hero-title{
     font-size:65px;
   }
 
-  .footerGrid{
-    grid-template-columns:1fr 1fr;
+  .hero-copy{
+    font-size:16px;
   }
 
+  .hero-arrow{
+    display:none;
+  }
+
+  .section{
+    padding:48px 20px;
+  }
+
+  .category-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .promo-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .kids-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .countdown{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .footer-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .floating-coupon{
+    left:14px;
+    right:14px;
+    bottom:14px;
+    justify-content:space-between;
+  }
 }
 
-@media(max-width:480px){
+@media(max-width:600px){
 
-  .hero h1{
-    font-size:52px;
+  .top-ticker{
+    height:36px;
+  }
+
+  .ticker-item{
+    padding:0 25px;
+    font-size:10px;
+  }
+
+  .header{
+    height:70px;
+    padding:0 15px;
+  }
+
+  .menu-btn{
+    width:35px;
+  }
+
+  .menu-btn span{
+    width:27px;
+  }
+
+  .logo{
+    font-size:27px;
+  }
+
+  .logo span{
+    display:block;
+    margin-left:0;
+    font-size:7px;
+    letter-spacing:3px;
+  }
+
+  .header-right{
+    gap:0;
+  }
+
+  .icon-btn{
+    width:34px;
+    font-size:20px;
+  }
+
+  .search-area{
+    padding:10px 14px;
+  }
+
+  .search-box{
+    height:44px;
+  }
+
+  .category-bar{
+    top:70px;
+  }
+
+  .category-link{
+    padding:0 17px;
+    font-size:11px;
   }
 
   .hero{
-    min-height:600px;
+    height:590px;
+    min-height:590px;
   }
 
-  .categoryTile{
-    height:220px;
+  .hero-content{
+    left:28px;
+    right:25px;
+    top:48%;
   }
 
-  .tileText{
-    left:15px;
-    bottom:15px;
+  .hero-kicker{
+    font-size:9px;
+    letter-spacing:2.5px;
+    padding:9px 12px;
   }
 
-  .tileText h3{
-    font-size:24px;
+  .hero-title{
+    font-size:58px;
+    line-height:.87;
+    margin-bottom:22px;
   }
 
-  .offer h3{
-    font-size:21px;
+  .hero-copy{
+    font-size:15px;
+    line-height:1.55;
   }
 
-  .footerGrid{
-    grid-template-columns:1fr;
+  .hero-btn{
+    min-width:145px;
+    height:49px;
+    padding:0 15px;
+    font-size:12px;
   }
 
+  .section{
+    padding:42px 16px;
+  }
+
+  .section-title{
+    font-size:32px;
+  }
+
+  .category-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+  }
+
+  .category-card,
+  .category-card img{
+    min-height:190px;
+  }
+
+  .promo-grid{
+    gap:9px;
+  }
+
+  .promo-card{
+    min-height:175px;
+    padding:18px;
+  }
+
+  .promo-card h3{
+    font-size:22px;
+  }
+
+  .kids-grid{
+    gap:9px;
+  }
+
+  .kids-card{
+    min-height:230px;
+  }
+
+  .countdown{
+    padding:30px 20px;
+  }
+
+  .countdown h2{
+    font-size:30px;
+  }
+
+  .time-box{
+    min-width:55px;
+  }
+
+  .time-box strong{
+    font-size:22px;
+  }
+
+  .trend-card{
+    width:205px;
+    height:260px;
+  }
+
+  .newsletter{
+    padding:50px 20px;
+  }
+
+  .newsletter h2{
+    font-size:32px;
+  }
+
+  .newsletter-form{
+    display:block;
+  }
+
+  .newsletter-form input,
+  .newsletter-form button{
+    width:100%;
+    height:48px;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    gap:25px 15px;
+  }
+
+  .floating-coupon{
+    font-size:12px;
+  }
+
+  .coupon-copy{
+    padding:9px 12px;
+  }
 }
-
 </style>
 </head>
 
-
 <body>
 
+<!-- =========================
+     TOP TICKER
+========================= -->
 
-<!-- ================= TOP PROMOTION ================= -->
+<div class="top-ticker">
+  <div class="ticker-track">
 
-<div class="topbar">
+    <div class="ticker-item">
+      🚚 FREE SHIPPING ABOVE <strong>₹999</strong>
+    </div>
 
-  <div class="marquee">
+    <div class="ticker-item">
+      ⚡ CLEARANCE SALE — UP TO <strong>70% OFF</strong>
+    </div>
 
-    <span>
-      🔥 EXTRA 20% OFF — USE CODE ASNEW20
-    </span>
+    <div class="ticker-item">
+      🎁 FIRST ORDER — USE CODE <strong>ASNEW20</strong>
+    </div>
 
-    <span>
-      🚚 FREE SHIPPING ABOVE ₹999
-    </span>
-
-    <span>
-      ⚡ CLEARANCE SALE — UP TO 70% OFF
-    </span>
-
-    <span>
+    <div class="ticker-item">
       💳 EXTRA DISCOUNT ON ONLINE PAYMENTS
-    </span>
+    </div>
 
-    <span>
-      🔥 EXTRA 20% OFF — USE CODE ASNEW20
-    </span>
+    <div class="ticker-item">
+      🔥 TRENDING STYLES — SHOP NOW
+    </div>
 
-    <span>
-      🚚 FREE SHIPPING ABOVE ₹999
-    </span>
+    <div class="ticker-item">
+      🚚 FREE SHIPPING ABOVE <strong>₹999</strong>
+    </div>
+
+    <div class="ticker-item">
+      ⚡ CLEARANCE SALE — UP TO <strong>70% OFF</strong>
+    </div>
+
+    <div class="ticker-item">
+      🎁 FIRST ORDER — USE CODE <strong>ASNEW20</strong>
+    </div>
 
   </div>
-
 </div>
 
-
-<!-- ================= HEADER ================= -->
+<!-- =========================
+     HEADER
+========================= -->
 
 <header class="header">
 
-  <button class="menu"
-          onclick="openMenu()">
-    ☰
-  </button>
+  <div class="header-left">
 
-  <div class="logo"
-       onclick="location.href='index.html'">
-
-    AS
-    <span>FASHIONS</span>
+    <button class="menu-btn" onclick="openDrawer()" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
   </div>
 
+  <a href="index.html" class="logo">
+    AS <span>FASHIONS</span>
+  </a>
 
-  <div class="actions">
+  <div class="header-right">
 
-    <button class="action"
-            onclick="location.href='products.html'">
+    <button class="icon-btn"
+      onclick="go('profile.html')"
+      aria-label="Profile">
       ♙
     </button>
 
-    <button class="action"
-            onclick="location.href='products.html?wishlist=true'">
+    <button class="icon-btn"
+      onclick="go('wishlist.html')"
+      aria-label="Wishlist">
       ♡
-      <span class="badge"
-            id="wishCount">
-        0
-      </span>
+      <small id="wishCount">0</small>
     </button>
 
-    <button class="action"
-            onclick="location.href='products.html?cart=true'">
+    <button class="icon-btn"
+      onclick="go('cart.html')"
+      aria-label="Cart">
       🛒
-      <span class="badge"
-            id="cartCount">
-        0
-      </span>
+      <small id="cartCount">0</small>
     </button>
 
   </div>
 
 </header>
 
+<!-- =========================
+     SEARCH
+========================= -->
 
-<!-- ================= MENU ================= -->
+<div class="search-area">
 
-<div class="mobileMenu"
-     id="mobileMenu">
+  <form class="search-box" onsubmit="searchProducts(event)">
 
-  <button class="closeMenu"
-          onclick="closeMenu()">
-    ×
-  </button>
+    <input
+      id="searchInput"
+      type="search"
+      placeholder="Search products, brands & more"
+      autocomplete="off">
 
-  <h2>AS FASHIONS</h2>
+    <button type="submit">⌕</button>
 
-  <a href="index.html">
-    Home
-  </a>
-
-  <a href="products.html?category=Women">
-    Women
-  </a>
-
-  <a href="products.html?category=Men">
-    Men
-  </a>
-
-  <a href="products.html?category=Kids">
-    Kids
-  </a>
-
-  <a href="products.html?subcategory=Girl">
-    Girls
-  </a>
-
-  <a href="products.html?subcategory=Boy">
-    Boys
-  </a>
-
-  <a href="products.html?max=499">
-    Under ₹499
-  </a>
-
-  <a href="products.html?max=999">
-    Under ₹999
-  </a>
-
-  <a href="products.html?discount=70">
-    70% OFF
-  </a>
+  </form>
 
 </div>
 
+<!-- =========================
+     CATEGORY NAV
+========================= -->
 
-<!-- ================= CATEGORY NAV ================= -->
+<nav class="category-bar">
 
-<nav class="categoryNav">
+  <a class="category-link active"
+     href="products.html">ALL</a>
 
-  <button onclick="go('products.html')">
-    ALL
-  </button>
+  <a class="category-link"
+     href="products.html?category=women">WOMEN</a>
 
-  <button onclick="go('products.html?category=Women')">
-    WOMEN
-  </button>
+  <a class="category-link"
+     href="products.html?category=men">MEN</a>
 
-  <button onclick="go('products.html?category=Men')">
-    MEN
-  </button>
+  <a class="category-link"
+     href="products.html?category=kids">KIDS</a>
 
-  <button onclick="go('products.html?category=Kids')">
-    KIDS
-  </button>
+  <a class="category-link"
+     href="products.html?category=girls">GIRLS</a>
 
-  <button onclick="go('products.html?subcategory=Girl')">
-    GIRLS
-  </button>
+  <a class="category-link"
+     href="products.html?category=boys">BOYS</a>
 
-  <button onclick="go('products.html?subcategory=Boy')">
-    BOYS
-  </button>
+  <a class="category-link"
+     href="products.html?category=dresses">DRESSES</a>
 
-  <button onclick="go('products.html?subcategory=Dresses')">
-    DRESSES
-  </button>
+  <a class="category-link"
+     href="products.html?category=shirts">SHIRTS</a>
 
-  <button onclick="go('products.html?subcategory=Shirts')">
-    SHIRTS
-  </button>
+  <a class="category-link"
+     href="products.html?category=denim">DENIM</a>
 
-  <button onclick="go('products.html?subcategory=Denim')">
-    DENIM
-  </button>
+  <a class="category-link"
+     href="products.html?category=footwear">FOOTWEAR</a>
 
-  <button onclick="go('products.html?max=499')">
-    UNDER ₹499
-  </button>
+  <a class="category-link"
+     href="products.html?category=accessories">ACCESSORIES</a>
 
-  <button onclick="go('products.html?discount=70')">
-    SALE
-  </button>
+  <a class="category-link sale"
+     href="products.html?discount=70">SALE</a>
 
 </nav>
 
+<!-- =========================
+     HERO
+========================= -->
 
-<!-- ================= HERO 1 ================= -->
+<section class="hero" id="hero">
 
-<section class="hero">
+  <!-- SLIDE 1 -->
 
+  <article class="hero-slide active">
 
-  <article class="slide active">
+    <img
+      class="hero-image"
+      src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1800&q=85"
+      alt="Women's new season fashion">
 
-    <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1800&q=90">
+    <div class="hero-content">
 
-    <div class="slideOverlay"></div>
-
-    <div class="heroContent">
-
-      <div class="kicker">
+      <div class="hero-kicker">
         AS FASHIONS / NEW SEASON
       </div>
 
-      <h1>
+      <h1 class="hero-title">
         Own<br>
         Your<br>
         Style.
       </h1>
 
-      <p>
-        Discover elevated fashion designed for
-        modern lifestyles. Fresh silhouettes,
-        premium details and effortless confidence.
+      <p class="hero-copy">
+        Discover elevated fashion designed for modern lifestyles.
+        Fresh silhouettes, premium details and effortless confidence.
       </p>
 
-      <div class="heroButtons">
+      <div class="hero-buttons">
 
-        <button class="heroBtn"
-                onclick="go('products.html?category=Women')">
+        <button
+          class="hero-btn"
+          onclick="go('products.html?category=women')">
           SHOP WOMEN
         </button>
 
-        <button class="heroBtn dark"
-                onclick="go('products.html?category=Men')">
+        <button
+          class="hero-btn dark"
+          onclick="go('products.html?category=men')">
           SHOP MEN
         </button>
 
@@ -1085,664 +1469,653 @@ footer a{
 
   </article>
 
+  <!-- SLIDE 2 -->
 
-  <!-- HERO 2 -->
+  <article class="hero-slide">
 
-  <article class="slide">
+    <img
+      class="hero-image"
+      src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=1800&q=85"
+      alt="Men fashion collection">
 
-    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1800&q=90">
+    <div class="hero-content">
 
-    <div class="slideOverlay"></div>
-
-    <div class="heroContent">
-
-      <div class="kicker">
-        NEW ARRIVALS
+      <div class="hero-kicker">
+        MEN'S EDIT / 2026
       </div>
 
-      <h1>
-        Fresh<br>
-        Looks.
-      </h1>
+      <h2 class="hero-title">
+        Sharp<br>
+        Looks.<br>
+        Easy Style.
+      </h2>
 
-      <p>
-        New season styles made for your everyday
-        wardrobe.
+      <p class="hero-copy">
+        Elevated shirts, denim, smart casuals and everyday essentials
+        curated for the modern man.
       </p>
 
-      <button class="heroBtn"
-              onclick="go('products.html')">
-        SHOP NEW ARRIVALS
-      </button>
+      <div class="hero-buttons">
+
+        <button
+          class="hero-btn"
+          onclick="go('products.html?category=men')">
+          SHOP MEN
+        </button>
+
+        <button
+          class="hero-btn dark"
+          onclick="go('products.html?category=shirts')">
+          SHOP SHIRTS
+        </button>
+
+      </div>
 
     </div>
 
   </article>
 
+  <!-- SLIDE 3 -->
 
-  <!-- HERO 3 -->
+  <article class="hero-slide">
 
-  <article class="slide">
+    <img
+      class="hero-image"
+      src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=1800&q=85"
+      alt="Kids fashion">
 
-    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1800&q=90">
+    <div class="hero-content">
 
-    <div class="slideOverlay"></div>
-
-    <div class="heroContent">
-
-      <div class="kicker">
-        BIG FASHION SALE
+      <div class="hero-kicker">
+        KIDS / NEW ARRIVALS
       </div>
 
-      <h1>
-        UP TO<br>
-        70% OFF.
-      </h1>
-
-      <p>
-        Your favourite styles. Limited-time prices.
-      </p>
-
-      <button class="heroBtn"
-              onclick="go('products.html?discount=70')">
-        EXPLORE SALE
-      </button>
-
-    </div>
-
-  </article>
-
-
-  <!-- HERO 4 -->
-
-  <article class="slide">
-
-    <img src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?auto=format&fit=crop&w=1800&q=90">
-
-    <div class="slideOverlay"></div>
-
-    <div class="heroContent">
-
-      <div class="kicker">
-        KIDS EDIT
-      </div>
-
-      <h1>
+      <h2 class="hero-title">
         Little<br>
-        Icons.
-      </h1>
+        Looks.<br>
+        Big Style.
+      </h2>
 
-      <p>
-        Playful styles for every little personality.
+      <p class="hero-copy">
+        Fun, comfortable and stylish collections for every little trendsetter.
       </p>
 
-      <button class="heroBtn"
-              onclick="go('products.html?category=Kids')">
-        SHOP KIDS
-      </button>
+      <div class="hero-buttons">
+
+        <button
+          class="hero-btn"
+          onclick="go('products.html?category=girls')">
+          GIRLS
+        </button>
+
+        <button
+          class="hero-btn dark"
+          onclick="go('products.html?category=boys')">
+          BOYS
+        </button>
+
+      </div>
 
     </div>
 
   </article>
 
+  <!-- SLIDE 4 -->
 
-  <!-- HERO 5 -->
+  <article class="hero-slide">
 
-  <article class="slide">
+    <img
+      class="hero-image"
+      src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1800&q=85"
+      alt="Fashion sale">
 
-    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1800&q=90">
+    <div class="hero-content">
 
-    <div class="slideOverlay"></div>
-
-    <div class="heroContent">
-
-      <div class="kicker">
-        FINAL MARKDOWNS
+      <div class="hero-kicker">
+        BIG FASHION EVENT
       </div>
 
-      <h1>
+      <h2 class="hero-title">
+        Up To<br>
+        70%<br>
+        OFF.
+      </h2>
+
+      <p class="hero-copy">
+        Your favourite styles at prices worth moving fast for.
+      </p>
+
+      <div class="hero-buttons">
+
+        <button
+          class="hero-btn"
+          onclick="go('products.html?discount=70')">
+          SHOP 70% OFF
+        </button>
+
+        <button
+          class="hero-btn dark"
+          onclick="go('products.html?maxPrice=999')">
+          UNDER ₹999
+        </button>
+
+      </div>
+
+    </div>
+
+  </article>
+
+  <!-- SLIDE 5 -->
+
+  <article class="hero-slide">
+
+    <img
+      class="hero-image"
+      src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1800&q=85"
+      alt="Clearance fashion sale">
+
+    <div class="hero-content">
+
+      <div class="hero-kicker">
+        FINAL MARKDOWN
+      </div>
+
+      <h2 class="hero-title">
         CLEARANCE<br>
         SALE.
-      </h1>
+      </h2>
 
-      <p>
-        Last chance to grab your favourites.
+      <p class="hero-copy">
+        Last chance styles. Limited stock. Final prices.
       </p>
 
-      <button class="heroBtn"
-              onclick="go('products.html?discount=70')">
-        SHOP CLEARANCE
-      </button>
+      <div class="hero-buttons">
+
+        <button
+          class="hero-btn"
+          onclick="go('products.html?discount=70')">
+          SHOP CLEARANCE
+        </button>
+
+      </div>
 
     </div>
 
   </article>
 
+  <button class="hero-arrow hero-prev" onclick="prevSlide()">‹</button>
+  <button class="hero-arrow hero-next" onclick="nextSlide()">›</button>
 
-  <div class="heroDots"
-       id="heroDots"></div>
+  <div class="hero-dots">
+
+    <button class="hero-dot active" onclick="showSlide(0)"></button>
+    <button class="hero-dot" onclick="showSlide(1)"></button>
+    <button class="hero-dot" onclick="showSlide(2)"></button>
+    <button class="hero-dot" onclick="showSlide(3)"></button>
+    <button class="hero-dot" onclick="showSlide(4)"></button>
+
+  </div>
 
 </section>
 
-
-<!-- ================= TRENDING ================= -->
+<!-- =========================
+     SHOP BY CATEGORY
+========================= -->
 
 <section class="section">
 
-  <div class="sectionHead">
+  <div class="section-head">
 
     <div>
-
-      <div class="eyebrow">
-        LIVE NOW
-      </div>
-
-      <h2>
-        Trending Now
-      </h2>
-
+      <div class="section-kicker">Discover</div>
+      <h2 class="section-title">Shop By Category</h2>
     </div>
 
-    <a class="viewAll"
-       href="products.html">
+    <a class="view-all" href="products.html">
       VIEW ALL
     </a>
 
   </div>
 
+  <div class="category-grid">
 
-  <div class="trendingTrack"
-       id="trendingTrack">
-
-
-    <article class="trendCard"
-             onclick="go('products.html?category=Women')">
-
-      <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=700&q=85">
-
-      <div class="trendOverlay">
-
-        <span class="live">
-          🔴 LIVE
-        </span>
-
-        <h3>
-          Women's Edit
-        </h3>
-
-      </div>
-
-    </article>
-
-
-    <article class="trendCard"
-             onclick="go('products.html?category=Men')">
-
-      <img src="https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?auto=format&fit=crop&w=700&q=85">
-
-      <div class="trendOverlay">
-
-        <span class="live">
-          🔥 TRENDING
-        </span>
-
-        <h3>
-          Men's Streetwear
-        </h3>
-
-      </div>
-
-    </article>
-
-
-    <article class="trendCard"
-             onclick="go('products.html?subcategory=Dresses')">
-
-      <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=85">
-
-      <div class="trendOverlay">
-
-        <span class="live">
-          ⚡ VIRAL
-        </span>
-
-        <h3>
-          Dresses
-        </h3>
-
-      </div>
-
-    </article>
-
-
-    <article class="trendCard"
-             onclick="go('products.html?subcategory=Denim')">
-
-      <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=85">
-
-      <div class="trendOverlay">
-
-        <span class="live">
-          🔥 HOT
-        </span>
-
-        <h3>
-          Denim
-        </h3>
-
-      </div>
-
-    </article>
-
-
-    <article class="trendCard"
-             onclick="go('products.html?category=Kids')">
-
-      <img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=85">
-
-      <div class="trendOverlay">
-
-        <span class="live">
-          ✨ NEW
-        </span>
-
-        <h3>
-          Kids
-        </h3>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-<!-- ================= SHOP CATEGORIES ================= -->
-
-<section class="section">
-
-  <div class="sectionHead">
-
-    <div>
-
-      <div class="eyebrow">
-        EXPLORE
-      </div>
-
-      <h2>
-        Shop by Category
-      </h2>
-
-    </div>
-
-  </div>
-
-
-  <div class="categoryGrid">
-
-
-    <article class="categoryTile"
-             onclick="go('products.html?category=Women')">
-
-      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85">
-
-      <div class="tileText">
+    <a class="category-card"
+       href="products.html?category=women">
+      <img
+        src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80"
+        alt="Women">
+      <div class="category-overlay">
         <h3>Women</h3>
-        <p>Shop the edit →</p>
       </div>
+    </a>
 
-    </article>
-
-
-    <article class="categoryTile"
-             onclick="go('products.html?category=Men')">
-
-      <img src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?auto=format&fit=crop&w=900&q=85">
-
-      <div class="tileText">
+    <a class="category-card"
+       href="products.html?category=men">
+      <img
+        src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?auto=format&fit=crop&w=700&q=80"
+        alt="Men">
+      <div class="category-overlay">
         <h3>Men</h3>
-        <p>Shop the edit →</p>
       </div>
+    </a>
 
-    </article>
-
-
-    <article class="categoryTile"
-             onclick="go('products.html?subcategory=Girl')">
-
-      <img src="https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?auto=format&fit=crop&w=900&q=85">
-
-      <div class="tileText">
+    <a class="category-card"
+       href="products.html?category=girls">
+      <img
+        src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=700&q=80"
+        alt="Girls">
+      <div class="category-overlay">
         <h3>Girls</h3>
-        <p>Little fashion →</p>
       </div>
+    </a>
 
-    </article>
-
-
-    <article class="categoryTile"
-             onclick="go('products.html?subcategory=Boy')">
-
-      <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=900&q=85">
-
-      <div class="tileText">
+    <a class="category-card"
+       href="products.html?category=boys">
+      <img
+        src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80"
+        alt="Boys">
+      <div class="category-overlay">
         <h3>Boys</h3>
-        <p>Cool looks →</p>
       </div>
+    </a>
 
-    </article>
+    <a class="category-card"
+       href="products.html?category=dresses">
+      <img
+        src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=80"
+        alt="Dresses">
+      <div class="category-overlay">
+        <h3>Dresses</h3>
+      </div>
+    </a>
 
+    <a class="category-card"
+       href="products.html?category=footwear">
+      <img
+        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"
+        alt="Footwear">
+      <div class="category-overlay">
+        <h3>Footwear</h3>
+      </div>
+    </a>
 
   </div>
 
 </section>
 
-
-<!-- ================= OFFER GRID ================= -->
+<!-- =========================
+     PROMOTIONAL TILES
+========================= -->
 
 <section class="section">
 
-  <div class="sectionHead">
+  <div class="section-head">
 
     <div>
-
-      <div class="eyebrow">
-        SHOP SMART
-      </div>
-
-      <h2>
-        Offers for You
-      </h2>
-
+      <div class="section-kicker">Shop Smart</div>
+      <h2 class="section-title">Deals Made For You</h2>
     </div>
 
   </div>
 
+  <div class="promo-grid">
 
-  <div class="offerGrid">
+    <a class="promo-card"
+       href="products.html?maxPrice=499">
 
+      <div class="promo-icon">💸</div>
 
-    <article class="offer"
-             onclick="go('products.html?max=499')">
-
-      <div class="emoji">
-        💸
+      <div>
+        <h3>UNDER ₹499</h3>
+        <p>Affordable everyday styles.</p>
       </div>
 
-      <h3>
-        Under ₹499
-      </h3>
+    </a>
 
-      <p>
-        Everyday styles at easy prices.
-      </p>
+    <a class="promo-card"
+       href="products.html?maxPrice=999">
 
-    </article>
+      <div class="promo-icon">✨</div>
 
-
-    <article class="offer"
-             onclick="go('products.html?max=999')">
-
-      <div class="emoji">
-        🛍️
+      <div>
+        <h3>UNDER ₹999</h3>
+        <p>Premium looks without the premium price.</p>
       </div>
 
-      <h3>
-        Under ₹999
-      </h3>
+    </a>
 
-      <p>
-        Premium looks without the premium price.
-      </p>
+    <a class="promo-card sale"
+       href="products.html?discount=50">
 
-    </article>
+      <div class="promo-icon">🔥</div>
 
-
-    <article class="offer hot"
-             onclick="go('products.html?discount=70')">
-
-      <div class="emoji">
-        🔥
+      <div>
+        <h3>UP TO 50% OFF</h3>
+        <p>Trending styles on offer.</p>
       </div>
 
-      <h3>
-        Up To 70% OFF
-      </h3>
+    </a>
 
-      <p>
-        Limited time sale.
-      </p>
+    <a class="promo-card dark"
+       href="products.html?discount=70">
 
-    </article>
+      <div class="promo-icon">⚡</div>
 
-
-    <article class="offer"
-             onclick="go('products.html')">
-
-      <div class="emoji">
-        ✨
+      <div>
+        <h3>UP TO 70% OFF</h3>
+        <p>Final markdowns. Limited stock.</p>
       </div>
 
-      <h3>
-        New Arrivals
-      </h3>
-
-      <p>
-        Fresh styles just dropped.
-      </p>
-
-    </article>
-
+    </a>
 
   </div>
 
 </section>
 
+<!-- =========================
+     COUNTDOWN
+========================= -->
 
-<!-- ================= SALE ================= -->
+<section class="section">
 
-<section class="saleBanner">
+  <div class="countdown">
 
-  <div>
+    <div>
+      <div class="section-kicker" style="color:#aaa">
+        LIMITED TIME
+      </div>
 
-    <small>
-      FINAL MARKDOWNS
-    </small>
-
-    <h2>
-      CLEARANCE<br>
-      SALE
-    </h2>
+      <h2>Flash Sale Ends Soon</h2>
+    </div>
 
     <div class="timer">
 
-      <div class="timeBox">
+      <div class="time-box">
         <strong id="hours">08</strong>
-        HRS
+        <span>HOURS</span>
       </div>
 
-      <div class="timeBox">
-        <strong id="minutes">45</strong>
-        MIN
+      <div class="time-box">
+        <strong id="minutes">00</strong>
+        <span>MINUTES</span>
       </div>
 
-      <div class="timeBox">
-        <strong id="seconds">20</strong>
-        SEC
+      <div class="time-box">
+        <strong id="seconds">00</strong>
+        <span>SECONDS</span>
       </div>
 
     </div>
 
-    <button class="heroBtn"
-            onclick="go('products.html?discount=70')">
-      SHOP CLEARANCE
+    <button
+      class="hero-btn"
+      onclick="go('products.html?discount=70')">
+      SHOP FLASH SALE
     </button>
 
   </div>
 
 </section>
 
-
-<!-- ================= KIDS ================= -->
+<!-- =========================
+     TRENDING
+========================= -->
 
 <section class="section">
 
-  <div class="sectionHead">
+  <div class="section-head">
 
     <div>
-
-      <div class="eyebrow">
-        KIDS EDIT
-      </div>
-
-      <h2>
-        Little Icons
-      </h2>
-
+      <div class="section-kicker">What's Hot</div>
+      <h2 class="section-title">Trending Now</h2>
     </div>
+
+    <a class="view-all"
+       href="products.html?sort=trending">
+      VIEW ALL
+    </a>
 
   </div>
 
+  <div class="trending-wrap">
 
-  <div class="kidsBox">
+    <div class="trending-track">
 
+      <a class="trend-card"
+         href="products.html?sort=trending&category=women">
+        <img
+          src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=700&q=80"
+          alt="Women's trending">
+        <span class="trend-label">🔥 TRENDING</span>
+      </a>
 
-    <article class="kidsCard"
-             onclick="go('products.html?subcategory=Girl')">
+      <a class="trend-card"
+         href="products.html?sort=trending&category=men">
+        <img
+          src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?auto=format&fit=crop&w=700&q=80"
+          alt="Men's trending">
+        <span class="trend-label">🔥 TRENDING</span>
+      </a>
 
-      <img src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=1000&q=85">
+      <a class="trend-card"
+         href="products.html?sort=trending&category=girls">
+        <img
+          src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=700&q=80"
+          alt="Girls trending">
+        <span class="trend-label">🔥 GIRLS</span>
+      </a>
 
-      <div class="kidsText">
+      <a class="trend-card"
+         href="products.html?sort=trending&category=boys">
+        <img
+          src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80"
+          alt="Boys trending">
+        <span class="trend-label">🔥 BOYS</span>
+      </a>
 
-        <h3>
-          Girls
-        </h3>
+      <!-- duplicate cards for seamless scroll -->
 
-        <p>
-          Dresses • Casual • Party
-        </p>
+      <a class="trend-card"
+         href="products.html?sort=trending&category=women">
+        <img
+          src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=700&q=80"
+          alt="Women's trending">
+        <span class="trend-label">🔥 TRENDING</span>
+      </a>
 
-      </div>
+      <a class="trend-card"
+         href="products.html?sort=trending&category=men">
+        <img
+          src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?auto=format&fit=crop&w=700&q=80"
+          alt="Men's trending">
+        <span class="trend-label">🔥 TRENDING</span>
+      </a>
 
-    </article>
-
-
-    <article class="kidsCard"
-             onclick="go('products.html?subcategory=Boy')">
-
-      <img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=1000&q=85">
-
-      <div class="kidsText">
-
-        <h3>
-          Boys
-        </h3>
-
-        <p>
-          Shirts • Tees • Casual
-        </p>
-
-      </div>
-
-    </article>
-
+    </div>
 
   </div>
 
 </section>
 
+<!-- =========================
+     KIDS
+========================= -->
 
-<!-- ================= FLOATING OFFER ================= -->
+<section class="section kids-section">
 
-<div class="floatingOffer">
+  <div class="section-head">
 
-  <span>
-    🔥 <b>ASNEW20</b> — EXTRA 20% OFF
-  </span>
-
-  <button class="copyBtn"
-          onclick="copyCode()">
-    COPY
-  </button>
-
-</div>
-
-
-<!-- ================= POPUP ================= -->
-
-<div class="popup"
-     id="popup">
-
-  <div class="popupBox">
-
-    <button class="popupClose"
-            onclick="closePopup()">
-      ×
-    </button>
-
-    <h2>
-      Spin & Win
-    </h2>
-
-    <p style="margin-top:10px">
-      Get a special AS FASHIONS coupon.
-    </p>
-
-    <div class="spin">
-      🎁
+    <div>
+      <div class="section-kicker">Little Fashion</div>
+      <h2 class="section-title">Kids Catalogue</h2>
     </div>
 
-    <button class="spinBtn"
-            onclick="spinCoupon()">
-      SPIN NOW
-    </button>
-
-    <p id="couponResult"
-       style="margin-top:20px;font-weight:700">
-    </p>
+    <a class="view-all"
+       href="products.html?category=kids">
+      SHOP KIDS
+    </a>
 
   </div>
 
-</div>
+  <div class="kids-grid">
 
+    <a class="kids-card"
+       href="products.html?category=girls">
 
-<!-- ================= FOOTER ================= -->
+      <img
+        src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=800&q=80"
+        alt="Girls collection">
+
+      <div class="kids-card-content">
+        <h3>Girls</h3>
+      </div>
+
+    </a>
+
+    <a class="kids-card"
+       href="products.html?category=boys">
+
+      <img
+        src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=800&q=80"
+        alt="Boys collection">
+
+      <div class="kids-card-content">
+        <h3>Boys</h3>
+      </div>
+
+    </a>
+
+    <a class="kids-card"
+       href="products.html?category=girls&sort=new">
+      <img
+        src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80"
+        alt="Girls new arrivals">
+
+      <div class="kids-card-content">
+        <h3>Girls New</h3>
+      </div>
+
+    </a>
+
+    <a class="kids-card"
+       href="products.html?category=boys&sort=new">
+
+      <img
+        src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=800&q=80"
+        alt="Boys new arrivals">
+
+      <div class="kids-card-content">
+        <h3>Boys New</h3>
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     CLEARANCE
+========================= -->
+
+<section class="section">
+
+  <div class="promo-card sale"
+       style="min-height:300px;justify-content:center;text-align:center;">
+
+    <div class="promo-icon">🔥</div>
+
+    <h3 style="font-size:clamp(40px,6vw,72px);">
+      CLEARANCE SALE
+    </h3>
+
+    <p>
+      Final markdowns. Limited quantities.
+    </p>
+
+    <div>
+      <button
+        class="hero-btn"
+        onclick="go('products.html?discount=70')">
+        SHOP CLEARANCE
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     NEWSLETTER
+========================= -->
+
+<section class="newsletter">
+
+  <h2>Stay Ahead of the Trend</h2>
+
+  <p>
+    Get new arrivals, exclusive offers and early sale access.
+  </p>
+
+  <form
+    class="newsletter-form"
+    onsubmit="subscribe(event)">
+
+    <input
+      id="emailInput"
+      type="email"
+      placeholder="Enter your email"
+      required>
+
+    <button type="submit">
+      JOIN
+    </button>
+
+  </form>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
-  <div class="footerGrid">
+  <div class="footer-grid">
 
     <div>
 
-      <h3>
+      <div class="footer-brand">
         AS FASHIONS
-      </h3>
+      </div>
 
-      <p style="color:#aaa;line-height:1.7">
-        Modern fashion for every side of you.
-        Discover fresh styles, everyday essentials
-        and limited-time offers.
+      <p style="color:#777;line-height:1.7;margin-top:15px;">
+        Premium fashion for every side of you.
       </p>
 
     </div>
 
+    <div>
+
+      <h4>SHOP</h4>
+
+      <a href="products.html?category=women">Women</a>
+      <a href="products.html?category=men">Men</a>
+      <a href="products.html?category=kids">Kids</a>
+      <a href="products.html?category=footwear">Footwear</a>
+
+    </div>
 
     <div>
 
-      <h3>Shop</h3>
+      <h4>DISCOVER</h4>
 
-      <a href="products.html?category=Women">
-        Women
+      <a href="products.html?sort=trending">
+        Trending
       </a>
 
-      <a href="products.html?category=Men">
-        Men
-      </a>
-
-      <a href="products.html?category=Kids">
-        Kids
+      <a href="products.html?sort=new">
+        New Arrivals
       </a>
 
       <a href="products.html?discount=70">
@@ -1751,219 +2124,405 @@ footer a{
 
     </div>
 
-
     <div>
 
-      <h3>Kids</h3>
+      <h4>HELP</h4>
 
-      <a href="products.html?subcategory=Girl">
-        Girls
-      </a>
-
-      <a href="products.html?subcategory=Boy">
-        Boys
-      </a>
+      <a href="contact.html">Contact Us</a>
+      <a href="shipping.html">Shipping</a>
+      <a href="returns.html">Returns</a>
 
     </div>
 
-
     <div>
 
-      <h3>Offers</h3>
+      <h4>ACCOUNT</h4>
 
-      <a href="products.html?max=499">
-        Under ₹499
-      </a>
-
-      <a href="products.html?max=999">
-        Under ₹999
-      </a>
-
-      <a href="products.html?discount=70">
-        Up To 70% OFF
-      </a>
+      <a href="profile.html">My Account</a>
+      <a href="wishlist.html">Wishlist</a>
+      <a href="cart.html">Cart</a>
 
     </div>
 
   </div>
 
+  <div class="copyright">
+    © 2026 AS FASHIONS. All rights reserved.
+  </div>
+
 </footer>
 
+<!-- =========================
+     FLOATING COUPON
+========================= -->
 
-<script src="products.js"></script>
+<div class="floating-coupon">
+
+  <span>
+    🔥 <strong>ASNEW20</strong> — EXTRA 20% OFF
+  </span>
+
+  <button
+    class="coupon-copy"
+    onclick="copyCoupon()">
+    COPY
+  </button>
+
+</div>
+
+<!-- =========================
+     DRAWER
+========================= -->
+
+<div
+  id="drawerOverlay"
+  class="drawer-overlay"
+  onclick="closeDrawer(event)">
+
+  <aside class="drawer"
+        onclick="event.stopPropagation()">
+
+    <div class="drawer-head">
+
+      <div class="drawer-logo">
+        AS FASHIONS
+      </div>
+
+      <button
+        class="drawer-close"
+        onclick="closeDrawer()">
+        ×
+      </button>
+
+    </div>
+
+    <div class="drawer-section">
+
+      <h4>SHOP</h4>
+
+      <a class="drawer-link"
+         href="products.html?category=women">
+        Women
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?category=men">
+        Men
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?category=kids">
+        Kids
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?category=girls">
+        Girls
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?category=boys">
+        Boys
+      </a>
+
+    </div>
+
+    <div class="drawer-section">
+
+      <h4>FASHION</h4>
+
+      <a class="drawer-link"
+         href="products.html?category=dresses">
+        Dresses
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?category=shirts">
+        Shirts
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?category=denim">
+        Denim
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?category=footwear">
+        Footwear
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?category=accessories">
+        Accessories
+      </a>
+
+    </div>
+
+    <div class="drawer-section">
+
+      <h4>OFFERS</h4>
+
+      <a class="drawer-link"
+         href="products.html?maxPrice=499">
+        Under ₹499
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?maxPrice=999">
+        Under ₹999
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?discount=50">
+        Up To 50% Off
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?discount=70">
+        Up To 70% Off
+      </a>
+
+      <a class="drawer-link"
+         href="products.html?discount=70">
+        Clearance Sale
+      </a>
+
+    </div>
+
+  </aside>
+
+</div>
+
+<!-- =========================
+     FIRST VISIT POPUP
+========================= -->
+
+<div id="offerPopup" class="popup-overlay">
+
+  <div class="popup">
+
+    <button
+      class="popup-close"
+      onclick="closePopup()">
+      ×
+    </button>
+
+    <div style="font-size:35px;">
+      🎁
+    </div>
+
+    <h2>Welcome to AS FASHIONS</h2>
+
+    <p>
+      Get an extra 20% OFF on your first order.
+    </p>
+
+    <div class="popup-code">
+      ASNEW20
+    </div>
+
+    <button
+      class="hero-btn"
+      onclick="copyCoupon();closePopup();">
+      COPY COUPON
+    </button>
+
+  </div>
+
+</div>
 
 <script>
 
-
-/* ================= NAVIGATION ================= */
+/* =========================
+   SAFE NAVIGATION
+========================= */
 
 function go(url){
   window.location.href = url;
 }
 
+/* =========================
+   SEARCH
+========================= */
 
-/* ================= MENU ================= */
+function searchProducts(event){
 
-function openMenu(){
+  event.preventDefault();
 
-  document
-    .getElementById("mobileMenu")
-    .classList.add("active");
+  const input =
+    document.getElementById("searchInput");
 
+  const value =
+    input.value.trim();
+
+  if(!value){
+    input.focus();
+    return;
+  }
+
+  window.location.href =
+    "products.html?search=" +
+    encodeURIComponent(value);
 }
 
-function closeMenu(){
-
-  document
-    .getElementById("mobileMenu")
-    .classList.remove("active");
-
-}
-
-
-/* ================= HERO SLIDER ================= */
+/* =========================
+   HERO SLIDER
+========================= */
 
 const slides =
-  document.querySelectorAll(".slide");
+  document.querySelectorAll(".hero-slide");
 
 const dots =
-  document.getElementById("heroDots");
+  document.querySelectorAll(".hero-dot");
 
 let currentSlide = 0;
 
-
-/* Create dots */
-
-slides.forEach((slide,index)=>{
-
-  const dot =
-    document.createElement("button");
-
-  dot.className =
-    "heroDot " +
-    (index === 0 ? "active" : "");
-
-  dot.onclick = ()=>{
-    showSlide(index);
-  };
-
-  dots.appendChild(dot);
-
-});
-
-
 function showSlide(index){
 
-  currentSlide = index;
+  currentSlide =
+    (index + slides.length) %
+    slides.length;
 
   slides.forEach((slide,i)=>{
-
     slide.classList.toggle(
       "active",
-      i === index
+      i === currentSlide
     );
-
   });
 
+  dots.forEach((dot,i)=>{
+    dot.classList.toggle(
+      "active",
+      i === currentSlide
+    );
+  });
+}
+
+function nextSlide(){
+  showSlide(currentSlide + 1);
+}
+
+function prevSlide(){
+  showSlide(currentSlide - 1);
+}
+
+setInterval(nextSlide,5500);
+
+/* =========================
+   TOUCH SWIPE
+========================= */
+
+let touchStartX = 0;
+
+const hero =
+  document.getElementById("hero");
+
+hero.addEventListener(
+  "touchstart",
+  e=>{
+    touchStartX =
+      e.changedTouches[0].screenX;
+  },
+  {passive:true}
+);
+
+hero.addEventListener(
+  "touchend",
+  e=>{
+
+    const endX =
+      e.changedTouches[0].screenX;
+
+    const diff =
+      touchStartX - endX;
+
+    if(Math.abs(diff) > 50){
+
+      if(diff > 0){
+        nextSlide();
+      }else{
+        prevSlide();
+      }
+
+    }
+
+  },
+  {passive:true}
+);
+
+/* =========================
+   DRAWER
+========================= */
+
+function openDrawer(){
+
   document
-    .querySelectorAll(".heroDot")
-    .forEach((dot,i)=>{
+    .getElementById("drawerOverlay")
+    .classList.add("open");
 
-      dot.classList.toggle(
-        "active",
-        i === index
-      );
+  document.body.style.overflow =
+    "hidden";
+}
 
+function closeDrawer(event){
+
+  if(event &&
+     event.target !==
+     document.getElementById("drawerOverlay")){
+    return;
+  }
+
+  document
+    .getElementById("drawerOverlay")
+    .classList.remove("open");
+
+  document.body.style.overflow =
+    "";
+}
+
+/* =========================
+   COUPON
+========================= */
+
+function copyCoupon(){
+
+  navigator.clipboard
+    .writeText("ASNEW20")
+    .then(()=>{
+      alert("ASNEW20 coupon copied!");
+    })
+    .catch(()=>{
+      alert("Coupon: ASNEW20");
     });
 
 }
 
-
-setInterval(()=>{
-
-  currentSlide =
-    (currentSlide + 1) % slides.length;
-
-  showSlide(currentSlide);
-
-},5000);
-
-
-/* ================= TRENDING AUTO SCROLL ================= */
-
-const trending =
-  document.getElementById("trendingTrack");
-
-let direction = 1;
-
-setInterval(()=>{
-
-  if(
-    window.innerWidth > 600 &&
-    trending
-  ){
-
-    const max =
-      trending.scrollWidth -
-      trending.clientWidth;
-
-    if(trending.scrollLeft >= max){
-      direction = -1;
-    }
-
-    if(trending.scrollLeft <= 0){
-      direction = 1;
-    }
-
-    trending.scrollLeft +=
-      direction * 1;
-
-  }
-
-},40);
-
-
-/* ================= COUNTDOWN ================= */
+/* =========================
+   COUNTDOWN
+========================= */
 
 let saleEnd =
   Date.now() +
-  (8 * 60 * 60 * 1000) +
-  (45 * 60 * 1000);
-
+  (8 * 60 * 60 * 1000);
 
 function updateTimer(){
 
-  let distance =
-    saleEnd - Date.now();
+  const remaining =
+    Math.max(0,saleEnd - Date.now());
 
-  if(distance <= 0){
-
-    saleEnd =
-      Date.now() +
-      (12 * 60 * 60 * 1000);
-
-    distance =
-      saleEnd - Date.now();
-
-  }
+  const totalSeconds =
+    Math.floor(remaining / 1000);
 
   const hours =
-    Math.floor(
-      distance / (1000*60*60)
-    );
+    Math.floor(totalSeconds / 3600);
 
   const minutes =
     Math.floor(
-      (distance % (1000*60*60))
-      / (1000*60)
+      (totalSeconds % 3600) / 60
     );
 
   const seconds =
-    Math.floor(
-      (distance % (1000*60))
-      / 1000
-    );
-
+    totalSeconds % 60;
 
   document.getElementById("hours")
     .textContent =
@@ -1977,153 +2536,129 @@ function updateTimer(){
     .textContent =
     String(seconds).padStart(2,"0");
 
-}
+  if(remaining <= 0){
 
-
-setInterval(updateTimer,1000);
-updateTimer();
-
-
-/* ================= COPY COUPON ================= */
-
-function copyCode(){
-
-  navigator.clipboard
-    .writeText("ASNEW20")
-    .then(()=>{
-
-      alert(
-        "ASNEW20 coupon copy అయింది!"
-      );
-
-    })
-    .catch(()=>{
-
-      alert(
-        "Coupon Code: ASNEW20"
-      );
-
-    });
-
-}
-
-
-/* ================= POPUP ================= */
-
-setTimeout(()=>{
-
-  if(
-    !sessionStorage.getItem(
-      "asPopupShown"
-    )
-  ){
-
-    document
-      .getElementById("popup")
-      .classList.add("active");
-
-    sessionStorage.setItem(
-      "asPopupShown",
-      "true"
-    );
+    saleEnd =
+      Date.now() +
+      (8 * 60 * 60 * 1000);
 
   }
 
-},2500);
+}
 
+updateTimer();
+
+setInterval(updateTimer,1000);
+
+/* =========================
+   NEWSLETTER
+========================= */
+
+function subscribe(event){
+
+  event.preventDefault();
+
+  const email =
+    document.getElementById("emailInput").value;
+
+  if(!email) return;
+
+  alert(
+    "Welcome to AS FASHIONS! " +
+    email +
+    " subscribed successfully."
+  );
+
+  document
+    .getElementById("emailInput")
+    .value = "";
+
+}
+
+/* =========================
+   LOCAL COUNTS
+========================= */
+
+function updateHeaderCounts(){
+
+  try{
+
+    const wishlist =
+      JSON.parse(
+        localStorage.getItem("asWishlist") || "[]"
+      );
+
+    const cart =
+      JSON.parse(
+        localStorage.getItem("asCart") || "[]"
+      );
+
+    document.getElementById("wishCount")
+      .textContent = wishlist.length;
+
+    document.getElementById("cartCount")
+      .textContent = cart.length;
+
+  }catch(error){
+
+    document.getElementById("wishCount")
+      .textContent = "0";
+
+    document.getElementById("cartCount")
+      .textContent = "0";
+
+  }
+
+}
+
+updateHeaderCounts();
+
+/* =========================
+   FIRST VISIT POPUP
+========================= */
+
+setTimeout(()=>{
+
+  if(!localStorage.getItem("asFashionPopupSeen")){
+
+    document
+      .getElementById("offerPopup")
+      .classList.add("show");
+
+  }
+
+},4500);
 
 function closePopup(){
 
   document
-    .getElementById("popup")
-    .classList.remove("active");
+    .getElementById("offerPopup")
+    .classList.remove("show");
+
+  localStorage.setItem(
+    "asFashionPopupSeen",
+    "1"
+  );
 
 }
 
-
-function spinCoupon(){
-
-  const coupons = [
-    "ASNEW20 — 20% OFF",
-    "STYLE15 — 15% OFF",
-    "FASHION25 — 25% OFF"
-  ];
-
-  const coupon =
-    coupons[
-      Math.floor(
-        Math.random()*coupons.length
-      )
-    ];
-
-  document
-    .getElementById("couponResult")
-    .textContent =
-    "🎉 Your Coupon: " + coupon;
-
-}
-
-
-/* ================= COUNTS ================= */
-
-function updateCounts(){
-
-  const wishlist =
-    JSON.parse(
-      localStorage.getItem(
-        "asWishlist"
-      ) || "[]"
-    );
-
-  const cart =
-    JSON.parse(
-      localStorage.getItem(
-        "asCart"
-      ) || "[]"
-    );
-
-  document.getElementById(
-    "wishCount"
-  ).textContent =
-    wishlist.length;
-
-
-  const cartCount =
-    cart.reduce(
-      (sum,item)=>
-        sum + Number(item.qty || 0),
-      0
-    );
-
-  document.getElementById(
-    "cartCount"
-  ).textContent =
-    cartCount;
-
-}
-
-
-updateCounts();
-
-
-/* ================= EXIT PROMOTION ================= */
-
-let exitShown = false;
+/* =========================
+   ESC CLOSE
+========================= */
 
 document.addEventListener(
-  "mouseleave",
-  event => {
+  "keydown",
+  e=>{
 
-    if(
-      event.clientY <= 0 &&
-      !exitShown
-    ){
+    if(e.key === "Escape"){
 
-      exitShown = true;
+      closePopup();
 
       document
-        .getElementById("popup")
-        .classList.add("active");
+        .getElementById("drawerOverlay")
+        .classList.remove("open");
+
+      document.body.style.overflow = "";
 
     }
 

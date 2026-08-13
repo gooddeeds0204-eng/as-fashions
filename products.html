@@ -1,1155 +1,948 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>AS FASHIONS — Shop</title>
-
-<style>
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f7f7f7;
-  color: #222;
-}
-
-/* ================= TOP BAR ================= */
-
-.topbar {
-  background: #111;
-  color: white;
-  padding: 9px 15px;
-  font-size: 12px;
-  text-align: center;
-  letter-spacing: .3px;
-}
-
-/* ================= HEADER ================= */
-
-.header {
-  height: 70px;
-  background: white;
-  border-bottom: 1px solid #eee;
-
-  display: flex;
-  align-items: center;
-  gap: 25px;
-
-  padding: 0 5%;
-
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.logo {
-  font-family: Georgia, serif;
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -1px;
-  white-space: nowrap;
-}
-
-.logo span {
-  font-style: italic;
-}
-
-.search {
-  flex: 1;
-  max-width: 600px;
-  position: relative;
-}
-
-.search input {
-  width: 100%;
-  height: 42px;
-  border: 1px solid #ddd;
-  background: #f6f6f6;
-  border-radius: 4px;
-  padding: 0 45px 0 15px;
-  outline: none;
-}
-
-.search button {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-
-  width: 32px;
-  height: 32px;
-
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.header-actions {
-  display: flex;
-  gap: 18px;
-}
-
-.header-actions button {
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  font-size: 13px;
-}
-
-/* ================= NAV ================= */
-
-.nav {
-  background: white;
-  border-bottom: 1px solid #eee;
-
-  display: flex;
-  justify-content: center;
-  gap: 35px;
-
-  padding: 14px;
-}
-
-.nav button {
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.nav button:hover {
-  color: #e91e63;
-}
-
-/* ================= PAGE ================= */
-
-.page {
-  width: 92%;
-  max-width: 1400px;
-  margin: 25px auto;
-}
-
-.page-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.page-head h1 {
-  font-size: 25px;
-}
-
-.result-count {
-  color: #777;
-  font-size: 13px;
-}
-
-/* ================= LAYOUT ================= */
-
-.shop-layout {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 25px;
-}
-
-/* ================= FILTER ================= */
-
-.filters {
-  background: white;
-  border-radius: 5px;
-  padding: 20px;
-  height: fit-content;
-  position: sticky;
-  top: 100px;
-}
-
-.filter-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.filter-group {
-  border-top: 1px solid #eee;
-  padding: 18px 0;
-}
-
-.filter-group h3 {
-  font-size: 13px;
-  margin-bottom: 12px;
-}
-
-.filter-group button {
-  display: block;
-  width: 100%;
-  text-align: left;
-
-  border: 0;
-  background: transparent;
-
-  padding: 7px 0;
-
-  cursor: pointer;
-  color: #555;
-}
-
-.filter-group button:hover {
-  color: #e91e63;
-}
-
-/* ================= SORT ================= */
-
-.shop-tools {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 15px;
-}
-
-.sort {
-  padding: 10px 14px;
-  border: 1px solid #ddd;
-  background: white;
-}
-
-/* ================= GRID ================= */
-
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-}
-
-/* ================= CARD ================= */
-
-.product-card {
-  background: white;
-  position: relative;
-  overflow: hidden;
-  transition: .25s;
-}
-
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0,0,0,.08);
-}
-
-.product-image {
-  width: 100%;
-  aspect-ratio: .78;
-  object-fit: cover;
-  display: block;
-}
-
-.badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-
-  background: #111;
-  color: white;
-
-  padding: 5px 8px;
-  font-size: 10px;
-  font-weight: 700;
-  border-radius: 2px;
-}
-
-.badge.hot {
-  background: #e91e63;
-  animation: pulse 1.5s infinite;
-}
-
-.badge.sale {
-  background: #ff5722;
-}
-
-@keyframes pulse {
-  0%,100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: .55;
-  }
-}
-
-.wishlist {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-
-  width: 35px;
-  height: 35px;
-
-  border-radius: 50%;
-  border: 0;
-
-  background: white;
-  cursor: pointer;
-
-  font-size: 18px;
-}
-
-.wishlist.active {
-  color: #e91e63;
-}
-
-/* ================= INFO ================= */
-
-.product-info {
-  padding: 12px;
-}
-
-.product-name {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 7px;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.product-category {
-  font-size: 11px;
-  color: #888;
-  margin-bottom: 8px;
-}
-
-.price-row {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.price {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.mrp {
-  font-size: 12px;
-  color: #999;
-  text-decoration: line-through;
-}
-
-.discount {
-  color: #0a9b46;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-/* ================= EMPTY ================= */
-
-.empty {
-  grid-column: 1 / -1;
-  background: white;
-  padding: 80px 20px;
-  text-align: center;
-  color: #777;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width: 900px) {
-
-  .header {
-    padding: 0 15px;
-    gap: 12px;
-  }
-
-  .logo {
-    font-size: 22px;
-  }
-
-  .search {
-    display: none;
-  }
-
-  .nav {
-    overflow-x: auto;
-    justify-content: flex-start;
-    gap: 25px;
-    white-space: nowrap;
-  }
-
-  .shop-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .filters {
-    position: static;
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding: 12px;
-  }
-
-  .filter-title,
-  .filter-group h3 {
-    display: none;
-  }
-
-  .filter-group {
-    border: 0;
-    padding: 0;
-    min-width: max-content;
-  }
-
-  .filter-group button {
-    background: #f3f3f3;
-    border-radius: 20px;
-    padding: 9px 14px;
-    width: auto;
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .page {
-    width: 95%;
-  }
-
-  .header-actions {
-    margin-left: auto;
-    gap: 8px;
-  }
-
-  .header-actions button {
-    font-size: 11px;
-  }
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Products | AS Fashions</title>
+
+  <meta
+    name="description"
+    content="Shop the latest fashion for women, men and kids at AS Fashions."
+  >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f8f8f8;
+      color: #111;
+    }
+
+    button,
+    select,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ================= HEADER ================= */
+
+    .top-bar {
+      background: #111;
+      color: #fff;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 12px;
+    }
+
+    .marquee {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 22s linear infinite;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    .header {
+      height: 72px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .menu-btn {
+      border: 0;
+      background: transparent;
+      font-size: 25px;
+      display: none;
+    }
+
+    .logo {
+      font-family: Georgia, serif;
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      font-style: italic;
+    }
+
+    .nav {
+      display: flex;
+      gap: 26px;
+      margin-left: 45px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .nav a:hover {
+      color: #e11d48;
+    }
+
+    .header-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .action {
+      border: 0;
+      background: transparent;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .action-icon {
+      font-size: 20px;
+    }
+
+    /* ================= PAGE ================= */
+
+    .page {
+      width: 90%;
+      max-width: 1450px;
+      margin: 0 auto;
+      padding: 25px 0 60px;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 18px;
+    }
+
+    .breadcrumb span {
+      color: #111;
+      font-weight: 600;
+    }
+
+    .page-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .page-title h1 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .page-title p {
+      color: #777;
+      font-size: 13px;
+    }
+
+    .mobile-filter-btn {
+      display: none;
+      border: 1px solid #ddd;
+      background: white;
+      padding: 10px 15px;
+    }
+
+    /* ================= TOOLBAR ================= */
+
+    .toolbar {
+      background: #fff;
+      border: 1px solid #eee;
+      padding: 13px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .result-count {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sort-label {
+      font-size: 12px;
+      color: #777;
+    }
+
+    .sort-select {
+      border: 1px solid #ddd;
+      background: #fff;
+      padding: 9px 35px 9px 12px;
+      outline: none;
+    }
+
+    /* ================= MAIN ================= */
+
+    .products-layout {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 25px;
+    }
+
+    /* ================= FILTER ================= */
+
+    .filters {
+      background: #fff;
+      border: 1px solid #eee;
+      height: fit-content;
+    }
+
+    .filter-header {
+      padding: 17px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .filter-header strong {
+      font-size: 14px;
+    }
+
+    .clear-btn {
+      border: 0;
+      background: transparent;
+      color: #e11d48;
+      font-size: 11px;
+    }
+
+    .filter-section {
+      padding: 17px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .filter-section h3 {
+      font-size: 12px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 10px 0;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .filter-option input {
+      accent-color: #111;
+    }
+
+    .price-inputs {
+      display: flex;
+      gap: 7px;
+    }
+
+    .price-inputs input {
+      width: 50%;
+      padding: 9px;
+      border: 1px solid #ddd;
+      outline: none;
+      font-size: 12px;
+    }
+
+    /* ================= PRODUCTS ================= */
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .product-card {
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    }
+
+    .product-image-wrap {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: #eee;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.04);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #111;
+      color: #fff;
+      padding: 5px 8px;
+      font-size: 10px;
+      font-weight: 700;
+      z-index: 2;
+    }
+
+    .hot-badge {
+      background: #e11d48;
+    }
+
+    .wishlist-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.95);
+      font-size: 18px;
+      z-index: 3;
+    }
+
+    .wishlist-btn.active {
+      color: #e11d48;
+    }
+
+    .product-info {
+      padding: 13px;
+    }
+
+    .product-brand {
+      font-size: 11px;
+      color: #777;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .product-name {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.4;
+      min-height: 36px;
+    }
+
+    .rating {
+      margin: 8px 0;
+      font-size: 11px;
+    }
+
+    .rating span {
+      background: #16803c;
+      color: #fff;
+      padding: 3px 6px;
+      margin-right: 5px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .price {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .old-price {
+      font-size: 11px;
+      color: #999;
+      text-decoration: line-through;
+    }
+
+    .discount {
+      color: #16803c;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* ================= EMPTY ================= */
+
+    .empty-state {
+      display: none;
+      text-align: center;
+      background: #fff;
+      padding: 70px 20px;
+      border: 1px solid #eee;
+    }
+
+    .empty-state .emoji {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .empty-state h2 {
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .shop-btn {
+      background: #111;
+      color: #fff;
+      border: 0;
+      padding: 12px 25px;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 1000px) {
+
+      .nav {
+        gap: 15px;
+        margin-left: 25px;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .products-layout {
+        grid-template-columns: 200px 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+
+      .top-bar {
+        height: 30px;
+        font-size: 10px;
+      }
+
+      .header {
+        height: 60px;
+        padding: 0 15px;
+        justify-content: space-between;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .logo {
+        font-size: 22px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .header-actions {
+        margin-left: auto;
+        gap: 9px;
+      }
+
+      .action {
+        font-size: 0;
+      }
+
+      .action-icon {
+        font-size: 19px;
+      }
+
+      .page {
+        width: 94%;
+        padding-top: 18px;
+      }
+
+      .page-title h1 {
+        font-size: 22px;
+      }
+
+      .mobile-filter-btn {
+        display: block;
+      }
+
+      .toolbar {
+        padding: 10px;
+      }
+
+      .sort-label {
+        display: none;
+      }
+
+      .products-layout {
+        display: block;
+      }
+
+      .filters {
+        display: none;
+        margin-bottom: 15px;
+      }
+
+      .filters.mobile-visible {
+        display: block;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .product-info {
+        padding: 10px;
+      }
+
+      .product-name {
+        font-size: 12px;
+      }
+
+      .price {
+        font-size: 13px;
+      }
+
+      .old-price,
+      .discount {
+        font-size: 10px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- TOP PROMO -->
-
-<div class="topbar">
-  FREE SHIPPING ON ORDERS ABOVE ₹999 • EXTRA 10% OFF ON PREPAID ORDERS
-</div>
-
-
-<!-- HEADER -->
-
-<header class="header">
-
-  <div
-    class="logo"
-    onclick="goHome()"
-    style="cursor:pointer"
-  >
-    AS <span>FASHIONS</span>
+  <!-- TOP PROMO BAR -->
+  <div class="top-bar">
+    <div class="marquee">
+      🔥 EXTRA 10% OFF ON FIRST ORDER &nbsp; | &nbsp;
+      FREE SHIPPING ABOVE ₹999 &nbsp; | &nbsp;
+      NEW STYLES EVERY WEEK &nbsp; | &nbsp;
+      USE CODE: AS10
+    </div>
   </div>
 
-  <div class="search">
+  <!-- HEADER -->
+  <header class="header">
 
-    <input
-      id="searchInput"
-      type="search"
-      placeholder="Search for products, brands and more..."
-      oninput="searchProducts()"
+    <button
+      class="menu-btn"
+      onclick="toggleMobileMenu()"
+      aria-label="Menu"
     >
-
-    <button onclick="searchProducts()">⌕</button>
-
-  </div>
-
-  <div class="header-actions">
-
-    <button onclick="goHome()">
-      🏠<br>Home
+      ☰
     </button>
 
-    <button onclick="showWishlist()">
-      ♡<br>Wishlist
-    </button>
+    <a href="index.html" class="logo">
+      AS <span>Fashions</span>
+    </a>
 
-    <button onclick="showCart()">
-      🛒<br>Cart
-    </button>
+    <nav class="nav" id="desktopNav">
+      <a href="index.html">HOME</a>
+      <a href="products.html?category=women">WOMEN</a>
+      <a href="products.html?category=men">MEN</a>
+      <a href="products.html?category=kids">KIDS</a>
+      <a href="products.html?category=sale">SALE</a>
+    </nav>
 
-  </div>
+    <div class="header-actions">
 
-</header>
+      <button class="action" onclick="goToProfile()">
+        <span class="action-icon">♙</span>
+        <span>Profile</span>
+      </button>
 
+      <button class="action" onclick="goToWishlist()">
+        <span class="action-icon">♡</span>
+        <span>Wishlist</span>
+      </button>
 
-<!-- NAVIGATION -->
+      <button class="action" onclick="goToCart()">
+        <span class="action-icon">🛍</span>
+        <span>Bag</span>
+      </button>
 
-<nav class="nav">
-
-  <button onclick="filterCategory('women')">
-    WOMEN
-  </button>
-
-  <button onclick="filterCategory('men')">
-    MEN
-  </button>
-
-  <button onclick="filterCategory('kids')">
-    KIDS
-  </button>
-
-  <button onclick="filterNew()">
-    NEW ARRIVALS
-  </button>
-
-  <button onclick="filterTrending()">
-    TRENDING
-  </button>
-
-  <button onclick="filterClearance()">
-    CLEARANCE
-  </button>
-
-</nav>
-
-
-<main class="page">
-
-  <div class="page-head">
-
-    <div>
-      <h1 id="pageTitle">All Products</h1>
-      <div
-        class="result-count"
-        id="resultCount"
-      ></div>
     </div>
 
-  </div>
+  </header>
 
+  <!-- MAIN -->
+  <main class="page">
 
-  <div class="shop-layout">
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+      Home / Products /
+      <span id="breadcrumbCategory">All Products</span>
+    </div>
 
-    <!-- FILTERS -->
+    <!-- TITLE -->
+    <div class="page-title-row">
 
-    <aside class="filters">
-
-      <div class="filter-title">
-        FILTERS
+      <div class="page-title">
+        <h1 id="pageTitle">All Products</h1>
+        <p id="pageSubtitle">
+          Discover the latest styles from AS Fashions
+        </p>
       </div>
 
-      <div class="filter-group">
+      <button
+        class="mobile-filter-btn"
+        onclick="toggleFilters()"
+      >
+        ☰ Filters
+      </button>
 
-        <h3>CATEGORY</h3>
+    </div>
 
-        <button onclick="filterCategory('women')">
-          Women
-        </button>
+    <!-- TOOLBAR -->
+    <div class="toolbar">
 
-        <button onclick="filterCategory('men')">
-          Men
-        </button>
-
-        <button onclick="filterCategory('kids')">
-          Kids
-        </button>
-
+      <div class="result-count">
+        <span id="resultCount">0</span> Products
       </div>
 
-
-      <div class="filter-group">
-
-        <h3>PRICE</h3>
-
-        <button onclick="filterPrice(499)">
-          Under ₹499
-        </button>
-
-        <button onclick="filterPrice(999)">
-          Under ₹999
-        </button>
-
-        <button onclick="filterPrice(1499)">
-          Under ₹1499
-        </button>
-
-      </div>
-
-
-      <div class="filter-group">
-
-        <h3>DISCOUNT</h3>
-
-        <button onclick="filterDiscount(30)">
-          30% and Above
-        </button>
-
-        <button onclick="filterDiscount(50)">
-          50% and Above
-        </button>
-
-        <button onclick="filterDiscount(70)">
-          70% and Above
-        </button>
-
-      </div>
-
-
-      <div class="filter-group">
-
-        <h3>COLLECTION</h3>
-
-        <button onclick="filterNew()">
-          New Arrivals
-        </button>
-
-        <button onclick="filterTrending()">
-          Trending Now
-        </button>
-
-        <button onclick="filterClearance()">
-          Clearance Sale
-        </button>
-
-      </div>
-
-    </aside>
-
-
-    <!-- PRODUCTS -->
-
-    <section>
-
-      <div class="shop-tools">
+      <div class="toolbar-right">
+        <span class="sort-label">Sort by</span>
 
         <select
-          class="sort"
           id="sortSelect"
-          onchange="sortProducts()"
+          class="sort-select"
+          onchange="applySorting()"
         >
-
-          <option value="default">
-            Sort By
-          </option>
-
-          <option value="low">
-            Price: Low to High
-          </option>
-
-          <option value="high">
-            Price: High to Low
-          </option>
-
-          <option value="discount">
-            Discount
-          </option>
-
-          <option value="new">
-            Newest
-          </option>
-
+          <option value="recommended">Recommended</option>
+          <option value="newest">Newest</option>
+          <option value="priceLow">Price: Low to High</option>
+          <option value="priceHigh">Price: High to Low</option>
+          <option value="discount">Discount</option>
+          <option value="rating">Customer Rating</option>
         </select>
-
       </div>
 
+    </div>
 
-      <div
-        class="products-grid"
-        id="productsGrid"
-      ></div>
+    <!-- PRODUCTS AREA -->
+    <div class="products-layout">
 
-    </section>
+      <!-- FILTERS -->
+      <aside class="filters" id="filters">
 
-  </div>
-
-</main>
-
-
-<script src="products.js"></script>
-
-<script>
-
-/* =========================================================
-   AS FASHIONS — CATALOGUE ENGINE
-========================================================= */
-
-let currentProducts = [...PRODUCTS];
-
-
-/* ================= INITIAL LOAD ================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  readURLFilters();
-
-  renderProducts(currentProducts);
-
-});
-
-
-/* ================= URL FILTERS ================= */
-
-function readURLFilters() {
-
-  const params =
-    new URLSearchParams(window.location.search);
-
-  const category =
-    params.get("category");
-
-  const max =
-    params.get("max");
-
-  const subcategory =
-    params.get("subcategory");
-
-  if (category) {
-
-    currentProducts =
-      PRODUCTS.filter(
-        p => p.category === category
-      );
-
-    document.getElementById("pageTitle").textContent =
-      category.charAt(0).toUpperCase() +
-      category.slice(1);
-
-  }
-
-  if (max) {
-
-    currentProducts =
-      PRODUCTS.filter(
-        p => p.price <= Number(max)
-      );
-
-    document.getElementById("pageTitle").textContent =
-      `Under ₹${max}`;
-
-  }
-
-  if (subcategory) {
-
-    currentProducts =
-      PRODUCTS.filter(
-        p => p.subcategory === subcategory
-      );
-
-    document.getElementById("pageTitle").textContent =
-      subcategory
-        .replaceAll("-", " ")
-        .replace(/\b\w/g, x => x.toUpperCase());
-
-  }
-
-}
-
-
-/* ================= RENDER ================= */
-
-function renderProducts(products) {
-
-  const grid =
-    document.getElementById("productsGrid");
-
-  document.getElementById("resultCount").textContent =
-    `${products.length} products`;
-
-  if (!products.length) {
-
-    grid.innerHTML = `
-      <div class="empty">
-        <h2>No products found</h2>
-        <p>Try another category or filter.</p>
-      </div>
-    `;
-
-    return;
-  }
-
-
-  grid.innerHTML =
-    products.map(product => {
-
-      let badge = "";
-
-      if (product.isNew) {
-
-        badge =
-          `<div class="badge">NEW</div>`;
-
-      } else if (product.isTrending) {
-
-        badge =
-          `<div class="badge hot">🔥 TRENDING</div>`;
-
-      } else if (product.isClearance) {
-
-        badge =
-          `<div class="badge sale">CLEARANCE</div>`;
-
-      }
-
-
-      const wishlist =
-        getWishlist().includes(product.id);
-
-
-      return `
-
-        <article
-          class="product-card"
-          onclick="openProduct('${product.id}')"
-        >
-
-          ${badge}
+        <div class="filter-header">
+          <strong>FILTERS</strong>
 
           <button
-            class="wishlist ${wishlist ? "active" : ""}"
-            onclick="event.stopPropagation(); toggleWishlist('${product.id}')"
+            class="clear-btn"
+            onclick="clearFilters()"
           >
-            ${wishlist ? "♥" : "♡"}
+            CLEAR ALL
           </button>
+        </div>
 
+        <!-- CATEGORY -->
+        <div class="filter-section">
 
-          <img
-            class="product-image"
-            src="${product.image}"
-            alt="${product.name}"
-            loading="lazy"
-          >
+          <h3>Category</h3>
 
+          <label class="filter-option">
+            <input
+              type="radio"
+              name="category"
+              value="all"
+              onchange="applyFilters()"
+            >
+            All
+          </label>
 
-          <div class="product-info">
+          <label class="filter-option">
+            <input
+              type="radio"
+              name="category"
+              value="women"
+              onchange="applyFilters()"
+            >
+            Women
+          </label>
 
-            <div class="product-name">
-              ${product.name}
-            </div>
+          <label class="filter-option">
+            <input
+              type="radio"
+              name="category"
+              value="men"
+              onchange="applyFilters()"
+            >
+            Men
+          </label>
 
-            <div class="product-category">
-              ${product.category.toUpperCase()}
-              •
-              ${product.subcategory.replaceAll("-", " ")}
-            </div>
+          <label class="filter-option">
+            <input
+              type="radio"
+              name="category"
+              value="kids"
+              onchange="applyFilters()"
+            >
+            Kids
+          </label>
 
-            <div class="price-row">
+        </div>
 
-              <span class="price">
-                ₹${product.price}
-              </span>
+        <!-- SUBCATEGORY -->
+        <div class="filter-section">
 
-              <span class="mrp">
-                ₹${product.mrp}
-              </span>
+          <h3>Sub Category</h3>
 
-              <span class="discount">
-                ${product.discount}% OFF
-              </span>
+          <label class="filter-option">
+            <input
+              type="checkbox"
+              value="shirts"
+              class="subcategory-filter"
+              onchange="applyFilters()"
+            >
+            Shirts
+          </label>
 
-            </div>
+          <label class="filter-option">
+            <input
+              type="checkbox"
+              value="tshirts"
+              class="subcategory-filter"
+              onchange="applyFilters()"
+            >
+            T-Shirts
+          </label>
+
+          <label class="filter-option">
+            <input
+              type="checkbox"
+              value="dresses"
+              class="subcategory-filter"
+              onchange="applyFilters()"
+            >
+            Dresses
+          </label>
+
+          <label class="filter-option">
+            <input
+              type="checkbox"
+              value="jeans"
+              class="subcategory-filter"
+              onchange="applyFilters()"
+            >
+            Jeans
+          </label>
+
+          <label class="filter-option">
+            <input
+              type="checkbox"
+              value="ethnic"
+              class="subcategory-filter"
+              onchange="applyFilters()"
+            >
+            Ethnic Wear
+          </label>
+
+        </div>
+
+        <!-- PRICE -->
+        <div class="filter-section">
+
+          <h3>Price</h3>
+
+          <div class="price-inputs">
+
+            <input
+              type="number"
+              id="minPrice"
+              placeholder="Min ₹"
+              onchange="applyFilters()"
+            >
+
+            <input
+              type="number"
+              id="maxPrice"
+              placeholder="Max ₹"
+              onchange="applyFilters()"
+            >
 
           </div>
 
-        </article>
-
-      `;
-
-    }).join("");
-
-}
-
-
-/* ================= CATEGORY ================= */
-
-function filterCategory(category) {
-
-  currentProducts =
-    PRODUCTS.filter(
-      p => p.category === category
-    );
-
-  document.getElementById("pageTitle").textContent =
-    category.toUpperCase();
-
-  renderProducts(currentProducts);
-
-}
-
-
-/* ================= PRICE ================= */
-
-function filterPrice(max) {
-
-  currentProducts =
-    PRODUCTS.filter(
-      p => p.price <= max
-    );
-
-  document.getElementById("pageTitle").textContent =
-    `Under ₹${max}`;
-
-  renderProducts(currentProducts);
-
-}
-
-
-/* ================= DISCOUNT ================= */
-
-function filterDiscount(min) {
-
-  currentProducts =
-    PRODUCTS.filter(
-      p => p.discount >= min
-    );
-
-  document.getElementById("pageTitle").textContent =
-    `${min}%+ OFF`;
-
-  renderProducts(currentProducts);
-
-}
-
-
-/* ================= NEW ================= */
-
-function filterNew() {
-
-  currentProducts =
-    PRODUCTS.filter(
-      p => p.isNew
-    );
-
-  document.getElementById("pageTitle").textContent =
-    "New Arrivals";
-
-  renderProducts(currentProducts);
-
-}
-
-
-/* ================= TRENDING ================= */
-
-function filterTrending() {
-
-  currentProducts =
-    PRODUCTS.filter(
-      p => p.isTrending
-    );
-
-  document.getElementById("pageTitle").textContent =
-    "Trending Now";
-
-  renderProducts(currentProducts);
-
-}
-
-
-/* ================= CLEARANCE ================= */
-
-function filterClearance() {
-
-  currentProducts =
-    PRODUCTS.filter(
-      p => p.isClearance
-    );
-
-  document.getElementById("pageTitle").textContent =
-    "Clearance Sale";
-
-  renderProducts(currentProducts);
-
-}
-
-
-/* ================= SEARCH ================= */
-
-function searchProducts() {
-
-  const query =
-    document
-      .getElementById("searchInput")
-      .value
-      .toLowerCase()
-      .trim();
-
-
-  if (!query) {
-
-    currentProducts = [...PRODUCTS];
-
-    renderProducts(currentProducts);
-
-    return;
-
-  }
-
-
-  currentProducts =
-    PRODUCTS.filter(product => {
-
-      const text =
-        `
-        ${product.name}
-        ${product.category}
-        ${product.subcategory}
-        ${product.gender || ""}
-        ${product.ageGroup || ""}
-        ${product.colors.join(" ")}
-        `.toLowerCase();
-
-      return text.includes(query);
-
-    });
-
-
-  document.getElementById("pageTitle").textContent =
-    `Search: ${query}`;
-
-  renderProducts(currentProducts);
-
-}
-
-
-/* ================= SORT ================= */
-
-function sortProducts() {
-
-  const value =
-    document.getElementById("sortSelect").value;
-
-
-  let sorted =
-    [...currentProducts];
-
-
-  if (value === "low") {
-
-    sorted.sort(
-      (a,b) => a.price - b.price
-    );
-
-  }
-
-  else if (value === "high") {
-
-    sorted.sort(
-      (a,b) => b.price - a.price
-    );
-
-  }
-
-  else if (value === "discount") {
-
-    sorted.sort(
-      (a,b) => b.discount - a.discount
-    );
-
-  }
-
-  else if (value === "new") {
-
-    sorted.sort(
-      (a,b) =>
-        Number(b.isNew) -
-        Number(a.isNew)
-    );
-
-  }
-
-
-  renderProducts(sorted);
-
-}
-
-
-/* ================= WISHLIST ================= */
-
-function getWishlist() {
-
-  return JSON.parse(
-    localStorage.getItem("asWishlist") || "[]"
-  );
-
-}
-
-
-function toggleWishlist(id) {
-
-  let wishlist =
-    getWishlist();
-
-
-  if (wishlist.includes(id)) {
-
-    wishlist =
-      wishlist.filter(
-        item => item !== id
-      );
-
-  } else {
-
-    wishlist.push(id);
-
-  }
-
-
-  localStorage.setItem(
-    "asWishlist",
-    JSON.stringify(wishlist)
-  );
-
-
-  renderProducts(currentProducts);
-
-}
-
-
-/* ================= PRODUCT ================= */
-
-function openProduct(id) {
-
-  window.location.href =
-    `product.html?id=${encodeURIComponent(id)}`;
-
-}
-
-
-/* ================= CART ================= */
-
-function showCart() {
-
-  window.location.href = "cart.html";
-
-}
-
-
-/* ================= WISHLIST PAGE ================= */
-
-function showWishlist() {
-
-  window.location.href =
-    "wishlist.html";
-
-}
-
-
-/* ================= HOME ================= */
-
-function goHome() {
-
-  window.location.href =
-    "index.html";
-
-}
-
-</script>
+        </div>
+
+        <!-- DISCOUNT -->
+        <div class="filter-section">
+
+          <h3>Discount</h3>
+
+          <label class="filter-option">
+            <input
+              type="checkbox"
+              value="10"
+              class="discount-filter"
+              onchange="applyFilters()"
+            >
+            10% and above
+          </label>
+
+          <label class="filter-option">
+            <input
+              type="checkbox"
+              value="30"
+              class="discount-filter"
+              onchange="applyFilters()"
+            >
+            30% and above
+          </label>
+
+          <label class="filter-option">
+            <input
+              type="checkbox"
+              value="50"
+              class="discount-filter"
+              onchange="applyFilters()"
+            >
+            50% and above
+          </label>
+
+          <label class="filter-option">
+            <input
+              type="checkbox"
+              value="70"
+              class="discount-filter"
+              onchange="applyFilters()"
+            >
+            70% and above
+          </label>
+
+        </div>
+
+      </aside>
+
+      <!-- PRODUCT CONTENT -->
+      <section>
+
+        <div
+          class="products-grid"
+          id="productsGrid"
+        >
+          <!-- products.js will insert products here -->
+        </div>
+
+        <div
+          class="empty-state"
+          id="emptyState"
+        >
+          <div class="emoji">🛍️</div>
+
+          <h2>No products found</h2>
+
+          <p>
+            Try changing your filters or explore all products.
+          </p>
+
+          <button
+            class="shop-btn"
+            onclick="clearFilters()"
+          >
+            View All Products
+          </button>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <script src="products.js"></script>
+
+  <script>
+
+    function toggleFilters() {
+      const filters = document.getElementById("filters");
+      filters.classList.toggle("mobile-visible");
+    }
+
+    function toggleMobileMenu() {
+      const nav = document.getElementById("desktopNav");
+
+      if (nav.style.display === "flex") {
+        nav.style.display = "";
+      } else {
+        nav.style.display = "flex";
+        nav.style.position = "absolute";
+        nav.style.top = "60px";
+        nav.style.left = "0";
+        nav.style.width = "100%";
+        nav.style.background = "#fff";
+        nav.style.padding = "20px";
+        nav.style.flexDirection = "column";
+        nav.style.margin = "0";
+        nav.style.borderBottom = "1px solid #eee";
+        nav.style.zIndex = "999";
+      }
+    }
+
+    function goToProfile() {
+      window.location.href = "profile.html";
+    }
+
+    function goToWishlist() {
+      window.location.href = "wishlist.html";
+    }
+
+    function goToCart() {
+      window.location.href = "cart.html";
+    }
+
+  </script>
 
 </body>
 </html>

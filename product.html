@@ -1,1700 +1,900 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Product | AS FASHIONS</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #fff;
-      color: #111;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    /* ================= HEADER ================= */
-
-    .top-bar {
-      background: #111;
-      color: #fff;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      white-space: nowrap;
-      font-size: 11px;
-      letter-spacing: .05em;
-    }
-
-    .top-track {
-      display: inline-flex;
-      gap: 60px;
-      animation: marquee 24s linear infinite;
-    }
-
-    @keyframes marquee {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-    .main-header {
-      height: 76px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 4%;
-      background: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .brand {
-      font-family: Georgia, serif;
-      font-size: 27px;
-      font-weight: 900;
-      letter-spacing: .08em;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .header-btn {
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      font-size: 21px;
-      position: relative;
-    }
-
-    .header-btn:hover {
-      background: #f5f5f5;
-    }
-
-    .count {
-      position: absolute;
-      right: 1px;
-      top: 0;
-      min-width: 17px;
-      height: 17px;
-      padding: 0 4px;
-      background: #e91e3a;
-      color: white;
-      border-radius: 20px;
-      font-size: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* ================= BREADCRUMB ================= */
-
-    .breadcrumb {
-      max-width: 1400px;
-      margin: auto;
-      padding: 18px 4%;
-      font-size: 12px;
-      color: #777;
-    }
-
-    .breadcrumb span {
-      color: #111;
-      font-weight: 600;
-    }
-
-    /* ================= PRODUCT ================= */
-
-    .product-page {
-      max-width: 1400px;
-      margin: auto;
-      padding: 10px 4% 70px;
-    }
-
-    .product-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
-      gap: 55px;
-      align-items: start;
-    }
-
-    /* ================= IMAGE ================= */
-
-    .image-section {
-      position: relative;
-    }
-
-    .main-image-wrap {
-      width: 100%;
-      background: #f5f4f1;
-      aspect-ratio: 3 / 4;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .main-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .image-badge {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      background: #111;
-      color: #fff;
-      padding: 8px 12px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .08em;
-    }
-
-    .image-wishlist {
-      position: absolute;
-      right: 18px;
-      bottom: 18px;
-      width: 48px;
-      height: 48px;
-      border: 0;
-      border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 5px 25px rgba(0,0,0,.16);
-      cursor: pointer;
-      font-size: 25px;
-      z-index: 3;
-    }
-
-    .image-wishlist.active {
-      color: #e31b23;
-    }
-
-    /* ================= INFO ================= */
-
-    .brand-name {
-      color: #777;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .13em;
-      margin-bottom: 9px;
-    }
-
-    .product-title {
-      font-size: 28px;
-      line-height: 1.25;
-      font-weight: 600;
-      margin-bottom: 13px;
-    }
-
-    .rating-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .rating {
-      background: #138a42;
-      color: #fff;
-      padding: 6px 9px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .reviews {
-      color: #777;
-      font-size: 12px;
-    }
-
-    .price-row {
-      display: flex;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 12px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #eee;
-    }
-
-    .current-price {
-      font-size: 27px;
-      font-weight: 700;
-    }
-
-    .mrp {
-      color: #888;
-      font-size: 15px;
-    }
-
-    .offer {
-      color: #12853d;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .tax-note {
-      color: #777;
-      font-size: 11px;
-      margin-top: 9px;
-    }
-
-    /* ================= SIZE ================= */
-
-    .section-title {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 13px;
-      text-transform: uppercase;
-      letter-spacing: .07em;
-    }
-
-    .size-section {
-      padding-top: 24px;
-    }
-
-    .size-options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .size-btn {
-      min-width: 52px;
-      height: 42px;
-      padding: 0 12px;
-      border: 1px solid #ccc;
-      background: #fff;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .size-btn:hover,
-    .size-btn.selected {
-      border-color: #111;
-      background: #111;
-      color: #fff;
-    }
-
-    .size-error {
-      display: none;
-      color: #d71920;
-      font-size: 12px;
-      margin-top: 10px;
-    }
-
-    /* ================= ACTIONS ================= */
-
-    .action-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 25px;
-    }
-
-    .action-btn {
-      height: 52px;
-      border: 1px solid #111;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .07em;
-    }
-
-    .add-cart {
-      background: #fff;
-      color: #111;
-    }
-
-    .buy-now {
-      background: #111;
-      color: #fff;
-    }
-
-    .action-btn:hover {
-      opacity: .88;
-    }
-
-    /* ================= DETAILS ================= */
-
-    .details-box {
-      margin-top: 25px;
-      border-top: 1px solid #eee;
-    }
-
-    .detail-row {
-      padding: 17px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .detail-row strong {
-      display: block;
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
-
-    .detail-row p {
-      color: #666;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    /* ================= DELIVERY ================= */
-
-    .delivery-box {
-      margin-top: 25px;
-      padding: 18px;
-      background: #fafafa;
-      border: 1px solid #eee;
-    }
-
-    .delivery-title {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .pincode-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .pincode-input {
-      flex: 1;
-      height: 42px;
-      border: 1px solid #ccc;
-      padding: 0 12px;
-      outline: none;
-    }
-
-    .check-btn {
-      width: 90px;
-      border: 1px solid #111;
-      background: #111;
-      color: #fff;
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    .delivery-result {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #14853c;
-    }
-
-    /* ================= RELATED ================= */
-
-    .related-section {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 4% 70px;
-    }
-
-    .related-heading {
-      font-size: 22px;
-      margin-bottom: 22px;
-    }
-
-    .related-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .related-card {
-      display: block;
-      background: #fafafa;
-    }
-
-    .related-image {
-      width: 100%;
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      display: block;
-    }
-
-    .related-info {
-      padding: 12px;
-    }
-
-    .related-brand {
-      font-size: 10px;
-      color: #777;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .related-name {
-      margin: 5px 0 8px;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    .related-price {
-      font-weight: 700;
-      font-size: 13px;
-    }
-
-    /* ================= TOAST ================= */
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 25px;
-      transform: translate(-50%, 20px);
-      opacity: 0;
-      pointer-events: none;
-      background: #111;
-      color: #fff;
-      padding: 14px 22px;
-      z-index: 99999;
-      transition: .25s ease;
-      font-size: 13px;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-
-    /* ================= LOADING ================= */
-
-    .loading {
-      min-height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: #777;
-    }
-
-    .not-found {
-      min-height: 500px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 15px;
-    }
-
-    .not-found h2 {
-      font-size: 26px;
-    }
-
-    .back-btn {
-      background: #111;
-      color: #fff;
-      padding: 13px 24px;
-      border: 0;
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    /* ================= MOBILE ================= */
-
-    @media (max-width: 850px) {
-
-      .main-header {
-        height: 65px;
-        padding: 0 16px;
-      }
-
-      .brand {
-        font-size: 21px;
-      }
-
-      .header-actions {
-        gap: 2px;
-      }
-
-      .header-btn {
-        width: 38px;
-        height: 38px;
-      }
-
-      .product-page {
-        padding: 5px 12px 50px;
-      }
-
-      .product-layout {
-        grid-template-columns: 1fr;
-        gap: 28px;
-      }
-
-      .main-image-wrap {
-        aspect-ratio: 4 / 5;
-      }
-
-      .product-title {
-        font-size: 22px;
-      }
-
-      .current-price {
-        font-size: 23px;
-      }
-
-      .related-section {
-        padding: 0 12px 50px;
-      }
-
-      .related-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-
-    }
-
-    @media (max-width: 480px) {
-
-      .top-bar {
-        height: 28px;
-        font-size: 9px;
-      }
-
-      .breadcrumb {
-        padding: 12px;
-        font-size: 10px;
-      }
-
-      .action-row {
-        grid-template-columns: 1fr;
-      }
-
-      .action-btn {
-        height: 50px;
-      }
-
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AS FASHIONS — Product</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:#111;
+    background:#fff;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.topbar{
+    height:44px;
+    background:#111;
+    color:#fff;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+}
+
+.marquee{
+    white-space:nowrap;
+    animation:move 22s linear infinite;
+    font-size:13px;
+    letter-spacing:1px;
+}
+
+@keyframes move{
+    from{transform:translateX(100%)}
+    to{transform:translateX(-100%)}
+}
+
+.header{
+    height:88px;
+    border-bottom:1px solid #eee;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+}
+
+.logo{
+    font-family:Georgia,serif;
+    font-size:34px;
+    letter-spacing:5px;
+}
+
+.logo span{
+    font-size:12px;
+    letter-spacing:6px;
+    display:block;
+    text-align:center;
+    margin-top:3px;
+}
+
+.header-actions{
+    display:flex;
+    gap:22px;
+    align-items:center;
+}
+
+.header-actions a{
+    font-size:25px;
+    position:relative;
+}
+
+.badge{
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:#e21b2d;
+    color:white;
+    font-size:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.breadcrumb{
+    padding:22px 5%;
+    color:#777;
+    font-size:15px;
+}
+
+.product-container{
+    max-width:1400px;
+    margin:auto;
+    padding:20px 5% 80px;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:55px;
+}
+
+.image-area{
+    position:relative;
+}
+
+.product-image{
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    background:#f5f5f5;
+    display:block;
+}
+
+.image-fallback{
+    display:none;
+    width:100%;
+    aspect-ratio:4/5;
+    background:#f4f4f4;
+    align-items:center;
+    justify-content:center;
+    font-size:60px;
+}
+
+.wishlist-btn{
+    position:absolute;
+    right:20px;
+    top:20px;
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    border:none;
+    background:#fff;
+    box-shadow:0 5px 20px #0002;
+    font-size:27px;
+    cursor:pointer;
+}
+
+.brand{
+    font-size:13px;
+    letter-spacing:3px;
+    color:#777;
+    margin-bottom:14px;
+}
+
+.product-name{
+    font-family:Georgia,serif;
+    font-size:42px;
+    line-height:1.08;
+    margin-bottom:18px;
+}
+
+.rating{
+    display:inline-flex;
+    background:#16843b;
+    color:#fff;
+    padding:8px 12px;
+    border-radius:5px;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+.price-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:8px;
+}
+
+.price{
+    font-size:30px;
+    font-weight:700;
+}
+
+.old-price{
+    color:#888;
+    text-decoration:line-through;
+    font-size:18px;
+}
+
+.discount{
+    color:#16843b;
+    font-weight:bold;
+}
+
+.tax{
+    color:#777;
+    font-size:13px;
+    margin-bottom:30px;
+}
+
+.option-title{
+    font-weight:bold;
+    margin:22px 0 12px;
+}
+
+.size-list{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.size{
+    min-width:55px;
+    padding:12px 15px;
+    border:1px solid #ccc;
+    background:#fff;
+    cursor:pointer;
+}
+
+.size.active{
+    border:2px solid #111;
+}
+
+.buttons{
+    display:flex;
+    gap:12px;
+    margin-top:30px;
+}
+
+.add-cart,
+.buy-now{
+    flex:1;
+    padding:18px;
+    border:none;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.add-cart{
+    background:#fff;
+    border:1px solid #111;
+}
+
+.buy-now{
+    background:#111;
+    color:#fff;
+}
+
+.info{
+    margin-top:35px;
+    border-top:1px solid #eee;
+}
+
+.info-row{
+    padding:18px 0;
+    border-bottom:1px solid #eee;
+}
+
+.not-found{
+    min-height:60vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    flex-direction:column;
+    gap:18px;
+}
+
+.not-found h1{
+    font-size:40px;
+}
+
+.back-btn{
+    background:#111;
+    color:#fff;
+    padding:15px 30px;
+}
+
+@media(max-width:768px){
+
+    .topbar{
+        height:38px;
+    }
+
+    .header{
+        height:76px;
+        padding:0 22px;
+    }
+
+    .logo{
+        font-size:25px;
+        letter-spacing:3px;
+    }
+
+    .logo span{
+        font-size:8px;
+        letter-spacing:4px;
+    }
+
+    .header-actions{
+        gap:15px;
+    }
+
+    .header-actions a{
+        font-size:22px;
+    }
+
+    .breadcrumb{
+        padding:18px 20px;
+    }
+
+    .product-container{
+        display:block;
+        padding:0 20px 50px;
+    }
+
+    .product-info{
+        padding-top:30px;
+    }
+
+    .product-name{
+        font-size:32px;
+    }
+
+    .product-image{
+        aspect-ratio:4/5;
+    }
+
+    .buttons{
+        position:sticky;
+        bottom:0;
+        background:#fff;
+        padding:12px 0;
+        z-index:20;
+    }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- ================= TOP PROMO ================= -->
-
-  <div class="top-bar">
-    <div class="top-track">
-      <span>EXTRA 10% OFF ON FIRST ORDER</span>
-      <span>FREE SHIPPING ON ORDERS ABOVE ₹999</span>
-      <span>NEW SEASON • NEW STYLES</span>
-      <span>FLAT 70% OFF SELECTED STYLES</span>
-
-      <span>EXTRA 10% OFF ON FIRST ORDER</span>
-      <span>FREE SHIPPING ON ORDERS ABOVE ₹999</span>
-      <span>NEW SEASON • NEW STYLES</span>
-      <span>FLAT 70% OFF SELECTED STYLES</span>
+<div class="topbar">
+    <div class="marquee">
+        🔥 EXTRA 20% OFF ON FIRST ORDER &nbsp;&nbsp; | &nbsp;&nbsp;
+        🚚 FREE SHIPPING ABOVE ₹999 &nbsp;&nbsp; | &nbsp;&nbsp;
+        ⚡ CLEARANCE SALE UP TO 70% OFF
     </div>
-  </div>
+</div>
 
+<header class="header">
 
-  <!-- ================= HEADER ================= -->
-
-  <header class="main-header">
-
-    <a
-      href="index.html"
-      class="brand"
-    >
-      AS FASHIONS
+    <a href="index.html" class="logo">
+        AS
+        <span>FASHIONS</span>
     </a>
 
     <div class="header-actions">
-
-      <button
-        class="header-btn"
-        id="wishlistBtn"
-        type="button"
-        aria-label="Wishlist"
-      >
-        ♡
-        <span
-          class="count"
-          id="wishlistCount"
-        >0</span>
-      </button>
-
-      <button
-        class="header-btn"
-        id="cartBtn"
-        type="button"
-        aria-label="Cart"
-      >
-        🛍
-        <span
-          class="count"
-          id="cartCount"
-        >0</span>
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- ================= BREADCRUMB ================= -->
-
-  <div
-    class="breadcrumb"
-    id="breadcrumb"
-  >
-    Home / Products / <span>Loading...</span>
-  </div>
-
-
-  <!-- ================= PRODUCT ================= -->
-
-  <main class="product-page">
-
-    <div
-      id="productContainer"
-      class="loading"
-    >
-      Loading product...
-    </div>
-
-  </main>
-
-
-  <!-- ================= RELATED ================= -->
-
-  <section
-    class="related-section"
-    id="relatedSection"
-    style="display:none;"
-  >
-
-    <h2 class="related-heading">
-      You May Also Like
-    </h2>
-
-    <div
-      class="related-grid"
-      id="relatedGrid"
-    ></div>
-
-  </section>
-
-
-  <!-- ================= TOAST ================= -->
-
-  <div
-    class="toast"
-    id="toast"
-  ></div>
-
-
-  <!-- IMPORTANT:
-       products.js MUST load first
-  -->
-
-  <script src="products.js"></script>
-
-
-  <script>
-
-    (() => {
-
-      "use strict";
-
-
-      /* =========================================
-         GET PRODUCT ID
-         ========================================= */
-
-      const params =
-        new URLSearchParams(
-          window.location.search
-        );
-
-      const productId =
-        params.get("id");
-
-
-      const container =
-        document.getElementById(
-          "productContainer"
-        );
-
-
-      /* =========================================
-         GET PRODUCT FROM products.js
-         ========================================= */
-
-      const product =
-        window.ASFashionsProducts &&
-        window.ASFashionsProducts.getProduct
-          ? window.ASFashionsProducts.getProduct(productId)
-          : null;
-
-
-      /* =========================================
-         HELPERS
-         ========================================= */
-
-      function money(value) {
-
-        return "₹" +
-          Number(value).toLocaleString("en-IN");
-
-      }
-
-
-      function escapeHTML(value) {
-
-        return String(value)
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
-          .replaceAll("'", "&#039;");
-
-      }
-
-
-      function getWishlist() {
-
-        try {
-
-          return JSON.parse(
-            localStorage.getItem(
-              "asf_wishlist"
-            )
-          ) || [];
-
-        } catch {
-
-          return [];
-
-        }
-
-      }
-
-
-      function getCart() {
-
-        try {
-
-          return JSON.parse(
-            localStorage.getItem(
-              "asf_cart"
-            )
-          ) || [];
-
-        } catch {
-
-          return [];
-
-        }
-
-      }
-
-
-      function saveWishlist(items) {
-
-        localStorage.setItem(
-          "asf_wishlist",
-          JSON.stringify(items)
-        );
-
-      }
-
-
-      function saveCart(items) {
-
-        localStorage.setItem(
-          "asf_cart",
-          JSON.stringify(items)
-        );
-
-      }
-
-
-      /* =========================================
-         NOT FOUND
-         ========================================= */
-
-      if (!product) {
-
-        container.className =
-          "not-found";
-
-        container.innerHTML = `
-
-          <h2>Product Not Found</h2>
-
-          <p>
-            ఈ product ప్రస్తుతం అందుబాటులో లేదు.
-          </p>
-
-          <button
-            class="back-btn"
-            onclick="window.location.href='products.html'"
-          >
-            BACK TO PRODUCTS
-          </button>
-
-        `;
-
-        return;
-
-      }
-
-
-      /* =========================================
-         PAGE TITLE
-         ========================================= */
-
-      document.title =
-        `${product.name} | AS FASHIONS`;
-
-
-      /* =========================================
-         BREADCRUMB
-         ========================================= */
-
-      document.getElementById(
-        "breadcrumb"
-      ).innerHTML = `
-
-        <a href="index.html">Home</a>
-        &nbsp;/&nbsp;
-
-        <a href="products.html?category=${encodeURIComponent(product.category)}">
-          ${escapeHTML(product.category)}
+        <a href="wishlist.html">♡
+            <span class="badge" id="wishCount">0</span>
         </a>
 
-        &nbsp;/&nbsp;
+        <a href="cart.html">🛍
+            <span class="badge" id="cartCount">0</span>
+        </a>
+    </div>
 
-        <span>
-          ${escapeHTML(product.name)}
-        </span>
+</header>
 
-      `;
+<div class="breadcrumb">
+    <a href="index.html">Home</a>
+    /
+    <a href="products.html">Products</a>
+    /
+    <span id="breadName">Product</span>
+</div>
 
+<main id="productRoot">
 
-      /* =========================================
-         PRODUCT PAGE
-         ========================================= */
+    <div class="not-found">
+        <h1>Loading...</h1>
+    </div>
 
-      container.className =
-        "product-layout";
+</main>
 
 
-      container.innerHTML = `
+<!-- IMPORTANT:
+     products.js must be loaded BEFORE this page script.
+-->
+<script src="products.js"></script>
 
-        <!-- IMAGE -->
+<script>
 
-        <section class="image-section">
+/* =========================================================
+   AS FASHIONS — PRODUCT DETAIL ENGINE
+   ========================================================= */
 
-          <div class="main-image-wrap">
+(function(){
 
-            <img
-              src="${product.image}"
-              alt="${escapeHTML(product.name)}"
-              class="main-image"
-              onerror="
-                this.src='https://placehold.co/700x900/f4f3ef/222?text=AS+FASHIONS'
-              "
-            >
+    const params = new URLSearchParams(window.location.search);
 
-            ${
-              product.badge
-                ? `
-                  <div class="image-badge">
-                    ${escapeHTML(product.badge)}
-                  </div>
-                `
-                : ""
-            }
+    const requestedId = String(
+        params.get("id") || ""
+    ).trim().toLowerCase();
 
-            <button
-              class="image-wishlist"
-              id="productWishlist"
-              type="button"
-              aria-label="Wishlist"
-            >
-              ♡
-            </button>
+    const root = document.getElementById("productRoot");
 
-          </div>
+    function getProducts(){
 
-        </section>
+        /*
+         Supports the current AS FASHIONS products.js
+         and also older versions.
+        */
 
-
-        <!-- INFORMATION -->
-
-        <section class="product-info-section">
-
-          <div class="brand-name">
-            ${escapeHTML(product.brand)}
-          </div>
-
-
-          <h1 class="product-title">
-            ${escapeHTML(product.name)}
-          </h1>
-
-
-          <div class="rating-row">
-
-            <span class="rating">
-              ★ 4.5
-            </span>
-
-            <span class="reviews">
-              100+ Ratings & Reviews
-            </span>
-
-          </div>
-
-
-          <div class="price-row">
-
-            <strong class="current-price">
-              ${money(product.price)}
-            </strong>
-
-            <del class="mrp">
-              ${money(product.mrp)}
-            </del>
-
-            <span class="offer">
-              ${product.discount}% OFF
-            </span>
-
-          </div>
-
-
-          <div class="tax-note">
-            Inclusive of all applicable taxes
-          </div>
-
-
-          <!-- SIZE -->
-
-          <div class="size-section">
-
-            <div class="section-title">
-              Select Size
-            </div>
-
-            <div
-              class="size-options"
-              id="sizeOptions"
-            >
-
-              ${
-                product.sizes.map(size => `
-
-                  <button
-                    type="button"
-                    class="size-btn"
-                    data-size="${escapeHTML(size)}"
-                  >
-                    ${escapeHTML(size)}
-                  </button>
-
-                `).join("")
-              }
-
-            </div>
-
-            <div
-              class="size-error"
-              id="sizeError"
-            >
-              Please select a size
-            </div>
-
-          </div>
-
-
-          <!-- ACTIONS -->
-
-          <div class="action-row">
-
-            <button
-              type="button"
-              class="action-btn add-cart"
-              id="addCartBtn"
-            >
-              ADD TO BAG
-            </button>
-
-            <button
-              type="button"
-              class="action-btn buy-now"
-              id="buyNowBtn"
-            >
-              BUY NOW
-            </button>
-
-          </div>
-
-
-          <!-- DELIVERY -->
-
-          <div class="delivery-box">
-
-            <div class="delivery-title">
-              Check Delivery
-            </div>
-
-            <div class="pincode-row">
-
-              <input
-                id="pincode"
-                class="pincode-input"
-                type="tel"
-                inputmode="numeric"
-                maxlength="6"
-                placeholder="Enter Pincode"
-              >
-
-              <button
-                class="check-btn"
-                id="checkPincode"
-                type="button"
-              >
-                CHECK
-              </button>
-
-            </div>
-
-            <div
-              class="delivery-result"
-              id="deliveryResult"
-            ></div>
-
-          </div>
-
-
-          <!-- DETAILS -->
-
-          <div class="details-box">
-
-            <div class="detail-row">
-
-              <strong>
-                Product Details
-              </strong>
-
-              <p>
-                Premium ${escapeHTML(product.subcategory)}
-                designed for a modern everyday wardrobe.
-              </p>
-
-            </div>
-
-
-            <div class="detail-row">
-
-              <strong>
-                Category
-              </strong>
-
-              <p>
-                ${escapeHTML(product.category)}
-                ${
-                  product.gender
-                    ? " • " + escapeHTML(product.gender)
-                    : ""
-                }
-                • ${escapeHTML(product.subcategory)}
-              </p>
-
-            </div>
-
-
-            <div class="detail-row">
-
-              <strong>
-                Colour
-              </strong>
-
-              <p>
-                ${escapeHTML(product.color)}
-              </p>
-
-            </div>
-
-
-            <div class="detail-row">
-
-              <strong>
-                Available Sizes
-              </strong>
-
-              <p>
-                ${product.sizes
-                  .map(escapeHTML)
-                  .join(" • ")}
-              </p>
-
-            </div>
-
-
-            <div class="detail-row">
-
-              <strong>
-                Delivery & Returns
-              </strong>
-
-              <p>
-                Easy delivery and hassle-free
-                returns as per AS FASHIONS policy.
-              </p>
-
-            </div>
-
-          </div>
-
-        </section>
-
-      `;
-
-
-      /* =========================================
-         SELECTED SIZE
-         ========================================= */
-
-      let selectedSize = "";
-
-
-      document
-        .querySelectorAll(".size-btn")
-        .forEach(button => {
-
-          button.addEventListener(
-            "click",
-            () => {
-
-              document
-                .querySelectorAll(".size-btn")
-                .forEach(btn =>
-                  btn.classList.remove(
-                    "selected"
-                  )
-                );
-
-
-              button.classList.add(
-                "selected"
-              );
-
-
-              selectedSize =
-                button.dataset.size;
-
-
-              document.getElementById(
-                "sizeError"
-              ).style.display =
-                "none";
-
-            }
-          );
-
-        });
-
-
-      /* =========================================
-         WISHLIST STATE
-         ========================================= */
-
-      const wishlistButton =
-        document.getElementById(
-          "productWishlist"
-        );
-
-
-      function updateWishlistUI() {
-
-        const wishlist =
-          getWishlist();
-
-
-        const active =
-          wishlist.includes(
-            product.id
-          );
-
-
-        wishlistButton.textContent =
-          active ? "♥" : "♡";
-
-
-        wishlistButton.classList.toggle(
-          "active",
-          active
-        );
-
-      }
-
-
-      updateWishlistUI();
-
-
-      /* =========================================
-         WISHLIST
-         ========================================= */
-
-      wishlistButton.addEventListener(
-        "click",
-        () => {
-
-          let wishlist =
-            getWishlist();
-
-
-          const index =
-            wishlist.indexOf(
-              product.id
-            );
-
-
-          if (index >= 0) {
-
-            wishlist.splice(
-              index,
-              1
-            );
-
-            showToast(
-              "Wishlist నుంచి తొలగించబడింది"
-            );
-
-          } else {
-
-            wishlist.push(
-              product.id
-            );
-
-            showToast(
-              "Wishlist కి add అయ్యింది ♥"
-            );
-
-          }
-
-
-          saveWishlist(
-            wishlist
-          );
-
-
-          updateWishlistUI();
-
-          updateCounts();
-
+        if(Array.isArray(window.PRODUCTS)){
+            return window.PRODUCTS;
         }
-      );
+
+        if(Array.isArray(window.AS_PRODUCTS)){
+            return window.AS_PRODUCTS;
+        }
+
+        if(Array.isArray(window.products)){
+            return window.products;
+        }
+
+        return [];
+    }
 
 
-      /* =========================================
-         ADD CART
-         ========================================= */
+    function findProduct(){
 
-      document
-        .getElementById("addCartBtn")
-        .addEventListener(
-          "click",
-          () => {
+        const list = getProducts();
 
-            if (!selectedSize) {
+        if(!requestedId){
+            return null;
+        }
 
-              document.getElementById(
-                "sizeError"
-              ).style.display =
-                "block";
+        return list.find(product => {
 
-              return;
+            if(!product) return false;
 
-            }
+            const id = String(
+                product.id ??
+                product.productId ??
+                product.sku ??
+                ""
+            ).trim().toLowerCase();
+
+            return id === requestedId;
+
+        }) || null;
+    }
 
 
-            addToCart(
-              selectedSize
+    function safe(value){
+
+        return String(value ?? "")
+            .replace(/&/g,"&amp;")
+            .replace(/</g,"&lt;")
+            .replace(/>/g,"&gt;")
+            .replace(/"/g,"&quot;");
+    }
+
+
+    function money(value){
+
+        const number = Number(value || 0);
+
+        return "₹" + number.toLocaleString("en-IN");
+    }
+
+
+    function render(product){
+
+        if(!product){
+
+            root.innerHTML = `
+                <div class="not-found">
+
+                    <h1>Product Not Found</h1>
+
+                    <p>
+                        ఈ product ప్రస్తుతం అందుబాటులో లేదు.
+                    </p>
+
+                    <a href="products.html"
+                       class="back-btn">
+                        BACK TO PRODUCTS
+                    </a>
+
+                </div>
+            `;
+
+            return;
+        }
+
+
+        const image =
+            product.image ||
+            product.imageUrl ||
+            product.img ||
+            "";
+
+
+        const name =
+            product.name ||
+            product.title ||
+            "Fashion Product";
+
+
+        const brand =
+            product.brand ||
+            "AS FASHIONS";
+
+
+        const price =
+            product.price ??
+            product.salePrice ??
+            0;
+
+
+        const oldPrice =
+            product.oldPrice ??
+            product.mrp ??
+            price;
+
+
+        const discount =
+            product.discount ??
+            (
+                oldPrice > price
+                ? Math.round(
+                    ((oldPrice-price)/oldPrice)*100
+                  )
+                : 0
             );
 
-          }
-        );
+
+        const rating =
+            product.rating ??
+            4.5;
 
 
-      /* =========================================
-         BUY NOW
-         ========================================= */
-
-      document
-        .getElementById("buyNowBtn")
-        .addEventListener(
-          "click",
-          () => {
-
-            if (!selectedSize) {
-
-              document.getElementById(
-                "sizeError"
-              ).style.display =
-                "block";
-
-              return;
-
-            }
+        const reviews =
+            product.reviews ??
+            100;
 
 
-            addToCart(
-              selectedSize,
-              true
-            );
-
-          }
-        );
+        const sizes =
+            Array.isArray(product.sizes)
+            ? product.sizes
+            : ["S","M","L","XL"];
 
 
-      /* =========================================
-         CART FUNCTION
-         ========================================= */
+        const category =
+            product.category ||
+            "";
 
-      function addToCart(
-        size,
-        buyNow = false
-      ) {
+
+        const subcategory =
+            product.subcategory ||
+            "";
+
+
+        document.title =
+            `${name} — AS FASHIONS`;
+
+
+        document.getElementById("breadName")
+            .textContent = name;
+
+
+        root.innerHTML = `
+
+            <div class="product-container">
+
+                <section class="image-area">
+
+                    <img
+                        class="product-image"
+                        src="${safe(image)}"
+                        alt="${safe(name)}"
+                        onerror="this.style.display='none';
+                                 this.nextElementSibling.style.display='flex';"
+                    >
+
+                    <div class="image-fallback">
+                        👗
+                    </div>
+
+                    <button
+                        class="wishlist-btn"
+                        id="detailWish"
+                        aria-label="Wishlist">
+                        ♡
+                    </button>
+
+                </section>
+
+
+                <section class="product-info">
+
+                    <div class="brand">
+                        ${safe(brand)}
+                    </div>
+
+                    <h1 class="product-name">
+                        ${safe(name)}
+                    </h1>
+
+                    <div class="rating">
+                        ★ ${safe(rating)}
+                        &nbsp; ${safe(reviews)} Reviews
+                    </div>
+
+                    <div class="price-row">
+
+                        <span class="price">
+                            ${money(price)}
+                        </span>
+
+                        ${
+                            Number(oldPrice) > Number(price)
+                            ? `
+                                <span class="old-price">
+                                    ${money(oldPrice)}
+                                </span>
+
+                                <span class="discount">
+                                    ${safe(discount)}% OFF
+                                </span>
+                            `
+                            : ""
+                        }
+
+                    </div>
+
+                    <div class="tax">
+                        MRP inclusive of all taxes
+                    </div>
+
+
+                    <div class="option-title">
+                        Select Size
+                    </div>
+
+                    <div class="size-list">
+
+                        ${
+                            sizes.map((size,index)=>`
+
+                                <button
+                                    class="size ${index===0?'active':''}"
+                                    data-size="${safe(size)}">
+                                    ${safe(size)}
+                                </button>
+
+                            `).join("")
+                        }
+
+                    </div>
+
+
+                    <div class="buttons">
+
+                        <button
+                            class="add-cart"
+                            id="addCart">
+                            ADD TO BAG
+                        </button>
+
+                        <button
+                            class="buy-now"
+                            id="buyNow">
+                            BUY NOW
+                        </button>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <div class="info-row">
+                            <strong>Category</strong><br>
+                            ${safe(category)}
+                        </div>
+
+                        <div class="info-row">
+                            <strong>Style</strong><br>
+                            ${safe(subcategory)}
+                        </div>
+
+                        <div class="info-row">
+                            <strong>Delivery</strong><br>
+                            Check delivery availability at your location
+                        </div>
+
+                        <div class="info-row">
+                            <strong>Returns</strong><br>
+                            Easy returns as per AS FASHIONS policy
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+        `;
+
+
+        /* SIZE */
+
+        document
+            .querySelectorAll(".size")
+            .forEach(button => {
+
+                button.addEventListener("click",()=>{
+
+                    document
+                        .querySelectorAll(".size")
+                        .forEach(item =>
+                            item.classList.remove("active")
+                        );
+
+                    button.classList.add("active");
+
+                });
+
+            });
+
+
+        /* WISHLIST */
+
+        document
+            .getElementById("detailWish")
+            .addEventListener("click",()=>{
+
+                let wishlist =
+                    JSON.parse(
+                        localStorage.getItem("asWishlist")
+                        || "[]"
+                    );
+
+                const exists =
+                    wishlist.some(
+                        item =>
+                        String(item.id).toLowerCase()
+                        === String(product.id).toLowerCase()
+                    );
+
+                if(!exists){
+
+                    wishlist.push(product);
+
+                    localStorage.setItem(
+                        "asWishlist",
+                        JSON.stringify(wishlist)
+                    );
+
+                    document.getElementById("detailWish")
+                        .textContent = "♥";
+
+                }
+
+                updateCounts();
+
+            });
+
+
+        /* ADD CART */
+
+        document
+            .getElementById("addCart")
+            .addEventListener("click",()=>{
+
+                addToCart(product);
+
+                alert("Product cart లో add అయింది.");
+
+                updateCounts();
+
+            });
+
+
+        /* BUY NOW */
+
+        document
+            .getElementById("buyNow")
+            .addEventListener("click",()=>{
+
+                addToCart(product);
+
+                window.location.href =
+                    "cart.html";
+
+            });
+
+    }
+
+
+    function addToCart(product){
 
         let cart =
-          getCart();
+            JSON.parse(
+                localStorage.getItem("asCart")
+                || "[]"
+            );
+
+
+        const selectedSize =
+            document.querySelector(".size.active")
+            ?.dataset.size || "";
 
 
         const existing =
-          cart.find(
-            item =>
-              item.id === product.id &&
-              item.size === size
-          );
+            cart.find(item =>
+                String(item.id).toLowerCase()
+                === String(product.id).toLowerCase()
+                &&
+                item.size === selectedSize
+            );
 
 
-        if (existing) {
+        if(existing){
 
-          existing.quantity =
-            Number(
-              existing.quantity || 1
-            ) + 1;
+            existing.quantity =
+                Number(existing.quantity || 1) + 1;
 
-        } else {
+        }else{
 
-          cart.push({
+            cart.push({
 
-            id: product.id,
-            size: size,
-            quantity: 1
+                ...product,
 
-          });
+                size:selectedSize,
 
-        }
+                quantity:1
 
-
-        saveCart(cart);
-
-        updateCounts();
-
-
-        if (buyNow) {
-
-          window.location.href =
-            "cart.html";
-
-          return;
+            });
 
         }
 
 
-        showToast(
-          "Product cart లో add అయ్యింది 🛍"
+        localStorage.setItem(
+            "asCart",
+            JSON.stringify(cart)
         );
 
-      }
+    }
 
 
-      /* =========================================
-         COUNTS
-         ========================================= */
-
-      function updateCounts() {
-
-        const wishlist =
-          getWishlist();
-
+    function updateCounts(){
 
         const cart =
-          getCart();
+            JSON.parse(
+                localStorage.getItem("asCart")
+                || "[]"
+            );
+
+        const wishlist =
+            JSON.parse(
+                localStorage.getItem("asWishlist")
+                || "[]"
+            );
 
 
         const cartCount =
-          cart.reduce(
-            (total, item) =>
-              total +
-              Number(
-                item.quantity || 1
-              ),
-            0
-          );
-
-
-        document.getElementById(
-          "wishlistCount"
-        ).textContent =
-          wishlist.length;
-
-
-        document.getElementById(
-          "cartCount"
-        ).textContent =
-          cartCount;
-
-      }
-
-
-      updateCounts();
-
-
-      /* =========================================
-         HEADER NAVIGATION
-         ========================================= */
-
-      document
-        .getElementById("cartBtn")
-        .addEventListener(
-          "click",
-          () => {
-
-            window.location.href =
-              "cart.html";
-
-          }
-        );
-
-
-      document
-        .getElementById("wishlistBtn")
-        .addEventListener(
-          "click",
-          () => {
-
-            window.location.href =
-              "wishlist.html";
-
-          }
-        );
-
-
-      /* =========================================
-         PINCODE
-         ========================================= */
-
-      document
-        .getElementById("checkPincode")
-        .addEventListener(
-          "click",
-          () => {
-
-            const value =
-              document
-                .getElementById("pincode")
-                .value
-                .trim();
-
-
-            const result =
-              document.getElementById(
-                "deliveryResult"
-              );
-
-
-            if (!/^[1-9][0-9]{5}$/.test(value)) {
-
-              result.style.color =
-                "#d71920";
-
-              result.textContent =
-                "దయచేసి valid 6-digit pincode ఇవ్వండి.";
-
-              return;
-
-            }
-
-
-            result.style.color =
-              "#14853c";
-
-            result.textContent =
-              "✓ Delivery available. Estimated delivery: 3–7 days.";
-
-          }
-        );
-
-
-      /* =========================================
-         RELATED PRODUCTS
-         ========================================= */
-
-      const relatedSection =
-        document.getElementById(
-          "relatedSection"
-        );
-
-
-      const relatedGrid =
-        document.getElementById(
-          "relatedGrid"
-        );
-
-
-      const allProducts =
-        window.ASFashionsProducts
-          ? window.ASFashionsProducts.products
-          : [];
-
-
-      const related =
-        allProducts
-          .filter(item => {
-
-            if (
-              item.id === product.id
-            ) {
-              return false;
-            }
-
-
-            return (
-              item.category ===
-              product.category
+            cart.reduce(
+                (sum,item)=>
+                sum + Number(item.quantity || 1),
+                0
             );
 
-          })
-          .slice(0, 4);
+
+        document.getElementById("cartCount")
+            .textContent = cartCount;
 
 
-      if (related.length) {
+        document.getElementById("wishCount")
+            .textContent = wishlist.length;
 
-        relatedSection.style.display =
-          "block";
-
-
-        relatedGrid.innerHTML =
-          related.map(item => `
-
-            <a
-              class="related-card"
-              href="product.html?id=${encodeURIComponent(item.id)}"
-            >
-
-              <img
-                class="related-image"
-                src="${item.image}"
-                alt="${escapeHTML(item.name)}"
-                loading="lazy"
-                onerror="
-                  this.src='https://placehold.co/600x800/f4f3ef/222?text=AS+FASHIONS'
-                "
-              >
-
-              <div class="related-info">
-
-                <div class="related-brand">
-                  ${escapeHTML(item.brand)}
-                </div>
-
-                <div class="related-name">
-                  ${escapeHTML(item.name)}
-                </div>
-
-                <div class="related-price">
-                  ${money(item.price)}
-                </div>
-
-              </div>
-
-            </a>
-
-          `).join("");
-
-      }
+    }
 
 
-      /* =========================================
-         TOAST
-         ========================================= */
+    /* START */
 
-      function showToast(message) {
+    const product = findProduct();
 
-        const toast =
-          document.getElementById(
-            "toast"
-          );
+    render(product);
+
+    updateCounts();
 
 
-        toast.textContent =
-          message;
+})();
 
-
-        toast.classList.add(
-          "show"
-        );
-
-
-        clearTimeout(
-          window.__productToast
-        );
-
-
-        window.__productToast =
-          setTimeout(
-            () => {
-
-              toast.classList.remove(
-                "show"
-              );
-
-            },
-            2200
-          );
-
-      }
-
-    })();
-
-  </script>
+</script>
 
 </body>
 </html>

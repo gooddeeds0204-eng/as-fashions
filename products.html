@@ -1,1 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>AS FASHIONS — Shop</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f7f7f7;
+  color: #222;
+}
+
+/* ================= TOP BAR ================= */
+
+.topbar {
+  background: #111;
+  color: white;
+  padding: 9px 15px;
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: .3px;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+  height: 70px;
+  background: white;
+  border-bottom: 1px solid #eee;
+
+  display: flex;
+  align-items: center;
+  gap: 25px;
+
+  padding: 0 5%;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  white-space: nowrap;
+}
+
+.logo span {
+  font-style: italic;
+}
+
+.search {
+  flex: 1;
+  max-width: 600px;
+  position: relative;
+}
+
+.search input {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #ddd;
+  background: #f6f6f6;
+  border-radius: 4px;
+  padding: 0 45px 0 15px;
+  outline: none;
+}
+
+.search button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+
+  width: 32px;
+  height: 32px;
+
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 18px;
+}
+
+.header-actions button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* ================= NAV ================= */
+
+.nav {
+  background: white;
+  border-bottom: 1px solid #eee;
+
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+
+  padding: 14px;
+}
+
+.nav button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.nav button:hover {
+  color: #e91e63;
+}
+
+/* ================= PAGE ================= */
+
+.page {
+  width: 92%;
+  max-width: 1400px;
+  margin: 25px auto;
+}
+
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.page-head h1 {
+  font-size: 25px;
+}
+
+.result-count {
+  color: #777;
+  font-size: 13px;
+}
+
+/* ================= LAYOUT ================= */
+
+.shop-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 25px;
+}
+
+/* ================= FILTER ================= */
+
+.filters {
+  background: white;
+  border-radius: 5px;
+  padding: 20px;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.filter-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  border-top: 1px solid #eee;
+  padding: 18px 0;
+}
+
+.filter-group h3 {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.filter-group button {
+  display: block;
+  width: 100%;
+  text-align: left;
+
+  border: 0;
+  background: transparent;
+
+  padding: 7px 0;
+
+  cursor: pointer;
+  color: #555;
+}
+
+.filter-group button:hover {
+  color: #e91e63;
+}
+
+/* ================= SORT ================= */
+
+.shop-tools {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.sort {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  background: white;
+}
+
+/* ================= GRID ================= */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+/* ================= CARD ================= */
+
+.product-card {
+  background: white;
+  position: relative;
+  overflow: hidden;
+  transition: .25s;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+.product-image {
+  width: 100%;
+  aspect-ratio: .78;
+  object-fit: cover;
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  background: #111;
+  color: white;
+
+  padding: 5px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 2px;
+}
+
+.badge.hot {
+  background: #e91e63;
+  animation: pulse 1.5s infinite;
+}
+
+.badge.sale {
+  background: #ff5722;
+}
+
+@keyframes pulse {
+  0%,100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .55;
+  }
+}
+
+.wishlist {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+
+  width: 35px;
+  height: 35px;
+
+  border-radius: 50%;
+  border: 0;
+
+  background: white;
+  cursor: pointer;
+
+  font-size: 18px;
+}
+
+.wishlist.active {
+  color: #e91e63;
+}
+
+/* ================= INFO ================= */
+
+.product-info {
+  padding: 12px;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 7px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-category {
+  font-size: 11px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.price {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.mrp {
+  font-size: 12px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.discount {
+  color: #0a9b46;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ================= EMPTY ================= */
+
+.empty {
+  grid-column: 1 / -1;
+  background: white;
+  padding: 80px 20px;
+  text-align: center;
+  color: #777;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width: 900px) {
+
+  .header {
+    padding: 0 15px;
+    gap: 12px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .search {
+    display: none;
+  }
+
+  .nav {
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 25px;
+    white-space: nowrap;
+  }
+
+  .shop-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    position: static;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 12px;
+  }
+
+  .filter-title,
+  .filter-group h3 {
+    display: none;
+  }
+
+  .filter-group {
+    border: 0;
+    padding: 0;
+    min-width: max-content;
+  }
+
+  .filter-group button {
+    background: #f3f3f3;
+    border-radius: 20px;
+    padding: 9px 14px;
+    width: auto;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .page {
+    width: 95%;
+  }
+
+  .header-actions {
+    margin-left: auto;
+    gap: 8px;
+  }
+
+  .header-actions button {
+    font-size: 11px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOP PROMO -->
+
+<div class="topbar">
+  FREE SHIPPING ON ORDERS ABOVE ₹999 • EXTRA 10% OFF ON PREPAID ORDERS
+</div>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+  <div
+    class="logo"
+    onclick="goHome()"
+    style="cursor:pointer"
+  >
+    AS <span>FASHIONS</span>
+  </div>
+
+  <div class="search">
+
+    <input
+      id="searchInput"
+      type="search"
+      placeholder="Search for products, brands and more..."
+      oninput="searchProducts()"
+    >
+
+    <button onclick="searchProducts()">⌕</button>
+
+  </div>
+
+  <div class="header-actions">
+
+    <button onclick="goHome()">
+      🏠<br>Home
+    </button>
+
+    <button onclick="showWishlist()">
+      ♡<br>Wishlist
+    </button>
+
+    <button onclick="showCart()">
+      🛒<br>Cart
+    </button>
+
+  </div>
+
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav class="nav">
+
+  <button onclick="filterCategory('women')">
+    WOMEN
+  </button>
+
+  <button onclick="filterCategory('men')">
+    MEN
+  </button>
+
+  <button onclick="filterCategory('kids')">
+    KIDS
+  </button>
+
+  <button onclick="filterNew()">
+    NEW ARRIVALS
+  </button>
+
+  <button onclick="filterTrending()">
+    TRENDING
+  </button>
+
+  <button onclick="filterClearance()">
+    CLEARANCE
+  </button>
+
+</nav>
+
+
+<main class="page">
+
+  <div class="page-head">
+
+    <div>
+      <h1 id="pageTitle">All Products</h1>
+      <div
+        class="result-count"
+        id="resultCount"
+      ></div>
+    </div>
+
+  </div>
+
+
+  <div class="shop-layout">
+
+    <!-- FILTERS -->
+
+    <aside class="filters">
+
+      <div class="filter-title">
+        FILTERS
+      </div>
+
+      <div class="filter-group">
+
+        <h3>CATEGORY</h3>
+
+        <button onclick="filterCategory('women')">
+          Women
+        </button>
+
+        <button onclick="filterCategory('men')">
+          Men
+        </button>
+
+        <button onclick="filterCategory('kids')">
+          Kids
+        </button>
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <h3>PRICE</h3>
+
+        <button onclick="filterPrice(499)">
+          Under ₹499
+        </button>
+
+        <button onclick="filterPrice(999)">
+          Under ₹999
+        </button>
+
+        <button onclick="filterPrice(1499)">
+          Under ₹1499
+        </button>
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <h3>DISCOUNT</h3>
+
+        <button onclick="filterDiscount(30)">
+          30% and Above
+        </button>
+
+        <button onclick="filterDiscount(50)">
+          50% and Above
+        </button>
+
+        <button onclick="filterDiscount(70)">
+          70% and Above
+        </button>
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <h3>COLLECTION</h3>
+
+        <button onclick="filterNew()">
+          New Arrivals
+        </button>
+
+        <button onclick="filterTrending()">
+          Trending Now
+        </button>
+
+        <button onclick="filterClearance()">
+          Clearance Sale
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- PRODUCTS -->
+
+    <section>
+
+      <div class="shop-tools">
+
+        <select
+          class="sort"
+          id="sortSelect"
+          onchange="sortProducts()"
+        >
+
+          <option value="default">
+            Sort By
+          </option>
+
+          <option value="low">
+            Price: Low to High
+          </option>
+
+          <option value="high">
+            Price: High to Low
+          </option>
+
+          <option value="discount">
+            Discount
+          </option>
+
+          <option value="new">
+            Newest
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div
+        class="products-grid"
+        id="productsGrid"
+      ></div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<script src="products.js"></script>
+
+<script>
+
+/* =========================================================
+   AS FASHIONS — CATALOGUE ENGINE
+========================================================= */
+
+let currentProducts = [...PRODUCTS];
+
+
+/* ================= INITIAL LOAD ================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  readURLFilters();
+
+  renderProducts(currentProducts);
+
+});
+
+
+/* ================= URL FILTERS ================= */
+
+function readURLFilters() {
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const category =
+    params.get("category");
+
+  const max =
+    params.get("max");
+
+  const subcategory =
+    params.get("subcategory");
+
+  if (category) {
+
+    currentProducts =
+      PRODUCTS.filter(
+        p => p.category === category
+      );
+
+    document.getElementById("pageTitle").textContent =
+      category.charAt(0).toUpperCase() +
+      category.slice(1);
+
+  }
+
+  if (max) {
+
+    currentProducts =
+      PRODUCTS.filter(
+        p => p.price <= Number(max)
+      );
+
+    document.getElementById("pageTitle").textContent =
+      `Under ₹${max}`;
+
+  }
+
+  if (subcategory) {
+
+    currentProducts =
+      PRODUCTS.filter(
+        p => p.subcategory === subcategory
+      );
+
+    document.getElementById("pageTitle").textContent =
+      subcategory
+        .replaceAll("-", " ")
+        .replace(/\b\w/g, x => x.toUpperCase());
+
+  }
+
+}
+
+
+/* ================= RENDER ================= */
+
+function renderProducts(products) {
+
+  const grid =
+    document.getElementById("productsGrid");
+
+  document.getElementById("resultCount").textContent =
+    `${products.length} products`;
+
+  if (!products.length) {
+
+    grid.innerHTML = `
+      <div class="empty">
+        <h2>No products found</h2>
+        <p>Try another category or filter.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  grid.innerHTML =
+    products.map(product => {
+
+      let badge = "";
+
+      if (product.isNew) {
+
+        badge =
+          `<div class="badge">NEW</div>`;
+
+      } else if (product.isTrending) {
+
+        badge =
+          `<div class="badge hot">🔥 TRENDING</div>`;
+
+      } else if (product.isClearance) {
+
+        badge =
+          `<div class="badge sale">CLEARANCE</div>`;
+
+      }
+
+
+      const wishlist =
+        getWishlist().includes(product.id);
+
+
+      return `
+
+        <article
+          class="product-card"
+          onclick="openProduct('${product.id}')"
+        >
+
+          ${badge}
+
+          <button
+            class="wishlist ${wishlist ? "active" : ""}"
+            onclick="event.stopPropagation(); toggleWishlist('${product.id}')"
+          >
+            ${wishlist ? "♥" : "♡"}
+          </button>
+
+
+          <img
+            class="product-image"
+            src="${product.image}"
+            alt="${product.name}"
+            loading="lazy"
+          >
+
+
+          <div class="product-info">
+
+            <div class="product-name">
+              ${product.name}
+            </div>
+
+            <div class="product-category">
+              ${product.category.toUpperCase()}
+              •
+              ${product.subcategory.replaceAll("-", " ")}
+            </div>
+
+            <div class="price-row">
+
+              <span class="price">
+                ₹${product.price}
+              </span>
+
+              <span class="mrp">
+                ₹${product.mrp}
+              </span>
+
+              <span class="discount">
+                ${product.discount}% OFF
+              </span>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* ================= CATEGORY ================= */
+
+function filterCategory(category) {
+
+  currentProducts =
+    PRODUCTS.filter(
+      p => p.category === category
+    );
+
+  document.getElementById("pageTitle").textContent =
+    category.toUpperCase();
+
+  renderProducts(currentProducts);
+
+}
+
+
+/* ================= PRICE ================= */
+
+function filterPrice(max) {
+
+  currentProducts =
+    PRODUCTS.filter(
+      p => p.price <= max
+    );
+
+  document.getElementById("pageTitle").textContent =
+    `Under ₹${max}`;
+
+  renderProducts(currentProducts);
+
+}
+
+
+/* ================= DISCOUNT ================= */
+
+function filterDiscount(min) {
+
+  currentProducts =
+    PRODUCTS.filter(
+      p => p.discount >= min
+    );
+
+  document.getElementById("pageTitle").textContent =
+    `${min}%+ OFF`;
+
+  renderProducts(currentProducts);
+
+}
+
+
+/* ================= NEW ================= */
+
+function filterNew() {
+
+  currentProducts =
+    PRODUCTS.filter(
+      p => p.isNew
+    );
+
+  document.getElementById("pageTitle").textContent =
+    "New Arrivals";
+
+  renderProducts(currentProducts);
+
+}
+
+
+/* ================= TRENDING ================= */
+
+function filterTrending() {
+
+  currentProducts =
+    PRODUCTS.filter(
+      p => p.isTrending
+    );
+
+  document.getElementById("pageTitle").textContent =
+    "Trending Now";
+
+  renderProducts(currentProducts);
+
+}
+
+
+/* ================= CLEARANCE ================= */
+
+function filterClearance() {
+
+  currentProducts =
+    PRODUCTS.filter(
+      p => p.isClearance
+    );
+
+  document.getElementById("pageTitle").textContent =
+    "Clearance Sale";
+
+  renderProducts(currentProducts);
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchProducts() {
+
+  const query =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  if (!query) {
+
+    currentProducts = [...PRODUCTS];
+
+    renderProducts(currentProducts);
+
+    return;
+
+  }
+
+
+  currentProducts =
+    PRODUCTS.filter(product => {
+
+      const text =
+        `
+        ${product.name}
+        ${product.category}
+        ${product.subcategory}
+        ${product.gender || ""}
+        ${product.ageGroup || ""}
+        ${product.colors.join(" ")}
+        `.toLowerCase();
+
+      return text.includes(query);
+
+    });
+
+
+  document.getElementById("pageTitle").textContent =
+    `Search: ${query}`;
+
+  renderProducts(currentProducts);
+
+}
+
+
+/* ================= SORT ================= */
+
+function sortProducts() {
+
+  const value =
+    document.getElementById("sortSelect").value;
+
+
+  let sorted =
+    [...currentProducts];
+
+
+  if (value === "low") {
+
+    sorted.sort(
+      (a,b) => a.price - b.price
+    );
+
+  }
+
+  else if (value === "high") {
+
+    sorted.sort(
+      (a,b) => b.price - a.price
+    );
+
+  }
+
+  else if (value === "discount") {
+
+    sorted.sort(
+      (a,b) => b.discount - a.discount
+    );
+
+  }
+
+  else if (value === "new") {
+
+    sorted.sort(
+      (a,b) =>
+        Number(b.isNew) -
+        Number(a.isNew)
+    );
+
+  }
+
+
+  renderProducts(sorted);
+
+}
+
+
+/* ================= WISHLIST ================= */
+
+function getWishlist() {
+
+  return JSON.parse(
+    localStorage.getItem("asWishlist") || "[]"
+  );
+
+}
+
+
+function toggleWishlist(id) {
+
+  let wishlist =
+    getWishlist();
+
+
+  if (wishlist.includes(id)) {
+
+    wishlist =
+      wishlist.filter(
+        item => item !== id
+      );
+
+  } else {
+
+    wishlist.push(id);
+
+  }
+
+
+  localStorage.setItem(
+    "asWishlist",
+    JSON.stringify(wishlist)
+  );
+
+
+  renderProducts(currentProducts);
+
+}
+
+
+/* ================= PRODUCT ================= */
+
+function openProduct(id) {
+
+  window.location.href =
+    `product.html?id=${encodeURIComponent(id)}`;
+
+}
+
+
+/* ================= CART ================= */
+
+function showCart() {
+
+  window.location.href = "cart.html";
+
+}
+
+
+/* ================= WISHLIST PAGE ================= */
+
+function showWishlist() {
+
+  window.location.href =
+    "wishlist.html";
+
+}
+
+
+/* ================= HOME ================= */
+
+function goHome() {
+
+  window.location.href =
+    "index.html";
+
+}
+
+</script>
+
+</body>
+</html>

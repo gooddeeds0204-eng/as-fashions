@@ -1874,11 +1874,11 @@ body{
     }
 
     .logo-as{
-        font-size:29px;
+        font-size:40px;
     }
 
     .logo-fashion{
-        font-size:11px;
+        font-size:30px;
         letter-spacing:3px;
     }
 
@@ -5445,37 +5445,6 @@ function closeModal(event,id){
             .classList.remove("active");
 
     }
-
-}
-
-
-/* =========================================================
-   COUPON
-========================================================= */
-
-function copyText(text){
-
-    navigator.clipboard
-        .writeText(text)
-        .then(
-            () =>
-            showToast(
-                "Coupon copied: " + text
-            )
-        )
-        .catch(
-            () =>
-            showToast(
-                "Coupon: " + text
-            )
-        );
-
-}
-
-
-function copyCoupon(){
-
-    copyText("ASNEW20");
 
 }
 

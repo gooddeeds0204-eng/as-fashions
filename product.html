@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Product | AS FASHIONS</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff;
+      color: #111;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    /* ================= HEADER ================= */
+
+    .top-bar {
+      background: #111;
+      color: #fff;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 11px;
+      letter-spacing: .05em;
+    }
+
+    .top-track {
+      display: inline-flex;
+      gap: 60px;
+      animation: marquee 24s linear infinite;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .main-header {
+      height: 76px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4%;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand {
+      font-family: Georgia, serif;
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-btn {
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      font-size: 21px;
+      position: relative;
+    }
+
+    .header-btn:hover {
+      background: #f5f5f5;
+    }
+
+    .count {
+      position: absolute;
+      right: 1px;
+      top: 0;
+      min-width: 17px;
+      height: 17px;
+      padding: 0 4px;
+      background: #e91e3a;
+      color: white;
+      border-radius: 20px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ================= BREADCRUMB ================= */
+
+    .breadcrumb {
+      max-width: 1400px;
+      margin: auto;
+      padding: 18px 4%;
+      font-size: 12px;
+      color: #777;
+    }
+
+    .breadcrumb span {
+      color: #111;
+      font-weight: 600;
+    }
+
+    /* ================= PRODUCT ================= */
+
+    .product-page {
+      max-width: 1400px;
+      margin: auto;
+      padding: 10px 4% 70px;
+    }
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      gap: 55px;
+      align-items: start;
+    }
+
+    /* ================= IMAGE ================= */
+
+    .image-section {
+      position: relative;
+    }
+
+    .main-image-wrap {
+      width: 100%;
+      background: #f5f4f1;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .main-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: #111;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    .image-wishlist {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 5px 25px rgba(0,0,0,.16);
+      cursor: pointer;
+      font-size: 25px;
+      z-index: 3;
+    }
+
+    .image-wishlist.active {
+      color: #e31b23;
+    }
+
+    /* ================= INFO ================= */
+
+    .brand-name {
+      color: #777;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      margin-bottom: 9px;
+    }
+
+    .product-title {
+      font-size: 28px;
+      line-height: 1.25;
+      font-weight: 600;
+      margin-bottom: 13px;
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .rating {
+      background: #138a42;
+      color: #fff;
+      padding: 6px 9px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .reviews {
+      color: #777;
+      font-size: 12px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .current-price {
+      font-size: 27px;
+      font-weight: 700;
+    }
+
+    .mrp {
+      color: #888;
+      font-size: 15px;
+    }
+
+    .offer {
+      color: #12853d;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .tax-note {
+      color: #777;
+      font-size: 11px;
+      margin-top: 9px;
+    }
+
+    /* ================= SIZE ================= */
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 13px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .size-section {
+      padding-top: 24px;
+    }
+
+    .size-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .size-btn {
+      min-width: 52px;
+      height: 42px;
+      padding: 0 12px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .size-btn:hover,
+    .size-btn.selected {
+      border-color: #111;
+      background: #111;
+      color: #fff;
+    }
+
+    .size-error {
+      display: none;
+      color: #d71920;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    /* ================= ACTIONS ================= */
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .action-btn {
+      height: 52px;
+      border: 1px solid #111;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .07em;
+    }
+
+    .add-cart {
+      background: #fff;
+      color: #111;
+    }
+
+    .buy-now {
+      background: #111;
+      color: #fff;
+    }
+
+    .action-btn:hover {
+      opacity: .88;
+    }
+
+    /* ================= DETAILS ================= */
+
+    .details-box {
+      margin-top: 25px;
+      border-top: 1px solid #eee;
+    }
+
+    .detail-row {
+      padding: 17px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .detail-row strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .detail-row p {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ================= DELIVERY ================= */
+
+    .delivery-box {
+      margin-top: 25px;
+      padding: 18px;
+      background: #fafafa;
+      border: 1px solid #eee;
+    }
+
+    .delivery-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .pincode-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pincode-input {
+      flex: 1;
+      height: 42px;
+      border: 1px solid #ccc;
+      padding: 0 12px;
+      outline: none;
+    }
+
+    .check-btn {
+      width: 90px;
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .delivery-result {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #14853c;
+    }
+
+    /* ================= RELATED ================= */
+
+    .related-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 4% 70px;
+    }
+
+    .related-heading {
+      font-size: 22px;
+      margin-bottom: 22px;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .related-card {
+      display: block;
+      background: #fafafa;
+    }
+
+    .related-image {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+    }
+
+    .related-info {
+      padding: 12px;
+    }
+
+    .related-brand {
+      font-size: 10px;
+      color: #777;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .related-name {
+      margin: 5px 0 8px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .related-price {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* ================= TOAST ================= */
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      pointer-events: none;
+      background: #111;
+      color: #fff;
+      padding: 14px 22px;
+      z-index: 99999;
+      transition: .25s ease;
+      font-size: 13px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* ================= LOADING ================= */
+
+    .loading {
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #777;
+    }
+
+    .not-found {
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 15px;
+    }
+
+    .not-found h2 {
+      font-size: 26px;
+    }
+
+    .back-btn {
+      background: #111;
+      color: #fff;
+      padding: 13px 24px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 850px) {
+
+      .main-header {
+        height: 65px;
+        padding: 0 16px;
+      }
+
+      .brand {
+        font-size: 21px;
+      }
+
+      .header-actions {
+        gap: 2px;
+      }
+
+      .header-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .product-page {
+        padding: 5px 12px 50px;
+      }
+
+      .product-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .main-image-wrap {
+        aspect-ratio: 4 / 5;
+      }
+
+      .product-title {
+        font-size: 22px;
+      }
+
+      .current-price {
+        font-size: 23px;
+      }
+
+      .related-section {
+        padding: 0 12px 50px;
+      }
+
+      .related-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+    }
+
+    @media (max-width: 480px) {
+
+      .top-bar {
+        height: 28px;
+        font-size: 9px;
+      }
+
+      .breadcrumb {
+        padding: 12px;
+        font-size: 10px;
+      }
+
+      .action-row {
+        grid-template-columns: 1fr;
+      }
+
+      .action-btn {
+        height: 50px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= TOP PROMO ================= -->
+
+  <div class="top-bar">
+    <div class="top-track">
+      <span>EXTRA 10% OFF ON FIRST ORDER</span>
+      <span>FREE SHIPPING ON ORDERS ABOVE ₹999</span>
+      <span>NEW SEASON • NEW STYLES</span>
+      <span>FLAT 70% OFF SELECTED STYLES</span>
+
+      <span>EXTRA 10% OFF ON FIRST ORDER</span>
+      <span>FREE SHIPPING ON ORDERS ABOVE ₹999</span>
+      <span>NEW SEASON • NEW STYLES</span>
+      <span>FLAT 70% OFF SELECTED STYLES</span>
+    </div>
+  </div>
+
+
+  <!-- ================= HEADER ================= -->
+
+  <header class="main-header">
+
+    <a
+      href="index.html"
+      class="brand"
+    >
+      AS FASHIONS
+    </a>
+
+    <div class="header-actions">
+
+      <button
+        class="header-btn"
+        id="wishlistBtn"
+        type="button"
+        aria-label="Wishlist"
+      >
+        ♡
+        <span
+          class="count"
+          id="wishlistCount"
+        >0</span>
+      </button>
+
+      <button
+        class="header-btn"
+        id="cartBtn"
+        type="button"
+        aria-label="Cart"
+      >
+        🛍
+        <span
+          class="count"
+          id="cartCount"
+        >0</span>
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================= BREADCRUMB ================= -->
+
+  <div
+    class="breadcrumb"
+    id="breadcrumb"
+  >
+    Home / Products / <span>Loading...</span>
+  </div>
+
+
+  <!-- ================= PRODUCT ================= -->
+
+  <main class="product-page">
+
+    <div
+      id="productContainer"
+      class="loading"
+    >
+      Loading product...
+    </div>
+
+  </main>
+
+
+  <!-- ================= RELATED ================= -->
+
+  <section
+    class="related-section"
+    id="relatedSection"
+    style="display:none;"
+  >
+
+    <h2 class="related-heading">
+      You May Also Like
+    </h2>
+
+    <div
+      class="related-grid"
+      id="relatedGrid"
+    ></div>
+
+  </section>
+
+
+  <!-- ================= TOAST ================= -->
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <!-- IMPORTANT:
+       products.js MUST load first
+  -->
+
+  <script src="products.js"></script>
+
+
+  <script>
+
+    (() => {
+
+      "use strict";
+
+
+      /* =========================================
+         GET PRODUCT ID
+         ========================================= */
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      const productId =
+        params.get("id");
+
+
+      const container =
+        document.getElementById(
+          "productContainer"
+        );
+
+
+      /* =========================================
+         GET PRODUCT FROM products.js
+         ========================================= */
+
+      const product =
+        window.ASFashionsProducts &&
+        window.ASFashionsProducts.getProduct
+          ? window.ASFashionsProducts.getProduct(productId)
+          : null;
+
+
+      /* =========================================
+         HELPERS
+         ========================================= */
+
+      function money(value) {
+
+        return "₹" +
+          Number(value).toLocaleString("en-IN");
+
+      }
+
+
+      function escapeHTML(value) {
+
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+
+      }
+
+
+      function getWishlist() {
+
+        try {
+
+          return JSON.parse(
+            localStorage.getItem(
+              "asf_wishlist"
+            )
+          ) || [];
+
+        } catch {
+
+          return [];
+
+        }
+
+      }
+
+
+      function getCart() {
+
+        try {
+
+          return JSON.parse(
+            localStorage.getItem(
+              "asf_cart"
+            )
+          ) || [];
+
+        } catch {
+
+          return [];
+
+        }
+
+      }
+
+
+      function saveWishlist(items) {
+
+        localStorage.setItem(
+          "asf_wishlist",
+          JSON.stringify(items)
+        );
+
+      }
+
+
+      function saveCart(items) {
+
+        localStorage.setItem(
+          "asf_cart",
+          JSON.stringify(items)
+        );
+
+      }
+
+
+      /* =========================================
+         NOT FOUND
+         ========================================= */
+
+      if (!product) {
+
+        container.className =
+          "not-found";
+
+        container.innerHTML = `
+
+          <h2>Product Not Found</h2>
+
+          <p>
+            ఈ product ప్రస్తుతం అందుబాటులో లేదు.
+          </p>
+
+          <button
+            class="back-btn"
+            onclick="window.location.href='products.html'"
+          >
+            BACK TO PRODUCTS
+          </button>
+
+        `;
+
+        return;
+
+      }
+
+
+      /* =========================================
+         PAGE TITLE
+         ========================================= */
+
+      document.title =
+        `${product.name} | AS FASHIONS`;
+
+
+      /* =========================================
+         BREADCRUMB
+         ========================================= */
+
+      document.getElementById(
+        "breadcrumb"
+      ).innerHTML = `
+
+        <a href="index.html">Home</a>
+        &nbsp;/&nbsp;
+
+        <a href="products.html?category=${encodeURIComponent(product.category)}">
+          ${escapeHTML(product.category)}
+        </a>
+
+        &nbsp;/&nbsp;
+
+        <span>
+          ${escapeHTML(product.name)}
+        </span>
+
+      `;
+
+
+      /* =========================================
+         PRODUCT PAGE
+         ========================================= */
+
+      container.className =
+        "product-layout";
+
+
+      container.innerHTML = `
+
+        <!-- IMAGE -->
+
+        <section class="image-section">
+
+          <div class="main-image-wrap">
+
+            <img
+              src="${product.image}"
+              alt="${escapeHTML(product.name)}"
+              class="main-image"
+              onerror="
+                this.src='https://placehold.co/700x900/f4f3ef/222?text=AS+FASHIONS'
+              "
+            >
+
+            ${
+              product.badge
+                ? `
+                  <div class="image-badge">
+                    ${escapeHTML(product.badge)}
+                  </div>
+                `
+                : ""
+            }
+
+            <button
+              class="image-wishlist"
+              id="productWishlist"
+              type="button"
+              aria-label="Wishlist"
+            >
+              ♡
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- INFORMATION -->
+
+        <section class="product-info-section">
+
+          <div class="brand-name">
+            ${escapeHTML(product.brand)}
+          </div>
+
+
+          <h1 class="product-title">
+            ${escapeHTML(product.name)}
+          </h1>
+
+
+          <div class="rating-row">
+
+            <span class="rating">
+              ★ 4.5
+            </span>
+
+            <span class="reviews">
+              100+ Ratings & Reviews
+            </span>
+
+          </div>
+
+
+          <div class="price-row">
+
+            <strong class="current-price">
+              ${money(product.price)}
+            </strong>
+
+            <del class="mrp">
+              ${money(product.mrp)}
+            </del>
+
+            <span class="offer">
+              ${product.discount}% OFF
+            </span>
+
+          </div>
+
+
+          <div class="tax-note">
+            Inclusive of all applicable taxes
+          </div>
+
+
+          <!-- SIZE -->
+
+          <div class="size-section">
+
+            <div class="section-title">
+              Select Size
+            </div>
+
+            <div
+              class="size-options"
+              id="sizeOptions"
+            >
+
+              ${
+                product.sizes.map(size => `
+
+                  <button
+                    type="button"
+                    class="size-btn"
+                    data-size="${escapeHTML(size)}"
+                  >
+                    ${escapeHTML(size)}
+                  </button>
+
+                `).join("")
+              }
+
+            </div>
+
+            <div
+              class="size-error"
+              id="sizeError"
+            >
+              Please select a size
+            </div>
+
+          </div>
+
+
+          <!-- ACTIONS -->
+
+          <div class="action-row">
+
+            <button
+              type="button"
+              class="action-btn add-cart"
+              id="addCartBtn"
+            >
+              ADD TO BAG
+            </button>
+
+            <button
+              type="button"
+              class="action-btn buy-now"
+              id="buyNowBtn"
+            >
+              BUY NOW
+            </button>
+
+          </div>
+
+
+          <!-- DELIVERY -->
+
+          <div class="delivery-box">
+
+            <div class="delivery-title">
+              Check Delivery
+            </div>
+
+            <div class="pincode-row">
+
+              <input
+                id="pincode"
+                class="pincode-input"
+                type="tel"
+                inputmode="numeric"
+                maxlength="6"
+                placeholder="Enter Pincode"
+              >
+
+              <button
+                class="check-btn"
+                id="checkPincode"
+                type="button"
+              >
+                CHECK
+              </button>
+
+            </div>
+
+            <div
+              class="delivery-result"
+              id="deliveryResult"
+            ></div>
+
+          </div>
+
+
+          <!-- DETAILS -->
+
+          <div class="details-box">
+
+            <div class="detail-row">
+
+              <strong>
+                Product Details
+              </strong>
+
+              <p>
+                Premium ${escapeHTML(product.subcategory)}
+                designed for a modern everyday wardrobe.
+              </p>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <strong>
+                Category
+              </strong>
+
+              <p>
+                ${escapeHTML(product.category)}
+                ${
+                  product.gender
+                    ? " • " + escapeHTML(product.gender)
+                    : ""
+                }
+                • ${escapeHTML(product.subcategory)}
+              </p>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <strong>
+                Colour
+              </strong>
+
+              <p>
+                ${escapeHTML(product.color)}
+              </p>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <strong>
+                Available Sizes
+              </strong>
+
+              <p>
+                ${product.sizes
+                  .map(escapeHTML)
+                  .join(" • ")}
+              </p>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <strong>
+                Delivery & Returns
+              </strong>
+
+              <p>
+                Easy delivery and hassle-free
+                returns as per AS FASHIONS policy.
+              </p>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      `;
+
+
+      /* =========================================
+         SELECTED SIZE
+         ========================================= */
+
+      let selectedSize = "";
+
+
+      document
+        .querySelectorAll(".size-btn")
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              document
+                .querySelectorAll(".size-btn")
+                .forEach(btn =>
+                  btn.classList.remove(
+                    "selected"
+                  )
+                );
+
+
+              button.classList.add(
+                "selected"
+              );
+
+
+              selectedSize =
+                button.dataset.size;
+
+
+              document.getElementById(
+                "sizeError"
+              ).style.display =
+                "none";
+
+            }
+          );
+
+        });
+
+
+      /* =========================================
+         WISHLIST STATE
+         ========================================= */
+
+      const wishlistButton =
+        document.getElementById(
+          "productWishlist"
+        );
+
+
+      function updateWishlistUI() {
+
+        const wishlist =
+          getWishlist();
+
+
+        const active =
+          wishlist.includes(
+            product.id
+          );
+
+
+        wishlistButton.textContent =
+          active ? "♥" : "♡";
+
+
+        wishlistButton.classList.toggle(
+          "active",
+          active
+        );
+
+      }
+
+
+      updateWishlistUI();
+
+
+      /* =========================================
+         WISHLIST
+         ========================================= */
+
+      wishlistButton.addEventListener(
+        "click",
+        () => {
+
+          let wishlist =
+            getWishlist();
+
+
+          const index =
+            wishlist.indexOf(
+              product.id
+            );
+
+
+          if (index >= 0) {
+
+            wishlist.splice(
+              index,
+              1
+            );
+
+            showToast(
+              "Wishlist నుంచి తొలగించబడింది"
+            );
+
+          } else {
+
+            wishlist.push(
+              product.id
+            );
+
+            showToast(
+              "Wishlist కి add అయ్యింది ♥"
+            );
+
+          }
+
+
+          saveWishlist(
+            wishlist
+          );
+
+
+          updateWishlistUI();
+
+          updateCounts();
+
+        }
+      );
+
+
+      /* =========================================
+         ADD CART
+         ========================================= */
+
+      document
+        .getElementById("addCartBtn")
+        .addEventListener(
+          "click",
+          () => {
+
+            if (!selectedSize) {
+
+              document.getElementById(
+                "sizeError"
+              ).style.display =
+                "block";
+
+              return;
+
+            }
+
+
+            addToCart(
+              selectedSize
+            );
+
+          }
+        );
+
+
+      /* =========================================
+         BUY NOW
+         ========================================= */
+
+      document
+        .getElementById("buyNowBtn")
+        .addEventListener(
+          "click",
+          () => {
+
+            if (!selectedSize) {
+
+              document.getElementById(
+                "sizeError"
+              ).style.display =
+                "block";
+
+              return;
+
+            }
+
+
+            addToCart(
+              selectedSize,
+              true
+            );
+
+          }
+        );
+
+
+      /* =========================================
+         CART FUNCTION
+         ========================================= */
+
+      function addToCart(
+        size,
+        buyNow = false
+      ) {
+
+        let cart =
+          getCart();
+
+
+        const existing =
+          cart.find(
+            item =>
+              item.id === product.id &&
+              item.size === size
+          );
+
+
+        if (existing) {
+
+          existing.quantity =
+            Number(
+              existing.quantity || 1
+            ) + 1;
+
+        } else {
+
+          cart.push({
+
+            id: product.id,
+            size: size,
+            quantity: 1
+
+          });
+
+        }
+
+
+        saveCart(cart);
+
+        updateCounts();
+
+
+        if (buyNow) {
+
+          window.location.href =
+            "cart.html";
+
+          return;
+
+        }
+
+
+        showToast(
+          "Product cart లో add అయ్యింది 🛍"
+        );
+
+      }
+
+
+      /* =========================================
+         COUNTS
+         ========================================= */
+
+      function updateCounts() {
+
+        const wishlist =
+          getWishlist();
+
+
+        const cart =
+          getCart();
+
+
+        const cartCount =
+          cart.reduce(
+            (total, item) =>
+              total +
+              Number(
+                item.quantity || 1
+              ),
+            0
+          );
+
+
+        document.getElementById(
+          "wishlistCount"
+        ).textContent =
+          wishlist.length;
+
+
+        document.getElementById(
+          "cartCount"
+        ).textContent =
+          cartCount;
+
+      }
+
+
+      updateCounts();
+
+
+      /* =========================================
+         HEADER NAVIGATION
+         ========================================= */
+
+      document
+        .getElementById("cartBtn")
+        .addEventListener(
+          "click",
+          () => {
+
+            window.location.href =
+              "cart.html";
+
+          }
+        );
+
+
+      document
+        .getElementById("wishlistBtn")
+        .addEventListener(
+          "click",
+          () => {
+
+            window.location.href =
+              "wishlist.html";
+
+          }
+        );
+
+
+      /* =========================================
+         PINCODE
+         ========================================= */
+
+      document
+        .getElementById("checkPincode")
+        .addEventListener(
+          "click",
+          () => {
+
+            const value =
+              document
+                .getElementById("pincode")
+                .value
+                .trim();
+
+
+            const result =
+              document.getElementById(
+                "deliveryResult"
+              );
+
+
+            if (!/^[1-9][0-9]{5}$/.test(value)) {
+
+              result.style.color =
+                "#d71920";
+
+              result.textContent =
+                "దయచేసి valid 6-digit pincode ఇవ్వండి.";
+
+              return;
+
+            }
+
+
+            result.style.color =
+              "#14853c";
+
+            result.textContent =
+              "✓ Delivery available. Estimated delivery: 3–7 days.";
+
+          }
+        );
+
+
+      /* =========================================
+         RELATED PRODUCTS
+         ========================================= */
+
+      const relatedSection =
+        document.getElementById(
+          "relatedSection"
+        );
+
+
+      const relatedGrid =
+        document.getElementById(
+          "relatedGrid"
+        );
+
+
+      const allProducts =
+        window.ASFashionsProducts
+          ? window.ASFashionsProducts.products
+          : [];
+
+
+      const related =
+        allProducts
+          .filter(item => {
+
+            if (
+              item.id === product.id
+            ) {
+              return false;
+            }
+
+
+            return (
+              item.category ===
+              product.category
+            );
+
+          })
+          .slice(0, 4);
+
+
+      if (related.length) {
+
+        relatedSection.style.display =
+          "block";
+
+
+        relatedGrid.innerHTML =
+          related.map(item => `
+
+            <a
+              class="related-card"
+              href="product.html?id=${encodeURIComponent(item.id)}"
+            >
+
+              <img
+                class="related-image"
+                src="${item.image}"
+                alt="${escapeHTML(item.name)}"
+                loading="lazy"
+                onerror="
+                  this.src='https://placehold.co/600x800/f4f3ef/222?text=AS+FASHIONS'
+                "
+              >
+
+              <div class="related-info">
+
+                <div class="related-brand">
+                  ${escapeHTML(item.brand)}
+                </div>
+
+                <div class="related-name">
+                  ${escapeHTML(item.name)}
+                </div>
+
+                <div class="related-price">
+                  ${money(item.price)}
+                </div>
+
+              </div>
+
+            </a>
+
+          `).join("");
+
+      }
+
+
+      /* =========================================
+         TOAST
+         ========================================= */
+
+      function showToast(message) {
+
+        const toast =
+          document.getElementById(
+            "toast"
+          );
+
+
+        toast.textContent =
+          message;
+
+
+        toast.classList.add(
+          "show"
+        );
+
+
+        clearTimeout(
+          window.__productToast
+        );
+
+
+        window.__productToast =
+          setTimeout(
+            () => {
+
+              toast.classList.remove(
+                "show"
+              );
+
+            },
+            2200
+          );
+
+      }
+
+    })();
+
+  </script>
+
+</body>
+</html>

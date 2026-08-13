@@ -157,7 +157,7 @@ img{
 
 
 /* =========================================================
-   CUSTOM LOGO STYLES (PALETTE MATCHED)
+   NEW CUSTOM LOGO STYLES (PALETTE MATCHED)
 ========================================================= */
 
 .logo{
@@ -1223,12 +1223,6 @@ img{
     gap:35px;
 }
 
-.footer h3{
-    font-family:"Playfair Display",serif;
-    font-size:25px;
-    margin-bottom:15px;
-}
-
 .footer h4{
     font-size:11px;
     letter-spacing:1.5px;
@@ -1262,6 +1256,44 @@ img{
     font-size:10px;
     display:flex;
     justify-content:space-between;
+}
+
+
+/* =========================================================
+   STICKY PROMO
+========================================================= */
+
+.sticky-promo{
+    position:fixed;
+    left:50%;
+    bottom:15px;
+    transform:translateX(-50%);
+    width:min(700px,calc(100% - 25px));
+    background:#22223B;
+    color:#C9ADA7;
+    z-index:1500;
+    padding:12px 15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 8px 30px rgba(34,34,59,.25);
+    border-radius:999px;
+    border:1px solid rgba(201,173,167,.3);
+}
+
+.sticky-promo strong{
+    color:#fff;
+}
+
+.copy-btn{
+    border:0;
+    background:#C9ADA7;
+    color:#22223B;
+    padding:9px 18px;
+    font-size:10px;
+    font-weight:800;
+    border-radius:999px;
+    cursor:pointer;
 }
 
 
@@ -1324,10 +1356,6 @@ img{
 
 .modal-info{
     padding:45px;
-}
-
-.modal-info .brand{
-    margin-bottom:10px;
 }
 
 .modal-info h2{
@@ -1424,6 +1452,74 @@ img{
 
 
 /* =========================================================
+   SPIN WHEEL
+========================================================= */
+
+.spin-modal .modal-box{
+    max-width:500px;
+    padding:35px;
+    text-align:center;
+}
+
+.wheel{
+    width:230px;
+    height:230px;
+    border-radius:50%;
+    margin:25px auto;
+    background:conic-gradient(
+        #22223B 0deg 60deg,
+        #9A8C98 60deg 120deg,
+        #C9ADA7 120deg 180deg,
+        #F2E9E4 180deg 240deg,
+        #22223B 240deg 300deg,
+        #9A8C98 300deg 360deg
+    );
+    display:grid;
+    place-items:center;
+    border:8px solid #fff;
+    box-shadow:0 0 0 1px #C9ADA7;
+}
+
+.wheel span{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#fff;
+    display:grid;
+    place-items:center;
+    font-size:11px;
+    font-weight:800;
+    color:#22223B;
+}
+
+
+/* =========================================================
+   EXIT POPUP
+========================================================= */
+
+.exit-content{
+    text-align:center;
+    padding:55px 30px;
+}
+
+.exit-content h2{
+    font-family:"Playfair Display",serif;
+    font-size:50px;
+    color:#22223B;
+}
+
+.coupon{
+    margin:20px auto;
+    border:1px dashed #22223B;
+    padding:14px;
+    width:220px;
+    font-weight:800;
+    letter-spacing:2px;
+    color:#22223B;
+}
+
+
+/* =========================================================
    TOAST
 ========================================================= */
 
@@ -1437,12 +1533,11 @@ img{
     color:#C9ADA7;
     padding:12px 22px;
     font-size:12px;
-    opacity:0.95;
+    opacity:0;
     pointer-events:none;
     transition:.3s;
     border-radius:999px;
     border:1px solid rgba(201,173,167,.3);
-    box-shadow:0 10px 30px rgba(34,34,59,.3);
 }
 
 .toast.show{
@@ -1458,8 +1553,6 @@ img{
 @media(max-width:1000px){
     .nav{ display:none; }
     .menu-btn{ display:block; }
-    .header-main{ gap:15px; }
-    .search{ flex:1; width:auto; }
     .category-grid{ grid-template-columns:repeat(3,1fr); }
     .promo-grid{ grid-template-columns:repeat(2,1fr); }
     .footer-grid{ grid-template-columns:1fr 1fr; }
@@ -1480,9 +1573,6 @@ img{
 
 <body>
 
-<!-- =========================================================
-     OFFER BAR
-========================================================= -->
 <div class="offer-bar">
     <div class="ticker">
         <span>🔥 MEGA SALE — UP TO <strong>70% OFF</strong></span>
@@ -1490,7 +1580,6 @@ img{
         <span>✨ NEW SEASON JUST DROPPED</span>
         <span>💳 EXTRA 10% OFF — CODE <strong>ASNEW10</strong></span>
         <span>⚡ TRENDING STYLES LIVE NOW</span>
-
         <span>🔥 MEGA SALE — UP TO <strong>70% OFF</strong></span>
         <span>🚚 FREE SHIPPING ABOVE ₹999</span>
         <span>✨ NEW SEASON JUST DROPPED</span>
@@ -1499,15 +1588,10 @@ img{
     </div>
 </div>
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
 <header class="header">
     <div class="container header-main">
         <div class="header-left">
-            <button class="menu-btn" onclick="openMenu()" aria-label="Open menu">
-                <span></span><span></span><span></span>
-            </button>
+            <button class="menu-btn" onclick="openMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
             <nav class="nav">
                 <a href="#new">NEW IN</a>
                 <a href="#women">WOMEN</a>
@@ -1518,20 +1602,12 @@ img{
                 <a href="#clearance" class="sale-link">SALE</a>
             </nav>
         </div>
-
         <a href="#home" class="logo">
-            <div class="logo-main-text">
-                <span class="logo-as">AS</span>
-                <span class="logo-fashion">FASHIONS</span>
-            </div>
+            <div class="logo-main-text"><span class="logo-as">AS</span><span class="logo-fashion">FASHIONS</span></div>
             <div class="logo-subtitle">PREMIUM FASHION & LIFESTYLE</div>
         </a>
-
         <div class="header-right">
-            <div class="search">
-                <span class="search-icon">⌕</span>
-                <input id="searchInput" type="search" placeholder="Search products, brands & more" oninput="searchProducts()">
-            </div>
+            <div class="search"><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Search products, brands & more" oninput="searchProducts()"></div>
             <div class="actions">
                 <button class="action-btn" onclick="openProfile()" aria-label="Profile">♙</button>
                 <button class="action-btn" onclick="openWishlist()" aria-label="Wishlist">♡<span class="badge" id="wishCount">0</span></button>
@@ -1541,9 +1617,6 @@ img{
     </div>
 </header>
 
-<!-- =========================================================
-     CATEGORY NAV
-========================================================= -->
 <nav class="category-nav">
     <div class="container category-scroll">
         <button class="active" onclick="filterCategory('all',this)">ALL</button>
@@ -1559,17 +1632,11 @@ img{
     </div>
 </nav>
 
-<!-- =========================================================
-     MOBILE DRAWER
-========================================================= -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeMenu(event)">
     <aside class="drawer" onclick="event.stopPropagation()">
         <div class="drawer-head">
             <a href="#home" class="logo">
-                <div class="logo-main-text">
-                    <span class="logo-as">AS</span>
-                    <span class="logo-fashion">FASHIONS</span>
-                </div>
+                <div class="logo-main-text"><span class="logo-as">AS</span><span class="logo-fashion">FASHIONS</span></div>
                 <div class="logo-subtitle">PREMIUM FASHION & LIFESTYLE</div>
             </a>
             <button class="drawer-close" onclick="closeMenu()">×</button>
@@ -1592,10 +1659,6 @@ img{
 </div>
 
 <main id="home">
-
-<!-- =========================================================
-     HERO
-========================================================= -->
 <section class="hero">
     <div class="hero-track" id="heroTrack">
         <article class="hero-slide active">
@@ -1616,23 +1679,15 @@ img{
                 <span class="hero-kicker">LIMITED TIME / BIG SAVINGS</span>
                 <h1>UP TO<br>70% OFF</h1>
                 <p>Your favourite styles. Exceptional prices.</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-light" onclick="goTo('sale')">SHOP SALE</button>
-                </div>
+                <div class="hero-buttons"><button class="btn btn-light" onclick="goTo('sale')">SHOP SALE</button></div>
             </div>
         </article>
     </div>
     <button class="hero-arrow hero-prev" onclick="prevHero()">‹</button>
     <button class="hero-arrow hero-next" onclick="nextHero()">›</button>
-    <div class="hero-dots" id="heroDots">
-        <button class="hero-dot active"></button>
-        <button class="hero-dot"></button>
-    </div>
+    <div class="hero-dots" id="heroDots"><button class="hero-dot active"></button><button class="hero-dot"></button></div>
 </section>
 
-<!-- =========================================================
-     FLASH SALE + COUNTDOWN
-========================================================= -->
 <section class="flash-strip">
     <div class="container flash-inner">
         <div class="flash-title">⚡ FLASH SALE — LIVE NOW</div>
@@ -1645,108 +1700,42 @@ img{
     </div>
 </section>
 
-<!-- =========================================================
-     SHOP BY CATEGORIES
-========================================================= -->
 <section class="section" id="categories">
     <div class="container">
         <div class="section-head">
-            <div>
-                <div class="eyebrow">EXPLORE</div>
-                <h2 class="section-title">Shop By Category</h2>
-            </div>
+            <div><div class="eyebrow">EXPLORE</div><h2 class="section-title">Shop By Category</h2></div>
             <a href="#categories" class="view-all">VIEW ALL</a>
         </div>
         <div class="category-grid">
-            <div class="category-card" onclick="goTo('women')">
-                <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=700&q=80" alt="Women">
-                <div class="category-info"><strong>Women</strong><small>SHOP NOW →</small></div>
-            </div>
-            <div class="category-card" onclick="goTo('men')">
-                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80" alt="Men">
-                <div class="category-info"><strong>Men</strong><small>SHOP NOW →</small></div>
-            </div>
-            <div class="category-card" onclick="goTo('kids')">
-                <img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80" alt="Kids">
-                <div class="category-info"><strong>Kids</strong><small>SHOP NOW →</small></div>
-            </div>
-            <div class="category-card" onclick="goTo('dresses')">
-                <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=80" alt="Dresses">
-                <div class="category-info"><strong>Dresses</strong><small>SHOP NOW →</small></div>
-            </div>
-            <div class="category-card" onclick="goTo('footwear')">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80" alt="Footwear">
-                <div class="category-info"><strong>Footwear</strong><small>SHOP NOW →</small></div>
-            </div>
-            <div class="category-card" onclick="goTo('accessories')">
-                <img src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?auto=format&fit=crop&w=700&q=80" alt="Accessories">
-                <div class="category-info"><strong>Accessories</strong><small>SHOP NOW →</small></div>
-            </div>
+            <div class="category-card" onclick="goTo('women')"><img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=700&q=80" alt="Women"><div class="category-info"><strong>Women</strong><small>SHOP NOW →</small></div></div>
+            <div class="category-card" onclick="goTo('men')"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80" alt="Men"><div class="category-info"><strong>Men</strong><small>SHOP NOW →</small></div></div>
+            <div class="category-card" onclick="goTo('kids')"><img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80" alt="Kids"><div class="category-info"><strong>Kids</strong><small>SHOP NOW →</small></div></div>
+            <div class="category-card" onclick="goTo('dresses')"><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=80" alt="Dresses"><div class="category-info"><strong>Dresses</strong><small>SHOP NOW →</small></div></div>
+            <div class="category-card" onclick="goTo('footwear')"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80" alt="Footwear"><div class="category-info"><strong>Footwear</strong><small>SHOP NOW →</small></div></div>
+            <div class="category-card" onclick="goTo('accessories')"><img src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?auto=format&fit=crop&w=700&q=80" alt="Accessories"><div class="category-info"><strong>Accessories</strong><small>SHOP NOW →</small></div></div>
         </div>
     </div>
 </section>
 
-<!-- =========================================================
-     PROMOTIONAL TILES
-========================================================= -->
 <section class="section">
     <div class="container">
-        <div class="section-head">
-            <div>
-                <div class="eyebrow">SHOP SMART</div>
-                <h2 class="section-title">More To Explore</h2>
-            </div>
-        </div>
+        <div class="section-head"><div><div class="eyebrow">SHOP SMART</div><h2 class="section-title">More To Explore</h2></div></div>
         <div class="promo-grid">
-            <div class="promo-card" onclick="goTo('sale')">
-                <div class="promo-icon">🔥</div>
-                <h3>CLEARANCE</h3>
-                <p>Final markdowns.</p>
-                <div class="promo-arrow">→</div>
-            </div>
-            <div class="promo-card" onclick="goTo('new')">
-                <div class="promo-icon">✨</div>
-                <h3>NEW ARRIVALS</h3>
-                <p>Fresh styles just dropped.</p>
-                <div class="promo-arrow">→</div>
-            </div>
-            <div class="promo-card" onclick="goTo('under499')">
-                <div class="promo-icon">💸</div>
-                <h3>UNDER ₹499</h3>
-                <p>Everyday fashion.</p>
-                <div class="promo-arrow">→</div>
-            </div>
-            <div class="promo-card" onclick="goTo('trending')">
-                <div class="promo-icon">🔥</div>
-                <h3>VIRAL STYLES</h3>
-                <p>Trending right now.</p>
-                <div class="promo-arrow">→</div>
-            </div>
+            <div class="promo-card" onclick="goTo('sale')"><div class="promo-icon">🔥</div><h3>CLEARANCE</h3><p>Final markdowns.</p><div class="promo-arrow">→</div></div>
+            <div class="promo-card" onclick="goTo('new')"><div class="promo-icon">✨</div><h3>NEW ARRIVALS</h3><p>Fresh styles just dropped.</p><div class="promo-arrow">→</div></div>
+            <div class="promo-card" onclick="goTo('under499')"><div class="promo-icon">💸</div><h3>UNDER ₹499</h3><p>Everyday fashion.</p><div class="promo-arrow">→</div></div>
+            <div class="promo-card" onclick="goTo('trending')"><div class="promo-icon">🔥</div><h3>VIRAL STYLES</h3><p>Trending right now.</p><div class="promo-arrow">→</div></div>
         </div>
     </div>
 </section>
 
-<!-- =========================================================
-     TRENDING NOW
-========================================================= -->
 <section class="section" id="trending">
     <div class="container">
-        <div class="section-head">
-            <div>
-                <div class="eyebrow">🔴 LIVE TRENDING</div>
-                <h2 class="section-title">Trending Now</h2>
-            </div>
-            <button class="view-all" onclick="goTo('trending')">EXPLORE ALL</button>
-        </div>
-        <div class="horizontal-wrapper">
-            <div class="product-row" id="trendingRow"></div>
-        </div>
+        <div class="section-head"><div><div class="eyebrow">🔴 LIVE TRENDING</div><h2 class="section-title">Trending Now</h2></div><button class="view-all" onclick="goTo('trending')">EXPLORE ALL</button></div>
+        <div class="horizontal-wrapper"><div class="product-row" id="trendingRow"></div></div>
     </div>
 </section>
 
-<!-- =========================================================
-     OWN YOUR STYLE
-========================================================= -->
 <section class="style-section">
     <div class="style-banner">
         <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=2000&q=85" alt="Own your style">
@@ -1759,33 +1748,16 @@ img{
     </div>
 </section>
 
-<!-- =========================================================
-     NEW ARRIVALS
-========================================================= -->
 <section class="section" id="new">
     <div class="container">
-        <div class="section-head">
-            <div>
-                <div class="eyebrow">JUST DROPPED</div>
-                <h2 class="section-title">New Arrivals</h2>
-            </div>
-            <button class="view-all" onclick="filterCategory('new')">VIEW ALL</button>
-        </div>
+        <div class="section-head"><div><div class="eyebrow">JUST DROPPED</div><h2 class="section-title">New Arrivals</h2></div><button class="view-all" onclick="filterCategory('new')">VIEW ALL</button></div>
         <div class="product-row" id="newRow"></div>
     </div>
 </section>
 
-<!-- =========================================================
-     KIDS
-========================================================= -->
 <section class="section kids-section" id="kids">
     <div class="container">
-        <div class="section-head">
-            <div>
-                <div class="eyebrow">LITTLE STYLE</div>
-                <h2 class="section-title">Kids Catalogue</h2>
-            </div>
-        </div>
+        <div class="section-head"><div><div class="eyebrow">LITTLE STYLE</div><h2 class="section-title">Kids Catalogue</h2></div></div>
         <div class="kids-tabs">
             <button class="kids-tab active" data-kid="all" onclick="selectKids('all')">ALL KIDS</button>
             <button class="kids-tab" data-kid="boys" onclick="selectKids('boys')">👦 BOYS</button>
@@ -1797,34 +1769,17 @@ img{
     </div>
 </section>
 
-<!-- =========================================================
-     PRICE COLLECTION
-========================================================= -->
 <section class="section" id="under499">
     <div class="container">
-        <div class="section-head">
-            <div>
-                <div class="eyebrow">SHOP SMART</div>
-                <h2 class="section-title">Shop By Price</h2>
-            </div>
-        </div>
+        <div class="section-head"><div><div class="eyebrow">SHOP SMART</div><h2 class="section-title">Shop By Price</h2></div></div>
         <div class="price-grid">
-            <button class="price-card" onclick="filterCategory('under499')">
-                <span>UNDER</span><strong>₹499</strong><small>SHOP NOW →</small>
-            </button>
-            <button class="price-card" onclick="filterCategory('under999')">
-                <span>UNDER</span><strong>₹999</strong><small>SHOP NOW →</small>
-            </button>
-            <button class="price-card" onclick="goTo('sale')">
-                <span>SALE</span><strong>UP TO 70%</strong><small>SHOP NOW →</small>
-            </button>
+            <button class="price-card" onclick="filterCategory('under499')"><span>UNDER</span><strong>₹499</strong><small>SHOP NOW →</small></button>
+            <button class="price-card" onclick="filterCategory('under999')"><span>UNDER</span><strong>₹999</strong><small>SHOP NOW →</small></button>
+            <button class="price-card" onclick="goTo('sale')"><span>SALE</span><strong>UP TO 70%</strong><small>SHOP NOW →</small></button>
         </div>
     </div>
 </section>
 
-<!-- =========================================================
-     CLEARANCE
-========================================================= -->
 <section class="deal-banner" id="clearance">
     <div class="eyebrow" style="color:#C9ADA7">FINAL MARKDOWNS</div>
     <h2>CLEARANCE<br>SALE</h2>
@@ -1832,16 +1787,10 @@ img{
     <button class="btn btn-light" onclick="filterCategory('sale')">SHOP CLEARANCE</button>
 </section>
 
-<!-- =========================================================
-     ALL PRODUCTS
-========================================================= -->
 <section class="section" id="products">
     <div class="container">
         <div class="section-head">
-            <div>
-                <div class="eyebrow">AS FASHIONS EDIT</div>
-                <h2 class="section-title" id="productHeading">All Products</h2>
-            </div>
+            <div><div class="eyebrow">AS FASHIONS EDIT</div><h2 class="section-title" id="productHeading">All Products</h2></div>
             <select id="sortSelect" onchange="sortProducts(this.value)" style="border:1px solid #C9ADA7; padding:10px; background:#fff; font-size:11px; border-radius:8px;">
                 <option value="featured">Featured</option>
                 <option value="low">Price: Low to High</option>
@@ -1854,9 +1803,6 @@ img{
     </div>
 </section>
 
-<!-- =========================================================
-     TRUST
-========================================================= -->
 <section class="section" style="padding-top:20px">
     <div class="container">
         <div class="feature-grid">
@@ -1868,9 +1814,6 @@ img{
     </div>
 </section>
 
-<!-- =========================================================
-     NEWSLETTER
-========================================================= -->
 <section class="newsletter">
     <h2>Stay In The Loop</h2>
     <p>Get early access to new drops, private sales and exclusive offers.</p>
@@ -1879,44 +1822,20 @@ img{
         <button type="submit">SUBSCRIBE</button>
     </form>
 </section>
-
 </main>
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
 <footer class="footer">
     <div class="container footer-grid">
         <div>
             <a href="#home" class="logo">
-                <div class="logo-main-text">
-                    <span class="logo-as" style="color:#C9ADA7;">AS</span>
-                    <span class="logo-fashion" style="color:#fff;">FASHIONS</span>
-                </div>
+                <div class="logo-main-text"><span class="logo-as" style="color:#C9ADA7;">AS</span><span class="logo-fashion" style="color:#fff;">FASHIONS</span></div>
                 <div class="logo-subtitle" style="color:#9A8C98;">PREMIUM FASHION & LIFESTYLE</div>
             </a>
             <p style="margin-top:20px">Modern fashion. Premium essentials. Designed for people who want to express their own style.</p>
         </div>
-        <div>
-            <h4>SHOP</h4>
-            <a href="#new">New Arrivals</a>
-            <a href="#women">Women</a>
-            <a href="#men">Men</a>
-            <a href="#kids">Kids</a>
-            <a href="#clearance">Sale</a>
-        </div>
-        <div>
-            <h4>HELP</h4>
-            <a href="#" onclick="showToast('Track Order will connect to your order system.');return false">Track Order</a>
-            <a href="#" onclick="showToast('Returns policy page ready for backend connection.');return false">Returns</a>
-            <a href="#" onclick="showToast('Contact: support@asfashions.com');return false">Contact Us</a>
-        </div>
-        <div>
-            <h4>FOLLOW</h4>
-            <a href="#" onclick="showToast('Instagram link can be connected here.');return false">Instagram</a>
-            <a href="#" onclick="showToast('Facebook link can be connected here.');return false">Facebook</a>
-            <a href="#" onclick="showToast('Pinterest link can be connected here.');return false">Pinterest</a>
-        </div>
+        <div><h4>SHOP</h4><a href="#new">New Arrivals</a><a href="#women">Women</a><a href="#men">Men</a><a href="#kids">Kids</a><a href="#clearance">Sale</a></div>
+        <div><h4>HELP</h4><a href="#" onclick="showToast('Track Order connected.');return false">Track Order</a><a href="#" onclick="showToast('Returns page ready.');return false">Returns</a><a href="#" onclick="showToast('Contact: support@asfashions.com');return false">Contact Us</a></div>
+        <div><h4>FOLLOW</h4><a href="#" onclick="showToast('Instagram link.');return false">Instagram</a><a href="#" onclick="showToast('Facebook link.');return false">Facebook</a><a href="#" onclick="showToast('Pinterest link.');return false">Pinterest</a></div>
     </div>
     <div class="container footer-bottom">
         <span>© 2026 AS FASHIONS</span>
@@ -1924,9 +1843,11 @@ img{
     </div>
 </footer>
 
-<!-- =========================================================
-     MODALS
-========================================================= -->
+<div class="sticky-promo">
+    <div>🔥 <strong>ASNEW20</strong> — EXTRA 20% OFF</div>
+    <button class="copy-btn" onclick="copyCoupon()">COPY</button>
+</div>
+
 <div class="modal" id="productModal" onclick="closeModal(event,'productModal')">
     <div class="modal-box" onclick="event.stopPropagation()">
         <button class="modal-close" onclick="closeModal(null,'productModal')">×</button>
@@ -1938,12 +1859,7 @@ img{
                 <div id="modalRating"></div>
                 <div class="modal-price" id="modalPrice"></div>
                 <p>Premium quality fashion selected by AS FASHIONS.</p>
-                <div class="size-list">
-                    <button class="size active">S</button>
-                    <button class="size">M</button>
-                    <button class="size">L</button>
-                    <button class="size">XL</button>
-                </div>
+                <div class="size-list"><button class="size active">S</button><button class="size">M</button><button class="size">L</button><button class="size">XL</button></div>
                 <button class="btn full-btn" id="modalAdd">ADD TO BAG</button>
                 <button class="btn full-btn" style="margin-top:8px;background:#fff;color:#22223B;border:1px solid #C9ADA7;" id="modalWish">ADD TO WISHLIST</button>
             </div>
@@ -1980,7 +1896,32 @@ img{
             <div style="font-size:50px; color:#22223B;">♙</div>
             <h2 style="font-family:'Playfair Display',serif; margin:15px 0;">AS FASHIONS</h2>
             <p style="margin:15px 0; color:#666;">Sign in to manage orders, wishlist and saved addresses.</p>
-            <button class="btn" onclick="showToast('Login system ready for Firebase integration.')">LOGIN / SIGN UP</button>
+            <button class="btn" onclick="showToast('Login ready.')">LOGIN / SIGN UP</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal spin-modal" id="spinModal" onclick="closeModal(event,'spinModal')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal(null,'spinModal')">×</button>
+        <h2>🎁 SPIN & WIN</h2>
+        <p>Try your luck and unlock an exclusive coupon.</p>
+        <div class="wheel" id="wheel"><span>SPIN</span></div>
+        <button class="btn" onclick="spinWheel()">SPIN NOW</button>
+        <p id="spinResult" style="margin-top:15px; font-weight:700;"></p>
+    </div>
+</div>
+
+<div class="modal" id="exitModal" onclick="closeModal(event,'exitModal')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal(null,'exitModal')">×</button>
+        <div class="exit-content">
+            <div style="font-size:40px">👀</div>
+            <div class="eyebrow">WAIT!</div>
+            <h2>One More Deal.</h2>
+            <p style="margin:15px 0">Take an extra 15% OFF before you leave.</p>
+            <div class="coupon">ASWELCOME15</div>
+            <button class="btn" onclick="copyText('ASWELCOME15');closeModal(null,'exitModal')">COPY COUPON</button>
         </div>
     </div>
 </div>
@@ -2323,6 +2264,38 @@ function subscribe(event){
     showToast("You're subscribed to AS FASHIONS.");
     document.getElementById("emailInput").value = "";
 }
+
+function spinWheel(){
+    const wheel = document.getElementById("wheel");
+    const rotation = 1800 + Math.floor(Math.random() * 1000);
+    wheel.style.transform = `rotate(${rotation}deg)`;
+    setTimeout(() => {
+        document.getElementById("spinResult").textContent = "🎉 You won ASNEW15 — 15% OFF!";
+    }, 3000);
+}
+
+function copyText(text){
+    navigator.clipboard.writeText(text).then(() => showToast("Coupon copied: " + text)).catch(() => showToast("Coupon: " + text));
+}
+
+function copyCoupon(){
+    copyText("ASNEW20");
+}
+
+let popupShown = false;
+setTimeout(() => {
+    if(!sessionStorage.getItem("asSpinShown")){
+        document.getElementById("spinModal").classList.add("active");
+        sessionStorage.setItem("asSpinShown", "yes");
+    }
+}, 2500);
+
+document.addEventListener("mouseleave", event => {
+    if(event.clientY <= 5 && !popupShown){
+        popupShown = true;
+        document.getElementById("exitModal").classList.add("active");
+    }
+});
 
 renderProducts();
 updateCounts();

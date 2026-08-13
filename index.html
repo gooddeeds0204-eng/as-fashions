@@ -2,463 +2,178 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AS FASHIONS — Premium Fashion Store</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#ffffff"
+    >
 
     <meta
         name="description"
-        content="AS FASHIONS — Premium fashion for men, women and kids."
+        content="AS FASHIONS - Premium Fashion & Lifestyle Store"
     >
 
-    <meta name="theme-color" content="#ffffff">
+    <title>AS FASHIONS — Premium Fashion Store</title>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="style.css">
+    <!-- =====================================================
+         MAIN CSS
+         ===================================================== -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <!-- =========================================================
-     SALE / TOP ANNOUNCEMENT BAR
-========================================================= -->
+     TOP OFFER / ANNOUNCEMENT BAR
+     ========================================================= -->
 
-<div class="top-announcement" id="topAnnouncement">
+<div class="announcement-bar">
+
     <div class="announcement-track">
 
         <span>🔥 FLAT 70% OFF</span>
         <span>•</span>
-
         <span>NEW SEASON COLLECTION</span>
         <span>•</span>
-
         <span>FREE SHIPPING ON ORDERS ABOVE ₹999</span>
         <span>•</span>
-
         <span>EXTRA 10% OFF WITH SELECTED COUPONS</span>
 
     </div>
+
 </div>
 
 
 <!-- =========================================================
-     MAIN HEADER
-========================================================= -->
+     HEADER
+     ========================================================= -->
 
 <header class="site-header" id="siteHeader">
 
-    <div class="header-container">
+    <div class="header-main">
 
-        <!-- Mobile Menu -->
+        <!-- MOBILE MENU -->
         <button
-            class="icon-btn mobile-menu-btn"
-            id="mobileMenuBtn"
-            aria-label="Open menu"
+            class="mobile-menu-btn"
             type="button"
+            data-action="mobile-menu"
+            aria-label="Open menu"
         >
-            ☰
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
 
 
         <!-- LOGO -->
-
-        <a href="#" class="brand-logo" id="brandLogo">
-            <span class="brand-main">AS</span>
-            <span class="brand-name">FASHIONS</span>
+        <a
+            href="#"
+            class="site-logo"
+            aria-label="AS FASHIONS Home"
+        >
+            <span class="logo-as">AS</span>
+            <span class="logo-text">FASHIONS</span>
         </a>
 
 
-        <!-- DESKTOP NAVIGATION -->
-
-        <nav class="main-navigation" id="mainNavigation">
-
-            <div class="nav-item has-mega-menu">
-                <button class="nav-link" type="button">
-                    MEN
-                </button>
-
-                <div class="mega-menu">
-                    <div class="mega-column">
-
-                        <h4>Topwear</h4>
-
-                        <a href="#" data-category="men-shirts">
-                            Shirts
-                        </a>
-
-                        <a href="#" data-category="men-tshirts">
-                            T-Shirts
-                        </a>
-
-                        <a href="#" data-category="men-polos">
-                            Polos
-                        </a>
-
-                        <a href="#" data-category="men-sweatshirts">
-                            Sweatshirts
-                        </a>
-
-                        <a href="#" data-category="men-hoodies">
-                            Hoodies
-                        </a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Bottomwear</h4>
-
-                        <a href="#">Jeans</a>
-                        <a href="#">Trousers</a>
-                        <a href="#">Cargos</a>
-                        <a href="#">Shorts</a>
-                        <a href="#">Track Pants</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Indian Wear</h4>
-
-                        <a href="#">Kurtas</a>
-                        <a href="#">Kurta Sets</a>
-                        <a href="#">Nehru Jackets</a>
-                        <a href="#">Sherwanis</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Collections</h4>
-
-                        <a href="#">New Arrivals</a>
-                        <a href="#">Trending</a>
-                        <a href="#">Best Sellers</a>
-                        <a href="#">Sale</a>
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="nav-item has-mega-menu">
-
-                <button class="nav-link" type="button">
-                    WOMEN
-                </button>
-
-                <div class="mega-menu">
-
-                    <div class="mega-column">
-
-                        <h4>Indian Wear</h4>
-
-                        <a href="#">Kurtas</a>
-                        <a href="#">Kurtis</a>
-                        <a href="#">Sarees</a>
-                        <a href="#">Salwar Suits</a>
-                        <a href="#">Lehenga Choli</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Western Wear</h4>
-
-                        <a href="#">Dresses</a>
-                        <a href="#">Tops</a>
-                        <a href="#">Shirts</a>
-                        <a href="#">Jeans</a>
-                        <a href="#">Trousers</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Activewear</h4>
-
-                        <a href="#">Sports Bras</a>
-                        <a href="#">Gym Tops</a>
-                        <a href="#">Track Pants</a>
-                        <a href="#">Leggings</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Collections</h4>
-
-                        <a href="#">New Arrivals</a>
-                        <a href="#">Trending</a>
-                        <a href="#">Best Sellers</a>
-                        <a href="#">Sale</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="nav-item has-mega-menu">
-
-                <button class="nav-link" type="button">
-                    KIDS
-                </button>
-
-                <div class="mega-menu">
-
-                    <div class="mega-column">
-
-                        <h4>Boys</h4>
-
-                        <a href="#">T-Shirts</a>
-                        <a href="#">Shirts</a>
-                        <a href="#">Jeans</a>
-                        <a href="#">Shorts</a>
-                        <a href="#">Ethnic Wear</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Girls</h4>
-
-                        <a href="#">Dresses</a>
-                        <a href="#">Tops</a>
-                        <a href="#">Skirts</a>
-                        <a href="#">Jeans</a>
-                        <a href="#">Ethnic Wear</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Baby</h4>
-
-                        <a href="#">Newborn</a>
-                        <a href="#">Bodysuits</a>
-                        <a href="#">Sets</a>
-                        <a href="#">Sleepwear</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="nav-item has-mega-menu">
-
-                <button class="nav-link" type="button">
-                    FOOTWEAR
-                </button>
-
-                <div class="mega-menu">
-
-                    <div class="mega-column">
-
-                        <h4>Men</h4>
-
-                        <a href="#">Casual Shoes</a>
-                        <a href="#">Sports Shoes</a>
-                        <a href="#">Sneakers</a>
-                        <a href="#">Formal Shoes</a>
-                        <a href="#">Sandals</a>
-                        <a href="#">Slippers</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Women</h4>
-
-                        <a href="#">Heels</a>
-                        <a href="#">Flats</a>
-                        <a href="#">Sneakers</a>
-                        <a href="#">Boots</a>
-                        <a href="#">Sandals</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Kids</h4>
-
-                        <a href="#">School Shoes</a>
-                        <a href="#">Sports Shoes</a>
-                        <a href="#">Casual Shoes</a>
-                        <a href="#">Sandals</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="nav-item has-mega-menu">
-
-                <button class="nav-link" type="button">
-                    BAGS
-                </button>
-
-                <div class="mega-menu">
-
-                    <div class="mega-column">
-
-                        <h4>Backpacks</h4>
-                        <a href="#">Laptop Backpacks</a>
-                        <a href="#">College Backpacks</a>
-                        <a href="#">Travel Backpacks</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Women</h4>
-                        <a href="#">Handbags</a>
-                        <a href="#">Sling Bags</a>
-                        <a href="#">Tote Bags</a>
-                        <a href="#">Clutches</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Travel</h4>
-                        <a href="#">Duffel Bags</a>
-                        <a href="#">Trolley Bags</a>
-                        <a href="#">Travel Organizers</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="nav-item has-mega-menu">
-
-                <button class="nav-link" type="button">
-                    ACCESSORIES
-                </button>
-
-                <div class="mega-menu">
-
-                    <div class="mega-column">
-
-                        <h4>Fashion Accessories</h4>
-
-                        <a href="#">Belts</a>
-                        <a href="#">Wallets</a>
-                        <a href="#">Caps</a>
-                        <a href="#">Sunglasses</a>
-                        <a href="#">Scarves</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Jewellery</h4>
-
-                        <a href="#">Necklaces</a>
-                        <a href="#">Bracelets</a>
-                        <a href="#">Earrings</a>
-                        <a href="#">Rings</a>
-
-                    </div>
-
-                    <div class="mega-column">
-
-                        <h4>Watches</h4>
-
-                        <a href="#">Men's Watches</a>
-                        <a href="#">Women's Watches</a>
-                        <a href="#">Smart Watches</a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="nav-item">
-                <button
-                    class="nav-link sale-link"
-                    type="button"
-                    data-category="sale"
-                >
-                    SALE
-                </button>
-            </div>
+        <!-- DESKTOP NAV -->
+        <nav
+            class="desktop-navigation"
+            aria-label="Main Navigation"
+        >
+
+            <a href="#" data-category="men">
+                MEN
+            </a>
+
+            <a href="#" data-category="women">
+                WOMEN
+            </a>
+
+            <a href="#" data-category="kids">
+                KIDS
+            </a>
+
+            <a href="#" data-category="footwear">
+                FOOTWEAR
+            </a>
+
+            <a href="#" data-category="bags">
+                BAGS
+            </a>
+
+            <a href="#" data-category="accessories">
+                ACCESSORIES
+            </a>
+
+            <a href="#" data-category="sports">
+                SPORTS
+            </a>
+
+            <a href="#" data-category="sale" class="sale-link">
+                SALE
+            </a>
 
         </nav>
 
 
-        <!-- HEADER SEARCH -->
+        <!-- SEARCH -->
+        <div class="search-container">
 
-        <div class="header-search">
+            <div class="search-box">
 
-            <span class="search-icon">⌕</span>
+                <span class="search-icon">
+                    ⌕
+                </span>
 
-            <input
-                type="search"
-                id="searchInput"
-                placeholder="Search for products, brands and more"
-                autocomplete="off"
-            >
+                <input
+                    type="search"
+                    id="searchInput"
+                    class="search-input"
+                    name="search"
+                    placeholder="Search for products, brands & more"
+                    autocomplete="off"
+                >
 
-            <button
-                type="button"
-                class="search-clear"
-                id="searchClear"
-                aria-label="Clear search"
-            >
-                ×
-            </button>
+                <button
+                    type="button"
+                    class="search-button"
+                    data-action="search"
+                    aria-label="Search"
+                >
+                    SEARCH
+                </button>
+
+            </div>
+
 
             <div
-                class="search-suggestions"
                 id="searchSuggestions"
+                class="search-suggestions"
+                data-search-suggestions
             ></div>
 
         </div>
 
 
         <!-- HEADER ACTIONS -->
-
         <div class="header-actions">
 
             <button
-                class="header-action"
-                id="profileBtn"
                 type="button"
-            >
-                <span class="action-icon">♙</span>
-                <span class="action-label">Profile</span>
-            </button>
-
-
-            <button
                 class="header-action"
-                id="wishlistBtn"
-                type="button"
+                data-action="wishlist-page"
             >
                 <span class="action-icon">♡</span>
                 <span class="action-label">Wishlist</span>
                 <span
-                    class="action-count"
-                    id="wishlistCount"
+                    class="header-count wishlist-count"
+                    data-wishlist-count
                 >
                     0
                 </span>
@@ -466,19 +181,723 @@
 
 
             <button
-                class="header-action"
-                id="cartBtn"
                 type="button"
+                class="header-action"
+                data-action="cart"
             >
                 <span class="action-icon">🛍</span>
                 <span class="action-label">Bag</span>
+
                 <span
-                    class="action-count"
-                    id="cartCount"
+                    class="header-count cart-count"
+                    data-cart-count
                 >
                     0
                 </span>
             </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MEGA MENU
+         ===================================================== -->
+
+    <div class="mega-menu">
+
+        <!-- MEN -->
+        <div class="mega-menu-panel" data-mega="men">
+
+            <div class="mega-column">
+
+                <h3>Topwear</h3>
+
+                <a href="#" data-subcategory="shirts">
+                    Shirts
+                </a>
+
+                <a href="#" data-subcategory="t-shirts">
+                    T-Shirts
+                </a>
+
+                <a href="#" data-subcategory="polos">
+                    Polos
+                </a>
+
+                <a href="#" data-subcategory="sweatshirts">
+                    Sweatshirts
+                </a>
+
+                <a href="#" data-subcategory="hoodies">
+                    Hoodies
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Bottomwear</h3>
+
+                <a href="#" data-subcategory="jeans">
+                    Jeans
+                </a>
+
+                <a href="#" data-subcategory="trousers">
+                    Trousers
+                </a>
+
+                <a href="#" data-subcategory="cargo-pants">
+                    Cargos
+                </a>
+
+                <a href="#" data-subcategory="shorts">
+                    Shorts
+                </a>
+
+                <a href="#" data-subcategory="track-pants">
+                    Track Pants
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Indian Wear</h3>
+
+                <a href="#" data-subcategory="men-kurtas">
+                    Kurtas
+                </a>
+
+                <a href="#" data-subcategory="kurta-sets">
+                    Kurta Sets
+                </a>
+
+                <a href="#" data-subcategory="nehru-jackets">
+                    Nehru Jackets
+                </a>
+
+                <a href="#" data-subcategory="sherwanis">
+                    Sherwanis
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Collections</h3>
+
+                <a href="#" data-subcategory="new-arrivals">
+                    New Arrivals
+                </a>
+
+                <a href="#" data-subcategory="trending">
+                    Trending
+                </a>
+
+                <a href="#" data-subcategory="best-sellers">
+                    Best Sellers
+                </a>
+
+                <a href="#" data-subcategory="sale">
+                    Sale
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- WOMEN -->
+        <div class="mega-menu-panel" data-mega="women">
+
+            <div class="mega-column">
+
+                <h3>Indian Wear</h3>
+
+                <a href="#" data-subcategory="kurtas">
+                    Kurtas
+                </a>
+
+                <a href="#" data-subcategory="kurtis">
+                    Kurtis
+                </a>
+
+                <a href="#" data-subcategory="sarees">
+                    Sarees
+                </a>
+
+                <a href="#" data-subcategory="salwar-suits">
+                    Salwar Suits
+                </a>
+
+                <a href="#" data-subcategory="lehenga-choli">
+                    Lehenga Choli
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Western Wear</h3>
+
+                <a href="#" data-subcategory="women-dresses">
+                    Dresses
+                </a>
+
+                <a href="#" data-subcategory="women-tops">
+                    Tops
+                </a>
+
+                <a href="#" data-subcategory="women-shirts">
+                    Shirts
+                </a>
+
+                <a href="#" data-subcategory="women-jeans">
+                    Jeans
+                </a>
+
+                <a href="#" data-subcategory="women-trousers">
+                    Trousers
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Activewear</h3>
+
+                <a href="#" data-subcategory="sports-bras">
+                    Sports Bras
+                </a>
+
+                <a href="#" data-subcategory="gym-tops">
+                    Gym Tops
+                </a>
+
+                <a href="#" data-subcategory="track-pants-women">
+                    Track Pants
+                </a>
+
+                <a href="#" data-subcategory="leggings">
+                    Leggings
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Collections</h3>
+
+                <a href="#" data-subcategory="women-new-arrivals">
+                    New Arrivals
+                </a>
+
+                <a href="#" data-subcategory="women-trending">
+                    Trending
+                </a>
+
+                <a href="#" data-subcategory="women-best-sellers">
+                    Best Sellers
+                </a>
+
+                <a href="#" data-subcategory="women-sale">
+                    Sale
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- KIDS -->
+        <div class="mega-menu-panel" data-mega="kids">
+
+            <div class="mega-column">
+
+                <h3>Boys</h3>
+
+                <a href="#" data-subcategory="boys-tshirts">
+                    T-Shirts
+                </a>
+
+                <a href="#" data-subcategory="boys-shirts">
+                    Shirts
+                </a>
+
+                <a href="#" data-subcategory="boys-jeans">
+                    Jeans
+                </a>
+
+                <a href="#" data-subcategory="boys-trousers">
+                    Trousers
+                </a>
+
+                <a href="#" data-subcategory="boys-shorts">
+                    Shorts
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Girls</h3>
+
+                <a href="#" data-subcategory="girls-tops">
+                    Tops
+                </a>
+
+                <a href="#" data-subcategory="girls-dresses">
+                    Dresses
+                </a>
+
+                <a href="#" data-subcategory="girls-jeans">
+                    Jeans
+                </a>
+
+                <a href="#" data-subcategory="girls-skirts">
+                    Skirts
+                </a>
+
+                <a href="#" data-subcategory="girls-ethnic">
+                    Ethnic Wear
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Kids Essentials</h3>
+
+                <a href="#" data-subcategory="kids-activewear">
+                    Activewear
+                </a>
+
+                <a href="#" data-subcategory="kids-nightwear">
+                    Nightwear
+                </a>
+
+                <a href="#" data-subcategory="kids-innerwear">
+                    Innerwear
+                </a>
+
+                <a href="#" data-subcategory="kids-winterwear">
+                    Winter Wear
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Collections</h3>
+
+                <a href="#" data-subcategory="kids-new-arrivals">
+                    New Arrivals
+                </a>
+
+                <a href="#" data-subcategory="kids-trending">
+                    Trending
+                </a>
+
+                <a href="#" data-subcategory="kids-best-sellers">
+                    Best Sellers
+                </a>
+
+                <a href="#" data-subcategory="kids-sale">
+                    Sale
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTWEAR -->
+        <div class="mega-menu-panel" data-mega="footwear">
+
+            <div class="mega-column">
+
+                <h3>Men's Footwear</h3>
+
+                <a href="#" data-subcategory="men-sneakers">
+                    Sneakers
+                </a>
+
+                <a href="#" data-subcategory="men-sports-shoes">
+                    Sports Shoes
+                </a>
+
+                <a href="#" data-subcategory="men-formal-shoes">
+                    Formal Shoes
+                </a>
+
+                <a href="#" data-subcategory="men-loafers">
+                    Loafers
+                </a>
+
+                <a href="#" data-subcategory="men-sandals">
+                    Sandals
+                </a>
+
+                <a href="#" data-subcategory="men-slippers">
+                    Slippers
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Women's Footwear</h3>
+
+                <a href="#" data-subcategory="women-sneakers">
+                    Sneakers
+                </a>
+
+                <a href="#" data-subcategory="women-heels">
+                    Heels
+                </a>
+
+                <a href="#" data-subcategory="women-flats">
+                    Flats
+                </a>
+
+                <a href="#" data-subcategory="women-sandals">
+                    Sandals
+                </a>
+
+                <a href="#" data-subcategory="women-slippers">
+                    Slippers
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Kids Footwear</h3>
+
+                <a href="#" data-subcategory="kids-sneakers">
+                    Sneakers
+                </a>
+
+                <a href="#" data-subcategory="kids-sports-shoes">
+                    Sports Shoes
+                </a>
+
+                <a href="#" data-subcategory="kids-sandals">
+                    Sandals
+                </a>
+
+                <a href="#" data-subcategory="kids-slippers">
+                    Slippers
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Shop By</h3>
+
+                <a href="#" data-subcategory="footwear-new">
+                    New Arrivals
+                </a>
+
+                <a href="#" data-subcategory="footwear-trending">
+                    Trending
+                </a>
+
+                <a href="#" data-subcategory="footwear-sale">
+                    Sale
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- BAGS -->
+        <div class="mega-menu-panel" data-mega="bags">
+
+            <div class="mega-column">
+
+                <h3>Women's Bags</h3>
+
+                <a href="#" data-subcategory="handbags">
+                    Handbags
+                </a>
+
+                <a href="#" data-subcategory="shoulder-bags">
+                    Shoulder Bags
+                </a>
+
+                <a href="#" data-subcategory="sling-bags">
+                    Sling Bags
+                </a>
+
+                <a href="#" data-subcategory="tote-bags">
+                    Tote Bags
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Men's Bags</h3>
+
+                <a href="#" data-subcategory="backpacks">
+                    Backpacks
+                </a>
+
+                <a href="#" data-subcategory="laptop-bags">
+                    Laptop Bags
+                </a>
+
+                <a href="#" data-subcategory="duffle-bags">
+                    Duffle Bags
+                </a>
+
+                <a href="#" data-subcategory="travel-bags">
+                    Travel Bags
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Travel</h3>
+
+                <a href="#" data-subcategory="travel-backpacks">
+                    Travel Backpacks
+                </a>
+
+                <a href="#" data-subcategory="weekend-bags">
+                    Weekend Bags
+                </a>
+
+                <a href="#" data-subcategory="luggage">
+                    Luggage
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Collections</h3>
+
+                <a href="#" data-subcategory="bags-new">
+                    New Arrivals
+                </a>
+
+                <a href="#" data-subcategory="bags-trending">
+                    Trending
+                </a>
+
+                <a href="#" data-subcategory="bags-sale">
+                    Sale
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACCESSORIES -->
+        <div class="mega-menu-panel" data-mega="accessories">
+
+            <div class="mega-column">
+
+                <h3>Fashion Accessories</h3>
+
+                <a href="#" data-subcategory="belts">
+                    Belts
+                </a>
+
+                <a href="#" data-subcategory="wallets">
+                    Wallets
+                </a>
+
+                <a href="#" data-subcategory="caps">
+                    Caps
+                </a>
+
+                <a href="#" data-subcategory="hats">
+                    Hats
+                </a>
+
+                <a href="#" data-subcategory="sunglasses">
+                    Sunglasses
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Jewellery</h3>
+
+                <a href="#" data-subcategory="fashion-jewellery">
+                    Fashion Jewellery
+                </a>
+
+                <a href="#" data-subcategory="necklaces">
+                    Necklaces
+                </a>
+
+                <a href="#" data-subcategory="earrings">
+                    Earrings
+                </a>
+
+                <a href="#" data-subcategory="bracelets">
+                    Bracelets
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Watches</h3>
+
+                <a href="#" data-subcategory="men-watches">
+                    Men's Watches
+                </a>
+
+                <a href="#" data-subcategory="women-watches">
+                    Women's Watches
+                </a>
+
+                <a href="#" data-subcategory="kids-watches">
+                    Kids' Watches
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Collections</h3>
+
+                <a href="#" data-subcategory="accessories-new">
+                    New Arrivals
+                </a>
+
+                <a href="#" data-subcategory="accessories-trending">
+                    Trending
+                </a>
+
+                <a href="#" data-subcategory="accessories-sale">
+                    Sale
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- SPORTS -->
+        <div class="mega-menu-panel" data-mega="sports">
+
+            <div class="mega-column">
+
+                <h3>Men's Sports</h3>
+
+                <a href="#" data-subcategory="sports-tshirts-men">
+                    Sports T-Shirts
+                </a>
+
+                <a href="#" data-subcategory="sports-shorts-men">
+                    Sports Shorts
+                </a>
+
+                <a href="#" data-subcategory="track-pants-men">
+                    Track Pants
+                </a>
+
+                <a href="#" data-subcategory="sports-shoes-men">
+                    Sports Shoes
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Women's Sports</h3>
+
+                <a href="#" data-subcategory="sports-tops-women">
+                    Sports Tops
+                </a>
+
+                <a href="#" data-subcategory="sports-bras">
+                    Sports Bras
+                </a>
+
+                <a href="#" data-subcategory="leggings-sports">
+                    Leggings
+                </a>
+
+                <a href="#" data-subcategory="sports-shoes-women">
+                    Sports Shoes
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Sports Categories</h3>
+
+                <a href="#" data-subcategory="running">
+                    Running
+                </a>
+
+                <a href="#" data-subcategory="gym">
+                    Gym
+                </a>
+
+                <a href="#" data-subcategory="training">
+                    Training
+                </a>
+
+                <a href="#" data-subcategory="outdoor">
+                    Outdoor
+                </a>
+
+            </div>
+
+
+            <div class="mega-column">
+
+                <h3>Collections</h3>
+
+                <a href="#" data-subcategory="sports-new">
+                    New Arrivals
+                </a>
+
+                <a href="#" data-subcategory="sports-trending">
+                    Trending
+                </a>
+
+                <a href="#" data-subcategory="sports-sale">
+                    Sale
+                </a>
+
+            </div>
 
         </div>
 
@@ -489,29 +908,24 @@
 
 <!-- =========================================================
      MOBILE NAVIGATION
-========================================================= -->
-
-<div
-    class="mobile-menu-overlay"
-    id="mobileMenuOverlay"
-></div>
+     ========================================================= -->
 
 <aside
-    class="mobile-drawer"
-    id="mobileDrawer"
+    class="mobile-menu"
+    id="mobileMenu"
+    data-mobile-menu
 >
 
-    <div class="mobile-drawer-header">
+    <div class="mobile-menu-header">
 
-        <a href="#" class="brand-logo">
-            <span class="brand-main">AS</span>
-            <span class="brand-name">FASHIONS</span>
+        <a href="#" class="mobile-logo">
+            AS FASHIONS
         </a>
 
         <button
-            class="icon-btn"
-            id="mobileMenuClose"
             type="button"
+            data-action="close-mobile-menu"
+            class="mobile-menu-close"
         >
             ×
         </button>
@@ -519,65 +933,48 @@
     </div>
 
 
-    <div class="mobile-user-card">
+    <div class="mobile-menu-content">
 
-        <div class="mobile-user-icon">
-            ♙
-        </div>
+        <a href="#" data-category="men">
+            MEN
+        </a>
 
-        <div>
-            <strong>Welcome to AS FASHIONS</strong>
-            <small>Login for a better experience</small>
-        </div>
+        <a href="#" data-category="women">
+            WOMEN
+        </a>
+
+        <a href="#" data-category="kids">
+            KIDS
+        </a>
+
+        <a href="#" data-category="footwear">
+            FOOTWEAR
+        </a>
+
+        <a href="#" data-category="bags">
+            BAGS
+        </a>
+
+        <a href="#" data-category="accessories">
+            ACCESSORIES
+        </a>
+
+        <a href="#" data-category="sports">
+            SPORTS
+        </a>
+
+        <a href="#" data-category="sale">
+            SALE
+        </a>
 
     </div>
-
-
-    <nav class="mobile-navigation">
-
-        <button class="mobile-nav-item" data-category="men">
-            Men
-            <span>›</span>
-        </button>
-
-        <button class="mobile-nav-item" data-category="women">
-            Women
-            <span>›</span>
-        </button>
-
-        <button class="mobile-nav-item" data-category="kids">
-            Kids
-            <span>›</span>
-        </button>
-
-        <button class="mobile-nav-item" data-category="footwear">
-            Footwear
-            <span>›</span>
-        </button>
-
-        <button class="mobile-nav-item" data-category="bags">
-            Bags
-            <span>›</span>
-        </button>
-
-        <button class="mobile-nav-item" data-category="accessories">
-            Accessories
-            <span>›</span>
-        </button>
-
-        <button class="mobile-nav-item sale-mobile-item" data-category="sale">
-            Sale
-            <span>›</span>
-        </button>
-
-    </nav>
 
 </aside>
 
 
 <!-- =========================================================
      HERO SECTION
-========================================================= -->
+     ========================================================= -->
 
 <main>
 
@@ -585,124 +982,129 @@
 
     <div class="hero-slider" id="heroSlider">
 
-        <!-- Slide 1 -->
-
         <article class="hero-slide active">
 
             <div class="hero-content">
 
-                <span class="hero-eyebrow">
-                    THE NEW SEASON
+                <span class="hero-kicker">
+                    NEW SEASON 2026
                 </span>
 
                 <h1>
-                    Style That<br>
-                    Speaks For You
+                    YOUR STYLE.
+                    <br>
+                    YOUR STATEMENT.
                 </h1>
 
                 <p>
-                    Discover premium fashion curated
-                    for your everyday statement.
+                    Discover premium fashion made for
+                    every moment.
                 </p>
 
-                <button
-                    class="primary-btn"
-                    data-category="new-arrivals"
-                    type="button"
-                >
-                    SHOP NEW ARRIVALS
-                    <span>→</span>
-                </button>
+                <div class="hero-actions">
+
+                    <a
+                        href="#"
+                        class="hero-btn primary"
+                        data-category="new-arrivals"
+                    >
+                        SHOP NEW ARRIVALS
+                    </a>
+
+                    <a
+                        href="#"
+                        class="hero-btn secondary"
+                        data-category="sale"
+                    >
+                        EXPLORE SALE
+                    </a>
+
+                </div>
 
             </div>
 
-            <div class="hero-image-placeholder">
-                <div class="hero-placeholder-content">
-                    <span>NEW SEASON</span>
-                    <strong>2026</strong>
+            <div class="hero-visual">
+
+                <div class="hero-placeholder">
+                    AS FASHIONS
                 </div>
+
             </div>
 
         </article>
 
 
-        <!-- Slide 2 -->
-
         <article class="hero-slide">
 
             <div class="hero-content">
 
-                <span class="hero-eyebrow">
+                <span class="hero-kicker">
                     MEGA SALE
                 </span>
 
-                <h1>
-                    Up To<br>
-                    70% Off
-                </h1>
+                <h2>
+                    UP TO
+                    <strong>70% OFF</strong>
+                </h2>
 
                 <p>
-                    Your favourite styles.
-                    Unmissable prices.
+                    Limited-time fashion deals.
                 </p>
 
-                <button
-                    class="primary-btn"
+                <a
+                    href="#"
+                    class="hero-btn primary"
                     data-category="sale"
-                    type="button"
                 >
                     SHOP SALE
-                    <span>→</span>
-                </button>
+                </a>
 
             </div>
 
-            <div class="hero-image-placeholder">
-                <div class="hero-placeholder-content">
-                    <span>SALE</span>
-                    <strong>70% OFF</strong>
+            <div class="hero-visual">
+
+                <div class="hero-placeholder">
+                    SALE 70% OFF
                 </div>
+
             </div>
 
         </article>
 
-
-        <!-- Slide 3 -->
 
         <article class="hero-slide">
 
             <div class="hero-content">
 
-                <span class="hero-eyebrow">
-                    PREMIUM EDIT
+                <span class="hero-kicker">
+                    TRENDING NOW
                 </span>
 
-                <h1>
-                    Everyday<br>
-                    Essentials
-                </h1>
+                <h2>
+                    STYLE
+                    <strong>STARTS HERE.</strong>
+                </h2>
 
                 <p>
-                    Timeless pieces made for
-                    modern wardrobes.
+                    Fresh looks. New drops. Everyday essentials.
                 </p>
 
-                <button
-                    class="primary-btn"
-                    data-category="trending"
-                    type="button"
+                <a
+                    href="#"
+                    class="hero-btn primary"
+                    data-subcategory="trending"
                 >
-                    EXPLORE COLLECTION
-                    <span>→</span>
-                </button>
+                    SHOP TRENDING
+                </a>
 
             </div>
 
-            <div class="hero-image-placeholder">
-                <div class="hero-placeholder-content">
-                    <span>PREMIUM</span>
-                    <strong>EDIT</strong>
+            <div class="hero-visual">
+
+                <div class="hero-placeholder">
+                    TRENDING
                 </div>
+
             </div>
 
         </article>
@@ -710,85 +1112,25 @@
     </div>
 
 
-    <!-- Slider Controls -->
-
-    <button
-        class="slider-arrow slider-prev"
-        id="heroPrev"
-        type="button"
-        aria-label="Previous slide"
-    >
-        ‹
-    </button>
-
-    <button
-        class="slider-arrow slider-next"
-        id="heroNext"
-        type="button"
-        aria-label="Next slide"
-    >
-        ›
-    </button>
-
-
-    <div class="slider-dots" id="heroDots">
-
-        <button class="slider-dot active" type="button"></button>
-        <button class="slider-dot" type="button"></button>
-        <button class="slider-dot" type="button"></button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     URGENCY / SALE STRIP
-========================================================= -->
-
-<section class="sale-urgency">
-
-    <div class="sale-urgency-inner">
-
-        <div class="urgency-title">
-            <span>⚡</span>
-            <strong>FLASH SALE</strong>
-        </div>
-
-        <div class="urgency-message">
-            Limited time. Limited styles.
-        </div>
-
-        <div class="countdown" id="saleCountdown">
-
-            <div class="countdown-box">
-                <strong id="countHours">04</strong>
-                <small>HRS</small>
-            </div>
-
-            <span>:</span>
-
-            <div class="countdown-box">
-                <strong id="countMinutes">59</strong>
-                <small>MIN</small>
-            </div>
-
-            <span>:</span>
-
-            <div class="countdown-box">
-                <strong id="countSeconds">59</strong>
-                <small>SEC</small>
-            </div>
-
-        </div>
+    <div class="hero-dots">
 
         <button
-            class="urgency-btn"
-            data-category="sale"
             type="button"
-        >
-            SHOP NOW →
-        </button>
+            class="hero-dot active"
+            data-slide="0"
+        ></button>
+
+        <button
+            type="button"
+            class="hero-dot"
+            data-slide="1"
+        ></button>
+
+        <button
+            type="button"
+            class="hero-dot"
+            data-slide="2"
+        ></button>
 
     </div>
 
@@ -796,180 +1138,281 @@
 
 
 <!-- =========================================================
-     CATEGORY DISCOVERY
-========================================================= -->
+     QUICK CATEGORY STRIP
+     ========================================================= -->
 
-<section class="section category-section">
+<section class="quick-categories">
 
-    <div class="section-heading">
+    <div class="section-container">
 
-        <div>
-            <span class="section-eyebrow">
-                EXPLORE
+        <div class="section-heading">
+
+            <span class="eyebrow">
+                SHOP YOUR STYLE
             </span>
 
             <h2>
-                Shop By Category
+                Explore Categories
             </h2>
+
         </div>
 
-        <button
-            class="text-btn"
-            id="viewAllCategories"
-            type="button"
-        >
-            View All →
-        </button>
 
-    </div>
+        <div class="category-strip">
 
-
-    <div
-        class="category-grid"
-        id="categoryGrid"
-    >
-
-        <!-- JS renders categories -->
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     TRENDING NOW
-========================================================= -->
-
-<section class="section trending-section">
-
-    <div class="section-heading">
-
-        <div>
-            <span class="section-eyebrow">
-                WHAT'S HOT
-            </span>
-
-            <h2>
-                Trending Now
-            </h2>
-        </div>
-
-        <button
-            class="text-btn"
-            data-category="trending"
-            type="button"
-        >
-            Explore All →
-        </button>
-
-    </div>
-
-
-    <div
-        class="product-grid"
-        id="trendingProducts"
-    >
-
-        <!-- Products rendered by JS -->
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     OFFER BANNERS
-========================================================= -->
-
-<section class="section offers-section">
-
-    <div class="offer-grid">
-
-        <article class="offer-card offer-large">
-
-            <div class="offer-content">
+            <a
+                href="#"
+                class="category-tile"
+                data-category="men"
+            >
+                <div class="category-image">
+                    MEN
+                </div>
 
                 <span>
+                    Men
+                </span>
+            </a>
+
+
+            <a
+                href="#"
+                class="category-tile"
+                data-category="women"
+            >
+                <div class="category-image">
+                    WOMEN
+                </div>
+
+                <span>
+                    Women
+                </span>
+            </a>
+
+
+            <a
+                href="#"
+                class="category-tile"
+                data-category="kids"
+            >
+                <div class="category-image">
+                    KIDS
+                </div>
+
+                <span>
+                    Kids
+                </span>
+            </a>
+
+
+            <a
+                href="#"
+                class="category-tile"
+                data-category="footwear"
+            >
+                <div class="category-image">
+                    SHOES
+                </div>
+
+                <span>
+                    Footwear
+                </span>
+            </a>
+
+
+            <a
+                href="#"
+                class="category-tile"
+                data-category="bags"
+            >
+                <div class="category-image">
+                    BAGS
+                </div>
+
+                <span>
+                    Bags
+                </span>
+            </a>
+
+
+            <a
+                href="#"
+                class="category-tile"
+                data-category="accessories"
+            >
+                <div class="category-image">
+                    ACCESSORIES
+                </div>
+
+                <span>
+                    Accessories
+                </span>
+            </a>
+
+
+            <a
+                href="#"
+                class="category-tile"
+                data-category="sports"
+            >
+                <div class="category-image">
+                    SPORTS
+                </div>
+
+                <span>
+                    Sports
+                </span>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SALE / COUNTDOWN
+     ========================================================= -->
+
+<section class="flash-sale-section">
+
+    <div class="section-container">
+
+        <div class="flash-sale-header">
+
+            <div>
+
+                <span class="eyebrow">
                     LIMITED TIME
                 </span>
 
-                <h3>
-                    Flat 50% Off
-                </h3>
-
-                <p>
-                    On selected styles
-                </p>
-
-                <button
-                    class="offer-btn"
-                    data-category="sale"
-                    type="button"
-                >
-                    SHOP OFFER →
-                </button>
+                <h2>
+                    🔥 Flash Sale
+                </h2>
 
             </div>
 
-        </article>
 
-
-        <article class="offer-card">
-
-            <div class="offer-content">
+            <div class="sale-countdown">
 
                 <span>
-                    NEW USERS
+                    Sale ends in
                 </span>
 
-                <h3>
-                    EXTRA ₹500 OFF
-                </h3>
-
-                <p>
-                    On your first order
-                </p>
-
-                <button
-                    class="offer-btn"
-                    id="newUserOffer"
-                    type="button"
+                <strong
+                    data-countdown=""
                 >
-                    GET OFFER →
-                </button>
+                    08h : 00m : 00s
+                </strong>
 
             </div>
 
-        </article>
+        </div>
 
 
-        <article class="offer-card">
+        <div
+            class="product-grid sale-product-grid"
+            id="flashSaleGrid"
+            data-product-grid
+        ></div>
 
-            <div class="offer-content">
+    </div>
 
-                <span>
-                    MEMBERS ONLY
-                </span>
+</section>
 
-                <h3>
-                    EXTRA 10% OFF
-                </h3>
 
-                <p>
-                    On selected products
-                </p>
+<!-- =========================================================
+     PROMO BANNERS
+     ========================================================= -->
 
-                <button
-                    class="offer-btn"
-                    id="memberOffer"
-                    type="button"
-                >
-                    VIEW DEALS →
-                </button>
+<section class="promo-section">
 
-            </div>
+    <div class="section-container">
 
-        </article>
+        <div class="promo-grid">
+
+            <a
+                href="#"
+                class="promo-card"
+                data-category="men"
+            >
+
+                <div class="promo-content">
+
+                    <span>
+                        MEN'S EDIT
+                    </span>
+
+                    <h3>
+                        Everyday
+                        <br>
+                        Essentials
+                    </h3>
+
+                    <strong>
+                        SHOP NOW →
+                    </strong>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="promo-card"
+                data-category="women"
+            >
+
+                <div class="promo-content">
+
+                    <span>
+                        WOMEN'S EDIT
+                    </span>
+
+                    <h3>
+                        New
+                        <br>
+                        Season Looks
+                    </h3>
+
+                    <strong>
+                        SHOP NOW →
+                    </strong>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="promo-card"
+                data-category="footwear"
+            >
+
+                <div class="promo-content">
+
+                    <span>
+                        FOOTWEAR
+                    </span>
+
+                    <h3>
+                        Step Into
+                        <br>
+                        Style
+                    </h3>
+
+                    <strong>
+                        SHOP NOW →
+                    </strong>
+
+                </div>
+
+            </a>
+
+        </div>
 
     </div>
 
@@ -978,270 +1421,306 @@
 
 <!-- =========================================================
      NEW ARRIVALS
-========================================================= -->
-
-<section class="section products-section">
-
-    <div class="section-heading">
-
-        <div>
-
-            <span class="section-eyebrow">
-                JUST IN
-            </span>
-
-            <h2>
-                New Arrivals
-            </h2>
-
-        </div>
-
-        <button
-            class="text-btn"
-            data-category="new-arrivals"
-            type="button"
-        >
-            View All →
-        </button>
-
-    </div>
-
-
-    <div
-        class="product-grid"
-        id="newProducts"
-    >
-
-        <!-- JS -->
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     SHOP BY OCCASION
-========================================================= -->
-
-<section class="section occasion-section">
-
-    <div class="section-heading centered">
-
-        <span class="section-eyebrow">
-            FIND YOUR STYLE
-        </span>
-
-        <h2>
-            Shop By Occasion
-        </h2>
-
-    </div>
-
-
-    <div class="occasion-grid">
-
-        <button
-            class="occasion-card"
-            data-occasion="casual"
-            type="button"
-        >
-            <span>CASUAL</span>
-            <strong>Everyday Style</strong>
-        </button>
-
-
-        <button
-            class="occasion-card"
-            data-occasion="work"
-            type="button"
-        >
-            <span>WORKWEAR</span>
-            <strong>Smart & Sharp</strong>
-        </button>
-
-
-        <button
-            class="occasion-card"
-            data-occasion="party"
-            type="button"
-        >
-            <span>PARTY</span>
-            <strong>Make An Entrance</strong>
-        </button>
-
-
-        <button
-            class="occasion-card"
-            data-occasion="sport"
-            type="button"
-        >
-            <span>ACTIVE</span>
-            <strong>Move In Style</strong>
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     BEST SELLERS
-========================================================= -->
-
-<section class="section products-section">
-
-    <div class="section-heading">
-
-        <div>
-
-            <span class="section-eyebrow">
-                CUSTOMER FAVOURITES
-            </span>
-
-            <h2>
-                Best Sellers
-            </h2>
-
-        </div>
-
-        <button
-            class="text-btn"
-            data-category="best-sellers"
-            type="button"
-        >
-            View All →
-        </button>
-
-    </div>
-
-
-    <div
-        class="product-grid"
-        id="bestSellerProducts"
-    >
-
-        <!-- JS -->
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     PRODUCT DISCOVERY / SHOPPING AREA
-========================================================= -->
+     ========================================================= -->
 
 <section
-    class="shop-section"
-    id="shopSection"
+    class="products-section"
+    id="newArrivalsSection"
 >
 
-    <div class="shop-header">
+    <div class="section-container">
 
-        <div>
+        <div class="section-heading-row">
 
-            <span class="section-eyebrow">
-                AS FASHIONS
-            </span>
+            <div class="section-heading">
 
-            <h2 id="shopTitle">
-                All Products
-            </h2>
+                <span class="eyebrow">
+                    JUST DROPPED
+                </span>
 
-            <p id="shopResultText">
-                Discover your next favourite style.
-            </p>
+                <h2>
+                    New Arrivals
+                </h2>
+
+                <p>
+                    Fresh styles added to AS FASHIONS.
+                </p>
+
+            </div>
+
+
+            <a
+                href="#"
+                class="view-all-link"
+                data-subcategory="new-arrivals"
+            >
+                VIEW ALL →
+            </a>
 
         </div>
 
 
-        <div class="shop-controls">
+        <div
+            class="product-grid"
+            id="newArrivalsGrid"
+            data-product-grid
+        ></div>
 
-            <button
-                class="filter-mobile-btn"
-                id="filterMobileBtn"
-                type="button"
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TRENDING
+     ========================================================= -->
+
+<section class="products-section trending-section">
+
+    <div class="section-container">
+
+        <div class="section-heading-row">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    WHAT'S HOT
+                </span>
+
+                <h2>
+                    Trending Now
+                </h2>
+
+                <p>
+                    The styles everyone is talking about.
+                </p>
+
+            </div>
+
+
+            <a
+                href="#"
+                class="view-all-link"
+                data-subcategory="trending"
             >
-                ☰ Filters
-            </button>
+                VIEW ALL →
+            </a>
 
-            <select
-                id="sortSelect"
-                class="sort-select"
+        </div>
+
+
+        <div
+            class="product-grid"
+            id="trendingGrid"
+            data-product-grid
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SHOP BY CATEGORY
+     ========================================================= -->
+
+<section class="category-showcase">
+
+    <div class="section-container">
+
+        <div class="section-heading centered">
+
+            <span class="eyebrow">
+                CURATED FOR YOU
+            </span>
+
+            <h2>
+                Shop By Category
+            </h2>
+
+        </div>
+
+
+        <div class="category-showcase-grid">
+
+            <a
+                href="#"
+                class="showcase-card"
+                data-subcategory="shirts"
             >
-                <option value="recommended">
-                    Recommended
-                </option>
+                <span>SHIRTS</span>
+                <strong>SHOP →</strong>
+            </a>
 
-                <option value="newest">
-                    Newest
-                </option>
 
-                <option value="price-low">
-                    Price: Low to High
-                </option>
+            <a
+                href="#"
+                class="showcase-card"
+                data-subcategory="dresses"
+            >
+                <span>DRESSES</span>
+                <strong>SHOP →</strong>
+            </a>
 
-                <option value="price-high">
-                    Price: High to Low
-                </option>
 
-                <option value="rating">
-                    Customer Rating
-                </option>
+            <a
+                href="#"
+                class="showcase-card"
+                data-subcategory="jeans"
+            >
+                <span>JEANS</span>
+                <strong>SHOP →</strong>
+            </a>
 
-                <option value="discount">
-                    Highest Discount
-                </option>
-            </select>
+
+            <a
+                href="#"
+                class="showcase-card"
+                data-subcategory="sneakers"
+            >
+                <span>SNEAKERS</span>
+                <strong>SHOP →</strong>
+            </a>
 
         </div>
 
     </div>
 
+</section>
 
-    <div class="shop-layout">
+
+<!-- =========================================================
+     ALL PRODUCTS / SHOP
+     ========================================================= -->
+
+<section
+    class="products-section all-products-section"
+    id="products"
+>
+
+    <div class="section-container">
+
+        <div class="shop-toolbar">
+
+            <div>
+
+                <span class="eyebrow">
+                    AS FASHIONS COLLECTION
+                </span>
+
+                <h2
+                    class="page-title"
+                    data-page-title
+                >
+                    All Products
+                </h2>
+
+                <span
+                    class="product-count"
+                    data-product-count
+                >
+                    0 Products
+                </span>
+
+            </div>
 
 
-        <!-- FILTER SIDEBAR -->
+            <div class="toolbar-actions">
 
-        <aside
-            class="filter-sidebar"
-            id="filterSidebar"
-        >
-
-            <div class="filter-header">
-
-                <strong>
+                <button
+                    type="button"
+                    class="filter-toggle-btn"
+                    data-action="open-filters"
+                >
                     FILTERS
-                </strong>
-
-                <button
-                    id="clearFilters"
-                    type="button"
-                >
-                    Clear All
                 </button>
+
+
+                <label class="sort-control">
+
+                    <span>
+                        Sort:
+                    </span>
+
+                    <select
+                        id="sortSelect"
+                        class="sort-select"
+                        data-sort
+                    >
+
+                        <option value="recommended">
+                            Recommended
+                        </option>
+
+                        <option value="popular">
+                            Popular
+                        </option>
+
+                        <option value="newest">
+                            Newest
+                        </option>
+
+                        <option value="price-low">
+                            Price: Low to High
+                        </option>
+
+                        <option value="price-high">
+                            Price: High to Low
+                        </option>
+
+                        <option value="discount">
+                            Highest Discount
+                        </option>
+
+                        <option value="rating">
+                            Highest Rated
+                        </option>
+
+                    </select>
+
+                </label>
 
             </div>
 
+        </div>
 
-            <div class="filter-group">
 
-                <button
-                    class="filter-group-title"
-                    type="button"
-                >
-                    Category
-                    <span>−</span>
-                </button>
+        <div class="shop-layout">
 
-                <div class="filter-options">
+            <!-- FILTER SIDEBAR -->
+            <aside
+                class="filter-sidebar"
+                id="filterSidebar"
+            >
+
+                <div class="filter-header">
+
+                    <h3>
+                        FILTERS
+                    </h3>
+
+                    <button
+                        type="button"
+                        data-action="clear-filters"
+                    >
+                        CLEAR ALL
+                    </button>
+
+                </div>
+
+
+                <!-- GENDER -->
+                <div class="filter-group">
+
+                    <h4>
+                        Gender
+                    </h4>
 
                     <label>
                         <input
                             type="checkbox"
+                            data-filter="gender"
                             value="men"
-                            data-filter="category"
                         >
                         Men
                     </label>
@@ -1249,8 +1728,8 @@
                     <label>
                         <input
                             type="checkbox"
+                            data-filter="gender"
                             value="women"
-                            data-filter="category"
                         >
                         Women
                     </label>
@@ -1258,176 +1737,81 @@
                     <label>
                         <input
                             type="checkbox"
+                            data-filter="gender"
                             value="kids"
-                            data-filter="category"
-                        >
-                        Kids
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="footwear"
-                            data-filter="category"
-                        >
-                        Footwear
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="bags"
-                            data-filter="category"
-                        >
-                        Bags
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="accessories"
-                            data-filter="category"
-                        >
-                        Accessories
-                    </label>
-
-                </div>
-
-            </div>
-
-
-            <div class="filter-group">
-
-                <button
-                    class="filter-group-title"
-                    type="button"
-                >
-                    Gender
-                    <span>−</span>
-                </button>
-
-                <div class="filter-options">
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="men"
-                            data-filter="gender"
-                        >
-                        Men
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="women"
-                            data-filter="gender"
-                        >
-                        Women
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="unisex"
-                            data-filter="gender"
-                        >
-                        Unisex
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="kids"
-                            data-filter="gender"
                         >
                         Kids
                     </label>
 
                 </div>
 
-            </div>
 
+                <!-- PRICE -->
+                <div class="filter-group">
 
-            <div class="filter-group">
-
-                <button
-                    class="filter-group-title"
-                    type="button"
-                >
-                    Price
-                    <span>−</span>
-                </button>
-
-                <div class="filter-options">
+                    <h4>
+                        Price
+                    </h4>
 
                     <label>
                         <input
-                            type="checkbox"
-                            value="0-999"
+                            type="radio"
+                            name="price"
                             data-filter="price"
+                            data-min="0"
+                            data-max="999"
                         >
                         Under ₹999
                     </label>
 
                     <label>
                         <input
-                            type="checkbox"
-                            value="1000-1999"
+                            type="radio"
+                            name="price"
                             data-filter="price"
+                            data-min="999"
+                            data-max="1999"
                         >
-                        ₹1,000 – ₹1,999
+                        ₹999 – ₹1,999
                     </label>
 
                     <label>
                         <input
-                            type="checkbox"
-                            value="2000-3999"
+                            type="radio"
+                            name="price"
                             data-filter="price"
+                            data-min="1999"
+                            data-max="2999"
                         >
-                        ₹2,000 – ₹3,999
+                        ₹1,999 – ₹2,999
                     </label>
 
                     <label>
                         <input
-                            type="checkbox"
-                            value="4000-999999"
+                            type="radio"
+                            name="price"
                             data-filter="price"
+                            data-min="2999"
+                            data-max="999999"
                         >
-                        ₹4,000+
+                        ₹2,999+
                     </label>
 
                 </div>
 
-            </div>
 
+                <!-- DISCOUNT -->
+                <div class="filter-group">
 
-            <div class="filter-group">
-
-                <button
-                    class="filter-group-title"
-                    type="button"
-                >
-                    Discount
-                    <span>−</span>
-                </button>
-
-                <div class="filter-options">
+                    <h4>
+                        Discount
+                    </h4>
 
                     <label>
                         <input
                             type="checkbox"
-                            value="10"
-                            data-filter="discount"
-                        >
-                        10% and above
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
+                            data-filter="minDiscount"
                             value="30"
-                            data-filter="discount"
                         >
                         30% and above
                     </label>
@@ -1435,8 +1819,8 @@
                     <label>
                         <input
                             type="checkbox"
+                            data-filter="minDiscount"
                             value="50"
-                            data-filter="discount"
                         >
                         50% and above
                     </label>
@@ -1444,135 +1828,206 @@
                     <label>
                         <input
                             type="checkbox"
-                            value="70"
-                            data-filter="discount"
+                            data-filter="minDiscount"
+                            value="60"
                         >
-                        70% and above
+                        60% and above
                     </label>
 
                 </div>
 
-            </div>
+
+                <!-- SIZE -->
+                <div class="filter-group">
+
+                    <h4>
+                        Size
+                    </h4>
+
+                    <div class="filter-chip-grid">
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="sizes"
+                                value="XS"
+                            >
+                            <span>XS</span>
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="sizes"
+                                value="S"
+                            >
+                            <span>S</span>
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="sizes"
+                                value="M"
+                            >
+                            <span>M</span>
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="sizes"
+                                value="L"
+                            >
+                            <span>L</span>
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="sizes"
+                                value="XL"
+                            >
+                            <span>XL</span>
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="sizes"
+                                value="XXL"
+                            >
+                            <span>XXL</span>
+                        </label>
+
+                    </div>
+
+                </div>
 
 
-            <div class="filter-group">
+                <!-- FOOTWEAR SIZE -->
+                <div class="filter-group">
 
-                <button
-                    class="filter-group-title"
-                    type="button"
-                >
-                    Size
-                    <span>−</span>
-                </button>
+                    <h4>
+                        Footwear Size
+                    </h4>
 
-                <div class="filter-options size-filter">
+                    <div class="filter-chip-grid footwear-sizes">
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="footwearSizes"
+                                value="5"
+                            >
+                            <span>5</span>
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="footwearSizes"
+                                value="6"
+                            >
+                            <span>6</span>
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="footwearSizes"
+                                value="7"
+                            >
+                            <span>7</span>
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="footwearSizes"
+                                value="8"
+                            >
+                            <span>8</span>
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="footwearSizes"
+                                value="9"
+                            >
+                            <span>9</span>
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="footwearSizes"
+                                value="10"
+                            >
+                            <span>10</span>
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                data-filter="footwearSizes"
+                                value="11"
+                            >
+                            <span>11</span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RATING -->
+                <div class="filter-group">
+
+                    <h4>
+                        Rating
+                    </h4>
 
                     <label>
                         <input
-                            type="checkbox"
-                            value="XS"
-                            data-filter="size"
+                            type="radio"
+                            name="rating"
+                            data-filter="minRating"
+                            value="4"
                         >
-                        XS
+                        4★ & above
                     </label>
 
                     <label>
                         <input
-                            type="checkbox"
-                            value="S"
-                            data-filter="size"
+                            type="radio"
+                            name="rating"
+                            data-filter="minRating"
+                            value="3"
                         >
-                        S
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="M"
-                            data-filter="size"
-                        >
-                        M
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="L"
-                            data-filter="size"
-                        >
-                        L
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="XL"
-                            data-filter="size"
-                        >
-                        XL
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="XXL"
-                            data-filter="size"
-                        >
-                        XXL
+                        3★ & above
                     </label>
 
                 </div>
 
-            </div>
-
-        </aside>
+            </aside>
 
 
-        <!-- PRODUCT RESULTS -->
+            <!-- PRODUCT GRID -->
+            <div class="shop-products">
 
-        <div class="shop-products">
-
-            <div
-                class="active-filters"
-                id="activeFilters"
-            ></div>
-
-
-            <div
-                class="product-grid"
-                id="productGrid"
-            >
-
-                <!-- products.js + app.js -->
-
-            </div>
+                <div
+                    class="active-filters"
+                    id="activeFilters"
+                ></div>
 
 
-            <div
-                class="no-products"
-                id="noProducts"
-                hidden
-            >
-
-                <div class="no-products-icon">
-                    ⌕
-                </div>
-
-                <h3>
-                    No products found
-                </h3>
-
-                <p>
-                    Try changing your filters or search.
-                </p>
-
-                <button
-                    class="primary-btn"
-                    id="resetSearch"
-                    type="button"
-                >
-                    VIEW ALL PRODUCTS
-                </button>
+                <div
+                    class="product-grid"
+                    id="productGrid"
+                    data-product-grid
+                ></div>
 
             </div>
 
@@ -1584,84 +2039,96 @@
 
 
 <!-- =========================================================
-     BRAND PROMISE / FEATURES
-========================================================= -->
+     BENEFITS
+     ========================================================= -->
 
-<section class="features-section">
+<section class="benefits-section">
 
-    <div class="features-container">
+    <div class="section-container">
 
-        <div class="feature-item">
+        <div class="benefits-grid">
 
-            <div class="feature-icon">
-                🚚
-            </div>
+            <div class="benefit-item">
 
-            <div>
-                <strong>
-                    Free Shipping
-                </strong>
-
-                <span>
-                    On orders above ₹999
+                <span class="benefit-icon">
+                    🚚
                 </span>
+
+                <div>
+
+                    <h3>
+                        Free Shipping
+                    </h3>
+
+                    <p>
+                        On orders above ₹999
+                    </p>
+
+                </div>
+
             </div>
 
-        </div>
 
+            <div class="benefit-item">
 
-        <div class="feature-item">
-
-            <div class="feature-icon">
-                ↩
-            </div>
-
-            <div>
-                <strong>
-                    Easy Returns
-                </strong>
-
-                <span>
-                    Hassle-free returns
+                <span class="benefit-icon">
+                    ↩
                 </span>
+
+                <div>
+
+                    <h3>
+                        Easy Returns
+                    </h3>
+
+                    <p>
+                        Hassle-free 7 day returns
+                    </p>
+
+                </div>
+
             </div>
 
-        </div>
 
+            <div class="benefit-item">
 
-        <div class="feature-item">
-
-            <div class="feature-icon">
-                🔒
-            </div>
-
-            <div>
-                <strong>
-                    Secure Payments
-                </strong>
-
-                <span>
-                    100% secure checkout
+                <span class="benefit-icon">
+                    🔒
                 </span>
+
+                <div>
+
+                    <h3>
+                        Secure Payment
+                    </h3>
+
+                    <p>
+                        100% secure checkout
+                    </p>
+
+                </div>
+
             </div>
 
-        </div>
 
+            <div class="benefit-item">
 
-        <div class="feature-item">
-
-            <div class="feature-icon">
-                ✓
-            </div>
-
-            <div>
-                <strong>
-                    Quality Assured
-                </strong>
-
-                <span>
-                    Curated products
+                <span class="benefit-icon">
+                    💬
                 </span>
+
+                <div>
+
+                    <h3>
+                        Customer Support
+                    </h3>
+
+                    <p>
+                        We're here to help
+                    </p>
+
+                </div>
+
             </div>
 
         </div>
@@ -1673,47 +2140,48 @@
 
 <!-- =========================================================
      NEWSLETTER
-========================================================= -->
+     ========================================================= -->
 
 <section class="newsletter-section">
 
-    <div class="newsletter-content">
+    <div class="section-container">
 
-        <span class="section-eyebrow">
-            STAY IN STYLE
-        </span>
+        <div class="newsletter-content">
 
-        <h2>
-            Get The Latest Drops
-        </h2>
+            <span class="eyebrow">
+                STAY IN THE LOOP
+            </span>
 
-        <p>
-            Sign up for exclusive offers, new arrivals
-            and fashion inspiration.
-        </p>
+            <h2>
+                Get the latest drops & offers.
+            </h2>
+
+            <p>
+                Subscribe for exclusive deals,
+                new arrivals and style updates.
+            </p>
 
 
-        <form
-            class="newsletter-form"
-            id="newsletterForm"
-        >
-
-            <input
-                type="email"
-                id="newsletterEmail"
-                placeholder="Enter your email address"
-                required
+            <form
+                class="newsletter-form"
+                id="newsletterForm"
             >
 
-            <button
-                type="submit"
-            >
-                SUBSCRIBE
-            </button>
+                <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    required
+                >
 
-        </form>
+                <button
+                    type="submit"
+                >
+                    SUBSCRIBE
+                </button>
 
-        <small id="newsletterMessage"></small>
+            </form>
+
+        </div>
 
     </div>
 
@@ -1724,47 +2192,130 @@
 
 <!-- =========================================================
      FOOTER
-========================================================= -->
+     ========================================================= -->
 
 <footer class="site-footer">
 
-    <div class="footer-main">
+    <div class="section-container">
 
-        <div class="footer-brand">
+        <div class="footer-grid">
 
-            <a href="#" class="brand-logo footer-logo">
+            <div class="footer-brand">
 
-                <span class="brand-main">
-                    AS
-                </span>
-
-                <span class="brand-name">
-                    FASHIONS
-                </span>
-
-            </a>
-
-            <p>
-                Premium fashion for every moment.
-                Discover styles that define you.
-            </p>
-
-            <div class="social-links">
-
-                <a href="#" aria-label="Instagram">
-                    ◎
+                <a
+                    href="#"
+                    class="footer-logo"
+                >
+                    AS FASHIONS
                 </a>
 
-                <a href="#" aria-label="Facebook">
-                    f
+                <p>
+                    Premium fashion for every style,
+                    every mood and every moment.
+                </p>
+
+
+                <div class="social-links">
+
+                    <a href="#" aria-label="Instagram">
+                        Instagram
+                    </a>
+
+                    <a href="#" aria-label="Facebook">
+                        Facebook
+                    </a>
+
+                    <a href="#" aria-label="YouTube">
+                        YouTube
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Shop
+                </h3>
+
+                <a href="#" data-category="men">
+                    Men
                 </a>
 
-                <a href="#" aria-label="Pinterest">
-                    p
+                <a href="#" data-category="women">
+                    Women
                 </a>
 
-                <a href="#" aria-label="X">
-                    𝕏
+                <a href="#" data-category="kids">
+                    Kids
+                </a>
+
+                <a href="#" data-category="footwear">
+                    Footwear
+                </a>
+
+                <a href="#" data-category="bags">
+                    Bags
+                </a>
+
+                <a href="#" data-category="accessories">
+                    Accessories
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Help
+                </h3>
+
+                <a href="#">
+                    Contact Us
+                </a>
+
+                <a href="#">
+                    Track Order
+                </a>
+
+                <a href="#">
+                    Shipping
+                </a>
+
+                <a href="#">
+                    Returns
+                </a>
+
+                <a href="#">
+                    FAQs
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Information
+                </h3>
+
+                <a href="#">
+                    About AS FASHIONS
+                </a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms & Conditions
+                </a>
+
+                <a href="#">
+                    Cancellation Policy
                 </a>
 
             </div>
@@ -1772,124 +2323,16 @@
         </div>
 
 
-        <div class="footer-column">
+        <div class="footer-bottom">
 
-            <h4>ONLINE SHOPPING</h4>
+            <span>
+                © 2026 AS FASHIONS. All rights reserved.
+            </span>
 
-            <a href="#" data-category="men">
-                Men
-            </a>
+            <span>
+                Premium Fashion Store
+            </span>
 
-            <a href="#" data-category="women">
-                Women
-            </a>
-
-            <a href="#" data-category="kids">
-                Kids
-            </a>
-
-            <a href="#" data-category="footwear">
-                Footwear
-            </a>
-
-            <a href="#" data-category="bags">
-                Bags
-            </a>
-
-            <a href="#" data-category="accessories">
-                Accessories
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h4>USEFUL LINKS</h4>
-
-            <a href="#" id="footerTrackOrder">
-                Track Order
-            </a>
-
-            <a href="#" id="footerReturns">
-                Returns
-            </a>
-
-            <a href="#" id="footerShipping">
-                Shipping
-            </a>
-
-            <a href="#" id="footerContact">
-                Contact Us
-            </a>
-
-            <a href="#" id="footerFaq">
-                FAQ
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h4>ABOUT AS FASHIONS</h4>
-
-            <a href="#">
-                About Us
-            </a>
-
-            <a href="#">
-                Careers
-            </a>
-
-            <a href="#">
-                Terms & Conditions
-            </a>
-
-            <a href="#">
-                Privacy Policy
-            </a>
-
-        </div>
-
-
-        <div class="footer-column footer-app">
-
-            <h4>EXPERIENCE AS FASHIONS</h4>
-
-            <p>
-                Shop smarter. Shop faster.
-            </p>
-
-            <div class="app-buttons">
-
-                <button type="button">
-                    <small>GET IT ON</small>
-                    <strong>Google Play</strong>
-                </button>
-
-                <button type="button">
-                    <small>DOWNLOAD ON</small>
-                    <strong>App Store</strong>
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="footer-bottom">
-
-        <span>
-            © 2026 AS FASHIONS. All rights reserved.
-        </span>
-
-        <div>
-            <span>Secure Payments</span>
-            <span>•</span>
-            <span>Made With Style</span>
         </div>
 
     </div>
@@ -1898,430 +2341,56 @@
 
 
 <!-- =========================================================
-     PRODUCT QUICK VIEW MODAL
-========================================================= -->
-
-<div
-    class="modal-overlay"
-    id="productModal"
-    hidden
->
-
-    <div
-        class="product-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Product details"
-    >
-
-        <button
-            class="modal-close"
-            id="productModalClose"
-            type="button"
-        >
-            ×
-        </button>
-
-
-        <div class="product-modal-content">
-
-            <div class="modal-product-image" id="modalProductImage">
-                <span>PRODUCT</span>
-            </div>
-
-
-            <div class="modal-product-info">
-
-                <span
-                    class="modal-product-brand"
-                    id="modalProductBrand"
-                >
-                    AS FASHIONS
-                </span>
-
-                <h2 id="modalProductName">
-                    Product Name
-                </h2>
-
-                <div
-                    class="modal-rating"
-                    id="modalProductRating"
-                >
-                    ★ 4.5
-                </div>
-
-                <div class="modal-price">
-
-                    <strong id="modalProductPrice">
-                        ₹1,999
-                    </strong>
-
-                    <del id="modalProductOriginalPrice">
-                        ₹3,999
-                    </del>
-
-                    <span id="modalProductDiscount">
-                        50% OFF
-                    </span>
-
-                </div>
-
-
-                <div class="modal-divider"></div>
-
-
-                <div class="modal-size-section">
-
-                    <div class="modal-size-header">
-
-                        <strong>
-                            Select Size
-                        </strong>
-
-                        <button
-                            type="button"
-                            id="sizeGuideBtn"
-                        >
-                            Size Guide
-                        </button>
-
-                    </div>
-
-                    <div
-                        class="modal-sizes"
-                        id="modalSizes"
-                    ></div>
-
-                </div>
-
-
-                <div class="modal-actions">
-
-                    <button
-                        class="modal-add-cart"
-                        id="modalAddCart"
-                        type="button"
-                    >
-                        ADD TO BAG
-                    </button>
-
-                    <button
-                        class="modal-wishlist"
-                        id="modalWishlist"
-                        type="button"
-                    >
-                        ♡
-                    </button>
-
-                </div>
-
-
-                <div class="modal-delivery">
-
-                    <strong>
-                        Delivery
-                    </strong>
-
-                    <div class="delivery-input">
-
-                        <input
-                            type="text"
-                            id="pincodeInput"
-                            placeholder="Enter pincode"
-                            maxlength="6"
-                        >
-
-                        <button
-                            type="button"
-                            id="checkPincode"
-                        >
-                            CHECK
-                        </button>
-
-                    </div>
-
-                    <small id="deliveryMessage"></small>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
      CART DRAWER
-========================================================= -->
+     ========================================================= -->
 
 <div
-    class="cart-overlay"
-    id="cartOverlay"
-    hidden
-></div>
-
-<aside
-    class="cart-drawer"
     id="cartDrawer"
->
-
-    <div class="cart-header">
-
-        <div>
-            <span class="section-eyebrow">
-                YOUR SHOPPING BAG
-            </span>
-
-            <h2>
-                My Bag
-            </h2>
-        </div>
-
-        <button
-            class="icon-btn"
-            id="cartClose"
-            type="button"
-        >
-            ×
-        </button>
-
-    </div>
-
-
-    <div
-        class="cart-items"
-        id="cartItems"
-    >
-
-        <!-- JS -->
-
-    </div>
-
-
-    <div
-        class="cart-empty"
-        id="cartEmpty"
-    >
-
-        <div>
-            🛍
-        </div>
-
-        <h3>
-            Your bag is empty
-        </h3>
-
-        <p>
-            Add something you love.
-        </p>
-
-        <button
-            class="primary-btn"
-            id="startShoppingBtn"
-            type="button"
-        >
-            START SHOPPING
-        </button>
-
-    </div>
-
-
-    <div
-        class="cart-summary"
-        id="cartSummary"
-    >
-
-        <div class="summary-row">
-            <span>Subtotal</span>
-            <strong id="cartSubtotal">₹0</strong>
-        </div>
-
-        <div class="summary-row">
-            <span>Discount</span>
-            <strong id="cartDiscount">− ₹0</strong>
-        </div>
-
-        <div class="summary-row">
-            <span>Shipping</span>
-            <strong id="cartShipping">FREE</strong>
-        </div>
-
-        <div class="summary-total">
-            <span>Total</span>
-            <strong id="cartTotal">₹0</strong>
-        </div>
-
-        <button
-            class="checkout-btn"
-            id="checkoutBtn"
-            type="button"
-        >
-            PROCEED TO CHECKOUT
-            <span>→</span>
-        </button>
-
-    </div>
-
-</aside>
-
-
-<!-- =========================================================
-     WISHLIST DRAWER
-========================================================= -->
-
-<div
-    class="wishlist-overlay"
-    id="wishlistOverlay"
-    hidden
+    class="cart-drawer"
+    data-cart-drawer
 ></div>
 
-<aside
-    class="wishlist-drawer"
-    id="wishlistDrawer"
->
 
-    <div class="drawer-header">
+<!-- =========================================================
+     PRODUCT MODAL
+     ========================================================= -->
 
-        <div>
-
-            <span class="section-eyebrow">
-                SAVED FOR LATER
-            </span>
-
-            <h2>
-                Wishlist
-            </h2>
-
-        </div>
-
-        <button
-            class="icon-btn"
-            id="wishlistClose"
-            type="button"
-        >
-            ×
-        </button>
-
-    </div>
-
-
-    <div
-        class="wishlist-items"
-        id="wishlistItems"
-    ></div>
-
-</aside>
+<div
+    id="productModal"
+    class="product-modal"
+    data-product-modal
+></div>
 
 
 <!-- =========================================================
-     PROFILE MODAL
-========================================================= -->
+     SCRATCH CARD
+     ========================================================= -->
 
 <div
-    class="modal-overlay"
-    id="profileModal"
-    hidden
+    id="scratchCard"
+    class="scratch-card"
+    data-scratch-card
 >
 
-    <div class="profile-modal">
+    <div class="scratch-card-inner">
 
-        <button
-            class="modal-close"
-            id="profileModalClose"
-            type="button"
-        >
-            ×
-        </button>
-
-        <div class="profile-icon">
-            ♙
-        </div>
-
-        <h2>
-            Welcome to AS FASHIONS
-        </h2>
-
-        <p>
-            Login to access your wishlist,
-            orders and personalised experience.
-        </p>
-
-        <button
-            class="primary-btn full-btn"
-            id="loginBtn"
-            type="button"
-        >
-            LOGIN / SIGN UP
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     COUPON / SCRATCH CARD
-========================================================= -->
-
-<div
-    class="modal-overlay"
-    id="couponModal"
-    hidden
->
-
-    <div class="coupon-modal">
-
-        <button
-            class="modal-close"
-            id="couponModalClose"
-            type="button"
-        >
-            ×
-        </button>
-
-        <span class="section-eyebrow">
-            EXCLUSIVE OFFER
+        <span>
+            🎁
         </span>
 
-        <h2>
-            Unlock Your Deal
-        </h2>
+        <strong>
+            SCRATCH & WIN
+        </strong>
 
-        <p>
-            Scratch to reveal your special coupon.
-        </p>
-
-        <div
-            class="scratch-card"
-            id="scratchCard"
-        >
-            <span>
-                SCRATCH HERE
-            </span>
-        </div>
+        <small>
+            Tap to reveal your coupon
+        </small>
 
         <div
-            class="coupon-result"
-            id="couponResult"
-            hidden
+            class="scratch-result"
+            data-scratch-result
         >
-            <strong>
-                ASNEW10
-            </strong>
-
-            <span>
-                Get extra 10% OFF
-            </span>
-
-            <button
-                type="button"
-                id="copyCoupon"
-            >
-                COPY CODE
-            </button>
+            SCRATCH
         </div>
 
     </div>
@@ -2330,44 +2399,72 @@
 
 
 <!-- =========================================================
-     TOAST NOTIFICATION
-========================================================= -->
+     TOAST CONTAINER
+     ========================================================= -->
 
 <div
-    class="toast-container"
     id="toastContainer"
-    aria-live="polite"
+    class="toast-container"
 ></div>
 
 
 <!-- =========================================================
-     LOADING SCREEN
-========================================================= -->
+     MOBILE BOTTOM NAV
+     ========================================================= -->
 
-<div
-    class="page-loader"
-    id="pageLoader"
->
+<nav class="mobile-bottom-nav">
 
-    <div class="loader-logo">
-        <span>AS</span>
-        <strong>FASHIONS</strong>
-    </div>
+    <a
+        href="#"
+        data-category="all"
+    >
+        <span>⌂</span>
+        <small>Home</small>
+    </a>
 
-    <div class="loader-bar">
-        <span></span>
-    </div>
 
-</div>
+    <button
+        type="button"
+        data-action="mobile-menu"
+    >
+        <span>☰</span>
+        <small>Categories</small>
+    </button>
+
+
+    <button
+        type="button"
+        data-action="wishlist-page"
+    >
+        <span>♡</span>
+        <small>Wishlist</small>
+    </button>
+
+
+    <button
+        type="button"
+        data-action="cart"
+    >
+        <span>🛍</span>
+        <small>Bag</small>
+    </button>
+
+</nav>
 
 
 <!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
+     JAVASCRIPT MODULES
+     EXACT FOLDER STRUCTURE
+     ========================================================= -->
 
-<script src="categories.js"></script>
-<script src="products.js"></script>
-<script src="app.js"></script>
+<script src="js/products.js"></script>
+<script src="js/categories.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/search.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/offers.js"></script>
+<script src="js/app.js"></script>
 
 </body>
-</html>
+    </html>

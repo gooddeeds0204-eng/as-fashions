@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details - AS Fashions</title>
+    <title>Shop Collection - AS Fashions</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,86 +15,200 @@
             --text-muted: #94a3b8;
             --border: rgba(255, 255, 255, 0.1);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-deep); color: var(--text-main); min-height: 100vh; }
-        
-        header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1.2rem 5%; background: rgba(11, 15, 25, 0.8);
-            backdrop-filter: blur(16px); border-bottom: 1px solid var(--border);
-        }
-        .logo { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #ec4899, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .details-container {
-            max-width: 1200px; margin: 4rem auto; padding: 0 5%;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-        }
-        .img-box {
-            width: 100%; height: 500px; border-radius: 24px; overflow: hidden;
-            border: 1px solid var(--border); background: var(--surface);
-        }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .info-box h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .info-box .price { font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 1.5rem; display: block; }
-        .info-box p { color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem; }
-        
-        .sizes { display: flex; gap: 1rem; margin-bottom: 2rem; }
-        .size-btn {
-            background: var(--surface); border: 1px solid var(--border);
-            color: white; padding: 0.8rem 1.2rem; border-radius: 12px; cursor: pointer; font-weight: 700; transition: 0.3s;
-        }
-        .size-btn:hover, .size-btn.selected { border-color: var(--primary); background: rgba(236,72,153,0.1); }
-        
-        .cta-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none; width: 100%; padding: 1rem; border-radius: 14px;
-            color: white; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s;
-            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
-        }
-        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(236, 72, 153, 0.5); }
 
-        @media(max-width: 768px) { .details-container { grid-template-columns: 1fr; gap: 2rem; } }
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0px, transparent 50%);
+        }
+
+        /* Glassmorphism Header */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.6rem; font-weight: 800;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        nav a {
+            color: var(--text-muted); text-decoration: none; margin-left: 2rem;
+            font-weight: 600; transition: 0.3s;
+        }
+
+        nav a:hover, nav a.active { color: var(--primary); }
+
+        /* Main Shop Wrapper */
+        .shop-wrapper {
+            max-width: 1400px; margin: 2rem auto; padding: 0 5%;
+        }
+
+        .shop-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;
+        }
+
+        .shop-header h1 {
+            font-size: 2.5rem; font-weight: 800; letter-spacing: -1px;
+        }
+
+        /* Search Input Dynamic Glow */
+        .search-box {
+            position: relative; width: 300px;
+        }
+
+        .search-box input {
+            width: 100%; padding: 0.8rem 1.2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 50px; color: white;
+            outline: none; transition: 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Ultra Product Card */
+        .product-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px; overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer; position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(236, 72, 153, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(236, 72, 153, 0.2);
+        }
+
+        .card-img-wrapper {
+            width: 100%; height: 350px; position: relative; overflow: hidden;
+        }
+
+        .card-img-wrapper img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .card-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .badge {
+            position: absolute; top: 12px; left: 12px;
+            background: rgba(11, 15, 25, 0.8); backdrop-filter: blur(8px);
+            border: 1px solid var(--border);
+            padding: 4px 12px; font-size: 0.75rem; font-weight: 700;
+            border-radius: 20px; color: #f472b6; z-index: 2;
+        }
+
+        .quick-view-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(11,15,25,0.9), transparent);
+            padding: 1.5rem; text-align: center; font-weight: 700;
+            opacity: 0; transition: 0.3s;
+        }
+
+        .product-card:hover .quick-view-overlay { opacity: 1; }
+
+        .card-content { padding: 1.5rem; }
+
+        .category {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.4rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        .price-row {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .price {
+            font-size: 1.25rem; font-weight: 800; color: #fff;
+        }
+
+        .cart-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none; padding: 0.6rem 1.2rem; border-radius: 12px;
+            color: white; font-weight: 700; cursor: pointer; transition: 0.3s;
+        }
+
+        .cart-btn:hover {
+            opacity: 0.9; transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+
+        @media(max-width: 768px) {
+            .shop-header { flex-direction: column; align-items: flex-start; }
+            .search-box { width: 100%; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Header -->
     <header>
         <div class="logo">AS FASHIONS</div>
-        <a href="products.html" style="color: var(--text-muted); text-decoration: none; font-weight: 600;">← Back to Shop</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html" class="active">Shop</a>
+            <a href="cart.html">Cart ⚡</a>
+        </nav>
     </header>
 
-    <div class="details-container" id="product-detail-view">
-        <!-- Dynamically Loaded via URL parameters -->
+    <!-- Main Content -->
+    <div class="shop-wrapper">
+        <div class="shop-header">
+            <div>
+                <h1>Latest Drops</h1>
+                <p style="color: var(--text-muted);">Explore handpicked high-fashion trends designed for you.</p>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search clothes, categories...">
+            </div>
+        </div>
+
+        <!-- Product Grid Container -->
+        <div class="product-grid" id="products-container">
+            <!-- Dynamic Injection via JS -->
+        </div>
     </div>
 
+    <!-- Script Link -->
     <script src="products.js"></script>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const productId = parseInt(urlParams.get('id')) || 1;
-        const currentProd = products.find(p => p.id === productId) || products[0];
-
-        document.getElementById("product-detail-view").innerHTML = `
-            <div class="img-box">
-                <img src="${currentProd.image}" alt="${currentProd.name}">
-            </div>
-            <div class="info-box">
-                <span style="color: var(--secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">${currentProd.category} Collection</span>
-                <h1>${currentProd.name}</h1>
-                <span class="price">₹${currentProd.price}</span>
-                <p>Crafted with elite fabrics, designed for supreme comfort and standout streetwear vibes. Standard fit tailored for the modern trendsetters.</p>
-                
-                <label style="display:block; margin-bottom: 0.8rem; font-weight: 700;">Select Size:</label>
-                <div class="sizes">
-                    <button class="size-btn selected">S</button>
-                    <button class="size-btn">M</button>
-                    <button class="size-btn">L</button>
-                    <button class="size-btn">XL</button>
-                </div>
-                
-                <button class="cta-btn" onclick="addToCart(${currentProd.id})">⚡ Add to Cart Now</button>
-            </div>
-        `;
-    </script>
 </body>
 </html>

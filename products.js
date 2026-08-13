@@ -1,2017 +1,716 @@
 /* =========================================================
-   AS FASHIONS — PRODUCTS.JS
-   Complete Product Catalogue + Filters + Search + Wishlist
-   + Cart + Sorting + Navigation
-========================================================= */
-
-"use strict";
-
-/* =========================================================
-   PRODUCT DATA
-========================================================= */
+   AS FASHIONS — MASTER PRODUCT DATABASE
+   One source of truth for index.html + products.html
+   ========================================================= */
 
 const AS_PRODUCTS = [
 
-  /* ================= WOMEN ================= */
+  /* ===================== MEN ===================== */
 
   {
-    id:"w001",
-    name:"Floral Print A-Line Dress",
-    brand:"AS Studio",
-    category:"women",
-    subcategory:"dresses",
-    gender:"women",
-    price:799,
-    mrp:1599,
-    discount:50,
-    rating:4.5,
-    reviews:128,
-    badge:"HOT DEAL",
-    sizes:["S","M","L","XL"],
-    image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=85"
+    id: "M001",
+    brand: "AS FASHIONS",
+    name: "Premium Oversized T-Shirt",
+    category: "Men",
+    subcategory: "T-Shirts",
+    gender: "Men",
+    price: 799,
+    mrp: 1499,
+    discount: 47,
+    rating: 4.5,
+    reviews: 1240,
+    badge: "TRENDING",
+    trending: true,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85",
+    colors: ["Black", "White", "Grey"],
+    sizes: ["S", "M", "L", "XL", "XXL"]
   },
 
   {
-    id:"w002",
-    name:"Elegant Women Co-Ord Set",
-    brand:"AS Trends",
-    category:"women",
-    subcategory:"western",
-    gender:"women",
-    price:999,
-    mrp:1999,
-    discount:50,
-    rating:4.4,
-    reviews:96,
-    badge:"TRENDING",
-    sizes:["S","M","L","XL"],
-    image:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=85"
+    id: "M002",
+    brand: "AS FASHIONS",
+    name: "Premium Casual Shirt",
+    category: "Men",
+    subcategory: "Shirts",
+    gender: "Men",
+    price: 899,
+    mrp: 1799,
+    discount: 50,
+    rating: 4.4,
+    reviews: 982,
+    badge: "BESTSELLER",
+    trending: true,
+    newArrival: false,
+    image: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=900&q=85",
+    colors: ["Blue", "White", "Black"],
+    sizes: ["S", "M", "L", "XL", "XXL"]
   },
 
   {
-    id:"w003",
-    name:"Classic Women Kurti",
-    brand:"AS Ethnic",
-    category:"women",
-    subcategory:"kurtis",
-    gender:"women",
-    price:649,
-    mrp:1299,
-    discount:50,
-    rating:4.6,
-    reviews:214,
-    badge:"BESTSELLER",
-    sizes:["S","M","L","XL","XXL"],
-    image:"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=800&q=85"
+    id: "M003",
+    brand: "AS FASHIONS",
+    name: "Relaxed Fit Cargo Pants",
+    category: "Men",
+    subcategory: "Trousers",
+    gender: "Men",
+    price: 1299,
+    mrp: 2499,
+    discount: 48,
+    rating: 4.6,
+    reviews: 756,
+    badge: "HOT DEAL",
+    trending: true,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85",
+    colors: ["Olive", "Black", "Beige"],
+    sizes: ["30", "32", "34", "36", "38"]
   },
 
   {
-    id:"w004",
-    name:"Women Oversized Denim Jacket",
-    brand:"AS Denim",
-    category:"women",
-    subcategory:"jackets",
-    gender:"women",
-    price:1199,
-    mrp:2499,
-    discount:52,
-    rating:4.3,
-    reviews:72,
-    badge:"NEW",
-    sizes:["S","M","L","XL"],
-    image:"https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=800&q=85"
+    id: "M004",
+    brand: "AS FASHIONS",
+    name: "Classic Denim Jeans",
+    category: "Men",
+    subcategory: "Jeans",
+    gender: "Men",
+    price: 999,
+    mrp: 1999,
+    discount: 50,
+    rating: 4.5,
+    reviews: 640,
+    badge: "50% OFF",
+    trending: true,
+    newArrival: false,
+    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=85",
+    colors: ["Blue", "Dark Blue", "Black"],
+    sizes: ["30", "32", "34", "36", "38"]
   },
 
   {
-    id:"w005",
-    name:"Women Relaxed Fit Jeans",
-    brand:"AS Denim",
-    category:"women",
-    subcategory:"denim",
-    gender:"women",
-    price:899,
-    mrp:1799,
-    discount:50,
-    rating:4.4,
-    reviews:156,
-    badge:"HOT DEAL",
-    sizes:["26","28","30","32","34"],
-    image:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=85"
+    id: "M005",
+    brand: "AS FASHIONS",
+    name: "Premium Bomber Jacket",
+    category: "Men",
+    subcategory: "Jackets",
+    gender: "Men",
+    price: 1599,
+    mrp: 2999,
+    discount: 47,
+    rating: 4.7,
+    reviews: 438,
+    badge: "NEW",
+    trending: false,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=85",
+    colors: ["Black", "Brown"],
+    sizes: ["M", "L", "XL", "XXL"]
   },
 
   {
-    id:"w006",
-    name:"Women Satin Party Dress",
-    brand:"AS Luxe",
-    category:"women",
-    subcategory:"dresses",
-    gender:"women",
-    price:1499,
-    mrp:2999,
-    discount:50,
-    rating:4.7,
-    reviews:89,
-    badge:"PREMIUM",
-    sizes:["S","M","L"],
-    image:"https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=800&q=85"
+    id: "M006",
+    brand: "AS FASHIONS",
+    name: "Minimal Polo T-Shirt",
+    category: "Men",
+    subcategory: "T-Shirts",
+    gender: "Men",
+    price: 499,
+    mrp: 999,
+    discount: 50,
+    rating: 4.3,
+    reviews: 890,
+    badge: "UNDER ₹499",
+    trending: true,
+    newArrival: false,
+    image: "https://images.unsplash.com/photo-1627225924765-552d49cf47ad?auto=format&fit=crop&w=900&q=85",
+    colors: ["White", "Navy", "Black"],
+    sizes: ["S", "M", "L", "XL"]
   },
 
-  /* ================= MEN ================= */
+  /* ===================== WOMEN ===================== */
 
   {
-    id:"m001",
-    name:"Men Premium Oxford Shirt",
-    brand:"AS Menswear",
-    category:"men",
-    subcategory:"shirts",
-    gender:"men",
-    price:699,
-    mrp:1399,
-    discount:50,
-    rating:4.5,
-    reviews:184,
-    badge:"BESTSELLER",
-    sizes:["S","M","L","XL","XXL"],
-    image:"https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=800&q=85"
-  },
-
-  {
-    id:"m002",
-    name:"Men Casual Oversized T-Shirt",
-    brand:"AS Street",
-    category:"men",
-    subcategory:"tshirts",
-    gender:"men",
-    price:499,
-    mrp:999,
-    discount:50,
-    rating:4.4,
-    reviews:231,
-    badge:"UNDER ₹499",
-    sizes:["S","M","L","XL","XXL"],
-    image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85"
+    id: "W001",
+    brand: "AS FASHIONS",
+    name: "Floral Summer Dress",
+    category: "Women",
+    subcategory: "Dresses",
+    gender: "Women",
+    price: 999,
+    mrp: 1999,
+    discount: 50,
+    rating: 4.6,
+    reviews: 1500,
+    badge: "TRENDING",
+    trending: true,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=85",
+    colors: ["Floral", "White"],
+    sizes: ["XS", "S", "M", "L", "XL"]
   },
 
   {
-    id:"m003",
-    name:"Men Slim Fit Denim Jeans",
-    brand:"AS Denim",
-    category:"men",
-    subcategory:"denim",
-    gender:"men",
-    price:999,
-    mrp:1999,
-    discount:50,
-    rating:4.3,
-    reviews:143,
-    badge:"TRENDING",
-    sizes:["30","32","34","36","38"],
-    image:"https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=85"
+    id: "W002",
+    brand: "AS FASHIONS",
+    name: "Premium Everyday Top",
+    category: "Women",
+    subcategory: "Tops",
+    gender: "Women",
+    price: 499,
+    mrp: 999,
+    discount: 50,
+    rating: 4.4,
+    reviews: 1100,
+    badge: "UNDER ₹499",
+    trending: true,
+    newArrival: false,
+    image: "https://images.unsplash.com/photo-1564257577054-8c4b3e5c9b88?auto=format&fit=crop&w=900&q=85",
+    colors: ["White", "Black", "Pink"],
+    sizes: ["XS", "S", "M", "L", "XL"]
   },
 
   {
-    id:"m004",
-    name:"Men Relaxed Cargo Pants",
-    brand:"AS Street",
-    category:"men",
-    subcategory:"trousers",
-    gender:"men",
-    price:899,
-    mrp:1799,
-    discount:50,
-    rating:4.4,
-    reviews:91,
-    badge:"HOT DEAL",
-    sizes:["30","32","34","36"],
-    image:"https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=800&q=85"
+    id: "W003",
+    brand: "AS FASHIONS",
+    name: "Wide Leg Denim Jeans",
+    category: "Women",
+    subcategory: "Jeans",
+    gender: "Women",
+    price: 1299,
+    mrp: 2599,
+    discount: 50,
+    rating: 4.5,
+    reviews: 875,
+    badge: "BESTSELLER",
+    trending: true,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=900&q=85",
+    colors: ["Blue", "Black"],
+    sizes: ["26", "28", "30", "32", "34"]
   },
 
   {
-    id:"m005",
-    name:"Men Premium Bomber Jacket",
-    brand:"AS Urban",
-    category:"men",
-    subcategory:"jackets",
-    gender:"men",
-    price:1599,
-    mrp:3499,
-    discount:54,
-    rating:4.6,
-    reviews:64,
-    badge:"54% OFF",
-    sizes:["M","L","XL","XXL"],
-    image:"https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=85"
+    id: "W004",
+    brand: "AS FASHIONS",
+    name: "Elegant Kurta Set",
+    category: "Women",
+    subcategory: "Ethnic Wear",
+    gender: "Women",
+    price: 899,
+    mrp: 1799,
+    discount: 50,
+    rating: 4.7,
+    reviews: 720,
+    badge: "HOT DEAL",
+    trending: true,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=900&q=85",
+    colors: ["Pink", "Blue", "Green"],
+    sizes: ["S", "M", "L", "XL", "XXL"]
   },
 
   {
-    id:"m006",
-    name:"Men Linen Casual Shirt",
-    brand:"AS Premium",
-    category:"men",
-    subcategory:"shirts",
-    gender:"men",
-    price:799,
-    mrp:1599,
-    discount:50,
-    rating:4.5,
-    reviews:118,
-    badge:"NEW",
-    sizes:["S","M","L","XL","XXL"],
-    image:"https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=85"
-  },
-
-  /* ================= GIRLS ================= */
-
-  {
-    id:"g001",
-    name:"Girls Floral Party Dress",
-    brand:"AS Kids",
-    category:"girls",
-    subcategory:"dresses",
-    gender:"girls",
-    price:599,
-    mrp:1199,
-    discount:50,
-    rating:4.7,
-    reviews:74,
-    badge:"BESTSELLER",
-    sizes:["2-3Y","4-5Y","6-7Y","8-9Y"],
-    image:"https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=800&q=85"
+    id: "W005",
+    brand: "AS FASHIONS",
+    name: "Premium Co-ord Set",
+    category: "Women",
+    subcategory: "Co-ords",
+    gender: "Women",
+    price: 1499,
+    mrp: 2999,
+    discount: 50,
+    rating: 4.5,
+    reviews: 480,
+    badge: "NEW",
+    trending: true,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85",
+    colors: ["Beige", "Black"],
+    sizes: ["XS", "S", "M", "L"]
   },
 
   {
-    id:"g002",
-    name:"Girls Casual Denim Dress",
-    brand:"AS Kids",
-    category:"girls",
-    subcategory:"dresses",
-    gender:"girls",
-    price:699,
-    mrp:1399,
-    discount:50,
-    rating:4.5,
-    reviews:61,
-    badge:"TRENDING",
-    sizes:["3-4Y","5-6Y","7-8Y","9-10Y"],
-    image:"https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=800&q=85"
+    id: "W006",
+    brand: "AS FASHIONS",
+    name: "Statement Party Dress",
+    category: "Women",
+    subcategory: "Dresses",
+    gender: "Women",
+    price: 1799,
+    mrp: 3999,
+    discount: 55,
+    rating: 4.8,
+    reviews: 360,
+    badge: "55% OFF",
+    trending: true,
+    newArrival: false,
+    image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=900&q=85",
+    colors: ["Black", "Red"],
+    sizes: ["XS", "S", "M", "L"]
+  },
+
+  /* ===================== GIRLS ===================== */
+
+  {
+    id: "G001",
+    brand: "AS FASHIONS KIDS",
+    name: "Girls Floral Party Frock",
+    category: "Kids",
+    subcategory: "Girls Dresses",
+    gender: "Girls",
+    price: 899,
+    mrp: 1599,
+    discount: 44,
+    rating: 4.5,
+    reviews: 322,
+    badge: "TRENDING",
+    trending: true,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=900&q=85",
+    colors: ["Pink", "White"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y"]
   },
 
   {
-    id:"g003",
-    name:"Girls Cotton Top & Skirt Set",
-    brand:"AS Junior",
-    category:"girls",
-    subcategory:"sets",
-    gender:"girls",
-    price:749,
-    mrp:1499,
-    discount:50,
-    rating:4.6,
-    reviews:47,
-    badge:"NEW",
-    sizes:["4-5Y","6-7Y","8-9Y","10-11Y"],
-    image:"https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?auto=format&fit=crop&w=800&q=85"
-  },
-
-  /* ================= BOYS ================= */
-
-  {
-    id:"b001",
-    name:"Boys Casual Printed T-Shirt",
-    brand:"AS Junior",
-    category:"boys",
-    subcategory:"tshirts",
-    gender:"boys",
-    price:399,
-    mrp:799,
-    discount:50,
-    rating:4.5,
-    reviews:93,
-    badge:"UNDER ₹499",
-    sizes:["2-3Y","4-5Y","6-7Y","8-9Y","10-11Y"],
-    image:"https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=800&q=85"
+    id: "G002",
+    brand: "AS FASHIONS KIDS",
+    name: "Girls Casual T-Shirt",
+    category: "Kids",
+    subcategory: "Girls Tops",
+    gender: "Girls",
+    price: 399,
+    mrp: 799,
+    discount: 50,
+    rating: 4.3,
+    reviews: 210,
+    badge: "UNDER ₹499",
+    trending: true,
+    newArrival: false,
+    image: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=900&q=85",
+    colors: ["Pink", "Yellow"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y"]
   },
 
   {
-    id:"b002",
-    name:"Boys Casual Denim Shirt",
-    brand:"AS Kids",
-    category:"boys",
-    subcategory:"shirts",
-    gender:"boys",
-    price:599,
-    mrp:1199,
-    discount:50,
-    rating:4.4,
-    reviews:51,
-    badge:"HOT DEAL",
-    sizes:["3-4Y","5-6Y","7-8Y","9-10Y"],
-    image:"https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=800&q=85"
+    id: "G003",
+    brand: "AS FASHIONS KIDS",
+    name: "Girls Denim Jacket",
+    category: "Kids",
+    subcategory: "Girls Jackets",
+    gender: "Girls",
+    price: 799,
+    mrp: 1499,
+    discount: 47,
+    rating: 4.4,
+    reviews: 184,
+    badge: "NEW",
+    trending: false,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=900&q=85",
+    colors: ["Blue"],
+    sizes: ["4-5Y", "6-7Y", "8-9Y", "10-11Y"]
+  },
+
+  /* ===================== BOYS ===================== */
+
+  {
+    id: "B001",
+    brand: "AS FASHIONS KIDS",
+    name: "Boys Casual Outfit Set",
+    category: "Kids",
+    subcategory: "Boys Sets",
+    gender: "Boys",
+    price: 799,
+    mrp: 1299,
+    discount: 38,
+    rating: 4.3,
+    reviews: 288,
+    badge: "BESTSELLER",
+    trending: true,
+    newArrival: false,
+    image: "https://images.unsplash.com/photo-1503944583220-7eeec4934c7b?auto=format&fit=crop&w=900&q=85",
+    colors: ["Blue", "Black"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y"]
   },
 
   {
-    id:"b003",
-    name:"Boys Jogger Set",
-    brand:"AS Active Kids",
-    category:"boys",
-    subcategory:"sets",
-    gender:"boys",
-    price:799,
-    mrp:1599,
-    discount:50,
-    rating:4.6,
-    reviews:68,
-    badge:"BESTSELLER",
-    sizes:["4-5Y","6-7Y","8-9Y","10-11Y"],
-    image:"https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=85"
-  },
-
-  /* ================= FOOTWEAR ================= */
-
-  {
-    id:"f001",
-    name:"Classic White Sneakers",
-    brand:"AS Footwear",
-    category:"footwear",
-    subcategory:"sneakers",
-    gender:"unisex",
-    price:999,
-    mrp:1999,
-    discount:50,
-    rating:4.5,
-    reviews:188,
-    badge:"TRENDING",
-    sizes:["6","7","8","9","10"],
-    image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85"
+    id: "B002",
+    brand: "AS FASHIONS KIDS",
+    name: "Boys Graphic T-Shirt",
+    category: "Kids",
+    subcategory: "Boys T-Shirts",
+    gender: "Boys",
+    price: 399,
+    mrp: 799,
+    discount: 50,
+    rating: 4.4,
+    reviews: 412,
+    badge: "UNDER ₹499",
+    trending: true,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=900&q=85",
+    colors: ["Blue", "White", "Black"],
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y"]
   },
 
   {
-    id:"f002",
-    name:"Men Casual Running Shoes",
-    brand:"AS Active",
-    category:"footwear",
-    subcategory:"sports",
-    gender:"men",
-    price:1199,
-    mrp:2499,
-    discount:52,
-    rating:4.4,
-    reviews:112,
-    badge:"52% OFF",
-    sizes:["6","7","8","9","10"],
-    image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85"
+    id: "B003",
+    brand: "AS FASHIONS KIDS",
+    name: "Boys Denim Jeans",
+    category: "Kids",
+    subcategory: "Boys Jeans",
+    gender: "Boys",
+    price: 699,
+    mrp: 1299,
+    discount: 46,
+    rating: 4.5,
+    reviews: 245,
+    badge: "HOT DEAL",
+    trending: true,
+    newArrival: false,
+    image: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=900&q=85",
+    colors: ["Blue"],
+    sizes: ["4-5Y", "6-7Y", "8-9Y", "10-11Y"]
+  },
+
+  /* ===================== FOOTWEAR ===================== */
+
+  {
+    id: "F001",
+    brand: "AS FASHIONS",
+    name: "Everyday Casual Sneakers",
+    category: "Footwear",
+    subcategory: "Sneakers",
+    gender: "Men",
+    price: 1499,
+    mrp: 2999,
+    discount: 50,
+    rating: 4.5,
+    reviews: 891,
+    badge: "TRENDING",
+    trending: true,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85",
+    colors: ["White", "Black"],
+    sizes: ["6", "7", "8", "9", "10"]
   },
 
   {
-    id:"f003",
-    name:"Women Everyday Sneakers",
-    brand:"AS Street",
-    category:"footwear",
-    subcategory:"sneakers",
-    gender:"women",
-    price:899,
-    mrp:1799,
-    discount:50,
-    rating:4.3,
-    reviews:97,
-    badge:"HOT DEAL",
-    sizes:["4","5","6","7","8"],
-    image:"https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=85"
-  },
-
-  /* ================= ACCESSORIES ================= */
-
-  {
-    id:"a001",
-    name:"Minimal Everyday Handbag",
-    brand:"AS Accessories",
-    category:"accessories",
-    subcategory:"bags",
-    gender:"women",
-    price:699,
-    mrp:1499,
-    discount:53,
-    rating:4.4,
-    reviews:81,
-    badge:"53% OFF",
-    sizes:["ONE SIZE"],
-    image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=85"
-  },
-
-  {
-    id:"a002",
-    name:"Classic Leather Wallet",
-    brand:"AS Accessories",
-    category:"accessories",
-    subcategory:"wallets",
-    gender:"men",
-    price:499,
-    mrp:999,
-    discount:50,
-    rating:4.5,
-    reviews:136,
-    badge:"UNDER ₹499",
-    sizes:["ONE SIZE"],
-    image:"https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=85"
-  },
-
-  {
-    id:"a003",
-    name:"Premium Sunglasses",
-    brand:"AS Luxe",
-    category:"accessories",
-    subcategory:"sunglasses",
-    gender:"unisex",
-    price:799,
-    mrp:1599,
-    discount:50,
-    rating:4.3,
-    reviews:58,
-    badge:"NEW",
-    sizes:["ONE SIZE"],
-    image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=85"
+    id: "F002",
+    brand: "AS FASHIONS",
+    name: "Women's Street Sneakers",
+    category: "Footwear",
+    subcategory: "Sneakers",
+    gender: "Women",
+    price: 1299,
+    mrp: 2499,
+    discount: 48,
+    rating: 4.4,
+    reviews: 530,
+    badge: "HOT DEAL",
+    trending: true,
+    newArrival: true,
+    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=85",
+    colors: ["White", "Pink"],
+    sizes: ["4", "5", "6", "7", "8"]
   }
 
 ];
 
 
 /* =========================================================
-   STORAGE
-========================================================= */
-
-const WISHLIST_KEY =
-  "asfashions_wishlist";
-
-const CART_KEY =
-  "asfashions_cart";
-
-
-function readStorage(key){
-
-  try{
-
-    const value =
-      localStorage.getItem(key);
-
-    return value
-      ? JSON.parse(value)
-      : [];
-
-  }catch(error){
-
-    return [];
-
-  }
-
-}
-
-
-function writeStorage(key,value){
-
-  localStorage.setItem(
-    key,
-    JSON.stringify(value)
-  );
-
-}
-
-
-/* =========================================================
-   PAGE STATE
-========================================================= */
-
-let wishlist =
-  readStorage(WISHLIST_KEY);
-
-let cart =
-  readStorage(CART_KEY);
-
-let filteredProducts = [];
-
-let currentSort =
-  "recommended";
-
-
-/* =========================================================
-   URL STATE
-========================================================= */
-
-const urlParams =
-  new URLSearchParams(
-    window.location.search
-  );
-
-const urlCategory =
-  (
-    urlParams.get("category") ||
-    "all"
-  ).toLowerCase();
-
-const urlSearch =
-  (
-    urlParams.get("search") ||
-    ""
-  ).trim().toLowerCase();
-
-
-/* =========================================================
    HELPERS
-========================================================= */
+   ========================================================= */
 
-function formatPrice(price){
-
-  return "₹" +
-    Number(price).toLocaleString(
-      "en-IN"
-    );
-
+function getAllProducts() {
+  return [...AS_PRODUCTS];
 }
 
-
-function escapeHTML(value){
-
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
+function getProductById(id) {
+  return AS_PRODUCTS.find(product => String(product.id) === String(id));
 }
 
-
-function getWishlist(){
-
-  wishlist =
-    readStorage(WISHLIST_KEY);
-
-  return wishlist;
-
+function money(value) {
+  return "₹" + Number(value).toLocaleString("en-IN");
 }
 
-
-function getCart(){
-
-  cart =
-    readStorage(CART_KEY);
-
-  return cart;
-
+function productLink(product) {
+  return `products.html?product=${encodeURIComponent(product.id)}`;
 }
 
 
 /* =========================================================
-   WISHLIST
-========================================================= */
+   LOCAL STORAGE
+   ========================================================= */
 
-function isWishlisted(productId){
+const AS_CART_KEY = "as_fashions_cart";
+const AS_WISHLIST_KEY = "as_fashions_wishlist";
 
-  return getWishlist()
-    .some(
-      item =>
-        String(item.id) ===
-        String(productId)
-    );
-
+function getCart() {
+  try {
+    return JSON.parse(localStorage.getItem(AS_CART_KEY) || "[]");
+  } catch {
+    return [];
+  }
 }
 
+function saveCart(cart) {
+  localStorage.setItem(AS_CART_KEY, JSON.stringify(cart));
+}
 
-function toggleWishlist(productId){
-
-  let items =
-    getWishlist();
-
-  const index =
-    items.findIndex(
-      item =>
-        String(item.id) ===
-        String(productId)
-    );
-
-  if(index >= 0){
-
-    items.splice(
-      index,
-      1
-    );
-
-    showToast(
-      "Wishlist nundi remove chesam"
-    );
-
-  }else{
-
-    const product =
-      AS_PRODUCTS.find(
-        item =>
-          String(item.id) ===
-          String(productId)
-      );
-
-    if(product){
-
-      items.push({
-        id:product.id,
-        name:product.name,
-        brand:product.brand,
-        price:product.price,
-        mrp:product.mrp,
-        image:product.image,
-        size:product.sizes?.[0] || ""
-      });
-
-    }
-
-    showToast(
-      "Wishlist lo add chesam ❤️"
-    );
-
+function getWishlist() {
+  try {
+    return JSON.parse(localStorage.getItem(AS_WISHLIST_KEY) || "[]");
+  } catch {
+    return [];
   }
+}
 
-  writeStorage(
-    WISHLIST_KEY,
-    items
+function saveWishlist(list) {
+  localStorage.setItem(AS_WISHLIST_KEY, JSON.stringify(list));
+}
+
+function cartCount() {
+  return getCart().reduce((sum, item) => sum + Number(item.qty || 1), 0);
+}
+
+function wishlistCount() {
+  return getWishlist().length;
+}
+
+function addToCart(id, size = "", color = "") {
+  const product = getProductById(id);
+  if (!product) return;
+
+  const cart = getCart();
+
+  const existing = cart.find(item =>
+    String(item.id) === String(id) &&
+    item.size === size &&
+    item.color === color
   );
 
-  updateCounts();
-
-  renderProducts();
-
-}
-
-
-/* =========================================================
-   CART
-========================================================= */
-
-function addToCart(productId){
-
-  const product =
-    AS_PRODUCTS.find(
-      item =>
-        String(item.id) ===
-        String(productId)
-    );
-
-  if(!product){
-    return;
-  }
-
-  let items =
-    getCart();
-
-  const existing =
-    items.find(
-      item =>
-        String(item.id) ===
-        String(productId)
-    );
-
-  if(existing){
-
-    existing.quantity =
-      Number(existing.quantity || 1) + 1;
-
-  }else{
-
-    items.push({
-
-      id:product.id,
-
-      name:product.name,
-
-      brand:product.brand,
-
-      price:product.price,
-
-      mrp:product.mrp,
-
-      image:product.image,
-
-      size:product.sizes?.[0] || "",
-
-      quantity:1
-
+  if (existing) {
+    existing.qty = Number(existing.qty || 1) + 1;
+  } else {
+    cart.push({
+      id: product.id,
+      size,
+      color,
+      qty: 1
     });
-
   }
 
-  writeStorage(
-    CART_KEY,
-    items
-  );
+  saveCart(cart);
+}
 
-  updateCounts();
+function toggleWishlist(id) {
+  const list = getWishlist();
+  const index = list.findIndex(x => String(x) === String(id));
 
-  showToast(
-    "Cart lo product add ayyindi 🛒"
-  );
+  if (index >= 0) {
+    list.splice(index, 1);
+  } else {
+    list.push(String(id));
+  }
 
+  saveWishlist(list);
+  return list;
 }
 
 
 /* =========================================================
-   COUNT BADGES
-========================================================= */
+   URL FILTER ENGINE
+   ========================================================= */
 
-function updateCounts(){
+function filterProductsFromURL(products = AS_PRODUCTS) {
 
-  const wishlistCount =
-    document.getElementById(
-      "wishlistCount"
+  const params = new URLSearchParams(window.location.search);
+
+  const category = (params.get("category") || "All").trim();
+  const gender = (params.get("gender") || "").trim();
+  const subcategory = (params.get("subcategory") || "").trim();
+
+  const priceMaxParam = params.get("priceMax");
+  const priceMinParam = params.get("priceMin");
+  const discountMinParam = params.get("discountMin");
+
+  const search = (params.get("search") || "").trim().toLowerCase();
+  const sort = params.get("sort") || "recommended";
+
+  let result = [...products];
+
+  /* CATEGORY */
+
+  if (category && category.toLowerCase() !== "all") {
+    result = result.filter(product =>
+      product.category.toLowerCase() === category.toLowerCase()
     );
-
-  const cartCount =
-    document.getElementById(
-      "cartCount"
-    );
-
-  const wishlistItems =
-    getWishlist();
-
-  const cartItems =
-    getCart();
-
-  if(wishlistCount){
-
-    wishlistCount.textContent =
-      wishlistItems.length;
-
   }
 
-  if(cartCount){
+  /* GENDER / GIRLS / BOYS */
 
-    const quantity =
-      cartItems.reduce(
-        (total,item) =>
-          total +
-          Number(
-            item.quantity || 1
-          ),
-        0
+  if (gender) {
+    result = result.filter(product =>
+      product.gender.toLowerCase() === gender.toLowerCase()
+    );
+  }
+
+  /* SUBCATEGORY */
+
+  if (subcategory) {
+    result = result.filter(product =>
+      product.subcategory.toLowerCase() === subcategory.toLowerCase()
+    );
+  }
+
+  /* SEARCH */
+
+  if (search) {
+    result = result.filter(product => {
+
+      const searchable = [
+        product.name,
+        product.brand,
+        product.category,
+        product.subcategory,
+        product.gender
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return searchable.includes(search);
+    });
+  }
+
+  /* PRICE MAX */
+
+  if (priceMaxParam !== null && priceMaxParam !== "") {
+    const max = Number(priceMaxParam);
+
+    if (!Number.isNaN(max)) {
+      result = result.filter(product =>
+        Number(product.price) <= max
       );
-
-    cartCount.textContent =
-      quantity;
-
+    }
   }
 
-}
+  /* PRICE MIN */
 
+  if (priceMinParam !== null && priceMinParam !== "") {
+    const min = Number(priceMinParam);
 
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(message){
-
-  if(
-    typeof window.asFashionToast ===
-    "function"
-  ){
-
-    window.asFashionToast(
-      message
-    );
-
-    return;
-
-  }
-
-  const toast =
-    document.getElementById(
-      "toast"
-    );
-
-  if(!toast){
-    return;
-  }
-
-  toast.textContent =
-    message;
-
-  toast.classList.add(
-    "show"
-  );
-
-  clearTimeout(
-    window.__asToastTimer
-  );
-
-  window.__asToastTimer =
-    setTimeout(
-      () => {
-
-        toast.classList.remove(
-          "show"
-        );
-
-      },
-      2200
-    );
-
-}
-
-
-/* =========================================================
-   PRODUCT URL
-========================================================= */
-
-function openProduct(productId){
-
-  window.location.href =
-    "product.html?id=" +
-    encodeURIComponent(
-      productId
-    );
-
-}
-
-
-/* =========================================================
-   PRODUCT CARD
-========================================================= */
-
-function createProductCard(product){
-
-  const wished =
-    isWishlisted(
-      product.id
-    );
-
-  const discount =
-    Number(
-      product.discount || 0
-    );
-
-  const badgeClass =
-    String(
-      product.badge || ""
-    ).toLowerCase()
-     .includes("hot")
-      ? "badge hot"
-      : discount >= 50
-        ? "badge sale"
-        : "badge";
-
-  const sizes =
-    Array.isArray(product.sizes)
-      ? product.sizes
-      : [];
-
-  const visibleSizes =
-    sizes.slice(0,4);
-
-  const sizeHTML =
-    visibleSizes.length
-      ? `
-        <div class="size-row">
-          ${
-            visibleSizes
-              .map(
-                size =>
-                  `<span class="size-chip">${escapeHTML(size)}</span>`
-              )
-              .join("")
-          }
-        </div>
-      `
-      : "";
-
-  return `
-
-    <article
-      class="product-card"
-      data-product-id="${escapeHTML(product.id)}">
-
-      <div
-        class="product-image-wrap"
-        data-open-product="${escapeHTML(product.id)}">
-
-        ${
-          product.badge
-            ? `
-              <span class="${badgeClass}">
-                ${escapeHTML(product.badge)}
-              </span>
-            `
-            : ""
-        }
-
-        <button
-          type="button"
-          class="wishlist-btn ${
-            wished ? "active" : ""
-          }"
-          data-wishlist="${escapeHTML(product.id)}"
-          aria-label="Add to wishlist">
-
-          ${
-            wished
-              ? "♥"
-              : "♡"
-          }
-
-        </button>
-
-        <img
-          class="product-image"
-          src="${escapeHTML(product.image)}"
-          alt="${escapeHTML(product.name)}"
-          loading="lazy"
-          onerror="this.onerror=null;this.src='https://placehold.co/800x1067/f4f4f4/777?text=AS+FASHIONS';"
-        >
-
-        <button
-          type="button"
-          class="quick-add"
-          data-cart="${escapeHTML(product.id)}">
-
-          ADD TO BAG
-
-        </button>
-
-      </div>
-
-      <div class="product-info">
-
-        <div class="product-brand">
-          ${escapeHTML(product.brand)}
-        </div>
-
-        <div
-          class="product-name"
-          data-open-product="${escapeHTML(product.id)}">
-
-          ${escapeHTML(product.name)}
-
-        </div>
-
-        <span class="rating">
-          ★ ${Number(product.rating || 0).toFixed(1)}
-        </span>
-
-        <span style="
-          color:#888;
-          font-size:10px;
-          margin-left:5px;
-        ">
-          (${Number(product.reviews || 0)})
-        </span>
-
-        <div class="price-row">
-
-          <span class="price">
-            ${formatPrice(product.price)}
-          </span>
-
-          <span class="mrp">
-            ${formatPrice(product.mrp)}
-          </span>
-
-          <span class="discount">
-            (${discount}% OFF)
-          </span>
-
-        </div>
-
-        ${sizeHTML}
-
-      </div>
-
-    </article>
-
-  `;
-
-}
-
-
-/* =========================================================
-   GET SELECTED FILTERS
-========================================================= */
-
-function getSelectedCategories(){
-
-  const desktop =
-    [
-      ...document.querySelectorAll(
-        "[data-filter-category]:checked"
-      )
-    ]
-    .map(
-      input => input.value
-    );
-
-  const mobile =
-    [
-      ...document.querySelectorAll(
-        "[data-mobile-category]:checked"
-      )
-    ]
-    .map(
-      input => input.value
-    );
-
-  return [
-    ...new Set(
-      [...desktop,...mobile]
-    )
-  ];
-
-}
-
-
-function getSelectedPrice(){
-
-  const desktop =
-    document.querySelector(
-      "input[name='price']:checked"
-    );
-
-  const mobile =
-    document.querySelector(
-      "input[name='mobilePrice']:checked"
-    );
-
-  return (
-    desktop?.value ||
-    mobile?.value ||
-    ""
-  );
-
-}
-
-
-function getSelectedDiscount(){
-
-  const desktop =
-    document.querySelector(
-      "input[name='discount']:checked"
-    );
-
-  const mobile =
-    document.querySelector(
-      "input[name='mobileDiscount']:checked"
-    );
-
-  return Number(
-    desktop?.value ||
-    mobile?.value ||
-    0
-  );
-
-}
-
-
-/* =========================================================
-   CATEGORY MATCHING
-========================================================= */
-
-function matchesCategory(
-  product,
-  category
-){
-
-  if(
-    !category ||
-    category === "all"
-  ){
-
-    return true;
-
-  }
-
-  if(category === "kids"){
-
-    return [
-      "kids",
-      "girls",
-      "boys"
-    ].includes(
-      product.category
-    );
-
-  }
-
-  if(category === "sale"){
-
-    return (
-      Number(
-        product.discount || 0
-      ) >= 40
-    );
-
-  }
-
-  if(category === "dresses"){
-
-    return (
-      product.subcategory ===
-      "dresses"
-    );
-
-  }
-
-  if(category === "shirts"){
-
-    return (
-      product.subcategory ===
-      "shirts"
-    );
-
-  }
-
-  if(category === "denim"){
-
-    return (
-      product.subcategory ===
-      "denim"
-    );
-
-  }
-
-  if(category === "footwear"){
-
-    return (
-      product.category ===
-      "footwear"
-    );
-
-  }
-
-  if(category === "accessories"){
-
-    return (
-      product.category ===
-      "accessories"
-    );
-
-  }
-
-  return (
-    product.category ===
-    category
-  );
-
-}
-
-
-/* =========================================================
-   PRICE MATCH
-========================================================= */
-
-function matchesPrice(
-  product,
-  range
-){
-
-  if(!range){
-    return true;
-  }
-
-  const price =
-    Number(
-      product.price || 0
-    );
-
-  if(range === "0-499"){
-
-    return price <= 499;
-
-  }
-
-  if(range === "500-999"){
-
-    return (
-      price >= 500 &&
-      price <= 999
-    );
-
-  }
-
-  if(range === "1000-1999"){
-
-    return (
-      price >= 1000 &&
-      price <= 1999
-    );
-
-  }
-
-  if(range === "2000+"){
-
-    return price >= 2000;
-
-  }
-
-  return true;
-
-}
-
-
-/* =========================================================
-   SEARCH MATCH
-========================================================= */
-
-function matchesSearch(
-  product,
-  search
-){
-
-  if(!search){
-    return true;
-  }
-
-  const text = [
-
-    product.name,
-
-    product.brand,
-
-    product.category,
-
-    product.subcategory,
-
-    product.gender,
-
-    ...(product.sizes || [])
-
-  ]
-  .join(" ")
-  .toLowerCase();
-
-  return text.includes(
-    search
-  );
-
-}
-
-
-/* =========================================================
-   FILTER PRODUCTS
-========================================================= */
-
-function getFilteredProducts(){
-
-  const selectedCategories =
-    getSelectedCategories();
-
-  const selectedPrice =
-    getSelectedPrice();
-
-  const selectedDiscount =
-    getSelectedDiscount();
-
-  let result =
-    AS_PRODUCTS.filter(
-      product => {
-
-        /* URL category */
-
-        if(
-          !matchesCategory(
-            product,
-            urlCategory
-          )
-        ){
-
-          return false;
-
-        }
-
-        /* URL search */
-
-        if(
-          !matchesSearch(
-            product,
-            urlSearch
-          )
-        ){
-
-          return false;
-
-        }
-
-        /* checkbox category */
-
-        if(
-          selectedCategories.length > 0
-        ){
-
-          const matched =
-            selectedCategories.some(
-              category =>
-                matchesCategory(
-                  product,
-                  category
-                )
-            );
-
-          if(!matched){
-
-            return false;
-
-          }
-
-        }
-
-        /* price */
-
-        if(
-          !matchesPrice(
-            product,
-            selectedPrice
-          )
-        ){
-
-          return false;
-
-        }
-
-        /* discount */
-
-        if(
-          selectedDiscount &&
-          Number(
-            product.discount || 0
-          ) < selectedDiscount
-        ){
-
-          return false;
-
-        }
-
-        return true;
-
-      }
-    );
-
-  return sortProducts(
-    result,
-    currentSort
-  );
-
-}
-
-
-/* =========================================================
-   SORT
-========================================================= */
-
-function sortProducts(
-  products,
-  sort
-){
-
-  const result =
-    [...products];
-
-  switch(sort){
-
-    case "price-low":
-
-      result.sort(
-        (a,b) =>
-          a.price - b.price
+    if (!Number.isNaN(min)) {
+      result = result.filter(product =>
+        Number(product.price) >= min
       );
+    }
+  }
 
-      break;
+  /* DISCOUNT */
 
+  if (discountMinParam !== null && discountMinParam !== "") {
+    const discount = Number(discountMinParam);
 
-    case "price-high":
-
-      result.sort(
-        (a,b) =>
-          b.price - a.price
+    if (!Number.isNaN(discount)) {
+      result = result.filter(product =>
+        Number(product.discount) >= discount
       );
+    }
+  }
 
-      break;
+  /* SORTING */
 
+  if (sort === "price-low") {
+    result.sort((a, b) => a.price - b.price);
+  }
 
-    case "discount":
+  if (sort === "price-high") {
+    result.sort((a, b) => b.price - a.price);
+  }
 
-      result.sort(
-        (a,b) =>
-          b.discount - a.discount
-      );
+  if (sort === "discount") {
+    result.sort((a, b) => b.discount - a.discount);
+  }
 
-      break;
+  if (sort === "rating") {
+    result.sort((a, b) => b.rating - a.rating);
+  }
 
-
-    case "rating":
-
-      result.sort(
-        (a,b) =>
-          b.rating - a.rating
-      );
-
-      break;
-
-
-    case "newest":
-
-      result.reverse();
-
-      break;
-
-
-    case "recommended":
-
-    default:
-
-      result.sort(
-        (a,b) => {
-
-          const scoreA =
-            (a.rating || 0) * 10 +
-            (a.discount || 0) / 10;
-
-          const scoreB =
-            (b.rating || 0) * 10 +
-            (b.discount || 0) / 10;
-
-          return scoreB - scoreA;
-
-        }
-      );
-
-      break;
-
+  if (sort === "newest") {
+    result.sort((a, b) =>
+      Number(b.newArrival) - Number(a.newArrival)
+    );
   }
 
   return result;
-
 }
 
 
 /* =========================================================
-   RENDER PRODUCTS
-========================================================= */
+   NAVIGATION URL BUILDERS
+   ========================================================= */
 
-function renderProducts(){
+function productsURL(options = {}) {
 
-  const grid =
-    document.getElementById(
-      "productGrid"
-    );
+  const params = new URLSearchParams();
 
-  const empty =
-    document.getElementById(
-      "emptyState"
-    );
-
-  const count =
-    document.getElementById(
-      "productCount"
-    );
-
-  if(!grid){
-    return;
+  if (options.category && options.category !== "All") {
+    params.set("category", options.category);
   }
 
-  filteredProducts =
-    getFilteredProducts();
-
-  if(count){
-
-    count.textContent =
-      `${filteredProducts.length} ${
-        filteredProducts.length === 1
-          ? "Product"
-          : "Products"
-      }`;
-
+  if (options.gender) {
+    params.set("gender", options.gender);
   }
 
-  if(
-    filteredProducts.length === 0
-  ){
-
-    grid.innerHTML = "";
-
-    empty?.classList.add(
-      "show"
-    );
-
-    return;
-
+  if (options.subcategory) {
+    params.set("subcategory", options.subcategory);
   }
 
-  empty?.classList.remove(
-    "show"
-  );
+  if (options.priceMax !== undefined) {
+    params.set("priceMax", options.priceMax);
+  }
 
-  grid.innerHTML =
-    filteredProducts
-      .map(
-        createProductCard
-      )
-      .join("");
+  if (options.priceMin !== undefined) {
+    params.set("priceMin", options.priceMin);
+  }
 
-  bindProductEvents();
+  if (options.discountMin !== undefined) {
+    params.set("discountMin", options.discountMin);
+  }
 
+  if (options.search) {
+    params.set("search", options.search);
+  }
+
+  if (options.sort) {
+    params.set("sort", options.sort);
+  }
+
+  const query = params.toString();
+
+  return `products.html${query ? "?" + query : ""}`;
 }
 
 
 /* =========================================================
-   BIND PRODUCT EVENTS
-========================================================= */
-
-function bindProductEvents(){
-
-  /* product click */
-
-  document.querySelectorAll(
-    "[data-open-product]"
-  ).forEach(
-    element => {
-
-      element.addEventListener(
-        "click",
-        event => {
-
-          /*
-           * Wishlist button / quick-add
-           * click chesthe product open kakudadhu.
-           */
-
-          if(
-            event.target.closest(
-              "[data-wishlist]"
-            ) ||
-            event.target.closest(
-              "[data-cart]"
-            )
-          ){
-
-            return;
-
-          }
-
-          const id =
-            element.dataset.openProduct;
-
-          openProduct(id);
-
-        }
-      );
-
-    }
-  );
-
-
-  /* wishlist */
-
-  document.querySelectorAll(
-    "[data-wishlist]"
-  ).forEach(
-    button => {
-
-      button.addEventListener(
-        "click",
-        event => {
-
-          event.stopPropagation();
-
-          toggleWishlist(
-            button.dataset.wishlist
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-  /* cart */
-
-  document.querySelectorAll(
-    "[data-cart]"
-  ).forEach(
-    button => {
-
-      button.addEventListener(
-        "click",
-        event => {
-
-          event.stopPropagation();
-
-          addToCart(
-            button.dataset.cart
-          );
-
-        }
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   SEARCH BOX
-========================================================= */
-
-function setupSearch(){
-
-  const input =
-    document.getElementById(
-      "searchInput"
-    );
-
-  if(!input){
-    return;
-  }
-
-  input.addEventListener(
-    "input",
-    () => {
-
-      const value =
-        input.value
-          .trim()
-          .toLowerCase();
-
-      /*
-       * Live search current page.
-       */
-
-      let result =
-        AS_PRODUCTS.filter(
-          product => {
-
-            if(
-              !matchesCategory(
-                product,
-                urlCategory
-              )
-            ){
-
-              return false;
-
-            }
-
-            return matchesSearch(
-              product,
-              value
-            );
-
-          }
-        );
-
-      /*
-       * Apply existing filters.
-       */
-
-      const selectedCategories =
-        getSelectedCategories();
-
-      const price =
-        getSelectedPrice();
-
-      const discount =
-        getSelectedDiscount();
-
-      if(
-        selectedCategories.length
-      ){
-
-        result =
-          result.filter(
-            product =>
-              selectedCategories.some(
-                category =>
-                  matchesCategory(
-                    product,
-                    category
-                  )
-              )
-          );
-
-      }
-
-      if(price){
-
-        result =
-          result.filter(
-            product =>
-              matchesPrice(
-                product,
-                price
-              )
-          );
-
-      }
-
-      if(discount){
-
-        result =
-          result.filter(
-            product =>
-              Number(
-                product.discount || 0
-              ) >= discount
-          );
-
-      }
-
-      result =
-        sortProducts(
-          result,
-          currentSort
-        );
-
-      filteredProducts =
-        result;
-
-      const grid =
-        document.getElementById(
-          "productGrid"
-        );
-
-      const empty =
-        document.getElementById(
-          "emptyState"
-        );
-
-      const count =
-        document.getElementById(
-          "productCount"
-        );
-
-      if(count){
-
-        count.textContent =
-          `${result.length} ${
-            result.length === 1
-              ? "Product"
-              : "Products"
-          }`;
-
-      }
-
-      if(
-        result.length === 0
-      ){
-
-        grid.innerHTML = "";
-
-        empty?.classList.add(
-          "show"
-        );
-
-      }else{
-
-        empty?.classList.remove(
-          "show"
-        );
-
-        grid.innerHTML =
-          result
-            .map(
-              createProductCard
-            )
-            .join("");
-
-        bindProductEvents();
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   SORT EVENT
-========================================================= */
-
-window.addEventListener(
-  "asfashions:sort",
-  event => {
-
-    currentSort =
-      event.detail?.value ||
-      "recommended";
-
-    renderProducts();
-
-  }
-);
-
-
-/* =========================================================
-   FILTER EVENT
-========================================================= */
-
-window.addEventListener(
-  "asfashions:filter",
-  () => {
-
-    renderProducts();
-
-  }
-);
-
-
-/* =========================================================
-   MOBILE / DESKTOP FILTER SYNC
-========================================================= */
-
-function syncFilters(){
-
-  /* category */
-
-  const desktopCategories =
-    [
-      ...document.querySelectorAll(
-        "[data-filter-category]"
-      )
-    ];
-
-  const mobileCategories =
-    [
-      ...document.querySelectorAll(
-        "[data-mobile-category]"
-      )
-    ];
-
-  mobileCategories.forEach(
-    mobile => {
-
-      const desktop =
-        desktopCategories.find(
-          item =>
-            item.value ===
-            mobile.value
-        );
-
-      if(desktop){
-
-        desktop.checked =
-          mobile.checked;
-
-      }
-
-    }
-  );
-
-
-  desktopCategories.forEach(
-    desktop => {
-
-      const mobile =
-        mobileCategories.find(
-          item =>
-            item.value ===
-            desktop.value
-        );
-
-      if(mobile){
-
-        mobile.checked =
-          desktop.checked;
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   FILTER CHECKBOX SYNC
-========================================================= */
-
-document.addEventListener(
-  "change",
-  event => {
-
-    if(
-      event.target.matches(
-        "[data-mobile-category]"
-      )
-    ){
-
-      syncFilters();
-
-    }
-
-    if(
-      event.target.matches(
-        "[data-filter-category]"
-      )
-    ){
-
-      syncFilters();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   EMPTY CLEAR BUTTON
-========================================================= */
-
-document.getElementById(
-  "clearFiltersBtn"
-)?.addEventListener(
-  "click",
-  () => {
-
-    document.querySelectorAll(
-      "input[type='checkbox'], input[type='radio']"
-    ).forEach(
-      input => {
-
-        input.checked =
-          false;
-
-      }
-    );
-
-    currentSort =
-      "recommended";
-
-    const sort =
-      document.getElementById(
-        "sortSelect"
-      );
-
-    if(sort){
-
-      sort.value =
-        "recommended";
-
-    }
-
-    renderProducts();
-
-  }
-);
-
-
-/* =========================================================
-   HEADER COUNTS
-========================================================= */
-
-window.addEventListener(
-  "storage",
-  updateCounts
-);
-
-
-/* =========================================================
-   INITIAL LOAD
-========================================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    updateCounts();
-
-    setupSearch();
-
-    renderProducts();
-
-  }
-);
-
-
-/* =========================================================
-   GLOBAL API
-   Future pages can use these functions.
-========================================================= */
+   EXPORT
+   ========================================================= */
 
 window.AS_FASHIONS = {
-
-  products:AS_PRODUCTS,
-
-  getProduct:function(id){
-
-    return AS_PRODUCTS.find(
-      product =>
-        String(product.id) ===
-        String(id)
-    );
-
-  },
-
+  products: AS_PRODUCTS,
+  getAllProducts,
+  getProductById,
+  money,
+  productLink,
+  getCart,
+  saveCart,
+  getWishlist,
+  saveWishlist,
+  cartCount,
+  wishlistCount,
   addToCart,
-
   toggleWishlist,
-
-  openProduct,
-
-  renderProducts,
-
-  updateCounts
-
+  filterProductsFromURL,
+  productsURL
 };

@@ -157,38 +157,52 @@ img{
 
 
 /* =========================================================
-   PREMIUM LOGO
+   PREMIUM LOGO (AMAZON STYLE INSPIRED)
 ========================================================= */
 
 .logo{
     display:flex;
-    align-items:baseline;
-    gap:8px;
+    flex-direction:column;
+    align-items:center;
     white-space:nowrap;
     justify-self:center;
     text-decoration:none;
 }
 
-.logo-as{
-    font-family:"Playfair Display",serif;
-    font-size:40px;
-    font-weight:700;
-    color:#ff0000;
-    letter-spacing:-2px;
+.logo-main-text {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
 }
 
-.logo-dot{
-    display:none;
+.logo-as{
+    font-family:"Poppins",sans-serif;
+    font-size:32px;
+    font-weight:800;
+    color:#FF9900;
+    letter-spacing:-1px;
+    line-height:1;
 }
 
 .logo-fashion{
-    font-family:"Playfair Display",serif;
-    font-size:35px;
-    font-weight:600;
-    color:#000000;
-    letter-spacing:4px;
-    border-bottom:none;
-    padding-bottom:0;
+    font-family:"Poppins",sans-serif;
+    font-size:20px;
+    font-weight:700;
+    color:#232F3E;
+    letter-spacing:3px;
+    line-height:1;
+}
+
+.logo-smile {
+    width: 100%;
+    height: 8px;
+    margin-top: -2px;
+}
+
+.logo-smile svg {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 
@@ -1507,8 +1521,6 @@ section.section.in-view,
 
 /* =========================================================
    TRENDY / GLASSMORPHISM THEME
-   (overrides the base styles above with a bolder,
-   youthful, Myntra/Ajio-style visual language)
 ========================================================= */
 
 :root{
@@ -1537,30 +1549,6 @@ body{
     -webkit-backdrop-filter:blur(20px) saturate(160%);
     border-bottom:1px solid rgba(20,33,61,.15);
     box-shadow:0 4px 24px rgba(0,0,0,.06);
-}
-
-.logo-as{
-    font-family:"Playfair Display",serif;
-    font-size:40px;
-    font-weight:700;
-    color:#ff0000;
-    letter-spacing:-2px;
-    line-height:1;
-}
-
-.logo-dot{
-    display:none;
-}
-
-.logo-fashion{
-    font-family:"Playfair Display",serif;
-    font-size:35px;
-    font-weight:600;
-    color:#000000;
-    letter-spacing:4px;
-    border-bottom:none;
-    padding-bottom:0;
-    line-height:1;
 }
 
 .nav a{
@@ -2191,8 +2179,16 @@ body{
 
 
         <a href="#home" class="logo">
-            <span class="logo-as">AS</span>
-            <span class="logo-fashion">FASHIONS</span>
+            <div class="logo-main-text">
+                <span class="logo-as">AS</span>
+                <span class="logo-fashion">FASHIONS</span>
+            </div>
+            <div class="logo-smile">
+                <svg viewBox="0 0 160 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 2C50 14 110 14 158 2" stroke="#FF9900" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M145 2L158 2L152 -4" stroke="#FF9900" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
         </a>
 
 
@@ -2332,8 +2328,16 @@ body{
         <div class="drawer-head">
 
             <a href="#home" class="logo">
-                <span class="logo-as">AS</span>
-                <span class="logo-fashion">FASHIONS</span>
+                <div class="logo-main-text">
+                    <span class="logo-as">AS</span>
+                    <span class="logo-fashion">FASHIONS</span>
+                </div>
+                <div class="logo-smile">
+                    <svg viewBox="0 0 160 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 2C50 14 110 14 158 2" stroke="#FF9900" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M145 2L158 2L152 -4" stroke="#FF9900" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
             </a>
 
             <button
@@ -3547,21 +3551,16 @@ body{
                 href="#home"
                 class="logo">
 
-                <span
-                    class="logo-as"
-                    style="color:#fff">
-                    AS
-                </span>
-
-                <span class="logo-dot"></span>
-
-                <span
-                    class="logo-fashion"
-                    style="
-                        color:#fff;
-                        border-color:#fff">
-                    FASHIONS
-                </span>
+                <div class="logo-main-text">
+                    <span class="logo-as" style="color:#FF9900;">AS</span>
+                    <span class="logo-fashion" style="color:#ffffff;">FASHIONS</span>
+                </div>
+                <div class="logo-smile">
+                    <svg viewBox="0 0 160 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 2C50 14 110 14 158 2" stroke="#FF9900" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M145 2L158 2L152 -4" stroke="#FF9900" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
 
             </a>
 

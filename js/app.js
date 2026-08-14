@@ -1,1533 +1,275 @@
-/* =========================================================
-   AS FASHIONS — js/app.js
-   Main Application Controller
-   Connects:
-   products.js
-   categories.js
-   cart.js
-   wishlist.js
-   search.js
-   filters.js
-   offers.js
-   ========================================================= */
-
+/**
+ * AS FASHIONS — App
+ * Boots the homepage: mega-menu, hero, promo strip, category rail,
+ * product rails (New Arrivals / Bestsellers / Sale), cart drawer,
+ * wishlist count, and search typeahead.
+ */
 (function () {
-  "use strict";
+  'use strict';
 
-  const APP_NAME = "AS FASHIONS";
-  const CART_BADGE_SELECTOR =
-    "[data-cart-count], #cartCount, .cart-count";
+  var catApi = window.ASF.categories;
+  var prodApi = window.ASF.products;
+  var cartApi = window.ASF.cart;
+  var wishApi = window.ASF.wishlist;
+  var searchApi = window.ASF.search;
+  var offersApi = window.ASF.offers;
 
-  const WISHLIST_BADGE_SELECTOR =
-    "[data-wishlist-count], #wishlistCount, .wishlist-count";
+  var money = function (n) { return '\u20B9' + Number(n).toLocaleString('en-IN'); };
 
+  /* ---------- Mega menu ---------- */
+  function renderMegaMenu() {
+    var nav = document.getElementById('mainNav');
+    if (!nav) return;
+    nav.innerHTML = '';
 
-  /* =======================================================
-     APPLICATION STATE
-     ======================================================= */
+    var swatchColors = ['#D98E2E', '#6E1F2B', '#3F5B4B', '#274472', '#8A6D3B', '#B25A45', '#4C4A55', '#7A8C6E', '#A9445B', '#5C6E91'];
 
-  const state = {
-    initialized: false,
+    catApi.CATEGORY_TREE.forEach(function (top, i) {
+      var item = document.createElement('div');
+      item.className = 'nav-item';
 
-    currentView: "home",
+      var link = document.createElement('a');
+      link.href = '#' + top.slug;
+      link.className = 'nav-link';
+      link.textContent = top.name;
+      item.appendChild(link);
 
-    currentCategory: null,
+      if (top.children && top.children.length) {
+        var panel = document.createElement('div');
+        panel.className = 'mega-panel';
 
-    currentSubcategory: null,
+        top.children.forEach(function (section) {
+          var col = document.createElement('div');
+          col.className = 'mega-col';
 
-    searchQuery: "",
+          var heading = document.createElement('p');
+          heading.className = 'mega-col-heading';
+          heading.textContent = section.name;
+          col.appendChild(heading);
 
-    filters: {
-      category: null,
-      subcategory: null,
-      gender: null,
+          var list = document.createElement('ul');
+          (section.children || []).slice(0, 9).forEach(function (leaf, idx) {
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.href = '#' + leaf.slug;
+            var chip = document.createElement('span');
+            chip.className = 'swatch-chip';
+            chip.style.background = swatchColors[(idx + i) % swatchColors.length];
+            a.appendChild(chip);
+            a.appendChild(document.createTextNode(leaf.name));
+            li.appendChild(a);
+            list.appendChild(li);
+          });
+          col.appendChild(list);
+          panel.appendChild(col);
+        });
 
-      sizes: [],
-      colors: [],
-      tags: [],
-
-      minPrice: null,
-      maxPrice: null,
-
-      minRating: null,
-
-      discount: null,
-
-      availability: "all",
-
-      isNew: false,
-      isTrending: false,
-
-      sort: "recommended"
-    },
-
-    products: [],
-
-    visibleProducts: [],
-
-    cartCount: 0,
-
-    wishlistCount: 0,
-
-    selectedProduct: null
-  };
-
-
-  /* =======================================================
-     BASIC HELPERS
-     ======================================================= */
-
-  function getProducts() {
-    return window.PRODUCTS ||
-           window.products ||
-           [];
-  }
-
-
-  function getCategories() {
-    return window.CATEGORIES ||
-           window.categories ||
-           [];
-  }
-
-
-  function $(selector, parent = document) {
-    return parent.querySelector(selector);
-  }
-
-
-  function $$(selector, parent = document) {
-    return [
-      ...parent.querySelectorAll(selector)
-    ];
-  }
-
-
-  function escapeHTML(value) {
-
-    return String(value ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-
-  function formatPrice(value) {
-
-    const amount =
-      Number(value) || 0;
-
-    return new Intl.NumberFormat(
-      "en-IN",
-      {
-        style: "currency",
-        currency: "INR",
-        maximumFractionDigits: 0
+        item.appendChild(panel);
       }
-    ).format(amount);
+
+      nav.appendChild(item);
+    });
   }
 
-
-  function getProductById(id) {
-
-    return getProducts().find(
-      product =>
-        String(product.id) === String(id)
-    ) || null;
+  /* ---------- Product card ---------- */
+  function productCard(p) {
+    var wished = wishApi.isWishlisted(p.id);
+    var card = document.createElement('article');
+    card.className = 'product-card';
+    card.innerHTML =
+      '<div class="product-media">' +
+        '<div class="product-media-fallback" style="background:' + colorFromString(p.id) + '"></div>' +
+        '<button class="wish-btn' + (wished ? ' active' : '') + '" data-id="' + p.id + '" aria-label="Add to wishlist">&#9825;</button>' +
+        (p.discountPct >= 30 ? '<span class="tag tag-sale">' + p.discountPct + '% OFF</span>' : '') +
+        (p.isNew ? '<span class="tag tag-new">NEW</span>' : '') +
+      '</div>' +
+      '<div class="product-info">' +
+        '<p class="product-brand">' + p.brand + '</p>' +
+        '<p class="product-name">' + p.name + '</p>' +
+        '<p class="product-price">' + money(p.price) +
+          (p.discountPct > 0 ? ' <span class="mrp">' + money(p.mrp) + '</span>' : '') +
+        '</p>' +
+        '<p class="product-rating">&#9733; ' + p.rating + ' (' + p.ratingCount + ')</p>' +
+        '<button class="btn btn-add" data-id="' + p.id + '">Add to Bag</button>' +
+      '</div>';
+    return card;
   }
 
+  function colorFromString(str) {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    var hue = Math.abs(hash) % 360;
+    return 'hsl(' + hue + ', 32%, 88%)';
+  }
 
-  /* =======================================================
-     TOAST
-     ======================================================= */
+  function renderRail(containerId, products) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = '';
+    products.slice(0, 8).forEach(function (p) { el.appendChild(productCard(p)); });
+  }
 
-  function showToast(
-    message,
-    type = "success"
-  ) {
+  /* ---------- Promo banners ---------- */
+  function renderPromos() {
+    var el = document.getElementById('promoStrip');
+    if (!el) return;
+    el.innerHTML = '';
+    offersApi.getPromoBanners().forEach(function (promo) {
+      var card = document.createElement('a');
+      card.className = 'promo-card';
+      card.href = promo.link;
+      card.innerHTML =
+        '<p class="promo-title">' + promo.title + '</p>' +
+        '<p class="promo-subtitle">' + promo.subtitle + '</p>' +
+        '<span class="promo-cta">' + promo.ctaLabel + ' \u2192</span>';
+      el.appendChild(card);
+    });
+  }
 
-    let toast =
-      $("#asfToast");
+  /* ---------- Category rail (top-level) ---------- */
+  function renderCategoryRail() {
+    var el = document.getElementById('categoryRail');
+    if (!el) return;
+    el.innerHTML = '';
+    catApi.CATEGORY_TREE.forEach(function (top, i) {
+      var card = document.createElement('a');
+      card.className = 'category-card';
+      card.href = '#' + top.slug;
+      card.innerHTML =
+        '<div class="category-swatch" style="background:' + colorFromString(top.id) + '"></div>' +
+        '<p>' + top.name + '</p>';
+      el.appendChild(card);
+    });
+  }
 
+  /* ---------- Cart badge + drawer ---------- */
+  function updateCartBadge() {
+    var badge = document.getElementById('cartCount');
+    if (badge) badge.textContent = cartApi.getItemCount();
+  }
+  function updateWishBadge() {
+    var badge = document.getElementById('wishCount');
+    if (badge) badge.textContent = wishApi.getCount();
+  }
 
-    if (!toast) {
-
-      toast =
-        document.createElement("div");
-
-      toast.id = "asfToast";
-
-      toast.setAttribute(
-        "role",
-        "status"
-      );
-
-      document.body.appendChild(
-        toast
-      );
-
+  function renderCartDrawer() {
+    var body = document.getElementById('cartDrawerBody');
+    var totalEl = document.getElementById('cartSubtotal');
+    if (!body) return;
+    var summary = cartApi.getSummary();
+    body.innerHTML = '';
+    if (!summary.lines.length) {
+      body.innerHTML = '<p class="empty-state">Your bag is empty.</p>';
+    } else {
+      summary.lines.forEach(function (line) {
+        if (!line.product) return;
+        var row = document.createElement('div');
+        row.className = 'cart-row';
+        row.innerHTML =
+          '<div class="cart-row-media" style="background:' + colorFromString(line.product.id) + '"></div>' +
+          '<div class="cart-row-info">' +
+            '<p class="cart-row-name">' + line.product.name + '</p>' +
+            '<p class="cart-row-meta">' + (line.size || '') + (line.color ? ' \u00b7 ' + line.color : '') + ' \u00b7 Qty ' + line.qty + '</p>' +
+            '<p class="cart-row-price">' + money(line.lineTotal) + '</p>' +
+          '</div>' +
+          '<button class="cart-row-remove" data-id="' + line.product.id + '" data-size="' + (line.size || '') + '" data-color="' + (line.color || '') + '">Remove</button>';
+        body.appendChild(row);
+      });
     }
+    if (totalEl) totalEl.textContent = money(summary.subtotal);
+  }
 
+  function toggleDrawer(open) {
+    var drawer = document.getElementById('cartDrawer');
+    if (drawer) drawer.classList.toggle('open', open);
+  }
 
-    toast.className =
-      `asf-toast asf-toast-${type}`;
+  /* ---------- Search ---------- */
+  function renderSearchResults(query) {
+    var box = document.getElementById('searchResults');
+    if (!box) return;
+    var results = searchApi.suggest(query, 6);
+    if (!query.trim()) { box.innerHTML = ''; box.classList.remove('open'); return; }
 
+    var html = '';
+    if (results.categories.length) {
+      html += '<p class="search-group-label">Categories</p>';
+      results.categories.forEach(function (c) {
+        html += '<a class="search-row" href="#' + c.slug + '">' + c.name + '</a>';
+      });
+    }
+    if (results.products.length) {
+      html += '<p class="search-group-label">Products</p>';
+      results.products.forEach(function (p) {
+        html += '<a class="search-row" href="#product-' + p.id + '">' + p.brand + ' ' + p.name + '</a>';
+      });
+    }
+    if (!html) html = '<p class="empty-state">No results found</p>';
+    box.innerHTML = html;
+    box.classList.add('open');
+  }
 
-    toast.textContent =
-      message;
-
-
-    requestAnimationFrame(() => {
-
-      toast.classList.add(
-        "show"
-      );
-
+  /* ---------- Wire up events ---------- */
+  function bindEvents() {
+    document.body.addEventListener('click', function (e) {
+      var addBtn = e.target.closest('.btn-add');
+      if (addBtn) {
+        cartApi.addItem(addBtn.dataset.id, { qty: 1 });
+        toggleDrawer(true);
+        return;
+      }
+      var wishBtn = e.target.closest('.wish-btn');
+      if (wishBtn) {
+        wishApi.toggle(wishBtn.dataset.id);
+        wishBtn.classList.toggle('active');
+        return;
+      }
+      var removeBtn = e.target.closest('.cart-row-remove');
+      if (removeBtn) {
+        cartApi.removeItem(removeBtn.dataset.id, removeBtn.dataset.size, removeBtn.dataset.color);
+        return;
+      }
+      if (e.target.closest('#cartToggle')) { toggleDrawer(true); return; }
+      if (e.target.closest('#cartClose') || e.target.closest('.drawer-backdrop')) { toggleDrawer(false); return; }
+      if (e.target.closest('#mobileMenuToggle')) {
+        document.getElementById('mainNav').classList.toggle('open');
+        return;
+      }
     });
 
-
-    clearTimeout(
-      toast._hideTimer
-    );
-
-
-    toast._hideTimer =
-      setTimeout(() => {
-
-        toast.classList.remove(
-          "show"
-        );
-
-      }, 2600);
-  }
-
-
-  /* =======================================================
-     CART / WISHLIST BADGES
-     ======================================================= */
-
-  function updateBadges() {
-
-    let cartCount = 0;
-
-    let wishlistCount = 0;
-
-
-    if (
-      window.ASFCart &&
-      typeof window.ASFCart.getCartCount ===
-        "function"
-    ) {
-
-      cartCount =
-        window.ASFCart.getCartCount();
-
-    }
-
-
-    if (
-      window.ASFWishlist &&
-      typeof window.ASFWishlist.getWishlistCount ===
-        "function"
-    ) {
-
-      wishlistCount =
-        window.ASFWishlist.getWishlistCount();
-
-    }
-
-
-    state.cartCount =
-      cartCount;
-
-    state.wishlistCount =
-      wishlistCount;
-
-
-    $$(CART_BADGE_SELECTOR)
-      .forEach(element => {
-
-        element.textContent =
-          cartCount;
-
-        element.hidden =
-          cartCount === 0;
-
+    var searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', searchApi.debounce(function (e) {
+        renderSearchResults(e.target.value);
+      }, 180));
+      searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          searchApi.pushRecent(e.target.value);
+          renderSearchResults(e.target.value);
+        }
       });
+    }
 
-
-    $$(WISHLIST_BADGE_SELECTOR)
-      .forEach(element => {
-
-        element.textContent =
-          wishlistCount;
-
-        element.hidden =
-          wishlistCount === 0;
-
-      });
+    window.addEventListener('asf:cart-updated', function () {
+      updateCartBadge();
+      renderCartDrawer();
+    });
+    window.addEventListener('asf:wishlist-updated', updateWishBadge);
   }
 
-
-  /* =======================================================
-     PRODUCT CARD ACTIONS
-     ======================================================= */
-
-  function addProductToCart(
-    productId,
-    options = {}
-  ) {
-
-    if (
-      !window.ASFCart ||
-      typeof window.ASFCart.addToCart !==
-        "function"
-    ) {
-
-      showToast(
-        "Cart is not ready yet.",
-        "error"
-      );
-
-      return false;
-    }
-
-
-    const product =
-      getProductById(productId);
-
-
-    if (!product) {
-
-      showToast(
-        "Product not found.",
-        "error"
-      );
-
-      return false;
-    }
-
-
-    const result =
-      window.ASFCart.addToCart(
-        productId,
-        options
-      );
-
-
-    if (result.success) {
-
-      showToast(
-        `${product.name} added to cart`
-      );
-
-      updateBadges();
-
-      return true;
-    }
-
-
-    showToast(
-      result.message ||
-        "Unable to add product.",
-      "error"
-    );
-
-
-    return false;
-  }
-
-
-  function toggleProductWishlist(
-    productId
-  ) {
-
-    if (
-      !window.ASFWishlist
-    ) {
-
-      showToast(
-        "Wishlist is not ready yet.",
-        "error"
-      );
-
-      return false;
-    }
-
-
-    const product =
-      getProductById(productId);
-
-
-    if (!product) {
-
-      showToast(
-        "Product not found.",
-        "error"
-      );
-
-      return false;
-    }
-
-
-    const result =
-      window.ASFWishlist
-        .toggleWishlist(
-          productId
-        );
-
-
-    showToast(
-      result.message
-    );
-
-
-    updateBadges();
-
-
-    return result.active;
-  }
-
-
-  /* =======================================================
-     SEARCH
-     ======================================================= */
-
-  function performSearch(
-    query
-  ) {
-
-    const value =
-      String(query || "").trim();
-
-
-    state.searchQuery =
-      value;
-
-
-    if (!value) {
-
-      state.visibleProducts =
-        getFilteredProducts();
-
-      emitStateChange();
-
-      return state.visibleProducts;
-    }
-
-
-    let results = [];
-
-
-    if (
-      window.ASFSearch &&
-      typeof window.ASFSearch.searchProducts ===
-        "function"
-    ) {
-
-      results =
-        window.ASFSearch.searchProducts(
-          value,
-          {
-            saveHistory: true
-          }
-        );
-
-    } else {
-
-      const normalized =
-        value.toLowerCase();
-
-
-      results =
-        getProducts().filter(
-          product =>
-            String(
-              product.name || ""
-            )
-              .toLowerCase()
-              .includes(
-                normalized
-              )
-        );
-
-    }
-
-
-    state.visibleProducts =
-      applyLocalFilters(
-        results
-      );
-
-
-    emitStateChange();
-
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "asf:search-complete",
-        {
-          detail: {
-            query: value,
-            products:
-              state.visibleProducts
-          }
-        }
-      )
-    );
-
-
-    return state.visibleProducts;
-  }
-
-
-  /* =======================================================
-     FILTERING
-     ======================================================= */
-
-  function applyLocalFilters(
-    products
-  ) {
-
-    if (
-      !window.ASFFilters ||
-      typeof window.ASFFilters.filterProducts !==
-        "function"
-    ) {
-
-      return products;
-
-    }
-
-
-    return window.ASFFilters
-      .filterProducts(
-        products,
-        state.filters
-      );
-  }
-
-
-  function getFilteredProducts() {
-
-    let products =
-      getProducts();
-
-
-    if (
-      state.searchQuery
-    ) {
-
-      if (
-        window.ASFSearch &&
-        typeof window.ASFSearch.searchProducts ===
-          "function"
-      ) {
-
-        products =
-          window.ASFSearch.searchProducts(
-            state.searchQuery,
-            {
-              saveHistory: false
-            }
-          );
-
-      } else {
-
-        const query =
-          state.searchQuery
-            .toLowerCase();
-
-
-        products =
-          products.filter(
-            product =>
-              String(
-                product.name || ""
-              )
-                .toLowerCase()
-                .includes(query)
-          );
-
-      }
-    }
-
-
-    products =
-      applyLocalFilters(
-        products
-      );
-
-
-    if (
-      window.ASFFilters &&
-      typeof window.ASFFilters.sortProducts ===
-        "function"
-    ) {
-
-      products =
-        window.ASFFilters.sortProducts(
-          products,
-          state.filters.sort
-        );
-
-    }
-
-
-    state.visibleProducts =
-      products;
-
-
-    return products;
-  }
-
-
-  function setFilters(
-    changes = {}
-  ) {
-
-    state.filters = {
-
-      ...state.filters,
-
-      ...changes
-
-    };
-
-
-    state.visibleProducts =
-      getFilteredProducts();
-
-
-    emitStateChange();
-
-
-    return state.visibleProducts;
-  }
-
-
-  function resetFilters() {
-
-    if (
-      window.ASFFilters &&
-      typeof window.ASFFilters.createDefaultFilters ===
-        "function"
-    ) {
-
-      state.filters =
-        window.ASFFilters
-          .createDefaultFilters();
-
-    } else {
-
-      state.filters = {
-        category: null,
-        subcategory: null,
-        gender: null,
-        sizes: [],
-        colors: [],
-        tags: [],
-        minPrice: null,
-        maxPrice: null,
-        minRating: null,
-        discount: null,
-        availability: "all",
-        isNew: false,
-        isTrending: false,
-        sort: "recommended"
-      };
-
-    }
-
-
-    state.visibleProducts =
-      getFilteredProducts();
-
-
-    emitStateChange();
-
-
-    return state.visibleProducts;
-  }
-
-
-  /* =======================================================
-     CATEGORY NAVIGATION
-     ======================================================= */
-
-  function openCategory(
-    categoryId,
-    subcategoryId = null
-  ) {
-
-    const category =
-      getCategories().find(
-        item =>
-          item.id === categoryId
-      );
-
-
-    if (!category) {
-
-      showToast(
-        "Category not found.",
-        "error"
-      );
-
-      return [];
-
-    }
-
-
-    state.currentView =
-      "category";
-
-    state.currentCategory =
-      categoryId;
-
-    state.currentSubcategory =
-      subcategoryId;
-
-
-    state.filters.category =
-      category.name;
-
-
-    if (subcategoryId) {
-
-      const subcategory =
-        category.subcategories?.find(
-          item =>
-            item.id === subcategoryId
-        );
-
-
-      state.filters.subcategory =
-        subcategory
-          ? subcategory.name
-          : null;
-
-    } else {
-
-      state.filters.subcategory =
-        null;
-
-    }
-
-
-    state.searchQuery =
-      "";
-
-
-    state.visibleProducts =
-      getFilteredProducts();
-
-
-    emitStateChange();
-
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "asf:category-opened",
-        {
-          detail: {
-            category,
-            subcategoryId,
-            products:
-              state.visibleProducts
-          }
-        }
-      )
-    );
-
-
-    return state.visibleProducts;
-  }
-
-
-  function openHome() {
-
-    state.currentView =
-      "home";
-
-    state.currentCategory =
-      null;
-
-    state.currentSubcategory =
-      null;
-
-    state.searchQuery =
-      "";
-
-
-    resetFilters();
-
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "asf:home-opened"
-      )
-    );
-  }
-
-
-  /* =======================================================
-     COLLECTIONS
-     ======================================================= */
-
-  function openCollection(
-    collectionId
-  ) {
-
-    resetFilters();
-
-
-    state.currentView =
-      "collection";
-
-
-    switch (collectionId) {
-
-      case "new-arrivals":
-
-        state.filters.isNew =
-          true;
-
-        break;
-
-
-      case "trending":
-
-      case "trending-now":
-
-        state.filters.isTrending =
-          true;
-
-        break;
-
-
-      case "bestsellers":
-
-        state.filters.sort =
-          "rating";
-
-        break;
-
-
-      case "flash-sale":
-
-        state.filters.discount =
-          30;
-
-        state.filters.sort =
-          "discount";
-
-        break;
-
-
-      case "under-499":
-
-        state.filters.maxPrice =
-          499;
-
-        break;
-
-
-      case "under-999":
-
-        state.filters.maxPrice =
-          999;
-
-        break;
-
-
-      case "flat-50":
-
-        state.filters.discount =
-          50;
-
-        state.filters.sort =
-          "discount";
-
-        break;
-
-
-      case "flat-70":
-
-        state.filters.discount =
-          70;
-
-        state.filters.sort =
-          "discount";
-
-        break;
-
-
-      case "flat-80":
-
-        state.filters.discount =
-          80;
-
-        state.filters.sort =
-          "discount";
-
-        break;
-
-
-      default:
-
-        showToast(
-          "Collection not found.",
-          "error"
-        );
-
-        return [];
-
-    }
-
-
-    state.visibleProducts =
-      getFilteredProducts();
-
-
-    emitStateChange();
-
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "asf:collection-opened",
-        {
-          detail: {
-            collectionId,
-            products:
-              state.visibleProducts
-          }
-        }
-      )
-    );
-
-
-    return state.visibleProducts;
-  }
-
-
-  /* =======================================================
-     PRODUCT OPEN
-     ======================================================= */
-
-  function openProduct(
-    productId
-  ) {
-
-    const product =
-      getProductById(
-        productId
-      );
-
-
-    if (!product) {
-
-      showToast(
-        "Product not found.",
-        "error"
-      );
-
-      return null;
-    }
-
-
-    state.selectedProduct =
-      product;
-
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "asf:product-opened",
-        {
-          detail: {
-            product
-          }
-        }
-      )
-    );
-
-
-    return product;
-  }
-
-
-  /* =======================================================
-     CART NAVIGATION
-     ======================================================= */
-
-  function openCart() {
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "asf:cart-open"
-      )
-    );
-
-
-    const cartLink =
-      $(
-        "[data-open-cart]"
-      );
-
-
-    if (
-      cartLink &&
-      cartLink.tagName === "A"
-    ) {
-
-      return;
-
-    }
-
-
-    return window.ASFCart
-      ? window.ASFCart.getCart()
-      : [];
-  }
-
-
-  /* =======================================================
-     WISHLIST NAVIGATION
-     ======================================================= */
-
-  function openWishlist() {
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "asf:wishlist-open"
-      )
-    );
-
-
-    return window.ASFWishlist
-      ? window.ASFWishlist
-          .getWishlistProducts()
-      : [];
-  }
-
-
-  /* =======================================================
-     OFFER HANDLING
-     ======================================================= */
-
-  function getOfferState() {
-
-    if (
-      !window.ASFOffers
-    ) {
-
-      return null;
-    }
-
-
-    return {
-
-      primary:
-        window.ASFOffers
-          .getPrimaryOffer(),
-
-      flashSale:
-        window.ASFOffers
-          .getFlashSaleCountdown(),
-
-      coupons:
-        window.ASFOffers
-          .getCoupons()
-
-    };
-  }
-
-
-  /* =======================================================
-     EVENT DELEGATION
-     ======================================================= */
-
-  function handleClick(
-    event
-  ) {
-
-    const target =
-      event.target.closest(
-        "[data-action]"
-      );
-
-
-    if (!target) {
-      return;
-    }
-
-
-    const action =
-      target.dataset.action;
-
-
-    switch (action) {
-
-      case "add-cart": {
-
-        event.preventDefault();
-
-        addProductToCart(
-          target.dataset.productId,
-          {
-            size:
-              target.dataset.size ||
-              null,
-
-            color:
-              target.dataset.color ||
-              null,
-
-            quantity:
-              Number(
-                target.dataset.quantity ||
-                1
-              )
-          }
-        );
-
-        break;
-      }
-
-
-      case "wishlist": {
-
-        event.preventDefault();
-
-        toggleProductWishlist(
-          target.dataset.productId
-        );
-
-        break;
-      }
-
-
-      case "product": {
-
-        event.preventDefault();
-
-        openProduct(
-          target.dataset.productId
-        );
-
-        break;
-      }
-
-
-      case "category": {
-
-        event.preventDefault();
-
-        openCategory(
-          target.dataset.categoryId,
-          target.dataset.subcategoryId ||
-            null
-        );
-
-        break;
-      }
-
-
-      case "collection": {
-
-        event.preventDefault();
-
-        openCollection(
-          target.dataset.collectionId
-        );
-
-        break;
-      }
-
-
-      case "cart": {
-
-        event.preventDefault();
-
-        openCart();
-
-        break;
-      }
-
-
-      case "wishlist-page": {
-
-        event.preventDefault();
-
-        openWishlist();
-
-        break;
-      }
-
-
-      case "home": {
-
-        event.preventDefault();
-
-        openHome();
-
-        break;
-      }
-
-    }
-  }
-
-
-  /* =======================================================
-     SEARCH FORM
-     ======================================================= */
-
-  function handleSearchSubmit(
-    event
-  ) {
-
-    const form =
-      event.target.closest(
-        "form[data-search-form]"
-      );
-
-
-    if (!form) {
-      return;
-    }
-
-
-    event.preventDefault();
-
-
-    const input =
-      form.querySelector(
-        "input"
-      );
-
-
-    if (!input) {
-      return;
-    }
-
-
-    performSearch(
-      input.value
-    );
-  }
-
-
-  /* =======================================================
-     SEARCH INPUT
-     ======================================================= */
-
-  function handleSearchInput(
-    event
-  ) {
-
-    const input =
-      event.target.closest(
-        "[data-search-input]"
-      );
-
-
-    if (!input) {
-      return;
-    }
-
-
-    const query =
-      input.value.trim();
-
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "asf:search-suggestions",
-        {
-          detail: {
-
-            query,
-
-            suggestions:
-              window.ASFSearch &&
-              window.ASFSearch
-                .getSuggestions
-                ? window.ASFSearch
-                    .getSuggestions(
-                      query
-                    )
-                : []
-
-          }
-        }
-      )
-    );
-  }
-
-
-  /* =======================================================
-     GLOBAL EVENT LISTENERS
-     ======================================================= */
-
-  function bindEvents() {
-
-    document.addEventListener(
-      "click",
-      handleClick
-    );
-
-
-    document.addEventListener(
-      "submit",
-      handleSearchSubmit
-    );
-
-
-    document.addEventListener(
-      "input",
-      handleSearchInput
-    );
-
-
-    window.addEventListener(
-      "asf:cart-updated",
-      () => {
-
-        updateBadges();
-
-        emitStateChange();
-
-      }
-    );
-
-
-    window.addEventListener(
-      "asf:wishlist-updated",
-      () => {
-
-        updateBadges();
-
-        emitStateChange();
-
-      }
-    );
-
-
-    window.addEventListener(
-      "popstate",
-      () => {
-
-        updateBadges();
-
-      }
-    );
-  }
-
-
-  /* =======================================================
-     STATE EVENT
-     ======================================================= */
-
-  function emitStateChange() {
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "asf:state-changed",
-        {
-          detail: {
-            state:
-              getState()
-          }
-        }
-      )
-    );
-  }
-
-
-  /* =======================================================
-     GET STATE
-     ======================================================= */
-
-  function getState() {
-
-    return {
-
-      ...state,
-
-      filters: {
-        ...state.filters,
-
-        sizes:
-          [...state.filters.sizes],
-
-        colors:
-          [...state.filters.colors],
-
-        tags:
-          [...state.filters.tags]
-
-      },
-
-      products:
-        [...state.products],
-
-      visibleProducts:
-        [...state.visibleProducts]
-
-    };
-  }
-
-
-  /* =======================================================
-     INITIALIZATION
-     ======================================================= */
-
+  /* ---------- Boot ---------- */
   function init() {
-
-    if (
-      state.initialized
-    ) {
-
-      return getState();
-
-    }
-
-
-    state.products =
-      getProducts();
-
-
-    state.visibleProducts =
-      getFilteredProducts();
-
-
+    renderMegaMenu();
+    renderPromos();
+    renderCategoryRail();
+    renderRail('newArrivalsRail', prodApi.getNewArrivals().length ? prodApi.getNewArrivals() : prodApi.getAllProducts());
+    renderRail('bestsellersRail', prodApi.getBestsellers().length ? prodApi.getBestsellers() : prodApi.getAllProducts().slice(8, 16));
+    renderRail('saleRail', prodApi.getSaleProducts());
+    updateCartBadge();
+    updateWishBadge();
+    renderCartDrawer();
     bindEvents();
-
-    updateBadges();
-
-
-    state.initialized =
-      true;
-
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "asf:app-ready",
-        {
-          detail: {
-            appName:
-              APP_NAME,
-
-            state:
-              getState()
-          }
-        }
-      )
-    );
-
-
-    return getState();
   }
 
-
-  /* =======================================================
-     PUBLIC API
-     ======================================================= */
-
-  window.ASFApp = {
-
-    APP_NAME,
-
-    state,
-
-    init,
-
-    getState,
-
-    getProducts,
-
-    getProductById,
-
-    getCategories,
-
-    formatPrice,
-
-    showToast,
-
-    updateBadges,
-
-    addProductToCart,
-
-    toggleProductWishlist,
-
-    performSearch,
-
-    getFilteredProducts,
-
-    setFilters,
-
-    resetFilters,
-
-    openCategory,
-
-    openCollection,
-
-    openHome,
-
-    openProduct,
-
-    openCart,
-
-    openWishlist,
-
-    getOfferState
-
-  };
-
-
-  /* =======================================================
-     GLOBAL HELPERS
-     ======================================================= */
-
-  window.showToast =
-    showToast;
-
-  window.openProduct =
-    openProduct;
-
-  window.openCategory =
-    openCategory;
-
-  window.openCollection =
-    openCollection;
-
-  window.performSearch =
-    performSearch;
-
-
-  /* =======================================================
-     DOM READY
-     ======================================================= */
-
-  if (
-    document.readyState ===
-    "loading"
-  ) {
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      init,
-      {
-        once: true
-      }
-    );
-
-  } else {
-
-    init();
-
-  }
-
+  document.addEventListener('DOMContentLoaded', init);
 })();

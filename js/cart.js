@@ -113,3 +113,4 @@
     getSummary: getSummary
   };
 })(window);
+

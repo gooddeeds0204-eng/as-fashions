@@ -1,11 +1,7 @@
 /**
- * AS FASHIONS — Product Catalog (demo/sample data)
+ * AS FASHIONS — Product Catalog
  * Every product.categoryId matches an id in js/categories.js exactly,
  * so PLP filters, breadcrumbs, and category pages stay in sync automatically.
- *
- * Replace this file's PRODUCTS array with real catalog data (or fetch it
- * from an API) — everything else (search, filters, cart) reads from
- * window.ASF.products and does not care where the data came from.
  *
  * Product schema:
  * {
@@ -3997,21 +3993,96 @@
   }
 ];
 
-  function getAllProducts() { return PRODUCTS; }
+  /* ---------------------------------------------------------------
+   * Admin overrides (localStorage-backed draft layer)
+   * admin.html never edits PRODUCTS above directly — it stores
+   * adds/edits/deletes here, and getEffectiveProducts() merges them in.
+   * This means admin changes preview live on the storefront immediately
+   * (same browser), without needing a backend. To make changes permanent
+   * for every visitor, use admin.html's "Export products.js" button and
+   * replace this file in the repo.
+   * --------------------------------------------------------------- */
+  var OVERRIDES_KEY = 'asf_admin_overrides';
 
-  function getProductById(id) {
-    return PRODUCTS.find(function (p) { return p.id === id; }) || null;
+  function readOverrides() {
+    try {
+      var raw = localStorage.getItem(OVERRIDES_KEY);
+      return raw ? JSON.parse(raw) : { added: [], edited: {}, deleted: [] };
+    } catch (e) {
+      return { added: [], edited: {}, deleted: [] };
+    }
   }
 
-  // Returns products in this category OR any of its descendant categories.
-  function getProductsByCategory(categoryId) {
-    var catApi = global.ASF && global.ASF.categories;
-    if (!catApi) return PRODUCTS.filter(function (p) { return p.categoryId === categoryId; });
+  function writeOverrides(overrides) {
+    try {
+      localStorage.setItem(OVERRIDES_KEY, JSON.stringify(overrides));
+    } catch (e) {
+      console.error('Could not save admin overrides (localStorage full?)', e);
+    }
+    global.dispatchEvent(new CustomEvent('asf:products-updated', {}));
+  }
 
-    var descendantIds = catApi.getAllLeafIds([catApi.getCategoryNode ? catApi.getCategoryNode(categoryId) : null].filter(Boolean));
-    // Fallback: match by id prefix within the category tree using CATEGORY_INDEX ancestors
+  function addOverrideProduct(product) {
+    var overrides = readOverrides();
+    overrides.added.push(product);
+    writeOverrides(overrides);
+  }
+
+  function updateOverrideProduct(id, patch) {
+    var overrides = readOverrides();
+    var addedIdx = overrides.added.findIndex(function (p) { return p.id === id; });
+    if (addedIdx !== -1) {
+      overrides.added[addedIdx] = Object.assign({}, overrides.added[addedIdx], patch);
+    } else {
+      overrides.edited[id] = Object.assign({}, overrides.edited[id] || {}, patch);
+    }
+    writeOverrides(overrides);
+  }
+
+  function deleteOverrideProduct(id) {
+    var overrides = readOverrides();
+    overrides.added = overrides.added.filter(function (p) { return p.id !== id; });
+    delete overrides.edited[id];
+    if (PRODUCTS.some(function (p) { return p.id === id; }) && overrides.deleted.indexOf(id) === -1) {
+      overrides.deleted.push(id);
+    }
+    writeOverrides(overrides);
+  }
+
+  function clearOverrides() {
+    writeOverrides({ added: [], edited: {}, deleted: [] });
+  }
+
+  function getEffectiveProducts() {
+    var overrides = readOverrides();
+    var base = PRODUCTS
+      .filter(function (p) { return overrides.deleted.indexOf(p.id) === -1; })
+      .map(function (p) { return overrides.edited[p.id] ? Object.assign({}, p, overrides.edited[p.id]) : p; });
+    return base.concat(overrides.added);
+  }
+
+  function getNextProductId() {
+    var all = getEffectiveProducts();
+    var maxNum = 0;
+    all.forEach(function (p) {
+      var m = /asf-(\d+)/.exec(p.id || '');
+      if (m) maxNum = Math.max(maxNum, parseInt(m[1], 10));
+    });
+    return 'asf-' + String(maxNum + 1).padStart(4, '0');
+  }
+
+  function getAllProducts() { return getEffectiveProducts(); }
+
+  function getProductById(id) {
+    return getEffectiveProducts().find(function (p) { return p.id === id; }) || null;
+  }
+
+  function getProductsByCategory(categoryId) {
+    var all = getEffectiveProducts();
+    var catApi = global.ASF && global.ASF.categories;
+    if (!catApi) return all.filter(function (p) { return p.categoryId === categoryId; });
     var index = catApi.CATEGORY_INDEX;
-    return PRODUCTS.filter(function (p) {
+    return all.filter(function (p) {
       if (p.categoryId === categoryId) return true;
       var entry = index[p.categoryId];
       return entry && entry.ancestors && entry.ancestors.indexOf(categoryId) !== -1;
@@ -4019,21 +4090,76 @@
   }
 
   function getProductsByGender(gender) {
-    return PRODUCTS.filter(function (p) { return p.gender === gender; });
+    return getEffectiveProducts().filter(function (p) { return p.gender === gender; });
   }
 
   function searchProducts(query) {
     var q = (query || '').trim().toLowerCase();
     if (!q) return [];
-    return PRODUCTS.filter(function (p) {
+    return getEffectiveProducts().filter(function (p) {
       return p.name.toLowerCase().indexOf(q) !== -1 ||
              p.brand.toLowerCase().indexOf(q) !== -1;
     });
   }
 
-  function getNewArrivals() { return PRODUCTS.filter(function (p) { return p.isNew; }); }
-  function getBestsellers() { return PRODUCTS.filter(function (p) { return p.isBestseller; }); }
-  function getSaleProducts() { return PRODUCTS.filter(function (p) { return p.discountPct >= 30; }); }
+  function getNewArrivals() { return getEffectiveProducts().filter(function (p) { return p.isNew; }); }
+  function getBestsellers() { return getEffectiveProducts().filter(function (p) { return p.isBestseller; }); }
+  function getSaleProducts() { return getEffectiveProducts().filter(function (p) { return p.discountPct >= 30; }); }
+
+  // Builds ready-to-commit file text for js/products.js with all current
+  // overrides baked permanently into the PRODUCTS array. Used by
+  // admin.html's "Export products.js" download button.
+  function exportProductsFileText() {
+    var merged = getEffectiveProducts();
+    var json = JSON.stringify(merged, null, 2);
+    var lines = [];
+    lines.push("/**");
+    lines.push(" * AS FASHIONS \u2014 Product Catalog");
+    lines.push(" * Exported from the admin panel. Replace js/products.js in your repo");
+    lines.push(" * with this file, commit, and push to make these changes permanent");
+    lines.push(" * for every visitor.");
+    lines.push(" */");
+    lines.push("(function (global) {");
+    lines.push("  'use strict';");
+    lines.push("");
+    lines.push("  var PRODUCTS = " + json + ";");
+    lines.push("");
+    lines.push("  function getAllProducts() { return PRODUCTS; }");
+    lines.push("  function getProductById(id) { return PRODUCTS.find(function (p) { return p.id === id; }) || null; }");
+    lines.push("  function getProductsByCategory(categoryId) {");
+    lines.push("    var catApi = global.ASF && global.ASF.categories;");
+    lines.push("    if (!catApi) return PRODUCTS.filter(function (p) { return p.categoryId === categoryId; });");
+    lines.push("    var index = catApi.CATEGORY_INDEX;");
+    lines.push("    return PRODUCTS.filter(function (p) {");
+    lines.push("      if (p.categoryId === categoryId) return true;");
+    lines.push("      var entry = index[p.categoryId];");
+    lines.push("      return entry && entry.ancestors && entry.ancestors.indexOf(categoryId) !== -1;");
+    lines.push("    });");
+    lines.push("  }");
+    lines.push("  function getProductsByGender(gender) { return PRODUCTS.filter(function (p) { return p.gender === gender; }); }");
+    lines.push("  function searchProducts(query) {");
+    lines.push("    var q = (query || '').trim().toLowerCase();");
+    lines.push("    if (!q) return [];");
+    lines.push("    return PRODUCTS.filter(function (p) { return p.name.toLowerCase().indexOf(q) !== -1 || p.brand.toLowerCase().indexOf(q) !== -1; });");
+    lines.push("  }");
+    lines.push("  function getNewArrivals() { return PRODUCTS.filter(function (p) { return p.isNew; }); }");
+    lines.push("  function getBestsellers() { return PRODUCTS.filter(function (p) { return p.isBestseller; }); }");
+    lines.push("  function getSaleProducts() { return PRODUCTS.filter(function (p) { return p.discountPct >= 30; }); }");
+    lines.push("");
+    lines.push("  global.ASF = global.ASF || {};");
+    lines.push("  global.ASF.products = {");
+    lines.push("    getAllProducts: getAllProducts,");
+    lines.push("    getProductById: getProductById,");
+    lines.push("    getProductsByCategory: getProductsByCategory,");
+    lines.push("    getProductsByGender: getProductsByGender,");
+    lines.push("    searchProducts: searchProducts,");
+    lines.push("    getNewArrivals: getNewArrivals,");
+    lines.push("    getBestsellers: getBestsellers,");
+    lines.push("    getSaleProducts: getSaleProducts");
+    lines.push("  };");
+    lines.push("})(window);");
+    return lines.join("\n");
+  }
 
   global.ASF = global.ASF || {};
   global.ASF.products = {
@@ -4044,6 +4170,15 @@
     searchProducts: searchProducts,
     getNewArrivals: getNewArrivals,
     getBestsellers: getBestsellers,
-    getSaleProducts: getSaleProducts
+    getSaleProducts: getSaleProducts,
+    admin: {
+      addProduct: addOverrideProduct,
+      updateProduct: updateOverrideProduct,
+      deleteProduct: deleteOverrideProduct,
+      clearOverrides: clearOverrides,
+      getOverrides: readOverrides,
+      getNextProductId: getNextProductId,
+      exportProductsFileText: exportProductsFileText
+    }
   };
 })(window);

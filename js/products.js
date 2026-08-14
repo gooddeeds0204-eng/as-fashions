@@ -4014,18 +4014,25 @@
   }
 
   function writeOverrides(overrides) {
+    var saved = true;
+    var errorMessage = '';
     try {
       localStorage.setItem(OVERRIDES_KEY, JSON.stringify(overrides));
     } catch (e) {
-      console.error('Could not save admin overrides (localStorage full?)', e);
+      saved = false;
+      errorMessage = (e && e.name === 'QuotaExceededError')
+        ? 'Browser storage is full — this usually happens after adding several photos. Use smaller photos, remove an old admin-added photo, or use the Image Manager\u2019s ZIP export instead of embedding photos directly.'
+        : 'Could not save changes: ' + (e && e.message ? e.message : e);
+      console.error('[AS FASHIONS admin] Save failed', e);
     }
-    global.dispatchEvent(new CustomEvent('asf:products-updated', {}));
+    global.dispatchEvent(new CustomEvent('asf:products-updated', { detail: { saved: saved, error: errorMessage } }));
+    return { saved: saved, error: errorMessage };
   }
 
   function addOverrideProduct(product) {
     var overrides = readOverrides();
     overrides.added.push(product);
-    writeOverrides(overrides);
+    return writeOverrides(overrides);
   }
 
   function updateOverrideProduct(id, patch) {
@@ -4036,7 +4043,7 @@
     } else {
       overrides.edited[id] = Object.assign({}, overrides.edited[id] || {}, patch);
     }
-    writeOverrides(overrides);
+    return writeOverrides(overrides);
   }
 
   function deleteOverrideProduct(id) {
@@ -4046,11 +4053,11 @@
     if (PRODUCTS.some(function (p) { return p.id === id; }) && overrides.deleted.indexOf(id) === -1) {
       overrides.deleted.push(id);
     }
-    writeOverrides(overrides);
+    return writeOverrides(overrides);
   }
 
   function clearOverrides() {
-    writeOverrides({ added: [], edited: {}, deleted: [] });
+    return writeOverrides({ added: [], edited: {}, deleted: [] });
   }
 
   function getEffectiveProducts() {

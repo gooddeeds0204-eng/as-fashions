@@ -1,1130 +1,513 @@
 /* =========================================================
-   AS FASHIONS
-   OFFERS & PROMOTIONS ENGINE
-   js/offers.js
+   AS FASHIONS — js/offers.js
+   Premium Offers / Flash Sale / Coupon Engine
    ========================================================= */
 
-"use strict";
+(function () {
+  "use strict";
+
+  const OFFER_STORAGE_KEY = "asf_offer_state";
+  const COUPON_STORAGE_KEY = "asf_applied_coupon";
 
 
-/* =========================================================
-   STORAGE KEYS
-   ========================================================= */
+  /* =======================================================
+     OFFER DATABASE
+     ======================================================= */
 
-const OFFER_STORAGE_KEYS = {
-
-    CLAIMED_COUPONS:
-        "as_fashions_claimed_coupons",
-
-    APPLIED_COUPON:
-        "as_fashions_applied_coupon",
-
-    SCRATCH_REWARD:
-        "as_fashions_scratch_reward",
-
-    OFFER_SEEN:
-        "as_fashions_offer_seen"
-
-};
-
-
-/* =========================================================
-   OFFER DATABASE
-   ========================================================= */
-
-const OFFERS = [
+  const OFFERS = [
 
     {
-        id: "welcome-10",
-
-        type: "coupon",
-
-        code: "WELCOME10",
-
-        title: "Welcome Offer",
-
-        subtitle:
-            "Get 10% OFF on your first order",
-
-        discountType: "percentage",
-
-        discountValue: 10,
-
-        minimumOrder: 999,
-
-        maximumDiscount: 500,
-
-        active: true
+      id: "flat-80",
+      type: "discount",
+      title: "FLAT 80% OFF",
+      subtitle: "Limited Time Fashion Deals",
+      discountType: "percentage",
+      discountValue: 80,
+      minOrder: 999,
+      maxDiscount: 3000,
+      active: true,
+      priority: 100
     },
 
-
     {
-        id: "fashion-20",
-
-        type: "coupon",
-
-        code: "STYLE20",
-
-        title: "Style Upgrade",
-
-        subtitle:
-            "Flat 20% OFF on selected styles",
-
-        discountType: "percentage",
-
-        discountValue: 20,
-
-        minimumOrder: 1499,
-
-        maximumDiscount: 1000,
-
-        active: true
+      id: "flat-70",
+      type: "discount",
+      title: "FLAT 70% OFF",
+      subtitle: "Premium Styles at Special Prices",
+      discountType: "percentage",
+      discountValue: 70,
+      minOrder: 799,
+      maxDiscount: 2500,
+      active: true,
+      priority: 90
     },
 
-
     {
-        id: "flat-500",
-
-        type: "coupon",
-
-        code: "SAVE500",
-
-        title: "Big Savings",
-
-        subtitle:
-            "₹500 OFF on orders above ₹2999",
-
-        discountType: "fixed",
-
-        discountValue: 500,
-
-        minimumOrder: 2999,
-
-        maximumDiscount: 500,
-
-        active: true
+      id: "flat-50",
+      type: "discount",
+      title: "FLAT 50% OFF",
+      subtitle: "Trending Fashion Picks",
+      discountType: "percentage",
+      discountValue: 50,
+      minOrder: 599,
+      maxDiscount: 1500,
+      active: true,
+      priority: 80
     }
 
-];
+  ];
 
 
-/* =========================================================
-   FLASH SALES
-   ========================================================= */
+  /* =======================================================
+     COUPONS
+     ======================================================= */
 
-const FLASH_SALES = [
+  const COUPONS = [
 
     {
-        id: "flash-01",
-
-        title: "FLASH SALE",
-
-        subtitle:
-            "Limited-time fashion deals",
-
-        discountText:
-            "UP TO 70% OFF",
-
-        startTime:
-            "2026-08-14T09:00:00+05:30",
-
-        endTime:
-            "2026-08-14T23:59:59+05:30",
-
-        active: true
+      code: "WELCOME10",
+      title: "Welcome Offer",
+      type: "percentage",
+      value: 10,
+      minOrder: 999,
+      maxDiscount: 500,
+      active: true
     },
 
-
     {
-        id: "midnight-01",
-
-        title: "MIDNIGHT SALE",
-
-        subtitle:
-            "Tonight's biggest fashion deals",
-
-        discountText:
-            "UP TO 80% OFF",
-
-        startTime:
-            "2026-08-14T21:00:00+05:30",
-
-        endTime:
-            "2026-08-15T02:00:00+05:30",
-
-        active: true
-    }
-
-];
-
-
-/* =========================================================
-   SALE CAMPAIGNS
-   ========================================================= */
-
-const SALE_CAMPAIGNS = [
-
-    {
-        id: "eors",
-
-        name:
-            "END OF REASON SALE",
-
-        shortName:
-            "EORS",
-
-        headline:
-            "THE BIGGEST FASHION SALE",
-
-        subheadline:
-            "Up to 80% OFF",
-
-        badge:
-            "LIMITED TIME",
-
-        active: true,
-
-        endTime:
-            "2026-08-20T23:59:59+05:30"
+      code: "AS500",
+      title: "Flat ₹500 Off",
+      type: "flat",
+      value: 500,
+      minOrder: 2499,
+      active: true
     },
 
-
     {
-        id: "season-end",
-
-        name:
-            "SEASON END SALE",
-
-        shortName:
-            "SEASON END",
-
-        headline:
-            "LAST CHANCE TO SAVE",
-
-        subheadline:
-            "Up to 60% OFF",
-
-        badge:
-            "HURRY",
-
-        active: true,
-
-        endTime:
-            "2026-08-31T23:59:59+05:30"
+      code: "AS1000",
+      title: "Flat ₹1000 Off",
+      type: "flat",
+      value: 1000,
+      minOrder: 4999,
+      active: true
     }
 
-];
+  ];
 
 
-/* =========================================================
-   OFFER STATE
-   ========================================================= */
+  /* =======================================================
+     FLASH SALE
+     ======================================================= */
 
-let OFFER_STATE = {
+  const FLASH_SALE = {
 
-    activeCampaign: null,
+    id: "flash-sale-01",
 
-    activeFlashSale: null,
+    title: "FLASH SALE",
 
-    claimedCoupons: [],
+    subtitle:
+      "Extra discounts on selected styles",
 
-    appliedCoupon: null,
+    discount: 80,
 
-    scratchReward: null,
+    active: true,
 
-    countdownTimers: {},
+    startsAt:
+      Date.now(),
 
-    initialized: false
+    endsAt:
+      Date.now() +
+      (
+        6 *
+        60 *
+        60 *
+        1000
+      )
 
-};
+  };
 
 
-/* =========================================================
-   STORAGE HELPERS
-   ========================================================= */
+  /* =======================================================
+     STORAGE
+     ======================================================= */
 
-function loadOfferStorage(
-    key,
-    fallback = []
-) {
+  function saveOfferState(state) {
 
     try {
 
-        const value =
-            localStorage.getItem(
-                key
-            );
-
-
-        if (!value) {
-            return fallback;
-        }
-
-
-        return JSON.parse(
-            value
-        );
+      localStorage.setItem(
+        OFFER_STORAGE_KEY,
+        JSON.stringify(state)
+      );
 
     } catch (error) {
 
-        console.error(
-            "AS FASHIONS: Offer storage error",
-            error
-        );
-
-        return fallback;
+      console.error(
+        "Offer state error:",
+        error
+      );
 
     }
 
-}
+  }
 
 
-function saveOfferStorage(
-    key,
-    value
-) {
+  function getOfferState() {
 
     try {
 
-        localStorage.setItem(
-            key,
-            JSON.stringify(value)
+      const saved =
+        localStorage.getItem(
+          OFFER_STORAGE_KEY
         );
+
+
+      return saved
+        ? JSON.parse(saved)
+        : {};
 
     } catch (error) {
 
-        console.error(
-            "AS FASHIONS: Offer save error",
-            error
-        );
+      return {};
 
     }
 
-}
+  }
 
 
-/* =========================================================
-   INITIALIZE OFFER STATE
-   ========================================================= */
+  /* =======================================================
+     ACTIVE OFFERS
+     ======================================================= */
 
-function initializeOfferState() {
+  function getActiveOffers() {
 
-    OFFER_STATE.claimedCoupons =
-        loadOfferStorage(
-            OFFER_STORAGE_KEYS.CLAIMED_COUPONS,
-            []
-        );
-
-
-    OFFER_STATE.appliedCoupon =
-        loadOfferStorage(
-            OFFER_STORAGE_KEYS.APPLIED_COUPON,
-            null
-        );
-
-
-    OFFER_STATE.scratchReward =
-        loadOfferStorage(
-            OFFER_STORAGE_KEYS.SCRATCH_REWARD,
-            null
-        );
+    return OFFERS
+      .filter(
+        offer =>
+          offer.active === true
+      )
+      .sort(
+        (a, b) =>
+          b.priority -
+          a.priority
+      );
+  }
 
 
-    OFFER_STATE.activeCampaign =
-        getActiveCampaign();
-
-
-    OFFER_STATE.activeFlashSale =
-        getActiveFlashSale();
-
-}
-
-
-/* =========================================================
-   DATE HELPERS
-   ========================================================= */
-
-function getOfferDate(
-    value
-) {
-
-    const date =
-        new Date(value);
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return null;
-
-    }
-
-
-    return date;
-
-}
-
-
-function isOfferCurrentlyActive(
-    startTime,
-    endTime
-) {
-
-    const now =
-        Date.now();
-
-
-    const start =
-        getOfferDate(
-            startTime
-        );
-
-
-    const end =
-        getOfferDate(
-            endTime
-        );
-
-
-    if (!start || !end) {
-        return false;
-    }
-
+  function getPrimaryOffer() {
 
     return (
-        now >= start.getTime() &&
-        now <= end.getTime()
+      getActiveOffers()[0] ||
+      null
     );
-
-}
-
-
-/* =========================================================
-   ACTIVE CAMPAIGN
-   ========================================================= */
-
-function getActiveCampaign() {
-
-    return SALE_CAMPAIGNS.find(
-        campaign =>
-            campaign.active &&
-            isOfferCurrentlyActive(
-                getCampaignStartTime(
-                    campaign
-                ),
-                campaign.endTime
-            )
-    ) || null;
-
-}
+  }
 
 
-/*
- * Campaigns without explicit start
- * are considered active from now.
- */
+  /* =======================================================
+     COUNTDOWN
+     ======================================================= */
 
-function getCampaignStartTime(
-    campaign
-) {
-
-    return campaign.startTime ||
-        new Date(
-            Date.now() -
-            24 * 60 * 60 * 1000
-        ).toISOString();
-
-}
-
-
-/* =========================================================
-   ACTIVE FLASH SALE
-   ========================================================= */
-
-function getActiveFlashSale() {
-
-    return FLASH_SALES.find(
-        sale =>
-            sale.active &&
-            isOfferCurrentlyActive(
-                sale.startTime,
-                sale.endTime
-            )
-    ) || null;
-
-}
-
-
-/* =========================================================
-   COUNTDOWN
-   ========================================================= */
-
-function calculateCountdown(
+  function getCountdown(
     endTime
-) {
+  ) {
 
-    const end =
-        getOfferDate(
-            endTime
-        );
-
-
-    if (!end) {
-
-        return {
-
-            total: 0,
-
-            days: 0,
-
-            hours: 0,
-
-            minutes: 0,
-
-            seconds: 0,
-
-            expired: true
-
-        };
-
-    }
+    const remaining =
+      Math.max(
+        0,
+        Number(endTime) -
+        Date.now()
+      );
 
 
-    const difference =
-        end.getTime() -
-        Date.now();
-
-
-    if (
-        difference <= 0
-    ) {
-
-        return {
-
-            total: 0,
-
-            days: 0,
-
-            hours: 0,
-
-            minutes: 0,
-
-            seconds: 0,
-
-            expired: true
-
-        };
-
-    }
-
-
-    const second =
-        1000;
-
-    const minute =
-        second * 60;
-
-    const hour =
-        minute * 60;
-
-    const day =
-        hour * 24;
-
-
-    const days =
-        Math.floor(
-            difference / day
-        );
+    const totalSeconds =
+      Math.floor(
+        remaining / 1000
+      );
 
 
     const hours =
-        Math.floor(
-            (difference % day) /
-            hour
-        );
+      Math.floor(
+        totalSeconds / 3600
+      );
 
 
     const minutes =
-        Math.floor(
-            (difference % hour) /
-            minute
-        );
+      Math.floor(
+        (totalSeconds % 3600) /
+        60
+      );
 
 
     const seconds =
-        Math.floor(
-            (difference % minute) /
-            second
-        );
+      totalSeconds % 60;
 
 
     return {
 
-        total: difference,
+      totalMilliseconds:
+        remaining,
 
-        days,
+      totalSeconds,
 
-        hours,
+      hours,
 
-        minutes,
+      minutes,
 
-        seconds,
+      seconds,
 
-        expired: false
+      formatted:
+
+        `${String(hours).padStart(2, "0")}h : ` +
+        `${String(minutes).padStart(2, "0")}m : ` +
+        `${String(seconds).padStart(2, "0")}s`
 
     };
 
-}
+  }
 
 
-/* =========================================================
-   FORMAT COUNTDOWN
-   ========================================================= */
+  function isFlashSaleActive() {
 
-function padOfferNumber(
-    number
-) {
-
-    return String(
-        number
-    ).padStart(
-        2,
-        "0"
+    return (
+      FLASH_SALE.active &&
+      Date.now() >=
+        FLASH_SALE.startsAt &&
+      Date.now() <
+        FLASH_SALE.endsAt
     );
 
-}
+  }
 
 
-function formatOfferCountdown(
-    countdown
-) {
+  function getFlashSaleCountdown() {
 
     if (
-        !countdown ||
-        countdown.expired
+      !isFlashSaleActive()
     ) {
 
-        return "00 : 00 : 00";
+      return {
+        active: false,
+        remaining: 0,
+        formatted: "SALE ENDED"
+      };
 
     }
+
+
+    return {
+
+      active: true,
+
+      ...getCountdown(
+        FLASH_SALE.endsAt
+      )
+
+    };
+
+  }
+
+
+  /* =======================================================
+     DISCOUNT CALCULATION
+     ======================================================= */
+
+  function calculateDiscount(
+    price,
+    offer
+  ) {
+
+    const amount =
+      Number(price) || 0;
+
+
+    if (!offer) {
+      return 0;
+    }
+
+
+    let discount = 0;
 
 
     if (
-        countdown.days > 0
+      offer.discountType ===
+      "percentage"
     ) {
 
-        return [
-
-            `${padOfferNumber(countdown.days)}d`,
-
-            `${padOfferNumber(countdown.hours)}h`,
-
-            `${padOfferNumber(countdown.minutes)}m`
-
-        ].join(" : ");
-
-    }
-
-
-    return [
-
-        padOfferNumber(
-            countdown.hours
-        ),
-
-        padOfferNumber(
-            countdown.minutes
-        ),
-
-        padOfferNumber(
-            countdown.seconds
-        )
-
-    ].join(" : ");
-
-}
-
-
-/* =========================================================
-   COUNTDOWN TIMER
-   ========================================================= */
-
-function startOfferCountdown(
-    element,
-    endTime,
-    options = {}
-) {
-
-    if (!element) {
-        return;
-    }
-
-
-    const timerId =
-        `${Date.now()}-${Math.random()}`;
-
-
-    function update() {
-
-        const countdown =
-            calculateCountdown(
-                endTime
-            );
-
-
-        if (
-            countdown.expired
-        ) {
-
-            element.textContent =
-                options.expiredText ||
-                "SALE ENDED";
-
-
-            if (
-                typeof options.onExpire ===
-                "function"
-            ) {
-
-                options.onExpire();
-
-            }
-
-
-            clearInterval(
-                OFFER_STATE.countdownTimers[
-                    timerId
-                ]
-            );
-
-
-            return;
-
-        }
-
-
-        if (
-            options.format ===
-            "full"
-        ) {
-
-            element.innerHTML = `
-
-                <span class="offer-time-unit">
-
-                    <strong>
-                        ${padOfferNumber(countdown.days)}
-                    </strong>
-
-                    <small>
-                        Days
-                    </small>
-
-                </span>
-
-                <span>:</span>
-
-                <span class="offer-time-unit">
-
-                    <strong>
-                        ${padOfferNumber(countdown.hours)}
-                    </strong>
-
-                    <small>
-                        Hrs
-                    </small>
-
-                </span>
-
-                <span>:</span>
-
-                <span class="offer-time-unit">
-
-                    <strong>
-                        ${padOfferNumber(countdown.minutes)}
-                    </strong>
-
-                    <small>
-                        Min
-                    </small>
-
-                </span>
-
-                <span>:</span>
-
-                <span class="offer-time-unit">
-
-                    <strong>
-                        ${padOfferNumber(countdown.seconds)}
-                    </strong>
-
-                    <small>
-                        Sec
-                    </small>
-
-                </span>
-
-            `;
-
-        } else {
-
-            element.textContent =
-                formatOfferCountdown(
-                    countdown
-                );
-
-        }
-
-    }
-
-
-    update();
-
-
-    OFFER_STATE.countdownTimers[
-        timerId
-    ] = setInterval(
-        update,
-        1000
-    );
-
-
-    return timerId;
-
-}
-
-
-/* =========================================================
-   INITIALIZE COUNTDOWNS
-   ========================================================= */
-
-function initializeOfferCountdowns() {
-
-    document
-        .querySelectorAll(
-            "[data-offer-countdown]"
-        )
-        .forEach(element => {
-
-            const endTime =
-                element.dataset
-                    .offerCountdown;
-
-
-            if (!endTime) {
-                return;
-            }
-
-
-            startOfferCountdown(
-                element,
-                endTime,
-                {
-                    format:
-                        element.dataset
-                            .countdownFormat ||
-                        "simple"
-                }
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   OFFER BANNER
-   ========================================================= */
-
-function renderOfferBanner() {
-
-    const containers =
-        document.querySelectorAll(
-            "[data-offer-banner]"
+      discount =
+        amount *
+        (
+          Number(
+            offer.discountValue
+          ) / 100
         );
 
+    } else {
 
-    containers.forEach(
-        container => {
-
-            const campaign =
-                OFFER_STATE.activeCampaign;
-
-
-            const flashSale =
-                OFFER_STATE.activeFlashSale;
-
-
-            const offer =
-                campaign ||
-                flashSale;
-
-
-            if (!offer) {
-
-                container.innerHTML = "";
-
-                container.classList.remove(
-                    "offer-active"
-                );
-
-                return;
-
-            }
-
-
-            const title =
-                campaign
-                    ? campaign.headline
-                    : flashSale.title;
-
-
-            const subtitle =
-                campaign
-                    ? campaign.subheadline
-                    : flashSale.discountText;
-
-
-            const endTime =
-                campaign
-                    ? campaign.endTime
-                    : flashSale.endTime;
-
-
-            container.innerHTML = `
-
-                <div class="premium-offer-banner">
-
-                    <div class="offer-banner-content">
-
-                        <span class="offer-badge">
-
-                            ${
-                                escapeOfferHTML(
-                                    campaign
-                                        ? campaign.badge
-                                        : "FLASH SALE"
-                                )
-                            }
-
-                        </span>
-
-
-                        <h2>
-                            ${escapeOfferHTML(title)}
-                        </h2>
-
-
-                        <p>
-                            ${escapeOfferHTML(subtitle)}
-                        </p>
-
-
-                        <div
-                            class="offer-countdown"
-                            data-offer-countdown="${escapeOfferHTML(endTime)}"
-                            data-countdown-format="full"
-                        ></div>
-
-
-                        <button
-                            type="button"
-                            class="offer-shop-button"
-                            onclick="handleOfferShopClick()"
-                        >
-                            SHOP NOW
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            container.classList.add(
-                "offer-active"
-            );
-
-
-            const countdown =
-                container.querySelector(
-                    "[data-offer-countdown]"
-                );
-
-
-            if (countdown) {
-
-                startOfferCountdown(
-                    countdown,
-                    endTime,
-                    {
-                        format: "full"
-                    }
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   SHOP OFFER
-   ========================================================= */
-
-function handleOfferShopClick() {
-
-    if (
-        typeof window.showOfferProducts ===
-        "function"
-    ) {
-
-        window.showOfferProducts();
-
-        return;
+      discount =
+        Number(
+          offer.discountValue
+        ) || 0;
 
     }
 
 
-    window.location.href =
-        "index.html?offer=active";
+    if (
+      offer.maxDiscount
+    ) {
 
-}
+      discount =
+        Math.min(
+          discount,
+          Number(
+            offer.maxDiscount
+          )
+        );
+
+    }
 
 
-/* =========================================================
-   COUPON HELPERS
-   ========================================================= */
-
-function getAllCoupons() {
-
-    return OFFERS.filter(
-        offer =>
-            offer.type === "coupon" &&
-            offer.active
+    return Math.min(
+      Math.max(0, discount),
+      amount
     );
 
-}
+  }
 
 
-function getCouponByCode(
+  function getOfferPrice(
+    price,
+    offer
+  ) {
+
+    const original =
+      Number(price) || 0;
+
+
+    return Math.max(
+      0,
+      original -
+      calculateDiscount(
+        original,
+        offer
+      )
+    );
+
+  }
+
+
+  /* =======================================================
+     COUPON
+     ======================================================= */
+
+  function findCoupon(
     code
-) {
+  ) {
 
-    const normalized =
-        String(code || "")
-            .trim()
-            .toUpperCase();
+    const target =
+      String(code || "")
+        .trim()
+        .toUpperCase();
 
 
-    return getAllCoupons().find(
+    return (
+      COUPONS.find(
         coupon =>
-            coupon.code ===
-            normalized
-    ) || null;
+          coupon.code === target &&
+          coupon.active === true
+      ) ||
+      null
+    );
 
-}
+  }
 
 
-/* =========================================================
-   COUPON VALIDATION
-   ========================================================= */
-
-function validateCoupon(
+  function validateCoupon(
     code,
-    cartTotal = null
-) {
+    subtotal
+  ) {
 
     const coupon =
-        getCouponByCode(
-            code
-        );
+      findCoupon(code);
 
 
     if (!coupon) {
 
-        return {
+      return {
 
-            valid: false,
+        valid: false,
 
-            message:
-                "Invalid coupon code.",
+        message:
+          "Invalid coupon code",
 
-            coupon: null
+        coupon: null,
 
-        };
+        discount: 0
+
+      };
 
     }
+
+
+    const amount =
+      Number(subtotal) || 0;
 
 
     if (
-        cartTotal !== null &&
-        Number(cartTotal) <
-        Number(coupon.minimumOrder || 0)
+      coupon.minOrder &&
+      amount <
+        Number(coupon.minOrder)
     ) {
 
-        return {
+      return {
 
-            valid: false,
+        valid: false,
 
-            message:
-                `Add items worth ₹${Number(coupon.minimumOrder).toLocaleString("en-IN")} to use this coupon.`,
+        message:
+          `Minimum order ₹${coupon.minOrder} required`,
 
-            coupon
+        coupon,
 
-        };
+        discount: 0
+
+      };
 
     }
+
+
+    const discount =
+      calculateCouponDiscount(
+        coupon,
+        amount
+      );
 
 
     return {
 
-        valid: true,
+      valid: true,
 
-        message:
-            `${coupon.code} applied successfully.`,
+      message:
+        "Coupon applied successfully",
 
-        coupon
+      coupon,
+
+      discount
 
     };
 
-}
+  }
 
 
-/* =========================================================
-   CALCULATE COUPON DISCOUNT
-   ========================================================= */
-
-function calculateCouponDiscount(
+  function calculateCouponDiscount(
     coupon,
-    cartTotal
-) {
-
-    if (!coupon) {
-        return 0;
-    }
-
-
-    const total =
-        Number(
-            cartTotal || 0
-        );
-
+    subtotal
+  ) {
 
     if (
-        total <
-        Number(
-            coupon.minimumOrder || 0
-        )
+      !coupon ||
+      subtotal <= 0
     ) {
 
-        return 0;
+      return 0;
 
     }
 
@@ -1133,1126 +516,553 @@ function calculateCouponDiscount(
 
 
     if (
-        coupon.discountType ===
-        "percentage"
+      coupon.type ===
+      "percentage"
     ) {
 
-        discount =
-            total *
-            (
-                Number(
-                    coupon.discountValue
-                ) / 100
-            );
-
-    }
+      discount =
+        subtotal *
+        (
+          Number(coupon.value) /
+          100
+        );
 
 
-    if (
-        coupon.discountType ===
-        "fixed"
-    ) {
+      if (
+        coupon.maxDiscount
+      ) {
 
         discount =
+          Math.min(
+            discount,
             Number(
-                coupon.discountValue
-            );
-
-    }
-
-
-    if (
-        coupon.maximumDiscount
-    ) {
-
-        discount =
-            Math.min(
-                discount,
-                Number(
-                    coupon.maximumDiscount
-                )
-            );
-
-    }
-
-
-    return Math.max(
-        0,
-        Math.round(
-            discount
-        )
-    );
-
-}
-
-
-/* =========================================================
-   APPLY COUPON
-   ========================================================= */
-
-function applyCoupon(
-    code,
-    cartTotal = null
-) {
-
-    const validation =
-        validateCoupon(
-            code,
-            cartTotal
-        );
-
-
-    if (
-        !validation.valid
-    ) {
-
-        showOfferMessage(
-            validation.message,
-            "error"
-        );
-
-
-        return validation;
-
-    }
-
-
-    const coupon =
-        validation.coupon;
-
-
-    OFFER_STATE.appliedCoupon =
-        coupon;
-
-
-    saveOfferStorage(
-        OFFER_STORAGE_KEYS.APPLIED_COUPON,
-        coupon
-    );
-
-
-    if (
-        !OFFER_STATE.claimedCoupons.includes(
-            coupon.code
-        )
-    ) {
-
-        OFFER_STATE.claimedCoupons.push(
-            coupon.code
-        );
-
-
-        saveOfferStorage(
-            OFFER_STORAGE_KEYS.CLAIMED_COUPONS,
-            OFFER_STATE.claimedCoupons
-        );
-
-    }
-
-
-    updateCouponUI(
-        coupon,
-        cartTotal
-    );
-
-
-    showOfferMessage(
-        validation.message,
-        "success"
-    );
-
-
-    return {
-
-        ...validation,
-
-        discount:
-            calculateCouponDiscount(
-                coupon,
-                cartTotal
+              coupon.maxDiscount
             )
+          );
 
-    };
+      }
 
-}
+    } else {
 
+      discount =
+        Number(
+          coupon.value
+        ) || 0;
 
-/* =========================================================
-   REMOVE COUPON
-   ========================================================= */
-
-function removeCoupon() {
-
-    OFFER_STATE.appliedCoupon =
-        null;
+    }
 
 
-    saveOfferStorage(
-        OFFER_STORAGE_KEYS.APPLIED_COUPON,
-        null
+    return Math.min(
+      Math.max(
+        0,
+        discount
+      ),
+      subtotal
+    );
+
+  }
+
+
+  function applyCoupon(
+    code,
+    subtotal
+  ) {
+
+    const result =
+      validateCoupon(
+        code,
+        subtotal
+      );
+
+
+    if (!result.valid) {
+
+      return result;
+
+    }
+
+
+    localStorage.setItem(
+      COUPON_STORAGE_KEY,
+      JSON.stringify(
+        result.coupon
+      )
     );
 
 
-    updateCouponUI(
-        null,
-        0
-    );
-
-
-    showOfferMessage(
-        "Coupon removed.",
-        "info"
-    );
-
-}
-
-
-/* =========================================================
-   COUPON UI
-   ========================================================= */
-
-function updateCouponUI(
-    coupon,
-    cartTotal
-) {
-
-    document
-        .querySelectorAll(
-            "[data-applied-coupon]"
-        )
-        .forEach(element => {
-
-            if (!coupon) {
-
-                element.innerHTML = "";
-
-                return;
-
-            }
-
-
-            const discount =
-                calculateCouponDiscount(
-                    coupon,
-                    cartTotal
-                );
-
-
-            element.innerHTML = `
-
-                <div class="applied-coupon">
-
-                    <div>
-
-                        <strong>
-                            ${escapeOfferHTML(coupon.code)}
-                        </strong>
-
-                        <span>
-                            ${discount
-                                ? `You save ₹${discount.toLocaleString("en-IN")}`
-                                : coupon.subtitle}
-                        </span>
-
-                    </div>
-
-
-                    <button
-                        type="button"
-                        onclick="removeCoupon()"
-                    >
-                        Remove
-                    </button>
-
-                </div>
-
-            `;
-
-        });
-
-}
-
-
-/* =========================================================
-   RENDER COUPON LIST
-   ========================================================= */
-
-function renderCoupons() {
-
-    const containers =
-        document.querySelectorAll(
-            "[data-coupon-list]"
-        );
-
-
-    containers.forEach(
-        container => {
-
-            const coupons =
-                getAllCoupons();
-
-
-            container.innerHTML =
-                coupons.map(
-                    coupon => `
-
-                        <article
-                            class="coupon-card"
-                            data-coupon="${escapeOfferHTML(coupon.code)}"
-                        >
-
-                            <div class="coupon-card-main">
-
-                                <span class="coupon-badge">
-                                    OFFER
-                                </span>
-
-                                <h3>
-                                    ${escapeOfferHTML(coupon.title)}
-                                </h3>
-
-                                <p>
-                                    ${escapeOfferHTML(coupon.subtitle)}
-                                </p>
-
-                                <small>
-                                    Min. order ₹${Number(
-                                        coupon.minimumOrder
-                                    ).toLocaleString("en-IN")}
-                                </small>
-
-                            </div>
-
-
-                            <div class="coupon-card-action">
-
-                                <strong>
-                                    ${escapeOfferHTML(coupon.code)}
-                                </strong>
-
-                                <button
-                                    type="button"
-                                    onclick="copyCouponCode('${escapeOfferHTML(coupon.code)}')"
-                                >
-                                    COPY
-                                </button>
-
-                            </div>
-
-                        </article>
-
-                    `
-                ).join("");
-
+    window.dispatchEvent(
+      new CustomEvent(
+        "asf:coupon-applied",
+        {
+          detail: result
         }
+      )
     );
 
-}
+
+    return result;
+
+  }
 
 
-/* =========================================================
-   COPY COUPON
-   ========================================================= */
-
-async function copyCouponCode(
-    code
-) {
+  function getAppliedCoupon() {
 
     try {
 
-        await navigator.clipboard.writeText(
-            code
+      const saved =
+        localStorage.getItem(
+          COUPON_STORAGE_KEY
         );
 
 
-        showOfferMessage(
-            `${code} copied.`,
-            "success"
-        );
+      return saved
+        ? JSON.parse(saved)
+        : null;
 
+    } catch {
 
-    } catch (error) {
-
-        showOfferMessage(
-            `Coupon code: ${code}`,
-            "info"
-        );
+      return null;
 
     }
 
-}
+  }
 
 
-/* =========================================================
-   SCRATCH CARD
-   ========================================================= */
+  function removeCoupon() {
 
-const SCRATCH_REWARDS = [
+    localStorage.removeItem(
+      COUPON_STORAGE_KEY
+    );
+
+
+    window.dispatchEvent(
+      new CustomEvent(
+        "asf:coupon-removed"
+      )
+    );
+
+  }
+
+
+  function getCoupons() {
+
+    return [...COUPONS];
+
+  }
+
+
+  /* =======================================================
+     SCRATCH CARD
+     ======================================================= */
+
+  const SCRATCH_REWARDS = [
 
     {
-        id: "reward-10",
-        text: "10% OFF",
-        code: "SCRATCH10"
+      id: "scratch-10",
+      type: "percentage",
+      value: 10,
+      label: "10% OFF",
+      probability: 45
     },
 
     {
-        id: "reward-15",
-        text: "15% OFF",
-        code: "SCRATCH15"
+      id: "scratch-15",
+      type: "percentage",
+      value: 15,
+      label: "15% OFF",
+      probability: 30
     },
 
     {
-        id: "reward-200",
-        text: "₹200 OFF",
-        code: "SCRATCH200"
+      id: "scratch-20",
+      type: "percentage",
+      value: 20,
+      label: "20% OFF",
+      probability: 15
     },
 
     {
-        id: "reward-free",
-        text: "FREE SHIPPING",
-        code: "FREESHIP"
+      id: "scratch-500",
+      type: "flat",
+      value: 500,
+      label: "₹500 OFF",
+      probability: 8
+    },
+
+    {
+      id: "scratch-1000",
+      type: "flat",
+      value: 1000,
+      label: "₹1000 OFF",
+      probability: 2
     }
 
-];
+  ];
 
 
-function getScratchReward() {
+  function getScratchReward() {
 
-    if (
-        OFFER_STATE.scratchReward
+    const total =
+      SCRATCH_REWARDS.reduce(
+        (sum, reward) =>
+          sum +
+          reward.probability,
+        0
+      );
+
+
+    let random =
+      Math.random() * total;
+
+
+    for (
+      const reward
+      of SCRATCH_REWARDS
     ) {
 
-        return OFFER_STATE.scratchReward;
+      random -=
+        reward.probability;
+
+
+      if (random <= 0) {
+
+        return {
+          ...reward
+        };
+
+      }
 
     }
 
+
+    return {
+      ...SCRATCH_REWARDS[0]
+    };
+
+  }
+
+
+  function generateScratchCard() {
 
     const reward =
-        SCRATCH_REWARDS[
-            Math.floor(
-                Math.random() *
-                SCRATCH_REWARDS.length
-            )
-        ];
+      getScratchReward();
 
 
-    OFFER_STATE.scratchReward =
-        reward;
+    const state = {
+
+      id:
+        `scratch-${Date.now()}`,
+
+      reward,
+
+      createdAt:
+        Date.now(),
+
+      scratched:
+        false
+
+    };
 
 
-    saveOfferStorage(
-        OFFER_STORAGE_KEYS.SCRATCH_REWARD,
-        reward
+    saveOfferState(
+      state
     );
 
 
-    return reward;
+    return state;
 
-}
+  }
 
 
-/* =========================================================
-   SHOW SCRATCH CARD
-   ========================================================= */
+  function revealScratchCard() {
 
-function showScratchCard() {
+    const state =
+      getOfferState();
 
-    const containers =
-        document.querySelectorAll(
-            "[data-scratch-card]"
-        );
 
+    if (!state.reward) {
 
-    containers.forEach(
-        container => {
-
-            const reward =
-                getScratchReward();
-
-
-            container.innerHTML = `
-
-                <div class="scratch-card">
-
-                    <div class="scratch-card-cover">
-
-                        <span>
-                            ✨
-                        </span>
-
-                        <strong>
-                            SCRATCH & WIN
-                        </strong>
-
-                        <small>
-                            Reveal your exclusive offer
-                        </small>
-
-                    </div>
-
-
-                    <div class="scratch-card-reward">
-
-                        <span>
-                            YOU WON
-                        </span>
-
-                        <strong>
-                            ${escapeOfferHTML(reward.text)}
-                        </strong>
-
-                        <code>
-                            ${escapeOfferHTML(reward.code)}
-                        </code>
-
-                        <button
-                            type="button"
-                            onclick="claimScratchReward()"
-                        >
-                            CLAIM OFFER
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   CLAIM SCRATCH REWARD
-   ========================================================= */
-
-function claimScratchReward() {
-
-    const reward =
-        getScratchReward();
-
-
-    showOfferMessage(
-        `You won ${reward.text}! Code: ${reward.code}`,
-        "success"
-    );
-
-
-    copyCouponCode(
-        reward.code
-    );
-
-}
-
-
-/* =========================================================
-   OFFER POPUP
-   ========================================================= */
-
-function showOfferPopup() {
-
-    const popup =
-        document.querySelector(
-            "[data-offer-popup]"
-        );
-
-
-    if (!popup) {
-        return;
-    }
-
-
-    const campaign =
-        OFFER_STATE.activeCampaign;
-
-
-    const flashSale =
-        OFFER_STATE.activeFlashSale;
-
-
-    const offer =
-        campaign ||
-        flashSale;
-
-
-    if (!offer) {
-        return;
-    }
-
-
-    const title =
-        campaign
-            ? campaign.headline
-            : flashSale.title;
-
-
-    const subtitle =
-        campaign
-            ? campaign.subheadline
-            : flashSale.discountText;
-
-
-    const endTime =
-        campaign
-            ? campaign.endTime
-            : flashSale.endTime;
-
-
-    popup.innerHTML = `
-
-        <div class="offer-popup-backdrop">
-
-            <div class="offer-popup-content">
-
-                <button
-                    type="button"
-                    class="offer-popup-close"
-                    data-offer-popup-close
-                >
-                    ×
-                </button>
-
-
-                <span class="offer-popup-badge">
-                    LIMITED TIME
-                </span>
-
-
-                <h2>
-                    ${escapeOfferHTML(title)}
-                </h2>
-
-
-                <p>
-                    ${escapeOfferHTML(subtitle)}
-                </p>
-
-
-                <div
-                    class="offer-popup-countdown"
-                    data-offer-countdown="${escapeOfferHTML(endTime)}"
-                    data-countdown-format="full"
-                ></div>
-
-
-                <button
-                    type="button"
-                    class="offer-popup-cta"
-                    onclick="handleOfferShopClick()"
-                >
-                    SHOP SALE
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    popup.classList.add(
-        "show"
-    );
-
-
-    const closeButton =
-        popup.querySelector(
-            "[data-offer-popup-close]"
-        );
-
-
-    if (closeButton) {
-
-        closeButton.addEventListener(
-            "click",
-            closeOfferPopup
-        );
+      return generateScratchCard();
 
     }
 
 
-    const countdown =
-        popup.querySelector(
-            "[data-offer-countdown]"
-        );
+    state.scratched =
+      true;
 
 
-    if (countdown) {
-
-        startOfferCountdown(
-            countdown,
-            endTime,
-            {
-                format: "full"
-            }
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   CLOSE OFFER POPUP
-   ========================================================= */
-
-function closeOfferPopup() {
-
-    document
-        .querySelectorAll(
-            "[data-offer-popup]"
-        )
-        .forEach(
-            popup =>
-                popup.classList.remove(
-                    "show"
-                )
-        );
-
-}
-
-
-/* =========================================================
-   OFFER MESSAGE
-   ========================================================= */
-
-function showOfferMessage(
-    message,
-    type = "info"
-) {
-
-    let container =
-        document.querySelector(
-            "[data-offer-message]"
-        );
-
-
-    if (!container) {
-
-        container =
-            document.createElement(
-                "div"
-            );
-
-
-        container.setAttribute(
-            "data-offer-message",
-            ""
-        );
-
-
-        document.body.appendChild(
-            container
-        );
-
-    }
-
-
-    container.className =
-        `offer-message offer-message-${type}`;
-
-
-    container.textContent =
-        message;
-
-
-    container.classList.add(
-        "show"
+    saveOfferState(
+      state
     );
 
 
-    setTimeout(
-        () => {
+    return state;
 
-            container.classList.remove(
-                "show"
-            );
-
-        },
-        3000
-    );
-
-}
+  }
 
 
-/* =========================================================
-   URGENCY MESSAGE
-   ========================================================= */
+  /* =======================================================
+     FOMO MESSAGES
+     ======================================================= */
 
-function generateUrgencyMessage(
+  function getFomoMessage(
     product
-) {
+  ) {
 
     if (!product) {
 
-        return "Limited stock available";
+      return {
+        type: "general",
+        text: "Limited-time offer"
+      };
 
     }
 
 
     const stock =
-        Number(
-            product.stock || 0
-        );
+      Number(
+        product.stock
+      );
 
 
     if (
-        stock > 0 &&
-        stock <= 3
+      stock > 0 &&
+      stock <= 3
     ) {
 
-        return `Only ${stock} left in stock`;
+      return {
 
-    }
-
-
-    if (
-        product.orders &&
-        Number(product.orders) > 20
-    ) {
-
-        return "Selling fast";
-
-    }
-
-
-    if (
-        product.popularity &&
-        Number(product.popularity) > 80
-    ) {
-
-        return "Trending now";
-
-    }
-
-
-    return "Limited-time offer";
-
-}
-
-
-/* =========================================================
-   PRODUCT OFFER BADGE
-   ========================================================= */
-
-function renderProductOfferBadge(
-    product
-) {
-
-    if (!product) {
-        return "";
-    }
-
-
-    const discount =
-        Number(
-            product.discount ||
-            0
-        );
-
-
-    if (
-        discount >= 50
-    ) {
-
-        return `
-
-            <span class="product-offer-badge">
-                ${discount}% OFF
-            </span>
-
-        `;
-
-    }
-
-
-    if (
-        product.flashSale
-    ) {
-
-        return `
-
-            <span class="product-offer-badge flash">
-                ⚡ FLASH SALE
-            </span>
-
-        `;
-
-    }
-
-
-    return "";
-
-}
-
-
-/* =========================================================
-   OFFER ELIGIBILITY
-   ========================================================= */
-
-function isProductOnOffer(
-    product
-) {
-
-    if (!product) {
-        return false;
-    }
-
-
-    return Boolean(
-
-        product.flashSale ||
-
-        product.offer ||
-
-        Number(
-            product.discount ||
-            0
-        ) >= 20
-
-    );
-
-}
-
-
-/* =========================================================
-   OFFER PRICE
-   ========================================================= */
-
-function getOfferPrice(
-    product
-) {
-
-    if (!product) {
-        return 0;
-    }
-
-
-    const price =
-        Number(
-            product.price || 0
-        );
-
-
-    const discount =
-        Number(
-            product.discount || 0
-        );
-
-
-    if (
-        discount <= 0
-    ) {
-
-        return price;
-
-    }
-
-
-    return Math.round(
-        price *
-        (
-            1 -
-            discount / 100
-        )
-    );
-
-}
-
-
-/* =========================================================
-   OFFER SHARE
-   ========================================================= */
-
-async function shareOffer(
-    offer = null
-) {
-
-    const active =
-        offer ||
-        OFFER_STATE.activeCampaign ||
-        OFFER_STATE.activeFlashSale;
-
-
-    if (!active) {
-        return;
-    }
-
-
-    const shareData = {
-
-        title:
-            active.name ||
-            active.title ||
-            "AS FASHIONS SALE",
+        type: "stock",
 
         text:
-            active.headline ||
-            active.subtitle ||
-            "Shop the latest fashion deals on AS FASHIONS.",
+          `Hurry! Only ${stock} left`
 
-        url:
-            window.location.href
+      };
+
+    }
+
+
+    if (
+      product.isTrending
+    ) {
+
+      return {
+
+        type: "trending",
+
+        text:
+          "Trending now — selling fast"
+
+      };
+
+    }
+
+
+    if (
+      Number(
+        product.discount
+      ) >= 50
+    ) {
+
+      return {
+
+        type: "offer",
+
+        text:
+          `Flat ${product.discount}% OFF`
+
+      };
+
+    }
+
+
+    return {
+
+      type: "general",
+
+      text:
+        "Limited-time deal"
 
     };
 
-
-    try {
-
-        if (
-            navigator.share
-        ) {
-
-            await navigator.share(
-                shareData
-            );
-
-            return;
-
-        }
+  }
 
 
-        await navigator.clipboard.writeText(
-            window.location.href
-        );
+  /* =======================================================
+     FLASH SALE BADGE
+     ======================================================= */
 
-
-        showOfferMessage(
-            "Sale link copied.",
-            "success"
-        );
-
-    } catch (error) {
-
-        /*
-         * User cancelled share.
-         */
-
-    }
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-   ========================================================= */
-
-function escapeOfferHTML(
-    value
-) {
-
-    return String(value ?? "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =========================================================
-   INITIALIZATION
-   ========================================================= */
-
-function initializeOffers() {
-
-    initializeOfferState();
-
-    renderOfferBanner();
-
-    renderCoupons();
-
-    initializeOfferCountdowns();
-
-
-    /*
-     * Scratch card only when explicitly
-     * requested by markup.
-     */
+  function getFlashSaleBadge(
+    product
+  ) {
 
     if (
-        document.querySelector(
-            "[data-scratch-card]"
-        )
+      !isFlashSaleActive()
     ) {
 
-        showScratchCard();
+      return null;
 
     }
 
 
-    OFFER_STATE.initialized =
-        true;
+    if (!product) {
 
-}
+      return {
+        text: "FLASH SALE"
+      };
+
+    }
 
 
-/* =========================================================
-   CLEANUP COUNTDOWNS
-   ========================================================= */
+    return {
 
-function destroyOfferTimers() {
+      text:
+        `UP TO ${FLASH_SALE.discount}% OFF`,
 
-    Object.values(
-        OFFER_STATE.countdownTimers
+      productId:
+        product.id
+
+    };
+
+  }
+
+
+  /* =======================================================
+     OFFER PROGRESS
+     ======================================================= */
+
+  function getOfferProgress(
+    subtotal,
+    target = 2999
+  ) {
+
+    const amount =
+      Number(subtotal) || 0;
+
+
+    const goal =
+      Number(target) || 0;
+
+
+    if (goal <= 0) {
+
+      return {
+        percentage: 100,
+        remaining: 0,
+        unlocked: true
+      };
+
+    }
+
+
+    const percentage =
+      Math.min(
+        100,
+        Math.round(
+          (amount / goal) *
+          100
+        )
+      );
+
+
+    return {
+
+      percentage,
+
+      remaining:
+        Math.max(
+          0,
+          goal - amount
+        ),
+
+      unlocked:
+        amount >= goal
+
+    };
+
+  }
+
+
+  /* =======================================================
+     PUBLIC API
+     ======================================================= */
+
+  window.ASFOffers = {
+
+    OFFERS,
+
+    COUPONS,
+
+    FLASH_SALE,
+
+    getActiveOffers,
+
+    getPrimaryOffer,
+
+    getCountdown,
+
+    isFlashSaleActive,
+
+    getFlashSaleCountdown,
+
+    calculateDiscount,
+
+    getOfferPrice,
+
+    findCoupon,
+
+    validateCoupon,
+
+    calculateCouponDiscount,
+
+    applyCoupon,
+
+    getAppliedCoupon,
+
+    removeCoupon,
+
+    getCoupons,
+
+    getScratchReward,
+
+    generateScratchCard,
+
+    revealScratchCard,
+
+    getFomoMessage,
+
+    getFlashSaleBadge,
+
+    getOfferProgress
+
+  };
+
+
+  /* =======================================================
+     GLOBAL HELPERS
+     ======================================================= */
+
+  window.getActiveOffers =
+    getActiveOffers;
+
+  window.getFlashSaleCountdown =
+    getFlashSaleCountdown;
+
+  window.applyCoupon =
+    applyCoupon;
+
+  window.getAppliedCoupon =
+    getAppliedCoupon;
+
+
+  /* =======================================================
+     READY EVENT
+     ======================================================= */
+
+  window.dispatchEvent(
+    new CustomEvent(
+      "asf:offers-ready"
     )
-    .forEach(
-        timerId =>
-            clearInterval(
-                timerId
-            )
-    );
+  );
 
-
-    OFFER_STATE.countdownTimers = {};
-
-}
-
-
-/* =========================================================
-   AUTO START
-   ========================================================= */
-
-if (
-    document.readyState ===
-    "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeOffers
-    );
-
-} else {
-
-    initializeOffers();
-
-}
-
-
-/* =========================================================
-   PAGE CLEANUP
-   ========================================================= */
-
-window.addEventListener(
-    "beforeunload",
-    destroyOfferTimers
-);
+})();

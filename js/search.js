@@ -1,1318 +1,828 @@
 /* =========================================================
-   AS FASHIONS
-   SEARCH ENGINE
-   js/search.js
+   AS FASHIONS — js/search.js
+   Premium Search Engine
    ========================================================= */
 
-const SEARCH_STORAGE_KEY = "as_fashions_recent_searches";
-const MAX_RECENT_SEARCHES = 8;
+(function () {
+  "use strict";
 
-let RECENT_SEARCHES = loadRecentSearches();
-let SEARCH_STATE = {
-    query: "",
-    results: [],
-    isOpen: false
-};
+  const SEARCH_HISTORY_KEY = "asf_search_history";
+  const MAX_HISTORY = 8;
 
 
-/* =========================================================
-   STORAGE
-   ========================================================= */
+  /* =======================================================
+     PRODUCT SOURCE
+     ======================================================= */
 
-function loadRecentSearches() {
-
-    try {
-
-        const saved =
-            localStorage.getItem(
-                SEARCH_STORAGE_KEY
-            );
-
-        if (!saved) {
-            return [];
-        }
-
-        const parsed = JSON.parse(saved);
-
-        return Array.isArray(parsed)
-            ? parsed
-            : [];
-
-    } catch (error) {
-
-        console.error(
-            "AS FASHIONS: Recent search load failed.",
-            error
-        );
-
-        return [];
-
-    }
-
-}
+  function getProducts() {
+    return window.PRODUCTS ||
+           window.products ||
+           [];
+  }
 
 
-function saveRecentSearches() {
+  /* =======================================================
+     NORMALIZE
+     ======================================================= */
 
-    try {
-
-        localStorage.setItem(
-            SEARCH_STORAGE_KEY,
-            JSON.stringify(RECENT_SEARCHES)
-        );
-
-    } catch (error) {
-
-        console.error(
-            "AS FASHIONS: Recent search save failed.",
-            error
-        );
-
-    }
-
-}
+  function normalize(value) {
+    return String(value || "")
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, " ");
+  }
 
 
-/* =========================================================
-   NORMALIZE QUERY
-   ========================================================= */
+  /* =======================================================
+     SEARCH SCORE
+     ======================================================= */
 
-function normalizeSearchQuery(query) {
+  function getSearchScore(product, query) {
 
-    return String(query || "")
-        .trim()
-        .replace(/\s+/g, " ")
-        .toLowerCase();
+    const q = normalize(query);
 
-}
+    if (!q) return 0;
 
 
-/* =========================================================
-   SAVE SEARCH
-   ========================================================= */
+    const name =
+      normalize(product.name);
 
-function saveSearchQuery(query) {
+    const brand =
+      normalize(product.brand);
 
-    const normalized =
-        normalizeSearchQuery(query);
+    const category =
+      normalize(product.category);
+
+    const subcategory =
+      normalize(product.subcategory);
+
+    const tags =
+      (product.tags || [])
+        .map(normalize);
 
 
-    if (!normalized) {
-        return;
+    let score = 0;
+
+
+    /* Exact product name */
+
+    if (name === q) {
+      score += 100;
     }
 
 
-    RECENT_SEARCHES =
-        RECENT_SEARCHES.filter(
-            item => item !== normalized
-        );
+    /* Product name starts with query */
 
-
-    RECENT_SEARCHES.unshift(
-        normalized
-    );
-
-
-    RECENT_SEARCHES =
-        RECENT_SEARCHES.slice(
-            0,
-            MAX_RECENT_SEARCHES
-        );
-
-
-    saveRecentSearches();
-
-}
-
-
-/* =========================================================
-   REMOVE RECENT SEARCH
-   ========================================================= */
-
-function removeRecentSearch(query) {
-
-    const normalized =
-        normalizeSearchQuery(query);
-
-
-    RECENT_SEARCHES =
-        RECENT_SEARCHES.filter(
-            item => item !== normalized
-        );
-
-
-    saveRecentSearches();
-
-    renderSearchSuggestions();
-
-}
-
-
-/* =========================================================
-   CLEAR RECENT SEARCHES
-   ========================================================= */
-
-function clearRecentSearches() {
-
-    RECENT_SEARCHES = [];
-
-    saveRecentSearches();
-
-    renderSearchSuggestions();
-
-}
-
-
-/* =========================================================
-   SEARCH PRODUCTS
-   ========================================================= */
-
-function performProductSearch(query) {
-
-    const normalized =
-        normalizeSearchQuery(query);
-
-
-    if (!normalized) {
-        return [];
+    if (name.startsWith(q)) {
+      score += 80;
     }
 
 
-    /*
-     * Use products.js search helper
-     * whenever available.
-     */
+    /* Product name contains query */
 
-    if (
-        typeof searchProducts ===
-        "function"
-    ) {
-
-        return searchProducts(
-            normalized
-        );
-
+    if (name.includes(q)) {
+      score += 60;
     }
 
 
-    /*
-     * Fallback search.
-     */
+    /* Brand */
 
-    if (
-        typeof PRODUCTS ===
-        "undefined"
-    ) {
+    if (brand === q) {
+      score += 55;
+    }
 
-        return [];
-
+    if (brand.includes(q)) {
+      score += 35;
     }
 
 
-    return PRODUCTS.filter(product => {
+    /* Category */
 
-        const searchableText = [
+    if (category === q) {
+      score += 50;
+    }
 
-            product.name,
-            product.brand,
-            product.category,
-            product.subcategory,
-            product.type,
-
-            ...(product.tags || [])
-
-        ]
-            .join(" ")
-            .toLowerCase();
+    if (category.includes(q)) {
+      score += 30;
+    }
 
 
-        return searchableText.includes(
-            normalized
-        );
+    /* Subcategory */
+
+    if (subcategory === q) {
+      score += 45;
+    }
+
+    if (subcategory.includes(q)) {
+      score += 28;
+    }
+
+
+    /* Tags */
+
+    tags.forEach(tag => {
+
+      if (tag === q) {
+        score += 45;
+      } else if (tag.includes(q)) {
+        score += 25;
+      }
 
     });
 
-}
+
+    /* Individual words */
+
+    const words =
+      q.split(" ")
+        .filter(Boolean);
 
 
-/* =========================================================
-   CATEGORY SEARCH
-   ========================================================= */
+    words.forEach(word => {
 
-function performCategorySearch(query) {
+      if (name.includes(word)) {
+        score += 12;
+      }
 
-    const normalized =
-        normalizeSearchQuery(query);
+      if (category.includes(word)) {
+        score += 8;
+      }
+
+      if (subcategory.includes(word)) {
+        score += 8;
+      }
+
+      tags.forEach(tag => {
+
+        if (tag.includes(word)) {
+          score += 6;
+        }
+
+      });
+
+    });
 
 
-    if (!normalized) {
-        return [];
+    /* Trending / New boost */
+
+    if (score > 0) {
+
+      if (product.isTrending) {
+        score += 3;
+      }
+
+      if (product.isNew) {
+        score += 2;
+      }
+
     }
 
 
-    if (
-        typeof searchCategories ===
-        "function"
-    ) {
-
-        return searchCategories(
-            normalized
-        );
-
-    }
+    return score;
+  }
 
 
-    return [];
+  /* =======================================================
+     SEARCH PRODUCTS
+     ======================================================= */
 
-}
+  function searchProducts(
+    query,
+    options = {}
+  ) {
 
-
-/* =========================================================
-   LIVE SEARCH
-   ========================================================= */
-
-function handleSearchInput(query) {
-
-    const normalized =
-        normalizeSearchQuery(query);
+    const q =
+      normalize(query);
 
 
-    SEARCH_STATE.query =
-        normalized;
-
-
-    if (!normalized) {
-
-        SEARCH_STATE.results = [];
-
-        SEARCH_STATE.isOpen = true;
-
-        renderSearchSuggestions();
-
-        return;
-
+    if (!q) {
+      return [];
     }
 
 
     const products =
-        performProductSearch(
-            normalized
+      getProducts();
+
+
+    const results =
+      products
+        .map(product => ({
+
+          product,
+
+          score:
+            getSearchScore(
+              product,
+              q
+            )
+
+        }))
+        .filter(
+          result =>
+            result.score > 0
+        )
+        .sort(
+          (a, b) =>
+            b.score - a.score
+        )
+        .map(
+          result =>
+            result.product
         );
 
 
-    const categories =
-        performCategorySearch(
-            normalized
-        );
+    const limit =
+      Number(options.limit);
 
 
-    SEARCH_STATE.results = {
+    if (
+      Number.isFinite(limit) &&
+      limit > 0
+    ) {
+      return results.slice(0, limit);
+    }
 
-        products,
-        categories
+
+    return results;
+  }
+
+
+  /* =======================================================
+     SEARCH WITH METADATA
+     ======================================================= */
+
+  function search(
+    query,
+    options = {}
+  ) {
+
+    const results =
+      searchProducts(
+        query,
+        options
+      );
+
+
+    if (
+      options.saveHistory !== false &&
+      normalize(query)
+    ) {
+
+      saveSearch(query);
+
+    }
+
+
+    return {
+
+      query:
+        String(query || "").trim(),
+
+      total:
+        results.length,
+
+      products:
+        results
 
     };
+  }
 
 
-    SEARCH_STATE.isOpen = true;
+  /* =======================================================
+     SUGGESTIONS
+     ======================================================= */
 
+  function getSuggestions(
+    query,
+    limit = 8
+  ) {
 
-    renderSearchSuggestions();
+    const q =
+      normalize(query);
 
-}
 
-
-/* =========================================================
-   SEARCH SUGGESTIONS
-   ========================================================= */
-
-function renderSearchSuggestions() {
-
-    const containers =
-        document.querySelectorAll(
-            "[data-search-suggestions]"
-        );
-
-
-    containers.forEach(container => {
-
-        const query =
-            SEARCH_STATE.query;
-
-
-        /*
-         * Empty query → recent searches.
-         */
-
-        if (!query) {
-
-            if (!RECENT_SEARCHES.length) {
-
-                container.innerHTML = `
-
-                    <div class="search-suggestions-empty">
-
-                        <span>🔍</span>
-
-                        <p>
-                            Search for products,
-                            categories or styles
-                        </p>
-
-                    </div>
-
-                `;
-
-                return;
-
-            }
-
-
-            container.innerHTML = `
-
-                <div class="search-section-header">
-
-                    <strong>
-                        Recent Searches
-                    </strong>
-
-                    <button
-                        type="button"
-                        onclick="clearRecentSearches()"
-                    >
-                        Clear
-                    </button>
-
-                </div>
-
-
-                <div class="recent-search-list">
-
-                    ${RECENT_SEARCHES.map(
-                        search => `
-
-                            <div class="recent-search-item">
-
-                                <button
-                                    type="button"
-                                    onclick="selectSearchSuggestion('${escapeSearchHTML(search)}')"
-                                >
-
-                                    <span>
-                                        🕘
-                                    </span>
-
-                                    ${escapeSearchHTML(search)}
-
-                                </button>
-
-
-                                <button
-                                    type="button"
-                                    onclick="removeRecentSearch('${escapeSearchHTML(search)}')"
-                                    aria-label="Remove recent search"
-                                >
-                                    ×
-                                </button>
-
-                            </div>
-
-                        `
-                    ).join("")}
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        const results =
-            SEARCH_STATE.results || {
-                products: [],
-                categories: []
-            };
-
-
-        const products =
-            results.products || [];
-
-
-        const categories =
-            results.categories || [];
-
-
-        /*
-         * No results.
-         */
-
-        if (
-            !products.length &&
-            !categories.length
-        ) {
-
-            container.innerHTML = `
-
-                <div class="search-no-results">
-
-                    <div class="search-no-results-icon">
-                        🔍
-                    </div>
-
-                    <h3>
-                        No results found
-                    </h3>
-
-                    <p>
-                        Try another keyword,
-                        category or style.
-                    </p>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        /*
-         * Limit suggestions for performance.
-         */
-
-        const productSuggestions =
-            products.slice(0, 6);
-
-
-        const categorySuggestions =
-            categories.slice(0, 5);
-
-
-        container.innerHTML = `
-
-            ${
-                categorySuggestions.length
-                    ? `
-
-                        <div class="search-section">
-
-                            <div class="search-section-title">
-                                Categories
-                            </div>
-
-                            <div class="search-category-results">
-
-                                ${categorySuggestions
-                                    .map(
-                                        result => `
-
-                                            <button
-                                                type="button"
-                                                class="search-category-result"
-                                                onclick="selectCategorySearchResult('${escapeSearchHTML(result.categoryId)}', '${escapeSearchHTML(result.name)}')"
-                                            >
-
-                                                <span>
-                                                    📂
-                                                </span>
-
-                                                <span>
-
-                                                    <strong>
-                                                        ${escapeSearchHTML(result.name)}
-                                                    </strong>
-
-                                                    ${
-                                                        result.categoryName
-                                                            ? `
-                                                                <small>
-                                                                    ${escapeSearchHTML(result.categoryName)}
-                                                                </small>
-                                                            `
-                                                            : ""
-                                                    }
-
-                                                </span>
-
-                                            </button>
-
-                                        `
-                                    )
-                                    .join("")}
-
-                            </div>
-
-                        </div>
-
-                    `
-                    : ""
-            }
-
-
-            ${
-                productSuggestions.length
-                    ? `
-
-                        <div class="search-section">
-
-                            <div class="search-section-title">
-
-                                Products
-
-                                ${
-                                    products.length > 6
-                                        ? `
-                                            <span>
-                                                ${products.length} results
-                                            </span>
-                                        `
-                                        : ""
-                                }
-
-                            </div>
-
-
-                            <div class="search-product-results">
-
-                                ${productSuggestions
-                                    .map(
-                                        product =>
-                                            createSearchProductSuggestion(
-                                                product
-                                            )
-                                    )
-                                    .join("")}
-
-                            </div>
-
-
-                            ${
-                                products.length > 6
-                                    ? `
-
-                                        <button
-                                            type="button"
-                                            class="search-view-all"
-                                            onclick="submitSearch('${escapeSearchHTML(query)}')"
-                                        >
-                                            View all results for
-                                            “${escapeSearchHTML(query)}”
-                                        </button>
-
-                                    `
-                                    : ""
-                            }
-
-                        </div>
-
-                    `
-                    : ""
-            }
-
-        `;
-
-    });
-
-}
-
-
-/* =========================================================
-   PRODUCT SUGGESTION CARD
-   ========================================================= */
-
-function createSearchProductSuggestion(
-    product
-) {
-
-    const image =
-        product.images &&
-        product.images.length
-            ? product.images[0]
-            : "";
-
-
-    return `
-
-        <button
-            type="button"
-            class="search-product-result"
-            onclick="openSearchProduct('${escapeSearchHTML(product.id)}')"
-        >
-
-            <div class="search-product-image">
-
-                <img
-                    src="${escapeSearchHTML(image)}"
-                    alt="${escapeSearchHTML(product.name)}"
-                    loading="lazy"
-                >
-
-            </div>
-
-
-            <div class="search-product-info">
-
-                <strong>
-                    ${escapeSearchHTML(product.name)}
-                </strong>
-
-                <small>
-                    ${escapeSearchHTML(product.brand)}
-                </small>
-
-
-                <div class="search-product-price">
-
-                    <span>
-                        ${formatSearchPrice(product.price)}
-                    </span>
-
-                    ${
-                        product.mrp
-                            ? `
-                                <del>
-                                    ${formatSearchPrice(product.mrp)}
-                                </del>
-                            `
-                            : ""
-                    }
-
-                    ${
-                        product.discount
-                            ? `
-                                <em>
-                                    ${product.discount}% OFF
-                                </em>
-                            `
-                            : ""
-                    }
-
-                </div>
-
-            </div>
-
-        </button>
-
-    `;
-
-}
-
-
-/* =========================================================
-   SELECT SEARCH SUGGESTION
-   ========================================================= */
-
-function selectSearchSuggestion(query) {
-
-    const input =
-        getSearchInputs()[0];
-
-
-    if (input) {
-
-        input.value =
-            query;
-
+    if (!q) {
+      return getPopularSearches(
+        limit
+      );
     }
 
 
-    submitSearch(query);
+    const products =
+      getProducts();
 
-}
 
+    const suggestions =
+      new Map();
 
-/* =========================================================
-   OPEN PRODUCT
-   ========================================================= */
 
-function openSearchProduct(productId) {
+    products.forEach(product => {
 
-    const product =
-        typeof getProductById ===
-        "function"
-            ? getProductById(productId)
-            : null;
+      const name =
+        String(
+          product.name || ""
+        ).trim();
 
 
-    if (!product) {
-        return;
-    }
+      const category =
+        String(
+          product.category || ""
+        ).trim();
 
 
-    saveSearchQuery(
-        SEARCH_STATE.query
-    );
+      const subcategory =
+        String(
+          product.subcategory || ""
+        ).trim();
 
 
-    closeSearch();
+      const brand =
+        String(
+          product.brand || ""
+        ).trim();
 
 
-    /*
-     * app.js can override this.
-     */
+      const candidates = [
 
-    if (
-        typeof window.openProductDetails ===
-        "function"
-    ) {
-
-        window.openProductDetails(
-            productId
-        );
-
-        return;
-
-    }
-
-
-    /*
-     * Fallback.
-     */
-
-    window.location.href =
-        `index.html?product=${encodeURIComponent(productId)}`;
-
-}
-
-
-/* =========================================================
-   CATEGORY RESULT
-   ========================================================= */
-
-function selectCategorySearchResult(
-    categoryId,
-    categoryName
-) {
-
-    saveSearchQuery(
-        SEARCH_STATE.query
-    );
-
-
-    closeSearch();
-
-
-    if (
-        typeof window.filterByCategory ===
-        "function"
-    ) {
-
-        window.filterByCategory(
-            categoryId
-        );
-
-        return;
-
-    }
-
-
-    window.location.href =
-        `index.html?category=${encodeURIComponent(categoryId)}`;
-
-}
-
-
-/* =========================================================
-   SUBMIT SEARCH
-   ========================================================= */
-
-function submitSearch(query = null) {
-
-    const input =
-        getSearchInputs()[0];
-
-
-    if (
-        query === null &&
-        input
-    ) {
-
-        query =
-            input.value;
-
-    }
-
-
-    const normalized =
-        normalizeSearchQuery(query);
-
-
-    if (!normalized) {
-
-        return false;
-
-    }
-
-
-    saveSearchQuery(
-        normalized
-    );
-
-
-    SEARCH_STATE.query =
-        normalized;
-
-
-    SEARCH_STATE.results =
-        performProductSearch(
-            normalized
-        );
-
-
-    SEARCH_STATE.isOpen =
-        false;
-
-
-    closeSearch();
-
-
-    /*
-     * app.js can handle search navigation.
-     */
-
-    if (
-        typeof window.showSearchResults ===
-        "function"
-    ) {
-
-        window.showSearchResults(
-            normalized
-        );
-
-        return true;
-
-    }
-
-
-    /*
-     * Fallback URL.
-     */
-
-    window.location.href =
-        `index.html?search=${encodeURIComponent(normalized)}`;
-
-
-    return true;
-
-}
-
-
-/* =========================================================
-   SEARCH INPUTS
-   ========================================================= */
-
-function getSearchInputs() {
-
-    return Array.from(
-        document.querySelectorAll(
-            "[data-search-input], #searchInput, .search-input"
-        )
-    );
-
-}
-
-
-/* =========================================================
-   OPEN SEARCH
-   ========================================================= */
-
-function openSearch() {
-
-    SEARCH_STATE.isOpen =
-        true;
-
-
-    const inputs =
-        getSearchInputs();
-
-
-    inputs.forEach(input => {
-
-        input.closest(
-            ".search-container, .search-box, header"
-        )?.classList.add(
-            "search-active"
-        );
-
-    });
-
-
-    renderSearchSuggestions();
-
-}
-
-
-/* =========================================================
-   CLOSE SEARCH
-   ========================================================= */
-
-function closeSearch() {
-
-    SEARCH_STATE.isOpen =
-        false;
-
-
-    document
-        .querySelectorAll(
-            ".search-active"
-        )
-        .forEach(element => {
-
-            element.classList.remove(
-                "search-active"
-            );
-
-        });
-
-
-    document
-        .querySelectorAll(
-            "[data-search-suggestions]"
-        )
-        .forEach(container => {
-
-            container.classList.remove(
-                "show"
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   CLEAR SEARCH INPUT
-   ========================================================= */
-
-function clearSearchInput() {
-
-    getSearchInputs()
-        .forEach(input => {
-
-            input.value = "";
-
-        });
-
-
-    SEARCH_STATE.query = "";
-
-    SEARCH_STATE.results = [];
-
-    openSearch();
-
-}
-
-
-/* =========================================================
-   ESC KEY
-   ========================================================= */
-
-function handleSearchKeydown(event) {
-
-    if (
-        event.key ===
-        "Enter"
-    ) {
-
-        event.preventDefault();
-
-        submitSearch();
-
-        return;
-
-    }
-
-
-    if (
-        event.key ===
-        "Escape"
-    ) {
-
-        closeSearch();
-
-        return;
-
-    }
-
-}
-
-
-/* =========================================================
-   PRICE FORMAT
-   ========================================================= */
-
-function formatSearchPrice(
-    amount
-) {
-
-    return new Intl.NumberFormat(
-        "en-IN",
         {
-            style: "currency",
-            currency: "INR",
-            maximumFractionDigits: 0
+          text: name,
+          type: "product",
+          score:
+            getSearchScore(
+              product,
+              q
+            )
+        },
+
+        {
+          text: subcategory,
+          type: "category",
+          score:
+            normalize(subcategory)
+              .includes(q)
+              ? 45
+              : 0
+        },
+
+        {
+          text: category,
+          type: "category",
+          score:
+            normalize(category)
+              .includes(q)
+              ? 40
+              : 0
+        },
+
+        {
+          text: brand,
+          type: "brand",
+          score:
+            normalize(brand)
+              .includes(q)
+              ? 35
+              : 0
         }
-    ).format(
-        Number(amount || 0)
-    );
 
-}
+      ];
 
 
-/* =========================================================
-   HTML ESCAPE
-   ========================================================= */
+      candidates.forEach(
+        candidate => {
 
-function escapeSearchHTML(
-    value
-) {
+          if (
+            candidate.text &&
+            candidate.score > 0
+          ) {
 
-    return String(value ?? "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =========================================================
-   SEARCH EVENT BINDING
-   ========================================================= */
-
-function initializeSearch() {
-
-    const inputs =
-        getSearchInputs();
-
-
-    inputs.forEach(input => {
-
-        input.addEventListener(
-            "input",
-            event => {
-
-                handleSearchInput(
-                    event.target.value
-                );
-
-            }
-        );
-
-
-        input.addEventListener(
-            "focus",
-            () => {
-
-                openSearch();
-
-            }
-        );
-
-
-        input.addEventListener(
-            "keydown",
-            handleSearchKeydown
-        );
-
-    });
-
-
-    /*
-     * Search submit buttons.
-     */
-
-    document
-        .querySelectorAll(
-            "[data-search-submit]"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    submitSearch();
-
-                }
-            );
-
-        });
-
-
-    /*
-     * Search close buttons.
-     */
-
-    document
-        .querySelectorAll(
-            "[data-search-close]"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                closeSearch
-            );
-
-        });
-
-
-    /*
-     * Clear buttons.
-     */
-
-    document
-        .querySelectorAll(
-            "[data-search-clear]"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                clearSearchInput
-            );
-
-        });
-
-
-    /*
-     * Click outside search.
-     */
-
-    document.addEventListener(
-        "click",
-        event => {
-
-            const searchArea =
-                event.target.closest(
-                    ".search-container, .search-box, [data-search-area]"
-                );
+            const key =
+              normalize(
+                candidate.text
+              );
 
 
             if (
-                !searchArea &&
-                SEARCH_STATE.isOpen
+              !suggestions.has(key) ||
+              suggestions.get(key).score <
+                candidate.score
             ) {
 
-                closeSearch();
+              suggestions.set(
+                key,
+                candidate
+              );
 
             }
 
+          }
+
         }
-    );
-
-}
-
-
-/* =========================================================
-   URL SEARCH INITIALIZATION
-   ========================================================= */
-
-function initializeURLSearch() {
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    const query =
-        params.get("search");
-
-
-    if (!query) {
-        return;
-    }
-
-
-    const inputs =
-        getSearchInputs();
-
-
-    inputs.forEach(input => {
-
-        input.value =
-            query;
+      );
 
     });
 
 
-    SEARCH_STATE.query =
-        normalizeSearchQuery(query);
+    return [...suggestions.values()]
+      .sort(
+        (a, b) =>
+          b.score - a.score
+      )
+      .slice(0, limit);
+  }
 
 
-    SEARCH_STATE.results =
-        performProductSearch(query);
+  /* =======================================================
+     POPULAR SEARCHES
+     ======================================================= */
+
+  function getPopularSearches(
+    limit = 8
+  ) {
+
+    const products =
+      getProducts();
 
 
-    /*
-     * app.js can render complete
-     * search results page.
-     */
+    const popular = [];
 
-    if (
-        typeof window.showSearchResults ===
-        "function"
-    ) {
 
-        window.showSearchResults(
-            query
+    products
+      .filter(
+        product =>
+          product.isTrending ||
+          product.isNew
+      )
+      .sort(
+        (a, b) => {
+
+          const aScore =
+            Number(a.rating || 0) +
+            Number(a.reviews || 0) / 1000;
+
+          const bScore =
+            Number(b.rating || 0) +
+            Number(b.reviews || 0) / 1000;
+
+          return bScore - aScore;
+
+        }
+      )
+      .forEach(product => {
+
+        if (
+          !popular.some(
+            item =>
+              normalize(item) ===
+              normalize(product.name)
+          )
+        ) {
+
+          popular.push(
+            product.name
+          );
+
+        }
+
+      });
+
+
+    return popular.slice(
+      0,
+      limit
+    );
+  }
+
+
+  /* =======================================================
+     SEARCH HISTORY
+     ======================================================= */
+
+  function getSearchHistory() {
+
+    try {
+
+      const saved =
+        localStorage.getItem(
+          SEARCH_HISTORY_KEY
         );
 
+
+      if (!saved) return [];
+
+
+      const parsed =
+        JSON.parse(saved);
+
+
+      return Array.isArray(parsed)
+        ? parsed
+        : [];
+
+    } catch (error) {
+
+      console.error(
+        "AS FASHIONS search history error:",
+        error
+      );
+
+      return [];
+
+    }
+  }
+
+
+  function saveSearch(query) {
+
+    const value =
+      String(query || "").trim();
+
+
+    if (!value) {
+      return;
     }
 
-}
+
+    let history =
+      getSearchHistory();
 
 
-/* =========================================================
-   INITIALIZATION
-   ========================================================= */
-
-function initializeSearchEngine() {
-
-    initializeSearch();
-
-    initializeURLSearch();
-
-}
+    history =
+      history.filter(
+        item =>
+          normalize(item) !==
+          normalize(value)
+      );
 
 
-/* =========================================================
-   AUTO START
-   ========================================================= */
+    history.unshift(value);
 
-if (
-    document.readyState ===
-    "loading"
-) {
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeSearchEngine
+    history =
+      history.slice(
+        0,
+        MAX_HISTORY
+      );
+
+
+    localStorage.setItem(
+      SEARCH_HISTORY_KEY,
+      JSON.stringify(history)
     );
 
-} else {
 
-    initializeSearchEngine();
+    window.dispatchEvent(
+      new CustomEvent(
+        "asf:search-history-updated",
+        {
+          detail: {
+            history
+          }
+        }
+      )
+    );
+  }
 
-                      }
+
+  function removeSearch(
+    query
+  ) {
+
+    const value =
+      normalize(query);
+
+
+    const history =
+      getSearchHistory()
+        .filter(
+          item =>
+            normalize(item) !==
+            value
+        );
+
+
+    localStorage.setItem(
+      SEARCH_HISTORY_KEY,
+      JSON.stringify(history)
+    );
+
+
+    window.dispatchEvent(
+      new CustomEvent(
+        "asf:search-history-updated",
+        {
+          detail: {
+            history
+          }
+        }
+      )
+    );
+  }
+
+
+  function clearSearchHistory() {
+
+    localStorage.removeItem(
+      SEARCH_HISTORY_KEY
+    );
+
+
+    window.dispatchEvent(
+      new CustomEvent(
+        "asf:search-history-updated",
+        {
+          detail: {
+            history: []
+          }
+        }
+      )
+    );
+  }
+
+
+  /* =======================================================
+     CATEGORY SEARCH
+     ======================================================= */
+
+  function searchCategory(
+    category,
+    subcategory = null
+  ) {
+
+    const categoryName =
+      normalize(category);
+
+
+    const subcategoryName =
+      normalize(subcategory);
+
+
+    return getProducts()
+      .filter(product => {
+
+        const productCategory =
+          normalize(
+            product.category
+          );
+
+
+        const productSubcategory =
+          normalize(
+            product.subcategory
+          );
+
+
+        const categoryMatch =
+          productCategory ===
+          categoryName;
+
+
+        if (!subcategoryName) {
+          return categoryMatch;
+        }
+
+
+        return (
+          categoryMatch &&
+          productSubcategory ===
+            subcategoryName
+        );
+
+      });
+  }
+
+
+  /* =======================================================
+     TAG SEARCH
+     ======================================================= */
+
+  function searchByTag(
+    tag
+  ) {
+
+    const target =
+      normalize(tag);
+
+
+    if (!target) return [];
+
+
+    return getProducts()
+      .filter(product => {
+
+        const tags =
+          (product.tags || [])
+            .map(normalize);
+
+
+        return tags.some(
+          item =>
+            item === target ||
+            item.includes(target)
+        );
+
+      });
+  }
+
+
+  /* =======================================================
+     PRICE SEARCH
+     ======================================================= */
+
+  function searchByPrice(
+    maxPrice
+  ) {
+
+    const max =
+      Number(maxPrice);
+
+
+    if (!Number.isFinite(max)) {
+      return [];
+    }
+
+
+    return getProducts()
+      .filter(
+        product =>
+          Number(product.price || 0) <= max
+      )
+      .sort(
+        (a, b) =>
+          Number(a.price || 0) -
+          Number(b.price || 0)
+      );
+  }
+
+
+  /* =======================================================
+     CLEAR SEARCH
+     ======================================================= */
+
+  function clearSearch() {
+
+    window.dispatchEvent(
+      new CustomEvent(
+        "asf:search-cleared"
+      )
+    );
+  }
+
+
+  /* =======================================================
+     PUBLIC API
+     ======================================================= */
+
+  window.ASFSearch = {
+
+    search,
+
+    searchProducts,
+
+    getSuggestions,
+
+    getPopularSearches,
+
+    getSearchHistory,
+
+    saveSearch,
+
+    removeSearch,
+
+    clearSearchHistory,
+
+    searchCategory,
+
+    searchByTag,
+
+    searchByPrice,
+
+    clearSearch
+
+  };
+
+
+  /* =======================================================
+     GLOBAL HELPERS
+     ======================================================= */
+
+  window.searchProducts =
+    searchProducts;
+
+  window.getSearchSuggestions =
+    getSuggestions;
+
+  window.getSearchHistory =
+    getSearchHistory;
+
+
+  /* =======================================================
+     READY EVENT
+     ======================================================= */
+
+  window.dispatchEvent(
+    new CustomEvent(
+      "asf:search-ready"
+    )
+  );
+
+})();

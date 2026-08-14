@@ -1,1679 +1,736 @@
 /* =========================================================
-   AS FASHIONS
-   PRODUCT DATABASE
-   js/products.js
+   AS FASHIONS — js/products.js
+   Single-Vendor Product Database
    ========================================================= */
 
 const PRODUCTS = [
 
-    /* =====================================================
-       MEN — TOPWEAR
-       ===================================================== */
-
-    {
-        id: "AF-MEN-001",
-        name: "Premium Oversized Cotton T-Shirt",
-        brand: "AS FASHIONS",
-        category: "men",
-        subcategory: "topwear",
-        type: "T-Shirts",
-
-        price: 699,
-        mrp: 1499,
-        discount: 53,
-        currency: "INR",
-
-        rating: 4.5,
-        reviews: 328,
-
-        images: [
-            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
-            "https://images.unsplash.com/photo-1503341504253-dff4815485f1"
-        ],
-
-        colors: [
-            {
-                name: "Black",
-                code: "#111111"
-            },
-            {
-                name: "White",
-                code: "#ffffff"
-            },
-            {
-                name: "Olive",
-                code: "#556b2f"
-            }
-        ],
-
-        sizes: ["S", "M", "L", "XL", "XXL"],
-
-        stock: 42,
-
-        tags: [
-            "oversized",
-            "cotton",
-            "trending",
-            "streetwear"
-        ],
-
-        offers: [
-            "Extra 10% OFF on selected products",
-            "Free shipping above ₹999"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: false
-    },
-
-
-    {
-        id: "AF-MEN-002",
-        name: "Slim Fit Casual Shirt",
-        brand: "AS FASHIONS",
-        category: "men",
-        subcategory: "topwear",
-        type: "Casual Shirts",
-
-        price: 899,
-        mrp: 1899,
-        discount: 53,
-        currency: "INR",
-
-        rating: 4.3,
-        reviews: 214,
-
-        images: [
-            "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
-            "https://images.unsplash.com/photo-1596755094514-f87e34085b2c"
-        ],
-
-        colors: [
-            {
-                name: "Sky Blue",
-                code: "#87ceeb"
-            },
-            {
-                name: "White",
-                code: "#ffffff"
-            },
-            {
-                name: "Black",
-                code: "#111111"
-            }
-        ],
-
-        sizes: ["S", "M", "L", "XL", "XXL"],
-
-        stock: 31,
-
-        tags: [
-            "casual",
-            "slim-fit",
-            "shirt"
-        ],
-
-        offers: [
-            "Buy 2 for ₹1499"
-        ],
-
-        isNew: false,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: true
-    },
-
-
-    {
-        id: "AF-MEN-003",
-        name: "Classic Polo T-Shirt",
-        brand: "AS FASHIONS",
-        category: "men",
-        subcategory: "topwear",
-        type: "Polo T-Shirts",
-
-        price: 749,
-        mrp: 1599,
-        discount: 53,
-
-        rating: 4.4,
-        reviews: 189,
-
-        images: [
-            "https://images.unsplash.com/photo-1625910513413-5fc45b8b9d5b"
-        ],
-
-        colors: [
-            {
-                name: "Navy",
-                code: "#172554"
-            },
-            {
-                name: "Maroon",
-                code: "#7f1d1d"
-            }
-        ],
-
-        sizes: ["S", "M", "L", "XL", "XXL"],
-
-        stock: 26,
-
-        tags: [
-            "polo",
-            "casual",
-            "classic"
-        ],
-
-        offers: [
-            "10% instant discount"
-        ],
-
-        isNew: true,
-        isTrending: false,
-        isSale: true,
-        isFeatured: false,
-        isFlashSale: false
-    },
-
-
-    /* =====================================================
-       MEN — BOTTOMWEAR
-       ===================================================== */
-
-    {
-        id: "AF-MEN-004",
-        name: "Relaxed Fit Cargo Pants",
-        brand: "AS FASHIONS",
-        category: "men",
-        subcategory: "bottomwear",
-        type: "Cargo Trousers",
-
-        price: 1199,
-        mrp: 2499,
-        discount: 52,
-
-        rating: 4.6,
-        reviews: 456,
-
-        images: [
-            "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f"
-        ],
-
-        colors: [
-            {
-                name: "Olive",
-                code: "#556b2f"
-            },
-            {
-                name: "Black",
-                code: "#111111"
-            },
-            {
-                name: "Beige",
-                code: "#d6c6a5"
-            }
-        ],
-
-        sizes: [
-            "28",
-            "30",
-            "32",
-            "34",
-            "36",
-            "38"
-        ],
-
-        stock: 18,
-
-        tags: [
-            "cargo",
-            "streetwear",
-            "trending"
-        ],
-
-        offers: [
-            "Extra ₹150 OFF"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: true
-    },
-
-
-    {
-        id: "AF-MEN-005",
-        name: "Straight Fit Blue Jeans",
-        brand: "AS FASHIONS",
-        category: "men",
-        subcategory: "bottomwear",
-        type: "Jeans",
-
-        price: 1099,
-        mrp: 2299,
-        discount: 52,
-
-        rating: 4.4,
-        reviews: 367,
-
-        images: [
-            "https://images.unsplash.com/photo-1542272604-787c3835535d"
-        ],
-
-        colors: [
-            {
-                name: "Blue",
-                code: "#2563eb"
-            },
-            {
-                name: "Dark Blue",
-                code: "#172554"
-            }
-        ],
-
-        sizes: [
-            "28",
-            "30",
-            "32",
-            "34",
-            "36",
-            "38"
-        ],
-
-        stock: 35,
-
-        tags: [
-            "jeans",
-            "denim",
-            "casual"
-        ],
-
-        offers: [
-            "Buy 2 get extra 15% OFF"
-        ],
-
-        isNew: false,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: false
-    },
-
-
-    /* =====================================================
-       WOMEN — WESTERN WEAR
-       ===================================================== */
-
-    {
-        id: "AF-WOMEN-001",
-        name: "Elegant Ribbed Crop Top",
-        brand: "AS FASHIONS",
-        category: "women",
-        subcategory: "western-wear",
-        type: "Crop Tops",
-
-        price: 499,
-        mrp: 999,
-        discount: 50,
-
-        rating: 4.5,
-        reviews: 521,
-
-        images: [
-            "https://images.unsplash.com/photo-1564257577054-1f3f5a1a4d5a"
-        ],
-
-        colors: [
-            {
-                name: "Black",
-                code: "#111111"
-            },
-            {
-                name: "Pink",
-                code: "#ec4899"
-            },
-            {
-                name: "White",
-                code: "#ffffff"
-            }
-        ],
-
-        sizes: [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-
-        stock: 52,
-
-        tags: [
-            "crop-top",
-            "trending",
-            "western"
-        ],
-
-        offers: [
-            "Flat 50% OFF"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: true
-    },
-
-
-    {
-        id: "AF-WOMEN-002",
-        name: "Relaxed Fit Women's Shirt",
-        brand: "AS FASHIONS",
-        category: "women",
-        subcategory: "western-wear",
-        type: "Shirts",
-
-        price: 799,
-        mrp: 1699,
-        discount: 53,
-
-        rating: 4.3,
-        reviews: 276,
-
-        images: [
-            "https://images.unsplash.com/photo-1598554747436-c9293d6a588f"
-        ],
-
-        colors: [
-            {
-                name: "White",
-                code: "#ffffff"
-            },
-            {
-                name: "Blue",
-                code: "#2563eb"
-            }
-        ],
-
-        sizes: [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-
-        stock: 24,
-
-        tags: [
-            "shirt",
-            "oversized",
-            "casual"
-        ],
-
-        offers: [
-            "Extra 10% OFF"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: false,
-        isFlashSale: false
-    },
-
-
-    /* =====================================================
-       WOMEN — DRESSES
-       ===================================================== */
-
-    {
-        id: "AF-WOMEN-003",
-        name: "Floral Midi Dress",
-        brand: "AS FASHIONS",
-        category: "women",
-        subcategory: "dresses",
-        type: "Midi Dresses",
-
-        price: 999,
-        mrp: 2199,
-        discount: 55,
-
-        rating: 4.6,
-        reviews: 643,
-
-        images: [
-            "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446"
-        ],
-
-        colors: [
-            {
-                name: "Floral Pink",
-                code: "#f9a8d4"
-            },
-            {
-                name: "Floral Blue",
-                code: "#93c5fd"
-            }
-        ],
-
-        sizes: [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-
-        stock: 16,
-
-        tags: [
-            "dress",
-            "floral",
-            "party",
-            "trending"
-        ],
-
-        offers: [
-            "Flat 55% OFF"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: true
-    },
-
-
-    /* =====================================================
-       WOMEN — ETHNIC
-       ===================================================== */
-
-    {
-        id: "AF-WOMEN-004",
-        name: "Printed Kurta Set",
-        brand: "AS FASHIONS",
-        category: "women",
-        subcategory: "indian-wear",
-        type: "Kurta Sets",
-
-        price: 1299,
-        mrp: 2999,
-        discount: 57,
-
-        rating: 4.7,
-        reviews: 812,
-
-        images: [
-            "https://images.unsplash.com/photo-1583391733956-6c78276477e2"
-        ],
-
-        colors: [
-            {
-                name: "Pink",
-                code: "#ec4899"
-            },
-            {
-                name: "Green",
-                code: "#16a34a"
-            }
-        ],
-
-        sizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL"
-        ],
-
-        stock: 29,
-
-        tags: [
-            "ethnic",
-            "kurta",
-            "festive"
-        ],
-
-        offers: [
-            "Extra ₹200 OFF on ₹1499"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: false
-    },
-
-
-    /* =====================================================
-       WOMEN — SAREES
-       ===================================================== */
-
-    {
-        id: "AF-WOMEN-005",
-        name: "Elegant Printed Georgette Saree",
-        brand: "AS FASHIONS",
-        category: "women",
-        subcategory: "sarees",
-        type: "Georgette Sarees",
-
-        price: 1499,
-        mrp: 3499,
-        discount: 57,
-
-        rating: 4.5,
-        reviews: 298,
-
-        images: [
-            "https://images.unsplash.com/photo-1610030469983-98e550d6193c"
-        ],
-
-        colors: [
-            {
-                name: "Red",
-                code: "#dc2626"
-            },
-            {
-                name: "Blue",
-                code: "#2563eb"
-            },
-            {
-                name: "Green",
-                code: "#15803d"
-            }
-        ],
-
-        sizes: [
-            "Free Size"
-        ],
-
-        stock: 21,
-
-        tags: [
-            "saree",
-            "georgette",
-            "festive"
-        ],
-
-        offers: [
-            "Flat 57% OFF"
-        ],
-
-        isNew: true,
-        isTrending: false,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: false
-    },
-
-
-    /* =====================================================
-       KIDS — BOYS
-       ===================================================== */
-
-    {
-        id: "AF-KIDS-001",
-        name: "Boys Printed Casual T-Shirt",
-        brand: "AS FASHIONS KIDS",
-        category: "kids",
-        subcategory: "boys",
-        type: "T-Shirts",
-
-        price: 399,
-        mrp: 799,
-        discount: 50,
-
-        rating: 4.4,
-        reviews: 167,
-
-        images: [
-            "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea"
-        ],
-
-        colors: [
-            {
-                name: "Blue",
-                code: "#2563eb"
-            },
-            {
-                name: "Black",
-                code: "#111111"
-            }
-        ],
-
-        sizes: [
-            "2-3Y",
-            "4-5Y",
-            "6-7Y",
-            "8-9Y",
-            "10-11Y",
-            "12-13Y"
-        ],
-
-        stock: 44,
-
-        tags: [
-            "kids",
-            "boys",
-            "casual"
-        ],
-
-        offers: [
-            "Buy 2 for ₹699"
-        ],
-
-        isNew: true,
-        isTrending: false,
-        isSale: true,
-        isFeatured: false,
-        isFlashSale: false
-    },
-
-
-    /* =====================================================
-       KIDS — GIRLS
-       ===================================================== */
-
-    {
-        id: "AF-KIDS-002",
-        name: "Girls Floral Party Dress",
-        brand: "AS FASHIONS KIDS",
-        category: "kids",
-        subcategory: "girls",
-        type: "Dresses",
-
-        price: 699,
-        mrp: 1499,
-        discount: 53,
-
-        rating: 4.6,
-        reviews: 241,
-
-        images: [
-            "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7"
-        ],
-
-        colors: [
-            {
-                name: "Pink",
-                code: "#ec4899"
-            },
-            {
-                name: "Purple",
-                code: "#9333ea"
-            }
-        ],
-
-        sizes: [
-            "2-3Y",
-            "4-5Y",
-            "6-7Y",
-            "8-9Y",
-            "10-11Y"
-        ],
-
-        stock: 19,
-
-        tags: [
-            "kids",
-            "girls",
-            "dress",
-            "party"
-        ],
-
-        offers: [
-            "Flat 53% OFF"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: false
-    },
-
-
-    /* =====================================================
-       FOOTWEAR — MEN
-       ===================================================== */
-
-    {
-        id: "AF-FOOT-001",
-        name: "Premium Everyday Sneakers",
-        brand: "AS FASHIONS",
-        category: "footwear",
-        subcategory: "mens-footwear",
-        type: "Sneakers",
-
-        price: 1299,
-        mrp: 2999,
-        discount: 57,
-
-        rating: 4.6,
-        reviews: 927,
-
-        images: [
-            "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-        ],
-
-        colors: [
-            {
-                name: "White",
-                code: "#ffffff"
-            },
-            {
-                name: "Black",
-                code: "#111111"
-            }
-        ],
-
-        sizes: [
-            "UK 6",
-            "UK 7",
-            "UK 8",
-            "UK 9",
-            "UK 10",
-            "UK 11"
-        ],
-
-        stock: 14,
-
-        tags: [
-            "sneakers",
-            "footwear",
-            "trending"
-        ],
-
-        offers: [
-            "Extra 10% OFF"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: true
-    },
-
-
-    /* =====================================================
-       FOOTWEAR — WOMEN
-       ===================================================== */
-
-    {
-        id: "AF-FOOT-002",
-        name: "Women's Block Heel Sandals",
-        brand: "AS FASHIONS",
-        category: "footwear",
-        subcategory: "womens-footwear",
-        type: "Block Heels",
-
-        price: 899,
-        mrp: 1999,
-        discount: 55,
-
-        rating: 4.4,
-        reviews: 314,
-
-        images: [
-            "https://images.unsplash.com/photo-1543163521-1bf539c55dd2"
-        ],
-
-        colors: [
-            {
-                name: "Black",
-                code: "#111111"
-            },
-            {
-                name: "Beige",
-                code: "#d6c6a5"
-            }
-        ],
-
-        sizes: [
-            "UK 3",
-            "UK 4",
-            "UK 5",
-            "UK 6",
-            "UK 7",
-            "UK 8"
-        ],
-
-        stock: 27,
-
-        tags: [
-            "heels",
-            "sandals",
-            "women"
-        ],
-
-        offers: [
-            "Flat 55% OFF"
-        ],
-
-        isNew: false,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: false
-    },
-
-
-    /* =====================================================
-       BAGS
-       ===================================================== */
-
-    {
-        id: "AF-BAG-001",
-        name: "Premium Everyday Tote Bag",
-        brand: "AS FASHIONS",
-        category: "bags",
-        subcategory: "womens-bags",
-        type: "Tote Bags",
-
-        price: 799,
-        mrp: 1799,
-        discount: 56,
-
-        rating: 4.5,
-        reviews: 438,
-
-        images: [
-            "https://images.unsplash.com/photo-1584917865442-de89df76afd3"
-        ],
-
-        colors: [
-            {
-                name: "Black",
-                code: "#111111"
-            },
-            {
-                name: "Brown",
-                code: "#78350f"
-            },
-            {
-                name: "Beige",
-                code: "#d6c6a5"
-            }
-        ],
-
-        sizes: [
-            "One Size"
-        ],
-
-        stock: 33,
-
-        tags: [
-            "tote",
-            "bag",
-            "everyday"
-        ],
-
-        offers: [
-            "Flat 56% OFF"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: false
-    },
-
-
-    /* =====================================================
-       ACCESSORIES — WATCH
-       ===================================================== */
-
-    {
-        id: "AF-ACC-001",
-        name: "Minimal Analog Watch",
-        brand: "AS FASHIONS",
-        category: "accessories",
-        subcategory: "watches",
-        type: "Analog Watches",
-
-        price: 999,
-        mrp: 2499,
-        discount: 60,
-
-        rating: 4.5,
-        reviews: 583,
-
-        images: [
-            "https://images.unsplash.com/photo-1524805444758-089113d48a6d"
-        ],
-
-        colors: [
-            {
-                name: "Black",
-                code: "#111111"
-            },
-            {
-                name: "Silver",
-                code: "#c0c0c0"
-            }
-        ],
-
-        sizes: [
-            "One Size"
-        ],
-
-        stock: 22,
-
-        tags: [
-            "watch",
-            "accessory",
-            "minimal"
-        ],
-
-        offers: [
-            "Extra 10% OFF"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: true
-    },
-
-
-    /* =====================================================
-       SPORTS
-       ===================================================== */
-
-    {
-        id: "AF-SPORT-001",
-        name: "Performance Running T-Shirt",
-        brand: "AS FASHIONS ACTIVE",
-        category: "sports",
-        subcategory: "mens-sportswear",
-        type: "Sports T-Shirts",
-
-        price: 599,
-        mrp: 1299,
-        discount: 54,
-
-        rating: 4.6,
-        reviews: 389,
-
-        images: [
-            "https://images.unsplash.com/photo-1552674605-db6ffd4facb5"
-        ],
-
-        colors: [
-            {
-                name: "Black",
-                code: "#111111"
-            },
-            {
-                name: "Blue",
-                code: "#2563eb"
-            },
-            {
-                name: "Green",
-                code: "#16a34a"
-            }
-        ],
-
-        sizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL"
-        ],
-
-        stock: 48,
-
-        tags: [
-            "running",
-            "sports",
-            "gym",
-            "activewear"
-        ],
-
-        offers: [
-            "Buy 2 for ₹999"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: true
-    },
-
-
-    /* =====================================================
-       WINTER WEAR
-       ===================================================== */
-
-    {
-        id: "AF-WINTER-001",
-        name: "Premium Puffer Jacket",
-        brand: "AS FASHIONS",
-        category: "winter-wear",
-        subcategory: "men-winter",
-        type: "Puffer Jackets",
-
-        price: 1799,
-        mrp: 3999,
-        discount: 55,
-
-        rating: 4.7,
-        reviews: 296,
-
-        images: [
-            "https://images.unsplash.com/photo-1551028719-00167b16eac5"
-        ],
-
-        colors: [
-            {
-                name: "Black",
-                code: "#111111"
-            },
-            {
-                name: "Navy",
-                code: "#172554"
-            }
-        ],
-
-        sizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL"
-        ],
-
-        stock: 12,
-
-        tags: [
-            "winter",
-            "jacket",
-            "puffer"
-        ],
-
-        offers: [
-            "Flat 55% OFF"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: true
-    },
-
-
-    /* =====================================================
-       TRENDING
-       ===================================================== */
-
-    {
-        id: "AF-TREND-001",
-        name: "Streetwear Co-ord Set",
-        brand: "AS FASHIONS",
-        category: "trending",
-        subcategory: "trending-fashion",
-        type: "Co-ord Sets",
-
-        price: 1299,
-        mrp: 2799,
-        discount: 54,
-
-        rating: 4.8,
-        reviews: 731,
-
-        images: [
-            "https://images.unsplash.com/photo-1529139574466-a303027c1d8b"
-        ],
-
-        colors: [
-            {
-                name: "Black",
-                code: "#111111"
-            },
-            {
-                name: "Grey",
-                code: "#6b7280"
-            }
-        ],
-
-        sizes: [
-            "S",
-            "M",
-            "L",
-            "XL"
-        ],
-
-        stock: 9,
-
-        tags: [
-            "trending",
-            "streetwear",
-            "coord-set",
-            "viral"
-        ],
-
-        offers: [
-            "Flash Sale — Limited Stock"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: true
-    },
-
-
-    /* =====================================================
-       NEW ARRIVALS
-       ===================================================== */
-
-    {
-        id: "AF-NEW-001",
-        name: "Premium Minimal Hoodie",
-        brand: "AS FASHIONS",
-        category: "new-arrivals",
-        subcategory: "new-men",
-        type: "New Hoodies",
-
-        price: 999,
-        mrp: 1999,
-        discount: 50,
-
-        rating: 4.7,
-        reviews: 112,
-
-        images: [
-            "https://images.unsplash.com/photo-1556821840-3a63f95609a7"
-        ],
-
-        colors: [
-            {
-                name: "Black",
-                code: "#111111"
-            },
-            {
-                name: "Grey",
-                code: "#6b7280"
-            },
-            {
-                name: "Cream",
-                code: "#f5f5dc"
-            }
-        ],
-
-        sizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL"
-        ],
-
-        stock: 38,
-
-        tags: [
-            "new",
-            "hoodie",
-            "minimal",
-            "winter"
-        ],
-
-        offers: [
-            "New Arrival Offer — Extra 10% OFF"
-        ],
-
-        isNew: true,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: false
-    },
-
-
-    /* =====================================================
-       SALE
-       ===================================================== */
-
-    {
-        id: "AF-SALE-001",
-        name: "Premium Casual Sneakers — Mega Deal",
-        brand: "AS FASHIONS",
-        category: "sale",
-        subcategory: "footwear-sale",
-        type: "Sneakers",
-
-        price: 799,
-        mrp: 1999,
-        discount: 60,
-
-        rating: 4.5,
-        reviews: 1042,
-
-        images: [
-            "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77"
-        ],
-
-        colors: [
-            {
-                name: "White",
-                code: "#ffffff"
-            },
-            {
-                name: "Black",
-                code: "#111111"
-            }
-        ],
-
-        sizes: [
-            "UK 6",
-            "UK 7",
-            "UK 8",
-            "UK 9",
-            "UK 10",
-            "UK 11"
-        ],
-
-        stock: 5,
-
-        tags: [
-            "sale",
-            "mega-deal",
-            "flash-sale",
-            "limited-stock"
-        ],
-
-        offers: [
-            "FLAT 60% OFF",
-            "Only 5 left at this price!"
-        ],
-
-        isNew: false,
-        isTrending: true,
-        isSale: true,
-        isFeatured: true,
-        isFlashSale: true
-    }
+  /* =======================================================
+     MEN — TOPWEAR
+     ======================================================= */
+
+  {
+    id: "ASF-MEN-001",
+    sku: "ASF-M001",
+    name: "Premium Slim Fit Cotton Shirt",
+    brand: "AS FASHIONS",
+    category: "Men",
+    subcategory: "Shirts",
+    gender: "Men",
+    price: 899,
+    mrp: 1799,
+    discount: 50,
+    rating: 4.5,
+    reviews: 328,
+    stock: 42,
+    isNew: true,
+    isTrending: true,
+    badge: "NEW",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: ["Black", "White", "Navy"],
+    tags: [
+      "shirt",
+      "men",
+      "cotton",
+      "slim fit",
+      "casual"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800"
+    ],
+    description:
+      "Premium cotton shirt with a clean slim-fit silhouette for everyday and smart-casual styling."
+  },
+
+  {
+    id: "ASF-MEN-002",
+    sku: "ASF-M002",
+    name: "Oversized Graphic T-Shirt",
+    brand: "AS FASHIONS",
+    category: "Men",
+    subcategory: "T-Shirts",
+    gender: "Men",
+    price: 599,
+    mrp: 1299,
+    discount: 54,
+    rating: 4.4,
+    reviews: 512,
+    stock: 67,
+    isNew: true,
+    isTrending: true,
+    badge: "TRENDING",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["Black", "White", "Grey"],
+    tags: [
+      "tshirt",
+      "oversized",
+      "graphic",
+      "streetwear"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800"
+    ],
+    description:
+      "Relaxed oversized T-shirt designed for modern streetwear looks."
+  },
+
+  {
+    id: "ASF-MEN-003",
+    sku: "ASF-M003",
+    name: "Regular Fit Polo T-Shirt",
+    brand: "AS FASHIONS",
+    category: "Men",
+    subcategory: "Polo T-Shirts",
+    gender: "Men",
+    price: 699,
+    mrp: 1499,
+    discount: 53,
+    rating: 4.3,
+    reviews: 214,
+    stock: 38,
+    badge: "BESTSELLER",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: ["Navy", "Black", "Olive"],
+    tags: [
+      "polo",
+      "tshirt",
+      "casual",
+      "men"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1625910513413-5fc45f6a3b8c?w=800"
+    ],
+    description:
+      "Classic regular-fit polo made for versatile everyday styling."
+  },
+
+  /* =======================================================
+     MEN — BOTTOMWEAR
+     ======================================================= */
+
+  {
+    id: "ASF-MEN-004",
+    sku: "ASF-M004",
+    name: "Straight Fit Stretch Jeans",
+    brand: "AS FASHIONS",
+    category: "Men",
+    subcategory: "Jeans",
+    gender: "Men",
+    price: 1099,
+    mrp: 2299,
+    discount: 52,
+    rating: 4.5,
+    reviews: 681,
+    stock: 54,
+    isTrending: true,
+    badge: "BESTSELLER",
+    sizes: ["28", "30", "32", "34", "36", "38"],
+    colors: ["Blue", "Black"],
+    tags: [
+      "jeans",
+      "denim",
+      "straight fit",
+      "men"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800"
+    ],
+    description:
+      "Comfort stretch denim with a contemporary straight-fit profile."
+  },
+
+  {
+    id: "ASF-MEN-005",
+    sku: "ASF-M005",
+    name: "Relaxed Cargo Pants",
+    brand: "AS FASHIONS",
+    category: "Men",
+    subcategory: "Trousers & Cargos",
+    gender: "Men",
+    price: 999,
+    mrp: 1999,
+    discount: 50,
+    rating: 4.4,
+    reviews: 403,
+    stock: 29,
+    isTrending: true,
+    badge: "TRENDING",
+    sizes: ["28", "30", "32", "34", "36"],
+    colors: ["Black", "Olive", "Beige"],
+    tags: [
+      "cargo",
+      "pants",
+      "streetwear",
+      "utility"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=800"
+    ],
+    description:
+      "Relaxed utility cargo pants with multiple practical pockets."
+  },
+
+  /* =======================================================
+     WOMEN — TOPWEAR
+     ======================================================= */
+
+  {
+    id: "ASF-WOMEN-001",
+    sku: "ASF-W001",
+    name: "Elegant Relaxed Fit Kurta",
+    brand: "AS FASHIONS",
+    category: "Women",
+    subcategory: "Kurtas & Kurtis",
+    gender: "Women",
+    price: 799,
+    mrp: 1699,
+    discount: 53,
+    rating: 4.6,
+    reviews: 734,
+    stock: 46,
+    isNew: true,
+    isTrending: true,
+    badge: "NEW",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: ["Blue", "Pink", "Green"],
+    tags: [
+      "kurta",
+      "kurti",
+      "ethnic",
+      "women"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=800"
+    ],
+    description:
+      "Elegant relaxed-fit kurta combining contemporary comfort with ethnic styling."
+  },
+
+  {
+    id: "ASF-WOMEN-002",
+    sku: "ASF-W002",
+    name: "Printed Casual Top",
+    brand: "AS FASHIONS",
+    category: "Women",
+    subcategory: "Tops",
+    gender: "Women",
+    price: 549,
+    mrp: 1199,
+    discount: 54,
+    rating: 4.3,
+    reviews: 286,
+    stock: 61,
+    isTrending: true,
+    badge: "TRENDING",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["White", "Blue", "Pink"],
+    tags: [
+      "top",
+      "casual",
+      "printed",
+      "women"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=800"
+    ],
+    description:
+      "Lightweight printed top designed for effortless everyday outfits."
+  },
+
+  {
+    id: "ASF-WOMEN-003",
+    sku: "ASF-W003",
+    name: "Classic Denim Jacket",
+    brand: "AS FASHIONS",
+    category: "Women",
+    subcategory: "Jackets",
+    gender: "Women",
+    price: 1299,
+    mrp: 2799,
+    discount: 54,
+    rating: 4.5,
+    reviews: 198,
+    stock: 25,
+    badge: "HOT DEAL",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Blue", "Black"],
+    tags: [
+      "jacket",
+      "denim",
+      "layering"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1543076447-215ad9ba6923?w=800"
+    ],
+    description:
+      "Timeless denim jacket designed for layering across seasons."
+  },
+
+  /* =======================================================
+     WOMEN — BOTTOMWEAR
+     ======================================================= */
+
+  {
+    id: "ASF-WOMEN-004",
+    sku: "ASF-W004",
+    name: "High Rise Straight Jeans",
+    brand: "AS FASHIONS",
+    category: "Women",
+    subcategory: "Jeans",
+    gender: "Women",
+    price: 999,
+    mrp: 2199,
+    discount: 55,
+    rating: 4.6,
+    reviews: 542,
+    stock: 47,
+    isTrending: true,
+    badge: "BESTSELLER",
+    sizes: ["26", "28", "30", "32", "34"],
+    colors: ["Blue", "Black"],
+    tags: [
+      "jeans",
+      "high rise",
+      "denim",
+      "women"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800"
+    ],
+    description:
+      "High-rise straight-leg jeans with comfortable stretch denim."
+  },
+
+  {
+    id: "ASF-WOMEN-005",
+    sku: "ASF-W005",
+    name: "Flowy Wide Leg Trousers",
+    brand: "AS FASHIONS",
+    category: "Women",
+    subcategory: "Trousers",
+    gender: "Women",
+    price: 899,
+    mrp: 1899,
+    discount: 53,
+    rating: 4.4,
+    reviews: 177,
+    stock: 33,
+    isNew: true,
+    badge: "NEW",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Black", "Beige", "Cream"],
+    tags: [
+      "trousers",
+      "wide leg",
+      "formal",
+      "casual"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800"
+    ],
+    description:
+      "Flowy wide-leg trousers offering a polished silhouette and all-day comfort."
+  },
+
+  /* =======================================================
+     KIDS
+     ======================================================= */
+
+  {
+    id: "ASF-KIDS-001",
+    sku: "ASF-K001",
+    name: "Kids Printed Cotton T-Shirt",
+    brand: "AS FASHIONS",
+    category: "Kids",
+    subcategory: "T-Shirts",
+    gender: "Kids",
+    price: 399,
+    mrp: 799,
+    discount: 50,
+    rating: 4.5,
+    reviews: 145,
+    stock: 72,
+    isNew: true,
+    badge: "NEW",
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y"],
+    colors: ["Blue", "Yellow", "White"],
+    tags: [
+      "kids",
+      "tshirt",
+      "cotton"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=800"
+    ],
+    description:
+      "Soft cotton printed T-shirt designed for active kids."
+  },
+
+  {
+    id: "ASF-KIDS-002",
+    sku: "ASF-K002",
+    name: "Kids Casual Denim Jeans",
+    brand: "AS FASHIONS",
+    category: "Kids",
+    subcategory: "Jeans",
+    gender: "Kids",
+    price: 699,
+    mrp: 1399,
+    discount: 50,
+    rating: 4.4,
+    reviews: 102,
+    stock: 35,
+    sizes: ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y"],
+    colors: ["Blue", "Black"],
+    tags: [
+      "kids",
+      "jeans",
+      "denim"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=800"
+    ],
+    description:
+      "Comfortable everyday denim jeans for kids."
+  },
+
+  /* =======================================================
+     FOOTWEAR
+     ======================================================= */
+
+  {
+    id: "ASF-FOOT-001",
+    sku: "ASF-F001",
+    name: "Minimal Everyday Sneakers",
+    brand: "AS FASHIONS",
+    category: "Footwear",
+    subcategory: "Casual Shoes",
+    gender: "Unisex",
+    price: 1199,
+    mrp: 2499,
+    discount: 52,
+    rating: 4.5,
+    reviews: 615,
+    stock: 31,
+    isTrending: true,
+    badge: "BESTSELLER",
+    sizes: [
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    colors: ["White", "Black"],
+    tags: [
+      "sneakers",
+      "shoes",
+      "casual",
+      "footwear"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800"
+    ],
+    description:
+      "Clean everyday sneakers with a versatile minimal profile."
+  },
+
+  {
+    id: "ASF-FOOT-002",
+    sku: "ASF-F002",
+    name: "Comfort Casual Slides",
+    brand: "AS FASHIONS",
+    category: "Footwear",
+    subcategory: "Sandals & Slides",
+    gender: "Unisex",
+    price: 449,
+    mrp: 899,
+    discount: 50,
+    rating: 4.2,
+    reviews: 264,
+    stock: 58,
+    sizes: [
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    colors: ["Black", "Brown", "White"],
+    tags: [
+      "slides",
+      "sandals",
+      "casual"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=800"
+    ],
+    description:
+      "Lightweight comfort slides for everyday use."
+  },
+
+  /* =======================================================
+     BAGS
+     ======================================================= */
+
+  {
+    id: "ASF-BAG-001",
+    sku: "ASF-B001",
+    name: "Structured Everyday Backpack",
+    brand: "AS FASHIONS",
+    category: "Bags",
+    subcategory: "Backpacks",
+    gender: "Unisex",
+    price: 899,
+    mrp: 1899,
+    discount: 53,
+    rating: 4.5,
+    reviews: 342,
+    stock: 28,
+    isTrending: true,
+    badge: "TRENDING",
+    sizes: ["Free Size"],
+    colors: ["Black", "Grey"],
+    tags: [
+      "backpack",
+      "bag",
+      "travel",
+      "college"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800"
+    ],
+    description:
+      "Structured everyday backpack with practical storage compartments."
+  },
+
+  {
+    id: "ASF-BAG-002",
+    sku: "ASF-B002",
+    name: "Premium Sling Crossbody Bag",
+    brand: "AS FASHIONS",
+    category: "Bags",
+    subcategory: "Sling Bags",
+    gender: "Unisex",
+    price: 649,
+    mrp: 1299,
+    discount: 50,
+    rating: 4.3,
+    reviews: 219,
+    stock: 44,
+    sizes: ["Free Size"],
+    colors: ["Black", "Brown", "Cream"],
+    tags: [
+      "sling",
+      "crossbody",
+      "bag"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800"
+    ],
+    description:
+      "Compact crossbody sling designed for everyday essentials."
+  },
+
+  /* =======================================================
+     ACCESSORIES
+     ======================================================= */
+
+  {
+    id: "ASF-ACC-001",
+    sku: "ASF-A001",
+    name: "Classic Minimal Watch",
+    brand: "AS FASHIONS",
+    category: "Accessories",
+    subcategory: "Watches",
+    gender: "Unisex",
+    price: 999,
+    mrp: 1999,
+    discount: 50,
+    rating: 4.4,
+    reviews: 188,
+    stock: 22,
+    isTrending: true,
+    badge: "HOT DEAL",
+    sizes: ["Free Size"],
+    colors: ["Black", "Silver"],
+    tags: [
+      "watch",
+      "accessory",
+      "minimal"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=800"
+    ],
+    description:
+      "Minimal everyday watch with a clean timeless dial."
+  },
+
+  {
+    id: "ASF-ACC-002",
+    sku: "ASF-A002",
+    name: "Premium Everyday Sunglasses",
+    brand: "AS FASHIONS",
+    category: "Accessories",
+    subcategory: "Sunglasses",
+    gender: "Unisex",
+    price: 599,
+    mrp: 1199,
+    discount: 50,
+    rating: 4.3,
+    reviews: 306,
+    stock: 51,
+    sizes: ["Free Size"],
+    colors: ["Black", "Brown"],
+    tags: [
+      "sunglasses",
+      "eyewear",
+      "accessory"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800"
+    ],
+    description:
+      "Contemporary sunglasses designed to complete everyday looks."
+  },
+
+  /* =======================================================
+     SPORTS
+     ======================================================= */
+
+  {
+    id: "ASF-SPORT-001",
+    sku: "ASF-S001",
+    name: "Performance Active T-Shirt",
+    brand: "AS FASHIONS",
+    category: "Sports",
+    subcategory: "Sports T-Shirts",
+    gender: "Unisex",
+    price: 649,
+    mrp: 1299,
+    discount: 50,
+    rating: 4.5,
+    reviews: 264,
+    stock: 49,
+    isNew: true,
+    badge: "NEW",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: ["Black", "Grey", "Blue"],
+    tags: [
+      "sports",
+      "activewear",
+      "gym",
+      "running"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800"
+    ],
+    description:
+      "Lightweight performance T-shirt designed for training and active lifestyles."
+  },
+
+  {
+    id: "ASF-SPORT-002",
+    sku: "ASF-S002",
+    name: "Performance Training Joggers",
+    brand: "AS FASHIONS",
+    category: "Sports",
+    subcategory: "Track Pants & Joggers",
+    gender: "Unisex",
+    price: 799,
+    mrp: 1599,
+    discount: 50,
+    rating: 4.4,
+    reviews: 192,
+    stock: 37,
+    isTrending: true,
+    badge: "TRENDING",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: ["Black", "Grey"],
+    tags: [
+      "joggers",
+      "sports",
+      "gym",
+      "training"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=800"
+    ],
+    description:
+      "Comfortable training joggers with a flexible athletic fit."
+  },
+
+  /* =======================================================
+     WINTER WEAR
+     ======================================================= */
+
+  {
+    id: "ASF-WINTER-001",
+    sku: "ASF-W001",
+    name: "Premium Puffer Jacket",
+    brand: "AS FASHIONS",
+    category: "Winter Wear",
+    subcategory: "Jackets",
+    gender: "Unisex",
+    price: 1699,
+    mrp: 3499,
+    discount: 51,
+    rating: 4.6,
+    reviews: 157,
+    stock: 19,
+    isNew: true,
+    badge: "NEW",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: ["Black", "Olive", "Navy"],
+    tags: [
+      "winter",
+      "jacket",
+      "puffer"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+    ],
+    description:
+      "Warm puffer jacket with a modern silhouette for winter layering."
+  },
+
+  {
+    id: "ASF-WINTER-002",
+    sku: "ASF-W002",
+    name: "Classic Knit Sweater",
+    brand: "AS FASHIONS",
+    category: "Winter Wear",
+    subcategory: "Sweaters",
+    gender: "Unisex",
+    price: 899,
+    mrp: 1899,
+    discount: 53,
+    rating: 4.4,
+    reviews: 231,
+    stock: 34,
+    isTrending: true,
+    badge: "TRENDING",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: ["Cream", "Grey", "Black"],
+    tags: [
+      "sweater",
+      "knitwear",
+      "winter"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800"
+    ],
+    description:
+      "Soft knit sweater designed for comfortable winter styling."
+  }
 
 ];
 
-
 /* =========================================================
-   PRODUCT HELPERS
+   GLOBAL PRODUCT ACCESS
    ========================================================= */
 
-
-/**
- * Get product using ID.
- */
-function getProductById(productId) {
-
-    return PRODUCTS.find(
-        product => product.id === productId
-    ) || null;
-
-}
-
-
-/**
- * Get products by category.
- */
-function getProductsByCategory(categoryId) {
-
-    return PRODUCTS.filter(
-        product => product.category === categoryId
-    );
-
-}
-
-
-/**
- * Get products by subcategory.
- */
-function getProductsBySubcategory(subcategoryId) {
-
-    return PRODUCTS.filter(
-        product => product.subcategory === subcategoryId
-    );
-
-}
-
-
-/**
- * Get products by product type.
- */
-function getProductsByType(type) {
-
-    return PRODUCTS.filter(
-        product =>
-            product.type &&
-            product.type.toLowerCase() ===
-            type.toLowerCase()
-    );
-
-}
-
-
-/**
- * Get products by brand.
- */
-function getProductsByBrand(brand) {
-
-    return PRODUCTS.filter(
-        product =>
-            product.brand.toLowerCase() ===
-            brand.toLowerCase()
-    );
-
-}
-
-
-/**
- * Get new arrivals.
- */
-function getNewArrivals() {
-
-    return PRODUCTS.filter(
-        product => product.isNew === true
-    );
-
-}
-
-
-/**
- * Get trending products.
- */
-function getTrendingProducts() {
-
-    return PRODUCTS.filter(
-        product => product.isTrending === true
-    );
-
-}
-
-
-/**
- * Get sale products.
- */
-function getSaleProducts() {
-
-    return PRODUCTS.filter(
-        product => product.isSale === true
-    );
-
-}
-
-
-/**
- * Get featured products.
- */
-function getFeaturedProducts() {
-
-    return PRODUCTS.filter(
-        product => product.isFeatured === true
-    );
-
-}
-
-
-/**
- * Get flash sale products.
- */
-function getFlashSaleProducts() {
-
-    return PRODUCTS.filter(
-        product => product.isFlashSale === true
-    );
-
-}
-
-
-/**
- * Search products.
- */
-function searchProducts(query) {
-
-    const searchTerm = String(query || "")
-        .trim()
-        .toLowerCase();
-
-    if (!searchTerm) {
-        return [];
-    }
-
-    return PRODUCTS.filter(product => {
-
-        const searchableText = [
-
-            product.name,
-            product.brand,
-            product.category,
-            product.subcategory,
-            product.type,
-
-            ...(product.tags || []),
-
-            ...(product.colors || [])
-                .map(color => color.name)
-
-        ]
-            .join(" ")
-            .toLowerCase();
-
-        return searchableText.includes(searchTerm);
-
-    });
-
-}
-
-
-/**
- * Get products within price range.
- */
-function getProductsByPrice(minPrice, maxPrice) {
-
-    return PRODUCTS.filter(product => {
-
-        return (
-            product.price >= minPrice &&
-            product.price <= maxPrice
-        );
-
-    });
-
-}
-
-
-/**
- * Get products by minimum rating.
- */
-function getProductsByRating(minRating) {
-
-    return PRODUCTS.filter(
-        product => product.rating >= minRating
-    );
-
-}
-
-
-/**
- * Get products by color.
- */
-function getProductsByColor(colorName) {
-
-    const searchColor =
-        String(colorName || "").toLowerCase();
-
-    return PRODUCTS.filter(product => {
-
-        return (product.colors || []).some(
-            color =>
-                color.name.toLowerCase() ===
-                searchColor
-        );
-
-    });
-
-}
-
-
-/**
- * Get products by size.
- */
-function getProductsBySize(size) {
-
-    return PRODUCTS.filter(product => {
-
-        return (product.sizes || []).includes(size);
-
-    });
-
-}
-
-
-/**
- * Sort products.
- */
-function sortProducts(products, sortBy) {
-
-    const result = [...products];
-
-    switch (sortBy) {
-
-        case "price-low":
-            return result.sort(
-                (a, b) => a.price - b.price
-            );
-
-        case "price-high":
-            return result.sort(
-                (a, b) => b.price - a.price
-            );
-
-        case "rating":
-            return result.sort(
-                (a, b) => b.rating - a.rating
-            );
-
-        case "discount":
-            return result.sort(
-                (a, b) => b.discount - a.discount
-            );
-
-        case "newest":
-            return result.sort(
-                (a, b) =>
-                    Number(b.isNew) -
-                    Number(a.isNew)
-            );
-
-        case "popular":
-            return result.sort(
-                (a, b) => b.reviews - a.reviews
-            );
-
-        default:
-            return result;
-
-    }
-
-}
-
-
-/**
- * Calculate discount percentage.
- */
-function calculateDiscount(price, mrp) {
-
-    if (!mrp || mrp <= 0) {
-        return 0;
-    }
-
-    return Math.round(
-        ((mrp - price) / mrp) * 100
-    );
-
-}
-
-
-/**
- * Check product stock.
- */
-function isProductInStock(productId) {
-
-    const product = getProductById(productId);
-
-    return Boolean(
-        product &&
-        product.stock > 0
-    );
-
-}
-
-
-/**
- * Get low-stock products.
- */
-function getLowStockProducts(limit = 10) {
-
-    return PRODUCTS
-        .filter(product => product.stock > 0)
-        .filter(product => product.stock <= limit)
-        .sort(
-            (a, b) => a.stock - b.stock
-        );
-
-}
-
-
-/* =========================================================
-   PRODUCT DATABASE CONFIG
-   ========================================================= */
-
-const PRODUCT_CONFIG = {
-
-    currency: "₹",
-
-    currencyCode: "INR",
-
-    defaultSort: "popular",
-
-    productsPerPage: 24,
-
-    enableRatings: true,
-
-    enableReviews: true,
-
-    enableWishlist: true,
-
-    enableQuickView: true,
-
-    enableSizeSelection: true,
-
-    enableColorSelection: true,
-
-    enableStockTracking: true,
-
-    enableOffers: true,
-
-    enableFlashSale: true,
-
-    lowStockThreshold: 5
-
-};
+window.PRODUCTS = PRODUCTS;
+window.products = PRODUCTS;

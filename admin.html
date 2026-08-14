@@ -278,7 +278,8 @@
     body.querySelectorAll('.delete-product-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         if (confirm('Delete this product? This only affects your browser until you export & commit.')) {
-          prodApi.admin.deleteProduct(btn.dataset.id);
+          var result = prodApi.admin.deleteProduct(btn.dataset.id);
+          if (result && !result.saved) alert('\u26A0 Delete failed: ' + result.error);
           renderProducts();
           renderStats();
         }
@@ -404,11 +405,16 @@
     }
 
     if (id) {
-      prodApi.admin.updateProduct(id, patch);
+      var result = prodApi.admin.updateProduct(id, patch);
     } else {
       var newId = prodApi.admin.getNextProductId();
       var full = Object.assign({ id: newId, image: pendingImageDataUrl || '', images: pendingImageDataUrl ? [pendingImageDataUrl] : [] }, patch);
-      prodApi.admin.addProduct(full);
+      var result = prodApi.admin.addProduct(full);
+    }
+
+    if (!result.saved) {
+      alert('\u26A0 Save failed: ' + result.error);
+      return; // keep the modal open so the person doesn't lose their edits
     }
 
     closeProductModal();
@@ -550,7 +556,7 @@
   document.getElementById('pf-imageFile').addEventListener('change', function (e) {
     var file = e.target.files[0];
     if (!file) return;
-    resizeImageToDataUrl(file, 900, 0.82).then(function (dataUrl) {
+    resizeImageToDataUrl(file, 640, 0.7).then(function (dataUrl) {
       pendingImageDataUrl = dataUrl;
       document.getElementById('pf-imgPreview').style.backgroundImage = 'url(' + dataUrl + ')';
     }).catch(function (err) {

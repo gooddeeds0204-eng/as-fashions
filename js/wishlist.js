@@ -1,907 +1,576 @@
 /* =========================================================
-   AS FASHIONS
-   WISHLIST ENGINE
-   js/wishlist.js
+   AS FASHIONS — js/wishlist.js
+   Premium Wishlist Engine
    ========================================================= */
 
-const WISHLIST_STORAGE_KEY = "as_fashions_wishlist";
+(function () {
+  "use strict";
 
-let WISHLIST = loadWishlist();
+  const STORAGE_KEY = "asf_wishlist";
+
+  let wishlist = loadWishlist();
 
 
-/* =========================================================
-   STORAGE
-   ========================================================= */
+  /* =======================================================
+     STORAGE
+     ======================================================= */
 
-function loadWishlist() {
-
+  function loadWishlist() {
     try {
+      const saved =
+        localStorage.getItem(STORAGE_KEY);
 
-        const saved =
-            localStorage.getItem(
-                WISHLIST_STORAGE_KEY
-            );
+      if (!saved) return [];
 
-        if (!saved) {
-            return [];
-        }
+      const parsed =
+        JSON.parse(saved);
 
-        const parsed = JSON.parse(saved);
-
-        return Array.isArray(parsed)
-            ? parsed
-            : [];
+      return Array.isArray(parsed)
+        ? parsed
+        : [];
 
     } catch (error) {
+      console.error(
+        "AS FASHIONS wishlist load error:",
+        error
+      );
 
-        console.error(
-            "AS FASHIONS: Wishlist load failed.",
-            error
-        );
-
-        return [];
-
+      return [];
     }
-
-}
-
-
-function saveWishlist() {
-
-    try {
-
-        localStorage.setItem(
-            WISHLIST_STORAGE_KEY,
-            JSON.stringify(WISHLIST)
-        );
-
-    } catch (error) {
-
-        console.error(
-            "AS FASHIONS: Wishlist save failed.",
-            error
-        );
-
-    }
-
-}
+  }
 
 
-/* =========================================================
-   PRODUCT LOOKUP
-   ========================================================= */
-
-function getWishlistProduct(productId) {
-
-    if (
-        typeof getProductById ===
-        "function"
-    ) {
-
-        return getProductById(productId);
-
-    }
-
-    if (
-        typeof PRODUCTS !==
-        "undefined"
-    ) {
-
-        return PRODUCTS.find(
-            product =>
-                product.id === productId
-        ) || null;
-
-    }
-
-    return null;
-
-}
-
-
-/* =========================================================
-   CHECK WISHLIST
-   ========================================================= */
-
-function isInWishlist(productId) {
-
-    return WISHLIST.some(
-        item =>
-            item.productId === productId
+  function saveWishlist() {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(wishlist)
     );
 
-}
+    emitWishlistUpdate();
+  }
 
 
-/* =========================================================
-   ADD TO WISHLIST
-   ========================================================= */
+  /* =======================================================
+     PRODUCT LOOKUP
+     ======================================================= */
 
-function addToWishlist(productId) {
+  function findProduct(productId) {
+
+    const products =
+      window.PRODUCTS ||
+      window.products ||
+      [];
+
+    return products.find(
+      product =>
+        product.id === productId
+    );
+  }
+
+
+  /* =======================================================
+     ADD
+     ======================================================= */
+
+  function addToWishlist(productId) {
 
     const product =
-        getWishlistProduct(productId);
+      typeof productId === "object"
+        ? productId
+        : findProduct(productId);
 
 
     if (!product) {
 
-        console.error(
-            "Wishlist product not found:",
-            productId
-        );
-
-        return false;
-
+      return {
+        success: false,
+        message: "Product not found"
+      };
     }
 
 
-    if (isInWishlist(productId)) {
+    const exists =
+      wishlist.some(
+        item =>
+          item.productId === product.id
+      );
 
-        return false;
 
+    if (exists) {
+
+      return {
+        success: true,
+        alreadyExists: true,
+        message: "Already in wishlist"
+      };
     }
 
 
-    WISHLIST.push({
+    wishlist.push({
 
-        productId: product.id,
+      productId: product.id,
 
-        addedAt:
-            new Date().toISOString()
+      addedAt: Date.now()
 
     });
 
 
     saveWishlist();
 
-    updateWishlistUI();
+
+    return {
+      success: true,
+      alreadyExists: false,
+      message: "Added to wishlist",
+      product
+    };
+  }
 
 
-    showWishlistMessage(
-        `${product.name} added to wishlist.`,
-        "success"
-    );
+  /* =======================================================
+     REMOVE
+     ======================================================= */
+
+  function removeFromWishlist(
+    productId
+  ) {
+
+    const index =
+      wishlist.findIndex(
+        item =>
+          item.productId === productId
+      );
 
 
-    return true;
-
-}
-
-
-/* =========================================================
-   REMOVE FROM WISHLIST
-   ========================================================= */
-
-function removeFromWishlist(productId) {
-
-    const oldLength =
-        WISHLIST.length;
-
-
-    WISHLIST =
-        WISHLIST.filter(
-            item =>
-                item.productId !==
-                productId
-        );
-
-
-    if (
-        WISHLIST.length !==
-        oldLength
-    ) {
-
-        saveWishlist();
-
-        updateWishlistUI();
-
-        return true;
-
+    if (index === -1) {
+      return false;
     }
 
 
-    return false;
+    wishlist.splice(index, 1);
 
-}
+    saveWishlist();
+
+    return true;
+  }
 
 
-/* =========================================================
-   TOGGLE WISHLIST
-   ========================================================= */
+  /* =======================================================
+     TOGGLE
+     ======================================================= */
 
-function toggleWishlist(productId) {
+  function toggleWishlist(
+    productId
+  ) {
 
     if (
-        isInWishlist(productId)
+      isInWishlist(productId)
     ) {
 
-        removeFromWishlist(
-            productId
-        );
+      removeFromWishlist(
+        productId
+      );
 
-        showWishlistMessage(
-            "Removed from wishlist.",
-            "success"
-        );
-
-        return false;
-
+      return {
+        active: false,
+        message: "Removed from wishlist"
+      };
     }
 
 
     addToWishlist(productId);
 
+
+    return {
+      active: true,
+      message: "Added to wishlist"
+    };
+  }
+
+
+  /* =======================================================
+     CHECK
+     ======================================================= */
+
+  function isInWishlist(
+    productId
+  ) {
+
+    return wishlist.some(
+      item =>
+        item.productId === productId
+    );
+  }
+
+
+  /* =======================================================
+     GET RAW WISHLIST
+     ======================================================= */
+
+  function getWishlist() {
+    return [...wishlist];
+  }
+
+
+  /* =======================================================
+     GET FULL PRODUCTS
+     ======================================================= */
+
+  function getWishlistProducts() {
+
+    return wishlist
+      .map(item =>
+        findProduct(
+          item.productId
+        )
+      )
+      .filter(Boolean);
+  }
+
+
+  /* =======================================================
+     COUNT
+     ======================================================= */
+
+  function getWishlistCount() {
+    return wishlist.length;
+  }
+
+
+  /* =======================================================
+     CLEAR
+     ======================================================= */
+
+  function clearWishlist() {
+
+    wishlist = [];
+
+    saveWishlist();
+
     return true;
+  }
 
-}
 
+  /* =======================================================
+     MOVE TO CART
+     ======================================================= */
 
-/* =========================================================
-   GET WISHLIST
-   ========================================================= */
-
-function getWishlistItems() {
-
-    return WISHLIST.map(
-        item =>
-            getWishlistProduct(
-                item.productId
-            )
-    ).filter(Boolean);
-
-}
-
-
-function getWishlistCount() {
-
-    return WISHLIST.length;
-
-}
-
-
-/* =========================================================
-   WISHLIST BUTTON UI
-   ========================================================= */
-
-function updateWishlistButtons() {
-
-    const buttons =
-        document.querySelectorAll(
-            "[data-wishlist-id]"
-        );
-
-
-    buttons.forEach(button => {
-
-        const productId =
-            button.dataset.wishlistId;
-
-
-        const active =
-            isInWishlist(productId);
-
-
-        button.classList.toggle(
-            "active",
-            active
-        );
-
-
-        button.classList.toggle(
-            "is-wishlisted",
-            active
-        );
-
-
-        button.setAttribute(
-            "aria-pressed",
-            active
-                ? "true"
-                : "false"
-        );
-
-
-        const icon =
-            button.querySelector(
-                "[data-wishlist-icon]"
-            );
-
-
-        if (icon) {
-
-            icon.textContent =
-                active
-                    ? "♥"
-                    : "♡";
-
-        } else {
-
-            /*
-             * Only update simple icon buttons.
-             * Avoid destroying custom button content.
-             */
-
-            if (
-                button.children.length === 0
-            ) {
-
-                button.textContent =
-                    active
-                        ? "♥"
-                        : "♡";
-
-            }
-
-        }
-
-    });
-
-}
-
-
-/* =========================================================
-   WISHLIST BADGE
-   ========================================================= */
-
-function updateWishlistBadge() {
-
-    const count =
-        getWishlistCount();
-
-
-    const badges =
-        document.querySelectorAll(
-            "[data-wishlist-count], .wishlist-count, #wishlistCount"
-        );
-
-
-    badges.forEach(badge => {
-
-        badge.textContent =
-            count;
-
-
-        badge.style.display =
-            count > 0
-                ? ""
-                : "none";
-
-    });
-
-}
-
-
-/* =========================================================
-   WISHLIST RENDER
-   ========================================================= */
-
-function renderWishlist() {
-
-    const containers =
-        document.querySelectorAll(
-            "[data-wishlist-items]"
-        );
-
-
-    containers.forEach(container => {
-
-        const products =
-            getWishlistItems();
-
-
-        if (!products.length) {
-
-            container.innerHTML = `
-
-                <div class="wishlist-empty">
-
-                    <div class="wishlist-empty-icon">
-                        ♡
-                    </div>
-
-                    <h3>
-                        Your wishlist is empty
-                    </h3>
-
-                    <p>
-                        Save your favourite styles
-                        and find them here anytime.
-                    </p>
-
-                    <button
-                        type="button"
-                        onclick="continueShopping()"
-                    >
-                        Explore Products
-                    </button>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        container.innerHTML =
-            products.map(product => {
-
-                const image =
-                    product.images &&
-                    product.images.length
-                        ? product.images[0]
-                        : "";
-
-
-                return `
-
-                    <article
-                        class="wishlist-item"
-                        data-product-id="${escapeWishlistHTML(product.id)}"
-                    >
-
-                        <div class="wishlist-product-image">
-
-                            <img
-                                src="${escapeWishlistHTML(image)}"
-                                alt="${escapeWishlistHTML(product.name)}"
-                                loading="lazy"
-                            >
-
-                            <button
-                                type="button"
-                                class="wishlist-remove"
-                                data-wishlist-id="${escapeWishlistHTML(product.id)}"
-                                onclick="toggleWishlist('${escapeWishlistHTML(product.id)}')"
-                                aria-label="Remove from wishlist"
-                            >
-                                ♥
-                            </button>
-
-                        </div>
-
-
-                        <div class="wishlist-product-info">
-
-                            <div class="wishlist-brand">
-                                ${escapeWishlistHTML(product.brand)}
-                            </div>
-
-                            <h3>
-                                ${escapeWishlistHTML(product.name)}
-                            </h3>
-
-
-                            <div class="wishlist-rating">
-
-                                <span>
-                                    ★ ${product.rating}
-                                </span>
-
-                                <small>
-                                    (${product.reviews})
-                                </small>
-
-                            </div>
-
-
-                            <div class="wishlist-price">
-
-                                <strong>
-                                    ${formatWishlistPrice(product.price)}
-                                </strong>
-
-                                <del>
-                                    ${formatWishlistPrice(product.mrp)}
-                                </del>
-
-                                <span>
-                                    ${product.discount}% OFF
-                                </span>
-
-                            </div>
-
-
-                            <div class="wishlist-actions">
-
-                                <button
-                                    type="button"
-                                    onclick="moveWishlistItemToCart('${escapeWishlistHTML(product.id)}')"
-                                >
-                                    Add to Bag
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                `;
-
-            }).join("");
-
-    });
-
-}
-
-
-/* =========================================================
-   MOVE WISHLIST ITEM TO CART
-   ========================================================= */
-
-function moveWishlistItemToCart(productId) {
+  function moveToCart(
+    productId,
+    options = {}
+  ) {
 
     const product =
-        getWishlistProduct(productId);
+      findProduct(productId);
 
 
     if (!product) {
-        return false;
-    }
 
-
-    /*
-     * If product has multiple sizes/colors,
-     * the product page can later ask the user
-     * to select the variant.
-     *
-     * For now, single-value variants are selected
-     * automatically.
-     */
-
-    let size = null;
-    let color = null;
-
-
-    if (
-        product.sizes &&
-        product.sizes.length === 1
-    ) {
-
-        size =
-            product.sizes[0];
-
+      return {
+        success: false,
+        message: "Product not found"
+      };
     }
 
 
     if (
-        product.colors &&
-        product.colors.length === 1
-    ) {
-
-        color =
-            product.colors[0].name;
-
-    }
-
-
-    if (
-        typeof addToCart !==
+      !window.ASFCart ||
+      typeof window.ASFCart.addToCart !==
         "function"
     ) {
 
-        showWishlistMessage(
-            "Cart system is not available yet.",
-            "error"
-        );
+      return {
+        success: false,
+        message: "Cart system not ready"
+      };
+    }
 
-        return false;
+
+    const result =
+      window.ASFCart.addToCart(
+        productId,
+        options
+      );
+
+
+    if (result.success) {
+
+      removeFromWishlist(
+        productId
+      );
 
     }
 
 
-    const added =
-        addToCart(
-            productId,
-            1,
-            size,
-            color
-        );
+    return result;
+  }
 
 
-    if (added) {
+  /* =======================================================
+     MOVE ALL TO CART
+     ======================================================= */
 
-        showWishlistMessage(
-            "Product added to your bag.",
-            "success"
-        );
+  function moveAllToCart(
+    options = {}
+  ) {
 
-        return true;
+    const products =
+      getWishlistProducts();
 
+
+    if (
+      !window.ASFCart ||
+      typeof window.ASFCart.addToCart !==
+        "function"
+    ) {
+
+      return {
+        success: false,
+        added: 0,
+        message: "Cart system not ready"
+      };
     }
 
 
-    return false;
-
-}
+    let added = 0;
 
 
-/* =========================================================
-   CLEAR WISHLIST
-   ========================================================= */
+    products.forEach(
+      product => {
 
-function clearWishlist() {
-
-    WISHLIST = [];
-
-    saveWishlist();
-
-    updateWishlistUI();
-
-}
+        const result =
+          window.ASFCart.addToCart(
+            product.id,
+            options
+          );
 
 
-/* =========================================================
-   UI UPDATE
-   ========================================================= */
-
-function updateWishlistUI() {
-
-    updateWishlistBadge();
-
-    updateWishlistButtons();
-
-    renderWishlist();
-
-}
-
-
-/* =========================================================
-   MESSAGE
-   ========================================================= */
-
-function showWishlistMessage(
-    message,
-    type = "success"
-) {
-
-    let container =
-        document.querySelector(
-            "#wishlistMessageContainer"
-        );
-
-
-    if (!container) {
-
-        container =
-            document.createElement(
-                "div"
-            );
-
-        container.id =
-            "wishlistMessageContainer";
-
-        container.className =
-            "wishlist-message-container";
-
-        document.body.appendChild(
-            container
-        );
-
-    }
-
-
-    const element =
-        document.createElement(
-            "div"
-        );
-
-
-    element.className =
-        `wishlist-message wishlist-message-${type}`;
-
-
-    element.textContent =
-        message;
-
-
-    container.appendChild(
-        element
-    );
-
-
-    setTimeout(() => {
-
-        element.classList.add(
-            "hide"
-        );
-
-
-        setTimeout(() => {
-
-            element.remove();
-
-        }, 300);
-
-    }, 2500);
-
-}
-
-
-/* =========================================================
-   MONEY FORMAT
-   ========================================================= */
-
-function formatWishlistPrice(amount) {
-
-    return new Intl.NumberFormat(
-        "en-IN",
-        {
-            style: "currency",
-            currency: "INR",
-            maximumFractionDigits: 0
+        if (result.success) {
+          added++;
         }
-    ).format(
-        Number(amount || 0)
+
+      }
     );
 
-}
 
+    if (added > 0) {
 
-/* =========================================================
-   HTML ESCAPE
-   ========================================================= */
-
-function escapeWishlistHTML(value) {
-
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
-
-
-/* =========================================================
-   PRODUCT CARD HELPER
-   ========================================================= */
-
-/*
- * Creates a wishlist button for product cards.
- *
- * HTML:
- *
- * ${createWishlistButton(product.id)}
- */
-
-function createWishlistButton(productId) {
-
-    const active =
-        isInWishlist(productId);
-
-
-    return `
-
-        <button
-            type="button"
-            class="product-wishlist-btn ${
-                active ? "active" : ""
-            }"
-            data-wishlist-id="${escapeWishlistHTML(productId)}"
-            onclick="toggleWishlist('${escapeWishlistHTML(productId)}')"
-            aria-label="${
-                active
-                    ? "Remove from wishlist"
-                    : "Add to wishlist"
-            }"
-            aria-pressed="${
-                active
-                    ? "true"
-                    : "false"
-            }"
-        >
-
-            <span data-wishlist-icon>
-                ${active ? "♥" : "♡"}
-            </span>
-
-        </button>
-
-    `;
-
-}
-
-
-/* =========================================================
-   WISHLIST PAGE NAVIGATION
-   ========================================================= */
-
-function openWishlist() {
-
-    /*
-     * app.js can override this later.
-     */
-
-    if (
-        typeof window.showWishlistPage ===
-        "function"
-    ) {
-
-        window.showWishlistPage();
-
-        return;
-
-    }
-
-
-    const wishlistSection =
-        document.querySelector(
-            "#wishlist"
+      wishlist =
+        wishlist.filter(
+          item =>
+            !products.some(
+              product =>
+                product.id ===
+                item.productId
+            )
         );
 
 
-    if (wishlistSection) {
-
-        wishlistSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-        return;
-
+      saveWishlist();
     }
 
 
-    /*
-     * Fallback.
-     */
-
-    window.location.href =
-        "wishlist.html";
-
-}
-
-
-/* =========================================================
-   INITIALIZATION
-   ========================================================= */
-
-function initializeWishlist() {
-
-    /*
-     * Remove products which no longer
-     * exist in products.js.
-     */
-
-    WISHLIST =
-        WISHLIST.filter(item => {
-
-            return Boolean(
-                getWishlistProduct(
-                    item.productId
-                )
-            );
-
-        });
+    return {
+      success: added > 0,
+      added,
+      message:
+        `${added} product(s) moved to cart`
+    };
+  }
 
 
-    saveWishlist();
+  /* =======================================================
+     PRICE HELPERS
+     ======================================================= */
 
-    updateWishlistUI();
+  function getWishlistValue() {
 
-}
+    return getWishlistProducts()
+      .reduce(
+        (total, product) =>
+          total +
+          Number(product.price || 0),
+        0
+      );
+  }
 
 
-/* =========================================================
-   AUTO INITIALIZATION
-   ========================================================= */
+  function getWishlistMrpValue() {
 
-if (
-    document.readyState ===
-    "loading"
-) {
+    return getWishlistProducts()
+      .reduce(
+        (total, product) =>
+          total +
+          Number(
+            product.mrp ||
+            product.price ||
+            0
+          ),
+        0
+      );
+  }
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeWishlist
+
+  function getWishlistSavings() {
+
+    return Math.max(
+      0,
+      getWishlistMrpValue() -
+      getWishlistValue()
     );
+  }
 
-} else {
 
-    initializeWishlist();
+  /* =======================================================
+     CLEAN INVALID ITEMS
+     ======================================================= */
 
-}
+  function cleanWishlist() {
+
+    const products =
+      window.PRODUCTS ||
+      window.products ||
+      [];
+
+
+    const validIds =
+      new Set(
+        products.map(
+          product => product.id
+        )
+      );
+
+
+    const before =
+      wishlist.length;
+
+
+    wishlist =
+      wishlist.filter(
+        item =>
+          validIds.has(
+            item.productId
+          )
+      );
+
+
+    if (
+      wishlist.length !== before
+    ) {
+      saveWishlist();
+    }
+
+
+    return wishlist.length;
+  }
+
+
+  /* =======================================================
+     WISHLIST EVENTS
+     ======================================================= */
+
+  function emitWishlistUpdate() {
+
+    window.dispatchEvent(
+      new CustomEvent(
+        "asf:wishlist-updated",
+        {
+          detail: {
+
+            wishlist:
+              getWishlist(),
+
+            products:
+              getWishlistProducts(),
+
+            count:
+              getWishlistCount()
+
+          }
+        }
+      )
+    );
+  }
+
+
+  /* =======================================================
+     PUBLIC API
+     ======================================================= */
+
+  window.ASFWishlist = {
+
+    addToWishlist,
+
+    removeFromWishlist,
+
+    toggleWishlist,
+
+    isInWishlist,
+
+    getWishlist,
+
+    getWishlistProducts,
+
+    getWishlistCount,
+
+    clearWishlist,
+
+    moveToCart,
+
+    moveAllToCart,
+
+    getWishlistValue,
+
+    getWishlistMrpValue,
+
+    getWishlistSavings,
+
+    cleanWishlist
+
+  };
+
+
+  /* =======================================================
+     GLOBAL HELPERS
+     ======================================================= */
+
+  window.addToWishlist =
+    addToWishlist;
+
+  window.removeFromWishlist =
+    removeFromWishlist;
+
+  window.toggleWishlist =
+    toggleWishlist;
+
+  window.isInWishlist =
+    isInWishlist;
+
+  window.getWishlistCount =
+    getWishlistCount;
+
+
+  /* =======================================================
+     INITIAL CLEANUP
+     ======================================================= */
+
+  cleanWishlist();
+
+
+  /* =======================================================
+     READY EVENT
+     ======================================================= */
+
+  window.dispatchEvent(
+    new CustomEvent(
+      "asf:wishlist-ready",
+      {
+        detail: {
+          count:
+            getWishlistCount()
+        }
+      }
+    )
+  );
+
+})();

@@ -390,4 +390,4 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
-}
+} 

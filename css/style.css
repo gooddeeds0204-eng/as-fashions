@@ -767,3 +767,47 @@ input,select{min-height:42px;}
   .asf-flash-card>a{margin-top:0;justify-content:center}
   .asf-timer{justify-content:flex-start}
 }
+
+/* =========================================================
+   AS FASHIONS — COMPLETE UI INTEGRATION LAYER
+   ========================================================= */
+:root{
+  --asf-bg:#f7f3eb;
+  --asf-paper:#fff;
+  --asf-ink:#171717;
+  --asf-muted:#747474;
+  --asf-line:#e8e2d9;
+  --asf-gold:#b27a2d;
+  --asf-sale:#ff3f6c;
+}
+.asf-scroll-lock{overflow:hidden}
+.asf-header-scrolled{
+  box-shadow:0 3px 20px rgba(0,0,0,.08);
+}
+.asf-toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translate(-50%,20px);
+  z-index:9999;
+  background:#171717;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:999px;
+  font-size:13px;
+  opacity:0;
+  pointer-events:none;
+  transition:.22s ease;
+}
+.asf-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:767px){
+  .asf-toast{
+    bottom:max(18px,env(safe-area-inset-bottom));
+    width:max-content;
+    max-width:calc(100vw - 30px);
+    text-align:center;
+  }
+  .asf-header-scrolled{
+    box-shadow:0 2px 14px rgba(0,0,0,.1);
+  }
+}

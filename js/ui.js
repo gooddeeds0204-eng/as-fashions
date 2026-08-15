@@ -104,3 +104,25 @@
     getQueryParam: getQueryParam
   };
 })(window);
+
+/* AS FASHIONS — global UI helpers */
+(function () {
+  window.ASFUI = window.ASFUI || {};
+
+  window.ASFUI.toast = function (message) {
+    let el = document.querySelector(".asf-toast");
+    if (!el) {
+      el = document.createElement("div");
+      el.className = "asf-toast";
+      document.body.appendChild(el);
+    }
+    el.textContent = message;
+    el.classList.add("show");
+    clearTimeout(el._timer);
+    el._timer = setTimeout(() => el.classList.remove("show"), 2200);
+  };
+
+  window.ASFUI.lockScroll = function (locked) {
+    document.documentElement.classList.toggle("asf-scroll-lock", !!locked);
+  };
+})();

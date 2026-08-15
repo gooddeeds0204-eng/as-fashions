@@ -93,27 +93,59 @@
   document.addEventListener('DOMContentLoaded', init);
 })();
 
+/* =========================================================
+   AS FASHIONS — UI integration layer
+   ========================================================= */
+(function () {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-/* AS FASHIONS: premium flash-sale countdown */
-(function(){
-  const root = document.querySelector('.asf-countdown');
-  if (!root) return;
-  let end = Number(localStorage.getItem('asf_flash_end'));
-  if (!end || end < Date.now()) {
-    end = Date.now() + 24 * 60 * 60 * 1000;
-    localStorage.setItem('asf_flash_end', String(end));
+  // Keep missing image paths from creating huge broken-image gaps.
+  function safeImage(img) {
+    if (!img || img.dataset.asfFallback) return;
+    img.dataset.asfFallback = "1";
+    img.addEventListener("error", function () {
+      this.style.objectFit = "cover";
+      this.src = "data:image/svg+xml;charset=UTF-8," +
+        encodeURIComponent(
+          '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800">' +
+          '<rect width="100%" height="100%" fill="#eee9e1"/>' +
+          '<text x="50%" y="47%" dominant-baseline="middle" text-anchor="middle" ' +
+          'font-family="Georgia,serif" font-size="34" fill="#7b684f">AS FASHIONS</text>' +
+          '<text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" ' +
+          'font-family="Arial" font-size="14" fill="#8d8d8d">IMAGE COMING SOON</text></svg>'
+        );
+    }, { once: true });
   }
-  function tick(){
-    let diff = Math.max(0, end - Date.now());
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    const set = (key,val) => {
-      const el = root.querySelector('[data-time="'+key+'"]');
-      if (el) el.textContent = String(val).padStart(2,'0');
-    };
-    set('hours',h); set('minutes',m); set('seconds',s);
+
+  function bindImageFallbacks() {
+    $$("img").forEach(safeImage);
   }
-  tick();
-  setInterval(tick,1000);
+
+  // Recently viewed products are stored locally for a real storefront feel.
+  window.ASFRecentlyViewed = {
+    add(id) {
+      if (!id) return;
+      const key = "asf_recently_viewed";
+      let items = JSON.parse(localStorage.getItem(key) || "[]");
+      items = [String(id), ...items.filter(x => String(x) !== String(id))].slice(0, 12);
+      localStorage.setItem(key, JSON.stringify(items));
+    },
+    get() {
+      return JSON.parse(localStorage.getItem("asf_recently_viewed") || "[]");
+    }
+  };
+
+  // Make product links register recently viewed items.
+  document.addEventListener("click", e => {
+    const link = e.target.closest('a[href*="product"]');
+    if (!link) return;
+    const match = link.href.match(/[?&](?:id|product)=([^&#]+)/i);
+    if (match) window.ASFRecentlyViewed.add(decodeURIComponent(match[1]));
+  });
+
+  bindImageFallbacks();
+  new MutationObserver(bindImageFallbacks).observe(document.documentElement, {
+    childList: true, subtree: true
+  });
 })();

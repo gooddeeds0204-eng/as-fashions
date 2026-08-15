@@ -1960,4 +1960,3 @@
     searchCategories: searchCategories
   };
 })(window);
-

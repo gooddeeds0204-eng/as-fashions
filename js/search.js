@@ -67,3 +67,27 @@
     pushRecent: pushRecent
   };
 })(window);
+
+/* AS FASHIONS — search UX enhancement */
+(function () {
+  const input = document.querySelector('input[type="search"], input[name="search"], .search-box input, .search-bar input');
+  if (!input) return;
+
+  let timer;
+  input.addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      input.dispatchEvent(new CustomEvent("asf:search", { bubbles: true, detail: input.value.trim() }));
+    }, 180);
+  });
+
+  const form = input.closest("form");
+  if (form) {
+    form.addEventListener("submit", e => {
+      if (!input.value.trim()) {
+        e.preventDefault();
+        input.focus();
+      }
+    });
+  }
+})();

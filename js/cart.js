@@ -11,7 +11,21 @@
   function readCart() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
+      var items = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(items)) return [];
+      // Defensive: drop/repair any malformed entries (e.g. from an older
+      // cart schema or manual localStorage edits) so counts never go NaN.
+      return items
+        .filter(function (i) { return i && i.productId; })
+        .map(function (i) {
+          var qty = Number(i.qty);
+          return {
+            productId: i.productId,
+            size: i.size || null,
+            color: i.color || null,
+            qty: Number.isFinite(qty) && qty > 0 ? qty : 1
+          };
+        });
     } catch (e) {
       console.error('Cart read failed', e);
       return [];
@@ -81,7 +95,7 @@
   }
 
   function getItemCount() {
-    return readCart().reduce(function (sum, i) { return sum + i.qty; }, 0);
+    return readCart().reduce(function (sum, i) { return sum + (Number(i.qty) || 0); }, 0);
   }
 
   function getSummary() {
@@ -113,4 +127,3 @@
     getSummary: getSummary
   };
 })(window);
-

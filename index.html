@@ -9,28 +9,58 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-asf-home="true">
+<body>
 
 <div id="siteHeader"></div>
 
-<section class="hero">
-  <div class="hero-inner">
-    <p class="hero-eyebrow">New Season Edit</p>
-    <h1>Fashion that speaks<br>your language.</h1>
-    <p>From everyday essentials to festive statements — Men, Women and Kids, all in one place.</p>
-    <a href="shop.html?filter=new" class="btn btn-primary">Shop New Arrivals</a>
+<section class="hero hero-carousel" id="heroCarousel">
+  <div class="hero-slide active" data-idx="0">
+    <img class="hero-slide-img" src="https://picsum.photos/seed/asf-hero-1/1600/700" alt="">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">New Season Edit</p>
+      <h1>Fashion that speaks<br>your language.</h1>
+      <p>From everyday essentials to festive statements — Men, Women and Kids, all in one place.</p>
+      <a href="shop.html?filter=new" class="btn btn-primary">Shop New Arrivals</a>
+      <div class="hero-dots" id="heroDots"></div>
+    </div>
+  </div>
+  <div class="hero-slide" data-idx="1">
+    <img class="hero-slide-img" src="https://picsum.photos/seed/asf-hero-2/1600/700" alt="">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Festive Edit</p>
+      <h1>Style that<br>feels like you.</h1>
+      <p>Ethnic wear, western wear, and everything between — curated for every occasion.</p>
+      <a href="shop.html?cat=collections" class="btn btn-primary">Explore Collections</a>
+    </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="section-head"><h2>Handpicked for you</h2></div>
-  <div id="promoStrip" class="promo-strip"></div>
-</section>
+<div class="trust-badges">
+  <div class="trust-badge"><span class="icon">&#128666;</span><div><p class="label">Free Shipping</p><p class="sub">On orders above ₹999</p></div></div>
+  <div class="trust-badge"><span class="icon">&#8635;</span><div><p class="label">Easy Returns</p><p class="sub">Simple return policy</p></div></div>
+  <div class="trust-badge"><span class="icon">&#128274;</span><div><p class="label">Secure Payment</p><p class="sub">100% secure checkout</p></div></div>
+  <div class="trust-badge"><span class="icon">&#127911;</span><div><p class="label">Support 24/7</p><p class="sub">We're always here</p></div></div>
+</div>
 
-<section class="section">
-  <div class="section-head"><h2>Shop by Category</h2></div>
+<section class="section" style="padding-top:0;">
+  <div class="section-head"><h2>Shop by Category</h2><a href="shop.html">View All &rarr;</a></div>
   <div id="categoryRail" class="category-rail"></div>
 </section>
+
+<div class="sale-banner">
+  <div class="sale-banner-inner">
+    <div>
+      <p class="sale-banner-title">The AS Fashions Sale</p>
+      <p class="sale-banner-sub">Up to 70% Off — Limited time prices, shop before it's gone!</p>
+    </div>
+    <div class="countdown" id="countdown">
+      <div class="countdown-unit"><div class="num" id="cdHours">12</div><div class="lbl">Hrs</div></div>
+      <div class="countdown-unit"><div class="num" id="cdMinutes">24</div><div class="lbl">Mins</div></div>
+      <div class="countdown-unit"><div class="num" id="cdSeconds">48</div><div class="lbl">Secs</div></div>
+    </div>
+    <a href="shop.html?filter=sale" class="btn btn-primary">Shop All Deals</a>
+  </div>
+</div>
 
 <section id="new-arrivals" class="section">
   <div class="section-head"><h2>New Arrivals</h2><a href="shop.html?filter=new">View all</a></div>
@@ -38,13 +68,20 @@
 </section>
 
 <section class="section">
+  <div class="section-head"><h2>Trending Now</h2><a href="shop.html?filter=bestsellers">View all</a></div>
+  <div id="trendingRail" class="product-rail"></div>
+</section>
+
+<section class="section">
   <div class="section-head"><h2>Bestsellers</h2><a href="shop.html?filter=bestsellers">View all</a></div>
   <div id="bestsellersRail" class="product-rail"></div>
 </section>
 
-<section id="sale" class="section">
-  <div class="section-head"><h2>Sale — Up to 50% Off</h2><a href="shop.html?filter=sale">View all</a></div>
-  <div id="saleRail" class="product-rail"></div>
+<section class="why-shop">
+  <div class="why-shop-item"><div class="icon">&#127775;</div><p class="label">Premium Quality</p><p class="sub">100% Original Products</p></div>
+  <div class="why-shop-item"><div class="icon">&#128102;</div><p class="label">Trendy Collections</p><p class="sub">Fresh styles every week</p></div>
+  <div class="why-shop-item"><div class="icon">&#128176;</div><p class="label">Best Price</p><p class="sub">Unbeatable deals</p></div>
+  <div class="why-shop-item"><div class="icon">&#9992;</div><p class="label">Fast Delivery</p><p class="sub">Quick &amp; reliable shipping</p></div>
 </section>
 
 <div id="siteFooter"></div>
@@ -59,114 +96,5 @@
 <script src="js/ui.js"></script>
 <script src="js/header.js"></script>
 <script src="js/app.js"></script>
-
-<!-- AS FASHIONS — Premium Homepage Sections -->
-<section class="asf-premium-home" aria-label="AS FASHIONS shopping sections">
-
-  <div class="asf-mobile-section-head">
-    <div>
-      <span>EXPLORE</span>
-      <h2>Shop by Category</h2>
-    </div>
-  </div>
-
-  <div class="asf-category-rail">
-    <a href="shop.html?category=Men" class="asf-category-item">
-      <div class="asf-category-image asf-cat-men" aria-hidden="true">M</div>
-      <strong>Men</strong>
-    </a>
-    <a href="shop.html?category=Women" class="asf-category-item">
-      <div class="asf-category-image asf-cat-women" aria-hidden="true">W</div>
-      <strong>Women</strong>
-    </a>
-    <a href="shop.html?category=Kids" class="asf-category-item">
-      <div class="asf-category-image asf-cat-kids" aria-hidden="true">K</div>
-      <strong>Kids</strong>
-    </a>
-    <a href="shop.html?category=Footwear" class="asf-category-item">
-      <div class="asf-category-image asf-cat-footwear" aria-hidden="true">F</div>
-      <strong>Footwear</strong>
-    </a>
-    <a href="shop.html?category=Bags" class="asf-category-item">
-      <div class="asf-category-image asf-cat-bags" aria-hidden="true">B</div>
-      <strong>Bags</strong>
-    </a>
-    <a href="shop.html?category=Accessories" class="asf-category-item">
-      <div class="asf-category-image asf-cat-accessories" aria-hidden="true">A</div>
-      <strong>Accessories</strong>
-    </a>
-  </div>
-
-  <section class="asf-feature-banner">
-    <div class="asf-feature-copy">
-      <span>NEW SEASON EDIT</span>
-      <h2>Fashion that speaks your language.</h2>
-      <p>Everyday essentials to statement looks — Men, Women and Kids, all in one place.</p>
-      <a href="shop.html?sort=newest">Shop New Arrivals</a>
-    </div>
-  </section>
-
-  <section class="asf-offer-section">
-    <div class="asf-section-row">
-      <h2>Handpicked for you</h2>
-      <a href="shop.html">View all</a>
-    </div>
-
-    <div class="asf-offer-rail">
-      <a href="shop.html?sort=sale" class="asf-offer-card">
-        <span>END OF SEASON SALE</span>
-        <strong>Up to 70% off</strong>
-        <b>Shop Sale →</b>
-      </a>
-      <a href="shop.html?sort=newest" class="asf-offer-card">
-        <span>NEW ARRIVALS</span>
-        <strong>Fresh styles, just in</strong>
-        <b>Explore →</b>
-      </a>
-      <a href="shop.html?sort=popular" class="asf-offer-card">
-        <span>BESTSELLERS</span>
-        <strong>Styles everyone wants</strong>
-        <b>Shop Now →</b>
-      </a>
-    </div>
-  </section>
-
-  <section class="asf-flash-card">
-    <div>
-      <span>LIMITED TIME</span>
-      <h2>Flash Sale</h2>
-      <p>Extra savings on selected styles.</p>
-    </div>
-    <div class="asf-timer" aria-label="Flash sale countdown">
-      <b data-asf-hour>24</b><i>:</i><b data-asf-min>00</b><i>:</i><b data-asf-sec>00</b>
-    </div>
-    <a href="shop.html?sort=sale">Shop Sale</a>
-  </section>
-
-</section>
-
-
-<script>
-(function () {
-  const h = document.querySelector('[data-asf-hour]');
-  const m = document.querySelector('[data-asf-min]');
-  const s = document.querySelector('[data-asf-sec]');
-  if (!h || !m || !s) return;
-  let end = Number(localStorage.getItem('asf_index_sale_end'));
-  if (!end || end < Date.now()) {
-    end = Date.now() + 24 * 60 * 60 * 1000;
-    localStorage.setItem('asf_index_sale_end', String(end));
-  }
-  function tick() {
-    const d = Math.max(0, end - Date.now());
-    h.textContent = String(Math.floor(d / 3600000)).padStart(2, '0');
-    m.textContent = String(Math.floor((d % 3600000) / 60000)).padStart(2, '0');
-    s.textContent = String(Math.floor((d % 60000) / 1000)).padStart(2, '0');
-  }
-  tick();
-  setInterval(tick, 1000);
-})();
-</script>
-
 </body>
 </html>

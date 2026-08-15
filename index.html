@@ -1,404 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="AS FASHIONS – Premium fashion for Men, Women and Kids.">
-  <title>AS FASHIONS | Premium Fashion Store</title>
-
-  <link rel="icon" href="assets/logo/logo.png" type="image/png">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-  <style>
-    /* Homepage structure fallback — existing css/style.css remains the main stylesheet */
-    :root{--pink:#ff3f6c;--text:#282c3f;--muted:#696e79;--border:#e9e9ed}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#fff}
-    a{text-decoration:none;color:inherit}
-    button,input{font:inherit}
-    .as-header{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid #eee;box-shadow:0 2px 10px #0000000a}
-    .top-strip{background:#282c3f;color:#fff;text-align:center;font-size:12px;padding:7px 12px}
-    .nav-wrap{height:74px;max-width:1440px;margin:auto;padding:0 28px;display:flex;align-items:center;gap:24px}
-    .brand{display:flex;align-items:center;min-width:145px}
-    .brand img{max-width:145px;max-height:48px;object-fit:contain}
-    .brand-text{font-size:24px;font-weight:900;letter-spacing:1px}
-    .brand-text span{color:var(--pink)}
-    .main-nav{display:flex;align-items:center;gap:24px;height:100%;white-space:nowrap}
-    .nav-item{height:100%;display:flex;align-items:center;font-size:13px;font-weight:700;position:relative;cursor:pointer}
-    .nav-item:hover{color:var(--pink)}
-    .nav-item.sale{color:#ff3f6c}
-    .search-box{flex:1;max-width:480px;margin-left:auto;position:relative}
-    .search-box i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#696e79}
-    .search-box input{width:100%;height:42px;border:0;background:#f5f5f6;border-radius:4px;padding:0 16px 0 43px;outline:0}
-    .actions{display:flex;align-items:center;gap:18px}
-    .action{font-size:12px;font-weight:700;text-align:center;position:relative;cursor:pointer;min-width:40px}
-    .action i{display:block;font-size:18px;margin-bottom:4px}
-    .badge{position:absolute;top:-7px;right:0;background:var(--pink);color:#fff;border-radius:20px;min-width:17px;height:17px;font-size:10px;display:grid;place-items:center}
-    .mobile-menu-btn{display:none;border:0;background:none;font-size:22px}
-    .mega{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid #eee;box-shadow:0 8px 25px #00000018}
-    .nav-item.has-menu:hover .mega{display:block}
-    .mega-inner{max-width:1250px;margin:auto;padding:28px;display:grid;grid-template-columns:repeat(5,1fr);gap:28px}
-    .mega h4{margin:0 0 12px;color:var(--pink);font-size:13px}
-    .mega a{display:block;font-size:12px;color:#535766;padding:4px 0}
-    .mega a:hover{color:var(--pink)}
-    .mobile-drawer{display:none}
-
-    .hero{max-width:1440px;margin:auto;padding:18px 24px 0}
-    .hero-card{min-height:390px;border-radius:4px;overflow:hidden;position:relative;background:linear-gradient(110deg,#171717,#5d1c32)}
-    .hero-content{padding:70px 7%;color:#fff;max-width:650px}
-    .hero-content .eyebrow{font-size:13px;letter-spacing:3px;font-weight:700}
-    .hero-content h1{font-size:54px;line-height:1.02;margin:12px 0}
-    .hero-content h1 span{color:#ffb4c7}
-    .hero-content p{font-size:16px;line-height:1.6;color:#eee}
-    .hero-btn{display:inline-flex;padding:13px 24px;background:#fff;color:#222;font-weight:800;border-radius:3px;margin-top:12px}
-    .hero-offer{position:absolute;right:7%;top:50%;transform:translateY(-50%);font-size:72px;font-weight:900;color:#ffffff20}
-
-    .promo-row,.section{max-width:1380px;margin:30px auto;padding:0 20px}
-    .promo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .promo{padding:20px;border:1px solid var(--border);background:#fff;text-align:center}
-    .promo strong{display:block;font-size:15px;margin-bottom:5px}
-    .promo span{font-size:12px;color:var(--muted)}
-
-    .section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}
-    .section-head h2{font-size:22px;margin:0}
-    .section-head p{font-size:12px;color:var(--muted);margin:5px 0 0}
-    .view-all{font-size:12px;font-weight:700;color:var(--pink)}
-    .category-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:16px}
-    .category-card{text-align:center}
-    .category-img{aspect-ratio:1/1;border-radius:50%;overflow:hidden;background:#f5f5f6}
-    .category-img img{width:100%;height:100%;object-fit:cover}
-    .category-card strong{display:block;font-size:12px;margin-top:10px}
-
-    .sale-banner{background:linear-gradient(90deg,#ff3f6c,#ff6f91);color:#fff;padding:24px 30px;display:flex;align-items:center;justify-content:space-between}
-    .sale-banner h2{margin:0;font-size:26px}
-    .countdown{display:flex;gap:8px}
-    .time{background:#fff;color:#282c3f;padding:8px 11px;text-align:center;min-width:48px;font-weight:800}
-    .time small{display:block;font-size:8px;font-weight:500}
-
-    .product-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-    .product-card{border:1px solid #eee;background:#fff;min-width:0;position:relative;transition:.2s}
-    .product-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px #00000012}
-    .product-image{aspect-ratio:3/4;background:#f5f5f6;overflow:hidden;position:relative}
-    .product-image img{width:100%;height:100%;object-fit:cover}
-    .wishlist-btn{position:absolute;right:8px;top:8px;width:32px;height:32px;border:0;border-radius:50%;background:#fff;box-shadow:0 2px 8px #0002;cursor:pointer}
-    .product-info{padding:10px}
-    .product-info h3{font-size:13px;margin:0 0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .product-info p{font-size:11px;color:var(--muted);margin:0 0 8px}
-    .price{font-size:13px;font-weight:800}.old-price{font-size:11px;color:#999;text-decoration:line-through;margin-left:5px}.discount{font-size:10px;color:#14958f;margin-left:5px}
-    .quick-add{width:100%;margin-top:9px;height:34px;border:1px solid #ddd;background:#fff;font-size:11px;font-weight:700;cursor:pointer}
-    .quick-add:hover{border-color:var(--pink);color:var(--pink)}
-
-    .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .feature{padding:22px;border:1px solid var(--border);display:flex;gap:13px;align-items:center}
-    .feature i{font-size:23px;color:var(--pink)}
-    .feature strong{display:block;font-size:13px}.feature span{font-size:11px;color:var(--muted)}
-
-    .as-footer{margin-top:50px;background:#fafbfc;border-top:1px solid #eee}
-    .footer-inner{max-width:1380px;margin:auto;padding:45px 25px}
-    .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:35px}
-    .footer-col h4{font-size:12px;margin:0 0 15px}.footer-col a{display:block;font-size:12px;color:#696e79;margin:9px 0}.footer-col a:hover{color:var(--pink)}
-    .footer-bottom{border-top:1px solid #ddd;margin-top:30px;padding-top:20px;display:flex;justify-content:space-between;font-size:11px;color:#696e79}
-    .toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%) translateY(100px);background:#282c3f;color:#fff;padding:12px 20px;border-radius:4px;z-index:5000;transition:.3s;font-size:13px}
-    .toast.show{transform:translateX(-50%) translateY(0)}
-
-    @media(max-width:1100px){
-      .main-nav{gap:12px}.nav-wrap{padding:0 16px}.product-grid{grid-template-columns:repeat(4,1fr)}.category-grid{grid-template-columns:repeat(6,1fr)}
-    }
-    @media(max-width:768px){
-      .top-strip{font-size:10px}.nav-wrap{height:62px;padding:0 12px;gap:10px}.mobile-menu-btn{display:block;order:-1}.brand{min-width:auto;flex:1}.brand img{max-width:120px;max-height:38px}.brand-text{font-size:20px}
-      .main-nav{display:none}.search-box{position:absolute;left:10px;right:10px;top:67px;max-width:none;z-index:20}.search-box input{height:40px}.actions{gap:10px}.action span{display:none}.action i{font-size:17px;margin:0}
-      .hero{padding:55px 10px 0}.hero-card{min-height:330px}.hero-content{padding:55px 25px;max-width:100%}.hero-content h1{font-size:38px}.hero-content p{font-size:13px}.hero-offer{font-size:42px;right:15px;bottom:20px;top:auto;transform:none}
-      .promo-row,.section{padding:0 10px;margin:22px auto}.promo-grid{grid-template-columns:repeat(2,1fr)}.promo{padding:14px 8px}
-      .category-grid{grid-template-columns:repeat(4,1fr);gap:13px}.category-card strong{font-size:10px}
-      .product-grid{grid-template-columns:repeat(2,1fr);gap:10px}.product-info{padding:8px}.product-info h3{font-size:12px}.quick-add{height:32px}
-      .sale-banner{display:block;padding:18px}.sale-banner h2{font-size:21px;margin-bottom:14px}.countdown{justify-content:flex-start}
-      .feature-grid{grid-template-columns:repeat(2,1fr)}.feature{padding:14px}.feature span{font-size:10px}
-      .footer-grid{grid-template-columns:repeat(2,1fr);gap:25px}.footer-bottom{display:block;line-height:1.8}
-      .mobile-drawer{position:fixed;inset:0;background:#0006;z-index:2000}.mobile-drawer.open{display:block}.drawer-panel{width:86%;max-width:340px;height:100%;background:#fff;padding:22px;overflow:auto}.drawer-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding-bottom:15px}.drawer-head button{border:0;background:none;font-size:22px}.drawer-link{display:block;padding:15px 0;border-bottom:1px solid #eee;font-weight:700;font-size:14px}
-    }
-    @media(max-width:420px){.category-grid{grid-template-columns:repeat(4,1fr)}.hero-content h1{font-size:32px}.footer-grid{grid-template-columns:1fr 1fr}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AS FASHIONS — Wear Your World</title>
+<meta name="description" content="AS FASHIONS — Men, Women & Kids fashion, footwear, bags and accessories.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
+<body data-asf-home="true">
 
-<body>
-<header class="as-header">
-  <div class="top-strip">WELCOME TO AS FASHIONS • FREE SHIPPING ON ORDERS ABOVE ₹999 • EASY RETURNS</div>
-  <div class="nav-wrap">
-    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+<div id="siteHeader"></div>
 
-    <a class="brand" href="index.html" aria-label="AS FASHIONS Home">
-      <img src="assets/logo/logo.png" alt="AS FASHIONS" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span class="brand-text" style="display:none">AS <span>FASHIONS</span></span>
-    </a>
-
-    <nav class="main-nav" aria-label="Main navigation">
-      <div class="nav-item has-menu">MEN
-        <div class="mega"><div class="mega-inner">
-          <div><h4>TOPWEAR</h4><a href="shop.html?category=Men&subcategory=T-Shirts">T-Shirts</a><a href="shop.html?category=Men&subcategory=Shirts">Casual Shirts</a><a href="shop.html?category=Men&subcategory=Jackets">Jackets</a><a href="shop.html?category=Men&subcategory=Kurtas">Kurtas</a></div>
-          <div><h4>BOTTOMWEAR</h4><a href="shop.html?category=Men&subcategory=Jeans">Jeans</a><a href="shop.html?category=Men&subcategory=Trousers">Trousers</a><a href="shop.html?category=Men&subcategory=Shorts">Shorts</a><a href="shop.html?category=Men&subcategory=Joggers">Joggers</a></div>
-          <div><h4>FOOTWEAR</h4><a href="shop.html?category=Footwear&subcategory=Sneakers">Sneakers</a><a href="shop.html?category=Footwear&subcategory=Sports Shoes">Sports Shoes</a><a href="shop.html?category=Footwear&subcategory=Formal Shoes">Formal Shoes</a><a href="shop.html?category=Footwear&subcategory=Sandals">Sandals</a></div>
-          <div><h4>ACCESSORIES</h4><a href="shop.html?category=Accessories&subcategory=Watches">Watches</a><a href="shop.html?category=Accessories&subcategory=Wallets">Wallets</a><a href="shop.html?category=Accessories&subcategory=Belts">Belts</a><a href="shop.html?category=Accessories&subcategory=Sunglasses">Sunglasses</a></div>
-          <div><h4>EDIT</h4><a href="shop.html?collection=New Arrivals">New Arrivals</a><a href="shop.html?collection=Trending">Trending</a><a href="shop.html?sale=true">Sale</a></div>
-        </div></div>
-      </div>
-
-      <div class="nav-item has-menu">WOMEN
-        <div class="mega"><div class="mega-inner">
-          <div><h4>INDIAN WEAR</h4><a href="shop.html?category=Women&subcategory=Sarees">Sarees</a><a href="shop.html?category=Women&subcategory=Kurtis">Kurtis</a><a href="shop.html?category=Women&subcategory=Kurtas">Kurtas & Sets</a><a href="shop.html?category=Women&subcategory=Lehengas">Lehengas</a></div>
-          <div><h4>WESTERN WEAR</h4><a href="shop.html?category=Women&subcategory=Dresses">Dresses</a><a href="shop.html?category=Women&subcategory=Tops">Tops</a><a href="shop.html?category=Women&subcategory=Jeans">Jeans</a><a href="shop.html?category=Women&subcategory=Co-ords">Co-ords</a></div>
-          <div><h4>FOOTWEAR</h4><a href="shop.html?category=Footwear&subcategory=Heels">Heels</a><a href="shop.html?category=Footwear&subcategory=Flats">Flats</a><a href="shop.html?category=Footwear&subcategory=Boots">Boots</a><a href="shop.html?category=Footwear&subcategory=Casual Shoes">Casual Shoes</a></div>
-          <div><h4>BAGS</h4><a href="shop.html?category=Bags&subcategory=Handbags">Handbags</a><a href="shop.html?category=Bags&subcategory=Sling Bags">Sling Bags</a><a href="shop.html?category=Bags&subcategory=Backpacks">Backpacks</a><a href="shop.html?category=Bags&subcategory=Wallets">Wallets</a></div>
-          <div><h4>EDIT</h4><a href="shop.html?collection=New Arrivals">New Arrivals</a><a href="shop.html?collection=Trending">Trending</a><a href="shop.html?sale=true">Sale</a></div>
-        </div></div>
-      </div>
-
-      <div class="nav-item has-menu">KIDS
-        <div class="mega"><div class="mega-inner">
-          <div><h4>BOYS</h4><a href="shop.html?category=Kids&subcategory=T-Shirts">T-Shirts</a><a href="shop.html?category=Kids&subcategory=Shirts">Shirts</a><a href="shop.html?category=Kids&subcategory=Jeans">Jeans</a><a href="shop.html?category=Kids&subcategory=Sets">Clothing Sets</a></div>
-          <div><h4>GIRLS</h4><a href="shop.html?category=Kids&subcategory=Dresses">Dresses</a><a href="shop.html?category=Kids&subcategory=Tops">Tops</a><a href="shop.html?category=Kids&subcategory=Lehengas">Lehengas</a><a href="shop.html?category=Kids&subcategory=Sets">Sets</a></div>
-          <div><h4>FOOTWEAR</h4><a href="shop.html?category=Footwear&subcategory=Kids Shoes">Kids Shoes</a><a href="shop.html?category=Footwear&subcategory=Sandals">Sandals</a><a href="shop.html?category=Footwear&subcategory=School Shoes">School Shoes</a></div>
-          <div><h4>ACCESSORIES</h4><a href="shop.html?category=Accessories&subcategory=Kids Bags">Kids Bags</a><a href="shop.html?category=Accessories&subcategory=Caps">Caps</a><a href="shop.html?category=Accessories&subcategory=Watches">Watches</a></div>
-          <div><h4>EDIT</h4><a href="shop.html?collection=New Arrivals">New Arrivals</a><a href="shop.html?sale=true">Sale</a></div>
-        </div></div>
-      </div>
-
-      <div class="nav-item has-menu">FOOTWEAR
-        <div class="mega"><div class="mega-inner">
-          <div><h4>MEN</h4><a href="shop.html?category=Footwear&subcategory=Sneakers">Sneakers</a><a href="shop.html?category=Footwear&subcategory=Sports Shoes">Sports Shoes</a><a href="shop.html?category=Footwear&subcategory=Formal Shoes">Formal Shoes</a></div>
-          <div><h4>WOMEN</h4><a href="shop.html?category=Footwear&subcategory=Heels">Heels</a><a href="shop.html?category=Footwear&subcategory=Flats">Flats</a><a href="shop.html?category=Footwear&subcategory=Boots">Boots</a></div>
-          <div><h4>KIDS</h4><a href="shop.html?category=Footwear&subcategory=Kids Shoes">Kids Shoes</a><a href="shop.html?category=Footwear&subcategory=School Shoes">School Shoes</a></div>
-          <div><h4>SPORTS</h4><a href="shop.html?category=Sports&subcategory=Sports Shoes">Sports Shoes</a><a href="shop.html?category=Sports&subcategory=Running">Running</a></div>
-          <div><h4>SALE</h4><a href="shop.html?sale=true">All Footwear Sale</a></div>
-        </div></div>
-      </div>
-
-      <div class="nav-item has-menu">BAGS
-        <div class="mega"><div class="mega-inner">
-          <div><h4>WOMEN</h4><a href="shop.html?category=Bags&subcategory=Handbags">Handbags</a><a href="shop.html?category=Bags&subcategory=Sling Bags">Sling Bags</a><a href="shop.html?category=Bags&subcategory=Shoulder Bags">Shoulder Bags</a></div>
-          <div><h4>MEN</h4><a href="shop.html?category=Bags&subcategory=Backpacks">Backpacks</a><a href="shop.html?category=Bags&subcategory=Laptop Bags">Laptop Bags</a><a href="shop.html?category=Bags&subcategory=Travel Bags">Travel Bags</a></div>
-          <div><h4>TRAVEL</h4><a href="shop.html?category=Bags&subcategory=Travel">Travel Bags</a><a href="shop.html?category=Bags&subcategory=Trolleys">Trolleys</a></div>
-          <div><h4>EVERYDAY</h4><a href="shop.html?category=Bags&subcategory=Backpacks">Backpacks</a><a href="shop.html?category=Bags&subcategory=Wallets">Wallets</a></div>
-          <div><h4>SALE</h4><a href="shop.html?sale=true">Bag Sale</a></div>
-        </div></div>
-      </div>
-
-      <div class="nav-item has-menu">ACCESSORIES
-        <div class="mega"><div class="mega-inner">
-          <div><h4>JEWELLERY</h4><a href="shop.html?category=Accessories&subcategory=Earrings">Earrings</a><a href="shop.html?category=Accessories&subcategory=Necklaces">Necklaces</a><a href="shop.html?category=Accessories&subcategory=Bracelets">Bracelets</a></div>
-          <div><h4>FASHION</h4><a href="shop.html?category=Accessories&subcategory=Watches">Watches</a><a href="shop.html?category=Accessories&subcategory=Sunglasses">Sunglasses</a><a href="shop.html?category=Accessories&subcategory=Belts">Belts</a></div>
-          <div><h4>EVERYDAY</h4><a href="shop.html?category=Accessories&subcategory=Wallets">Wallets</a><a href="shop.html?category=Accessories&subcategory=Caps">Caps</a><a href="shop.html?category=Accessories&subcategory=Scarves">Scarves</a></div>
-          <div><h4>GIFTING</h4><a href="shop.html?collection=Gifts">Gift Collections</a></div>
-          <div><h4>SALE</h4><a href="shop.html?sale=true">Accessory Sale</a></div>
-        </div></div>
-      </div>
-
-      <div class="nav-item">SPORTS</div>
-      <div class="nav-item">WINTER WEAR</div>
-      <div class="nav-item">COLLECTIONS</div>
-      <a class="nav-item sale" href="shop.html?sale=true">SALE</a>
-    </nav>
-
-    <div class="search-box">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input id="homeSearch" type="search" placeholder="Search for products, brands and more" autocomplete="off">
-    </div>
-
-    <div class="actions">
-      <a class="action" href="#" id="profileBtn"><i class="fa-regular fa-user"></i><span>Profile</span></a>
-      <a class="action" href="wishlist.html"><i class="fa-regular fa-heart"></i><span>Wishlist</span><b class="badge" id="wishlistBadge">0</b></a>
-      <a class="action" href="cart.html"><i class="fa-solid fa-bag-shopping"></i><span>Bag</span><b class="badge" id="cartBadge">0</b></a>
-    </div>
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">New Season Edit</p>
+    <h1>Fashion that speaks<br>your language.</h1>
+    <p>From everyday essentials to festive statements — Men, Women and Kids, all in one place.</p>
+    <a href="shop.html?filter=new" class="btn btn-primary">Shop New Arrivals</a>
   </div>
-</header>
+</section>
 
-<div class="mobile-drawer" id="mobileDrawer">
-  <div class="drawer-panel">
-    <div class="drawer-head"><strong>AS FASHIONS</strong><button id="closeDrawer">&times;</button></div>
-    <a class="drawer-link" href="shop.html?category=Men">Men</a>
-    <a class="drawer-link" href="shop.html?category=Women">Women</a>
-    <a class="drawer-link" href="shop.html?category=Kids">Kids</a>
-    <a class="drawer-link" href="shop.html?category=Footwear">Footwear</a>
-    <a class="drawer-link" href="shop.html?category=Bags">Bags</a>
-    <a class="drawer-link" href="shop.html?category=Accessories">Accessories</a>
-    <a class="drawer-link" href="shop.html?category=Sports">Sports</a>
-    <a class="drawer-link" href="shop.html?category=Winter Wear">Winter Wear</a>
-    <a class="drawer-link" href="shop.html?collection=Collections">Collections</a>
-    <a class="drawer-link" href="shop.html?sale=true" style="color:#ff3f6c">Sale</a>
-  </div>
-</div>
+<section class="section">
+  <div class="section-head"><h2>Handpicked for you</h2></div>
+  <div id="promoStrip" class="promo-strip"></div>
+</section>
 
-<main>
-  <section class="hero">
-    <div class="hero-card">
-      <div class="hero-content">
-        <div class="eyebrow">AS FASHIONS • NEW SEASON</div>
-        <h1>STYLE THAT<br><span>FEELS LIKE YOU.</span></h1>
-        <p>Discover curated fashion for Men, Women & Kids — new arrivals, everyday essentials and statement looks.</p>
-        <a class="hero-btn" href="shop.html?collection=New Arrivals">SHOP NEW ARRIVALS &nbsp; →</a>
-      </div>
-      <div class="hero-offer">UP TO 70% OFF</div>
-    </div>
-  </section>
+<section class="section">
+  <div class="section-head"><h2>Shop by Category</h2></div>
+  <div id="categoryRail" class="category-rail"></div>
+</section>
 
-  <section class="promo-row">
-    <div class="promo-grid">
-      <div class="promo"><strong>FLAT 70% OFF</strong><span>On selected styles</span></div>
-      <div class="promo"><strong>FREE SHIPPING</strong><span>On orders above ₹999</span></div>
-      <div class="promo"><strong>EASY RETURNS</strong><span>Simple & hassle-free</span></div>
-      <div class="promo"><strong>NEW DROPS</strong><span>Fresh styles every week</span></div>
-    </div>
-  </section>
+<section id="new-arrivals" class="section">
+  <div class="section-head"><h2>New Arrivals</h2><a href="shop.html?filter=new">View all</a></div>
+  <div id="newArrivalsRail" class="product-rail"></div>
+</section>
 
-  <section class="section">
-    <div class="section-head"><div><h2>SHOP BY CATEGORY</h2><p>Find your everyday style</p></div><a class="view-all" href="shop.html">VIEW ALL →</a></div>
-    <div class="category-grid">
-      <a class="category-card" href="shop.html?category=Men"><div class="category-img"><img src="assets/categories/men.jpg" alt="Men" loading="lazy"></div><strong>Men</strong></a>
-      <a class="category-card" href="shop.html?category=Women"><div class="category-img"><img src="assets/categories/women.jpg" alt="Women" loading="lazy"></div><strong>Women</strong></a>
-      <a class="category-card" href="shop.html?category=Kids"><div class="category-img"><img src="assets/categories/kids.jpg" alt="Kids" loading="lazy"></div><strong>Kids</strong></a>
-      <a class="category-card" href="shop.html?category=Footwear"><div class="category-img"><img src="assets/categories/footwear.jpg" alt="Footwear" loading="lazy"></div><strong>Footwear</strong></a>
-      <a class="category-card" href="shop.html?category=Bags"><div class="category-img"><img src="assets/categories/bags.jpg" alt="Bags" loading="lazy"></div><strong>Bags</strong></a>
-      <a class="category-card" href="shop.html?category=Accessories"><div class="category-img"><img src="assets/categories/accessories.jpg" alt="Accessories" loading="lazy"></div><strong>Accessories</strong></a>
-      <a class="category-card" href="shop.html?category=Sports"><div class="category-img"><img src="assets/categories/sports.jpg" alt="Sports" loading="lazy"></div><strong>Sports</strong></a>
-      <a class="category-card" href="shop.html?category=Winter Wear"><div class="category-img"><img src="assets/categories/winter-wear.jpg" alt="Winter Wear" loading="lazy"></div><strong>Winter Wear</strong></a>
-    </div>
-  </section>
+<section class="section">
+  <div class="section-head"><h2>Bestsellers</h2><a href="shop.html?filter=bestsellers">View all</a></div>
+  <div id="bestsellersRail" class="product-rail"></div>
+</section>
 
-  <section class="section">
-    <div class="sale-banner">
-      <div><h2>THE AS FASHIONS SALE</h2><span>Limited-time prices. Shop before your favourites sell out.</span></div>
-      <div class="countdown" id="countdown">
-        <div class="time"><span id="hh">12</span><small>HRS</small></div>
-        <div class="time"><span id="mm">00</span><small>MIN</small></div>
-        <div class="time"><span id="ss">00</span><small>SEC</small></div>
-      </div>
-    </div>
-  </section>
+<section id="sale" class="section">
+  <div class="section-head"><h2>Sale — Up to 50% Off</h2><a href="shop.html?filter=sale">View all</a></div>
+  <div id="saleRail" class="product-rail"></div>
+</section>
 
-  <section class="section">
-    <div class="section-head"><div><h2>NEW ARRIVALS</h2><p>Fresh styles just landed</p></div><a class="view-all" href="shop.html?collection=New Arrivals">VIEW ALL →</a></div>
-    <div class="product-grid" id="newArrivalsGrid"></div>
-  </section>
+<div id="siteFooter"></div>
 
-  <section class="section">
-    <div class="section-head"><div><h2>TRENDING NOW</h2><p>What everyone's wearing</p></div><a class="view-all" href="shop.html?collection=Trending">VIEW ALL →</a></div>
-    <div class="product-grid" id="trendingGrid"></div>
-  </section>
-
-  <section class="section">
-    <div class="section-head"><div><h2>BESTSELLERS</h2><p>Customer favourites</p></div><a class="view-all" href="shop.html?collection=Bestsellers">VIEW ALL →</a></div>
-    <div class="product-grid" id="bestsellersGrid"></div>
-  </section>
-
-  <section class="section">
-    <div class="section-head"><div><h2>WHY AS FASHIONS?</h2><p>Fashion shopping made simple</p></div></div>
-    <div class="feature-grid">
-      <div class="feature"><i class="fa-solid fa-truck-fast"></i><div><strong>Fast Delivery</strong><span>Quick doorstep delivery</span></div></div>
-      <div class="feature"><i class="fa-solid fa-rotate-left"></i><div><strong>Easy Returns</strong><span>Simple return experience</span></div></div>
-      <div class="feature"><i class="fa-solid fa-shield-halved"></i><div><strong>Secure Payments</strong><span>Safe checkout every time</span></div></div>
-      <div class="feature"><i class="fa-solid fa-headset"></i><div><strong>Customer Support</strong><span>We're here to help</span></div></div>
-    </div>
-  </section>
-</main>
-
-<footer class="as-footer">
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h4>ONLINE SHOPPING</h4>
-        <a href="shop.html?category=Men">Men</a><a href="shop.html?category=Women">Women</a><a href="shop.html?category=Kids">Kids</a><a href="shop.html?category=Footwear">Footwear</a><a href="shop.html?category=Bags">Bags</a><a href="shop.html?category=Accessories">Accessories</a><a href="shop.html?sale=true">Sale</a>
-      </div>
-      <div class="footer-col">
-        <h4>CUSTOMER POLICIES</h4>
-        <a href="#">Contact Us</a><a href="#">FAQ</a><a href="#">Shipping & Delivery</a><a href="#">Cancellation</a><a href="#">Returns</a><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a>
-      </div>
-      <div class="footer-col">
-        <h4>AS FASHIONS</h4>
-        <a href="#">About Us</a><a href="#">Careers</a><a href="#">Store Information</a><a href="#">Track Order</a><a href="#">Gift Cards</a><a href="#">Offers</a>
-      </div>
-      <div class="footer-col">
-        <h4>CONNECT WITH US</h4>
-        <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
-        <a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
-        <a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
-        <a href="mailto:support@asfashions.com"><i class="fa-solid fa-envelope"></i> support@asfashions.com</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 AS FASHIONS. All rights reserved.</span>
-      <span>Premium Fashion • Men • Women • Kids</span>
-    </div>
-  </div>
-</footer>
-
-<div class="toast" id="toast"></div>
-
-<script>
-  /* Homepage UI layer. Existing project JS files remain available below. */
-  (() => {
-    const drawer = document.getElementById('mobileDrawer');
-    document.getElementById('mobileMenuBtn')?.addEventListener('click', () => drawer.classList.add('open'));
-    document.getElementById('closeDrawer')?.addEventListener('click', () => drawer.classList.remove('open'));
-    drawer?.addEventListener('click', e => { if(e.target === drawer) drawer.classList.remove('open'); });
-
-    document.getElementById('homeSearch')?.addEventListener('keydown', e => {
-      if(e.key === 'Enter' && e.target.value.trim()){
-        location.href = 'shop.html?search=' + encodeURIComponent(e.target.value.trim());
-      }
-    });
-
-    const end = Date.now() + 12 * 60 * 60 * 1000;
-    const tick = () => {
-      let left = Math.max(0, end - Date.now());
-      const h = Math.floor(left / 3600000); left %= 3600000;
-      const m = Math.floor(left / 60000); left %= 60000;
-      const s = Math.floor(left / 1000);
-      document.getElementById('hh').textContent = String(h).padStart(2,'0');
-      document.getElementById('mm').textContent = String(m).padStart(2,'0');
-      document.getElementById('ss').textContent = String(s).padStart(2,'0');
-    };
-    tick(); setInterval(tick,1000);
-
-    const fallback = (name, count=6) => {
-      const grid = document.getElementById(name);
-      if(!grid) return;
-      grid.innerHTML = Array.from({length:count}, (_,i) => `
-        <article class="product-card">
-          <div class="product-image">
-            <img src="assets/products/asf-000${String(i+1).padStart(1,'0')}.jpg" alt="AS FASHIONS product" loading="lazy"
-                 onerror="this.src='assets/products/asf-0001.jpg'">
-            <button class="wishlist-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-          </div>
-          <div class="product-info">
-            <h3>AS FASHIONS Style ${i+1}</h3>
-            <p>Premium fashion collection</p>
-            <span class="price">₹${799+i*100}</span><span class="old-price">₹${1499+i*100}</span><span class="discount">${45+i*2}% OFF</span>
-            <button class="quick-add" onclick="location.href='shop.html'">VIEW PRODUCTS</button>
-          </div>
-        </article>`).join('');
-    };
-
-    /*
-      Existing products.js/app.js can replace these fallback cards with the
-      real 121-product catalog. IDs are intentionally kept separate so the
-      current project architecture is not destroyed.
-    */
-    fallback('newArrivalsGrid');
-    fallback('trendingGrid');
-    fallback('bestsellersGrid');
-  })();
-</script>
-
-<script src="js/products.js"></script>
 <script src="js/categories.js"></script>
+<script src="js/products.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/wishlist.js"></script>
 <script src="js/search.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/offers.js"></script>
-<script src="js/header.js"></script>
 <script src="js/ui.js"></script>
+<script src="js/header.js"></script>
 <script src="js/app.js"></script>
+
+<!-- AS FASHIONS — Premium Homepage Sections -->
+<section class="asf-premium-home" aria-label="AS FASHIONS shopping sections">
+
+  <div class="asf-mobile-section-head">
+    <div>
+      <span>EXPLORE</span>
+      <h2>Shop by Category</h2>
+    </div>
+  </div>
+
+  <div class="asf-category-rail">
+    <a href="shop.html?category=Men" class="asf-category-item">
+      <div class="asf-category-image asf-cat-men" aria-hidden="true">M</div>
+      <strong>Men</strong>
+    </a>
+    <a href="shop.html?category=Women" class="asf-category-item">
+      <div class="asf-category-image asf-cat-women" aria-hidden="true">W</div>
+      <strong>Women</strong>
+    </a>
+    <a href="shop.html?category=Kids" class="asf-category-item">
+      <div class="asf-category-image asf-cat-kids" aria-hidden="true">K</div>
+      <strong>Kids</strong>
+    </a>
+    <a href="shop.html?category=Footwear" class="asf-category-item">
+      <div class="asf-category-image asf-cat-footwear" aria-hidden="true">F</div>
+      <strong>Footwear</strong>
+    </a>
+    <a href="shop.html?category=Bags" class="asf-category-item">
+      <div class="asf-category-image asf-cat-bags" aria-hidden="true">B</div>
+      <strong>Bags</strong>
+    </a>
+    <a href="shop.html?category=Accessories" class="asf-category-item">
+      <div class="asf-category-image asf-cat-accessories" aria-hidden="true">A</div>
+      <strong>Accessories</strong>
+    </a>
+  </div>
+
+  <section class="asf-feature-banner">
+    <div class="asf-feature-copy">
+      <span>NEW SEASON EDIT</span>
+      <h2>Fashion that speaks your language.</h2>
+      <p>Everyday essentials to statement looks — Men, Women and Kids, all in one place.</p>
+      <a href="shop.html?sort=newest">Shop New Arrivals</a>
+    </div>
+  </section>
+
+  <section class="asf-offer-section">
+    <div class="asf-section-row">
+      <h2>Handpicked for you</h2>
+      <a href="shop.html">View all</a>
+    </div>
+
+    <div class="asf-offer-rail">
+      <a href="shop.html?sort=sale" class="asf-offer-card">
+        <span>END OF SEASON SALE</span>
+        <strong>Up to 70% off</strong>
+        <b>Shop Sale →</b>
+      </a>
+      <a href="shop.html?sort=newest" class="asf-offer-card">
+        <span>NEW ARRIVALS</span>
+        <strong>Fresh styles, just in</strong>
+        <b>Explore →</b>
+      </a>
+      <a href="shop.html?sort=popular" class="asf-offer-card">
+        <span>BESTSELLERS</span>
+        <strong>Styles everyone wants</strong>
+        <b>Shop Now →</b>
+      </a>
+    </div>
+  </section>
+
+  <section class="asf-flash-card">
+    <div>
+      <span>LIMITED TIME</span>
+      <h2>Flash Sale</h2>
+      <p>Extra savings on selected styles.</p>
+    </div>
+    <div class="asf-timer" aria-label="Flash sale countdown">
+      <b data-asf-hour>24</b><i>:</i><b data-asf-min>00</b><i>:</i><b data-asf-sec>00</b>
+    </div>
+    <a href="shop.html?sort=sale">Shop Sale</a>
+  </section>
+
+</section>
+
+
+<script>
+(function () {
+  const h = document.querySelector('[data-asf-hour]');
+  const m = document.querySelector('[data-asf-min]');
+  const s = document.querySelector('[data-asf-sec]');
+  if (!h || !m || !s) return;
+  let end = Number(localStorage.getItem('asf_index_sale_end'));
+  if (!end || end < Date.now()) {
+    end = Date.now() + 24 * 60 * 60 * 1000;
+    localStorage.setItem('asf_index_sale_end', String(end));
+  }
+  function tick() {
+    const d = Math.max(0, end - Date.now());
+    h.textContent = String(Math.floor(d / 3600000)).padStart(2, '0');
+    m.textContent = String(Math.floor((d % 3600000) / 60000)).padStart(2, '0');
+    s.textContent = String(Math.floor((d % 60000) / 1000)).padStart(2, '0');
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
 </body>
 </html>

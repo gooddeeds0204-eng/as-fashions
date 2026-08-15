@@ -47,4 +47,3 @@
     validateCoupon: validateCoupon
   };
 })(window);
-

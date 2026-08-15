@@ -127,3 +127,24 @@
     getSummary: getSummary
   };
 })(window);
+
+/* AS FASHIONS — cart badge sync */
+(function () {
+  function count() {
+    try {
+      const raw = JSON.parse(localStorage.getItem("cart") || localStorage.getItem("asf_cart") || "[]");
+      if (!Array.isArray(raw)) return 0;
+      return raw.reduce((n, x) => n + Number(x.quantity || x.qty || 1), 0);
+    } catch (_) { return 0; }
+  }
+  function render() {
+    const n = count();
+    document.querySelectorAll("[data-cart-count], .cart-count, .cart-badge").forEach(el => {
+      el.textContent = n;
+      el.hidden = n === 0;
+    });
+  }
+  render();
+  window.addEventListener("storage", render);
+  document.addEventListener("asf:cart-updated", render);
+})();

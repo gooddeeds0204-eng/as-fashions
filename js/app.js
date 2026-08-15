@@ -57,10 +57,57 @@
       card.className = 'category-card';
       card.href = 'shop.html?cat=' + encodeURIComponent(top.id);
       card.innerHTML =
-        '<div class="category-swatch" style="background:' + ui.colorFromString(top.id) + '"></div>' +
+        '<div class="category-swatch" style="background:' + ui.colorFromString(top.id) + '; background-image:url(https://picsum.photos/seed/' + encodeURIComponent(top.id) + '/160/160); background-size:cover; background-position:center;"></div>' +
         '<p>' + top.name + '</p>';
       el.appendChild(card);
     });
+  }
+
+  function initHeroCarousel() {
+    var slides = document.querySelectorAll('#heroCarousel .hero-slide');
+    if (!slides.length) return;
+    var dotsWrap = document.getElementById('heroDots');
+    if (dotsWrap) {
+      slides.forEach(function (s, i) {
+        var dot = document.createElement('button');
+        dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', function () { showSlide(i); });
+        dotsWrap.appendChild(dot);
+      });
+    }
+    var current = 0;
+    function showSlide(idx) {
+      slides.forEach(function (s, i) { s.classList.toggle('active', i === idx); });
+      if (dotsWrap) {
+        dotsWrap.querySelectorAll('.hero-dot').forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+      }
+      current = idx;
+    }
+    setInterval(function () { showSlide((current + 1) % slides.length); }, 5000);
+  }
+
+  function initCountdown() {
+    var el = document.getElementById('countdown');
+    if (!el) return;
+    // Counts down to the next local midnight, then wraps — always shows a
+    // live, moving countdown without needing a fixed sale end-date wired up.
+    function tick() {
+      var now = new Date();
+      var midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+      var diff = Math.max(0, midnight - now);
+      var h = Math.floor(diff / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      var pad = function (n) { return String(n).padStart(2, '0'); };
+      var hEl = document.getElementById('cdHours');
+      var mEl = document.getElementById('cdMinutes');
+      var sEl = document.getElementById('cdSeconds');
+      if (hEl) hEl.textContent = pad(h);
+      if (mEl) mEl.textContent = pad(m);
+      if (sEl) sEl.textContent = pad(s);
+    }
+    tick();
+    setInterval(tick, 1000);
   }
 
   function init() {
@@ -80,72 +127,18 @@
       var list = prodApi.getNewArrivals();
       ui.renderProductGrid('newArrivalsRail', list.length ? list : prodApi.getAllProducts(), { limit: 8 });
     });
+    safeRun('renderRail:trending', function () {
+      var list = prodApi.getBestsellers();
+      ui.renderProductGrid('trendingRail', list.length ? list.slice().reverse() : prodApi.getAllProducts().slice(0, 8), { limit: 8 });
+    });
     safeRun('renderRail:bestsellers', function () {
       var list = prodApi.getBestsellers();
       ui.renderProductGrid('bestsellersRail', list.length ? list : prodApi.getAllProducts().slice(8, 16), { limit: 8 });
     });
-    safeRun('renderRail:sale', function () {
-      ui.renderProductGrid('saleRail', prodApi.getSaleProducts(), { limit: 8 });
-    });
     safeRun('bindProductCardEvents', function () { ui.bindProductCardEvents(document.body); });
+    safeRun('initHeroCarousel', initHeroCarousel);
+    safeRun('initCountdown', initCountdown);
   }
 
   document.addEventListener('DOMContentLoaded', init);
-})();
-
-/* =========================================================
-   AS FASHIONS — UI integration layer
-   ========================================================= */
-(function () {
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-
-  // Keep missing image paths from creating huge broken-image gaps.
-  function safeImage(img) {
-    if (!img || img.dataset.asfFallback) return;
-    img.dataset.asfFallback = "1";
-    img.addEventListener("error", function () {
-      this.style.objectFit = "cover";
-      this.src = "data:image/svg+xml;charset=UTF-8," +
-        encodeURIComponent(
-          '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800">' +
-          '<rect width="100%" height="100%" fill="#eee9e1"/>' +
-          '<text x="50%" y="47%" dominant-baseline="middle" text-anchor="middle" ' +
-          'font-family="Georgia,serif" font-size="34" fill="#7b684f">AS FASHIONS</text>' +
-          '<text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" ' +
-          'font-family="Arial" font-size="14" fill="#8d8d8d">IMAGE COMING SOON</text></svg>'
-        );
-    }, { once: true });
-  }
-
-  function bindImageFallbacks() {
-    $$("img").forEach(safeImage);
-  }
-
-  // Recently viewed products are stored locally for a real storefront feel.
-  window.ASFRecentlyViewed = {
-    add(id) {
-      if (!id) return;
-      const key = "asf_recently_viewed";
-      let items = JSON.parse(localStorage.getItem(key) || "[]");
-      items = [String(id), ...items.filter(x => String(x) !== String(id))].slice(0, 12);
-      localStorage.setItem(key, JSON.stringify(items));
-    },
-    get() {
-      return JSON.parse(localStorage.getItem("asf_recently_viewed") || "[]");
-    }
-  };
-
-  // Make product links register recently viewed items.
-  document.addEventListener("click", e => {
-    const link = e.target.closest('a[href*="product"]');
-    if (!link) return;
-    const match = link.href.match(/[?&](?:id|product)=([^&#]+)/i);
-    if (match) window.ASFRecentlyViewed.add(decodeURIComponent(match[1]));
-  });
-
-  bindImageFallbacks();
-  new MutationObserver(bindImageFallbacks).observe(document.documentElement, {
-    childList: true, subtree: true
-  });
 })();

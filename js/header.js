@@ -239,3 +239,27 @@
 
   document.addEventListener('DOMContentLoaded', initHeaderAndFooter);
 })();
+
+/* AS FASHIONS — mobile header integration */
+(function () {
+  const body = document.body;
+  const header = document.querySelector("header, .site-header, .main-header");
+  if (!header) return;
+
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("asf-header-scrolled", window.scrollY > 8);
+  }, { passive: true });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "/" && !/input|textarea|select/i.test(document.activeElement.tagName)) {
+      const input = document.querySelector('input[type="search"], input[name="search"], .search-box input, .search-bar input');
+      if (input) {
+        e.preventDefault();
+        input.focus();
+      }
+    }
+    if (e.key === "Escape") {
+      body.classList.remove("menu-open", "nav-open", "search-open");
+    }
+  });
+})();

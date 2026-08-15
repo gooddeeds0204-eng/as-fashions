@@ -4189,3 +4189,18 @@
     }
   };
 })(window);
+
+/* AS FASHIONS catalog normalizer — preserves the existing 121-product catalog */
+(function () {
+  const list = window.products || window.PRODUCTS || [];
+  if (!Array.isArray(list)) return;
+  list.forEach((p, i) => {
+    if (!p.id) p.id = `asf-${String(i + 1).padStart(4, "0")}`;
+    p.image = p.image || p.img || `assets/products/asf-${String(i + 1).padStart(4, "0")}.jpg`;
+    p.images = Array.isArray(p.images) && p.images.length ? p.images : [p.image];
+    p.rating = p.rating ?? 4.2;
+    p.reviewCount = p.reviewCount ?? Math.floor(40 + Math.random() * 800);
+    p.stock = p.stock ?? (Math.floor(2 + Math.random() * 25));
+  });
+  window.ASF_PRODUCTS = list;
+})();

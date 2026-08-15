@@ -75,23 +75,3 @@
     getCount: getCount
   };
 })(window);
-
-/* AS FASHIONS — wishlist badge sync */
-(function () {
-  function count() {
-    try {
-      const raw = JSON.parse(localStorage.getItem("wishlist") || localStorage.getItem("asf_wishlist") || "[]");
-      return Array.isArray(raw) ? raw.length : 0;
-    } catch (_) { return 0; }
-  }
-  function render() {
-    const n = count();
-    document.querySelectorAll("[data-wishlist-count], .wishlist-count, .wishlist-badge").forEach(el => {
-      el.textContent = n;
-      el.hidden = n === 0;
-    });
-  }
-  render();
-  window.addEventListener("storage", render);
-  document.addEventListener("asf:wishlist-updated", render);
-})();

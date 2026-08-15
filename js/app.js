@@ -92,3 +92,28 @@
 
   document.addEventListener('DOMContentLoaded', init);
 })();
+
+
+/* AS FASHIONS: premium flash-sale countdown */
+(function(){
+  const root = document.querySelector('.asf-countdown');
+  if (!root) return;
+  let end = Number(localStorage.getItem('asf_flash_end'));
+  if (!end || end < Date.now()) {
+    end = Date.now() + 24 * 60 * 60 * 1000;
+    localStorage.setItem('asf_flash_end', String(end));
+  }
+  function tick(){
+    let diff = Math.max(0, end - Date.now());
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    const set = (key,val) => {
+      const el = root.querySelector('[data-time="'+key+'"]');
+      if (el) el.textContent = String(val).padStart(2,'0');
+    };
+    set('hours',h); set('minutes',m); set('seconds',s);
+  }
+  tick();
+  setInterval(tick,1000);
+})();

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Bag — AS FASHIONS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .cart-page { max-width: 1000px; margin: 0 auto; padding: 30px 24px 60px; display: grid; grid-template-columns: 1fr 320px; gap: 32px; align-items: start; }
+  .cart-page h1 { font-family: var(--font-display); font-size: 26px; margin: 0 0 20px; }
+  .cart-line { display: flex; gap: 16px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; margin-bottom: 14px; }
+  .cart-line-media { width: 84px; height: 104px; border-radius: 2px; flex-shrink: 0; overflow: hidden; position: relative; }
+  .cart-line-media img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .cart-line-info { flex: 1; }
+  .cart-line-name { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
+  .cart-line-meta { font-size: 12px; color: var(--ink-soft); margin: 0 0 10px; }
+  .cart-line-price { font-size: 14px; font-weight: 700; margin: 0 0 10px; }
+  .cart-line-actions { display: flex; align-items: center; gap: 14px; }
+  .cart-qty { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: var(--radius); }
+  .cart-qty button { padding: 5px 12px; }
+  .cart-qty span { padding: 0 10px; font-size: 13px; }
+  .cart-line-remove { font-size: 12px; color: var(--maroon); text-decoration: underline; }
+  .order-summary { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; position: sticky; top: 84px; }
+  .order-summary h3 { font-family: var(--font-display); font-size: 18px; margin: 0 0 16px; }
+  .summary-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; color: var(--ink-soft); }
+  .summary-row.total { font-size: 15px; font-weight: 700; color: var(--ink); border-top: 1px solid var(--line); padding-top: 12px; margin-top: 8px; }
+  .coupon-row { display: flex; gap: 8px; margin: 16px 0; }
+  .coupon-row input { flex: 1; padding: 9px 10px; border: 1px solid var(--line); border-radius: var(--radius); font-size: 13px; }
+  .coupon-msg { font-size: 12px; margin-top: 6px; }
+  .coupon-msg.success { color: #3f5b4b; }
+  .coupon-msg.error { color: var(--maroon); }
+  .empty-cart { text-align: center; padding: 60px 20px; grid-column: 1 / -1; }
+  .empty-cart .btn-primary { display: inline-block; margin-top: 16px; }
+  @media (max-width: 760px) { .cart-page { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="cart-page">
+  <div>
+    <h1>Your Bag</h1>
+    <div id="cartLines"></div>
+  </div>
+  <aside class="order-summary" id="orderSummary">
+    <h3>Order Summary</h3>
+    <div class="summary-row"><span>Subtotal</span><span id="sumSubtotal">₹0</span></div>
+    <div class="summary-row" id="sumDiscountRow" style="display:none;"><span>Coupon discount</span><span id="sumDiscount">−₹0</span></div>
+    <div class="summary-row"><span>Shipping</span><span id="sumShipping">Free</span></div>
+    <div class="summary-row total"><span>Total</span><span id="sumTotal">₹0</span></div>
+    <div class="coupon-row">
+      <input type="text" id="couponInput" placeholder="Coupon code">
+      <button class="btn-add" id="applyCouponBtn" style="white-space:nowrap;">Apply</button>
+    </div>
+    <p id="couponMsg" class="coupon-msg"></p>
+    <a href="checkout.html" class="btn btn-primary" style="width:100%; text-align:center; display:block; margin-top:10px;">Proceed to Checkout</a>
+  </aside>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/categories.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/search.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/offers.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/header.js"></script>
+<script>
+(function () {
+  'use strict';
+  var cartApi = window.ASF.cart;
+  var offersApi = window.ASF.offers;
+  var ui = window.ASF.ui;
+  var appliedCoupon = null;
+
+  function render() {
+    var summary = cartApi.getSummary();
+    var linesEl = document.getElementById('cartLines');
+    var summaryPanel = document.getElementById('orderSummary');
+
+    if (!summary.lines.length) {
+      linesEl.innerHTML = '<div class="empty-cart"><p style="font-size:16px;">Your bag is empty.</p><a href="index.html" class="btn btn-primary">Continue Shopping</a></div>';
+      summaryPanel.style.display = 'none';
+      return;
+    }
+    summaryPanel.style.display = '';
+
+    linesEl.innerHTML = summary.lines.map(function (line) {
+      if (!line.product) return '';
+      var p = line.product;
+      return '<div class="cart-line" data-id="' + p.id + '" data-size="' + (line.size || '') + '" data-color="' + (line.color || '') + '">' +
+        '<div class="cart-line-media" style="background:' + ui.colorFromString(p.id) + '">' + (p.image ? '<img src="' + p.image + '" alt="">' : '') + '</div>' +
+        '<div class="cart-line-info">' +
+          '<p class="cart-line-name">' + p.brand + ' ' + p.name + '</p>' +
+          '<p class="cart-line-meta">' + (line.size || '') + (line.color ? ' · ' + line.color : '') + '</p>' +
+          '<p class="cart-line-price">' + ui.money(line.lineTotal) + '</p>' +
+          '<div class="cart-line-actions">' +
+            '<div class="cart-qty">' +
+              '<button type="button" class="qty-dec">&minus;</button><span>' + line.qty + '</span><button type="button" class="qty-inc">+</button>' +
+            '</div>' +
+            '<button type="button" class="cart-line-remove">Remove</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    var discount = appliedCoupon ? appliedCoupon.discount : 0;
+    var shipping = summary.subtotal >= 999 ? 0 : 79;
+    var total = Math.max(0, summary.subtotal - discount) + shipping;
+
+    document.getElementById('sumSubtotal').textContent = ui.money(summary.subtotal);
+    document.getElementById('sumShipping').textContent = shipping === 0 ? 'Free' : ui.money(shipping);
+    document.getElementById('sumTotal').textContent = ui.money(total);
+    var discRow = document.getElementById('sumDiscountRow');
+    if (discount > 0) {
+      discRow.style.display = '';
+      document.getElementById('sumDiscount').textContent = '\u2212' + ui.money(discount);
+    } else {
+      discRow.style.display = 'none';
+    }
+
+    linesEl.querySelectorAll('.cart-line').forEach(function (lineEl) {
+      var id = lineEl.dataset.id, size = lineEl.dataset.size, color = lineEl.dataset.color;
+      var qtyLine = cartApi.getItems().find(function (i) { return i.productId === id && (i.size || '') === size && (i.color || '') === color; });
+      lineEl.querySelector('.qty-inc').addEventListener('click', function () {
+        cartApi.updateQty(id, size || null, color || null, (qtyLine ? qtyLine.qty : 1) + 1);
+      });
+      lineEl.querySelector('.qty-dec').addEventListener('click', function () {
+        cartApi.updateQty(id, size || null, color || null, (qtyLine ? qtyLine.qty : 1) - 1);
+      });
+      lineEl.querySelector('.cart-line-remove').addEventListener('click', function () {
+        cartApi.removeItem(id, size || null, color || null);
+      });
+    });
+  }
+
+  document.getElementById('applyCouponBtn').addEventListener('click', function () {
+    var code = document.getElementById('couponInput').value;
+    var summary = cartApi.getSummary();
+    var result = offersApi.validateCoupon(code, summary.subtotal);
+    var msgEl = document.getElementById('couponMsg');
+    if (result.valid) {
+      appliedCoupon = result;
+      msgEl.textContent = result.message;
+      msgEl.className = 'coupon-msg success';
+    } else {
+      appliedCoupon = null;
+      msgEl.textContent = result.message;
+      msgEl.className = 'coupon-msg error';
+    }
+    render();
+  });
+
+  window.addEventListener('asf:cart-updated', render);
+  document.addEventListener('DOMContentLoaded', render);
+})();
+</script>
+</body>
+</html>

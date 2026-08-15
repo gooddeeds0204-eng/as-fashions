@@ -48,7 +48,15 @@
     var mediaWrap = card.querySelector('.product-media');
     mediaWrap.style.position = 'relative';
     var imgEl = card.querySelector('.product-media-img');
-    imgEl.addEventListener('error', function () { imgEl.style.display = 'none'; });
+    // If the real product image (asset upload / admin photo) fails to load,
+    // fall back to a stable stock photo instead of a blank colored block —
+    // this keeps the storefront looking populated before real photography
+    // is uploaded. Real uploaded/admin images always take priority when present.
+    imgEl.addEventListener('error', function () {
+      if (imgEl.dataset.fallbackApplied) { imgEl.style.display = 'none'; return; }
+      imgEl.dataset.fallbackApplied = '1';
+      imgEl.src = 'https://picsum.photos/seed/' + encodeURIComponent(p.id) + '/400/520';
+    });
     imgEl.addEventListener('load', function () { imgEl.style.display = 'block'; });
 
     return card;
@@ -104,25 +112,3 @@
     getQueryParam: getQueryParam
   };
 })(window);
-
-/* AS FASHIONS — global UI helpers */
-(function () {
-  window.ASFUI = window.ASFUI || {};
-
-  window.ASFUI.toast = function (message) {
-    let el = document.querySelector(".asf-toast");
-    if (!el) {
-      el = document.createElement("div");
-      el.className = "asf-toast";
-      document.body.appendChild(el);
-    }
-    el.textContent = message;
-    el.classList.add("show");
-    clearTimeout(el._timer);
-    el._timer = setTimeout(() => el.classList.remove("show"), 2200);
-  };
-
-  window.ASFUI.lockScroll = function (locked) {
-    document.documentElement.classList.toggle("asf-scroll-lock", !!locked);
-  };
-})();

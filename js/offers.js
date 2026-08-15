@@ -47,29 +47,3 @@
     validateCoupon: validateCoupon
   };
 })(window);
-
-/* AS FASHIONS — shared flash-sale timer */
-(function () {
-  const nodes = document.querySelectorAll("[data-asf-hour], [data-asf-min], [data-asf-sec]");
-  if (!nodes.length) return;
-
-  let end = Number(localStorage.getItem("asf_sale_end"));
-  if (!end || end < Date.now()) {
-    end = Date.now() + 24 * 60 * 60 * 1000;
-    localStorage.setItem("asf_sale_end", String(end));
-  }
-
-  function tick() {
-    const d = Math.max(0, end - Date.now());
-    const values = {
-      hour: Math.floor(d / 3600000),
-      min: Math.floor((d % 3600000) / 60000),
-      sec: Math.floor((d % 60000) / 1000)
-    };
-    document.querySelectorAll("[data-asf-hour]").forEach(x => x.textContent = String(values.hour).padStart(2,"0"));
-    document.querySelectorAll("[data-asf-min]").forEach(x => x.textContent = String(values.min).padStart(2,"0"));
-    document.querySelectorAll("[data-asf-sec]").forEach(x => x.textContent = String(values.sec).padStart(2,"0"));
-  }
-  tick();
-  setInterval(tick, 1000);
-})();

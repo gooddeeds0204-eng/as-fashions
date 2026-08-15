@@ -112,14 +112,3 @@
     getFacets: getFacets
   };
 })(window);
-
-/* AS FASHIONS — filters UX */
-(function () {
-  document.addEventListener("click", e => {
-    const clear = e.target.closest("[data-clear-filters], .clear-filters, .filter-clear");
-    if (!clear) return;
-    document.querySelectorAll("input[type=checkbox], input[type=radio]").forEach(i => i.checked = false);
-    document.querySelectorAll("select").forEach(s => s.selectedIndex = 0);
-    document.dispatchEvent(new CustomEvent("asf:filters-cleared"));
-  });
-})();

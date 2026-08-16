@@ -8,14 +8,16 @@
 (function () {
   'use strict';
 
-  var ANNOUNCEMENTS = [
-    'End of Season Sale — Up to 70% Off',
-    'Free Shipping on Orders Above \u20B9999',
-    'Easy Returns & Exchanges'
-  ];
-
   var HEADER_HTML =
-    '<div class="utility-bar" id="announcementBar"><span id="announcementText">' + ANNOUNCEMENTS[0] + '</span></div>' +
+    '<div class="utility-bar">' +
+      '<span class="utility-promo">Get 10% OFF on your first order. Use code: <strong>ASFIRST10</strong></span>' +
+      '<div class="utility-links">' +
+        '<a href="#">&#128241; Download App</a>' +
+        '<a href="#">&#128205; Store Locator</a>' +
+        '<a href="orders.html">&#128230; Track Order</a>' +
+        '<a href="help.html">Help</a>' +
+      '</div>' +
+    '</div>' +
     '<header class="site-header">' +
       '<div class="header-row">' +
         '<button id="mobileMenuToggle" class="mobile-toggle" aria-label="Menu">&#9776;</button>' +
@@ -322,20 +324,6 @@
     });
   }
 
-  function startAnnouncementTicker() {
-    var el = document.getElementById('announcementText');
-    if (!el) return;
-    var idx = 0;
-    setInterval(function () {
-      idx = (idx + 1) % ANNOUNCEMENTS.length;
-      el.style.opacity = '0';
-      setTimeout(function () {
-        el.textContent = ANNOUNCEMENTS[idx];
-        el.style.opacity = '1';
-      }, 250);
-    }, 3500);
-  }
-
   function initHeaderAndFooter() {
     var headerHost = document.getElementById('siteHeader');
     var footerHost = document.getElementById('siteFooter');
@@ -348,7 +336,6 @@
     renderCartDrawer();
     renderNotifDropdown();
     bindHeaderEvents();
-    startAnnouncementTicker();
 
     // Let the page know the shared chrome is ready (pages wait for this
     // before rendering their own body content that depends on cart/wishlist state).

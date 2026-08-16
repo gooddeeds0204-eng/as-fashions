@@ -13,9 +13,9 @@
   ];
 
   var PROMO_BANNERS = [
-    { id: 'promo-1', title: 'End of Season Sale', subtitle: 'Up to 70% off', ctaLabel: 'Shop Sale', link: '#sale' },
-    { id: 'promo-2', title: 'New Season, New Edit', subtitle: 'Fresh arrivals every week', ctaLabel: 'Explore', link: '#new-arrivals' },
-    { id: 'promo-3', title: 'Festive Edit', subtitle: 'Ethnic wear for every occasion', ctaLabel: 'Shop Ethnic', link: '#collections' }
+    { id: 'promo-1', eyebrow: 'New Season', title: 'New Styles', subtitle: 'Up to 70% Off', ctaLabel: 'Shop Now', link: 'category.html?filter=new', tone: 'tone-a', img: 'https://picsum.photos/seed/asf-promo-newseason/500/300' },
+    { id: 'promo-2', eyebrow: 'Limited Time Offer', title: 'Extra 10% Off', subtitle: 'On Prepaid Orders', ctaLabel: 'Shop Now', link: 'category.html', tone: 'tone-b', img: '' },
+    { id: 'promo-3', eyebrow: 'Student Discount', title: 'Extra 15% Off', subtitle: 'Verify with Student ID', ctaLabel: 'Get Discount', link: 'category.html', tone: 'tone-c', img: 'https://picsum.photos/seed/asf-promo-student/500/300' }
   ];
 
   function getCoupons() {

@@ -72,7 +72,37 @@
       return;
     }
     var list = opts.limit ? products.slice(0, opts.limit) : products;
-    list.forEach(function (p) { el.appendChild(productCard(p)); });
+    list.forEach(function (p, i) {
+      var card = productCard(p);
+      if (opts.reveal !== false) {
+        card.classList.add('reveal');
+        card.style.transitionDelay = Math.min(i, 8) * 40 + 'ms';
+      }
+      el.appendChild(card);
+    });
+    if (opts.reveal !== false) observeReveal(el.querySelectorAll('.reveal'));
+  }
+
+  // Fades/slides elements into view the first time they scroll into the
+  // viewport. Falls back to showing everything immediately if
+  // IntersectionObserver isn't available (very old browsers).
+  var revealObserver = null;
+  function observeReveal(nodes) {
+    if (typeof IntersectionObserver === 'undefined') {
+      nodes.forEach(function (n) { n.classList.add('in-view'); });
+      return;
+    }
+    if (!revealObserver) {
+      revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }
+    nodes.forEach(function (n) { revealObserver.observe(n); });
   }
 
   // Wires up clicks for .wish-btn / .btn-add anywhere inside `root` (defaults
@@ -109,6 +139,7 @@
     productCard: productCard,
     renderProductGrid: renderProductGrid,
     bindProductCardEvents: bindProductCardEvents,
-    getQueryParam: getQueryParam
+    getQueryParam: getQueryParam,
+    observeReveal: observeReveal
   };
 })(window);

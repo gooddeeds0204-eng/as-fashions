@@ -7,34 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<style>
-  .cart-page { max-width: 1000px; margin: 0 auto; padding: 30px 24px 60px; display: grid; grid-template-columns: 1fr 320px; gap: 32px; align-items: start; }
-  .cart-page h1 { font-family: var(--font-display); font-size: 26px; margin: 0 0 20px; }
-  .cart-line { display: flex; gap: 16px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; margin-bottom: 14px; }
-  .cart-line-media { width: 84px; height: 104px; border-radius: 2px; flex-shrink: 0; overflow: hidden; position: relative; }
-  .cart-line-media img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-  .cart-line-info { flex: 1; }
-  .cart-line-name { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
-  .cart-line-meta { font-size: 12px; color: var(--ink-soft); margin: 0 0 10px; }
-  .cart-line-price { font-size: 14px; font-weight: 700; margin: 0 0 10px; }
-  .cart-line-actions { display: flex; align-items: center; gap: 14px; }
-  .cart-qty { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: var(--radius); }
-  .cart-qty button { padding: 5px 12px; }
-  .cart-qty span { padding: 0 10px; font-size: 13px; }
-  .cart-line-remove { font-size: 12px; color: var(--maroon); text-decoration: underline; }
-  .order-summary { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; position: sticky; top: 84px; }
-  .order-summary h3 { font-family: var(--font-display); font-size: 18px; margin: 0 0 16px; }
-  .summary-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; color: var(--ink-soft); }
-  .summary-row.total { font-size: 15px; font-weight: 700; color: var(--ink); border-top: 1px solid var(--line); padding-top: 12px; margin-top: 8px; }
-  .coupon-row { display: flex; gap: 8px; margin: 16px 0; }
-  .coupon-row input { flex: 1; padding: 9px 10px; border: 1px solid var(--line); border-radius: var(--radius); font-size: 13px; }
-  .coupon-msg { font-size: 12px; margin-top: 6px; }
-  .coupon-msg.success { color: #3f5b4b; }
-  .coupon-msg.error { color: var(--maroon); }
-  .empty-cart { text-align: center; padding: 60px 20px; grid-column: 1 / -1; }
-  .empty-cart .btn-primary { display: inline-block; margin-top: 16px; }
-  @media (max-width: 760px) { .cart-page { grid-template-columns: 1fr; } }
-</style>
+<link rel="stylesheet" href="css/checkout.css">
+<link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
@@ -69,6 +43,10 @@
 <script src="js/search.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/offers.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/reviews.js"></script>
+<script src="js/notifications.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/header.js"></script>
 <script>

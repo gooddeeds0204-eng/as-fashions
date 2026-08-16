@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Returns &amp; Exchanges — AS FASHIONS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/checkout.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="account-layout">
+  <nav class="account-nav">
+    <a href="profile.html">My Profile</a>
+    <a href="orders.html">My Orders</a>
+    <a href="addresses.html">Addresses</a>
+    <a href="wishlist.html">Wishlist</a>
+    <a href="returns.html" class="active">Returns</a>
+    <a href="help.html">Help</a>
+  </nav>
+  <div class="account-card">
+    <h1>Returns &amp; Exchanges</h1>
+    <div id="returnOrdersList"></div>
+    <div class="return-form" id="returnForm">
+      <label>Reason for return</label>
+      <select id="returnReason">
+        <option>Size doesn't fit</option>
+        <option>Product damaged</option>
+        <option>Wrong item received</option>
+        <option>Not as described</option>
+        <option>Other</option>
+      </select>
+      <label>Additional comments</label>
+      <textarea id="returnComments" rows="3"></textarea>
+      <button id="submitReturnBtn" class="btn btn-primary" style="padding:11px 24px;">Submit Return Request</button>
+    </div>
+    <div class="return-success" id="returnSuccess">
+      <p style="font-size:16px; font-weight:700; margin-bottom:8px;">&#10003; Return request submitted</p>
+      <p style="font-size:13px; color:var(--ink-soft);">We'll review your request and get back to you within 24-48 hours (demo).</p>
+    </div>
+  </div>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/categories.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/search.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/offers.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/reviews.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/header.js"></script>
+<script src="js/returns.js"></script>
+</body>
+</html>

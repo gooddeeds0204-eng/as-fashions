@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — AS FASHIONS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>Welcome back</h1>
+    <p class="sub">Login to continue to AS Fashions</p>
+    <form id="loginForm">
+      <label>Email or phone</label>
+      <input type="text" id="loginIdentifier" required>
+      <label>Password</label>
+      <input type="password" id="loginPassword" required>
+      <p class="auth-error" id="loginError"></p>
+      <button type="submit" class="btn btn-primary" style="width:100%; padding:13px;">Login</button>
+    </form>
+    <div class="auth-divider">or</div>
+    <a href="otp.html" class="btn-add" style="display:block; text-align:center; padding:11px;">Login with OTP</a>
+    <div class="auth-links">
+      <span>New here? <a href="register.html">Create account</a></span>
+    </div>
+  </div>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/categories.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/search.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/offers.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/reviews.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/header.js"></script>
+<script>
+(function () {
+  'use strict';
+  var authApi = window.ASF.auth;
+
+  if (authApi.isLoggedIn()) {
+    window.location.href = 'profile.html';
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var identifier = document.getElementById('loginIdentifier').value.trim();
+    var password = document.getElementById('loginPassword').value;
+    var result = authApi.login(identifier, password);
+    var errEl = document.getElementById('loginError');
+    if (!result.success) {
+      errEl.textContent = result.message;
+      errEl.style.display = 'block';
+      return;
+    }
+    window.location.href = 'profile.html';
+  });
+})();
+</script>
+</body>
+</html>

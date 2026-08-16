@@ -1,0 +1,85 @@
+/* AS FASHIONS — Admin panel styles */
+
+.admin-shell { display: flex; min-height: 100vh; }
+
+.admin-sidebar { width: 220px; background: var(--ink); color: var(--bone); padding: 24px 18px; flex-shrink: 0; }
+
+.admin-sidebar .logo { color: var(--bone); font-size: 20px; margin-bottom: 28px; display: block; }
+
+.admin-sidebar nav a { display: block; padding: 10px 10px; font-size: 13px; border-radius: var(--radius); margin-bottom: 4px; color: var(--bone-deep); }
+
+.admin-sidebar nav a.active, .admin-sidebar nav a:hover { background: rgba(255,255,255,0.08); color: var(--white); }
+
+.admin-main { flex: 1; padding: 32px; max-width: 1200px; }
+
+.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+
+.admin-header h1 { font-family: var(--font-display); font-size: 26px; margin: 0; }
+
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+
+.stat-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+
+.stat-card .num { font-family: var(--font-display); font-size: 28px; margin: 0 0 4px; }
+
+.stat-card .label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; }
+
+.admin-table-wrap { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+
+th { background: var(--bone-deep); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+tr:last-child td { border-bottom: none; }
+
+.swatch-dot { width: 10px; height: 10px; border-radius: 999px; display: inline-block; margin-right: 6px; }
+
+.filter-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+
+.filter-row select, .filter-row input { padding: 8px 10px; border: 1px solid var(--line); border-radius: var(--radius); font-size: 13px; font-family: inherit; }
+
+.pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+
+.pill-sale { background: var(--maroon); color: #fff; }
+
+.pill-new { background: var(--ink); color: #fff; }
+
+.btn-sm { padding: 5px 10px; font-size: 11px; font-weight: 700; border-radius: var(--radius); border: 1px solid var(--ink); text-transform: uppercase; letter-spacing: 0.02em; }
+
+.btn-sm:hover { background: var(--ink); color: var(--bone); }
+
+.btn-sm-danger { border-color: var(--maroon); color: var(--maroon); }
+
+.btn-sm-danger:hover { background: var(--maroon); color: #fff; }
+
+.action-cell { display: flex; gap: 6px; }
+
+.modal-backdrop { position: fixed; inset: 0; background: rgba(24,24,24,0.5); display: none; align-items: flex-start; justify-content: center; padding: 24px 16px; overflow-y: auto; z-index: 100; }
+
+.modal-backdrop.open { display: flex; }
+
+.modal-card { background: var(--bone); border-radius: var(--radius); width: 100%; max-width: 560px; padding: 26px; margin: 20px 0; }
+
+.modal-card h2 { font-family: var(--font-display); font-size: 22px; margin: 0 0 18px; }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.form-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 4px; }
+
+.form-field.full { grid-column: 1 / -1; }
+
+.form-field label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); }
+
+.form-field input, .form-field select { padding: 9px 10px; border: 1px solid var(--line); border-radius: var(--radius); font-size: 13px; font-family: inherit; background: var(--white); }
+
+.form-field.checkbox { flex-direction: row; align-items: center; gap: 8px; }
+
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+
+.img-upload-preview { width: 72px; height: 90px; border-radius: 2px; background: var(--bone-deep); background-size: cover; background-position: center; margin-bottom: 6px; }
+
+.top-actions { display: flex; gap: 10px; margin-bottom: 16px; }
+
+.banner-note { font-size: 12px; color: var(--ink-soft); background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px; margin-bottom: 16px; }

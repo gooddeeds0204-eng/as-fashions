@@ -222,6 +222,9 @@
     });
     safeRun('bindProductCardEvents', function () { ui.bindProductCardEvents(document.body); });
     safeRun('initCountdown', initCountdown);
+    safeRun('observeSectionReveal', function () {
+      ui.observeReveal(document.querySelectorAll('.reveal-section'));
+    });
   }
 
   document.addEventListener('DOMContentLoaded', init);

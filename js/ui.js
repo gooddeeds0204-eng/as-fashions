@@ -39,7 +39,7 @@
           '<p class="product-name">' + p.name + '</p>' +
         '</a>' +
         '<p class="product-price">' + money(p.price) +
-          (p.discountPct > 0 ? ' <span class="mrp">' + money(p.mrp) + '</span>' : '') +
+          (p.discountPct > 0 ? ' <span class="mrp">' + money(p.mrp) + '</span> <span class="off-pct">' + p.discountPct + '% off</span>' : '') +
         '</p>' +
         '<p class="product-rating">&#9733; ' + p.rating + ' (' + p.ratingCount + ')</p>' +
         '<button class="btn btn-add" data-id="' + p.id + '">Add to Bag</button>' +

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product — AS FASHIONS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/product.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+<div id="breadcrumb" class="breadcrumb"></div>
+
+<div id="pdpRoot" class="pdp-layout"><!-- filled by script; shows a not-found message if ?id= is missing/invalid --></div>
+
+<div id="relatedSection" class="related-section" style="display:none;">
+  <h2>You may also like</h2>
+  <div id="relatedGrid" class="product-grid"></div>
+</div>
+
+<div class="related-section" id="reviewsSection">
+  <h2>Ratings &amp; Reviews</h2>
+  <div id="reviewSummary" style="margin-bottom:20px;"></div>
+  <button id="writeReviewBtn" class="btn-add" style="padding:9px 18px; margin-bottom:20px;">Write a Review</button>
+  <div class="review-form" id="reviewForm" style="display:none; background:var(--white); border:1px solid var(--line); border-radius:2px; padding:18px; margin-bottom:20px; max-width:460px;">
+    <label style="display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); margin-bottom:6px;">Your rating</label>
+    <div id="starPicker" style="font-size:22px; margin-bottom:14px; cursor:pointer;">
+      <span data-star="1">&#9734;</span><span data-star="2">&#9734;</span><span data-star="3">&#9734;</span><span data-star="4">&#9734;</span><span data-star="5">&#9734;</span>
+    </div>
+    <textarea id="reviewComment" rows="3" placeholder="Share your experience..." style="width:100%; padding:10px; border:1px solid var(--line); border-radius:2px; font-family:inherit; font-size:13px; margin-bottom:12px;"></textarea>
+    <button id="submitReviewBtn" class="btn btn-primary" style="padding:9px 20px;">Submit Review</button>
+  </div>
+  <div id="reviewsList"></div>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/categories.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/search.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/offers.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/reviews.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/header.js"></script>
+<script>
+(function () {
+  'use strict';
+  var catApi = window.ASF.categories;
+  var prodApi = window.ASF.products;
+  var cartApi = window.ASF.cart;
+  var wishApi = window.ASF.wishlist;
+  var ui = window.ASF.ui;
+
+  var selectedSize = null, selectedColor = null, qty = 1, activeImageIdx = 0;
+
+  function renderBreadcrumb(p) {
+    var el = document.getElementById('breadcrumb');
+    var crumbs = catApi.getBreadcrumbs(p.categoryId);
+    el.innerHTML = '<a href="index.html">Home</a> ' + crumbs.map(function (c) {
+      return ' &rsaquo; <a href="category.html?cat=' + encodeURIComponent(c.id) + '">' + c.name + '</a>';
+    }).join('') + ' &rsaquo; ' + p.name;
+  }
+
+  function renderNotFound() {
+    document.getElementById('pdpRoot').innerHTML =
+      '<div style="grid-column:1/-1; text-align:center; padding:60px 20px;">' +
+        '<p style="font-size:18px; margin-bottom:12px;">Product not found.</p>' +
+        '<a href="index.html" class="btn btn-primary">Back to home</a>' +
+      '</div>';
+  }
+
+  function renderPdp(p) {
+    var images = (p.images && p.images.length ? p.images : [p.image]).filter(Boolean);
+    selectedSize = p.sizes && p.sizes[0] || null;
+    selectedColor = p.colors && p.colors[0] || null;
+
+    var root = document.getElementById('pdpRoot');
+    root.innerHTML =
+      '<div>' +
+        '<div class="pdp-gallery-main" id="pdpMainImg" style="background:' + ui.colorFromString(p.id) + '">' +
+          (images[0] ? '<img src="' + images[0] + '" alt="' + p.name + '">' : '') +
+        '</div>' +
+        (images.length > 1 ? '<div class="pdp-thumbs" id="pdpThumbs">' + images.map(function (img, i) {
+          return '<div class="pdp-thumb" data-idx="' + i + '"><img src="' + img + '" alt=""></div>';
+        }).join('') + '</div>' : '') +
+      '</div>' +
+      '<div>' +
+        '<p class="pdp-brand">' + p.brand + '</p>' +
+        '<p class="pdp-name">' + p.name + '</p>' +
+        '<div class="pdp-price-row">' +
+          '<span class="pdp-price">' + ui.money(p.price) + '</span>' +
+          (p.discountPct > 0 ? '<span class="pdp-mrp">' + ui.money(p.mrp) + '</span><span class="pdp-discount">' + p.discountPct + '% OFF</span>' : '') +
+        '</div>' +
+        '<p class="pdp-rating">&#9733; ' + p.rating + ' (' + p.ratingCount + ' ratings)</p>' +
+        (p.sizes && p.sizes.length ? '<div class="selector-group"><h4>Size</h4><div id="sizeSelector">' +
+          p.sizes.map(function (s) { return '<button type="button" class="swatch-btn size-btn" data-size="' + s + '">' + s + '</button>'; }).join('') +
+        '</div></div>' : '') +
+        (p.colors && p.colors.length ? '<div class="selector-group"><h4>Color</h4><div id="colorSelector">' +
+          p.colors.map(function (c) { return '<button type="button" class="swatch-btn color-btn" data-color="' + c + '">' + c + '</button>'; }).join('') +
+        '</div></div>' : '') +
+        '<div class="selector-group"><h4>Quantity</h4><div class="qty-stepper">' +
+          '<button type="button" id="qtyMinus">&minus;</button><span id="qtyValue">1</span><button type="button" id="qtyPlus">+</button>' +
+        '</div></div>' +
+        '<div class="pdp-actions">' +
+          '<button class="btn-add" id="pdpAddToBag">Add to Bag</button>' +
+          '<button class="pdp-wish-btn' + (wishApi.isWishlisted(p.id) ? ' active' : '') + '" id="pdpWishBtn">&#9825;</button>' +
+        '</div>' +
+        '<p class="pdp-added-note" id="pdpAddedNote">&#10003; Added to your bag</p>' +
+        '<div class="pdp-meta-row">Free shipping on orders above ₹999 · Easy 15-day returns · Cash on delivery available</div>' +
+      '</div>';
+
+    // wire size/color selection
+    function selectSwatch(group, selector, value) {
+      root.querySelectorAll(group).forEach(function (btn) {
+        btn.classList.toggle('selected', btn.dataset[selector] === value);
+      });
+    }
+    root.querySelectorAll('.size-btn').forEach(function (btn) {
+      if (btn.dataset.size === selectedSize) btn.classList.add('selected');
+      btn.addEventListener('click', function () { selectedSize = btn.dataset.size; selectSwatch('.size-btn', 'size', selectedSize); });
+    });
+    root.querySelectorAll('.color-btn').forEach(function (btn) {
+      if (btn.dataset.color === selectedColor) btn.classList.add('selected');
+      btn.addEventListener('click', function () { selectedColor = btn.dataset.color; selectSwatch('.color-btn', 'color', selectedColor); });
+    });
+
+    document.getElementById('qtyMinus').addEventListener('click', function () {
+      qty = Math.max(1, qty - 1);
+      document.getElementById('qtyValue').textContent = qty;
+    });
+    document.getElementById('qtyPlus').addEventListener('click', function () {
+      qty = Math.min(10, qty + 1);
+      document.getElementById('qtyValue').textContent = qty;
+    });
+
+    document.getElementById('pdpAddToBag').addEventListener('click', function () {
+      cartApi.addItem(p.id, { size: selectedSize, color: selectedColor, qty: qty });
+      var note = document.getElementById('pdpAddedNote');
+      note.style.display = 'block';
+      setTimeout(function () { note.style.display = 'none'; }, 2500);
+      if (typeof window.__asfOpenCartDrawer === 'function') window.__asfOpenCartDrawer();
+    });
+
+    var wishBtn = document.getElementById('pdpWishBtn');
+    wishBtn.addEventListener('click', function () {
+      wishApi.toggle(p.id);
+      wishBtn.classList.toggle('active');
+    });
+
+    var thumbs = document.getElementById('pdpThumbs');
+    if (thumbs) {
+      thumbs.querySelectorAll('.pdp-thumb').forEach(function (thumb) {
+        thumb.addEventListener('click', function () {
+          var idx = Number(thumb.dataset.idx);
+          document.getElementById('pdpMainImg').querySelector('img').src = images[idx];
+        });
+      });
+    }
+  }
+
+  function renderRelated(p) {
+    var related = prodApi.getProductsByCategory(p.categoryId).filter(function (r) { return r.id !== p.id; }).slice(0, 8);
+    if (!related.length) return;
+    document.getElementById('relatedSection').style.display = '';
+    ui.renderProductGrid('relatedGrid', related);
+  }
+
+  function renderReviews(p) {
+    var reviewsApi = window.ASF.reviews;
+    var reviews = reviewsApi.getReviews(p.id);
+    var avg = reviewsApi.getAverageRating(p.id);
+    var summaryEl = document.getElementById('reviewSummary');
+    summaryEl.innerHTML = avg
+      ? '<span style="font-size:20px; font-weight:700;">&#9733; ' + avg + '</span> <span style="color:var(--ink-soft); font-size:13px;">based on ' + reviews.length + ' review' + (reviews.length === 1 ? '' : 's') + '</span>'
+      : '<span style="color:var(--ink-soft); font-size:13px;">No reviews yet — be the first to review this product.</span>';
+
+    var listEl = document.getElementById('reviewsList');
+    listEl.innerHTML = reviews.map(function (r) {
+      var date = new Date(r.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+      return '<div style="border-bottom:1px solid var(--line); padding:14px 0;">' +
+        '<p style="margin:0 0 4px; font-weight:700; font-size:13px;">' + '&#9733;'.repeat(r.rating) + '<span style="color:var(--line);">' + '&#9733;'.repeat(5 - r.rating) + '</span></p>' +
+        '<p style="margin:0 0 4px; font-size:13px;">' + r.comment + '</p>' +
+        '<p style="margin:0; font-size:11px; color:var(--ink-soft);">' + r.name + ' &middot; ' + date + '</p>' +
+      '</div>';
+    }).join('');
+
+    var selectedRating = 0;
+    var stars = document.querySelectorAll('#starPicker span');
+    stars.forEach(function (star) {
+      star.addEventListener('click', function () {
+        selectedRating = Number(star.dataset.star);
+        stars.forEach(function (s, i) { s.innerHTML = i < selectedRating ? '&#9733;' : '&#9734;'; });
+      });
+    });
+
+    document.getElementById('writeReviewBtn').addEventListener('click', function () {
+      document.getElementById('reviewForm').style.display = 'block';
+    });
+
+    document.getElementById('submitReviewBtn').addEventListener('click', function () {
+      var comment = document.getElementById('reviewComment').value.trim();
+      if (!selectedRating) { alert('Please select a star rating.'); return; }
+      if (!comment) { alert('Please write a comment.'); return; }
+      var result = reviewsApi.addReview(p.id, { rating: selectedRating, comment: comment });
+      if (!result.success) { alert('\u26A0 ' + result.message); return; }
+      document.getElementById('reviewForm').style.display = 'none';
+      document.getElementById('reviewComment').value = '';
+      renderReviews(p);
+    });
+  }
+
+  function init() {
+    var id = ui.getQueryParam('id');
+    var p = id ? prodApi.getProductById(id) : null;
+    if (!p) { renderNotFound(); return; }
+    document.title = p.brand + ' ' + p.name + ' — AS FASHIONS';
+    renderBreadcrumb(p);
+    renderPdp(p);
+    renderRelated(p);
+    renderReviews(p);
+    window.ASF.ui.bindProductCardEvents(document.body);
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+</body>
+</html>

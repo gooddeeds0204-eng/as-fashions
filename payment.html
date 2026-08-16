@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment — AS FASHIONS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/checkout.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="payment-page">
+  <div>
+    <h1>Payment</h1>
+    <div class="demo-note">Demo payment — no real transaction occurs. Connect Razorpay/Stripe (or similar) via a backend before accepting real payments.</div>
+    <div class="addr-preview" id="addrPreview"></div>
+
+    <div class="pay-option selected" data-method="COD"><span class="icon">&#128181;</span><div><p class="title">Cash on Delivery</p><p class="sub">Pay when your order arrives</p></div></div>
+
+    <div class="pay-option" data-method="UPI">
+      <span class="icon">&#128241;</span>
+      <div style="flex:1;">
+        <p class="title">UPI</p><p class="sub">Pay via any UPI app</p>
+        <div class="pay-detail-fields" id="upiFields"><input type="text" placeholder="yourname@upi"></div>
+      </div>
+    </div>
+
+    <div class="pay-option" data-method="Card">
+      <span class="icon">&#128179;</span>
+      <div style="flex:1;">
+        <p class="title">Credit / Debit Card</p><p class="sub">Visa, Mastercard, RuPay</p>
+        <div class="pay-detail-fields" id="cardFields">
+          <input type="text" placeholder="Card number" maxlength="19">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <input type="text" placeholder="MM/YY" maxlength="5">
+            <input type="text" placeholder="CVV" maxlength="3">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button id="payNowBtn" class="btn btn-primary" style="width:100%; padding:14px; margin-top:10px;">Pay Now</button>
+  </div>
+  <aside class="order-summary">
+    <h3>Order Summary</h3>
+    <div id="paymentLines"></div>
+    <div class="summary-row" id="paymentDiscountRow" style="display:none;"><span>Discount</span><span id="paymentDiscount">−₹0</span></div>
+    <div class="summary-row"><span>Shipping</span><span id="paymentShipping">Free</span></div>
+    <div class="summary-row total"><span>Total</span><span id="paymentTotal">₹0</span></div>
+  </aside>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/categories.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/search.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/offers.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/reviews.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/header.js"></script>
+<script src="js/payment.js"></script>
+</body>
+</html>

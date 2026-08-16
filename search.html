@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search — AS FASHIONS</title>
+<meta http-equiv="refresh" content="0; url=category.html">
+</head>
+<body>
+<script>
+  // search.html and category.html share one PLP/search implementation
+  // (category.html reads ?q=, ?cat=, or ?filter=) to avoid maintaining two
+  // separate copies of filter/sort logic that could drift out of sync.
+  var params = new URLSearchParams(window.location.search);
+  var q = params.get('q') || '';
+  window.location.replace('category.html?q=' + encodeURIComponent(q));
+</script>
+<p>Redirecting to search results&hellip; <a href="category.html">Click here</a> if you are not redirected automatically.</p>
+</body>
+</html>

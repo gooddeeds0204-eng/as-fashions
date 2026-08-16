@@ -74,7 +74,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   z-index: 40;
   background: var(--bone);
   border-bottom: 1px solid var(--line);
+  transition: box-shadow .2s ease;
 }
+
+.site-header.scrolled { box-shadow: 0 2px 12px rgba(24,24,24,0.08); }
 
 .header-row {
   display: flex;
@@ -139,7 +142,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .header-actions { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
 
-.icon-btn { position: relative; font-size: 20px; line-height: 1; padding: 6px; }
+.icon-btn { position: relative; font-size: 20px; line-height: 1; padding: 6px; transition: transform .15s ease; }
+.icon-btn:hover { transform: translateY(-2px); }
 
 .badge {
   position: absolute;
@@ -155,6 +159,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   align-items: center;
   justify-content: center;
   padding: 0 3px;
+}
+
+.badge.bump { animation: badgeBump .3s ease; }
+
+@keyframes badgeBump {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
 }
 
 .mobile-toggle { display: none; font-size: 22px; }
@@ -183,7 +195,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .nav-link:hover { color: var(--marigold-deep); }
 
 .mega-panel {
-  display: none;
+  display: grid;
   position: absolute;
   top: 100%;
   left: 0;
@@ -195,9 +207,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   z-index: 45;
   min-width: 640px;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
 }
 
-.nav-item:hover .mega-panel { display: grid; }
+.nav-item:hover .mega-panel { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
 
 .mega-col-heading {
   font-family: var(--font-display);
@@ -308,11 +325,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
 }
+.btn:active { transform: scale(0.96); }
 
 .btn-primary { background: var(--marigold); color: var(--ink); }
 
-.btn-primary:hover { background: var(--marigold-deep); }
+.btn-primary:hover { background: var(--marigold-deep); box-shadow: 0 4px 14px rgba(217,142,46,0.35); transform: translateY(-1px); }
 
 /* ---------- Sections ---------- */
 .section { padding: 56px 24px; max-width: 1280px; margin: 0 auto; }
@@ -367,18 +386,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   gap: 20px;
 }
 
-.product-card {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
+.product-card { transition: transform .22s ease, box-shadow .22s ease; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.product-card:hover { transform: translateY(-4px); box-shadow: 0 4px 8px rgba(24,24,24,0.06), 0 16px 32px rgba(24,24,24,0.1); }
+.product-card.reveal { opacity: 0; transform: translateY(18px); }
+.product-card.reveal.in-view { opacity: 1; transform: translateY(0); transition: opacity .5s ease, transform .5s ease; }
 
 .product-media { position: relative; aspect-ratio: 3/4; overflow: hidden; }
 
 .product-media-fallback { width: 100%; height: 100%; }
 
-.product-media-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.product-media-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.product-card:hover .product-media-img { transform: scale(1.06); }
 
 .wish-btn {
   position: absolute;
@@ -388,9 +406,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-radius: 999px;
   font-size: 15px;
   display: flex; align-items: center; justify-content: center;
+  transition: transform .15s ease;
 }
 
-.wish-btn.active { color: var(--maroon); }
+.wish-btn:hover { transform: scale(1.12); }
+
+.wish-btn.active { color: var(--maroon); animation: wishPop .32s ease; }
+
+@keyframes wishPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
 
 .tag {
   position: absolute;
@@ -428,9 +455,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   letter-spacing: 0.03em;
   text-transform: uppercase;
   border-radius: var(--radius);
+  transition: background-color .15s ease, color .15s ease, transform .1s ease;
 }
 
 .btn-add:hover { background: var(--ink); color: var(--bone); }
+.btn-add:active { transform: scale(0.97); }
 
 /* ---------- Cart drawer ---------- */
 .drawer-backdrop {
@@ -501,7 +530,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .mobile-toggle { display: block; }
   .main-nav { flex-direction: column; display: none; padding: 0; }
   .main-nav.open { display: flex; }
-  .mega-panel { position: static; display: block !important; box-shadow: none; border: none; padding: 8px 0 8px 16px; grid-template-columns: 1fr; }
+  .mega-panel { position: static; display: block !important; opacity: 1 !important; visibility: visible !important; transform: none !important; pointer-events: auto !important; box-shadow: none; border: none; padding: 8px 0 8px 16px; grid-template-columns: 1fr; }
   .nav-item:hover .mega-panel { display: none !important; }
   .nav-item .mega-panel { display: none; }
   .promo-strip { grid-template-columns: 1fr; }
@@ -726,3 +755,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .empty-wishlist { text-align: center; padding: 60px 20px; }
 
 .empty-wishlist .btn-primary { display: inline-block; margin-top: 16px; }
+
+/* ---------- Scroll-reveal (sections + product cards) ---------- */
+.reveal-section { opacity: 0; transform: translateY(24px); }
+.reveal-section.in-view { opacity: 1; transform: translateY(0); transition: opacity .6s ease, transform .6s ease; }
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -95,6 +95,22 @@
       '</div>' +
     '</footer>';
 
+  function bumpBadge(el) {
+    el.classList.remove('bump');
+    void el.offsetWidth; // force reflow so the animation restarts if triggered again quickly
+    el.classList.add('bump');
+  }
+
+  function initScrollShadow() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    function onScroll() {
+      header.classList.toggle('scrolled', window.scrollY > 4);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
   function renderMegaMenu() {
     var catApi = window.ASF.categories;
     var nav = document.getElementById('mainNav');
@@ -153,9 +169,14 @@
     var profileLabel = document.getElementById('profileLabel');
     if (cartBadge && cartApi) {
       var c = cartApi.getItemCount();
+      if (cartBadge.textContent !== '' && cartBadge.textContent !== String(c)) bumpBadge(cartBadge);
       cartBadge.textContent = Number.isFinite(c) ? c : 0;
     }
-    if (wishBadge && wishApi) wishBadge.textContent = wishApi.getCount();
+    if (wishBadge && wishApi) {
+      var w = wishApi.getCount();
+      if (wishBadge.textContent !== '' && wishBadge.textContent !== String(w)) bumpBadge(wishBadge);
+      wishBadge.textContent = w;
+    }
     if (notifBadge && notifApi) {
       var unread = notifApi.getUnreadCount();
       notifBadge.textContent = unread;
@@ -336,6 +357,7 @@
     renderCartDrawer();
     renderNotifDropdown();
     bindHeaderEvents();
+    initScrollShadow();
 
     // Let the page know the shared chrome is ready (pages wait for this
     // before rendering their own body content that depends on cart/wishlist state).

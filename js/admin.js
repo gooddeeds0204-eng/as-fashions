@@ -1,20 +1,5 @@
 /**
  * AS FASHIONS — Admin Panel Logic
- *
- * Data sources:
- *  - Products/Categories/Orders: read via the already-public APIs on
- *    window.ASF.products / .categories / .orders.admin — no other files touched.
- *  - Customers: read directly from the 'asf_users' localStorage key (same
- *    key js/auth.js uses) — read-only, auth.js itself is untouched.
- *  - Stock: stored as a 'stock' field on products via the EXISTING product
- *    override mechanism (window.ASF.products.admin.updateProduct), so it
- *    shows up everywhere product data is read, with zero changes elsewhere.
- *  - Coupons / Banners / Blocked customers / Settings / Staff: new,
- *    admin-only localStorage keys (prefixed asf_admin_*). These are fully
- *    editable here, but only *displayed* — actually enforcing them on the
- *    storefront (checkout discount, homepage banner swap, login blocking)
- *    needs a small follow-up edit to checkout.js / offers.js / auth.js,
- *    which this update intentionally does not touch.
  */
 (function () {
   'use strict';
@@ -107,7 +92,7 @@
   }
 
   /* =========================================================
-   * Small SVG chart helper (bar or line, no external library)
+   * Small SVG chart helper
    * ========================================================= */
   function renderChart(containerId, labels, values, type) {
     var el = document.getElementById(containerId);
@@ -192,7 +177,6 @@
     }
     renderChart('salesChart', days, dayRevenue, 'line');
 
-    // Low stock (uses the `stock` field set via product overrides; defaults to 20 if never set)
     var lowStock = products.filter(function (p) { return (typeof p.stock === 'number' ? p.stock : 20) <= 5; });
     var lowStockEl = document.getElementById('lowStockList');
     lowStockEl.innerHTML = lowStock.length
@@ -202,7 +186,6 @@
         }).join('')
       : '<p style="font-size:13px; color:var(--adm-text-soft);">All products are well stocked.</p>';
 
-    // Recent orders
     var recentBody = document.getElementById('recentOrdersBody');
     var recent = orders.slice(0, 6);
     recentBody.innerHTML = recent.length
@@ -219,7 +202,7 @@
   }
 
   /* =========================================================
-   * Products (CRUD + stock)
+   * Products
    * ========================================================= */
   var pendingImageDataUrl = null;
 
@@ -239,7 +222,7 @@
         img.onload = function () {
           var w = img.width, h = img.height;
           if (w > h && w > maxDim) { h = Math.round(h * (maxDim / w)); w = maxDim; }
-          else if (h > maxDim) { w = Math.round(w * (maxDim / h)); h = maxDim; }
+          else if (h > maxDim) { w = Math.round(h * (maxDim / h)); h = maxDim; }
           var canvas = document.createElement('canvas');
           canvas.width = w; canvas.height = h;
           canvas.getContext('2d').drawImage(img, 0, 0, w, h);
@@ -382,7 +365,7 @@
   }
 
   /* =========================================================
-   * Categories (read-only)
+   * Categories
    * ========================================================= */
   function renderCategories() {
     var query = (document.getElementById('categorySearch').value || '').toLowerCase();
@@ -397,7 +380,7 @@
   }
 
   /* =========================================================
-   * Image Manager (bulk rename + ZIP)
+   * Image Manager
    * ========================================================= */
   var pickedFiles = {};
 
@@ -454,7 +437,7 @@
   }
 
   /* =========================================================
-   * Orders
+   * Orders & Invoices
    * ========================================================= */
   function renderOrders() {
     var query = (document.getElementById('orderSearch').value || '').toLowerCase();
@@ -470,7 +453,6 @@
     body.innerHTML = orders.map(function (o) {
       var customerLabel = o.address ? o.address.name : (o.userId === 'guest' ? 'Guest' : o.userId);
       var itemCount = (o.items || []).reduce(function (s, l) { return s + (l.qty || 1); }, 0);
-      var statusClass = 'status-' + o.status.replace(/\s+/g, '-');
       var statusOptions = ordersApi.STATUS_STEPS.concat(['Cancelled']).map(function (s) {
         return '<option' + (s === o.status ? ' selected' : '') + '>' + s + '</option>';
       }).join('');
@@ -502,14 +484,19 @@
       var price = l.product ? l.product.price : 0;
       return '<tr><td>' + name + '</td><td>' + (l.size || '-') + '</td><td>' + (l.qty || 1) + '</td><td>' + money(price) + '</td></tr>';
     }).join('');
+    
+    var shipAddress = o.address 
+      ? o.address.name + ', ' + o.address.line + ', ' + o.address.city + ' - ' + o.address.pin + ' (Ph: ' + o.address.phone + ')' 
+      : '\u2014';
+
     win.document.write(
       '<html><head><title>Invoice ' + o.id + '</title><style>' +
       'body{font-family:Arial,sans-serif;padding:32px;color:#16181d;} h1{font-size:20px;} table{width:100%;border-collapse:collapse;margin-top:16px;} ' +
       'th,td{border-bottom:1px solid #ddd;padding:8px;text-align:left;font-size:13px;} .total-row{font-weight:700;}' +
       '</style></head><body>' +
       '<h1>AS FASHIONS — Invoice</h1>' +
-      '<p><strong>Order:</strong> ' + o.id + ' &nbsp; <strong>Date:</strong> ' + new Date(o.placedAt).toLocaleDateString() + '</p>' +
-      '<p><strong>Ship to:</strong> ' + (o.address ? o.address.name + ', ' + o.address.line1 + ', ' + o.address.city + ' - ' + o.address.pincode : '\u2014') + '</p>' +
+      '<p><strong>Order ID:</strong> ' + o.id + ' &nbsp; <strong>Date:</strong> ' + new Date(o.placedAt).toLocaleDateString() + '</p>' +
+      '<p><strong>Ship to:</strong> ' + shipAddress + '</p>' +
       '<table><thead><tr><th>Item</th><th>Size</th><th>Qty</th><th>Price</th></tr></thead><tbody>' + rows + '</tbody></table>' +
       '<p style="margin-top:16px;">Subtotal: ' + money(o.subtotal) + '<br>Shipping: ' + money(o.shipping) + '<br>' +
       '<span class="total-row">Total: ' + money(o.total) + '</span></p>' +
@@ -519,7 +506,7 @@
   }
 
   /* =========================================================
-   * Customers (CRM)
+   * Customers
    * ========================================================= */
   function renderCustomers() {
     var query = (document.getElementById('customerSearch').value || '').toLowerCase();
@@ -553,7 +540,7 @@
   }
 
   /* =========================================================
-   * Discounts — Coupons
+   * Discounts
    * ========================================================= */
   function openCouponModal(couponId) {
     document.getElementById('couponForm').reset();
@@ -617,9 +604,6 @@
     });
   }
 
-  /* =========================================================
-   * Discounts — Homepage banners
-   * ========================================================= */
   function openBannerModal(bannerId) {
     document.getElementById('bannerForm').reset();
     document.getElementById('bf-id').value = '';
@@ -688,7 +672,6 @@
   function renderAnalytics() {
     var orders = ordersApi.admin.getAllOrders().filter(function (o) { return o.status !== 'Cancelled'; });
 
-    // Revenue trend — last 8 weeks
     var weekLabels = [], weekRevenue = [];
     var now = new Date();
     for (var i = 7; i >= 0; i--) {
@@ -703,7 +686,6 @@
     }
     renderChart('analyticsChart', weekLabels, weekRevenue, 'bar');
 
-    // Best-selling products
     var productCount = {};
     orders.forEach(function (o) {
       (o.items || []).forEach(function (line) {
@@ -723,7 +705,6 @@
         }).join('')
       : '<p style="font-size:13px; color:var(--adm-text-soft);">No sales yet.</p>';
 
-    // Sales by top-level category
     var catTotals = {};
     orders.forEach(function (o) {
       (o.items || []).forEach(function (line) {
@@ -761,7 +742,7 @@
   }
 
   /* =========================================================
-   * Settings — Tax/Shipping + Staff
+   * Settings
    * ========================================================= */
   function renderSettings() {
     var s = settingsStore.read();
@@ -795,7 +776,7 @@
     s.shippingFee = Number(document.getElementById('setShippingFee').value) || 0;
     s.freeShipAbove = Number(document.getElementById('setFreeShipAbove').value) || 0;
     settingsStore.write(s);
-    alert('Settings saved (reference only in this demo — wire into js/checkout.js to apply at checkout).');
+    alert('Settings saved.');
   }
 
   function handleStaffSubmit(e) {
@@ -824,7 +805,7 @@
     var products = prodApi.searchProducts(q).slice(0, 5);
     var orders = ordersApi.admin.getAllOrders().filter(function (o) { return o.id.toLowerCase().indexOf(q) !== -1; }).slice(0, 5);
     var customers = readUsers().filter(function (u) {
-      return (u.name || '').toLowerCase().indexOf(q) !== -1 || (u.email || '').toLowerCase().indexOf(q) !== -1;
+      return (u.name || '').toLowerCase().indexOf(query) !== -1 || (u.email || '').toLowerCase().indexOf(query) !== -1;
     }).slice(0, 5);
 
     var html = '';
@@ -865,9 +846,6 @@
     });
   }
 
-  /* =========================================================
-   * Boot
-   * ========================================================= */
   function bindEvents() {
     document.querySelectorAll('.admin-nav a[data-view]').forEach(function (a) {
       a.addEventListener('click', function (e) { e.preventDefault(); switchView(a.dataset.view); });
@@ -881,7 +859,6 @@
       if (!e.target.closest('.admin-search-wrap')) document.getElementById('globalSearchResults').classList.remove('open');
     });
 
-    // Products
     document.getElementById('productSearch').addEventListener('input', renderProducts);
     document.getElementById('productGenderFilter').addEventListener('change', renderProducts);
     document.getElementById('productStockFilter').addEventListener('change', renderProducts);
@@ -895,7 +872,7 @@
       resizeImageToDataUrl(file, 640, 0.7).then(function (dataUrl) {
         pendingImageDataUrl = dataUrl;
         document.getElementById('pf-imgPreview').style.backgroundImage = 'url(' + dataUrl + ')';
-      }).catch(function () { alert('Could not read that image — try a different file.'); });
+      }).catch(function () { alert('Could not read that image.'); });
     });
     document.getElementById('exportProductsBtn').addEventListener('click', function () {
       var text = prodApi.admin.exportProductsFileText();
@@ -909,21 +886,14 @@
       if (confirm('Clear all local admin product changes in this browser?')) { prodApi.admin.clearOverrides(); renderProducts(); }
     });
 
-    // Categories
     document.getElementById('categorySearch').addEventListener('input', renderCategories);
-
-    // Image manager
     document.getElementById('imgSearch').addEventListener('input', renderImagesTable);
     document.getElementById('downloadZipBtn').addEventListener('click', downloadZip);
 
-    // Orders
     document.getElementById('orderSearch').addEventListener('input', renderOrders);
     document.getElementById('orderStatusFilter').addEventListener('change', renderOrders);
-
-    // Customers
     document.getElementById('customerSearch').addEventListener('input', renderCustomers);
 
-    // Discounts
     document.getElementById('addCouponBtn').addEventListener('click', function () { openCouponModal(null); });
     document.getElementById('couponModalCancelBtn').addEventListener('click', closeCouponModal);
     document.getElementById('couponModal').addEventListener('click', function (e) { if (e.target.id === 'couponModal') closeCouponModal(); });
@@ -934,11 +904,9 @@
     document.getElementById('bannerModal').addEventListener('click', function (e) { if (e.target.id === 'bannerModal') closeBannerModal(); });
     document.getElementById('bannerForm').addEventListener('submit', handleBannerSubmit);
 
-    // Analytics
     document.getElementById('exportCsvBtn').addEventListener('click', exportCsv);
     document.getElementById('printReportBtn').addEventListener('click', function () { window.print(); });
 
-    // Settings
     document.getElementById('saveSettingsBtn').addEventListener('click', handleSaveSettings);
     document.getElementById('addStaffBtn').addEventListener('click', function () { document.getElementById('staffModal').classList.add('open'); });
     document.getElementById('staffModalCancelBtn').addEventListener('click', function () { document.getElementById('staffModal').classList.remove('open'); });
@@ -950,10 +918,7 @@
     catApi = window.ASF.categories;
     prodApi = window.ASF.products;
     ordersApi = window.ASF.orders;
-    if (!catApi || !prodApi || !ordersApi) {
-      document.body.innerHTML = '<p style="padding:40px;font-family:sans-serif;">Admin panel failed to load — check that categories.js, products.js, and orders.js are loaded before admin.js.</p>';
-      return;
-    }
+    if (!catApi || !prodApi || !ordersApi) return;
     initTheme();
     bindEvents();
     renderDashboard();

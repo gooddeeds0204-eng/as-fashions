@@ -98,32 +98,28 @@
   }
 
   function initHeroGrid() {
-    var cardsWrap = document.getElementById('heroCatCards');
+    var imageEl = document.getElementById('heroImage');
     var dotsWrap = document.getElementById('heroDots');
-    if (!cardsWrap) return;
+    if (!imageEl) return;
 
     var sets = [
       {
         title: 'Fashion That<br><span>Defines You</span>',
         sub: 'Curated styles for every you',
         discount: '50\u201380% OFF',
-        cats: [
-          { id: 'men', label: 'MEN', discount: '40-70% OFF' },
-          { id: 'women', label: 'WOMEN', discount: '40-70% OFF' },
-          { id: 'kids', label: 'KIDS', discount: '30-60% OFF' },
-          { id: 'footwear', label: 'FOOTWEAR', discount: '40-60% OFF' }
-        ]
+        img: 'https://picsum.photos/seed/asf-hero-main-1/1200/900'
       },
       {
         title: 'Style That<br><span>Feels Like You</span>',
         sub: 'Fresh arrivals every week',
         discount: 'UP TO 65% OFF',
-        cats: [
-          { id: 'bags', label: 'BAGS', discount: '30-60% OFF' },
-          { id: 'accessories', label: 'ACCESSORIES', discount: '20-50% OFF' },
-          { id: 'sports', label: 'SPORTS', discount: '30-55% OFF' },
-          { id: 'winter-wear', label: 'WINTER WEAR', discount: '40-65% OFF' }
-        ]
+        img: 'https://picsum.photos/seed/asf-hero-main-2/1200/900'
+      },
+      {
+        title: 'Elevate Your<br><span>Everyday Look</span>',
+        sub: 'Handpicked essentials, new every season',
+        discount: 'FLAT 40% OFF',
+        img: 'https://picsum.photos/seed/asf-hero-main-3/1200/900'
       }
     ];
 
@@ -134,16 +130,7 @@
       document.getElementById('heroTitle').innerHTML = set.title;
       document.getElementById('heroSub').textContent = set.sub;
       document.getElementById('heroDiscount').textContent = set.discount;
-      cardsWrap.innerHTML = set.cats.map(function (c) {
-        return '<a class="hero-cat-card" href="category.html?cat=' + encodeURIComponent(c.id) + '">' +
-          '<img src="https://picsum.photos/seed/asf-hero-' + encodeURIComponent(c.id) + '/500/700" alt="' + c.label + '">' +
-          '<div class="hero-cat-card-content">' +
-            '<p class="hero-cat-card-name">' + c.label + '</p>' +
-            '<p class="hero-cat-card-discount">' + c.discount + '</p>' +
-            '<p class="hero-cat-card-cta">Explore Now</p>' +
-          '</div>' +
-        '</a>';
-      }).join('');
+      imageEl.style.backgroundImage = 'url(' + set.img + ')';
       if (dotsWrap) {
         dotsWrap.querySelectorAll('.hero-dot').forEach(function (d, i) { d.classList.toggle('active', i === idx); });
       }

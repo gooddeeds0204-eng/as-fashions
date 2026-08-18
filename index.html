@@ -8,54 +8,115 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: #fcfbf9; color: #111; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Top Strip */
+    .top-banner { background: #111; color: #fff; font-size: 11px; text-align: center; padding: 6px 12px; }
+    .top-banner strong { color: #f4c430; }
+
+    /* Header */
+    .site-header { background: #fff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+    .header-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; gap: 16px; }
+    .brand-logo { font-size: 20px; font-weight: 800; color: #111; }
+    .brand-logo span { color: #ff3f6c; }
+    .header-search { flex: 1; max-width: 450px; display: flex; position: relative; }
+    .header-search input { width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 13px; background: #f5f5f6; outline: none; }
+    .header-actions { display: flex; gap: 14px; font-size: 13px; font-weight: 700; align-items: center; }
+
+    /* Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+
+    /* Hero Banner */
+    .hero-section { margin-bottom: 24px; }
+    .hero-slider { background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop&q=80'); background-size: cover; background-position: center; border-radius: 12px; padding: 36px 20px; color: #fff; min-height: 220px; }
+    .hero-content small { text-transform: uppercase; font-size: 11px; font-weight: 700; letter-spacing: 1px; display: block; margin-bottom: 6px; }
+    .hero-content h2 { font-size: 26px; font-weight: 800; line-height: 1.2; margin-bottom: 6px; }
+    .hero-content h2 span { color: #f4c430; }
+    .hero-content p { font-size: 16px; font-weight: 700; margin-bottom: 14px; }
+    .btn-primary { display: inline-block; background: #ff3f6c; color: #fff; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-weight: 700; }
+
+    /* Rails & Grids */
+    .section-header { display: flex; justify-content: space-between; align-items: center; margin: 24px 0 12px; }
+    .section-heading { font-size: 16px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+    .heading-bar { width: 4px; height: 16px; background: #ff3f6c; display: inline-block; border-radius: 2px; }
+    .section-view-all { font-size: 12px; font-weight: 700; color: #ff3f6c; }
+
+    .category-rail, .subcat-rail { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+    .category-rail::-webkit-scrollbar, .subcat-rail::-webkit-scrollbar { display: none; }
+    .category-card, .subcat-card { flex: 0 0 80px; text-align: center; font-size: 11px; font-weight: 600; }
+    .category-swatch, .subcat-swatch { width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 6px; background-size: cover; background-position: center; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+
+    /* Flash Sale */
+    .flash-sale-bar { background: linear-gradient(90deg, #ff3f6c, #ff6b4a); color: #fff; border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .flash-info h4 { font-size: 14px; margin-bottom: 2px; }
+    .flash-info p { font-size: 11px; opacity: 0.9; }
+    .btn-flash { background: #fff; color: #ff3f6c; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 20px; }
+
+    /* Product Grid Layout (3:4 Cards) */
+    .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+    @media (max-width: 768px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .header-search { display: none; }
+    }
+
+    .product-card { background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; flex-direction: column; position: relative; }
+    .product-media-wrap { position: relative; width: 100%; padding-top: 133.33%; background: #eaeaea; }
+    .product-media-wrap img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+    
+    .product-ribbon { position: absolute; top: 6px; left: 6px; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 2px; background: #ff3f6c; color: #fff; text-transform: uppercase; z-index: 2; }
+    .wishlist-btn { position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.85); border: none; font-size: 13px; display: flex; align-items: center; justify-content: center; z-index: 2; }
+    .product-rating-pill { position: absolute; bottom: 6px; left: 6px; background: rgba(255,255,255,0.9); padding: 2px 5px; border-radius: 3px; font-size: 9px; font-weight: 700; z-index: 2; }
+
+    .product-details { padding: 8px 10px; }
+    .product-brand { font-size: 11px; font-weight: 800; text-transform: uppercase; color: #222; margin-bottom: 2px; }
+    .product-title { font-size: 11px; color: #666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
+    .product-pricing { display: flex; gap: 4px; align-items: center; font-size: 12px; }
+    .product-price { font-weight: 800; color: #111; }
+    .product-mrp { font-size: 10px; color: #888; text-decoration: line-through; }
+    .product-discount { font-size: 10px; color: #ff3f6c; font-weight: 700; }
+
+    /* Footer */
+    .site-footer { background: #111; color: #999; text-align: center; padding: 24px 16px; font-size: 11px; margin-top: 30px; }
+  </style>
 </head>
 <body>
 
-  <!-- Top Notification -->
   <div class="top-banner">Get 10% OFF on your first order. Use code: <strong>WELCOME10</strong></div>
 
-  <!-- Header -->
   <header class="site-header">
-    <div class="header-container container">
-      <a href="index.html" class="brand-logo">
-        <span class="logo-accent">AS</span> FASHIONS
-      </a>
+    <div class="header-container">
+      <a href="index.html" class="brand-logo"><span>AS</span> FASHIONS</a>
       <div class="header-search">
-        <input type="text" id="globalSearchInput" placeholder="Search for products, brands and more" />
-        <button id="globalSearchBtn" aria-label="Search">🔍</button>
+        <input type="text" placeholder="Search for products, brands and more" />
       </div>
       <div class="header-actions">
         <a href="category.html?gender=men">Men</a>
         <a href="category.html?gender=women">Women</a>
-        <a href="cart.html" class="cart-link">👜 <span id="cartCount">0</span></a>
+        <a href="cart.html">👜 Bag</a>
       </div>
     </div>
   </header>
 
-  <main class="main-content container">
+  <main class="container">
 
-    <!-- Hero Banner Slider -->
+    <!-- Hero Banner -->
     <section class="hero-section">
       <div class="hero-slider" id="heroImage">
         <div class="hero-content">
           <small id="heroSub">Handpicked styles from premium labels</small>
           <h2 id="heroTitle">Curated Fashion<br><span>For Every You</span></h2>
           <p id="heroDiscount">50–80% OFF</p>
-          <a href="category.html" class="btn btn-primary" id="heroCta">EXPLORE COLLECTION</a>
+          <a href="category.html" class="btn-primary">EXPLORE COLLECTION</a>
         </div>
-        <button class="hero-nav hero-prev" id="heroPrev" aria-label="Previous slide">‹</button>
-        <button class="hero-nav hero-next" id="heroNext" aria-label="Next slide">›</button>
-        <div class="hero-dots" id="heroDots"></div>
       </div>
     </section>
 
     <!-- Shop By Category -->
-    <section class="store-section">
+    <section>
       <div class="section-header">
         <h3 class="section-heading"><span class="heading-bar"></span> Shop By Category</h3>
         <a href="category.html" class="section-view-all">View All →</a>
@@ -63,48 +124,38 @@
       <div class="category-rail" id="categoryRail"></div>
     </section>
 
-    <!-- Subcategories Rail -->
-    <section class="store-section">
-      <div class="subcat-rail" id="subcatRail"></div>
-    </section>
-
     <!-- Flash Sale Bar -->
-    <section class="flash-sale-bar">
+    <div class="flash-sale-bar">
       <div class="flash-info">
         <h4>The AS Fashions Flash Sale</h4>
         <p>Limited time price drops on season favorites</p>
       </div>
-      <div class="flash-countdown" id="flashCountdown">
-        <span class="cd-box" id="cdHours">00</span> :
-        <span class="cd-box" id="cdMinutes">00</span> :
-        <span class="cd-box" id="cdSeconds">00</span>
-      </div>
-      <a href="category.html" class="btn btn-flash">SHOP ALL DEALS</a>
-    </section>
+      <a href="category.html" class="btn-flash">SHOP ALL DEALS</a>
+    </div>
 
-    <!-- New Arrivals Rail -->
-    <section class="store-section">
+    <!-- New Arrivals -->
+    <section>
       <div class="section-header">
         <h3 class="section-heading"><span class="heading-bar"></span> New Arrivals</h3>
-        <a href="category.html?sort=new" class="section-view-all">View All →</a>
+        <a href="category.html" class="section-view-all">View All →</a>
       </div>
       <div class="product-grid" id="newArrivalsRail"></div>
     </section>
 
-    <!-- Trending Now Rail -->
-    <section class="store-section">
+    <!-- Trending Now -->
+    <section>
       <div class="section-header">
         <h3 class="section-heading"><span class="heading-bar"></span> Trending Now</h3>
-        <a href="category.html?sort=popular" class="section-view-all">View All →</a>
+        <a href="category.html" class="section-view-all">View All →</a>
       </div>
       <div class="product-grid" id="trendingRail"></div>
     </section>
 
-    <!-- Best of AS Fashions Rail -->
-    <section class="store-section">
+    <!-- Best of AS Fashions -->
+    <section>
       <div class="section-header">
         <h3 class="section-heading"><span class="heading-bar"></span> Best of AS Fashions</h3>
-        <a href="category.html?sort=bestseller" class="section-view-all">View All →</a>
+        <a href="category.html" class="section-view-all">View All →</a>
       </div>
       <div class="product-grid" id="bestsellersRail"></div>
     </section>
@@ -112,13 +163,11 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-content">
-      <p><strong>AS FASHIONS</strong> — Curated Luxury Fashion</p>
-      <p>© 2026 AS Fashions. All rights reserved.</p>
-    </div>
+    <p><strong>AS FASHIONS</strong> — Curated Luxury Fashion</p>
+    <p>© 2026 AS Fashions. All rights reserved.</p>
   </footer>
 
-  <!-- Modular Scripts in Order -->
+  <!-- Modular Scripts -->
   <script src="js/categories.js"></script>
   <script src="js/products.js"></script>
   <script src="js/ui.js"></script>

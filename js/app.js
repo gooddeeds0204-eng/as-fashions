@@ -1,39 +1,8 @@
 /**
- * AS FASHIONS — Homepage
- * Renders hero-adjacent sections only: hero grid, promo strip, category
- * rail, subcategory rail, and product rails. The shared header, mega-menu,
- * search, wishlist/cart badges, and cart drawer are all owned by
- * js/header.js (loaded before this file).
+ * AS FASHIONS — Homepage Application Controller
  */
 (function () {
   'use strict';
-
-  window.addEventListener('error', function (e) {
-    showErrorBanner('window.onerror', (e.error && e.error.message) || e.message || e);
-  });
-
-  function showErrorBanner(label, err) {
-    console.error('[AS FASHIONS]', label, err);
-    var banner = document.getElementById('asfDebugBanner');
-    if (!banner) {
-      banner = document.createElement('div');
-      banner.id = 'asfDebugBanner';
-      banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:999;background:#6e1f2b;color:#fff;font:12px/1.4 monospace;padding:10px 14px;max-height:40vh;overflow:auto;white-space:pre-wrap;';
-      document.body.appendChild(banner);
-    }
-    var line = document.createElement('div');
-    line.style.marginBottom = '6px';
-    line.textContent = '\u26A0 ' + label + ': ' + (err && err.message ? err.message : err);
-    banner.appendChild(line);
-  }
-
-  function safeRun(label, fn) {
-    try { 
-      fn(); 
-    } catch (err) { 
-      showErrorBanner(label, err); 
-    }
-  }
 
   function renderPromos(offersApi) {
     var el = document.getElementById('promoStrip');
@@ -44,7 +13,7 @@
       card.className = 'promo-card ' + (promo.tone || 'tone-a');
       card.href = promo.link || '#';
       if (promo.img) {
-        card.style.backgroundImage = 'linear-gradient(120deg, rgba(255,255,255,0.55), rgba(255,255,255,0.15)), url(' + promo.img + ')';
+        card.style.backgroundImage = 'linear-gradient(120deg, rgba(255,255,255,0.7), rgba(255,255,255,0.3)), url(' + promo.img + ')';
         card.style.backgroundSize = 'cover';
         card.style.backgroundPosition = 'center';
       }
@@ -67,7 +36,7 @@
       card.href = 'category.html?cat=' + encodeURIComponent(top.id);
       var bgColor = (ui && typeof ui.colorFromString === 'function') ? ui.colorFromString(top.id) : '#efe6d4';
       card.innerHTML =
-        '<div class="category-swatch" style="background:' + bgColor + '; background-image:url(https://picsum.photos/seed/' + encodeURIComponent(top.id) + '/160/160); background-size:cover; background-position:center;"></div>' +
+        '<div class="category-swatch" style="background:' + bgColor + '; background-image:url(https://picsum.photos/seed/' + encodeURIComponent(top.id) + '/180/180); background-size:cover; background-position:center;"></div>' +
         '<p>' + top.name + '</p>';
       el.appendChild(card);
     });
@@ -90,7 +59,7 @@
       card.className = 'subcat-card';
       card.href = 'category.html?cat=' + encodeURIComponent(id);
       card.innerHTML =
-        '<div class="subcat-swatch" style="background-image:url(https://picsum.photos/seed/' + encodeURIComponent(id) + '/160/160)"></div>' +
+        '<div class="subcat-swatch" style="background-image:url(https://picsum.photos/seed/' + encodeURIComponent(id) + '/160/160); background-size:cover; background-position:center;"></div>' +
         '<p>' + entry.name + '</p>';
       el.appendChild(card);
     });
@@ -108,22 +77,22 @@
 
     var sets = [
       {
-        title: 'Fashion That<br><span>Defines You</span>',
-        sub: 'Curated styles for every you',
+        title: 'Curated Fashion<br><span>For Every You</span>',
+        sub: 'Handpicked styles from premium labels',
         discount: '50\u201380% OFF',
-        img: 'https://picsum.photos/seed/asf-hero-main-1/1200/900'
+        img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop&q=80'
       },
       {
-        title: 'Style That<br><span>Feels Like You</span>',
-        sub: 'Fresh arrivals every week',
+        title: 'Statement Fits<br><span>Fresh Drops</span>',
+        sub: 'Elevate your seasonal wardrobe today',
         discount: 'UP TO 65% OFF',
-        img: 'https://picsum.photos/seed/asf-hero-main-2/1200/900'
+        img: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&auto=format&fit=crop&q=80'
       },
       {
-        title: 'Elevate Your<br><span>Everyday Look</span>',
-        sub: 'Handpicked essentials, new every season',
+        title: 'Modern Luxury<br><span>Effortless Style</span>',
+        sub: 'Minimal essentials to standout ethnics',
         discount: 'FLAT 40% OFF',
-        img: 'https://picsum.photos/seed/asf-hero-main-3/1200/900'
+        img: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&auto=format&fit=crop&q=80'
       }
     ];
 
@@ -172,20 +141,8 @@
 
     var prevBtn = document.getElementById('heroPrev');
     var nextBtn = document.getElementById('heroNext');
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', function () {
-        render((current - 1 + sets.length) % sets.length);
-        startAutoSlide();
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', function () {
-        render((current + 1) % sets.length);
-        startAutoSlide();
-      });
-    }
+    if (prevBtn) prevBtn.addEventListener('click', function () { render((current - 1 + sets.length) % sets.length); startAutoSlide(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { render((current + 1) % sets.length); startAutoSlide(); });
 
     render(0);
     startAutoSlide();
@@ -203,11 +160,10 @@
       var m = Math.floor((diff % 3600000) / 60000);
       var s = Math.floor((diff % 60000) / 1000);
       var pad = function (n) { return String(n).padStart(2, '0'); };
-      
+
       var hEl = document.getElementById('cdHours');
       var mEl = document.getElementById('cdMinutes');
       var sEl = document.getElementById('cdSeconds');
-
       if (hEl) hEl.textContent = pad(h);
       if (mEl) mEl.textContent = pad(m);
       if (sEl) sEl.textContent = pad(s);
@@ -224,51 +180,24 @@
     var offersApi = ASF.offers;
     var ui = ASF.ui;
 
-    if (!catApi) { showErrorBanner('boot', 'js/categories.js did not load — check the script path.'); return; }
-    if (!prodApi) { showErrorBanner('boot', 'js/products.js did not load or has a syntax error.'); return; }
-    if (!ui) { showErrorBanner('boot', 'js/ui.js did not load — check the script path and load order.'); return; }
+    if (!catApi || !prodApi || !ui) return;
 
-    safeRun('initHeroGrid', initHeroGrid);
-    safeRun('renderPromos', function () { renderPromos(offersApi); });
-    safeRun('renderCategoryRail', function () { renderCategoryRail(catApi, ui); });
-    safeRun('renderSubcatRail', function () { renderSubcatRail(catApi); });
+    initHeroGrid();
+    renderPromos(offersApi);
+    renderCategoryRail(catApi, ui);
+    renderSubcatRail(catApi);
 
-    safeRun('renderRail:newArrivals', function () {
-      var list = (typeof prodApi.getNewArrivals === 'function') ? prodApi.getNewArrivals() : [];
-      var fallback = (typeof prodApi.getAllProducts === 'function') ? prodApi.getAllProducts() : [];
-      ui.renderProductGrid('newArrivalsRail', list.length ? list : fallback, { limit: 8 });
-    });
+    var newItems = (typeof prodApi.getNewArrivals === 'function') ? prodApi.getNewArrivals() : [];
+    var allItems = (typeof prodApi.getAllProducts === 'function') ? prodApi.getAllProducts() : [];
+    var bestItems = (typeof prodApi.getBestsellers === 'function') ? prodApi.getBestsellers() : [];
 
-    safeRun('renderRail:trending', function () {
-      var list = [];
-      if (typeof prodApi.getTrending === 'function') {
-        list = prodApi.getTrending();
-      } else if (typeof prodApi.getBestsellers === 'function') {
-        list = prodApi.getBestsellers().slice().reverse();
-      }
-      var fallback = (typeof prodApi.getAllProducts === 'function') ? prodApi.getAllProducts().slice(0, 8) : [];
-      ui.renderProductGrid('trendingRail', list.length ? list : fallback, { limit: 8 });
-    });
+    ui.renderProductGrid('newArrivalsRail', newItems.length ? newItems : allItems, { limit: 8 });
+    ui.renderProductGrid('trendingRail', bestItems.length ? bestItems.slice().reverse() : allItems.slice(0, 8), { limit: 8 });
+    ui.renderProductGrid('bestsellersRail', bestItems.length ? bestItems : allItems.slice(8, 16), { limit: 8 });
 
-    safeRun('renderRail:bestsellers', function () {
-      var list = (typeof prodApi.getBestsellers === 'function') ? prodApi.getBestsellers() : [];
-      var fallback = (typeof prodApi.getAllProducts === 'function') ? prodApi.getAllProducts().slice(8, 16) : [];
-      ui.renderProductGrid('bestsellersRail', list.length ? list : fallback, { limit: 8 });
-    });
-
-    safeRun('bindProductCardEvents', function () { 
-      if (typeof ui.bindProductCardEvents === 'function') {
-        ui.bindProductCardEvents(document.body); 
-      }
-    });
-
-    safeRun('initCountdown', initCountdown);
-
-    safeRun('observeSectionReveal', function () {
-      if (typeof ui.observeReveal === 'function') {
-        ui.observeReveal(document.querySelectorAll('.reveal-section'));
-      }
-    });
+    ui.bindProductCardEvents(document.body);
+    initCountdown();
+    ui.observeReveal(document.querySelectorAll('.reveal-section'));
   }
 
   document.addEventListener('DOMContentLoaded', init);

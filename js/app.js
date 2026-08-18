@@ -4,28 +4,6 @@
 (function () {
   'use strict';
 
-  function renderPromos(offersApi) {
-    var el = document.getElementById('promoStrip');
-    if (!el || !offersApi || typeof offersApi.getPromoBanners !== 'function') return;
-    el.innerHTML = '';
-    offersApi.getPromoBanners().forEach(function (promo) {
-      var card = document.createElement('a');
-      card.className = 'promo-card ' + (promo.tone || 'tone-a');
-      card.href = promo.link || '#';
-      if (promo.img) {
-        card.style.backgroundImage = 'linear-gradient(120deg, rgba(255,255,255,0.7), rgba(255,255,255,0.3)), url(' + promo.img + ')';
-        card.style.backgroundSize = 'cover';
-        card.style.backgroundPosition = 'center';
-      }
-      card.innerHTML =
-        '<p class="promo-eyebrow">' + (promo.eyebrow || '') + '</p>' +
-        '<p class="promo-title">' + (promo.title || '') + '</p>' +
-        '<p class="promo-subtitle">' + (promo.subtitle || '') + '</p>' +
-        '<span class="btn btn-primary" style="width:fit-content; padding:8px 16px; font-size:11px;">' + (promo.ctaLabel || 'Shop Now') + '</span>';
-      el.appendChild(card);
-    });
-  }
-
   function renderCategoryRail(catApi, ui) {
     var el = document.getElementById('categoryRail');
     if (!el || !catApi || !Array.isArray(catApi.CATEGORY_TREE)) return;
@@ -49,7 +27,7 @@
       'men-clothing-t-shirts', 'men-clothing-shirts', 'men-clothing-jeans',
       'women-western-wear-dresses', 'men-ethnic-wear-kurtas', 'women-indian-wear-sarees',
       'men-clothing-jackets', 'men-footwear-sneakers', 'men-accessories-watches',
-      'women-bags-handbags', 'men-accessories-sunglasses'
+      'women-bags-handbags'
     ];
     el.innerHTML = '';
     ids.forEach(function (id) {
@@ -66,11 +44,11 @@
     var viewAll = document.createElement('a');
     viewAll.className = 'subcat-card';
     viewAll.href = 'category.html';
-    viewAll.innerHTML = '<div class="subcat-swatch view-all">\u2637</div><p>View All</p>';
+    viewAll.innerHTML = '<div class="subcat-swatch view-all">&#9776;</div><p>View All</p>';
     el.appendChild(viewAll);
   }
 
-  function initHeroGrid() {
+  function initHeroSlider() {
     var imageEl = document.getElementById('heroImage');
     var dotsWrap = document.getElementById('heroDots');
     if (!imageEl) return;
@@ -97,8 +75,6 @@
     ];
 
     var current = 0;
-    var slideTimer = null;
-
     function render(idx) {
       var set = sets[idx];
       var titleEl = document.getElementById('heroTitle');
@@ -118,40 +94,28 @@
       current = idx;
     }
 
-    function startAutoSlide() {
-      if (slideTimer) clearInterval(slideTimer);
-      slideTimer = setInterval(function () {
-        render((current + 1) % sets.length);
-      }, 6000);
-    }
-
     if (dotsWrap) {
       dotsWrap.innerHTML = '';
       sets.forEach(function (s, i) {
         var dot = document.createElement('button');
         dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', 'Slide ' + (i + 1));
-        dot.addEventListener('click', function () {
-          render(i);
-          startAutoSlide();
-        });
+        dot.addEventListener('click', function () { render(i); });
         dotsWrap.appendChild(dot);
       });
     }
 
     var prevBtn = document.getElementById('heroPrev');
     var nextBtn = document.getElementById('heroNext');
-    if (prevBtn) prevBtn.addEventListener('click', function () { render((current - 1 + sets.length) % sets.length); startAutoSlide(); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { render((current + 1) % sets.length); startAutoSlide(); });
+    if (prevBtn) prevBtn.addEventListener('click', function () { render((current - 1 + sets.length) % sets.length); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { render((current + 1) % sets.length); });
 
     render(0);
-    startAutoSlide();
+    setInterval(function () {
+      render((current + 1) % sets.length);
+    }, 5000);
   }
 
   function initCountdown() {
-    var el = document.getElementById('countdown');
-    if (!el) return;
-
     function tick() {
       var now = new Date();
       var midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
@@ -168,37 +132,40 @@
       if (mEl) mEl.textContent = pad(m);
       if (sEl) sEl.textContent = pad(s);
     }
-
     tick();
     setInterval(tick, 1000);
   }
 
-  function init() {
+  function initHome() {
     var ASF = window.ASF || {};
     var catApi = ASF.categories;
     var prodApi = ASF.products;
-    var offersApi = ASF.offers;
     var ui = ASF.ui;
 
-    if (!catApi || !prodApi || !ui) return;
+    if (!prodApi || !ui) return;
 
-    initHeroGrid();
-    renderPromos(offersApi);
-    renderCategoryRail(catApi, ui);
-    renderSubcatRail(catApi);
+    initHeroSlider();
+    initCountdown();
 
-    var newItems = (typeof prodApi.getNewArrivals === 'function') ? prodApi.getNewArrivals() : [];
-    var allItems = (typeof prodApi.getAllProducts === 'function') ? prodApi.getAllProducts() : [];
-    var bestItems = (typeof prodApi.getBestsellers === 'function') ? prodApi.getBestsellers() : [];
+    if (catApi) {
+      renderCategoryRail(catApi, ui);
+      renderSubcatRail(catApi);
+    }
 
-    ui.renderProductGrid('newArrivalsRail', newItems.length ? newItems : allItems, { limit: 8 });
-    ui.renderProductGrid('trendingRail', bestItems.length ? bestItems.slice().reverse() : allItems.slice(0, 8), { limit: 8 });
-    ui.renderProductGrid('bestsellersRail', bestItems.length ? bestItems : allItems.slice(8, 16), { limit: 8 });
+    var allItems = prodApi.getAllProducts();
+    var newItems = prodApi.getNewArrivals();
+    var bestItems = prodApi.getBestsellers();
+
+    ui.renderProductGrid('newArrivalsRail', newItems.length ? newItems : allItems, { limit: 8, reveal: false });
+    ui.renderProductGrid('trendingRail', bestItems.length ? bestItems.slice().reverse() : allItems.slice(2, 10), { limit: 8, reveal: false });
+    ui.renderProductGrid('bestsellersRail', bestItems.length ? bestItems : allItems.slice(4, 12), { limit: 8, reveal: false });
 
     ui.bindProductCardEvents(document.body);
-    initCountdown();
-    ui.observeReveal(document.querySelectorAll('.reveal-section'));
   }
 
-  document.addEventListener('DOMContentLoaded', init);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHome);
+  } else {
+    initHome();
+  }
 })();

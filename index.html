@@ -1,108 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AS FASHIONS — Wear Your World</title>
-<meta name="description" content="AS FASHIONS — Men, Women & Kids fashion, footwear, bags and accessories.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/responsive.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AS FASHIONS — Curated Luxury &amp; Everyday Style</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/product.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
-<div id="siteHeader"></div>
+  <!-- Injected Header & Cart Drawer -->
+  <div id="siteHeader"></div>
 
-<section class="hero-grid" id="heroGrid" style="animation: heroFadeIn .7s ease both;">
-  <div class="hero-panel-main">
-    <button class="hero-arrow hero-arrow-left" id="heroPrev" aria-label="Previous">&#8249;</button>
-    <div class="hero-text-panel">
-      <p class="hero-eyebrow">New Season</p>
-      <h1 id="heroTitle">Fashion That<br><span>Defines You</span></h1>
-      <p id="heroSub">Curated styles for every you</p>
-      <p class="hero-discount" id="heroDiscount">50–80% OFF</p>
-      <a href="category.html?filter=new" class="btn btn-primary">Shop Now &rarr;</a>
+  <main>
+    <!-- Hero Slider -->
+    <section class="hero-grid">
+      <div class="hero-panel-main">
+        <button id="heroPrev" class="hero-arrow hero-arrow-left" aria-label="Previous slide">&#10094;</button>
+        <div class="hero-text-panel">
+          <p id="heroSub" class="promo-eyebrow">Handpicked styles from premium labels</p>
+          <h1 id="heroTitle">Curated Fashion<br><span>For Every You</span></h1>
+          <p id="heroDiscount" class="hero-discount">50–80% OFF</p>
+          <a href="category.html?filter=sale" class="btn btn-primary" style="width: fit-content;">Explore Collection</a>
+        </div>
+        <div id="heroImage" class="hero-image"></div>
+        <button id="heroNext" class="hero-arrow hero-arrow-right" aria-label="Next slide">&#10095;</button>
+      </div>
+      <div id="heroDots" class="hero-dots"></div>
+    </section>
+
+    <!-- Promo Highlights Strip -->
+    <section id="promoStrip" class="promo-strip"></section>
+
+    <!-- Categories Rail -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Shop By Category</h2>
+        <a href="category.html">View All &rarr;</a>
+      </div>
+      <div id="categoryRail" class="category-rail"></div>
+    </section>
+
+    <!-- Subcategories Circle Rail -->
+    <section class="section" style="padding-top: 0;">
+      <div id="subcatRail" class="subcat-rail"></div>
+    </section>
+
+    <!-- Flash Sale Countdown Banner -->
+    <div class="sale-banner">
+      <div class="sale-banner-inner">
+        <div>
+          <h3 class="sale-banner-title">The AS Fashions Flash Sale</h3>
+          <p class="sale-banner-sub">Limited time price drops on season favorites</p>
+        </div>
+        <div id="countdown" class="countdown">
+          <div class="countdown-unit"><div id="cdHours" class="num">00</div><div class="lbl">Hours</div></div>
+          <div class="countdown-unit"><div id="cdMinutes" class="num">00</div><div class="lbl">Mins</div></div>
+          <div class="countdown-unit"><div id="cdSeconds" class="num">00</div><div class="lbl">Secs</div></div>
+        </div>
+        <a href="category.html?filter=sale" class="btn btn-primary">Shop All Deals</a>
+      </div>
     </div>
-    <div class="hero-image" id="heroImage"></div>
-    <button class="hero-arrow hero-arrow-right" id="heroNext" aria-label="Next">&#8250;</button>
-  </div>
-  <div class="hero-dots" id="heroDots"></div>
-</section>
 
-<div class="trust-badges reveal-section">
-  <div class="trust-badge"><span class="icon">&#128737;</span><div><p class="label">100% Original</p><p class="sub">Authentic Products</p></div></div>
-  <div class="trust-badge"><span class="icon">&#128230;</span><div><p class="label">Easy Returns</p><p class="sub">15 Days Return*</p></div></div>
-  <div class="trust-badge"><span class="icon">&#128666;</span><div><p class="label">Fast Delivery</p><p class="sub">On All Orders</p></div></div>
-  <div class="trust-badge"><span class="icon">&#128274;</span><div><p class="label">Secure Payments</p><p class="sub">100% Protected</p></div></div>
-  <div class="trust-badge"><span class="icon">&#127991;</span><div><p class="label">Best Prices</p><p class="sub">Unbeatable Deals</p></div></div>
-</div>
+    <!-- New Arrivals Grid -->
+    <section class="section">
+      <div class="section-head">
+        <h2>New Arrivals</h2>
+        <a href="category.html?filter=new">View All &rarr;</a>
+      </div>
+      <div id="newArrivalsRail" class="product-grid"></div>
+    </section>
 
-<section class="section reveal-section" style="padding-top:22px; padding-bottom:10px;">
-  <div id="subcatRail" class="subcat-rail"></div>
-</section>
+    <!-- Trending Now Grid -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Trending Now</h2>
+        <a href="category.html?filter=trending">View All &rarr;</a>
+      </div>
+      <div id="trendingRail" class="product-grid"></div>
+    </section>
 
-<section class="section reveal-section" style="padding-top:6px;">
-  <div id="promoStrip" class="promo-strip"></div>
-</section>
+    <!-- Bestsellers Grid -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Best of AS Fashions</h2>
+        <a href="category.html?filter=bestseller">View All &rarr;</a>
+      </div>
+      <div id="bestsellersRail" class="product-grid"></div>
+    </section>
 
-<section class="section reveal-section" style="padding-top:0;">
-  <div class="section-head"><h2>Shop by Category</h2><a href="category.html">View All &rarr;</a></div>
-  <div id="categoryRail" class="category-rail"></div>
-</section>
+    <!-- Trust Badges Strip -->
+    <section class="trust-badges">
+      <div class="trust-badge">
+        <span class="icon">&#11088;</span>
+        <div>
+          <div class="label">Premium Quality</div>
+          <div class="sub">100% Original Products</div>
+        </div>
+      </div>
+      <div class="trust-badge">
+        <span class="icon">&#128102;</span>
+        <div>
+          <div class="label">Trendy Collections</div>
+          <div class="sub">Fresh styles every week</div>
+        </div>
+      </div>
+      <div class="trust-badge">
+        <span class="icon">&#128176;</span>
+        <div>
+          <div class="label">Best Price</div>
+          <div class="sub">Unbeatable deals</div>
+        </div>
+      </div>
+      <div class="trust-badge">
+        <span class="icon">&#9992;</span>
+        <div>
+          <div class="label">Fast Delivery</div>
+          <div class="sub">Quick &amp; reliable shipping</div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<div class="sale-banner reveal-section">
-  <div class="sale-banner-inner">
-    <div>
-      <p class="sale-banner-title">The AS Fashions Sale</p>
-      <p class="sale-banner-sub">Up to 70% Off — Limited time prices, shop before it's gone!</p>
-    </div>
-    <div class="countdown" id="countdown">
-      <div class="countdown-unit"><div class="num" id="cdHours">12</div><div class="lbl">Hrs</div></div>
-      <div class="countdown-unit"><div class="num" id="cdMinutes">24</div><div class="lbl">Mins</div></div>
-      <div class="countdown-unit"><div class="num" id="cdSeconds">48</div><div class="lbl">Secs</div></div>
-    </div>
-    <a href="category.html?filter=sale" class="btn btn-primary">Shop All Deals</a>
-  </div>
-</div>
+  <!-- Injected Footer -->
+  <div id="siteFooter"></div>
 
-<section id="new-arrivals" class="section">
-  <div class="section-head"><h2>New Arrivals</h2><a href="category.html?filter=new">View all</a></div>
-  <div id="newArrivalsRail" class="product-rail"></div>
-</section>
-
-<section class="section">
-  <div class="section-head"><h2>Trending Now</h2><a href="category.html?filter=bestsellers">View all</a></div>
-  <div id="trendingRail" class="product-rail"></div>
-</section>
-
-<section class="section">
-  <div class="section-head"><h2>Best of AS Fashions</h2><a href="category.html?filter=bestsellers">View All &rarr;</a></div>
-  <div id="bestsellersRail" class="product-rail"></div>
-</section>
-
-<section class="why-shop reveal-section">
-  <div class="why-shop-item"><div class="icon">&#127775;</div><p class="label">Premium Quality</p><p class="sub">100% Original Products</p></div>
-  <div class="why-shop-item"><div class="icon">&#128102;</div><p class="label">Trendy Collections</p><p class="sub">Fresh styles every week</p></div>
-  <div class="why-shop-item"><div class="icon">&#128176;</div><p class="label">Best Price</p><p class="sub">Unbeatable deals</p></div>
-  <div class="why-shop-item"><div class="icon">&#9992;</div><p class="label">Fast Delivery</p><p class="sub">Quick &amp; reliable shipping</p></div>
-</section>
-
-<div id="siteFooter"></div>
-
-<script src="js/categories.js"></script>
-<script src="js/products.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/wishlist.js"></script>
-<script src="js/search.js"></script>
-<script src="js/filters.js"></script>
-<script src="js/offers.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/orders.js"></script>
-<script src="js/reviews.js"></script>
-<script src="js/notifications.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/header.js"></script>
-<script src="js/app.js"></script>
+  <!-- Core Scripts -->
+  <script src="js/categories.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/offers.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

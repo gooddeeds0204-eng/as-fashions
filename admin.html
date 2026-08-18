@@ -3,178 +3,380 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AS FASHIONS — Admin</title>
+<title>Admin — AS FASHIONS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/admin.css">
-<link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
-<div class="admin-shell">
-  <aside class="admin-sidebar">
-    <a href="index.html" class="logo">AS FASHIONS</a>
-    <nav>
-      <a href="#" class="active" data-view="products">Products</a>
-      <a href="#" data-view="categories">Categories</a>
-      <a href="#" data-view="images">Image Manager</a>
-      <a href="#" data-view="orders">Orders (demo)</a>
-      <a href="index.html">&larr; Back to store</a>
+<div class="admin-shell" id="adminShell" data-theme="light">
+
+  <div class="sidebar-scrim" id="sidebarScrim"></div>
+
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-logo">
+      <span>AS <span style="color:inherit;">FASHIONS</span> Admin</span>
+      <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close menu">&times;</button>
+    </div>
+    <nav class="admin-nav">
+      <p class="admin-nav-group-label">Overview</p>
+      <a href="#" data-view="dashboard" class="active"><span class="nav-icon">&#128202;</span> Dashboard</a>
+
+      <p class="admin-nav-group-label">Catalog</p>
+      <a href="#" data-view="products"><span class="nav-icon">&#128230;</span> Products</a>
+      <a href="#" data-view="categories"><span class="nav-icon">&#128194;</span> Categories</a>
+      <a href="#" data-view="images"><span class="nav-icon">&#128247;</span> Image Manager</a>
+
+      <p class="admin-nav-group-label">Sales</p>
+      <a href="#" data-view="orders"><span class="nav-icon">&#128722;</span> Orders</a>
+      <a href="#" data-view="customers"><span class="nav-icon">&#128101;</span> Customers</a>
+      <a href="#" data-view="discounts"><span class="nav-icon">&#127991;</span> Discounts</a>
+
+      <p class="admin-nav-group-label">Insights</p>
+      <a href="#" data-view="analytics"><span class="nav-icon">&#128200;</span> Analytics</a>
+
+      <p class="admin-nav-group-label">System</p>
+      <a href="#" data-view="settings"><span class="nav-icon">&#9881;</span> Settings</a>
     </nav>
+    <div class="sidebar-foot">
+      <a href="index.html">&larr; Back to store</a>
+    </div>
   </aside>
 
-  <main class="admin-main">
-    <div class="admin-header">
-      <h1 id="viewTitle">Products</h1>
-    </div>
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Menu">&#9776;</button>
+      <div class="admin-search-wrap">
+        <span class="admin-search-icon">&#128269;</span>
+        <input type="text" id="globalSearchInput" placeholder="Search products, orders, customers...">
+        <div class="admin-search-results" id="globalSearchResults"></div>
+      </div>
+      <div class="topbar-actions">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">&#9789;</button>
+        <div class="admin-avatar">A</div>
+      </div>
+    </header>
 
-    <div class="stat-grid">
-      <div class="stat-card"><p class="num" id="statTotalProducts">0</p><p class="label">Total Products</p></div>
-      <div class="stat-card"><p class="num" id="statTotalCategories">0</p><p class="label">Leaf Categories</p></div>
-      <div class="stat-card"><p class="num" id="statOnSale">0</p><p class="label">On Sale (30%+)</p></div>
-      <div class="stat-card"><p class="num" id="statNew">0</p><p class="label">New Arrivals</p></div>
-    </div>
+    <main class="admin-content">
 
-    <div id="productsView">
-      <div class="banner-note">Changes here save to this browser (localStorage) and preview live on your store immediately. Click <strong>Export products.js</strong> when ready to make them permanent for every visitor.</div>
-      <div class="top-actions">
-        <button id="addProductBtn" class="btn btn-primary" style="padding:9px 18px;">+ Add Product</button>
-        <button id="exportProductsBtn" class="btn-sm" style="padding:9px 18px;">Export products.js</button>
-        <button id="resetOverridesBtn" class="btn-sm btn-sm-danger" style="padding:9px 18px;">Reset all changes</button>
-      </div>
-      <div class="filter-row">
-        <input id="adminSearch" type="text" placeholder="Search products...">
-        <select id="adminGenderFilter">
-          <option value="">All genders</option>
-          <option value="men">Men</option>
-          <option value="women">Women</option>
-          <option value="kids">Kids</option>
-        </select>
-      </div>
-      <div class="admin-table-wrap">
-        <table>
-          <thead>
-            <tr><th></th><th>ID</th><th>Product</th><th>Brand</th><th>Category</th><th>Price</th><th>MRP</th><th>Rating</th><th>Tags</th><th>Actions</th></tr>
-          </thead>
-          <tbody id="productsTableBody"></tbody>
-        </table>
-      </div>
-    </div>
+      <!-- ===================== DASHBOARD ===================== -->
+      <section class="admin-view active" data-view="dashboard">
+        <div class="view-head">
+          <div><h1>Dashboard</h1><p class="view-sub">Live snapshot from this browser's demo data</p></div>
+        </div>
 
-    <div id="categoriesView" style="display:none;">
-      <div class="admin-table-wrap">
-        <table>
-          <thead><tr><th>Category ID</th><th>Name</th><th>Path</th><th>Type</th></tr></thead>
-          <tbody id="categoriesTableBody"></tbody>
-        </table>
-      </div>
-    </div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-top"><span class="stat-icon">&#128176;</span></div>
+            <p class="stat-num" id="statRevenueToday">₹0</p>
+            <p class="stat-label">Revenue Today</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-top"><span class="stat-icon">&#128181;</span></div>
+            <p class="stat-num" id="statRevenueMonth">₹0</p>
+            <p class="stat-label">Revenue This Month</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-top"><span class="stat-icon">&#128722;</span></div>
+            <p class="stat-num" id="statTotalOrders">0</p>
+            <p class="stat-label">Total Orders</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-top"><span class="stat-icon">&#128230;</span></div>
+            <p class="stat-num" id="statPendingOrders">0</p>
+            <p class="stat-label">Pending Deliveries</p>
+          </div>
+        </div>
 
-    <div id="ordersView" style="display:none;">
-      <div class="banner-note">Orders are stored in this browser's localStorage (js/orders.js) since there's no backend/database. This view lets you see and manage demo orders placed during testing.</div>
-      <div class="admin-table-wrap">
-        <table>
-          <thead><tr><th>Order ID</th><th>Date</th><th>Items</th><th>Total</th><th>Payment</th><th>Status</th><th>Actions</th></tr></thead>
-          <tbody id="ordersTableBody"></tbody>
-        </table>
-      </div>
-    </div>
+        <div class="dash-grid">
+          <div class="panel">
+            <h3>Sales — Last 14 Days</h3>
+            <div class="chart-svg-wrap" id="salesChart"></div>
+          </div>
+          <div class="panel">
+            <h3>Low Stock Alerts</h3>
+            <p class="panel-sub">Products at or below 5 units</p>
+            <div id="lowStockList"></div>
+          </div>
+        </div>
 
-    <div id="imagesView" style="display:none;">
-      <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px; max-width:640px;">
-        GitHub Pages has no backend, so this tool can't upload directly to your repo. Instead: pick a photo for each product below, then click <strong>Download renamed ZIP</strong> — it packages every picked photo with the exact filename the site expects. Extract that ZIP and drag its contents straight into <code>assets/products/</code> in your repo.
-      </p>
-      <div class="filter-row">
-        <input id="imgSearch" type="text" placeholder="Search products to assign photos...">
-        <button id="downloadZipBtn" class="btn btn-primary" style="padding:9px 18px;">Download renamed ZIP</button>
-        <span id="zipStatus" style="font-size:12px; color:var(--ink-soft); align-self:center;"></span>
-      </div>
-      <div class="admin-table-wrap">
-        <table>
-          <thead><tr><th>Preview</th><th>ID</th><th>Product</th><th>Target filename</th><th>Choose photo</th></tr></thead>
-          <tbody id="imagesTableBody"></tbody>
-        </table>
-      </div>
-    </div>
-  </main>
+        <div class="panel">
+          <h3>Recent Orders</h3>
+          <div class="table-wrap">
+            <table class="adm-table">
+              <thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Date</th></tr></thead>
+              <tbody id="recentOrdersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PRODUCTS ===================== -->
+      <section class="admin-view" data-view="products">
+        <div class="view-head">
+          <div><h1>Products</h1><p class="view-sub">Changes preview live on the storefront in this browser</p></div>
+          <div style="display:flex; gap:10px;">
+            <button class="adm-btn" id="exportProductsBtn">Export products.js</button>
+            <button class="adm-btn adm-btn-danger" id="resetOverridesBtn">Reset changes</button>
+            <button class="adm-btn adm-btn-primary" id="addProductBtn">+ Add Product</button>
+          </div>
+        </div>
+        <div class="filter-row">
+          <input type="text" id="productSearch" placeholder="Search products...">
+          <select id="productGenderFilter">
+            <option value="">All genders</option>
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+            <option value="kids">Kids</option>
+          </select>
+          <select id="productStockFilter">
+            <option value="">All stock levels</option>
+            <option value="low">Low stock (&le;5)</option>
+            <option value="out">Out of stock</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table class="adm-table">
+            <thead><tr><th></th><th>ID</th><th>Product</th><th>Brand</th><th>Category</th><th>Price</th><th>Stock</th><th>Rating</th><th>Tags</th><th>Actions</th></tr></thead>
+            <tbody id="productsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== CATEGORIES ===================== -->
+      <section class="admin-view" data-view="categories">
+        <div class="view-head"><div><h1>Categories</h1><p class="view-sub">Full taxonomy — read-only reference (351 nodes)</p></div></div>
+        <div class="filter-row"><input type="text" id="categorySearch" placeholder="Search categories..."></div>
+        <div class="table-wrap">
+          <table class="adm-table">
+            <thead><tr><th>ID</th><th>Name</th><th>Path</th><th>Type</th></tr></thead>
+            <tbody id="categoriesTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== IMAGE MANAGER ===================== -->
+      <section class="admin-view" data-view="images">
+        <div class="view-head"><div><h1>Image Manager</h1><p class="view-sub">Bulk-rename photos to match product filenames, then download as a ZIP</p></div></div>
+        <div class="banner-note">GitHub Pages has no backend, so this can't upload directly to your repo. Pick a photo per product below, then download the ZIP — extract it and drag the contents into <code>assets/products/</code>.</div>
+        <div class="filter-row">
+          <input type="text" id="imgSearch" placeholder="Search products to assign photos...">
+          <button class="adm-btn adm-btn-primary" id="downloadZipBtn">Download renamed ZIP</button>
+          <span id="zipStatus" style="font-size:12px; color:var(--adm-text-soft);"></span>
+        </div>
+        <div class="table-wrap">
+          <table class="adm-table">
+            <thead><tr><th>Preview</th><th>ID</th><th>Product</th><th>Target filename</th><th>Choose photo</th></tr></thead>
+            <tbody id="imagesTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== ORDERS ===================== -->
+      <section class="admin-view" data-view="orders">
+        <div class="view-head"><div><h1>Orders</h1><p class="view-sub">Track status, print invoices, handle returns</p></div></div>
+        <div class="filter-row">
+          <input type="text" id="orderSearch" placeholder="Search by order ID or customer...">
+          <select id="orderStatusFilter">
+            <option value="">All statuses</option>
+            <option>Placed</option><option>Packed</option><option>Shipped</option>
+            <option>Out for Delivery</option><option>Delivered</option><option>Cancelled</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table class="adm-table">
+            <thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Payment</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="ordersTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== CUSTOMERS ===================== -->
+      <section class="admin-view" data-view="customers">
+        <div class="view-head"><div><h1>Customers</h1><p class="view-sub">Registered accounts in this browser's demo data</p></div></div>
+        <div class="banner-note">Block/unblock here is recorded for reference in this demo; enforcing it at login requires a small backend (or a follow-up edit to <code>js/auth.js</code>).</div>
+        <div class="filter-row"><input type="text" id="customerSearch" placeholder="Search customers..."></div>
+        <div class="table-wrap">
+          <table class="adm-table">
+            <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Orders</th><th>Total Spent</th><th>Joined</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="customersTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== DISCOUNTS ===================== -->
+      <section class="admin-view" data-view="discounts">
+        <div class="view-head">
+          <div><h1>Discounts &amp; Promotions</h1><p class="view-sub">Coupons and homepage banners</p></div>
+          <button class="adm-btn adm-btn-primary" id="addCouponBtn">+ Add Coupon</button>
+        </div>
+        <div class="banner-note">Coupons created here are stored for the admin panel; to make them redeemable at checkout, <code>js/offers.js</code> needs a small follow-up hook — say the word and I'll wire it up.</div>
+        <div class="table-wrap" style="margin-bottom:26px;">
+          <table class="adm-table">
+            <thead><tr><th>Code</th><th>Type</th><th>Value</th><th>Min Order</th><th>Active</th><th>Actions</th></tr></thead>
+            <tbody id="couponsTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="view-head">
+          <div><h3 style="margin:0;">Homepage Banners</h3></div>
+          <button class="adm-btn adm-btn-primary" id="addBannerBtn">+ Add Banner</button>
+        </div>
+        <div id="bannersList"></div>
+      </section>
+
+      <!-- ===================== ANALYTICS ===================== -->
+      <section class="admin-view" data-view="analytics">
+        <div class="view-head">
+          <div><h1>Analytics &amp; Reports</h1><p class="view-sub">Export sales data for offline reporting</p></div>
+          <div style="display:flex; gap:10px;">
+            <button class="adm-btn" id="exportCsvBtn">Export CSV</button>
+            <button class="adm-btn" id="printReportBtn">Print / Save as PDF</button>
+          </div>
+        </div>
+        <div class="dash-grid">
+          <div class="panel">
+            <h3>Revenue Trend</h3>
+            <div class="chart-svg-wrap" id="analyticsChart"></div>
+          </div>
+          <div class="panel">
+            <h3>Best-Selling Products</h3>
+            <div id="bestSellingList"></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Sales by Category</h3>
+          <div class="chart-svg-wrap" id="categoryChart"></div>
+        </div>
+      </section>
+
+      <!-- ===================== SETTINGS ===================== -->
+      <section class="admin-view" data-view="settings">
+        <div class="view-head"><div><h1>Settings &amp; Roles</h1></div></div>
+
+        <div class="panel settings-section">
+          <h3>Tax &amp; Shipping</h3>
+          <p class="settings-desc">Reference configuration for this demo (wire into <code>js/checkout.js</code> to apply live).</p>
+          <div class="adm-form-grid">
+            <div class="adm-field"><label>Tax Rate (%)</label><input type="number" id="setTaxRate" min="0" max="30" step="0.5"></div>
+            <div class="adm-field"><label>Flat Shipping Fee (₹)</label><input type="number" id="setShippingFee" min="0"></div>
+            <div class="adm-field"><label>Free Shipping Above (₹)</label><input type="number" id="setFreeShipAbove" min="0"></div>
+          </div>
+          <button class="adm-btn adm-btn-primary" id="saveSettingsBtn" style="margin-top:10px;">Save Settings</button>
+        </div>
+
+        <div class="panel settings-section">
+          <h3>Staff &amp; Roles</h3>
+          <p class="settings-desc">Manager, Delivery, and Support roles with different access levels (reference only in this demo).</p>
+          <div id="staffList"></div>
+          <button class="adm-btn" id="addStaffBtn" style="margin-top:12px;">+ Add Staff Member</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
 </div>
 
 <!-- Add / Edit Product Modal -->
-<div id="productModal" class="modal-backdrop">
-  <div class="modal-card">
+<div id="productModal" class="adm-modal-backdrop">
+  <div class="adm-modal-card">
     <h2 id="modalTitle">Add Product</h2>
     <form id="productForm">
       <input type="hidden" id="pf-id">
-      <div class="form-field full">
+      <div class="adm-field full">
         <label>Photo</label>
         <div id="pf-imgPreview" class="img-upload-preview"></div>
         <input type="file" id="pf-imageFile" accept="image/*">
       </div>
-      <div class="form-grid">
-        <div class="form-field full">
-          <label>Product name *</label>
-          <input type="text" id="pf-name" required>
+      <div class="adm-form-grid">
+        <div class="adm-field full"><label>Product name *</label><input type="text" id="pf-name" required></div>
+        <div class="adm-field"><label>Brand *</label><input type="text" id="pf-brand" required></div>
+        <div class="adm-field"><label>Category *</label><select id="pf-categoryId" required></select></div>
+        <div class="adm-field"><label>Gender</label>
+          <select id="pf-gender"><option value="men">Men</option><option value="women">Women</option><option value="kids">Kids</option><option value="unisex">Unisex</option></select>
         </div>
-        <div class="form-field">
-          <label>Brand *</label>
-          <input type="text" id="pf-brand" required>
-        </div>
-        <div class="form-field">
-          <label>Category *</label>
-          <select id="pf-categoryId" required></select>
-        </div>
-        <div class="form-field">
-          <label>Gender</label>
-          <select id="pf-gender">
-            <option value="men">Men</option>
-            <option value="women">Women</option>
-            <option value="kids">Kids</option>
-            <option value="unisex">Unisex</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label>MRP (₹) *</label>
-          <input type="number" id="pf-mrp" min="0" required>
-        </div>
-        <div class="form-field">
-          <label>Selling price (₹) *</label>
-          <input type="number" id="pf-price" min="0" required>
-        </div>
-        <div class="form-field">
-          <label>Colors (comma separated)</label>
-          <input type="text" id="pf-colors" placeholder="Black, White">
-        </div>
-        <div class="form-field">
-          <label>Sizes (comma separated)</label>
-          <input type="text" id="pf-sizes" placeholder="S, M, L, XL">
-        </div>
-        <div class="form-field">
-          <label>Rating (0-5)</label>
-          <input type="number" id="pf-rating" min="0" max="5" step="0.1" value="4.3">
-        </div>
-        <div class="form-field">
-          <label>Rating count</label>
-          <input type="number" id="pf-ratingCount" min="0" value="0">
-        </div>
-        <div class="form-field checkbox">
-          <input type="checkbox" id="pf-isNew">
-          <label for="pf-isNew" style="text-transform:none;font-size:13px;">Mark as New Arrival</label>
-        </div>
-        <div class="form-field checkbox">
-          <input type="checkbox" id="pf-isBestseller">
-          <label for="pf-isBestseller" style="text-transform:none;font-size:13px;">Mark as Bestseller</label>
-        </div>
+        <div class="adm-field"><label>Stock Quantity</label><input type="number" id="pf-stock" min="0" value="20"></div>
+        <div class="adm-field"><label>MRP (₹) *</label><input type="number" id="pf-mrp" min="0" required></div>
+        <div class="adm-field"><label>Selling price (₹) *</label><input type="number" id="pf-price" min="0" required></div>
+        <div class="adm-field"><label>Colors (comma separated)</label><input type="text" id="pf-colors" placeholder="Black, White"></div>
+        <div class="adm-field"><label>Sizes (comma separated)</label><input type="text" id="pf-sizes" placeholder="S, M, L, XL"></div>
+        <div class="adm-field"><label>Rating (0-5)</label><input type="number" id="pf-rating" min="0" max="5" step="0.1" value="4.3"></div>
+        <div class="adm-field"><label>Rating count</label><input type="number" id="pf-ratingCount" min="0" value="0"></div>
+        <div class="adm-field checkbox"><input type="checkbox" id="pf-isNew"><label for="pf-isNew" style="text-transform:none;font-size:13px;">Mark as New Arrival</label></div>
+        <div class="adm-field checkbox"><input type="checkbox" id="pf-isBestseller"><label for="pf-isBestseller" style="text-transform:none;font-size:13px;">Mark as Bestseller</label></div>
       </div>
-      <div class="modal-actions">
-        <button type="button" id="modalCancelBtn" class="btn-sm" style="padding:9px 18px;">Cancel</button>
-        <button type="submit" class="btn btn-primary" style="padding:9px 18px;">Save Product</button>
+      <div class="adm-modal-actions">
+        <button type="button" class="adm-btn" id="modalCancelBtn">Cancel</button>
+        <button type="submit" class="adm-btn adm-btn-primary">Save Product</button>
       </div>
     </form>
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<!-- Add / Edit Coupon Modal -->
+<div id="couponModal" class="adm-modal-backdrop">
+  <div class="adm-modal-card">
+    <h2 id="couponModalTitle">Add Coupon</h2>
+    <form id="couponForm">
+      <input type="hidden" id="cf-id">
+      <div class="adm-form-grid">
+        <div class="adm-field full"><label>Coupon Code *</label><input type="text" id="cf-code" required style="text-transform:uppercase;"></div>
+        <div class="adm-field"><label>Type</label>
+          <select id="cf-type"><option value="percent">Percentage Off</option><option value="flat">Flat Amount Off</option></select>
+        </div>
+        <div class="adm-field"><label>Value *</label><input type="number" id="cf-value" min="0" required></div>
+        <div class="adm-field"><label>Minimum Order (₹)</label><input type="number" id="cf-minOrder" min="0" value="0"></div>
+        <div class="adm-field checkbox"><input type="checkbox" id="cf-active" checked><label for="cf-active" style="text-transform:none;font-size:13px;">Active</label></div>
+      </div>
+      <div class="adm-modal-actions">
+        <button type="button" class="adm-btn" id="couponModalCancelBtn">Cancel</button>
+        <button type="submit" class="adm-btn adm-btn-primary">Save Coupon</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add / Edit Banner Modal -->
+<div id="bannerModal" class="adm-modal-backdrop">
+  <div class="adm-modal-card">
+    <h2 id="bannerModalTitle">Add Banner</h2>
+    <form id="bannerForm">
+      <input type="hidden" id="bf-id">
+      <div class="adm-form-grid">
+        <div class="adm-field full"><label>Title *</label><input type="text" id="bf-title" required></div>
+        <div class="adm-field full"><label>Subtitle</label><input type="text" id="bf-subtitle"></div>
+        <div class="adm-field"><label>CTA Label</label><input type="text" id="bf-cta" value="Shop Now"></div>
+        <div class="adm-field"><label>Link</label><input type="text" id="bf-link" placeholder="category.html?filter=sale"></div>
+        <div class="adm-field checkbox"><input type="checkbox" id="bf-active" checked><label for="bf-active" style="text-transform:none;font-size:13px;">Active</label></div>
+      </div>
+      <div class="adm-modal-actions">
+        <button type="button" class="adm-btn" id="bannerModalCancelBtn">Cancel</button>
+        <button type="submit" class="adm-btn adm-btn-primary">Save Banner</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add Staff Modal -->
+<div id="staffModal" class="adm-modal-backdrop">
+  <div class="adm-modal-card">
+    <h2>Add Staff Member</h2>
+    <form id="staffForm">
+      <div class="adm-form-grid">
+        <div class="adm-field full"><label>Name *</label><input type="text" id="sf-name" required></div>
+        <div class="adm-field full"><label>Email *</label><input type="email" id="sf-email" required></div>
+        <div class="adm-field full"><label>Role</label>
+          <select id="sf-role"><option>Manager</option><option>Delivery</option><option>Support</option><option>Inventory</option></select>
+        </div>
+      </div>
+      <div class="adm-modal-actions">
+        <button type="button" class="adm-btn" id="staffModalCancelBtn">Cancel</button>
+        <button type="submit" class="adm-btn adm-btn-primary">Add Staff</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <script src="js/categories.js"></script>
 <script src="js/products.js"></script>
@@ -187,6 +389,7 @@
 <script src="js/orders.js"></script>
 <script src="js/reviews.js"></script>
 <script src="js/notifications.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="js/admin.js"></script>
 </body>
 </html>

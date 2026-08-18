@@ -1,5 +1,12 @@
 /**
- * AS FASHIONS — Auth Engine
+ * AS FASHIONS — Auth (demo)
+ * There is no backend, so this is a client-side simulation: accounts,
+ * sessions, and OTPs all live in this browser's localStorage. It's useful
+ * for demoing the UX flow (register → OTP → login → profile), but it is
+ * NOT secure — passwords are stored in plain text in localStorage and
+ * OTPs are shown on-screen instead of sent by SMS/email. Replace with a
+ * real backend (Firebase Auth, Supabase, custom API, etc.) before
+ * accepting real users.
  */
 (function (global) {
   'use strict';
@@ -38,6 +45,8 @@
     return String(Math.floor(1000 + Math.random() * 9000));
   }
 
+  // Starts a registration or login OTP flow. Returns the OTP so the calling
+  // page can display it directly (since there's no SMS/email backend).
   function requestOtp(identifier) {
     var otp = generateOtp();
     try {
@@ -49,11 +58,11 @@
   function verifyOtp(identifier, code) {
     try {
       var raw = localStorage.getItem(PENDING_OTP_KEY);
-      if (!raw) return { valid: false, message: 'No OTP requested. Please request a new code.' };
+      if (!raw) return { valid: false, message: 'No OTP was requested. Please request a new one.' };
       var pending = JSON.parse(raw);
       if (pending.identifier !== identifier) return { valid: false, message: 'OTP does not match this account.' };
-      if (Date.now() > pending.expiresAt) return { valid: false, message: 'OTP expired. Please request a new code.' };
-      if (pending.otp !== code) return { valid: false, message: 'Incorrect OTP entered.' };
+      if (Date.now() > pending.expiresAt) return { valid: false, message: 'OTP expired. Please request a new one.' };
+      if (pending.otp !== code) return { valid: false, message: 'Incorrect OTP.' };
       localStorage.removeItem(PENDING_OTP_KEY);
       return { valid: true };
     } catch (e) {
@@ -71,17 +80,17 @@
       name: data.name,
       email: data.email,
       phone: data.phone,
-      password: data.password,
+      password: data.password, // demo only — never store plain-text passwords in a real app
       createdAt: new Date().toISOString()
     };
     users.push(user);
-    if (!writeUsers(users)) return { success: false, message: 'Could not create account.' };
+    if (!writeUsers(users)) return { success: false, message: 'Could not save account (storage full?).' };
     return { success: true, user: user };
   }
 
   function login(identifier, password) {
     var user = findUserByPhoneOrEmail(identifier);
-    if (!user) return { success: false, message: 'No account found with this email/phone.' };
+    if (!user) return { success: false, message: 'No account found with that email/phone.' };
     if (isCustomerBlocked(user.id)) return { success: false, message: 'Account is temporarily suspended. Contact support.' };
     if (user.password !== password) return { success: false, message: 'Incorrect password.' };
     setSession(user);
@@ -90,7 +99,7 @@
 
   function loginWithOtpOnly(identifier) {
     var user = findUserByPhoneOrEmail(identifier);
-    if (!user) return { success: false, message: 'No account found with this email/phone.' };
+    if (!user) return { success: false, message: 'No account found with that email/phone.' };
     if (isCustomerBlocked(user.id)) return { success: false, message: 'Account is temporarily suspended.' };
     setSession(user);
     return { success: true, user: user };
@@ -115,20 +124,23 @@
     } catch (e) { return null; }
   }
 
-  function isLoggedIn() { return Boolean(getCurrentUser()); }
+  function isLoggedIn() {
+    return Boolean(getCurrentUser());
+  }
 
   function updateProfile(patch) {
     var session = getCurrentUser();
-    if (!session) return { success: false, message: 'Please login first.' };
+    if (!session) return { success: false, message: 'Not logged in.' };
     var users = readUsers();
     var idx = users.findIndex(function (u) { return u.id === session.userId; });
     if (idx === -1) return { success: false, message: 'Account not found.' };
     users[idx] = Object.assign({}, users[idx], patch);
-    if (!writeUsers(users)) return { success: false, message: 'Could not save profile changes.' };
+    if (!writeUsers(users)) return { success: false, message: 'Could not save changes.' };
     setSession(users[idx]);
     return { success: true, user: users[idx] };
   }
 
+  /* ---------- Addresses ---------- */
   var ADDRESSES_KEY = 'asf_addresses';
 
   function getAddresses() {
@@ -150,7 +162,7 @@
       all[user.userId] = list;
       localStorage.setItem(ADDRESSES_KEY, JSON.stringify(all));
       return true;
-    } catch (e) { return false; }
+    } catch (e) { console.error('Could not save addresses', e); return false; }
   }
 
   function addAddress(address) {

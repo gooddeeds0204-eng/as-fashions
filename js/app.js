@@ -1,6 +1,6 @@
 /**
  * AS FASHIONS — Homepage Application Controller
- * Handles hero sliders, flash countdown, category carousels, and storefront rails.
+ * Synchronized with the master 12-item portrait catalog & category tree.
  */
 (function () {
   'use strict';
@@ -24,19 +24,21 @@
   function renderSubcatRail(catApi) {
     var el = document.getElementById('subcatRail');
     if (!el || !catApi || typeof catApi.getCategoryById !== 'function') return;
-    
-    // IDs matching js/categories.js & catalog exact categories
+
+    // Categories directly matching your live product collection
     var ids = [
-      'men-clothing-jeans-slim-fit',
-      'women-bags-clutches',
-      'women-footwear-heels',
-      'men-sportswear-shorts',
-      'men-footwear-loafers',
-      'men-innerwear-and-loungewear-trunks',
-      'men-clothing-jeans-baggy-fit',
-      'women-indian-wear-palazzo-sets',
-      'women-lingerie-and-innerwear-innerwear-sets',
-      'sports-gym-wear'
+      'men-clothing-t-shirts',
+      'men-clothing-shirts',
+      'men-clothing-jeans',
+      'men-clothing-jackets',
+      'men-ethnic-wear-kurtas',
+      'women-western-wear-dresses',
+      'women-indian-wear-sarees',
+      'women-western-wear-tops',
+      'women-indian-wear-kurtas',
+      'men-footwear-sneakers',
+      'women-bags-handbags',
+      'men-accessories-watches'
     ];
 
     el.innerHTML = '';
@@ -166,12 +168,11 @@
     var allItems = prodApi.getAllProducts();
     var newItems = prodApi.getNewArrivals();
     var bestItems = prodApi.getBestsellers();
-    var saleItems = prodApi.getSaleProducts();
 
-    // Direct render with reveal:false to prevent blank screens
-    ui.renderProductGrid('newArrivalsRail', newItems.length ? newItems : allItems.slice(0, 8), { limit: 8, reveal: false });
-    ui.renderProductGrid('trendingRail', bestItems.length ? bestItems : allItems.slice(8, 16), { limit: 8, reveal: false });
-    ui.renderProductGrid('bestsellersRail', saleItems.length ? saleItems : allItems.slice(16, 24), { limit: 8, reveal: false });
+    // Renders rails cleanly using master catalog data
+    ui.renderProductGrid('newArrivalsRail', newItems.length ? newItems : allItems, { limit: 8, reveal: false });
+    ui.renderProductGrid('trendingRail', bestItems.length ? bestItems.slice().reverse() : allItems, { limit: 8, reveal: false });
+    ui.renderProductGrid('bestsellersRail', bestItems.length ? bestItems : allItems, { limit: 8, reveal: false });
 
     ui.bindProductCardEvents(document.body);
   }

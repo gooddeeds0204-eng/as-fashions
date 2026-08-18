@@ -1,6 +1,5 @@
 /**
  * AS FASHIONS — Homepage Application Controller
- * Synchronized with the master 12-item portrait catalog & category tree.
  */
 (function () {
   'use strict';
@@ -25,20 +24,17 @@
     var el = document.getElementById('subcatRail');
     if (!el || !catApi || typeof catApi.getCategoryById !== 'function') return;
 
-    // Categories directly matching your live product collection
     var ids = [
-      'men-clothing-t-shirts',
-      'men-clothing-shirts',
-      'men-clothing-jeans',
-      'men-clothing-jackets',
-      'men-ethnic-wear-kurtas',
-      'women-western-wear-dresses',
-      'women-indian-wear-sarees',
-      'women-western-wear-tops',
-      'women-indian-wear-kurtas',
-      'men-footwear-sneakers',
-      'women-bags-handbags',
-      'men-accessories-watches'
+      'men-clothing-jeans-slim-fit',
+      'women-bags-clutches',
+      'women-footwear-heels',
+      'men-sportswear-shorts',
+      'men-footwear-loafers',
+      'men-innerwear-and-loungewear-trunks',
+      'men-clothing-jeans-baggy-fit',
+      'women-indian-wear-palazzo-sets',
+      'women-lingerie-and-innerwear-innerwear-sets',
+      'sports-gym-wear'
     ];
 
     el.innerHTML = '';
@@ -70,7 +66,7 @@
       {
         title: 'Curated Fashion<br><span>For Every You</span>',
         sub: 'Handpicked styles from premium labels',
-        discount: '50\u201380% OFF',
+        discount: '50–80% OFF',
         img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop&q=80'
       },
       {
@@ -78,12 +74,6 @@
         sub: 'Elevate your seasonal wardrobe today',
         discount: 'UP TO 65% OFF',
         img: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&auto=format&fit=crop&q=80'
-      },
-      {
-        title: 'Modern Luxury<br><span>Effortless Style</span>',
-        sub: 'Minimal essentials to standout ethnics',
-        discount: 'FLAT 40% OFF',
-        img: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&auto=format&fit=crop&q=80'
       }
     ];
 
@@ -168,11 +158,11 @@
     var allItems = prodApi.getAllProducts();
     var newItems = prodApi.getNewArrivals();
     var bestItems = prodApi.getBestsellers();
+    var saleItems = prodApi.getSaleProducts ? prodApi.getSaleProducts() : allItems.slice(16, 24);
 
-    // Renders rails cleanly using master catalog data
-    ui.renderProductGrid('newArrivalsRail', newItems.length ? newItems : allItems, { limit: 8, reveal: false });
-    ui.renderProductGrid('trendingRail', bestItems.length ? bestItems.slice().reverse() : allItems, { limit: 8, reveal: false });
-    ui.renderProductGrid('bestsellersRail', bestItems.length ? bestItems : allItems, { limit: 8, reveal: false });
+    ui.renderProductGrid('newArrivalsRail', newItems.length ? newItems : allItems.slice(0, 8), { limit: 8 });
+    ui.renderProductGrid('trendingRail', bestItems.length ? bestItems : allItems.slice(8, 16), { limit: 8 });
+    ui.renderProductGrid('bestsellersRail', saleItems.length ? saleItems : allItems.slice(16, 24), { limit: 8 });
 
     ui.bindProductCardEvents(document.body);
   }

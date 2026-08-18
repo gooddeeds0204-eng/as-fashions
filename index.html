@@ -3,683 +3,125 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AS FASHIONS — Curated Fashion Store</title>
+  <title>AS FASHIONS — Curated Luxury Fashion</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    body {
-      background-color: #fcfbf9;
-      color: #111;
-      overflow-x: hidden;
-    }
-    a { text-decoration: none; color: inherit; }
-
-    /* Top Strip */
-    .top-strip {
-      background: #111;
-      color: #fff;
-      font-size: 11px;
-      text-align: center;
-      padding: 6px 12px;
-      letter-spacing: 0.5px;
-    }
-    .top-strip strong { color: #f4c430; }
-
-    /* Header & Navigation */
-    .site-header {
-      background: #fff;
-      border-bottom: 1px solid #eee;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      gap: 16px;
-    }
-    .brand-logo {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: #111;
-      white-space: nowrap;
-    }
-    .brand-logo span { color: #ff3f6c; }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    .nav-links a:hover { color: #ff3f6c; }
-
-    .search-bar {
-      flex: 1;
-      max-width: 450px;
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .search-bar input {
-      width: 100%;
-      padding: 10px 16px 10px 38px;
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-      font-size: 13px;
-      background: #f5f5f6;
-      outline: none;
-    }
-    .search-bar input:focus {
-      background: #fff;
-      border-color: #bbb;
-    }
-    .search-icon {
-      position: absolute;
-      left: 12px;
-      font-size: 14px;
-      color: #888;
-    }
-
-    .header-icons {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    .cart-badge {
-      background: #ff3f6c;
-      color: #fff;
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 10px;
-      margin-left: 2px;
-    }
-
-    /* Main Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 16px;
-    }
-
-    /* Hero Banner */
-    .hero-banner {
-      background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop&q=80');
-      background-size: cover;
-      background-position: center;
-      border-radius: 12px;
-      padding: 40px 24px;
-      color: #fff;
-      margin-bottom: 24px;
-    }
-    .hero-banner small {
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-size: 12px;
-      font-weight: 700;
-      display: block;
-      margin-bottom: 6px;
-    }
-    .hero-banner h2 {
-      font-size: 32px;
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 8px;
-    }
-    .hero-banner h2 span { color: #f4c430; }
-    .hero-banner p {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-    .hero-btn {
-      display: inline-block;
-      background: #ff3f6c;
-      color: #fff;
-      padding: 10px 22px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.5px;
-      transition: background 0.2s;
-    }
-    .hero-btn:hover { background: #e02f5a; }
-
-    /* Flash Sale Banner */
-    .flash-sale {
-      background: linear-gradient(90deg, #ff3f6c, #ff6b4a);
-      color: #fff;
-      border-radius: 10px;
-      padding: 14px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 28px;
-    }
-    .flash-sale h4 { font-size: 15px; margin-bottom: 2px; }
-    .flash-sale p { font-size: 12px; opacity: 0.9; }
-    .flash-btn {
-      background: #fff;
-      color: #ff3f6c;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 8px 16px;
-      border-radius: 20px;
-    }
-
-    /* Section Headers */
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 24px 0 14px;
-    }
-    .section-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: #222;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .section-title::before {
-      content: "";
-      width: 4px;
-      height: 18px;
-      background: #ff3f6c;
-      border-radius: 2px;
-    }
-    .view-all-link {
-      font-size: 13px;
-      font-weight: 700;
-      color: #ff3f6c;
-    }
-
-    /* Category Rail */
-    .cat-rail {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding: 6px 2px 14px;
-      scrollbar-width: none;
-    }
-    .cat-rail::-webkit-scrollbar { display: none; }
-    .cat-card {
-      flex: 0 0 85px;
-      text-align: center;
-    }
-    .cat-circle {
-      width: 75px;
-      height: 75px;
-      border-radius: 50%;
-      margin: 0 auto 6px;
-      background-size: cover;
-      background-position: center;
-      border: 2px solid #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .cat-name {
-      font-size: 11px;
-      font-weight: 600;
-      color: #333;
-    }
-
-    /* Product Grid Layout */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-
-    /* Portrait 3:4 Product Card */
-    .product-card {
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: transform 0.2s;
-    }
-    .product-card:hover { transform: translateY(-3px); }
-
-    .media-box {
-      position: relative;
-      width: 100%;
-      padding-top: 133.33%; /* 3:4 Aspect Ratio */
-      background: #eaeaea;
-    }
-    .media-box img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-
-    .badge-ribbon {
-      position: absolute;
-      top: 8px; left: 8px;
-      background: #ff3f6c;
-      color: #fff;
-      font-size: 9px;
-      font-weight: 800;
-      padding: 3px 6px;
-      border-radius: 3px;
-      text-transform: uppercase;
-      z-index: 2;
-    }
-    .badge-bestseller { background: #111; }
-
-    .wish-btn {
-      position: absolute;
-      top: 8px; right: 8px;
-      width: 30px; height: 30px;
-      background: rgba(255,255,255,0.85);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      z-index: 2;
-    }
-
-    .rating-pill {
-      position: absolute;
-      bottom: 8px; left: 8px;
-      background: rgba(255,255,255,0.9);
-      padding: 3px 6px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-      color: #111;
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      z-index: 2;
-    }
-    .rating-pill span { color: #888; font-weight: 500; }
-
-    .card-info {
-      padding: 10px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .brand-title {
-      font-size: 12px;
-      font-weight: 800;
-      color: #222;
-      text-transform: uppercase;
-    }
-    .product-desc {
-      font-size: 12px;
-      color: #666;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .price-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 4px;
-    }
-    .current-price {
-      font-size: 14px;
-      font-weight: 800;
-      color: #111;
-    }
-    .original-mrp {
-      font-size: 12px;
-      color: #888;
-      text-decoration: line-through;
-    }
-    .discount-tag {
-      font-size: 11px;
-      font-weight: 700;
-      color: #ff3f6c;
-    }
-
-    /* Footer */
-    .site-footer {
-      background: #111;
-      color: #aaa;
-      padding: 32px 16px;
-      font-size: 12px;
-      margin-top: 40px;
-      text-align: center;
-    }
-    .site-footer p { margin-top: 6px; }
-
-    /* Mobile Responsive Rules */
-    @media (max-width: 768px) {
-      .nav-links, .search-bar { display: none; }
-      .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-      .hero-banner h2 { font-size: 24px; }
-      .container { padding: 10px; }
-    }
-  </style>
+  
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
 
-  <div class="top-strip">Get 10% OFF on your first order. Use code: <strong>WELCOME10</strong></div>
+  <!-- Top Notification -->
+  <div class="top-banner">Get 10% OFF on your first order. Use code: <strong>WELCOME10</strong></div>
 
+  <!-- Header -->
   <header class="site-header">
-    <div class="header-inner">
-      <a href="index.html" class="brand-logo"><span>AS</span> FASHIONS</a>
-      <div class="nav-links">
-        <a href="#newArrivals">Men</a>
-        <a href="#trending">Women</a>
-        <a href="#bestsellers">Collections</a>
-        <a href="#" style="color:#ff3f6c;">Sale</a>
+    <div class="header-container container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-accent">AS</span> FASHIONS
+      </a>
+      <div class="header-search">
+        <input type="text" id="globalSearchInput" placeholder="Search for products, brands and more" />
+        <button id="globalSearchBtn" aria-label="Search">🔍</button>
       </div>
-      <div class="search-bar">
-        <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Search for products, brands and more" />
-      </div>
-      <div class="header-icons">
-        <a href="#">♡ Wishlist</a>
-        <a href="#">👜 Bag <span class="cart-badge">0</span></a>
+      <div class="header-actions">
+        <a href="category.html?gender=men">Men</a>
+        <a href="category.html?gender=women">Women</a>
+        <a href="cart.html" class="cart-link">👜 <span id="cartCount">0</span></a>
       </div>
     </div>
   </header>
 
-  <main class="container">
+  <main class="main-content container">
 
-    <!-- Hero Banner -->
-    <section class="hero-banner">
-      <small>Handpicked styles from premium labels</small>
-      <h2>CURATED FASHION<br><span>FOR EVERY YOU</span></h2>
-      <p>50–80% OFF</p>
-      <a href="#newArrivals" class="hero-btn">EXPLORE COLLECTION</a>
-    </section>
-
-    <!-- Shop By Category Rail -->
-    <section>
-      <div class="section-head">
-        <div class="section-title">Shop By Category</div>
-        <a href="#" class="view-all-link">View All →</a>
+    <!-- Hero Banner Slider -->
+    <section class="hero-section">
+      <div class="hero-slider" id="heroImage">
+        <div class="hero-content">
+          <small id="heroSub">Handpicked styles from premium labels</small>
+          <h2 id="heroTitle">Curated Fashion<br><span>For Every You</span></h2>
+          <p id="heroDiscount">50–80% OFF</p>
+          <a href="category.html" class="btn btn-primary" id="heroCta">EXPLORE COLLECTION</a>
+        </div>
+        <button class="hero-nav hero-prev" id="heroPrev" aria-label="Previous slide">‹</button>
+        <button class="hero-nav hero-next" id="heroNext" aria-label="Next slide">›</button>
+        <div class="hero-dots" id="heroDots"></div>
       </div>
-      <div class="cat-rail" id="categoryRail"></div>
     </section>
 
-    <!-- Flash Sale Notice -->
-    <div class="flash-sale">
-      <div>
+    <!-- Shop By Category -->
+    <section class="store-section">
+      <div class="section-header">
+        <h3 class="section-heading"><span class="heading-bar"></span> Shop By Category</h3>
+        <a href="category.html" class="section-view-all">View All →</a>
+      </div>
+      <div class="category-rail" id="categoryRail"></div>
+    </section>
+
+    <!-- Subcategories Rail -->
+    <section class="store-section">
+      <div class="subcat-rail" id="subcatRail"></div>
+    </section>
+
+    <!-- Flash Sale Bar -->
+    <section class="flash-sale-bar">
+      <div class="flash-info">
         <h4>The AS Fashions Flash Sale</h4>
         <p>Limited time price drops on season favorites</p>
       </div>
-      <a href="#" class="flash-btn">SHOP ALL DEALS</a>
-    </div>
-
-    <!-- New Arrivals Section -->
-    <section id="newArrivals">
-      <div class="section-head">
-        <div class="section-title">New Arrivals</div>
-        <a href="#" class="view-all-link">View All →</a>
+      <div class="flash-countdown" id="flashCountdown">
+        <span class="cd-box" id="cdHours">00</span> :
+        <span class="cd-box" id="cdMinutes">00</span> :
+        <span class="cd-box" id="cdSeconds">00</span>
       </div>
-      <div class="product-grid" id="newArrivalsGrid"></div>
+      <a href="category.html" class="btn btn-flash">SHOP ALL DEALS</a>
     </section>
 
-    <!-- Trending Now Section -->
-    <section id="trending">
-      <div class="section-head">
-        <div class="section-title">Trending Now</div>
-        <a href="#" class="view-all-link">View All →</a>
+    <!-- New Arrivals Rail -->
+    <section class="store-section">
+      <div class="section-header">
+        <h3 class="section-heading"><span class="heading-bar"></span> New Arrivals</h3>
+        <a href="category.html?sort=new" class="section-view-all">View All →</a>
       </div>
-      <div class="product-grid" id="trendingGrid"></div>
+      <div class="product-grid" id="newArrivalsRail"></div>
     </section>
 
-    <!-- Best of AS Fashions Section -->
-    <section id="bestsellers">
-      <div class="section-head">
-        <div class="section-title">Best of AS Fashions</div>
-        <a href="#" class="view-all-link">View All →</a>
+    <!-- Trending Now Rail -->
+    <section class="store-section">
+      <div class="section-header">
+        <h3 class="section-heading"><span class="heading-bar"></span> Trending Now</h3>
+        <a href="category.html?sort=popular" class="section-view-all">View All →</a>
       </div>
-      <div class="product-grid" id="bestsellersGrid"></div>
+      <div class="product-grid" id="trendingRail"></div>
+    </section>
+
+    <!-- Best of AS Fashions Rail -->
+    <section class="store-section">
+      <div class="section-header">
+        <h3 class="section-heading"><span class="heading-bar"></span> Best of AS Fashions</h3>
+        <a href="category.html?sort=bestseller" class="section-view-all">View All →</a>
+      </div>
+      <div class="product-grid" id="bestsellersRail"></div>
     </section>
 
   </main>
 
   <footer class="site-footer">
-    <p><strong>AS FASHIONS</strong> — Curated Luxury Fashion Store</p>
-    <p>© 2026 AS Fashions. All rights reserved.</p>
+    <div class="container footer-content">
+      <p><strong>AS FASHIONS</strong> — Curated Luxury Fashion</p>
+      <p>© 2026 AS Fashions. All rights reserved.</p>
+    </div>
   </footer>
 
-  <!-- Direct Embedded Product Data & Autonomous Render Script -->
-  <script>
-    var CATALOG_PRODUCTS = [
-      {
-        id: 'asf-m-01',
-        name: 'Oversized Vintage Acid Wash Heavyweight Tee',
-        brand: 'AS ORIGINALS',
-        price: 699,
-        mrp: 1499,
-        discountPct: 53,
-        rating: 4.6,
-        ratingCount: 1420,
-        badge: 'NEW SEASON',
-        image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=700&auto=format&fit=crop&q=80'
-      },
-      {
-        id: 'asf-m-02',
-        name: 'Relaxed Fit Textured Cuban Collar Linen Shirt',
-        brand: 'DECCAN CROWN',
-        price: 1199,
-        mrp: 2499,
-        discountPct: 52,
-        rating: 4.4,
-        ratingCount: 890,
-        badge: 'HOT DEAL',
-        image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=700&auto=format&fit=crop&q=80'
-      },
-      {
-        id: 'asf-m-03',
-        name: 'Baggy Wide-Leg Rigid Denim Jeans',
-        brand: 'URBAN DHAAGA',
-        price: 1599,
-        mrp: 3299,
-        discountPct: 51,
-        rating: 4.7,
-        ratingCount: 2310,
-        badge: 'BESTSELLER',
-        image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=700&auto=format&fit=crop&q=80'
-      },
-      {
-        id: 'asf-m-04',
-        name: 'Minimalist Lightweight Trucker Bomber Jacket',
-        brand: 'VANTAGE',
-        price: 1899,
-        mrp: 3999,
-        discountPct: 52,
-        rating: 4.5,
-        ratingCount: 540,
-        badge: 'TRENDING',
-        image: 'https://images.unsplash.com/photo-1548883354-7622d03aca27?w=700&auto=format&fit=crop&q=80'
-      },
-      {
-        id: 'asf-w-01',
-        name: 'Smocked Bodice Tiered Meadow Floral Maxi Dress',
-        brand: 'STUDIO AS',
-        price: 1399,
-        mrp: 2999,
-        discountPct: 53,
-        rating: 4.8,
-        ratingCount: 3120,
-        badge: 'NEW SEASON',
-        image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=700&auto=format&fit=crop&q=80'
-      },
-      {
-        id: 'asf-w-02',
-        name: 'Heritage Kalamkari Print Pure Chanderi Saree',
-        brand: 'KALANKARI HOUSE',
-        price: 2499,
-        mrp: 5499,
-        discountPct: 54,
-        rating: 4.9,
-        ratingCount: 1840,
-        badge: 'BESTSELLER',
-        image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=700&auto=format&fit=crop&q=80'
-      },
-      {
-        id: 'asf-w-03',
-        name: 'Cropped Fleece Pullover Hoodie & Joggers Set',
-        brand: 'BLOOMSTREET',
-        price: 1299,
-        mrp: 2799,
-        discountPct: 53,
-        rating: 4.5,
-        ratingCount: 940,
-        badge: 'HOT DEAL',
-        image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&auto=format&fit=crop&q=80'
-      },
-      {
-        id: 'asf-w-04',
-        name: 'Anarkali Embroidered Kurta with Dupatta Set',
-        brand: 'NORTHLINE',
-        price: 1999,
-        mrp: 4299,
-        discountPct: 53,
-        rating: 4.7,
-        ratingCount: 1650,
-        badge: 'BESTSELLER',
-        image: 'https://images.unsplash.com/photo-1583391733975-dd4f74d0811e?w=700&auto=format&fit=crop&q=80'
-      },
-      {
-        id: 'asf-f-01',
-        name: 'Retro Chunky Sole Low-Top Street Sneakers',
-        brand: 'IRONLOOM',
-        price: 1799,
-        mrp: 3599,
-        discountPct: 50,
-        rating: 4.6,
-        ratingCount: 2200,
-        badge: 'NEW SEASON',
-        image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=700&auto=format&fit=crop&q=80'
-      },
-      {
-        id: 'asf-a-01',
-        name: 'Structured Vegan Leather Top-Handle Tote Bag',
-        brand: 'MARIGOLD & CO',
-        price: 1499,
-        mrp: 2999,
-        discountPct: 50,
-        rating: 4.8,
-        ratingCount: 780,
-        badge: 'TRENDING',
-        image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&auto=format&fit=crop&q=80'
-      },
-      {
-        id: 'asf-m-05',
-        name: 'Handloom Slub Cotton Short Kurta',
-        brand: 'WEFT & WARP',
-        price: 899,
-        mrp: 1899,
-        discountPct: 52,
-        rating: 4.6,
-        ratingCount: 1120,
-        badge: 'BESTSELLER',
-        image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=700&auto=format&fit=crop&q=80'
-      },
-      {
-        id: 'asf-a-02',
-        name: 'Minimalist Chronograph Mesh Watch',
-        brand: 'PETAL ROW',
-        price: 1299,
-        mrp: 2999,
-        discountPct: 56,
-        rating: 4.7,
-        ratingCount: 1450,
-        badge: 'HOT DEAL',
-        image: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=700&auto=format&fit=crop&q=80'
-      }
-    ];
-
-    var CATEGORIES = [
-      { name: 'T-Shirts', img: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=200&auto=format&fit=crop&q=80' },
-      { name: 'Dresses', img: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=200&auto=format&fit=crop&q=80' },
-      { name: 'Jeans', img: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&auto=format&fit=crop&q=80' },
-      { name: 'Ethnic Wear', img: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=200&auto=format&fit=crop&q=80' },
-      { name: 'Sarees', img: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=200&auto=format&fit=crop&q=80' },
-      { name: 'Footwear', img: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=200&auto=format&fit=crop&q=80' },
-      { name: 'Handbags', img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=200&auto=format&fit=crop&q=80' },
-      { name: 'Watches', img: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=200&auto=format&fit=crop&q=80' }
-    ];
-
-    function createCardHTML(p) {
-      var badgeClass = p.badge === 'BESTSELLER' ? 'badge-ribbon badge-bestseller' : 'badge-ribbon';
-      return '' +
-        '<div class="product-card">' +
-          '<div class="media-box">' +
-            '<span class="' + badgeClass + '">' + p.badge + '</span>' +
-            '<button class="wish-btn" onclick="this.innerHTML = this.innerHTML === \'♥\' ? \'♡\' : \'♥\';">♡</button>' +
-            '<img src="' + p.image + '" alt="' + p.name + '" loading="lazy" />' +
-            '<div class="rating-pill">' + p.rating + ' ★ <span>(' + p.ratingCount + ')</span></div>' +
-          '</div>' +
-          '<div class="card-info">' +
-            '<div class="brand-title">' + p.brand + '</div>' +
-            '<div class="product-desc">' + p.name + '</div>' +
-            '<div class="price-row">' +
-              '<span class="current-price">₹' + p.price.toLocaleString('en-IN') + '</span>' +
-              '<span class="original-mrp">₹' + p.mrp.toLocaleString('en-IN') + '</span>' +
-              '<span class="discount-tag">(' + p.discountPct + '% OFF)</span>' +
-            '</div>' +
-          '</div>' +
-        '</div>';
-    }
-
-    function renderStorefront() {
-      // 1. Render Categories Rail
-      var catEl = document.getElementById('categoryRail');
-      if (catEl) {
-        catEl.innerHTML = CATEGORIES.map(function(c) {
-          return '<div class="cat-card">' +
-            '<div class="cat-circle" style="background-image:url(\'' + c.img + '\');"></div>' +
-            '<div class="cat-name">' + c.name + '</div>' +
-          '</div>';
-        }).join('');
-      }
-
-      // 2. Render Product Rails
-      var newArr = document.getElementById('newArrivalsGrid');
-      var trend = document.getElementById('trendingGrid');
-      var best = document.getElementById('bestsellersGrid');
-
-      if (newArr) newArr.innerHTML = CATALOG_PRODUCTS.slice(0, 4).map(createCardHTML).join('');
-      if (trend) trend.innerHTML = CATALOG_PRODUCTS.slice(4, 8).map(createCardHTML).join('');
-      if (best) best.innerHTML = CATALOG_PRODUCTS.slice(8, 12).map(createCardHTML).join('');
-    }
-
-    // Direct Instant Execution
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', renderStorefront);
-    } else {
-      renderStorefront();
-    }
-  </script>
+  <!-- Modular Scripts in Order -->
+  <script src="js/categories.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

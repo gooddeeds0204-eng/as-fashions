@@ -3994,13 +3994,7 @@
 ];
 
   /* ---------------------------------------------------------------
-   * Admin overrides (localStorage-backed draft layer)
-   * admin.html never edits PRODUCTS above directly — it stores
-   * adds/edits/deletes here, and getEffectiveProducts() merges them in.
-   * This means admin changes preview live on the storefront immediately
-   * (same browser), without needing a backend. To make changes permanent
-   * for every visitor, use admin.html's "Export products.js" button and
-   * replace this file in the repo.
+   * Admin overrides & Dynamic Storage Engine
    * --------------------------------------------------------------- */
   var OVERRIDES_KEY = 'asf_admin_overrides';
 
@@ -4021,7 +4015,7 @@
     } catch (e) {
       saved = false;
       errorMessage = (e && e.name === 'QuotaExceededError')
-        ? 'Browser storage is full — this usually happens after adding several photos. Use smaller photos, remove an old admin-added photo, or use the Image Manager\u2019s ZIP export instead of embedding photos directly.'
+        ? 'Browser storage is full.'
         : 'Could not save changes: ' + (e && e.message ? e.message : e);
       console.error('[AS FASHIONS admin] Save failed', e);
     }
@@ -4063,9 +4057,9 @@
   function getEffectiveProducts() {
     var overrides = readOverrides();
     var base = PRODUCTS
-      .filter(function (p) { return overrides.deleted.indexOf(p.id) === -1; })
-      .map(function (p) { return overrides.edited[p.id] ? Object.assign({}, p, overrides.edited[p.id]) : p; });
-    return base.concat(overrides.added);
+      .filter(function (p) { return (overrides.deleted || []).indexOf(p.id) === -1; })
+      .map(function (p) { return (overrides.edited && overrides.edited[p.id]) ? Object.assign({}, p, overrides.edited[p.id]) : p; });
+    return base.concat(overrides.added || []);
   }
 
   function getNextProductId() {
@@ -4109,22 +4103,27 @@
     });
   }
 
-  function getNewArrivals() { return getEffectiveProducts().filter(function (p) { return p.isNew; }); }
-  function getBestsellers() { return getEffectiveProducts().filter(function (p) { return p.isBestseller; }); }
-  function getSaleProducts() { return getEffectiveProducts().filter(function (p) { return p.discountPct >= 30; }); }
+  function getNewArrivals() { 
+    var list = getEffectiveProducts().filter(function (p) { return p.isNew; }); 
+    return list.length ? list : getEffectiveProducts().slice(0, 8);
+  }
 
-  // Builds ready-to-commit file text for js/products.js with all current
-  // overrides baked permanently into the PRODUCTS array. Used by
-  // admin.html's "Export products.js" download button.
+  function getBestsellers() { 
+    var list = getEffectiveProducts().filter(function (p) { return p.isBestseller; }); 
+    return list.length ? list : getEffectiveProducts().slice().reverse();
+  }
+
+  function getSaleProducts() { 
+    var list = getEffectiveProducts().filter(function (p) { return p.discountPct >= 30; }); 
+    return list.length ? list : getEffectiveProducts().slice(0, 8);
+  }
+
   function exportProductsFileText() {
     var merged = getEffectiveProducts();
     var json = JSON.stringify(merged, null, 2);
     var lines = [];
     lines.push("/**");
     lines.push(" * AS FASHIONS \u2014 Product Catalog");
-    lines.push(" * Exported from the admin panel. Replace js/products.js in your repo");
-    lines.push(" * with this file, commit, and push to make these changes permanent");
-    lines.push(" * for every visitor.");
     lines.push(" */");
     lines.push("(function (global) {");
     lines.push("  'use strict';");

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Orders — AS FASHIONS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/checkout.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+  .account-layout {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 30px;
+  }
+  .account-nav {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: fit-content;
+  }
+  .account-nav a {
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .account-nav a.active, .account-nav a:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+    font-weight: 600;
+  }
+  .order-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+  }
+  .order-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .order-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  .order-id { font-weight: 700; color: #0f172a; margin: 0; font-size: 14px; }
+  .order-date { color: #64748b; font-size: 12px; margin: 2px 0 0; }
+  .order-status-pill {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .order-status-pill.cancelled {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+  .order-items-preview {
+    font-size: 14px;
+    color: #334155;
+    margin: 0 0 12px;
+  }
+  .order-card-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #f1f5f9;
+  }
+  .order-total { font-weight: 700; color: #0f172a; }
+  @media(max-width: 768px) {
+    .account-layout { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="account-layout">
+  <nav class="account-nav">
+    <a href="profile.html">My Profile</a>
+    <a href="orders.html" class="active">My Orders</a>
+    <a href="addresses.html">Addresses</a>
+    <a href="wishlist.html">Wishlist</a>
+    <a href="returns.html">Returns</a>
+    <a href="help.html">Help</a>
+  </nav>
+  <div>
+    <h1 style="font-size:22px; font-weight:700; margin:0 0 18px; color:#0f172a;">My Orders</h1>
+    <div id="ordersList"></div>
+  </div>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/categories.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/search.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/offers.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/reviews.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/header.js"></script>
+<script>
+(function () {
+  'use strict';
+  var ordersApi = window.ASF.orders;
+  var ui = window.ASF.ui;
+
+  function render() {
+    var orders = ordersApi.getOrders();
+    var el = document.getElementById('ordersList');
+    if (!orders.length) {
+      el.innerHTML = '<div class="order-card" style="text-align:center; padding:40px 20px;"><p style="font-size:14px; margin-bottom:14px; color:#64748b;">No orders yet.</p><a href="index.html" class="btn btn-primary" style="display:inline-block; padding:10px 20px;">Start Shopping</a></div>';
+      return;
+    }
+    el.innerHTML = orders.map(function (o) {
+      var itemNames = o.items.map(function (i) { return i.product ? i.product.name : ''; }).filter(Boolean).join(', ');
+      var date = new Date(o.placedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+      return '<a href="order-tracking.html?id=' + o.id + '" class="order-card" style="display:block; text-decoration:none; color:inherit;">' +
+        '<div class="order-card-head">' +
+          '<div><p class="order-id">Order #' + o.id + '</p><p class="order-date">Placed on ' + date + '</p></div>' +
+          '<span class="order-status-pill' + (o.status === 'Cancelled' ? ' cancelled' : '') + '">' + o.status + '</span>' +
+        '</div>' +
+        '<p class="order-items-preview">' + itemNames + '</p>' +
+        '<div class="order-card-foot"><span class="order-total">' + ui.money(o.total) + '</span><span style="font-size:12px; color:#d97706; font-weight:600;">Track order &rarr;</span></div>' +
+      '</a>';
+    }).join('');
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

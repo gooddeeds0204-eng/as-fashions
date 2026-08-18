@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — AS FASHIONS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+  .auth-page {
+    min-height: calc(100vh - 140px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+    background: #f8fafc;
+  }
+  .auth-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 440px;
+    padding: 36px 32px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    border: 1px solid #e2e8f0;
+  }
+  .auth-card h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 6px 0;
+  }
+  .auth-card .sub {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 24px;
+  }
+  .auth-card label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 6px;
+  }
+  .auth-card input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1.5px solid #cbd5e1;
+    font-size: 14px;
+    margin-bottom: 16px;
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+  .auth-card input:focus {
+    border-color: #0f172a;
+    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+  }
+  .btn-primary {
+    background: #0f172a;
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .btn-primary:hover {
+    background: #1e293b;
+  }
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #94a3b8;
+    font-size: 13px;
+  }
+  .auth-divider::before, .auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .auth-divider:not(:empty)::before { margin-right: .75em; }
+  .auth-divider:not(:empty)::after { margin-left: .75em; }
+  .btn-add {
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff;
+    color: #334155;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .btn-add:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+  }
+  .auth-links {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #64748b;
+  }
+  .auth-links a {
+    color: #0f172a;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .auth-links a:hover { text-decoration: underline; }
+  .auth-error {
+    color: #ef4444;
+    font-size: 13px;
+    margin-bottom: 12px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="siteHeader"></div>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>Welcome back</h1>
+    <p class="sub">Login to continue to AS Fashions</p>
+    <form id="loginForm">
+      <label>Email or phone</label>
+      <input type="text" id="loginIdentifier" required>
+      <label>Password</label>
+      <input type="password" id="loginPassword" required>
+      <p class="auth-error" id="loginError"></p>
+      <button type="submit" class="btn btn-primary" style="width:100%; padding:13px;">Login</button>
+    </form>
+    <div class="auth-divider">or</div>
+    <a href="otp.html" class="btn-add" style="display:block; text-align:center; padding:11px;">Login with OTP</a>
+    <div class="auth-links">
+      <span>New here? <a href="register.html">Create account</a></span>
+    </div>
+  </div>
+</div>
+
+<div id="siteFooter"></div>
+
+<script src="js/categories.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/search.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/offers.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/reviews.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/header.js"></script>
+<script>
+(function () {
+  'use strict';
+  var authApi = window.ASF.auth;
+
+  if (authApi.isLoggedIn()) {
+    window.location.href = 'profile.html';
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var identifier = document.getElementById('loginIdentifier').value.trim();
+    var password = document.getElementById('loginPassword').value;
+    var result = authApi.login(identifier, password);
+    var errEl = document.getElementById('loginError');
+    if (!result.success) {
+      errEl.textContent = result.message;
+      errEl.style.display = 'block';
+      return;
+    }
+    window.location.href = 'profile.html';
+  });
+})();
+</script>
+</body>
+</html>

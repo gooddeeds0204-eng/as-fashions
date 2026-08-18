@@ -1,5 +1,8 @@
 /**
- * AS FASHIONS — Shared UI Engine (Myntra-Grade Layout)
+ * AS FASHIONS — Shared UI helpers
+ * Used by index.html, category.html, product.html, cart.html, wishlist.html.
+ * Keeping product-card rendering here means every page looks and behaves
+ * identically instead of drifting apart.
  */
 (function (global) {
   'use strict';
@@ -13,6 +16,8 @@
     return 'hsl(' + hue + ', 30%, 92%)';
   }
 
+  // Builds a <article class="product-card"> element wired with wishlist
+  // toggle, add-to-bag, and a click-through link to the product detail page.
   function productCard(p) {
     var wishApi = global.ASF.wishlist;
     var wished = wishApi ? wishApi.isWishlisted(p.id) : false;
@@ -48,11 +53,13 @@
       '</div>';
 
     var imgEl = card.querySelector('.product-media-img');
+    // If the real product image fails to load, fall back to a stable stock photo
     imgEl.addEventListener('error', function () {
       if (imgEl.dataset.fallbackApplied) { imgEl.style.display = 'none'; return; }
       imgEl.dataset.fallbackApplied = '1';
       imgEl.src = 'https://picsum.photos/seed/' + encodeURIComponent(p.id) + '/450/600';
     });
+    imgEl.addEventListener('load', function () { imgEl.style.display = 'block'; });
 
     return card;
   }
@@ -63,7 +70,7 @@
     if (!el) return;
     el.innerHTML = '';
     if (!products.length) {
-      el.innerHTML = '<p class="empty-state">No products found matching your criteria.</p>';
+      el.innerHTML = '<p class="empty-state">No products found.</p>';
       return;
     }
     var list = opts.limit ? products.slice(0, opts.limit) : products;
@@ -71,13 +78,14 @@
       var card = productCard(p);
       if (opts.reveal !== false) {
         card.classList.add('reveal');
-        card.style.transitionDelay = Math.min(i, 8) * 35 + 'ms';
+        card.style.transitionDelay = Math.min(i, 8) * 40 + 'ms';
       }
       el.appendChild(card);
     });
     if (opts.reveal !== false) observeReveal(el.querySelectorAll('.reveal'));
   }
 
+  // Fades/slides elements into view the first time they scroll into the viewport.
   var revealObserver = null;
   function observeReveal(nodes) {
     if (typeof IntersectionObserver === 'undefined') {
@@ -92,11 +100,12 @@
             revealObserver.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     }
     nodes.forEach(function (n) { revealObserver.observe(n); });
   }
 
+  // Wires up clicks for .wish-btn / .btn-add anywhere inside root.
   function bindProductCardEvents(root) {
     root = root || document.body;
     root.addEventListener('click', function (e) {

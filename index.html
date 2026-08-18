@@ -1,150 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AS FASHIONS — Curated Luxury &amp; Everyday Style</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AS FASHIONS — Curated Luxury Fashion</title>
   
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   
-  <!-- CSS Stylesheets -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/product.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <style>
+    /* Direct Layout & Card Fallback Styling */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 16px 0 32px;
+    }
+    @media (max-width: 900px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .product-media-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 133.33%; /* 3:4 aspect ratio */
+      background: #f5f5f5;
+    }
+    .product-media-wrap img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .product-details {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .product-brand {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111;
+      text-transform: uppercase;
+      margin: 0 0 4px;
+    }
+    .product-title {
+      font-size: 13px;
+      color: #666;
+      margin: 0 0 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .product-title a { text-decoration: none; color: inherit; }
+    .product-pricing {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      margin-top: auto;
+    }
+    .product-price { font-weight: 700; color: #111; }
+    .product-mrp { font-size: 12px; text-decoration: line-through; color: #888; }
+    .product-discount { font-size: 12px; color: #ff3f6c; font-weight: 600; }
+    .product-ribbon {
+      position: absolute;
+      top: 8px; left: 8px;
+      z-index: 2;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: #ff3f6c;
+      color: #fff;
+      text-transform: uppercase;
+    }
+    .wishlist-btn {
+      position: absolute;
+      top: 8px; right: 8px;
+      z-index: 2;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .quick-add-btn {
+      position: absolute;
+      bottom: 8px; right: 8px;
+      z-index: 2;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .category-rail, .subcat-rail {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 12px 0;
+      scrollbar-width: none;
+    }
+    .category-rail::-webkit-scrollbar, .subcat-rail::-webkit-scrollbar { display: none; }
+    .category-card, .subcat-card {
+      flex: 0 0 100px;
+      text-align: center;
+      text-decoration: none;
+      color: #222;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .category-swatch, .subcat-swatch {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 8px;
+      background: #f0f0f0;
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Injected Header & Cart Drawer -->
-  <div id="siteHeader"></div>
+  <!-- Top Notification -->
+  <div class="top-banner">Get 10% OFF on your first order. Use code: <strong>WELCOME10</strong></div>
 
-  <main>
-    <!-- Hero Slider -->
-    <section class="hero-grid">
-      <div class="hero-panel-main">
-        <button id="heroPrev" class="hero-arrow hero-arrow-left" aria-label="Previous slide">&#10094;</button>
-        <div class="hero-text-panel">
-          <p id="heroSub" class="promo-eyebrow">Handpicked styles from premium labels</p>
-          <h1 id="heroTitle">Curated Fashion<br><span>For Every You</span></h1>
-          <p id="heroDiscount" class="hero-discount">50–80% OFF</p>
-          <a href="category.html?filter=sale" class="btn btn-primary" style="width: fit-content;">Explore Collection</a>
-        </div>
-        <div id="heroImage" class="hero-image"></div>
-        <button id="heroNext" class="hero-arrow hero-arrow-right" aria-label="Next slide">&#10095;</button>
+  <!-- Main Navigation -->
+  <header class="site-header">
+    <div class="header-container container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-accent">AS</span> FASHIONS
+      </a>
+      <div class="header-search">
+        <input type="text" id="globalSearchInput" placeholder="Search for products, brands and more" />
+        <button id="globalSearchBtn" aria-label="Search">🔍</button>
       </div>
-      <div id="heroDots" class="hero-dots"></div>
-    </section>
-
-    <!-- Promo Highlights Strip -->
-    <section id="promoStrip" class="promo-strip"></section>
-
-    <!-- Categories Rail -->
-    <section class="section">
-      <div class="section-head">
-        <h2>Shop By Category</h2>
-        <a href="category.html">View All &rarr;</a>
-      </div>
-      <div id="categoryRail" class="category-rail"></div>
-    </section>
-
-    <!-- Subcategories Circle Rail -->
-    <section class="section" style="padding-top: 0;">
-      <div id="subcatRail" class="subcat-rail"></div>
-    </section>
-
-    <!-- Flash Sale Countdown Banner -->
-    <div class="sale-banner">
-      <div class="sale-banner-inner">
-        <div>
-          <h3 class="sale-banner-title">The AS Fashions Flash Sale</h3>
-          <p class="sale-banner-sub">Limited time price drops on season favorites</p>
-        </div>
-        <div id="countdown" class="countdown">
-          <div class="countdown-unit"><div id="cdHours" class="num">00</div><div class="lbl">Hours</div></div>
-          <div class="countdown-unit"><div id="cdMinutes" class="num">00</div><div class="lbl">Mins</div></div>
-          <div class="countdown-unit"><div id="cdSeconds" class="num">00</div><div class="lbl">Secs</div></div>
-        </div>
-        <a href="category.html?filter=sale" class="btn btn-primary">Shop All Deals</a>
+      <div class="header-actions">
+        <a href="category.html?gender=men">Men</a>
+        <a href="category.html?gender=women">Women</a>
+        <a href="cart.html" class="cart-link">👜 <span id="cartCount">0</span></a>
       </div>
     </div>
+  </header>
 
-    <!-- New Arrivals Grid -->
-    <section class="section">
-      <div class="section-head">
-        <h2>New Arrivals</h2>
-        <a href="category.html?filter=new">View All &rarr;</a>
+  <main class="main-content container">
+
+    <!-- Hero Banner -->
+    <section class="hero-section" style="margin: 20px 0;">
+      <div class="hero-slider" id="heroImage" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop&q=80'); background-size: cover; background-position: center; min-height: 240px; border-radius: 12px; padding: 24px; color: #fff; display: flex; flex-direction: column; justify-content: center;">
+        <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Handpicked styles from premium labels</span>
+        <h2 id="heroTitle" style="font-size: 26px; margin: 8px 0; color: #d4a373;">CURATED FASHION<br><span style="color: #fff;">FOR EVERY YOU</span></h2>
+        <p id="heroDiscount" style="font-weight: 700; font-size: 16px; margin: 0 0 14px;">50–80% OFF</p>
+        <a href="category.html" class="btn" style="display: inline-block; width: max-content; padding: 10px 20px; background: #c67d0a; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 700;">EXPLORE COLLECTION</a>
       </div>
-      <div id="newArrivalsRail" class="product-grid"></div>
     </section>
 
-    <!-- Trending Now Grid -->
-    <section class="section">
-      <div class="section-head">
-        <h2>Trending Now</h2>
-        <a href="category.html?filter=trending">View All &rarr;</a>
+    <!-- Shop By Category -->
+    <section style="margin: 28px 0;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 18px; margin: 0;">| Shop By Category</h3>
+        <a href="category.html" style="font-size: 12px; color: #c67d0a; text-decoration: none;">View All →</a>
       </div>
-      <div id="trendingRail" class="product-grid"></div>
+      <div class="category-rail" id="categoryRail"></div>
     </section>
 
-    <!-- Bestsellers Grid -->
-    <section class="section">
-      <div class="section-head">
-        <h2>Best of AS Fashions</h2>
-        <a href="category.html?filter=bestseller">View All &rarr;</a>
+    <!-- Flash Sale Bar -->
+    <div style="background: linear-gradient(90deg, #ff007a, #ff5e3a); color: #fff; border-radius: 12px; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; margin: 24px 0;">
+      <div>
+        <h4 style="margin: 0; font-size: 15px;">The AS Fashions Flash Sale</h4>
+        <small>Limited time price drops on season favorites</small>
       </div>
-      <div id="bestsellersRail" class="product-grid"></div>
+      <a href="category.html" style="background: #fff; color: #ff007a; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 12px;">SHOP ALL DEALS</a>
+    </div>
+
+    <!-- New Arrivals Rail -->
+    <section style="margin: 28px 0;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 18px; margin: 0;">| New Arrivals</h3>
+        <a href="category.html" style="font-size: 12px; color: #c67d0a; text-decoration: none;">View All →</a>
+      </div>
+      <div class="product-grid" id="newArrivalsRail"></div>
     </section>
 
-    <!-- Trust Badges Strip -->
-    <section class="trust-badges">
-      <div class="trust-badge">
-        <span class="icon">&#11088;</span>
-        <div>
-          <div class="label">Premium Quality</div>
-          <div class="sub">100% Original Products</div>
-        </div>
+    <!-- Trending Now Rail -->
+    <section style="margin: 28px 0;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 18px; margin: 0;">| Trending Now</h3>
+        <a href="category.html" style="font-size: 12px; color: #c67d0a; text-decoration: none;">View All →</a>
       </div>
-      <div class="trust-badge">
-        <span class="icon">&#128102;</span>
-        <div>
-          <div class="label">Trendy Collections</div>
-          <div class="sub">Fresh styles every week</div>
-        </div>
-      </div>
-      <div class="trust-badge">
-        <span class="icon">&#128176;</span>
-        <div>
-          <div class="label">Best Price</div>
-          <div class="sub">Unbeatable deals</div>
-        </div>
-      </div>
-      <div class="trust-badge">
-        <span class="icon">&#9992;</span>
-        <div>
-          <div class="label">Fast Delivery</div>
-          <div class="sub">Quick &amp; reliable shipping</div>
-        </div>
-      </div>
+      <div class="product-grid" id="trendingRail"></div>
     </section>
+
+    <!-- Best of AS Fashions Rail -->
+    <section style="margin: 28px 0;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 18px; margin: 0;">| Best of AS Fashions</h3>
+        <a href="category.html" style="font-size: 12px; color: #c67d0a; text-decoration: none;">View All →</a>
+      </div>
+      <div class="product-grid" id="bestsellersRail"></div>
+    </section>
+
   </main>
 
-  <!-- Injected Footer -->
-  <div id="siteFooter"></div>
-
-  <!-- Core Scripts -->
+  <!-- Core Scripts in Exact Dependency Order -->
   <script src="js/categories.js"></script>
   <script src="js/products.js"></script>
-  <script src="js/offers.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/wishlist.js"></script>
-  <script src="js/notifications.js"></script>
-  <script src="js/search.js"></script>
-  <script src="js/orders.js"></script>
   <script src="js/ui.js"></script>
-  <script src="js/header.js"></script>
   <script src="js/app.js"></script>
+
+  <!-- Autonomous Instant Render Fallback (Guarantees visible cards) -->
+  <script>
+    (function checkRender() {
+      setTimeout(function () {
+        var rail = document.getElementById('newArrivalsRail');
+        if (rail && rail.children.length === 0 && window.ASF && window.ASF.products && window.ASF.ui) {
+          var prods = window.ASF.products.getAllProducts();
+          window.ASF.ui.renderProductGrid('newArrivalsRail', prods.slice(0, 4), { limit: 4 });
+          window.ASF.ui.renderProductGrid('trendingRail', prods.slice(4, 8), { limit: 4 });
+          window.ASF.ui.renderProductGrid('bestsellersRail', prods.slice(8, 12), { limit: 4 });
+        }
+      }, 300);
+    })();
+  </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 /**
- * AS FASHIONS — Shared UI Engine (Myntra Pro Clean Layout)
+ * AS FASHIONS — Shared UI Engine (Myntra-Grade Card System)
  */
 (function (global) {
   'use strict';
@@ -21,7 +21,6 @@
 
     var ratingCountFormatted = p.ratingCount >= 1000 ? (p.ratingCount / 1000).toFixed(1) + 'k' : (p.ratingCount || 0);
 
-    // Dynamic Top-Left Highlight Tag
     var highlightHtml = '';
     if (p.isBestseller) {
       highlightHtml = '<div class="highlight-ribbon rising-star">Rising Star</div>';
@@ -34,7 +33,6 @@
     card.innerHTML =
       '<div class="card-media-box">' +
         '<a href="product.html?id=' + encodeURIComponent(p.id) + '" class="media-link">' +
-          '<div class="media-placeholder" style="background:' + colorFromString(p.id) + '"></div>' +
           '<img class="card-img" src="' + p.image + '" alt="' + p.name + '" loading="lazy">' +
         '</a>' +
         highlightHtml +
@@ -72,7 +70,7 @@
     if (!el) return;
     el.innerHTML = '';
     if (!products.length) {
-      el.innerHTML = '<p class="empty-plp" style="grid-column:1/-1;">No products found.</p>';
+      el.innerHTML = '<p class="empty-state" style="grid-column:1/-1;">No products found.</p>';
       return;
     }
     var list = opts.limit ? products.slice(0, opts.limit) : products;

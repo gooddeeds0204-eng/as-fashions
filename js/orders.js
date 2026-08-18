@@ -1,12 +1,18 @@
 /**
- * AS FASHIONS — Orders Engine
- * Persists to localStorage under 'asf_orders'.
+ * AS FASHIONS — Orders (demo)
+ * No backend, so orders live in this browser's localStorage. Status
+ * automatically "progresses" (Placed → Packed → Shipped → Out for
+ * Delivery → Delivered) based on how much time has passed since the
+ * order was placed, purely for demo realism — replace with real order
+ * data from a backend before going live.
  */
 (function (global) {
   'use strict';
 
   var ORDERS_KEY = 'asf_orders';
   var STATUS_STEPS = ['Placed', 'Packed', 'Shipped', 'Out for Delivery', 'Delivered'];
+  // Demo progression: one step advances every 90 seconds after placing,
+  // so testers can actually see the tracking timeline move without waiting days.
   var STEP_INTERVAL_MS = 90 * 1000;
 
   function readOrders() {
@@ -49,14 +55,14 @@
     };
     var orders = readOrders();
     orders.unshift(order);
-    if (!writeOrders(orders)) return { success: false, message: 'Could not save order (storage full).' };
+    if (!writeOrders(orders)) return { success: false, message: 'Could not save order (storage full?).' };
     return { success: true, order: order };
   }
 
   function getOrders() {
     var user = global.ASF.auth ? global.ASF.auth.getCurrentUser() : null;
     var all = readOrders().map(withComputedStatus);
-    if (!user) return all;
+    if (!user) return all; // guest checkout demo: show all orders in this browser
     return all.filter(function (o) { return o.userId === user.userId || o.userId === 'guest'; });
   }
 
@@ -74,7 +80,11 @@
     return { success: true };
   }
 
-  function updateOrderStatus(id, status) {
+  function getAllOrdersAdmin() {
+    return readOrders().map(withComputedStatus);
+  }
+
+  function updateOrderStatusAdmin(id, status) {
     var orders = readOrders();
     var idx = orders.findIndex(function (o) { return o.id === id; });
     if (idx === -1) return { success: false, message: 'Order not found.' };
@@ -91,8 +101,8 @@
     getOrderById: getOrderById,
     cancelOrder: cancelOrder,
     admin: {
-      getAllOrders: function () { return readOrders().map(withComputedStatus); },
-      updateOrderStatus: updateOrderStatus
+      getAllOrders: getAllOrdersAdmin,
+      updateOrderStatus: updateOrderStatusAdmin
     }
   };
 })(window);

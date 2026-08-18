@@ -1,75 +1,60 @@
-/* AS FASHIONS — Product Listing & Details (Myntra Pro UI) */
+/* AS FASHIONS — Product listing (PLP) & product detail (PDP) styles */
 
-.breadcrumb {
-  font-size: 12px;
-  color: var(--ink-soft);
-  padding: 16px 24px 8px;
-  max-width: 1280px;
-  margin: 0 auto;
-}
+.breadcrumb { font-size: 12px; color: var(--ink-soft); padding: 14px 24px 0; max-width: 1280px; margin: 0 auto; }
 .breadcrumb a { color: var(--ink-soft); }
 .breadcrumb a:hover { color: var(--marigold-deep); }
 
-/* PLP Structure */
-.plp-layout {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 28px;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 14px 24px 60px;
-  align-items: start;
-}
-.plp-title { font-family: var(--font-display); font-size: 24px; font-weight: 700; margin: 0 0 2px; }
-.plp-count { font-size: 13px; color: var(--ink-soft); margin: 0 0 16px; }
+.pdp-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto; padding: 20px 24px 60px; align-items: start; }
+.pdp-gallery-main { aspect-ratio: 3/4; border-radius: var(--radius); overflow: hidden; position: relative; background: var(--bone-deep); }
+.pdp-gallery-main img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.pdp-thumbs { display: flex; gap: 8px; margin-top: 10px; }
+.pdp-thumb { width: 64px; height: 80px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); cursor: pointer; background: var(--bone-deep); }
+.pdp-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-.filter-panel {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 20px;
-  position: sticky;
-  top: 84px;
-}
-.filter-group { margin-bottom: 20px; border-bottom: 1px solid #f2ece4; padding-bottom: 16px; }
-.filter-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-.filter-group h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 10px; color: var(--ink); }
-.filter-group label { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 8px; cursor: pointer; color: var(--ink-soft); }
-.filter-group label:hover { color: var(--ink); }
-.filter-clear { font-size: 12px; color: #ff3f6c; font-weight: 700; background: none; }
+.pdp-brand { font-size: 14px; font-weight: 700; margin: 0 0 4px; }
+.pdp-name { font-size: 20px; color: var(--ink-soft); margin: 0 0 12px; font-weight: 400; }
+.pdp-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+.pdp-price { font-size: 26px; font-weight: 700; }
+.pdp-mrp { font-size: 15px; color: var(--ink-soft); text-decoration: line-through; }
+.pdp-discount { font-size: 14px; color: var(--maroon); font-weight: 700; }
+.pdp-rating { font-size: 13px; color: var(--marigold-deep); margin: 6px 0 20px; }
 
-.plp-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.plp-toolbar select {
-  padding: 8px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  font-size: 13px;
-  background: var(--white);
-  outline: none;
-}
-.subcat-chip {
-  padding: 6px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  font-size: 12px;
-  font-weight: 600;
-  background: var(--white);
-  transition: all .2s;
-}
-.subcat-chip.active, .subcat-chip:hover {
-  background: var(--ink);
-  color: #fff;
-  border-color: var(--ink);
-}
+.selector-group { margin-bottom: 22px; }
+.selector-group h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 10px; }
+.swatch-btn { padding: 8px 14px; border: 1px solid var(--line); border-radius: var(--radius); font-size: 13px; background: var(--white); margin-right: 8px; margin-bottom: 8px; }
+.swatch-btn.selected { border-color: var(--ink); background: var(--ink); color: var(--bone); }
 
-/* Myntra Card Grid */
+.qty-stepper { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: var(--radius); }
+.qty-stepper button { padding: 8px 14px; font-size: 15px; }
+.qty-stepper span { padding: 0 14px; font-size: 14px; min-width: 24px; text-align: center; display: inline-block; }
+
+.pdp-actions { display: flex; gap: 12px; margin: 24px 0; }
+.pdp-actions .btn-add { flex: 1; padding: 14px; font-size: 13px; }
+.pdp-wish-btn { padding: 14px 20px; border: 1px solid var(--ink); border-radius: var(--radius); font-size: 18px; }
+.pdp-wish-btn.active { color: var(--maroon); border-color: var(--maroon); }
+
+.pdp-meta-row { font-size: 13px; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 16px; margin-top: 16px; }
+.pdp-added-note { font-size: 12px; color: var(--marigold-deep); font-weight: 600; margin-top: 8px; display: none; }
+.related-section { max-width: 1280px; margin: 0 auto; padding: 40px 24px 60px; }
+.related-section h2 { font-family: var(--font-display); font-size: 22px; margin: 0 0 20px; }
+
+.plp-layout { display: grid; grid-template-columns: 220px 1fr; gap: 28px; max-width: 1280px; margin: 0 auto; padding: 18px 24px 60px; align-items: start; }
+.plp-title { font-family: var(--font-display); font-size: 26px; margin: 0 0 4px; }
+.plp-count { font-size: 13px; color: var(--ink-soft); margin: 0 0 18px; }
+.filter-panel { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; position: sticky; top: 84px; }
+.filter-group { margin-bottom: 20px; }
+.filter-group h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 10px; }
+.filter-group label { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 8px; cursor: pointer; }
+.filter-clear { font-size: 12px; color: var(--marigold-deep); font-weight: 600; background:none; }
+
+.plp-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
+.plp-toolbar select { padding: 8px 10px; border: 1px solid var(--line); border-radius: var(--radius); font-size: 13px; font-family: inherit; background: var(--white); }
+.mobile-filter-toggle { display: none; }
+.empty-plp { padding: 60px 20px; text-align: center; color: var(--ink-soft); font-size: 14px; }
+.subcat-chip { padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; background: var(--white); }
+.subcat-chip.active { background: var(--ink); color: var(--bone); border-color: var(--ink); }
+
+/* Myntra Grid Card Styles */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -138,8 +123,8 @@
   bottom: 8px;
   right: 8px;
   background: #ffffff;
-  color: #ff3f6c;
-  border: 1px solid #ff3f6c;
+  color: var(--maroon);
+  border: 1px solid var(--maroon);
   border-radius: 6px;
   padding: 4px 10px;
   font-size: 11.5px;
@@ -153,7 +138,7 @@
   transition: all 0.2s ease;
 }
 .quick-add-btn:hover {
-  background: #ff3f6c;
+  background: var(--maroon);
   color: #ffffff;
 }
 
@@ -175,7 +160,7 @@
   z-index: 2;
   transition: transform 0.15s ease;
 }
-.product-media-wrap .wish-btn.active { color: #ff3f6c; }
+.product-media-wrap .wish-btn.active { color: var(--maroon); }
 
 .product-card.myntra-style .product-info {
   padding: 10px 12px 14px;
@@ -207,51 +192,5 @@
 }
 .product-card.myntra-style .product-price { font-size: 13.5px; font-weight: 700; color: #111827; }
 .product-card.myntra-style .mrp { font-size: 11.5px; color: #9ca3af; text-decoration: line-through; }
-.product-card.myntra-style .off-pct { font-size: 11.5px; color: #ff3f6c; font-weight: 700; }
-.best-price-tag { font-size: 11px; color: #03a685; font-weight: 600; margin: 4px 0 0; }
-
-/* PDP Styles */
-.pdp-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 24px 24px 60px;
-  align-items: start;
-}
-.pdp-gallery-main {
-  aspect-ratio: 3/4;
-  border-radius: var(--radius);
-  overflow: hidden;
-  position: relative;
-  background: var(--bone-deep);
-}
-.pdp-gallery-main img { width: 100%; height: 100%; object-fit: cover; }
-.pdp-thumbs { display: flex; gap: 10px; margin-top: 12px; }
-.pdp-thumb { width: 70px; height: 90px; border-radius: 8px; overflow: hidden; border: 1.5px solid transparent; cursor: pointer; }
-.pdp-thumb.active, .pdp-thumb:hover { border-color: var(--ink); }
-.pdp-thumb img { width: 100%; height: 100%; object-fit: cover; }
-
-.pdp-brand { font-size: 18px; font-weight: 700; margin: 0 0 4px; }
-.pdp-name { font-size: 16px; color: var(--ink-soft); margin: 0 0 14px; }
-.pdp-price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
-.pdp-price { font-size: 28px; font-weight: 700; color: #111827; }
-.pdp-mrp { font-size: 16px; color: var(--ink-soft); text-decoration: line-through; }
-.pdp-discount { font-size: 16px; color: #ff3f6c; font-weight: 700; }
-.pdp-rating { font-size: 13px; color: var(--marigold-deep); font-weight: 600; margin: 8px 0 20px; }
-
-.selector-group { margin-bottom: 22px; }
-.selector-group h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 10px; }
-.swatch-btn { padding: 8px 16px; border: 1px solid var(--line); border-radius: var(--radius-pill); font-size: 13px; font-weight: 600; background: #fff; margin-right: 8px; margin-bottom: 8px; }
-.swatch-btn.selected { border-color: var(--ink); background: var(--ink); color: #fff; }
-
-.qty-stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: var(--radius-pill); }
-.qty-stepper button { padding: 6px 14px; font-size: 16px; }
-.qty-stepper span { padding: 0 12px; font-size: 14px; font-weight: 700; }
-
-.pdp-actions { display: flex; gap: 14px; margin: 26px 0; }
-.pdp-actions .btn-add { flex: 1; padding: 14px; font-size: 13px; background: #ff3f6c; border-color: #ff3f6c; color: #fff; }
-.pdp-actions .btn-add:hover { background: #e0325b; }
-.pdp-wish-btn { padding: 12px 20px; border: 1.5px solid var(--line); border-radius: var(--radius-pill); font-size: 18px; }
-.pdp-wish-btn.active { color: #ff3f6c; border-color: #ff3f6c; }
+.product-card.myntra-style .off-pct { font-size: 11.5px; color: var(--maroon); font-weight: 700; }
+.best-price-tag { font-size: 11px; color: var(--forest); font-weight: 600; margin: 4px 0 0; }

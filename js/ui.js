@@ -204,9 +204,9 @@
       isBestseller: true,
       colors: ['Emerald Green', 'Royal Crimson', 'Teal'],
       sizes: ['S', 'M', 'L', 'XL'],
-      image: 'https://images.unsplash.com/photo-1583391733975-dd4f74d0811e?w=700&auto=format&fit=crop&q=80',
+      image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=700&auto=format&fit=crop&q=80',
       images: [
-        'https://images.unsplash.com/photo-1583391733975-dd4f74d0811e?w=700&auto=format&fit=crop&q=80'
+        'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=700&auto=format&fit=crop&q=80'
       ],
       description: 'Zari and sequin embroidered rayon flared Anarkali paired with tapered pants and a sheer organza bordered dupatta.'
     },
@@ -284,18 +284,29 @@
   function getStoredOverrides() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch (e) { return null; }
+      var parsed = raw ? JSON.parse(raw) : null;
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
+      return null;
+    } catch (e) {
+      return null;
+    }
   }
 
   function setStoredOverrides(list) {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); return true; }
-    catch (e) { console.error('Storage full / save failed', e); return false; }
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      return true;
+    } catch (e) {
+      console.error('Storage full / save failed', e);
+      return false;
+    }
   }
 
   function getAllProducts() {
     var overrides = getStoredOverrides();
-    return Array.isArray(overrides) && overrides.length ? overrides : PRODUCTS;
+    return (overrides && overrides.length) ? overrides : PRODUCTS;
   }
 
   function getProductById(id) {
@@ -304,7 +315,7 @@
 
   function getProductsByCategory(catId) {
     var all = getAllProducts();
-    var catApi = global.ASF.categories;
+    var catApi = global.ASF && global.ASF.categories;
     if (!catApi || typeof catApi.isDescendantOf !== 'function') {
       return all.filter(function (p) { return p.categoryId === catId; });
     }
@@ -314,19 +325,21 @@
   }
 
   function getNewArrivals() {
-    return getAllProducts().filter(function (p) { return p.isNew; });
+    var list = getAllProducts().filter(function (p) { return p.isNew; });
+    return list.length ? list : getAllProducts().slice(0, 8);
   }
 
   function getBestsellers() {
-    return getAllProducts().filter(function (p) { return p.isBestseller; });
+    var list = getAllProducts().filter(function (p) { return p.isBestseller; });
+    return list.length ? list : getAllProducts().slice().reverse();
   }
 
   function searchProducts(query) {
     var q = (query || '').trim().toLowerCase();
     if (!q) return [];
     return getAllProducts().filter(function (p) {
-      return p.name.toLowerCase().indexOf(q) !== -1 ||
-             p.brand.toLowerCase().indexOf(q) !== -1 ||
+      return (p.name && p.name.toLowerCase().indexOf(q) !== -1) ||
+             (p.brand && p.brand.toLowerCase().indexOf(q) !== -1) ||
              (p.description && p.description.toLowerCase().indexOf(q) !== -1);
     });
   }

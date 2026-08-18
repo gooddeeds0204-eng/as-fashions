@@ -1,108 +1,84 @@
 /**
- * AS FASHIONS — Orders (demo)
- * No backend, so orders live in this browser's localStorage. Status
- * automatically "progresses" (Placed → Packed → Shipped → Out for
- * Delivery → Delivered) based on how much time has passed since the
- * order was placed, purely for demo realism — replace with real order
- * data from a backend before going live.
+ * AS FASHIONS — Offers & Coupons
+ * Simple client-side coupon validation for demo purposes. In production,
+ * coupon validation should happen server-side at checkout.
  */
 (function (global) {
   'use strict';
 
-  var ORDERS_KEY = 'asf_orders';
-  var STATUS_STEPS = ['Placed', 'Packed', 'Shipped', 'Out for Delivery', 'Delivered'];
-  // Demo progression: one step advances every 90 seconds after placing,
-  // so testers can actually see the tracking timeline move without waiting days.
-  var STEP_INTERVAL_MS = 90 * 1000;
+  var COUPONS = [
+    { code: 'WELCOME10', type: 'percent', value: 10, minOrder: 999, label: 'Flat 10% off on your first order' },
+    { code: 'AS300', type: 'flat', value: 300, minOrder: 1999, label: '₹300 off on orders above ₹1999' },
+    { code: 'BIGSALE20', type: 'percent', value: 20, minOrder: 2999, label: '20% off on orders above ₹2999' }
+  ];
 
-  function readOrders() {
+  var PROMO_BANNERS = [
+    { id: 'promo-1', eyebrow: 'New Season', title: 'New Styles', subtitle: 'Up to 70% Off', ctaLabel: 'Shop Now', link: 'category.html?filter=new', tone: 'tone-a', img: 'https://picsum.photos/seed/asf-promo-newseason/500/300' },
+    { id: 'promo-2', eyebrow: 'Limited Time Offer', title: 'Extra 10% Off', subtitle: 'On Prepaid Orders', ctaLabel: 'Shop Now', link: 'category.html', tone: 'tone-b', img: '' },
+    { id: 'promo-3', eyebrow: 'Student Discount', title: 'Extra 15% Off', subtitle: 'Verify with Student ID', ctaLabel: 'Get Discount', link: 'category.html', tone: 'tone-c', img: 'https://picsum.photos/seed/asf-promo-student/500/300' }
+  ];
+
+  function getCoupons() {
     try {
-      var raw = localStorage.getItem(ORDERS_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch (e) { return []; }
+      var raw = localStorage.getItem('asf_admin_coupons');
+      var adminCoupons = raw ? JSON.parse(raw) : [];
+      var activeAdmin = adminCoupons.filter(function (c) { return c.active; }).map(function (c) {
+        return {
+          code: c.code,
+          type: c.type,
+          value: c.value,
+          minOrder: c.minOrder || 0,
+          label: (c.type === 'percent' ? c.value + '% off' : '₹' + c.value + ' off') + ' on orders above ₹' + (c.minOrder || 0)
+        };
+      });
+      return COUPONS.concat(activeAdmin);
+    } catch (e) {
+      return COUPONS;
+    }
   }
 
-  function writeOrders(orders) {
-    try { localStorage.setItem(ORDERS_KEY, JSON.stringify(orders)); return true; }
-    catch (e) { console.error('Could not save orders', e); return false; }
+  function getPromoBanners() {
+    try {
+      var raw = localStorage.getItem('asf_admin_banners');
+      var adminBanners = raw ? JSON.parse(raw) : [];
+      var activeAdmin = adminBanners.filter(function (b) { return b.active; }).map(function (b, i) {
+        var tones = ['tone-a', 'tone-b', 'tone-c'];
+        return {
+          id: b.id,
+          eyebrow: 'Special Offer',
+          title: b.title,
+          subtitle: b.subtitle,
+          ctaLabel: b.cta || 'Shop Now',
+          link: b.link || 'category.html',
+          tone: tones[i % tones.length],
+          img: ''
+        };
+      });
+      return activeAdmin.length ? activeAdmin : PROMO_BANNERS;
+    } catch (e) {
+      return PROMO_BANNERS;
+    }
   }
 
-  function computeStatus(order) {
-    var elapsed = Date.now() - new Date(order.placedAt).getTime();
-    var stepsElapsed = Math.floor(elapsed / STEP_INTERVAL_MS);
-    var idx = Math.min(STATUS_STEPS.length - 1, stepsElapsed);
-    return STATUS_STEPS[idx];
-  }
-
-  function withComputedStatus(order) {
-    return Object.assign({}, order, { status: order.status === 'Cancelled' ? 'Cancelled' : computeStatus(order) });
-  }
-
-  function createOrder(details) {
-    var user = global.ASF.auth ? global.ASF.auth.getCurrentUser() : null;
-    var order = {
-      id: 'ASF' + Date.now().toString().slice(-8),
-      userId: user ? user.userId : 'guest',
-      items: details.items,
-      subtotal: details.subtotal,
-      discount: details.discount || 0,
-      shipping: details.shipping || 0,
-      total: details.total,
-      address: details.address,
-      paymentMethod: details.paymentMethod,
-      placedAt: new Date().toISOString(),
-      status: 'Placed'
-    };
-    var orders = readOrders();
-    orders.unshift(order);
-    if (!writeOrders(orders)) return { success: false, message: 'Could not save order (storage full?).' };
-    return { success: true, order: order };
-  }
-
-  function getOrders() {
-    var user = global.ASF.auth ? global.ASF.auth.getCurrentUser() : null;
-    var all = readOrders().map(withComputedStatus);
-    if (!user) return all; // guest checkout demo: show all orders in this browser
-    return all.filter(function (o) { return o.userId === user.userId || o.userId === 'guest'; });
-  }
-
-  function getOrderById(id) {
-    var order = readOrders().find(function (o) { return o.id === id; });
-    return order ? withComputedStatus(order) : null;
-  }
-
-  function cancelOrder(id) {
-    var orders = readOrders();
-    var idx = orders.findIndex(function (o) { return o.id === id; });
-    if (idx === -1) return { success: false, message: 'Order not found.' };
-    orders[idx].status = 'Cancelled';
-    writeOrders(orders);
-    return { success: true };
-  }
-
-  function getAllOrdersAdmin() {
-    return readOrders().map(withComputedStatus);
-  }
-
-  function updateOrderStatusAdmin(id, status) {
-    var orders = readOrders();
-    var idx = orders.findIndex(function (o) { return o.id === id; });
-    if (idx === -1) return { success: false, message: 'Order not found.' };
-    orders[idx].status = status;
-    writeOrders(orders);
-    return { success: true };
+  function validateCoupon(code, subtotal) {
+    var couponsList = getCoupons();
+    var coupon = couponsList.find(function (c) { return c.code.toLowerCase() === (code || '').trim().toLowerCase(); });
+    if (!coupon) {
+      return { valid: false, message: 'Invalid coupon code' };
+    }
+    if (subtotal < coupon.minOrder) {
+      return { valid: false, message: 'Add items worth ₹' + (coupon.minOrder - subtotal) + ' more to use this coupon' };
+    }
+    var discount = coupon.type === 'percent'
+      ? Math.round(subtotal * (coupon.value / 100))
+      : coupon.value;
+    return { valid: true, coupon: coupon, discount: discount, message: (coupon.label || coupon.code) + ' applied' };
   }
 
   global.ASF = global.ASF || {};
-  global.ASF.orders = {
-    STATUS_STEPS: STATUS_STEPS,
-    createOrder: createOrder,
-    getOrders: getOrders,
-    getOrderById: getOrderById,
-    cancelOrder: cancelOrder,
-    admin: {
-      getAllOrders: getAllOrdersAdmin,
-      updateOrderStatus: updateOrderStatusAdmin
-    }
+  global.ASF.offers = {
+    getCoupons: getCoupons,
+    getPromoBanners: getPromoBanners,
+    validateCoupon: validateCoupon
   };
 })(window);

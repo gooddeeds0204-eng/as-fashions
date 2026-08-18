@@ -1,127 +1,105 @@
 /**
- * AS FASHIONS — Shared UI Engine (Myntra-Grade Card System)
+ * AS FASHIONS — Shared UI Engine
  */
 (function (global) {
   'use strict';
 
-  function money(n) { return '\u20B9' + Number(n || 0).toLocaleString('en-IN'); }
+  var FALLBACK_IMAGES = [
+    'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&auto=format&fit=crop&q=80'
+  ];
+
+  function money(n) {
+    return '₹' + Number(n || 0).toLocaleString('en-IN');
+  }
 
   function colorFromString(str) {
     var hash = 0;
     for (var i = 0; i < (str || '').length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    var hue = Math.abs(hash) % 360;
-    return 'hsl(' + hue + ', 25%, 92%)';
+    return 'hsl(' + (Math.abs(hash) % 360) + ', 30%, 88%)';
+  }
+
+  function resolveImage(p) {
+    if (p.image && (p.image.indexOf('http') === 0 || p.image.indexOf('data:') === 0)) return p.image;
+    if (p.images && p.images[0] && (p.images[0].indexOf('http') === 0 || p.images[0].indexOf('data:') === 0)) return p.images[0];
+    var sum = 0;
+    for (var i = 0; i < (p.id || '').length; i++) sum += p.id.charCodeAt(i);
+    return FALLBACK_IMAGES[sum % FALLBACK_IMAGES.length];
   }
 
   function productCard(p) {
-    var wishApi = global.ASF.wishlist;
+    var wishApi = global.ASF && global.ASF.wishlist;
     var wished = wishApi ? wishApi.isWishlisted(p.id) : false;
     var card = document.createElement('article');
-    card.className = 'product-card myntra-card';
+    card.className = 'product-card';
+    card.setAttribute('data-id', p.id);
 
-    var ratingCountFormatted = p.ratingCount >= 1000 ? (p.ratingCount / 1000).toFixed(1) + 'k' : (p.ratingCount || 0);
-
-    var highlightHtml = '';
-    if (p.isBestseller) {
-      highlightHtml = '<div class="highlight-ribbon rising-star">Rising Star</div>';
-    } else if (p.isNew) {
-      highlightHtml = '<div class="highlight-ribbon new-arrival">New Season</div>';
-    } else if (p.discountPct >= 40) {
-      highlightHtml = '<div class="highlight-ribbon hot-deal">Hot Deal</div>';
-    }
+    var imgSrc = resolveImage(p);
 
     card.innerHTML =
-      '<div class="card-media-box">' +
-        '<a href="product.html?id=' + encodeURIComponent(p.id) + '" class="media-link">' +
-          '<img class="card-img" src="' + p.image + '" alt="' + p.name + '" loading="lazy">' +
+      '<a class="product-media" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
+        '<img class="product-media-img" src="' + imgSrc + '" alt="' + (p.name || 'Product') + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + FALLBACK_IMAGES[0] + '\';">' +
+      '</a>' +
+      '<button class="wish-btn' + (wished ? ' active' : '') + '" data-id="' + p.id + '" aria-label="Add to wishlist">' + (wished ? '♥' : '♡') + '</button>' +
+      (p.discountPct >= 30 ? '<span class="tag tag-sale">' + p.discountPct + '% OFF</span>' : '') +
+      (p.isNew ? '<span class="tag tag-new">NEW</span>' : '') +
+      '<div class="product-info">' +
+        '<a href="product.html?id=' + encodeURIComponent(p.id) + '">' +
+          '<p class="product-brand">' + (p.brand || 'AS FASHIONS') + '</p>' +
+          '<p class="product-name">' + (p.name || '') + '</p>' +
         '</a>' +
-        highlightHtml +
-        '<button class="card-wish-btn' + (wished ? ' active' : '') + '" data-id="' + p.id + '" aria-label="Wishlist">' +
-          (wished ? '&#9829;' : '&#9825;') +
-        '</button>' +
-        (p.rating ? '<div class="card-rating-tag"><span>' + p.rating + ' &#9733;</span><span class="rating-bar">|</span><span>' + ratingCountFormatted + '</span></div>' : '') +
-        '<button class="card-quick-add btn-add" data-id="' + p.id + '">&#128092; Add</button>' +
-      '</div>' +
-      '<div class="card-details">' +
-        '<a href="product.html?id=' + encodeURIComponent(p.id) + '" class="details-anchor">' +
-          '<h4 class="brand-title">' + p.brand + '</h4>' +
-          '<p class="item-title">' + p.name + '</p>' +
-          '<div class="price-block">' +
-            '<span class="current-price">' + money(p.price) + '</span>' +
-            (p.discountPct > 0 ? '<span class="original-mrp">' + money(p.mrp) + '</span><span class="discount-label">(' + p.discountPct + '% OFF)</span>' : '') +
-          '</div>' +
-          (p.discountPct > 0 ? '<p class="offer-subtext">Best Price ' + money(Math.round(p.price * 0.9)) + ' with coupon</p>' : '') +
-        '</a>' +
+        '<p class="product-price">' + money(p.price) +
+          (p.discountPct > 0 ? ' <span class="mrp">' + money(p.mrp) + '</span><span class="off-pct">' + p.discountPct + '% off</span>' : '') +
+        '</p>' +
+        '<p class="product-rating">★ ' + (p.rating || '4.2') + ' (' + (p.ratingCount || '0') + ')</p>' +
+        '<button class="btn btn-add" data-id="' + p.id + '">Add to Bag</button>' +
       '</div>';
-
-    var imgEl = card.querySelector('.card-img');
-    imgEl.addEventListener('error', function () {
-      if (imgEl.dataset.fallbackApplied) { imgEl.style.display = 'none'; return; }
-      imgEl.dataset.fallbackApplied = '1';
-      imgEl.src = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&auto=format&fit=crop&q=60';
-    });
 
     return card;
   }
 
   function renderProductGrid(containerId, products, opts) {
     opts = opts || {};
-    var el = document.getElementById(containerId);
+    var el = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
     if (!el) return;
     el.innerHTML = '';
-    if (!products.length) {
-      el.innerHTML = '<p class="empty-state" style="grid-column:1/-1;">No products found.</p>';
+    var list = Array.isArray(products) ? products : [];
+    if (!list.length) {
+      el.innerHTML = '<p class="empty-state">No products found.</p>';
       return;
     }
-    var list = opts.limit ? products.slice(0, opts.limit) : products;
-    list.forEach(function (p, i) {
-      var card = productCard(p);
-      if (opts.reveal !== false) {
-        card.classList.add('reveal');
-        card.style.transitionDelay = Math.min(i, 8) * 30 + 'ms';
-      }
-      el.appendChild(card);
+    var slice = opts.limit ? list.slice(0, opts.limit) : list;
+    var fragment = document.createDocumentFragment();
+    slice.forEach(function (p) {
+      fragment.appendChild(productCard(p));
     });
-    if (opts.reveal !== false) observeReveal(el.querySelectorAll('.reveal'));
-  }
-
-  var revealObserver = null;
-  function observeReveal(nodes) {
-    if (typeof IntersectionObserver === 'undefined') {
-      nodes.forEach(function (n) { n.classList.add('in-view'); });
-      return;
-    }
-    if (!revealObserver) {
-      revealObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.05 });
-    }
-    nodes.forEach(function (n) { revealObserver.observe(n); });
+    el.appendChild(fragment);
   }
 
   function bindProductCardEvents(root) {
     root = root || document.body;
     root.addEventListener('click', function (e) {
-      var addBtn = e.target.closest('.card-quick-add');
-      if (addBtn) {
+      var addBtn = e.target.closest('.btn-add');
+      if (addBtn && global.ASF && global.ASF.cart) {
         e.preventDefault();
+        e.stopPropagation();
         global.ASF.cart.addItem(addBtn.dataset.id, { qty: 1 });
         if (typeof global.__asfOpenCartDrawer === 'function') global.__asfOpenCartDrawer();
         return;
       }
-      var wishBtn = e.target.closest('.card-wish-btn');
-      if (wishBtn) {
+      var wishBtn = e.target.closest('.wish-btn');
+      if (wishBtn && global.ASF && global.ASF.wishlist) {
         e.preventDefault();
-        global.ASF.wishlist.toggle(wishBtn.dataset.id);
-        var active = global.ASF.wishlist.isWishlisted(wishBtn.dataset.id);
-        wishBtn.classList.toggle('active', active);
-        wishBtn.innerHTML = active ? '&#9829;' : '&#9825;';
-        return;
+        e.stopPropagation();
+        var id = wishBtn.dataset.id;
+        var active = global.ASF.wishlist.toggle(id);
+        wishBtn.classList.toggle('active');
+        wishBtn.innerHTML = wishBtn.classList.contains('active') ? '♥' : '♡';
       }
     });
   }
@@ -129,6 +107,11 @@
   function getQueryParam(name) {
     var params = new URLSearchParams(window.location.search);
     return params.get(name);
+  }
+
+  function observeReveal(nodes) {
+    if (!nodes) return;
+    nodes.forEach(function (n) { if (n) n.classList.add('in-view'); });
   }
 
   global.ASF = global.ASF || {};

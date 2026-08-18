@@ -21,17 +21,26 @@
 
     var ratingCountFormatted = p.ratingCount >= 1000 ? (p.ratingCount / 1000).toFixed(1) + 'k' : (p.ratingCount || 0);
 
+    // Dynamic Top-Left Highlight Tag
+    var highlightHtml = '';
+    if (p.isBestseller) {
+      highlightHtml = '<div class="highlight-ribbon rising-star">Rising Star</div>';
+    } else if (p.isNew) {
+      highlightHtml = '<div class="highlight-ribbon new-arrival">New Season</div>';
+    } else if (p.discountPct >= 40) {
+      highlightHtml = '<div class="highlight-ribbon hot-deal">Hot Deal</div>';
+    }
+
     card.innerHTML =
       '<div class="card-media-box">' +
         '<a href="product.html?id=' + encodeURIComponent(p.id) + '" class="media-link">' +
           '<div class="media-placeholder" style="background:' + colorFromString(p.id) + '"></div>' +
           '<img class="card-img" src="' + p.image + '" alt="' + p.name + '" loading="lazy">' +
         '</a>' +
+        highlightHtml +
         '<button class="card-wish-btn' + (wished ? ' active' : '') + '" data-id="' + p.id + '" aria-label="Wishlist">' +
           (wished ? '&#9829;' : '&#9825;') +
         '</button>' +
-        (p.discountPct >= 20 ? '<span class="badge-discount">' + p.discountPct + '% OFF</span>' : '') +
-        (p.isNew ? '<span class="badge-new">NEW</span>' : '') +
         (p.rating ? '<div class="card-rating-tag"><span>' + p.rating + ' &#9733;</span><span class="rating-bar">|</span><span>' + ratingCountFormatted + '</span></div>' : '') +
         '<button class="card-quick-add btn-add" data-id="' + p.id + '">&#128092; Add</button>' +
       '</div>' +

@@ -1,32 +1,36 @@
 /**
- * AS FASHIONS — Shared Header, Navigation & Chrome Engine
+ * AS FASHIONS — Shared Header, Cart Drawer & Footer
+ * Every page includes a <div id="siteHeader"></div> and
+ * <div id="siteFooter"></div> placeholder — this script fills them in,
+ * renders the mega-menu from categories.js, wires search/cart/wishlist,
+ * and exposes window.__asfOpenCartDrawer() for other pages to call.
  */
 (function () {
   'use strict';
 
   var HEADER_HTML =
     '<div class="utility-bar">' +
-      '<span class="utility-promo">Get 10% OFF on your first order. Code: <strong>WELCOME10</strong></span>' +
+      '<span class="utility-promo">Get 10% OFF on your first order. Use code: <strong>WELCOME10</strong></span>' +
       '<div class="utility-links">' +
         '<a href="orders.html">&#128230; Track Order</a>' +
-        '<a href="help.html">Help &amp; Support</a>' +
+        '<a href="help.html">Help</a>' +
       '</div>' +
     '</div>' +
     '<header class="site-header">' +
       '<div class="header-row">' +
-        '<button id="mobileMenuToggle" class="mobile-toggle" aria-label="Toggle Menu">&#9776;</button>' +
+        '<button id="mobileMenuToggle" class="mobile-toggle" aria-label="Menu">&#9776;</button>' +
         '<a href="index.html" class="logo-block">' +
           '<span class="logo">AS <span>FASHIONS</span></span>' +
-          '<span class="logo-tagline">Curated Luxury &amp; Everyday Style</span>' +
+          '<span class="logo-tagline">Premium Fashion Store</span>' +
         '</a>' +
         '<div class="search-wrap">' +
-          '<input id="searchInput" type="text" placeholder="Search for apparel, brands, trends..." autocomplete="off">' +
+          '<input id="searchInput" type="text" placeholder="Search for products, brands and more" autocomplete="off">' +
           '<button type="button" id="searchSubmitBtn" class="search-submit-btn" aria-label="Search">&#128269;</button>' +
           '<div id="searchResults" class="search-results"></div>' +
         '</div>' +
         '<div class="header-actions">' +
           '<button id="notifBellBtn" class="icon-btn" aria-label="Notifications">&#128276;<span id="notifCount" class="badge" style="display:none;">0</span><span class="icon-label">Alerts</span></button>' +
-          '<a href="#" id="headerProfileLink" class="icon-btn header-profile" aria-label="Profile">&#128100;<span class="icon-label" id="profileLabel">Account</span></a>' +
+          '<a href="#" id="headerProfileLink" class="icon-btn header-profile" aria-label="Profile">&#128100;<span class="icon-label" id="profileLabel">Login</span></a>' +
           '<a href="wishlist.html" class="icon-btn" aria-label="Wishlist">&#9825;<span id="wishCount" class="badge">0</span><span class="icon-label">Wishlist</span></a>' +
           '<button id="cartToggle" class="icon-btn" aria-label="Cart">&#128092;<span id="cartCount" class="badge">0</span><span class="icon-label">Bag</span></button>' +
         '</div>' +
@@ -37,12 +41,12 @@
 
   var CART_DRAWER_HTML =
     '<div id="cartDrawer" class="cart-drawer">' +
-      '<div class="drawer-head"><h3>Your Shopping Bag</h3><button id="cartClose" aria-label="Close cart">&times;</button></div>' +
+      '<div class="drawer-head"><h3>Your Bag</h3><button id="cartClose" aria-label="Close cart">&times;</button></div>' +
       '<div id="cartDrawerBody" class="drawer-body"></div>' +
       '<div class="drawer-foot">' +
         '<div class="subtotal-row"><span>Subtotal</span><span id="cartSubtotal">\u20B90</span></div>' +
-        '<a href="checkout.html" class="btn btn-primary" style="width:100%; text-align:center; display:block; margin-bottom:8px;">Proceed to Checkout</a>' +
-        '<a href="cart.html" style="display:block; text-align:center; font-size:12px; color:var(--ink-soft); font-weight:600;">View &amp; Edit Full Bag</a>' +
+        '<a href="checkout.html" class="btn btn-primary" style="width:100%; text-align:center; display:block; margin-bottom:8px;">Checkout</a>' +
+        '<a href="cart.html" style="display:block; text-align:center; font-size:12px; color:var(--ink-soft);">View full bag</a>' +
       '</div>' +
     '</div>' +
     '<div class="drawer-backdrop"></div>';
@@ -51,36 +55,38 @@
     '<footer class="site-footer">' +
       '<div class="footer-grid">' +
         '<div><h4>Online Shopping</h4><ul>' +
-          '<li><a href="category.html?cat=men">Men\'s Collection</a></li>' +
-          '<li><a href="category.html?cat=women">Women\'s Collection</a></li>' +
-          '<li><a href="category.html?cat=kids">Kids &amp; Teens</a></li>' +
+          '<li><a href="category.html?cat=men">Men</a></li>' +
+          '<li><a href="category.html?cat=women">Women</a></li>' +
+          '<li><a href="category.html?cat=kids">Kids</a></li>' +
           '<li><a href="category.html?cat=footwear">Footwear</a></li>' +
-          '<li><a href="category.html?cat=bags">Bags &amp; Luggage</a></li>' +
+          '<li><a href="category.html?cat=bags">Bags</a></li>' +
           '<li><a href="category.html?cat=accessories">Accessories</a></li>' +
-          '<li><a href="category.html?cat=sale">Special Sale</a></li>' +
+          '<li><a href="category.html?cat=sports">Sports</a></li>' +
+          '<li><a href="category.html?cat=winter-wear">Winter Wear</a></li>' +
         '</ul></div>' +
-        '<div><h4>Customer Experience</h4><ul>' +
+        '<div><h4>Customer Service</h4><ul>' +
           '<li><a href="orders.html">Track Order</a></li>' +
           '<li><a href="returns.html">Returns &amp; Exchanges</a></li>' +
-          '<li><a href="help.html">Help &amp; Support</a></li>' +
+          '<li><a href="help.html">FAQ &amp; Help</a></li>' +
           '<li><a href="addresses.html">Saved Addresses</a></li>' +
         '</ul></div>' +
         '<div><h4>About AS Fashions</h4><ul>' +
           '<li><a href="index.html">Our Story</a></li>' +
           '<li><a href="help.html">Store Locator</a></li>' +
-          '<li><a href="admin.html">Staff Portal</a></li>' +
+          '<li><a href="admin.html">Staff Admin</a></li>' +
         '</ul></div>' +
-        '<div><h4>Stay Connected</h4>' +
-          '<p style="font-size:12.5px; color:#9a9587; margin:0 0 12px;">Get curated updates on fresh drops &amp; private sales.</p>' +
+        '<div><h4>Connect With Us</h4>' +
+          '<h4 style="margin-top:0;">Subscribe to our Newsletter</h4>' +
+          '<p style="font-size:12px; color:#9a9587; margin:0 0 10px;">Get updates on new arrivals and offers</p>' +
           '<div class="newsletter-row">' +
-            '<input type="email" placeholder="Enter your email address" id="newsletterEmail">' +
+            '<input type="email" placeholder="Enter your email" id="newsletterEmail">' +
             '<button type="button" id="newsletterBtn" aria-label="Subscribe">&#10148;</button>' +
           '</div>' +
         '</div>' +
       '</div>' +
       '<div class="footer-bottom">' +
-        '<span>\u00A9 2026 AS FASHIONS. All rights reserved.</span>' +
-        '<div class="payment-icons"><span>VISA</span><span>MASTERCARD</span><span>UPI</span><span>COD</span></div>' +
+        '<span>\u00A9 2026 AS Fashions. All rights reserved.</span>' +
+        '<span class="payment-icons"><span>VISA</span><span>UPI</span><span>MC</span><span>COD</span></span>' +
       '</div>' +
     '</footer>';
 
@@ -93,7 +99,9 @@
   function initScrollShadow() {
     var header = document.querySelector('.site-header');
     if (!header) return;
-    function onScroll() { header.classList.toggle('scrolled', window.scrollY > 10); }
+    function onScroll() {
+      header.classList.toggle('scrolled', window.scrollY > 4);
+    }
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
   }
@@ -103,7 +111,7 @@
     var nav = document.getElementById('mainNav');
     if (!nav || !catApi) return;
     nav.innerHTML = '';
-    var swatchColors = ['#D98E2E', '#6E1F2B', '#3F5B4B', '#274472', '#8A6D3B', '#B25A45', '#4C4A55'];
+    var swatchColors = ['#D98E2E', '#6E1F2B', '#3F5B4B', '#274472', '#8A6D3B', '#B25A45', '#4C4A55', '#7A8C6E', '#A9445B', '#5C6E91'];
 
     catApi.CATEGORY_TREE.forEach(function (top, i) {
       var item = document.createElement('div');
@@ -187,7 +195,7 @@
         if (profileLabel) profileLabel.textContent = user.name.split(' ')[0];
       } else {
         profileLink.href = 'login.html';
-        if (profileLabel) profileLabel.textContent = 'Account';
+        if (profileLabel) profileLabel.textContent = 'Login';
       }
     }
   }
@@ -200,7 +208,7 @@
       el.innerHTML = '<p class="empty-state" style="padding:20px;">No notifications yet.</p>';
       return;
     }
-    el.innerHTML = notifs.slice(0, 10).map(function (n) {
+    el.innerHTML = notifs.slice(0, 12).map(function (n) {
       return '<div class="notif-row' + (n.read ? '' : ' unread') + '">' +
         '<p class="notif-title">' + n.title + '</p>' +
         (n.body ? '<p class="notif-body">' + n.body + '</p>' : '') +
@@ -216,7 +224,7 @@
     var summary = cartApi.getSummary();
     body.innerHTML = '';
     if (!summary.lines.length) {
-      body.innerHTML = '<p class="empty-state">Your bag is currently empty.</p>';
+      body.innerHTML = '<p class="empty-state">Your bag is empty.</p>';
     } else {
       summary.lines.forEach(function (line) {
         if (!line.product) return;
@@ -263,7 +271,7 @@
         html += '<a class="search-row" href="product.html?id=' + encodeURIComponent(p.id) + '">' + p.brand + ' ' + p.name + '</a>';
       });
     }
-    if (!html) html = '<p class="empty-state" style="padding:14px;">No matching items found</p>';
+    if (!html) html = '<p class="empty-state">No results found</p>';
     box.innerHTML = html;
     box.classList.add('open');
   }
@@ -292,7 +300,7 @@
       if (e.target.closest('#newsletterBtn')) {
         var emailInput = document.getElementById('newsletterEmail');
         if (emailInput && emailInput.value.trim()) {
-          alert('Subscribed successfully! Welcome to AS Fashions.');
+          alert('Thanks for subscribing!');
           emailInput.value = '';
         }
         return;

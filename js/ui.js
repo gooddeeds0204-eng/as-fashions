@@ -1,127 +1,122 @@
 /**
- * AS FASHIONS — Shared UI Engine
+ * AS FASHIONS — UI Components & Global Render Engine
  */
 (function (global) {
   'use strict';
 
-  var FALLBACK_IMAGES = [
-    'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&auto=format&fit=crop&q=80'
-  ];
-
-  function money(n) {
-    return '₹' + Number(n || 0).toLocaleString('en-IN');
+  function formatPrice(num) {
+    return '₹' + Number(num || 0).toLocaleString('en-IN');
   }
 
-  function colorFromString(str) {
-    var hash = 0;
-    for (var i = 0; i < (str || '').length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    return 'hsl(' + (Math.abs(hash) % 360) + ', 30%, 88%)';
+  function getFallbackImage(brand, name) {
+    return 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&auto=format&fit=crop&q=80';
   }
 
-  function resolveImage(p) {
-    if (p.image && (p.image.indexOf('http') === 0 || p.image.indexOf('data:') === 0)) return p.image;
-    if (p.images && p.images[0] && (p.images[0].indexOf('http') === 0 || p.images[0].indexOf('data:') === 0)) return p.images[0];
-    var sum = 0;
-    for (var i = 0; i < (p.id || '').length; i++) sum += p.id.charCodeAt(i);
-    return FALLBACK_IMAGES[sum % FALLBACK_IMAGES.length];
-  }
-
-  function productCard(p) {
-    var wishApi = global.ASF && global.ASF.wishlist;
-    var wished = wishApi ? wishApi.isWishlisted(p.id) : false;
-    var card = document.createElement('article');
+  function createProductCard(prod) {
+    var card = document.createElement('div');
     card.className = 'product-card';
-    card.setAttribute('data-id', p.id);
+    card.setAttribute('data-id', prod.id);
 
-    var imgSrc = resolveImage(p);
+    // Pick first available portrait image
+    var imgUrl = prod.image || (prod.images && prod.images[0]) || getFallbackImage(prod.brand, prod.name);
+
+    var ribbonHtml = '';
+    if (prod.isNew) {
+      ribbonHtml = '<span class="product-ribbon ribbon-new">NEW SEASON</span>';
+    } else if (prod.isBestseller) {
+      ribbonHtml = '<span class="product-ribbon ribbon-star">BESTSELLER</span>';
+    } else if (prod.discountPct >= 30) {
+      ribbonHtml = '<span class="product-ribbon ribbon-deal">' + prod.discountPct + '% OFF</span>';
+    }
+
+    var mrpHtml = prod.mrp && prod.mrp > prod.price 
+      ? '<span class="product-mrp">' + formatPrice(prod.mrp) + '</span><span class="product-discount">(' + prod.discountPct + '% OFF)</span>' 
+      : '';
+
+    var ratingHtml = prod.rating 
+      ? '<div class="product-rating-pill">' + prod.rating + ' ★ <span class="rating-count">(' + (prod.ratingCount || 0) + ')</span></div>' 
+      : '';
 
     card.innerHTML =
-      '<a class="product-media" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
-        '<img class="product-media-img" src="' + imgSrc + '" alt="' + (p.name || 'Product') + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + FALLBACK_IMAGES[0] + '\';">' +
-      '</a>' +
-      '<button class="wish-btn' + (wished ? ' active' : '') + '" data-id="' + p.id + '" aria-label="Add to wishlist">' + (wished ? '♥' : '♡') + '</button>' +
-      (p.discountPct >= 30 ? '<span class="tag tag-sale">' + p.discountPct + '% OFF</span>' : '') +
-      (p.isNew ? '<span class="tag tag-new">NEW</span>' : '') +
-      '<div class="product-info">' +
-        '<a href="product.html?id=' + encodeURIComponent(p.id) + '">' +
-          '<p class="product-brand">' + (p.brand || 'AS FASHIONS') + '</p>' +
-          '<p class="product-name">' + (p.name || '') + '</p>' +
+      '<div class="product-media-wrap">' +
+        ribbonHtml +
+        '<button class="wishlist-btn" aria-label="Save to wishlist" data-action="wishlist">♡</button>' +
+        '<a href="product.html?id=' + encodeURIComponent(prod.id) + '" class="product-img-link">' +
+          '<img src="' + imgUrl + '" alt="' + (prod.name || 'Product') + '" class="product-img" loading="lazy" onerror="this.onerror=null;this.src=\'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&auto=format&fit=crop&q=80\';" />' +
         '</a>' +
-        '<p class="product-price">' + money(p.price) +
-          (p.discountPct > 0 ? ' <span class="mrp">' + money(p.mrp) + '</span><span class="off-pct">' + p.discountPct + '% off</span>' : '') +
-        '</p>' +
-        '<p class="product-rating">★ ' + (p.rating || '4.2') + ' (' + (p.ratingCount || '0') + ')</p>' +
-        '<button class="btn btn-add" data-id="' + p.id + '">Add to Bag</button>' +
+        ratingHtml +
+        '<button class="quick-add-btn" data-action="quick-add">👜 Add</button>' +
+      '</div>' +
+      '<div class="product-details">' +
+        '<h4 class="product-brand">' + (prod.brand || 'AS FASHIONS') + '</h4>' +
+        '<p class="product-title"><a href="product.html?id=' + encodeURIComponent(prod.id) + '">' + (prod.name || 'Fashion Item') + '</a></p>' +
+        '<div class="product-pricing">' +
+          '<span class="product-price">' + formatPrice(prod.price) + '</span>' +
+          mrpHtml +
+        '</div>' +
       '</div>';
 
     return card;
   }
 
-  function renderProductGrid(containerId, products, opts) {
-    opts = opts || {};
-    var el = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
+  function renderProductGrid(target, products, options) {
+    var el = typeof target === 'string' ? document.getElementById(target) : target;
+    if (!el && typeof target === 'string') {
+      el = document.querySelector('.' + target) || document.querySelector('[data-rail="' + target + '"]');
+    }
     if (!el) return;
+
     el.innerHTML = '';
     var list = Array.isArray(products) ? products : [];
-    if (!list.length) {
-      el.innerHTML = '<p class="empty-state">No products found.</p>';
+    var limit = (options && options.limit) ? options.limit : list.length;
+    var slice = list.slice(0, limit);
+
+    if (!slice.length) {
+      el.innerHTML = '<div class="rail-empty-msg">No products available at the moment.</div>';
       return;
     }
-    var slice = opts.limit ? list.slice(0, opts.limit) : list;
+
     var fragment = document.createDocumentFragment();
     slice.forEach(function (p) {
-      fragment.appendChild(productCard(p));
+      fragment.appendChild(createProductCard(p));
     });
     el.appendChild(fragment);
   }
 
-  function bindProductCardEvents(root) {
-    root = root || document.body;
+  function bindProductCardEvents(container) {
+    var root = container || document.body;
     root.addEventListener('click', function (e) {
-      var addBtn = e.target.closest('.btn-add');
-      if (addBtn && global.ASF && global.ASF.cart) {
+      var btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+      var card = btn.closest('.product-card');
+      if (!card) return;
+      var id = card.getAttribute('data-id');
+      var action = btn.getAttribute('data-action');
+
+      if (action === 'wishlist') {
         e.preventDefault();
         e.stopPropagation();
-        global.ASF.cart.addItem(addBtn.dataset.id, { qty: 1 });
-        if (typeof global.__asfOpenCartDrawer === 'function') global.__asfOpenCartDrawer();
-        return;
-      }
-      var wishBtn = e.target.closest('.wish-btn');
-      if (wishBtn && global.ASF && global.ASF.wishlist) {
+        var isActive = btn.classList.toggle('active');
+        btn.innerHTML = isActive ? '♥' : '♡';
+      } else if (action === 'quick-add') {
         e.preventDefault();
         e.stopPropagation();
-        var id = wishBtn.dataset.id;
-        var active = global.ASF.wishlist.toggle(id);
-        wishBtn.classList.toggle('active');
-        wishBtn.innerHTML = wishBtn.classList.contains('active') ? '♥' : '♡';
+        btn.textContent = '✓ Added';
+        setTimeout(function () { btn.innerHTML = '👜 Add'; }, 1500);
       }
     });
   }
 
-  function getQueryParam(name) {
-    var params = new URLSearchParams(window.location.search);
-    return params.get(name);
-  }
-
-  function observeReveal(nodes) {
-    if (!nodes) return;
-    nodes.forEach(function (n) { if (n) n.classList.add('in-view'); });
-  }
-
   global.ASF = global.ASF || {};
   global.ASF.ui = {
-    money: money,
-    colorFromString: colorFromString,
-    productCard: productCard,
+    formatPrice: formatPrice,
+    createProductCard: createProductCard,
     renderProductGrid: renderProductGrid,
     bindProductCardEvents: bindProductCardEvents,
-    getQueryParam: getQueryParam,
-    observeReveal: observeReveal
+    colorFromString: function (str) {
+      var hash = 0;
+      for (var i = 0; i < (str || '').length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
+      return 'hsl(' + (Math.abs(hash) % 360) + ', 25%, 92%)';
+    }
   };
 })(window);

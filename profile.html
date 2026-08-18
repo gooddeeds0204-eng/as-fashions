@@ -5,9 +5,87 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Profile — AS FASHIONS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
+<style>
+  .account-layout {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 30px;
+  }
+  .account-nav {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: fit-content;
+  }
+  .account-nav a {
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .account-nav a.active, .account-nav a:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+    font-weight: 600;
+  }
+  .account-nav a.danger {
+    color: #ef4444;
+  }
+  .account-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 30px;
+  }
+  .account-card h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 20px;
+    color: #0f172a;
+  }
+  .account-card label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 6px;
+  }
+  .account-card input {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1.5px solid #cbd5e1;
+    font-size: 14px;
+    margin-bottom: 16px;
+    outline: none;
+    box-sizing: border-box;
+  }
+  .account-card input:focus {
+    border-color: #0f172a;
+  }
+  .save-msg {
+    display: none;
+    color: #16a34a;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  @media(max-width: 768px) {
+    .account-layout { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
 
@@ -24,8 +102,7 @@
     <a href="#" id="logoutLink" class="danger">Logout</a>
   </nav>
   <div class="account-card" id="profileCard">
-    <!-- filled by script -->
-  </div>
+    </div>
 </div>
 
 <div id="siteFooter"></div>
@@ -52,7 +129,7 @@
     var user = authApi.getCurrentUser();
     var card = document.getElementById('profileCard');
     if (!user) {
-      card.innerHTML = '<p style="font-size:14px;">You need to be logged in to view your profile.</p><a href="login.html" class="btn btn-primary" style="display:inline-block; margin-top:10px;">Login</a>';
+      card.innerHTML = '<p style="font-size:14px; color:#64748b;">You need to be logged in to view your profile.</p><a href="login.html" class="btn btn-primary" style="display:inline-block; margin-top:10px; padding:10px 20px; text-decoration:none;">Login</a>';
       return;
     }
     card.innerHTML =
@@ -62,7 +139,7 @@
         '<label>Email</label><input type="email" id="pfEmail" value="' + user.email + '">' +
         '<label>Phone</label><input type="tel" id="pfPhone" value="' + user.phone + '">' +
         '<p class="save-msg" id="saveMsg">Saved!</p>' +
-        '<button type="submit" class="btn btn-primary" style="padding:11px 24px;">Save Changes</button>' +
+        '<button type="submit" class="btn btn-primary" style="padding:11px 24px; cursor:pointer;">Save Changes</button>' +
       '</form>';
 
     document.getElementById('profileForm').addEventListener('submit', function (e) {
